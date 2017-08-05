@@ -131,8 +131,8 @@ public class WKRUIWebView: WKWebView {
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
 
-        guard let preHideScript = script(named: "WKRPreHideScript", injectionTime: .atDocumentStart),
-            let postHideScript = script(named: "WKRPostHideScript", injectionTime: .atDocumentEnd) else {
+        guard let preHideScript = WKUserScript(name: "WKRPreHideScript", injectionTime: .atDocumentStart),
+            let postHideScript = WKUserScript(name: "WKRPostHideScript", injectionTime: .atDocumentEnd) else {
                 return nil
         }
 
@@ -141,16 +141,6 @@ public class WKRUIWebView: WKWebView {
         userContentController.addUserScript(postHideScript)
         config.userContentController = userContentController
         return config
-    }
-
-    private static func script(named name: String, injectionTime: WKUserScriptInjectionTime) -> WKUserScript? {
-        guard let url = Bundle(for: self).url(forResource: name, withExtension: "js") else {
-            return nil
-        }
-        guard let source = try? String(contentsOf: url) else {
-            return nil
-        }
-        return WKUserScript(source: source, injectionTime: injectionTime, forMainFrameOnly: true)
     }
 
     // MARK: - Progress View

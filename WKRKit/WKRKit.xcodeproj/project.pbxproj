@@ -7,9 +7,42 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140FCFC31F36547E00FFA84E /* WKRPlayersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */; };
+		140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC41F36549900FFA84E /* WKRPlayer.swift */; };
+		140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */; };
+		140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
+		140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */; };
+		140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */; };
+		1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3711F36524400E81FD8 /* WKRPage.swift */; };
+		1452B3741F36529300E81FD8 /* WKRConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRConstants.swift */; };
+		1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */; };
+		1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */; };
 		149FF8121F362B3D000A5D96 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF8081F362B3D000A5D96 /* WKRKit.framework */; };
 		149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8161F362B3D000A5D96 /* WKRKitTests.swift */; };
 		149FF8191F362B3D000A5D96 /* WKRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 149FF80B1F362B3D000A5D96 /* WKRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */; };
+		14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */; };
+		14E6DFB71F3687B5002755C3 /* WKRGetLinks.js in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */; };
+		14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */; };
+		14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F491F3682A000FF1A9E /* WKRGameState.swift */; };
+		14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */; };
+		14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */; };
+		14EB9F501F3682CA00FF1A9E /* WKRGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */; };
+		14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F511F3682D000FF1A9E /* WKRManager.swift */; };
+		14EB9F541F3682D600FF1A9E /* WKRManager+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F531F3682D600FF1A9E /* WKRManager+Host.swift */; };
+		14EB9F561F3682E500FF1A9E /* WKRManager+PeerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F551F3682E500FF1A9E /* WKRManager+PeerNetwork.swift */; };
+		14EB9F581F3682F200FF1A9E /* WKRManager+PageNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F571F3682F200FF1A9E /* WKRManager+PageNavigation.swift */; };
+		14EB9F5A1F3682F900FF1A9E /* WKRManager+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F591F3682F900FF1A9E /* WKRManager+Codable.swift */; };
+		14EB9F5E1F36830800FF1A9E /* WKRPeerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */; };
+		14EB9F601F36831A00FF1A9E /* WKRMultipeerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */; };
+		14EB9F621F36832C00FF1A9E /* WKRMultiWindowNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */; };
+		14EB9F641F36833400FF1A9E /* WKRCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F631F36833400FF1A9E /* WKRCodable.swift */; };
+		14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F651F36833A00FF1A9E /* WKROperation.swift */; };
+		14EB9F681F36834400FF1A9E /* WKRConnectionTester.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F671F36834400FF1A9E /* WKRConnectionTester.swift */; };
+		14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F691F36834E00FF1A9E /* WKRPageNavigation.swift */; };
+		14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */; };
+		14EB9F711F36850800FF1A9E /* WKRInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F701F36850800FF1A9E /* WKRInt.swift */; };
+		14EB9F731F36854700FF1A9E /* WKRVoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +56,46 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayersInfo.swift; sourceTree = "<group>"; };
+		140FCFC41F36549900FFA84E /* WKRPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayer.swift; sourceTree = "<group>"; };
+		140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerProfile.swift; sourceTree = "<group>"; };
+		140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerState.swift; sourceTree = "<group>"; };
+		140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistoryEntry.swift; sourceTree = "<group>"; };
+		140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistory.swift; sourceTree = "<group>"; };
+		1452B3711F36524400E81FD8 /* WKRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPage.swift; sourceTree = "<group>"; };
+		1452B3731F36529300E81FD8 /* WKRConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRConstants.swift; sourceTree = "<group>"; };
+		1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConstants.swift; sourceTree = "<group>"; };
+		1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageFetcher.swift; sourceTree = "<group>"; };
 		149FF8081F362B3D000A5D96 /* WKRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF80B1F362B3D000A5D96 /* WKRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRKit.h; sourceTree = "<group>"; };
 		149FF80C1F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		149FF8111F362B3D000A5D96 /* WKRKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WKRKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF8161F362B3D000A5D96 /* WKRKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTests.swift; sourceTree = "<group>"; };
 		149FF8181F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPreRaceConfig.swift; sourceTree = "<group>"; };
+		14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRKit+Array.swift"; sourceTree = "<group>"; };
+		14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = WKRGetLinks.js; path = WKRKit/WKRGetLinks.js; sourceTree = SOURCE_ROOT; };
+		14E6DFB81F3687BA002755C3 /* WKRArticlesData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WKRArticlesData.plist; path = WKRKit/WKRArticlesData.plist; sourceTree = SOURCE_ROOT; };
+		14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerMessage.swift; sourceTree = "<group>"; };
+		14EB9F491F3682A000FF1A9E /* WKRGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGameState.swift; sourceTree = "<group>"; };
+		14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConfig.swift; sourceTree = "<group>"; };
+		14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRActiveRace.swift; sourceTree = "<group>"; };
+		14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGame.swift; sourceTree = "<group>"; };
+		14EB9F511F3682D000FF1A9E /* WKRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRManager.swift; sourceTree = "<group>"; };
+		14EB9F531F3682D600FF1A9E /* WKRManager+Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+Host.swift"; sourceTree = "<group>"; };
+		14EB9F551F3682E500FF1A9E /* WKRManager+PeerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+PeerNetwork.swift"; sourceTree = "<group>"; };
+		14EB9F571F3682F200FF1A9E /* WKRManager+PageNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+PageNavigation.swift"; sourceTree = "<group>"; };
+		14EB9F591F3682F900FF1A9E /* WKRManager+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+Codable.swift"; sourceTree = "<group>"; };
+		14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPeerNetwork.swift; sourceTree = "<group>"; };
+		14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRMultipeerNetwork.swift; sourceTree = "<group>"; };
+		14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRMultiWindowNetwork.swift; sourceTree = "<group>"; };
+		14EB9F631F36833400FF1A9E /* WKRCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRCodable.swift; sourceTree = "<group>"; };
+		14EB9F651F36833A00FF1A9E /* WKROperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKROperation.swift; sourceTree = "<group>"; };
+		14EB9F671F36834400FF1A9E /* WKRConnectionTester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRConnectionTester.swift; sourceTree = "<group>"; };
+		14EB9F691F36834E00FF1A9E /* WKRPageNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageNavigation.swift; sourceTree = "<group>"; };
+		14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRLinkedPagesFetcher.swift; sourceTree = "<group>"; };
+		14EB9F701F36850800FF1A9E /* WKRInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRInt.swift; sourceTree = "<group>"; };
+		14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRVoteInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +139,14 @@
 			isa = PBXGroup;
 			children = (
 				149FF80B1F362B3D000A5D96 /* WKRKit.h */,
+				1452B3731F36529300E81FD8 /* WKRConstants.swift */,
+				14E6DFB31F3686EE002755C3 /* Game */,
+				14E6DFB11F3686B1002755C3 /* Manager */,
+				14EB9F6F1F3684FC00FF1A9E /* Network */,
+				14E6DFB41F368742002755C3 /* Other */,
+				14EB9F431F36823400FF1A9E /* Pages */,
+				14EB9F441F36824500FF1A9E /* Players */,
+				14E6DFB21F3686DA002755C3 /* Web Logic */,
 				149FF80C1F362B3D000A5D96 /* Info.plist */,
 			);
 			path = WKRKit;
@@ -84,6 +159,112 @@
 				149FF8181F362B3D000A5D96 /* Info.plist */,
 			);
 			path = WKRKitTests;
+			sourceTree = "<group>";
+		};
+		14E6DFB11F3686B1002755C3 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				14EB9F511F3682D000FF1A9E /* WKRManager.swift */,
+				14EB9F531F3682D600FF1A9E /* WKRManager+Host.swift */,
+				14EB9F591F3682F900FF1A9E /* WKRManager+Codable.swift */,
+				14EB9F551F3682E500FF1A9E /* WKRManager+PeerNetwork.swift */,
+				14EB9F571F3682F200FF1A9E /* WKRManager+PageNavigation.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		14E6DFB21F3686DA002755C3 /* Web Logic */ = {
+			isa = PBXGroup;
+			children = (
+				14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */,
+				14EB9F691F36834E00FF1A9E /* WKRPageNavigation.swift */,
+				14EB9F671F36834400FF1A9E /* WKRConnectionTester.swift */,
+				14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */,
+			);
+			path = "Web Logic";
+			sourceTree = "<group>";
+		};
+		14E6DFB31F3686EE002755C3 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */,
+				14EB9F491F3682A000FF1A9E /* WKRGameState.swift */,
+				14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */,
+				14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */,
+				14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */,
+				14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */,
+				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		14E6DFB41F368742002755C3 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
+				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		14E6DFB51F36874C002755C3 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				14EB9F631F36833400FF1A9E /* WKRCodable.swift */,
+				14EB9F701F36850800FF1A9E /* WKRInt.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
+		14EB9F431F36823400FF1A9E /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				14E6DFB81F3687BA002755C3 /* WKRArticlesData.plist */,
+				1452B3711F36524400E81FD8 /* WKRPage.swift */,
+				1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */,
+				140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */,
+				140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */,
+			);
+			path = Pages;
+			sourceTree = "<group>";
+		};
+		14EB9F441F36824500FF1A9E /* Players */ = {
+			isa = PBXGroup;
+			children = (
+				14EB9F471F36828800FF1A9E /* Single */,
+				14EB9F481F36828F00FF1A9E /* Container */,
+			);
+			path = Players;
+			sourceTree = "<group>";
+		};
+		14EB9F471F36828800FF1A9E /* Single */ = {
+			isa = PBXGroup;
+			children = (
+				140FCFC41F36549900FFA84E /* WKRPlayer.swift */,
+				140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */,
+				140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */,
+				14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */,
+			);
+			path = Single;
+			sourceTree = "<group>";
+		};
+		14EB9F481F36828F00FF1A9E /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		14EB9F6F1F3684FC00FF1A9E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				14E6DFB51F36874C002755C3 /* Codable */,
+				14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */,
+				14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */,
+				14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +329,7 @@
 				TargetAttributes = {
 					149FF8071F362B3D000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0900;
 					};
 					149FF8101F362B3D000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
@@ -194,6 +376,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EB9F581F3682F200FF1A9E /* WKRManager+PageNavigation.swift in Sources */,
+				140FCFC31F36547E00FFA84E /* WKRPlayersInfo.swift in Sources */,
+				14EB9F641F36833400FF1A9E /* WKRCodable.swift in Sources */,
+				14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */,
+				14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */,
+				140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */,
+				14E6DFB71F3687B5002755C3 /* WKRGetLinks.js in Sources */,
+				14EB9F541F3682D600FF1A9E /* WKRManager+Host.swift in Sources */,
+				14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */,
+				14EB9F501F3682CA00FF1A9E /* WKRGame.swift in Sources */,
+				14EB9F681F36834400FF1A9E /* WKRConnectionTester.swift in Sources */,
+				140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */,
+				14EB9F5A1F3682F900FF1A9E /* WKRManager+Codable.swift in Sources */,
+				14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */,
+				14EB9F5E1F36830800FF1A9E /* WKRPeerNetwork.swift in Sources */,
+				1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */,
+				1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */,
+				14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */,
+				14EB9F731F36854700FF1A9E /* WKRVoteInfo.swift in Sources */,
+				14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */,
+				140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */,
+				14EB9F601F36831A00FF1A9E /* WKRMultipeerNetwork.swift in Sources */,
+				14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */,
+				14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */,
+				1452B3741F36529300E81FD8 /* WKRConstants.swift in Sources */,
+				14EB9F711F36850800FF1A9E /* WKRInt.swift in Sources */,
+				14EB9F561F3682E500FF1A9E /* WKRManager+PeerNetwork.swift in Sources */,
+				14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */,
+				14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */,
+				1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */,
+				140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */,
+				140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */,
+				14EB9F621F36832C00FF1A9E /* WKRMultiWindowNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +547,7 @@
 		149FF81D1F362B3D000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -344,6 +560,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -352,6 +569,7 @@
 		149FF81E1F362B3D000A5D96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -372,6 +590,7 @@
 		149FF8201F362B3D000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WKRKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -385,6 +604,7 @@
 		149FF8211F362B3D000A5D96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WKRKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

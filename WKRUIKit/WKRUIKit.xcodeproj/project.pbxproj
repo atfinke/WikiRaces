@@ -26,6 +26,7 @@
 		14A3D4AC1F3634110038388F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A3D4AA1F3634110038388F /* LaunchScreen.storyboard */; };
 		14A3D4B11F36342A0038388F /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */; };
 		14A3D4B21F36342A0038388F /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14EB9F6E1F36838B00FF1A9E /* WKRUIKit+Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */; };
 		14FC66871F362FD4001868C4 /* WKRUIKit+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +75,7 @@
 		14A3D4A81F3634110038388F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14A3D4AB1F3634110038388F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14A3D4AD1F3634110038388F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Scripts.swift"; sourceTree = "<group>"; };
 		14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Fonts.swift"; sourceTree = "<group>"; };
 		14FC668B1F3631F5001868C4 /* WKRUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUILabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,6 +160,7 @@
 			children = (
 				149FF8AB1F362CF6000A5D96 /* WKRUIKit+Color.swift */,
 				14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */,
+				14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EB9F6E1F36838B00FF1A9E /* WKRUIKit+Scripts.swift in Sources */,
 				1413AB251F364FE400873ACA /* WKRUIButtonStyle.swift in Sources */,
 				1413AB201F364FBA00873ACA /* WKRUIThinLineView.swift in Sources */,
 				14FC66871F362FD4001868C4 /* WKRUIKit+Fonts.swift in Sources */,
