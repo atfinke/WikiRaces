@@ -23,6 +23,75 @@
 		149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8811F362BE4000A5D96 /* Assets.xcassets */; };
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
+		14C4AB291F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
+		14C4AB2A1F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
+		14C4AB2B1F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
+		14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
+		14C4AB2E1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
+		14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
+		14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */; };
+		14C4AB321F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */; };
+		14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */; };
+		14C4AB351F3689A40086B77F /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */; };
+		14C4AB361F3689A40086B77F /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */; };
+		14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */; };
+		14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB381F3689A90086B77F /* MenuTile.swift */; };
+		14C4AB3A1F3689A90086B77F /* MenuTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB381F3689A90086B77F /* MenuTile.swift */; };
+		14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB381F3689A90086B77F /* MenuTile.swift */; };
+		14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */; };
+		14C4AB3E1F3689AE0086B77F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */; };
+		14C4AB3F1F3689AE0086B77F /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */; };
+		14C4AB411F3689B50086B77F /* MenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */; };
+		14C4AB421F3689B50086B77F /* MenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */; };
+		14C4AB431F3689B50086B77F /* MenuViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */; };
+		14C4AB451F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */; };
+		14C4AB461F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */; };
+		14C4AB471F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */; };
+		14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB481F3689C60086B77F /* VotingViewController.swift */; };
+		14C4AB4A1F3689C60086B77F /* VotingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB481F3689C60086B77F /* VotingViewController.swift */; };
+		14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB481F3689C60086B77F /* VotingViewController.swift */; };
+		14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */; };
+		14C4AB521F3689E20086B77F /* VotingViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */; };
+		14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */; };
+		14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */; };
+		14C4AB561F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */; };
+		14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */; };
+		14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB581F368A050086B77F /* HistoryViewController.swift */; };
+		14C4AB5A1F368A050086B77F /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB581F368A050086B77F /* HistoryViewController.swift */; };
+		14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB581F368A050086B77F /* HistoryViewController.swift */; };
+		14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
+		14C4AB5E1F368A0C0086B77F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
+		14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
+		14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB601F368A170086B77F /* GameViewController+Manager.swift */; };
+		14C4AB621F368A170086B77F /* GameViewController+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB601F368A170086B77F /* GameViewController+Manager.swift */; };
+		14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB601F368A170086B77F /* GameViewController+Manager.swift */; };
+		14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
+		14C4AB661F368A210086B77F /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
+		14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
+		14C4AB691F368A270086B77F /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB681F368A270086B77F /* PlayersViewController.swift */; };
+		14C4AB6A1F368A270086B77F /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB681F368A270086B77F /* PlayersViewController.swift */; };
+		14C4AB6B1F368A270086B77F /* PlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB681F368A270086B77F /* PlayersViewController.swift */; };
+		14C4AB6D1F368A300086B77F /* PlayersViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */; };
+		14C4AB6E1F368A300086B77F /* PlayersViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */; };
+		14C4AB6F1F368A300086B77F /* PlayersViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */; };
+		14C4AB711F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */; };
+		14C4AB721F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */; };
+		14C4AB731F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */; };
+		14C4AB751F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */; };
+		14C4AB761F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */; };
+		14C4AB771F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */; };
+		14C4AB791F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */; };
+		14C4AB7A1F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */; };
+		14C4AB7B1F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */; };
+		14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
+		14C4AB7E1F368A5A0086B77F /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
+		14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
+		14C4AB811F368A630086B77F /* _Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* _Extensions.swift */; };
+		14C4AB821F368A630086B77F /* _Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* _Extensions.swift */; };
+		14C4AB831F368A630086B77F /* _Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* _Extensions.swift */; };
+		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14C4AB861F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +129,29 @@
 		149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14C4AB281F3689890086B77F /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredTableViewController.swift; sourceTree = "<group>"; };
+		14C4AB2C1F3689900086B77F /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+TableView.swift"; sourceTree = "<group>"; };
+		14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsTableViewCell.swift; sourceTree = "<group>"; };
+		14C4AB381F3689A90086B77F /* MenuTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTile.swift; sourceTree = "<group>"; };
+		14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+UI.swift"; sourceTree = "<group>"; };
+		14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+MPC.swift"; sourceTree = "<group>"; };
+		14C4AB481F3689C60086B77F /* VotingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingViewController.swift; sourceTree = "<group>"; };
+		14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VotingViewController+TableView.swift"; sourceTree = "<group>"; };
+		14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell.swift; sourceTree = "<group>"; };
+		14C4AB581F368A050086B77F /* HistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		14C4AB5C1F368A0C0086B77F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		14C4AB601F368A170086B77F /* GameViewController+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Manager.swift"; sourceTree = "<group>"; };
+		14C4AB641F368A210086B77F /* GameViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+UI.swift"; sourceTree = "<group>"; };
+		14C4AB681F368A270086B77F /* PlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayersViewController.swift; sourceTree = "<group>"; };
+		14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayersViewController+UI.swift"; sourceTree = "<group>"; };
+		14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayersViewController+TableView.swift"; sourceTree = "<group>"; };
+		14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterButtonTableViewCell.swift; sourceTree = "<group>"; };
+		14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStateTableViewCell.swift; sourceTree = "<group>"; };
+		14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
+		14C4AB801F368A630086B77F /* _Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _Extensions.swift; sourceTree = "<group>"; };
+		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +189,7 @@
 		149FF8401F362B83000A5D96 = {
 			isa = PBXGroup;
 			children = (
+				14C4AB251F3689400086B77F /* Shared */,
 				149FF84B1F362B83000A5D96 /* WikiRaces */,
 				149FF8631F362BBC000A5D96 /* WikiRaces (UI Catalog) */,
 				149FF8791F362BE4000A5D96 /* WikiRaces (Multi-Window) */,
@@ -162,6 +255,36 @@
 				149FF8921F362BF1000A5D96 /* Info.plist */,
 			);
 			path = WikiRacesScreenshots;
+			sourceTree = "<group>";
+		};
+		14C4AB251F3689400086B77F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				14C4AB281F3689890086B77F /* CenteredTableViewController.swift */,
+				14C4AB2C1F3689900086B77F /* ResultsViewController.swift */,
+				14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */,
+				14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */,
+				14C4AB381F3689A90086B77F /* MenuTile.swift */,
+				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
+				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
+				14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */,
+				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
+				14C4AB581F368A050086B77F /* HistoryViewController.swift */,
+				14C4AB481F3689C60086B77F /* VotingViewController.swift */,
+				14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */,
+				14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */,
+				14C4AB5C1F368A0C0086B77F /* GameViewController.swift */,
+				14C4AB601F368A170086B77F /* GameViewController+Manager.swift */,
+				14C4AB641F368A210086B77F /* GameViewController+UI.swift */,
+				14C4AB681F368A270086B77F /* PlayersViewController.swift */,
+				14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */,
+				14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */,
+				14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */,
+				14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */,
+				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
+				14C4AB801F368A630086B77F /* _Extensions.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,8 +450,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C4AB291F3689890086B77F /* CenteredTableViewController.swift in Sources */,
+				14C4AB711F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */,
+				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
+				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
+				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				14C4AB351F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
+				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF84F1F362B83000A5D96 /* ViewController.swift in Sources */,
+				14C4AB451F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
+				14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
+				14C4AB811F368A630086B77F /* _Extensions.swift in Sources */,
+				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
+				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
+				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
+				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
+				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
+				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
+				14C4AB791F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */,
+				14C4AB6D1F368A300086B77F /* PlayersViewController+UI.swift in Sources */,
+				14C4AB751F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */,
+				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
+				14C4AB411F3689B50086B77F /* MenuViewController+UI.swift in Sources */,
+				14C4AB691F368A270086B77F /* PlayersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,8 +482,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C4AB2A1F3689890086B77F /* CenteredTableViewController.swift in Sources */,
+				14C4AB721F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */,
+				14C4AB321F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				14C4AB561F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
+				14C4AB521F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
+				14C4AB621F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				14C4AB361F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
+				14C4AB5A1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF8671F362BBC000A5D96 /* ViewController.swift in Sources */,
+				14C4AB461F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
+				14C4AB7E1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
+				14C4AB821F368A630086B77F /* _Extensions.swift in Sources */,
+				14C4AB861F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
+				14C4AB3A1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF8651F362BBC000A5D96 /* AppDelegate.swift in Sources */,
+				14C4AB5E1F368A0C0086B77F /* GameViewController.swift in Sources */,
+				14C4AB661F368A210086B77F /* GameViewController+UI.swift in Sources */,
+				14C4AB2E1F3689900086B77F /* ResultsViewController.swift in Sources */,
+				14C4AB4A1F3689C60086B77F /* VotingViewController.swift in Sources */,
+				14C4AB7A1F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */,
+				14C4AB6E1F368A300086B77F /* PlayersViewController+UI.swift in Sources */,
+				14C4AB761F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */,
+				14C4AB3E1F3689AE0086B77F /* MenuViewController.swift in Sources */,
+				14C4AB421F3689B50086B77F /* MenuViewController+UI.swift in Sources */,
+				14C4AB6A1F368A270086B77F /* PlayersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,8 +514,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14C4AB2B1F3689890086B77F /* CenteredTableViewController.swift in Sources */,
+				14C4AB731F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */,
+				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
+				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
+				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
+				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
+				14C4AB471F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
+				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
+				14C4AB831F368A630086B77F /* _Extensions.swift in Sources */,
+				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
+				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
+				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
+				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
+				14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */,
+				14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */,
+				14C4AB7B1F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */,
+				14C4AB6F1F368A300086B77F /* PlayersViewController+UI.swift in Sources */,
+				14C4AB771F368A4A0086B77F /* FooterButtonTableViewCell.swift in Sources */,
+				14C4AB3F1F3689AE0086B77F /* MenuViewController.swift in Sources */,
+				14C4AB431F3689B50086B77F /* MenuViewController+UI.swift in Sources */,
+				14C4AB6B1F368A270086B77F /* PlayersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -533,6 +725,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRaces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -547,6 +740,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRaces/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRaces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -561,6 +755,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,6 +770,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -589,6 +785,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -603,6 +800,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";

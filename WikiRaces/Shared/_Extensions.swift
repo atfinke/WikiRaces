@@ -1,0 +1,26 @@
+//
+//  _Extensions.swift
+//  WikiRaces
+//
+//  Created by Andrew Finke on 8/5/17.
+//  Copyright © 2017 Andrew Finke. All rights reserved.
+//
+
+import Foundation
+import WKRKit
+
+extension UINavigationController {
+    var rootViewController: UIViewController? {
+        return viewControllers.first
+    }
+}
+
+extension GameViewController {
+    func performSegue(_ segue: Segue) {
+        performSegue(withIdentifier: segue.rawValue, sender: nil)
+    }
+}
+
+func wikiDebugLog(_ object: Any? = nil, file: String = #file, function: String = #function, line: Int = #line) {
+    _debugLog(object, file: file, function: function, line: line)
+}
