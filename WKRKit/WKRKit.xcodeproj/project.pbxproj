@@ -13,6 +13,8 @@
 		140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
 		140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */; };
 		140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */; };
+		1410DB481F4F544300F5CAD7 /* WKRArticlesData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */; };
+		1410DB4B1F4F552200F5CAD7 /* WKRGetLinks.js in Resources */ = {isa = PBXBuildFile; fileRef = 14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */; };
 		1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3711F36524400E81FD8 /* WKRPage.swift */; };
 		1452B3741F36529300E81FD8 /* WKRConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRConstants.swift */; };
 		1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */; };
@@ -22,7 +24,6 @@
 		149FF8191F362B3D000A5D96 /* WKRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 149FF80B1F362B3D000A5D96 /* WKRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */; };
 		14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */; };
-		14E6DFB71F3687B5002755C3 /* WKRGetLinks.js in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */; };
 		14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */; };
 		14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F491F3682A000FF1A9E /* WKRGameState.swift */; };
 		14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */; };
@@ -62,6 +63,7 @@
 		140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerState.swift; sourceTree = "<group>"; };
 		140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistoryEntry.swift; sourceTree = "<group>"; };
 		140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistory.swift; sourceTree = "<group>"; };
+		1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRArticlesData.plist; sourceTree = "<group>"; };
 		1452B3711F36524400E81FD8 /* WKRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPage.swift; sourceTree = "<group>"; };
 		1452B3731F36529300E81FD8 /* WKRConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRConstants.swift; sourceTree = "<group>"; };
 		1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConstants.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		14E6DFB41F368742002755C3 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
 			);
@@ -285,10 +288,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF81C1F362B3D000A5D96 /* Build configuration list for PBXNativeTarget "WKRKit" */;
 			buildPhases = (
+				149FDECE1F4F4996003A71D0 /* Build Number */,
 				149FF8031F362B3D000A5D96 /* Sources */,
 				149FF8041F362B3D000A5D96 /* Frameworks */,
 				149FF8051F362B3D000A5D96 /* Headers */,
 				149FF8061F362B3D000A5D96 /* Resources */,
+				149FDECD1F4F498B003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -359,6 +364,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1410DB4B1F4F552200F5CAD7 /* WKRGetLinks.js in Resources */,
+				1410DB481F4F544300F5CAD7 /* WKRArticlesData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +378,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		149FDECD1F4F498B003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		149FDECE1F4F4996003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		149FF8031F362B3D000A5D96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -382,7 +420,6 @@
 				14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */,
 				14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */,
 				140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */,
-				14E6DFB71F3687B5002755C3 /* WKRGetLinks.js in Sources */,
 				14EB9F541F3682D600FF1A9E /* WKRManager+Host.swift in Sources */,
 				14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */,
 				14EB9F501F3682CA00FF1A9E /* WKRGame.swift in Sources */,

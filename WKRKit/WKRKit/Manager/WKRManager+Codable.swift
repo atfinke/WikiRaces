@@ -117,7 +117,7 @@ extension WKRManager {
                 self.sendPreRaceConfig()
                 self.prepareVotingCountdown()
             } else {
-                fatalError()
+                fatalError("Need to add connection failed error")
             }
         }
     }

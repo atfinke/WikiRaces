@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1410DB401F4F51AC00F5CAD7 /* WKRPreHideScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */; };
+		1410DB411F4F51AC00F5CAD7 /* WKRPostHideScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */; };
 		1413AB1E1F364F2400873ACA /* WKRUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413AB1D1F364F2000873ACA /* WKRUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1413AB201F364FBA00873ACA /* WKRUIThinLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */; };
 		1413AB211F364FBD00873ACA /* WKRUIBottomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */; };
@@ -55,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPreHideScript.js; sourceTree = "<group>"; };
+		1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPostHideScript.js; sourceTree = "<group>"; };
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
 		1413AB2B1F36500400873ACA /* WKRUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWebView.swift; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +103,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1410DB421F4F51B200F5CAD7 /* Web View */ = {
+			isa = PBXGroup;
+			children = (
+				1413AB2B1F36500400873ACA /* WKRUIWebView.swift */,
+				1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */,
+				1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */,
+			);
+			path = "Web View";
+			sourceTree = "<group>";
+		};
 		149FF7E91F362B0D000A5D96 = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +185,7 @@
 				149FF89C1F362C05000A5D96 /* WKRUIAlertView.swift */,
 				149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */,
 				149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */,
-				1413AB2B1F36500400873ACA /* WKRUIWebView.swift */,
+				1410DB421F4F51B200F5CAD7 /* Web View */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,10 +208,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF7FB1F362B0D000A5D96 /* Build configuration list for PBXNativeTarget "WKRUIKit" */;
 			buildPhases = (
+				149FDED11F4F49A9003A71D0 /* Build Number */,
 				149FF7EE1F362B0D000A5D96 /* Sources */,
 				149FF7EF1F362B0D000A5D96 /* Frameworks */,
 				149FF7F01F362B0D000A5D96 /* Headers */,
 				149FF7F11F362B0D000A5D96 /* Resources */,
+				149FDED21F4F49AA003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -212,10 +228,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14A3D4AE1F3634110038388F /* Build configuration list for PBXNativeTarget "WKRUIKit (UI Catalog)" */;
 			buildPhases = (
+				149FDECF1F4F499E003A71D0 /* Build Number */,
 				14A3D49B1F3634110038388F /* Sources */,
 				14A3D49C1F3634110038388F /* Frameworks */,
 				14A3D49D1F3634110038388F /* Resources */,
 				14A3D4B51F36342A0038388F /* Embed Frameworks */,
+				149FDED01F4F49A0003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -270,6 +288,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1410DB411F4F51AC00F5CAD7 /* WKRPostHideScript.js in Resources */,
+				1410DB401F4F51AC00F5CAD7 /* WKRPreHideScript.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +304,65 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		149FDECF1F4F499E003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		149FDED01F4F49A0003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		149FDED11F4F49A9003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		149FDED21F4F49AA003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		149FF7EE1F362B0D000A5D96 /* Sources */ = {

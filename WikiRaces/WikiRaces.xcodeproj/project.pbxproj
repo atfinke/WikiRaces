@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1410DB2C1F4F4BEA00F5CAD7 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; };
+		1410DB2D1F4F4BEA00F5CAD7 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
+		1410DB341F4F4BEE00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
+		1410DB3B1F4F510900F5CAD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
+		1410DB3C1F4F510900F5CAD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
+		1410DB3D1F4F510900F5CAD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
+		1410DB4D1F4F55BB00F5CAD7 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; };
+		1410DB4E1F4F55BB00F5CAD7 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
+		1410DB541F4F55BF00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
 		149FF84F1F362B83000A5D96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84E1F362B83000A5D96 /* ViewController.swift */; };
 		149FF8521F362B83000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
@@ -19,7 +31,7 @@
 		149FF86F1F362BBC000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF86D1F362BBC000A5D96 /* LaunchScreen.storyboard */; };
 		149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF87A1F362BE4000A5D96 /* AppDelegate.swift */; };
 		149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF87C1F362BE4000A5D96 /* ViewController.swift */; };
-		149FF8801F362BE4000A5D96 /* Main-MutliWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */; };
+		149FF8801F362BE4000A5D96 /* Main-MultiWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF87E1F362BE4000A5D96 /* Main-MultiWindow.storyboard */; };
 		149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8811F362BE4000A5D96 /* Assets.xcassets */; };
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
@@ -96,6 +108,62 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1410DB2E1F4F4BEA00F5CAD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		1410DB351F4F4BEE00F5CAD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
+		1410DB4F1F4F55BB00F5CAD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		1410DB551F4F55BF00F5CAD7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
+		146B9A021F4F4B5900507B3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149FF8081F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		146B9A041F4F4B5900507B3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149FF8111F362B3D000A5D96;
+			remoteInfo = WKRKitTests;
+		};
+		146B9A131F4F4B7200507B3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 149FF7F31F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
+		146B9A151F4F4B7200507B3F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 14A3D49F1F3634110038388F;
+			remoteInfo = "WKRUIKit (UI Catalog)";
+		};
 		149FF8931F362BF1000A5D96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
@@ -105,7 +173,37 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1410DB321F4F4BEA00F5CAD7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1410DB341F4F4BEE00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */,
+				1410DB2D1F4F4BEA00F5CAD7 /* WKRKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1410DB521F4F55BB00F5CAD7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1410DB541F4F55BF00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */,
+				1410DB4E1F4F55BB00F5CAD7 /* WKRKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../../../WKRKit/WKRKit.xcodeproj; sourceTree = "<group>"; };
+		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../../../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF84E1F362B83000A5D96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +221,7 @@
 		149FF8781F362BE4000A5D96 /* WikiRaces (Multi-Window).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (Multi-Window).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF87A1F362BE4000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF87C1F362BE4000A5D96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		149FF87F1F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-MutliWindow.storyboard"; sourceTree = "<group>"; };
+		149FF87F1F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-MultiWindow.storyboard"; sourceTree = "<group>"; };
 		149FF8811F362BE4000A5D96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		149FF8841F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		149FF8861F362BE4000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,6 +259,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */,
+				1410DB2C1F4F4BEA00F5CAD7 /* WKRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +275,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */,
+				1410DB4D1F4F55BB00F5CAD7 /* WKRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +290,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		146B99FE1F4F4B5900507B3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146B9A031F4F4B5900507B3F /* WKRKit.framework */,
+				146B9A051F4F4B5900507B3F /* WKRKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		146B9A0F1F4F4B7200507B3F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146B9A141F4F4B7200507B3F /* WKRUIKit.framework */,
+				146B9A161F4F4B7200507B3F /* WKRUIKit (UI Catalog).app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		149FDED51F4F4AAF003A71D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */,
+				146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
 		149FF8401F362B83000A5D96 = {
 			isa = PBXGroup;
 			children = (
@@ -243,7 +372,7 @@
 				149FF87A1F362BE4000A5D96 /* AppDelegate.swift */,
 				14B55C981F3A49D20090E092 /* DebugWindow.swift */,
 				149FF87C1F362BE4000A5D96 /* ViewController.swift */,
-				149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */,
+				149FF87E1F362BE4000A5D96 /* Main-MultiWindow.storyboard */,
 				149FF8811F362BE4000A5D96 /* Assets.xcassets */,
 				149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */,
 				149FF8861F362BE4000A5D96 /* Info.plist */,
@@ -327,6 +456,7 @@
 			children = (
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14C4AB801F368A630086B77F /* _Extensions.swift */,
+				1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -342,6 +472,7 @@
 				14B55C931F3A49820090E092 /* GameViewController */,
 				14B55C941F3A498C0090E092 /* PlayersViewController */,
 				14B55C951F3A499C0090E092 /* Other */,
+				149FDED51F4F4AAF003A71D0 /* Frameworks */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -353,13 +484,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF85B1F362B83000A5D96 /* Build configuration list for PBXNativeTarget "WikiRaces" */;
 			buildPhases = (
+				149FDEC61F4F490C003A71D0 /* Build Number */,
 				149FF8451F362B83000A5D96 /* Sources */,
 				149FF8461F362B83000A5D96 /* Frameworks */,
 				149FF8471F362B83000A5D96 /* Resources */,
+				1410DB321F4F4BEA00F5CAD7 /* Embed Frameworks */,
+				149FDEC71F4F4913003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1410DB2F1F4F4BEA00F5CAD7 /* PBXTargetDependency */,
+				1410DB361F4F4BEE00F5CAD7 /* PBXTargetDependency */,
 			);
 			name = WikiRaces;
 			productName = WikiRaces;
@@ -370,9 +506,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF8711F362BBC000A5D96 /* Build configuration list for PBXNativeTarget "WikiRaces (UI Catalog)" */;
 			buildPhases = (
+				149FDEC91F4F491B003A71D0 /* Build Number */,
 				149FF85E1F362BBC000A5D96 /* Sources */,
 				149FF85F1F362BBC000A5D96 /* Frameworks */,
 				149FF8601F362BBC000A5D96 /* Resources */,
+				149FDECC1F4F4927003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -387,13 +525,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF8871F362BE4000A5D96 /* Build configuration list for PBXNativeTarget "WikiRaces (Multi-Window)" */;
 			buildPhases = (
+				149FDECA1F4F491F003A71D0 /* Build Number */,
 				149FF8741F362BE4000A5D96 /* Sources */,
 				149FF8751F362BE4000A5D96 /* Frameworks */,
 				149FF8761F362BE4000A5D96 /* Resources */,
+				149FDECB1F4F4923003A71D0 /* Swiftlint */,
+				1410DB521F4F55BB00F5CAD7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1410DB501F4F55BB00F5CAD7 /* PBXTargetDependency */,
+				1410DB561F4F55BF00F5CAD7 /* PBXTargetDependency */,
 			);
 			name = "WikiRaces (Multi-Window)";
 			productName = "WikiRaces (Multi-Window)";
@@ -454,6 +597,16 @@
 			mainGroup = 149FF8401F362B83000A5D96;
 			productRefGroup = 149FF84A1F362B83000A5D96 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 146B99FE1F4F4B5900507B3F /* Products */;
+					ProjectRef = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+				},
+				{
+					ProductGroup = 146B9A0F1F4F4B7200507B3F /* Products */;
+					ProjectRef = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				149FF8481F362B83000A5D96 /* WikiRaces */,
@@ -464,6 +617,37 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		146B9A031F4F4B5900507B3F /* WKRKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WKRKit.framework;
+			remoteRef = 146B9A021F4F4B5900507B3F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		146B9A051F4F4B5900507B3F /* WKRKitTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = WKRKitTests.xctest;
+			remoteRef = 146B9A041F4F4B5900507B3F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		146B9A141F4F4B7200507B3F /* WKRUIKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = WKRUIKit.framework;
+			remoteRef = 146B9A131F4F4B7200507B3F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		146B9A161F4F4B7200507B3F /* WKRUIKit (UI Catalog).app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "WKRUIKit (UI Catalog).app";
+			remoteRef = 146B9A151F4F4B7200507B3F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		149FF8471F362B83000A5D96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -471,6 +655,7 @@
 			files = (
 				149FF8571F362B83000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */,
+				1410DB3B1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
 				149FF8521F362B83000A5D96 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +666,7 @@
 			files = (
 				149FF86F1F362BBC000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF86C1F362BBC000A5D96 /* Assets.xcassets in Resources */,
+				1410DB3C1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
 				149FF86A1F362BBC000A5D96 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,7 +677,9 @@
 			files = (
 				149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */,
-				149FF8801F362BE4000A5D96 /* Main-MutliWindow.storyboard in Resources */,
+				149FF8801F362BE4000A5D96 /* Main-MultiWindow.storyboard in Resources */,
+				1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */,
+				1410DB3D1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,6 +691,93 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		149FDEC61F4F490C003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		149FDEC71F4F4913003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		149FDEC91F4F491B003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		149FDECA1F4F491F003A71D0 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		149FDECB1F4F4923003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		149FDECC1F4F4927003A71D0 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		149FF8451F362B83000A5D96 /* Sources */ = {
@@ -613,6 +888,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		1410DB2F1F4F4BEA00F5CAD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 1410DB2E1F4F4BEA00F5CAD7 /* PBXContainerItemProxy */;
+		};
+		1410DB361F4F4BEE00F5CAD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 1410DB351F4F4BEE00F5CAD7 /* PBXContainerItemProxy */;
+		};
+		1410DB501F4F55BB00F5CAD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 1410DB4F1F4F55BB00F5CAD7 /* PBXContainerItemProxy */;
+		};
+		1410DB561F4F55BF00F5CAD7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 1410DB551F4F55BF00F5CAD7 /* PBXContainerItemProxy */;
+		};
 		149FF8941F362BF1000A5D96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
@@ -653,12 +948,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */ = {
+		149FF87E1F362BE4000A5D96 /* Main-MultiWindow.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				149FF87F1F362BE4000A5D96 /* Base */,
 			);
-			name = "Main-MutliWindow.storyboard";
+			name = "Main-MultiWindow.storyboard";
 			sourceTree = "<group>";
 		};
 		149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */ = {
@@ -782,6 +1077,7 @@
 		149FF85C1F362B83000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRaces/Info.plist;
@@ -797,6 +1093,7 @@
 		149FF85D1F362B83000A5D96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRaces/Info.plist;
@@ -842,6 +1139,7 @@
 		149FF8881F362BE4000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
@@ -858,6 +1156,7 @@
 		149FF8891F362BE4000A5D96 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
