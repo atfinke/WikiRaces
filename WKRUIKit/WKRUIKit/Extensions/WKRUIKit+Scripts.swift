@@ -10,9 +10,8 @@ import WebKit
 
 extension WKUserScript {
 
-    public convenience init?(name: String, injectionTime: WKUserScriptInjectionTime) {
-        class BundleClass {}
-        guard let url = Bundle(for: BundleClass.self).url(forResource: name, withExtension: "js") else {
+    public convenience init?(named: String, in bundle: Bundle?, injectionTime: WKUserScriptInjectionTime) {
+        guard let url = bundle?.url(forResource: named, withExtension: "js") else {
             return nil
         }
         guard let source = try? String(contentsOf: url) else {
@@ -20,5 +19,5 @@ extension WKUserScript {
         }
         self.init(source: source, injectionTime: injectionTime, forMainFrameOnly: false)
     }
-    
+
 }
