@@ -28,7 +28,7 @@ struct WKRPageFetcher {
                 return nil
         }
         let range = Range(uncheckedBounds: (titleAttributeStart.upperBound, titleAttributeEnd.lowerBound))
-        return string.substring(with: range)
+        return String(string[range])
     }
 
     // MARK: - Fetching

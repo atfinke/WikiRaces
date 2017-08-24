@@ -14,7 +14,7 @@ public struct WKRPage: Codable {
 
     public let title: String?
     internal let url: URL
-    
+
     // MARK: - Initialization
 
     public init(title: String?, url: URL) {
@@ -30,7 +30,7 @@ public struct WKRPage: Codable {
         let charactersToRemove = WKRConstants.pageTitleCharactersToRemove
         if charactersToRemove > 0 && title.characters.count > charactersToRemove {
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
-            return title.substring(to: index).capitalized
+            return title[..<index].capitalized
         } else {
             return title.replacingOccurrences(of: WKRConstants.pageTitleStringToReplace, with: "").capitalized
         }
