@@ -131,10 +131,14 @@ public class WKRUIWebView: WKWebView {
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
 
-        guard let preHideScript = WKUserScript(name: "WKRPreHideScript", injectionTime: .atDocumentStart),
-            let postHideScript = WKUserScript(name: "WKRPostHideScript", injectionTime: .atDocumentEnd) else {
+        //swiftlint:disable:next nesting
+        class BundleClass {}
+        //swiftlint:disable line_length
+        guard let preHideScript = WKUserScript(named: "WKRPreHideScript", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentStart),
+            let postHideScript = WKUserScript(named: "WKRPostHideScript", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentEnd) else {
                 return nil
         }
+        //swiftlint:enable line_length
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(preHideScript)
@@ -163,4 +167,3 @@ public class WKRUIWebView: WKWebView {
     }
 
 }
-

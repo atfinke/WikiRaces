@@ -11,7 +11,7 @@ import Foundation
 public struct WKRPlayerProfile: Codable {
 
     // MARK: - Properties
-    
+
     public let name: String
     public let playerID: String
 

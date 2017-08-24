@@ -41,4 +41,3 @@ extension PlayersViewController: UITableViewDataSource, UITableViewDelegate {
         return indexPath.row == displayedPlayers.count ? 60.0 : 44.0
     }
 }
-

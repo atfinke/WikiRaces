@@ -85,11 +85,11 @@ class GameViewController: UIViewController {
         }
     }
 
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         _debugLog(segue)
         if segue.identifier == Segue.showPlayers.rawValue {
-            guard let destination = (segue.destination as? UINavigationController)?.rootViewController as? PlayersViewController else {
+            guard let navigationController = segue.destination as? UINavigationController,
+                let destination = navigationController.rootViewController as? PlayersViewController else {
                 fatalError()
             }
 
@@ -112,8 +112,9 @@ class GameViewController: UIViewController {
 
             self.playersViewController = destination
         } else if segue.identifier == Segue.showVoting.rawValue {
-            guard let destination = (segue.destination as? UINavigationController)?.rootViewController as? VotingViewController else {
-                fatalError()
+            guard let navigationController = segue.destination as? UINavigationController,
+                let destination = navigationController.rootViewController as? VotingViewController else {
+                    fatalError()
             }
 
             destination.playerVoted = { page in
@@ -127,9 +128,11 @@ class GameViewController: UIViewController {
 
             self.votingViewController = destination
         } else if segue.identifier == Segue.showResults.rawValue {
-            guard let destination = (segue.destination as? UINavigationController)?.rootViewController as? ResultsViewController else {
-                fatalError()
+            guard let navigationController = segue.destination as? UINavigationController,
+                let destination = navigationController.rootViewController as? ResultsViewController else {
+                    fatalError()
             }
+
             destination.state = manager.gameState
             destination.resultsInfo = manager.hostResultsInfo
             destination.isPlayerHost = isPlayerHost

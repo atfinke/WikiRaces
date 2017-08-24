@@ -77,8 +77,6 @@ extension WKRManager {
         }
     }
 
-
-
     func prepareVotingCountdown() {
         _debugLog()
         assert(localPlayer.isHost)

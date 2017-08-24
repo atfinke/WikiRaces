@@ -114,7 +114,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
             self.present()
         })
     }
-    
+
 }
 
 extension UIViewController {

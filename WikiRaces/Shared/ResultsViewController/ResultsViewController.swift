@@ -102,7 +102,8 @@ class ResultsViewController: CenteredTableViewController {
         guard let destinationNavigationController = segue.destination as? UINavigationController else {
             return
         }
-        if let destination = destinationNavigationController.rootViewController as? HistoryViewController, let player = sender as? WKRPlayer {
+        if let destination = destinationNavigationController.rootViewController as? HistoryViewController,
+            let player = sender as? WKRPlayer {
             destination.player = player
             historyViewController = destination
         } else if let destination = destinationNavigationController.rootViewController as? PlayersViewController {
@@ -113,8 +114,6 @@ class ResultsViewController: CenteredTableViewController {
             fatalError()
         }
 
-
     }
 
 }
-

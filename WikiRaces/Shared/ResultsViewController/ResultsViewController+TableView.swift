@@ -40,7 +40,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
                     let range = NSRange(location: player.name.characters.count, length: detail.characters.count)
                     let attributes: [NSAttributedStringKey: Any] = [
                         .foregroundColor: UIColor.lightGray,
-                        .font : UIFont.systemFont(ofSize: 15)
+                        .font: UIFont.systemFont(ofSize: 15)
                     ]
                     attributedText.addAttributes(attributes, range: range)
                     cell.playerLabel.attributedText = attributedText
@@ -74,5 +74,3 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
 }
-
-

@@ -77,4 +77,3 @@ class VotingViewController: CenteredTableViewController {
     }
 
 }
-

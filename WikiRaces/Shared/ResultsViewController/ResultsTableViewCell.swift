@@ -80,4 +80,3 @@ class ResultsTableViewCell: UITableViewCell {
     }
 
 }
-

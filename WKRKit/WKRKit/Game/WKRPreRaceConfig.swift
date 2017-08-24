@@ -35,6 +35,7 @@ public struct WKRPreRaceConfig: Codable {
     //swiftlint:disable:next function_body_length
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
         _debugLog()
+        //swiftlint:disable:next nesting
         class BundleClass {}
         let bundle = Bundle(for: BundleClass.self)
 

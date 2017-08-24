@@ -41,4 +41,3 @@ class HistoryTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 }
-

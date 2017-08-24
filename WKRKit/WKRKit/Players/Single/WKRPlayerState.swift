@@ -33,5 +33,5 @@ public enum WKRPlayerState: Int, Codable {
     public var connected: Bool {
         return self != .disconnected || self != .quit || self != .connecting
     }
-    
+
 }

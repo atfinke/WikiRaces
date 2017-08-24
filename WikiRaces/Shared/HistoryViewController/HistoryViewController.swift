@@ -48,7 +48,6 @@ class HistoryViewController: UITableViewController {
         }
     }
 
-
     @IBAction func doneButtonPressed() {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
@@ -60,6 +59,7 @@ class HistoryViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier, for: indexPath) as? HistoryTableViewCell else {
             fatalError()
         }
@@ -74,7 +74,7 @@ class HistoryViewController: UITableViewController {
             let range = NSRange(location: pageTitle.characters.count, length: detail.characters.count)
             let attributes: [NSAttributedStringKey: Any] = [
                 .foregroundColor: UIColor.lightGray,
-                .font : UIFont.systemFont(ofSize: 15)
+                .font: UIFont.systemFont(ofSize: 15)
             ]
             attributedText.addAttributes(attributes, range: range)
         }
@@ -93,4 +93,3 @@ class HistoryViewController: UITableViewController {
     }
 
 }
-

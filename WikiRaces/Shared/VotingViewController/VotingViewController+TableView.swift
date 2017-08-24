@@ -46,4 +46,3 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
 }
-

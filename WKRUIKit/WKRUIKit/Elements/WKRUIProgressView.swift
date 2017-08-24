@@ -47,5 +47,5 @@ public class WKRUIProgressView: UIProgressView {
             self.alpha = 1.0
         })
     }
-    
+
 }

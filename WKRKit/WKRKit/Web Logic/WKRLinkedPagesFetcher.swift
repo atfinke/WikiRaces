@@ -28,9 +28,13 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
 
         let config = WKWebViewConfiguration()
 
-        guard let linksScript = WKUserScript(name: "WKRGetLinks", injectionTime: .atDocumentEnd) else {
+        //swiftlint:disable:next nesting
+        class BundleClass {}
+        //swiftlint:disable line_length
+        guard let linksScript = WKUserScript(named: "WKRGetLinks", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentEnd) else {
             fatalError("WKRLinkGetter couldn't load linksScript")
         }
+        //swiftlint:enable line_length
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)

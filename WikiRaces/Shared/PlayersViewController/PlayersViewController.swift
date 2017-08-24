@@ -78,4 +78,3 @@ class PlayersViewController: UIViewController {
     }
 
 }
-
