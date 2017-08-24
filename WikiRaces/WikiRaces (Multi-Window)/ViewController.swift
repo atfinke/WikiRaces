@@ -10,16 +10,69 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //swiftlint:disable line_length function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        let twoRows = false
+        let windows = CGFloat(2)
+
+        let windowWidth: CGFloat
+        if twoRows {
+            windowWidth = (view.frame.width / windows * 2)
+        } else {
+            windowWidth = (view.frame.width / windows) - CGFloat(windows)
+        }
+
+        let windowNames = [
+            "First",
+            "Second",
+            "Third",
+            "Forth",
+            "Fifth",
+            "Sixth",
+            "Seventh",
+            "Eighth"
+        ]
+
+        if twoRows {
+            for x in 0..<Int(windows/2) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2))
+                window.playerName = windowNames[x]
+                window.rootViewController = self.menuViewController()
+                window.makeKeyAndVisible()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    window.rootViewController?.viewDidAppear(false)
+                }
+            }
+            for x in 0..<Int(windows/2) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2))
+                window.playerName = windowNames[x + Int(windows / 2)]
+                window.rootViewController = self.menuViewController()
+                window.makeKeyAndVisible()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    window.rootViewController?.viewDidAppear(false)
+                }
+            }
+        } else {
+            for x in 0..<Int(windows) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: 0, width: windowWidth, height: view.frame.height))
+                window.playerName = windowNames[x]
+                window.rootViewController = self.menuViewController()
+                window.makeKeyAndVisible()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    window.rootViewController?.viewDidAppear(false)
+                }
+            }
+        }
+        view.backgroundColor = UIColor.purple
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    //swiftlint:disable force_cast
+    func menuViewController() -> MenuViewController {
+        let controller = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateInitialViewController() as! UINavigationController
+        return controller.viewControllers.first as! MenuViewController
     }
-
 
 }
-

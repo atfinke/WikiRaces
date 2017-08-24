@@ -47,7 +47,7 @@ class MenuViewController: UIViewController {
         super.viewDidAppear(animated)
         animateMenuIn()
 
-        #if SPLITVIEWDEBUG
+        #if MULTIWINDOWDEBUG
             tempIsHost = view.window!.frame.origin == .zero
             self.performSegue(withIdentifier: "showConnecting", sender: false)
         #endif
@@ -157,7 +157,7 @@ class MenuViewController: UIViewController {
                 fatalError()
         }
 
-        #if SPLITVIEWDEBUG
+        #if MULTIWINDOWDEBUG
             //swiftlint:disable:next force_cast
             destination._playerName = (view.window as! DebugWindow).playerName
         #else

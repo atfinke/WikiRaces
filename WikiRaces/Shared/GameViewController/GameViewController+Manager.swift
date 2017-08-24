@@ -15,7 +15,7 @@ extension GameViewController {
     // MARK: - WKRManager
 
     func setupManager() {
-        #if SPLITVIEWDEBUG
+        #if MULTIWINDOWDEBUG
             manager = WKRManager(_playerName: _playerName, isHost: isPlayerHost, stateUpdate: { state in
                 self.transition(to: state)
             }, playersUpdate: { players in

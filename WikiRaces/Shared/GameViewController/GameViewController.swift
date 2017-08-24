@@ -27,7 +27,7 @@ class GameViewController: UIViewController {
     // MARK: - Properties
 
     var isPlayerHost = false
-    #if SPLITVIEWDEBUG
+    #if MULTIWINDOWDEBUG
     //swiftlint:disable:next identifier_name
     var _playerName: String!
     #endif

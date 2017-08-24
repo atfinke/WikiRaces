@@ -19,10 +19,11 @@
 		149FF86F1F362BBC000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF86D1F362BBC000A5D96 /* LaunchScreen.storyboard */; };
 		149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF87A1F362BE4000A5D96 /* AppDelegate.swift */; };
 		149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF87C1F362BE4000A5D96 /* ViewController.swift */; };
-		149FF8801F362BE4000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF87E1F362BE4000A5D96 /* Main.storyboard */; };
+		149FF8801F362BE4000A5D96 /* Main-MutliWindow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */; };
 		149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8811F362BE4000A5D96 /* Assets.xcassets */; };
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
+		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14C4AB291F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
 		14C4AB2A1F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
 		14C4AB2B1F3689890086B77F /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB281F3689890086B77F /* CenteredTableViewController.swift */; };
@@ -122,13 +123,14 @@
 		149FF8781F362BE4000A5D96 /* WikiRaces (Multi-Window).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (Multi-Window).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF87A1F362BE4000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF87C1F362BE4000A5D96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		149FF87F1F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		149FF87F1F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Main-MutliWindow.storyboard"; sourceTree = "<group>"; };
 		149FF8811F362BE4000A5D96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		149FF8841F362BE4000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		149FF8861F362BE4000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14C4AB281F3689890086B77F /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredTableViewController.swift; sourceTree = "<group>"; };
 		14C4AB2C1F3689900086B77F /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -239,8 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				149FF87A1F362BE4000A5D96 /* AppDelegate.swift */,
+				14B55C981F3A49D20090E092 /* DebugWindow.swift */,
 				149FF87C1F362BE4000A5D96 /* ViewController.swift */,
-				149FF87E1F362BE4000A5D96 /* Main.storyboard */,
+				149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */,
 				149FF8811F362BE4000A5D96 /* Assets.xcassets */,
 				149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */,
 				149FF8861F362BE4000A5D96 /* Info.plist */,
@@ -257,32 +260,88 @@
 			path = WikiRacesScreenshots;
 			sourceTree = "<group>";
 		};
-		14C4AB251F3689400086B77F /* Shared */ = {
+		14B55C8F1F3A495C0090E092 /* ResultsViewController */ = {
 			isa = PBXGroup;
 			children = (
-				14C4AB281F3689890086B77F /* CenteredTableViewController.swift */,
 				14C4AB2C1F3689900086B77F /* ResultsViewController.swift */,
 				14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */,
 				14C4AB341F3689A40086B77F /* ResultsTableViewCell.swift */,
+			);
+			path = ResultsViewController;
+			sourceTree = "<group>";
+		};
+		14B55C901F3A49670090E092 /* MenuViewController */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB381F3689A90086B77F /* MenuTile.swift */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */,
+			);
+			path = MenuViewController;
+			sourceTree = "<group>";
+		};
+		14B55C911F3A496D0090E092 /* HistoryViewController */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
 				14C4AB581F368A050086B77F /* HistoryViewController.swift */,
+			);
+			path = HistoryViewController;
+			sourceTree = "<group>";
+		};
+		14B55C921F3A497B0090E092 /* VotingViewController */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB481F3689C60086B77F /* VotingViewController.swift */,
 				14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */,
 				14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */,
+			);
+			path = VotingViewController;
+			sourceTree = "<group>";
+		};
+		14B55C931F3A49820090E092 /* GameViewController */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB5C1F368A0C0086B77F /* GameViewController.swift */,
 				14C4AB601F368A170086B77F /* GameViewController+Manager.swift */,
 				14C4AB641F368A210086B77F /* GameViewController+UI.swift */,
+			);
+			path = GameViewController;
+			sourceTree = "<group>";
+		};
+		14B55C941F3A498C0090E092 /* PlayersViewController */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB681F368A270086B77F /* PlayersViewController.swift */,
 				14C4AB6C1F368A300086B77F /* PlayersViewController+UI.swift */,
 				14C4AB701F368A3C0086B77F /* PlayersViewController+TableView.swift */,
 				14C4AB741F368A4A0086B77F /* FooterButtonTableViewCell.swift */,
 				14C4AB781F368A540086B77F /* PlayerStateTableViewCell.swift */,
+			);
+			path = PlayersViewController;
+			sourceTree = "<group>";
+		};
+		14B55C951F3A499C0090E092 /* Other */ = {
+			isa = PBXGroup;
+			children = (
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14C4AB801F368A630086B77F /* _Extensions.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		14C4AB251F3689400086B77F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				14C4AB281F3689890086B77F /* CenteredTableViewController.swift */,
+				14B55C8F1F3A495C0090E092 /* ResultsViewController */,
+				14B55C901F3A49670090E092 /* MenuViewController */,
+				14B55C911F3A496D0090E092 /* HistoryViewController */,
+				14B55C921F3A497B0090E092 /* VotingViewController */,
+				14B55C931F3A49820090E092 /* GameViewController */,
+				14B55C941F3A498C0090E092 /* PlayersViewController */,
+				14B55C951F3A499C0090E092 /* Other */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -432,7 +491,7 @@
 			files = (
 				149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */,
-				149FF8801F362BE4000A5D96 /* Main.storyboard in Resources */,
+				149FF8801F362BE4000A5D96 /* Main-MutliWindow.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +590,7 @@
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
+				14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */,
 				14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */,
 				14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14C4AB7B1F368A540086B77F /* PlayerStateTableViewCell.swift in Sources */,
@@ -593,12 +653,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		149FF87E1F362BE4000A5D96 /* Main.storyboard */ = {
+		149FF87E1F362BE4000A5D96 /* Main-MutliWindow.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				149FF87F1F362BE4000A5D96 /* Base */,
 			);
-			name = Main.storyboard;
+			name = "Main-MutliWindow.storyboard";
 			sourceTree = "<group>";
 		};
 		149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */ = {
@@ -787,6 +847,7 @@
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -802,6 +863,7 @@
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
