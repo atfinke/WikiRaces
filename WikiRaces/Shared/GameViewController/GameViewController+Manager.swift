@@ -76,6 +76,7 @@ extension GameViewController {
 
         switch state {
         case .voting:
+            self.title = "VOTING"
             dismissActiveController(completion: {
                 self.performSegue(.showVoting)
             })
@@ -89,6 +90,7 @@ extension GameViewController {
             } else {
                 resultsViewController?.state = state
             }
+            navigationController?.setNavigationBarHidden(false, animated: true)
         case .race:
             dismissActiveController(completion: nil)
         default: break
