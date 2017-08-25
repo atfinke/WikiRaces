@@ -49,7 +49,7 @@ extension WKRManager {
         _debugLog()
         assert(localPlayer.isHost)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRConstants.resultsPreHoldDuration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPreHoldDuration) {
             self.startResultsCountdown()
         }
     }
@@ -58,7 +58,7 @@ extension WKRManager {
         _debugLog()
         assert(localPlayer.isHost)
 
-        var timeLeft = WKRConstants.resultsDuration
+        var timeLeft = WKRRaceConstants.resultsDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             _debugLog(timeLeft)
             timeLeft -= 1
@@ -70,7 +70,7 @@ extension WKRManager {
                 timer.invalidate()
 
                 self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
-                DispatchQueue.main.asyncAfter(deadline: .now() + WKRConstants.resultsPostHoldDuration, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration, execute: {
                     self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
                 })
             }
@@ -81,7 +81,7 @@ extension WKRManager {
         _debugLog()
         assert(localPlayer.isHost)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRConstants.votingPreHoldDuration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPreHoldDuration) {
             self.startVotingCountdown()
         }
     }
@@ -90,7 +90,7 @@ extension WKRManager {
         _debugLog()
         assert(localPlayer.isHost)
 
-        var timeLeft = WKRConstants.votingDuration
+        var timeLeft = WKRRaceConstants.votingDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
             _debugLog(timeLeft)
             timeLeft -= 1
@@ -116,7 +116,7 @@ extension WKRManager {
 
         peerNetwork.send(object: WKRCodable(raceConfig))
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRConstants.votingPostHoldDuration) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPostHoldDuration) {
             let state = WKRGameState.race
             self.peerNetwork.send(object: WKRCodable(enum: state))
         }

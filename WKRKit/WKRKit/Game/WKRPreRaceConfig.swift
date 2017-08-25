@@ -35,11 +35,8 @@ public struct WKRPreRaceConfig: Codable {
     //swiftlint:disable:next function_body_length
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
         _debugLog()
-        //swiftlint:disable:next nesting
-        class BundleClass {}
-        let bundle = Bundle(for: BundleClass.self)
-
-        guard let url = bundle.url(forResource: WKRConstants.articlesPlistName, withExtension: "plist"),
+        guard let bundle = WKRKitConstants.bundle,
+            let url = bundle.url(forResource: WKRKitConstants.articlesPlistName, withExtension: "plist"),
             let arrayFromURL = NSArray(contentsOf: url), let array = arrayFromURL as? [String] else {
                 completionHandler(nil)
                 fatalError()
@@ -48,7 +45,7 @@ public struct WKRPreRaceConfig: Codable {
         let operationQueue = OperationQueue()
 
         var randomPaths = [String]()
-        while randomPaths.count < Int(Double(WKRConstants.votingArticlesCount) * 1.5) {
+        while randomPaths.count < Int(Double(WKRRaceConstants.votingArticlesCount) * 1.5) {
             if let randomPath = array.randomElement, !randomPaths.contains(randomPath) {
                 randomPaths.append(randomPath)
             }
@@ -61,7 +58,7 @@ public struct WKRPreRaceConfig: Codable {
         let completedOperation = BlockOperation {
             _debugLog("completedOperation")
 
-            if WKRConstants.quickRaceTest {
+            if WKRRaceConstants.quickRaceTest {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
 
@@ -105,7 +102,7 @@ public struct WKRPreRaceConfig: Codable {
     }
 
     private static func preRaceConfig(startingPage: WKRPage?, _ pages: [WKRPage]) -> WKRPreRaceConfig? {
-        let finalPages = Array(pages.prefix(WKRConstants.votingArticlesCount))
+        let finalPages = Array(pages.prefix(WKRRaceConstants.votingArticlesCount))
         if !finalPages.isEmpty, let page = startingPage {
             return WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
         }

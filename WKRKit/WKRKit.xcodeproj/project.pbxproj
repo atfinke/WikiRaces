@@ -77,7 +77,6 @@
 		14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPreRaceConfig.swift; sourceTree = "<group>"; };
 		14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRKit+Array.swift"; sourceTree = "<group>"; };
 		14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = WKRGetLinks.js; path = WKRKit/WKRGetLinks.js; sourceTree = SOURCE_ROOT; };
-		14E6DFB81F3687BA002755C3 /* WKRArticlesData.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WKRArticlesData.plist; path = WKRKit/WKRArticlesData.plist; sourceTree = SOURCE_ROOT; };
 		14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerMessage.swift; sourceTree = "<group>"; };
 		14EB9F491F3682A000FF1A9E /* WKRGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGameState.swift; sourceTree = "<group>"; };
 		14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConfig.swift; sourceTree = "<group>"; };
@@ -141,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				149FF80B1F362B3D000A5D96 /* WKRKit.h */,
-				1452B3731F36529300E81FD8 /* WKRConstants.swift */,
 				14E6DFB31F3686EE002755C3 /* Game */,
 				14E6DFB11F3686B1002755C3 /* Manager */,
 				14EB9F6F1F3684FC00FF1A9E /* Network */,
@@ -195,7 +193,6 @@
 				14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */,
 				14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */,
 				14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */,
-				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -204,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
+				1452B3731F36529300E81FD8 /* WKRConstants.swift */,
+				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
 			);
@@ -222,7 +221,6 @@
 		14EB9F431F36823400FF1A9E /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				14E6DFB81F3687BA002755C3 /* WKRArticlesData.plist */,
 				1452B3711F36524400E81FD8 /* WKRPage.swift */,
 				1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */,
 				140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */,

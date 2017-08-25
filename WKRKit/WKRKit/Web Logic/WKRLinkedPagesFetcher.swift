@@ -28,14 +28,10 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
 
         let config = WKWebViewConfiguration()
 
-        //swiftlint:disable:next nesting
-        class BundleClass {}
-        //swiftlint:disable line_length
-        guard let linksScript = WKUserScript(named: "WKRGetLinks", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentEnd) else {
+        guard let linksScript = WKUserScript(named: "WKRGetLinks", in: WKRKitConstants.bundle, injectionTime: .atDocumentEnd) else {
             fatalError("WKRLinkGetter couldn't load linksScript")
         }
-        //swiftlint:enable line_length
-
+        
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)
         userContentController.add(self, name: "linkedPage")
@@ -57,7 +53,7 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     func start(for page: WKRPage) {
         let path = page.url.lastPathComponent
         let query = "&namespace=0&limit=500&hidetrans=1"
-        guard let url = URL(string: WKRConstants.whatLinksHereURLString + "/" + path + query) else { return }
+        guard let url = URL(string: WKRRaceConstants.whatLinksHereURLString + "/" + path + query) else { return }
         load(url: url)
     }
 

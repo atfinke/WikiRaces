@@ -28,7 +28,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         guard let urlString = url?.absoluteString else {
             return false
         }
-        for bannedFragment in WKRConstants.bannedURLFragments {
+        for bannedFragment in WKRRaceConstants.bannedURLFragments {
             if urlString.contains(bannedFragment) {
                 return false
             }
@@ -36,7 +36,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         if urlString == "about:blank" {
             return true
         }
-        return urlString.contains(WKRConstants.baseURLString)
+        return urlString.contains(WKRRaceConstants.baseURLString)
     }
 
     // MARK: - WKNavigationDelegate

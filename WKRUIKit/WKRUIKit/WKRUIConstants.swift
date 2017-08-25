@@ -9,6 +9,8 @@
 import CoreGraphics
 
 struct WKRUIConstants {
+    static let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit")
+
     static let webViewAnimateInDuration   = 0.25
     static let webViewAnimateOutDuration  = 0.25
 
