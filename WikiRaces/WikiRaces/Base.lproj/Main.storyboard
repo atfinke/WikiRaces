@@ -28,7 +28,7 @@
         <!--Game View Controller-->
         <scene sceneID="Hht-95-HbY">
             <objects>
-                <viewController id="5bp-E7-KCj" customClass="GameViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="5bp-E7-KCj" customClass="GameViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kIX-NQ-nNn"/>
                         <viewControllerLayoutGuide type="bottom" id="NFK-sf-fD4"/>
@@ -39,7 +39,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="oZJ-ty-xLb"/>
                     </view>
-                    <navigationItem key="navigationItem" id="iZu-q5-XhP"/>
+                    <navigationItem key="navigationItem" id="iZu-q5-XhP">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="flag" id="VpH-Y3-50E"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="9HA-5I-myt"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="32h-KD-ArS" kind="presentation" identifier="showPlayers" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="f9Z-YG-5fp"/>
                         <segue destination="VBE-nT-qAo" kind="presentation" identifier="showVoting" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="t2P-SY-QpF"/>
@@ -53,7 +56,7 @@
         <!--Menu View Controller-->
         <scene sceneID="Kzk-I2-guM">
             <objects>
-                <viewController id="dJY-kC-clC" customClass="MenuViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dJY-kC-clC" customClass="MenuViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HB0-uB-3JF"/>
                         <viewControllerLayoutGuide type="bottom" id="Irt-r0-8eO"/>
@@ -110,7 +113,7 @@
         <!--Players View Controller-->
         <scene sceneID="sPw-ab-gIu">
             <objects>
-                <viewController id="VyK-N1-Rm3" customClass="PlayersViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VyK-N1-Rm3" customClass="PlayersViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zde-hX-YiP"/>
                         <viewControllerLayoutGuide type="bottom" id="utc-iv-FNl"/>
@@ -146,7 +149,7 @@
         <!--Voting View Controller-->
         <scene sceneID="seQ-yu-Unu">
             <objects>
-                <viewController id="55U-JC-03Q" customClass="VotingViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="55U-JC-03Q" customClass="VotingViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IOt-PR-rD0"/>
                         <viewControllerLayoutGuide type="bottom" id="Z2I-l9-q4n"/>
@@ -182,7 +185,7 @@
         <!--Results View Controller-->
         <scene sceneID="qiC-d1-oui">
             <objects>
-                <viewController id="s0x-IM-dO9" customClass="ResultsViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="s0x-IM-dO9" customClass="ResultsViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uLq-Ty-6Dq"/>
                         <viewControllerLayoutGuide type="bottom" id="Gw9-QC-RIP"/>
@@ -243,13 +246,13 @@
         <!--History View Controller-->
         <scene sceneID="i6i-qc-Zih">
             <objects>
-                <tableViewController id="Xme-IG-ql6" customClass="HistoryViewController" customModule="SplitWikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Xme-IG-ql6" customClass="HistoryViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v6X-kD-Egf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="ANp-nN-6qW" detailTextLabel="Mjt-BM-2HT" style="IBUITableViewCellStyleValue1" id="43D-4O-BQn" customClass="HistoryTableViewCell" customModule="SplitWikiRaces" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" textLabel="ANp-nN-6qW" detailTextLabel="Mjt-BM-2HT" style="IBUITableViewCellStyleValue1" id="43D-4O-BQn" customClass="HistoryTableViewCell" customModule="WikiRaces" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="43D-4O-BQn" id="BWp-gR-Vtt">
@@ -292,7 +295,10 @@
             <point key="canvasLocation" x="3188" y="2767"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="flag" width="17" height="21"/>
+    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FDO-Bq-NQz"/>
+        <segue reference="f9Z-YG-5fp"/>
     </inferredMetricsTieBreakers>
 </document>
