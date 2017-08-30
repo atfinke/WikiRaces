@@ -11,7 +11,7 @@ import Foundation
 public enum WKRPlayerMessage: Int {
     case linkOnPage
     case foundPage
-    case usedHint
+    case neededHelp
     case forfeited
     case quit
 
@@ -19,7 +19,7 @@ public enum WKRPlayerMessage: Int {
         switch self {
         case .linkOnPage: return player.name + " is close"
         case .foundPage: return player.name + " found the page"
-        case .usedHint: return player.name + " needed help"
+        case .neededHelp: return player.name + " needed help"
         case .forfeited: return player.name + " forfeited"
         case .quit: return player.name + " quit"
         }

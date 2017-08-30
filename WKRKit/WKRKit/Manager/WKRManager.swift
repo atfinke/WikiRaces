@@ -14,6 +14,8 @@ public enum WKRPlayerAction {
     case neededHelp
     case voted(WKRPage)
     case state(WKRPlayerState)
+    case forfeited
+    case quit
 }
 
 public enum WKRHostAction {
@@ -28,6 +30,10 @@ public enum WKRNetworkStatus {
 public class WKRManager {
 
     // MARK: - Public
+
+    public var finalPageURL: URL? {
+        return game.raceConfig?.endingPage.url
+    }
 
     public var votingInfo: WKRVoteInfo? {
         return game.preRaceConfig?.voteInfo
@@ -187,10 +193,11 @@ public class WKRManager {
     public func player(_ action: WKRPlayerAction) {
         _debugLog(action)
         switch action {
-        case .state(let newState): print(newState)
-        case .neededHelp: print(1)
         case .voted(let page):
             peerNetwork.send(object: WKRCodable(page))
+        case .neededHelp:
+            peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.neededHelp))
+        default: fatalError("\(action)")
         }
     }
 }
