@@ -11,8 +11,8 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: WKRAppDelegate {
 
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    //swiftlint:disable:next line_length
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         configureAppearance()
         return true
     }

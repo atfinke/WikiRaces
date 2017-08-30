@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140C580D1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */; };
+		140C580E1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */; };
+		140C580F1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */; };
 		1410DB2C1F4F4BEA00F5CAD7 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; };
 		1410DB2D1F4F4BEA00F5CAD7 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
@@ -203,8 +206,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
+		1468138B1F56B32900F427F4 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Shared/HelpViewController.swift; sourceTree = SOURCE_ROOT; };
+		1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CenteredTableViewController.swift; path = Shared/CenteredTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../../../WKRKit/WKRKit.xcodeproj; sourceTree = "<group>"; };
 		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../../../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -457,6 +463,8 @@
 		14B55C951F3A499C0090E092 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1468138B1F56B32900F427F4 /* HelpViewController.swift */,
+				1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14C4AB801F368A630086B77F /* _Extensions.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
@@ -469,6 +477,7 @@
 			isa = PBXGroup;
 			children = (
 				14C4AB281F3689890086B77F /* CenteredTableViewController.swift */,
+				140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */,
 				14B55C8F1F3A495C0090E092 /* ResultsViewController */,
 				14B55C901F3A49670090E092 /* MenuViewController */,
 				14B55C911F3A496D0090E092 /* HistoryViewController */,
@@ -801,6 +810,7 @@
 				14C4AB451F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
 				14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14C4AB811F368A630086B77F /* _Extensions.swift in Sources */,
+				140C580D1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,
 				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
@@ -824,6 +834,7 @@
 				14C4AB2A1F3689890086B77F /* CenteredTableViewController.swift in Sources */,
 				14C4AB721F368A3C0086B77F /* PlayersViewController+TableView.swift in Sources */,
 				14C4AB321F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				140C580E1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,
 				14C4AB561F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB521F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB621F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -860,6 +871,7 @@
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
+				140C580F1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB471F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
@@ -1155,7 +1167,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -1172,7 +1184,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--Multi-Window-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

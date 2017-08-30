@@ -40,13 +40,23 @@
                         <viewLayoutGuide key="safeArea" id="oZJ-ty-xLb"/>
                     </view>
                     <navigationItem key="navigationItem" id="iZu-q5-XhP">
-                        <barButtonItem key="leftBarButtonItem" image="flag" id="VpH-Y3-50E"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="9HA-5I-myt"/>
+                        <barButtonItem key="leftBarButtonItem" image="flag" id="VpH-Y3-50E">
+                            <connections>
+                                <action selector="flagButtonPressed:" destination="5bp-E7-KCj" id="uhz-zT-ix7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="9HA-5I-myt">
+                            <connections>
+                                <action selector="quitButtonPressed:" destination="5bp-E7-KCj" id="RSQ-7O-qqi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="flagBarButtonItem" destination="VpH-Y3-50E" id="3rb-HT-ymd"/>
                         <segue destination="32h-KD-ArS" kind="presentation" identifier="showPlayers" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="f9Z-YG-5fp"/>
                         <segue destination="VBE-nT-qAo" kind="presentation" identifier="showVoting" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="t2P-SY-QpF"/>
                         <segue destination="uXR-dP-Jlf" kind="presentation" identifier="showResults" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="a2n-af-vvD"/>
+                        <segue destination="t4g-rL-EB2" kind="presentation" identifier="showHelp" modalPresentationStyle="formSheet" id="kTX-dD-3f0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNu-P3-to5" sceneMemberID="firstResponder"/>
@@ -242,6 +252,44 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pyf-e1-ssX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2425" y="2767"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CM8-5Z-ke9">
+            <objects>
+                <navigationController id="t4g-rL-EB2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Htc-B1-Zts">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NWZ-lf-LI4" kind="relationship" relationship="rootViewController" id="2FZ-2w-9nj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNz-X3-heT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="925" y="3480"/>
+        </scene>
+        <!--HELP-->
+        <scene sceneID="lgT-cv-lgr">
+            <objects>
+                <viewController id="NWZ-lf-LI4" customClass="HelpViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4bw-bX-PNC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="GhA-Vw-CIz"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="HELP" id="9ja-K1-9hf">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="fJ7-XL-awe">
+                            <connections>
+                                <action selector="doneButtonPressed" destination="NWZ-lf-LI4" id="hrd-04-dYW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Old-h4-V8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1645" y="3479"/>
         </scene>
         <!--History View Controller-->
         <scene sceneID="i6i-qc-Zih">
