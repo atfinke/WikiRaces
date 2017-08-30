@@ -9,7 +9,7 @@
 import Foundation
 
 class WKRRaceConstants {
-    
+
     static let quickRaceTest                     = true
 
     static let votingArticlesCount               = 8

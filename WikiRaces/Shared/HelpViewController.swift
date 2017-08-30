@@ -51,5 +51,5 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
             linkTapped?()
         }
     }
-    
+
 }

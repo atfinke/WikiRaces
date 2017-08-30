@@ -91,5 +91,5 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     func presentNetworkInterface(on viewController: UIViewController) {
         fatalError()
     }
-    
+
 }

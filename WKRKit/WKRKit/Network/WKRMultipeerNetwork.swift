@@ -100,7 +100,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 }
 
 extension WKRMultipeerNetwork: MCBrowserViewControllerDelegate {
-    
+
     func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
         browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
     }
