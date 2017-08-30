@@ -9,6 +9,12 @@
 import Foundation
 import WKRKit
 
+extension IndexPath {
+    init(row: Int) {
+        self.init(row: row, section: 0)
+    }
+}
+
 extension UINavigationController {
     var rootViewController: UIViewController? {
         return viewControllers.first

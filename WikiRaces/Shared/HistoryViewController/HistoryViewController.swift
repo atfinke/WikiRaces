@@ -27,7 +27,7 @@ class HistoryViewController: UITableViewController {
 
             tableView.beginUpdates()
             if player.state != playerState {
-                let lastIndex = IndexPath(row: history.entries.count - 1, section: 0)
+                let lastIndex = IndexPath(row: history.entries.count - 1)
                 tableView.reloadRows(at: [lastIndex], with: .automatic)
             }
             playerState = player.state
@@ -37,11 +37,11 @@ class HistoryViewController: UITableViewController {
                     if entry != entries[index] {
                         entries.remove(at: index)
                         entries.insert(entry, at: index)
-                        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                        tableView.reloadRows(at: [IndexPath(row: index)], with: .automatic)
                     }
                 } else {
                     entries.insert(entry, at: index)
-                    tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+                    tableView.insertRows(at: [IndexPath(row: index)], with: .automatic)
                 }
             }
             tableView.endUpdates()

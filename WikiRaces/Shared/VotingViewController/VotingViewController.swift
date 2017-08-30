@@ -70,7 +70,7 @@ class VotingViewController: CenteredTableViewController {
 
         UIView.animate(withDuration: 1.5, animations: {
             for i in 0...votingObject.pageCount where i != index {
-                let indexPath = IndexPath(row: i, section: 0)
+                let indexPath = IndexPath(row: i)
                 self.tableView.cellForRow(at: indexPath)?.alpha = 0.2
             }
         })
