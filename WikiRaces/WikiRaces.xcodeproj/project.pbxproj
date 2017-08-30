@@ -22,6 +22,8 @@
 		1410DB541F4F55BF00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
+		148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
+		148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
 		149FF84F1F362B83000A5D96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84E1F362B83000A5D96 /* ViewController.swift */; };
 		149FF8521F362B83000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
@@ -183,6 +185,7 @@
 		1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CenteredTableViewController.swift; path = Shared/CenteredTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../../../WKRKit/WKRKit.xcodeproj; sourceTree = "<group>"; };
 		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../../../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = "<group>"; };
+		148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Segue.swift"; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF84E1F362B83000A5D96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -385,6 +388,7 @@
 				14C4AB5C1F368A0C0086B77F /* GameViewController.swift */,
 				14C4AB601F368A170086B77F /* GameViewController+Manager.swift */,
 				14C4AB641F368A210086B77F /* GameViewController+UI.swift */,
+				148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */,
 			);
 			path = GameViewController;
 			sourceTree = "<group>";
@@ -686,6 +690,7 @@
 				14C4AB351F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF84F1F362B83000A5D96 /* ViewController.swift in Sources */,
+				148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				14C4AB451F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
 				14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14C4AB811F368A630086B77F /* _Extensions.swift in Sources */,
@@ -717,6 +722,7 @@
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
+				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				140C580F1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
