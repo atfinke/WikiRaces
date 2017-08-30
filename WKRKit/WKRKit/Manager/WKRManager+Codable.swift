@@ -35,7 +35,7 @@ extension WKRManager {
             hostResultsInfo = resultsInfo
             resultsInfoHostUpdate?(resultsInfo)
 
-            if localPlayer.state != .foundPage {
+            if localPlayer.state.isRacing {
                 localPlayer.state = .forcedEnd
                 peerNetwork.send(object: WKRCodable(localPlayer))
             }

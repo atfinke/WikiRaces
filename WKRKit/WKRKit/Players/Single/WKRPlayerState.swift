@@ -18,6 +18,13 @@ public enum WKRPlayerState: Int, Codable {
     case connecting
     case disconnected
 
+    var isRacing: Bool {
+        switch self {
+        case .racing: return true
+        default: return false
+        }
+    }
+
     public var text: String {
         switch self {
         case .foundPage: return "Found Page"

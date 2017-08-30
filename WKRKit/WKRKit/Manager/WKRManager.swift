@@ -11,20 +11,12 @@ import WKRUIKit
 import MultipeerConnectivity
 
 public enum WKRPlayerAction {
+    case startedGame
     case neededHelp
     case voted(WKRPage)
     case state(WKRPlayerState)
     case forfeited
     case quit
-}
-
-public enum WKRHostAction {
-    case startedGame
-}
-
-public enum WKRNetworkStatus {
-    case started
-    case finished
 }
 
 public class WKRManager {
@@ -189,22 +181,25 @@ public class WKRManager {
 
     // MARK: - Actions
 
-    public func host(_ action: WKRHostAction) {
+    public func player(_ action: WKRPlayerAction) {
         _debugLog(action)
         switch action {
         case .startedGame:
             let state = WKRGameState.voting
             peerNetwork.send(object: WKRCodable(enum: state))
-        }
-    }
-
-    public func player(_ action: WKRPlayerAction) {
-        _debugLog(action)
-        switch action {
         case .voted(let page):
             peerNetwork.send(object: WKRCodable(page))
         case .neededHelp:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.neededHelp))
+        case .forfeited:
+            peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.forfeited))
+            localPlayer.state = .forfeited
+            peerNetwork.send(object: WKRCodable(localPlayer))
+        case .quit:
+            peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.quit))
+            localPlayer.state = .quit
+            peerNetwork.send(object: WKRCodable(localPlayer))
+            peerNetwork.disconnect()
         default: fatalError("\(action)")
         }
     }

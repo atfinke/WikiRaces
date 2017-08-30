@@ -23,20 +23,50 @@ public struct WKRResultsInfo: Codable {
     internal let points: [WKRPlayerProfile: Int]
 
     internal var keys: [WKRPlayer] {
+        // The players the found the page
         let foundPagePlayers = players.filter({ $0.state == .foundPage })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.raceHistory?.duration ?? Int.max < rhs.raceHistory?.duration ?? Int.max
             })
-        let notRacingPlayers = players.filter({ $0.state != .foundPage && $0.state != .racing })
+
+        // The players that participated but didn't quit or forfeit
+        let forcedFinishPlayers = players.filter({ $0.state == .forcedEnd })
             .sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.raceHistory?.duration ?? Int.max < rhs.raceHistory?.duration ?? Int.max
+                return lhs.profile.name < rhs.profile.name
             })
+
+        // The players that forfeited
+        let forfeitedPlayers = players.filter({ $0.state == .forfeited})
+            .sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.profile.name < rhs.profile.name
+            })
+
+        // The players that quit
+        let quitPlayers = players.filter({ $0.state == .quit})
+            .sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.profile.name < rhs.profile.name
+            })
+
+        // The players still racing
         let racingPlayers = players.filter({ $0.state == .racing })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
-        return foundPagePlayers + notRacingPlayers + racingPlayers
+        // The connecting players
+        let connectingPlayers = players.filter({ $0.state == .connecting })
+            .sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.profile.name < rhs.profile.name
+            })
+
+        // Figure out what the difference between disconnected and quit should be
+
+        return foundPagePlayers
+            + forcedFinishPlayers
+            + forfeitedPlayers
+            + quitPlayers
+            + racingPlayers
+            + connectingPlayers
     }
 
     // MARK: - Helpers
