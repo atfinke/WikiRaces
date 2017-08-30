@@ -88,4 +88,8 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
         totalData += data.count
     }
 
+    func presentNetworkInterface(on viewController: UIViewController) {
+        fatalError()
+    }
+    
 }

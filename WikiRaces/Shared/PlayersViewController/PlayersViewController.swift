@@ -15,6 +15,7 @@ class PlayersViewController: UIViewController {
 
     var didFinish: (() -> Void)?
     var startButtonPressed: (() -> Void)?
+    var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
     let tableView = UITableView()
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
@@ -75,6 +76,11 @@ class PlayersViewController: UIViewController {
     @objc func startRaceButtonPressed() {
         _debugLog(nil)
         startButtonPressed?()
+    }
+
+    @objc func footerButtonPressed() {
+        _debugLog(nil)
+        addPlayersButtonPressed?(self)
     }
 
 }

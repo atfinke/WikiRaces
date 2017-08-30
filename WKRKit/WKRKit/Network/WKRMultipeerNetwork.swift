@@ -13,6 +13,8 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 
     // MARK: - Properties
 
+    static let serviceType = "WKRPeer3.0"
+
     let isHost: Bool
     private let session: MCSession
     weak var delegate: WKRPeerNetworkDelegate?
@@ -43,6 +45,13 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
         } catch {
             print(error)
         }
+    }
+
+    func presentNetworkInterface(on viewController: UIViewController) {
+        let browserViewController = MCBrowserViewController(serviceType: WKRMultipeerNetwork.serviceType, session: session)
+        browserViewController.maximumNumberOfPeers = 8
+        browserViewController.delegate = self
+        viewController.present(viewController, animated: true, completion: nil)
     }
 
     // MARK: - MCSessionDelegate
@@ -86,6 +95,18 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
                       didReceive stream: InputStream,
                       withName streamName: String,
                       fromPeer peerID: MCPeerID) {
+    }
+
+}
+
+extension WKRMultipeerNetwork: MCBrowserViewControllerDelegate {
+    
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
 }

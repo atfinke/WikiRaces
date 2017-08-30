@@ -21,4 +21,5 @@ protocol WKRPeerNetwork: class {
     weak var delegate: WKRPeerNetworkDelegate? { get set }
 
     func send(object: WKRCodable)
+    func presentNetworkInterface(on viewController: UIViewController)
 }

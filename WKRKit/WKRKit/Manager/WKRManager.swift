@@ -179,6 +179,14 @@ public class WKRManager {
         webView.navigationDelegate = pageNavigation
     }
 
+    public func presentNetworkInterface(on viewController: UIViewController) {
+        peerNetwork.presentNetworkInterface(on: viewController)
+    }
+
+    public func enqueue(message: String, duration: Double = 5.0) {
+        alertView.enqueue(text: message, duration: duration)
+    }
+
     // MARK: - Actions
 
     public func host(_ action: WKRHostAction) {
