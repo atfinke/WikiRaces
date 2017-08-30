@@ -14,15 +14,6 @@ import WKRUIKit
 
 class GameViewController: UIViewController {
 
-    // MARK: - Types
-
-    enum Segue: String {
-        case showPlayers
-        case showVoting
-        case showResults
-        case showHelp
-    }
-
     // MARK: - Properties
 
     var isPlayerHost = false
@@ -89,84 +80,6 @@ class GameViewController: UIViewController {
         if manager.gameState == .preMatch {
             performSegue(.showPlayers)
             setupAlertView()
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        _debugLog(segue)
-
-        guard let navigationController = segue.destination as? UINavigationController,
-            let unwrappedSegueIdentifier = segue.identifier,
-            let segueIdentifier = Segue(rawValue: unwrappedSegueIdentifier) else {
-                fatalError("Unknown segue \(String(describing: segue.identifier))")
-        }
-
-        switch segueIdentifier {
-        case .showPlayers:
-            guard let destination = navigationController.rootViewController as? PlayersViewController else {
-                fatalError()
-            }
-
-            destination.didFinish = {
-                DispatchQueue.main.async {
-                    self.playersViewController?.dismiss(animated: true, completion: {
-                        self.playersViewController = nil
-                    })
-                }
-            }
-
-            destination.startButtonPressed = {
-                self.manager.host(.startedGame)
-                destination.didFinish?()
-            }
-
-            destination.addPlayersButtonPressed = { viewController in
-                self.manager.presentNetworkInterface(on: viewController)
-            }
-
-            destination.isPlayerHost = isPlayerHost
-            destination.isPreMatch = manager.gameState == .preMatch
-            destination.displayedPlayers = manager.allPlayers
-
-            self.playersViewController = destination
-        case .showVoting:
-            guard let destination = navigationController.rootViewController as? VotingViewController else {
-                fatalError()
-            }
-
-            navigationItem.leftBarButtonItem = flagBarButtonItem
-            navigationItem.leftBarButtonItem?.isEnabled = true
-            navigationItem.rightBarButtonItem?.isEnabled = true
-
-            destination.playerVoted = { page in
-                self.manager.player(.voted(page))
-            }
-
-            if let votingInfo = manager?.votingInfo {
-                destination.updateVotingInfo(to: votingInfo)
-            }
-
-            self.votingViewController = destination
-        case .showResults:
-            guard let destination = navigationController.rootViewController as? ResultsViewController else {
-                fatalError()
-            }
-
-            destination.state = manager.gameState
-            destination.resultsInfo = manager.hostResultsInfo
-            destination.isPlayerHost = isPlayerHost
-            self.resultsViewController = destination
-        case .showHelp:
-            guard let destination = navigationController.rootViewController as? HelpViewController else {
-                fatalError()
-            }
-
-            destination.linkTapped = {
-                self.manager.enqueue(message: "Links disabled in help", duration: 2.0)
-            }
-
-            destination.url = manager.finalPageURL
-            self.activeViewController = destination
         }
     }
 
