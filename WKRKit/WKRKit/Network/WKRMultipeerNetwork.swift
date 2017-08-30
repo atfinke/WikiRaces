@@ -36,6 +36,10 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 
     // MARK: - WKRNetwork
 
+    func disconnect() {
+        session.disconnect()
+    }
+
     func send(object: WKRCodable) {
         _debugLog(object)
         guard let data = try? WKRCodable.encoder.encode(object) else { return }
