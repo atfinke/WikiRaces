@@ -13,6 +13,7 @@ class AppDelegate: WKRAppDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        StatsHelper.shared.start()
         configureAppearance()
         return true
     }

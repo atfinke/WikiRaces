@@ -19,9 +19,9 @@ class ViewController: UIViewController {
 
         let windowWidth: CGFloat
         if twoRows {
-            windowWidth = (view.frame.width / windows * 2)
+            windowWidth = ((view.frame.width + 2) / windows * 2)
         } else {
-            windowWidth = (view.frame.width / windows) - CGFloat(windows)
+            windowWidth = ((view.frame.width + 2) / windows) - CGFloat(windows)
         }
 
         let windowNames = [
