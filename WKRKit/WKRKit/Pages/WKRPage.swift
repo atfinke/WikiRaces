@@ -27,12 +27,12 @@ public struct WKRPage: Codable {
     /// Removes extra characters in page title ("Wikipedia - Apple Inc." -> "Apple Inc.")
     private static func formattedTitle(for title: String?) -> String? {
         guard let title = title else { return nil }
-        let charactersToRemove = WKRRaceConstants.pageTitleCharactersToRemove
+        let charactersToRemove = WKRKitConstants.pageTitleCharactersToRemove
         if charactersToRemove > 0 && title.characters.count > charactersToRemove {
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
             return title[..<index].capitalized
         } else {
-            return title.replacingOccurrences(of: WKRRaceConstants.pageTitleStringToReplace, with: "").capitalized
+            return title.replacingOccurrences(of: WKRKitConstants.pageTitleStringToReplace, with: "").capitalized
         }
     }
 

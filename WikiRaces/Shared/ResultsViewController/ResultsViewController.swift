@@ -57,7 +57,7 @@ class ResultsViewController: CenteredTableViewController {
     private var historyViewController: HistoryViewController?
     private var playersViewController: PlayersViewController?
 
-    var readyForNextRound: (() -> Void)?
+    var readyButtonPressed: (() -> Void)?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
     // MARK: - View Life Cycle

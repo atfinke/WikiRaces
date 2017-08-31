@@ -77,18 +77,14 @@ extension GameViewController {
             }
         }
 
-        func hideBarButtonItems() {
-            navigationItem.leftBarButtonItem = nil
-            navigationItem.rightBarButtonItem = nil
-        }
-
         switch state {
         case .voting:
             self.title = "VOTING"
             dismissActiveController(completion: {
                 self.performSegue(.showVoting)
             })
-            hideBarButtonItems()
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
         case .results, .hostResults, .points:
             if let controller = activeViewController, controller != resultsViewController {
                 dismissActiveController(completion: {
@@ -106,7 +102,8 @@ extension GameViewController {
                 resultsViewController?.state = state
             }
             navigationController?.setNavigationBarHidden(false, animated: true)
-            hideBarButtonItems()
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
         case .race:
             dismissActiveController(completion: nil)
             navigationItem.leftBarButtonItem = flagBarButtonItem

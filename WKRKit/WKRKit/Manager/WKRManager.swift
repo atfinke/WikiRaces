@@ -6,9 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
 import WKRUIKit
-import MultipeerConnectivity
 
 public enum WKRPlayerAction {
     case startedGame
@@ -17,6 +15,7 @@ public enum WKRPlayerAction {
     case state(WKRPlayerState)
     case forfeited
     case quit
+    case ready
 }
 
 public class WKRManager {
@@ -85,10 +84,10 @@ public class WKRManager {
 
     // MARK: - Initialization
 
-    private init(player: WKRPlayer,
-                 network: WKRPeerNetwork,
-                 stateUpdate: @escaping ((WKRGameState) -> Void),
-                 playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+    internal init(player: WKRPlayer,
+                  network: WKRPeerNetwork,
+                  stateUpdate: @escaping ((WKRGameState) -> Void),
+                  playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
         self.stateUpdate = stateUpdate
         self.playersUpdate = playersUpdate
@@ -113,28 +112,6 @@ public class WKRManager {
         peerNetwork.send(object: WKRCodable(self.localPlayer))
 
         playersUpdate(game.players)
-    }
-
-    @available(*, deprecated, message: "Only for split view debugging")
-    //swiftlint:disable:next identifier_name
-    public convenience init(_playerName: String, isHost: Bool,
-                            stateUpdate: @escaping ((WKRGameState) -> Void),
-                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
-
-        let player = WKRPlayer(profile: WKRPlayerProfile(name: _playerName, playerID: _playerName), isHost: isHost)
-        let network = WKRSplitViewNetwork(playerName: _playerName, isHost: isHost)
-
-        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
-    }
-
-    public convenience init(session: MCSession, isHost: Bool,
-                            stateUpdate:   @escaping ((WKRGameState) -> Void),
-                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
-
-        let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isHost)
-        let network = WKRMultipeerNetwork(session: session, isHost: isHost)
-
-        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
     }
 
     // MARK: View Controller Callbacks
@@ -184,6 +161,8 @@ public class WKRManager {
     public func player(_ action: WKRPlayerAction) {
         _debugLog(action)
         switch action {
+        case .ready:
+            localPlayer.isReadyForNextRound = true
         case .startedGame:
             let state = WKRGameState.voting
             peerNetwork.send(object: WKRCodable(enum: state))

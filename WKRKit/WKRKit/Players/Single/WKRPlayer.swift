@@ -13,6 +13,7 @@ public class WKRPlayer: Codable, Hashable {
     // MARK: - Properties
 
     internal let isHost: Bool
+    internal var isReadyForNextRound = false
 
     public var raceHistory: WKRHistory?
     public var state: WKRPlayerState = .connecting
@@ -24,12 +25,6 @@ public class WKRPlayer: Codable, Hashable {
 
     // MARK: - Initialization
 
-//
-//    init(name: String, playerID: String) {
-//        isHost = false
-//        profile = WKRPlayerProfile(name: name, playerID: playerID)
-//    }
-
     init(profile: WKRPlayerProfile, isHost: Bool) {
         self.isHost = isHost
         self.profile = profile
@@ -40,6 +35,7 @@ public class WKRPlayer: Codable, Hashable {
     func startedNewRace(on page: WKRPage) {
         _debugLog(page)
         state = .racing
+        isReadyForNextRound = false
         raceHistory = WKRHistory(firstPage: page)
     }
 

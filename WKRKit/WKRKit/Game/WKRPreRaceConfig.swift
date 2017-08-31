@@ -58,7 +58,7 @@ public struct WKRPreRaceConfig: Codable {
         let completedOperation = BlockOperation {
             _debugLog("completedOperation")
 
-            if WKRRaceConstants.quickRaceTest {
+            if WKRKitConstants.quickRaceTest {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
 

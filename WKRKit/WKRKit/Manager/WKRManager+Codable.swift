@@ -126,6 +126,11 @@ extension WKRManager {
         _debugLog()
         assert(localPlayer.isHost)
 
+        // Make sure game hasn't already started
+        guard game.activeRace == nil else {
+           return
+        }
+
         guard let unwrappedObject = game.preRaceConfig else {
             fatalError()
         }

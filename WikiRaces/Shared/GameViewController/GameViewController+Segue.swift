@@ -18,7 +18,7 @@ extension GameViewController {
         case showResults
         case showHelp
     }
-    
+
     // MARK: - Performing Segues
 
     func performSegue(_ segue: Segue) {
@@ -77,6 +77,10 @@ extension GameViewController {
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {
                 fatalError()
+            }
+
+            destination.readyButtonPressed = {
+                self.manager.player(.ready)
             }
 
             destination.addPlayersButtonPressed = { viewController in

@@ -35,7 +35,7 @@ struct WKRPageFetcher {
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
     static func fetch(path: String, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard let url = URL(string: WKRRaceConstants.baseURLString + path) else {
+        guard let url = URL(string: WKRKitConstants.baseURLString + path) else {
             completionHandler(nil)
             return
         }
@@ -43,7 +43,7 @@ struct WKRPageFetcher {
     }
 
     static func fetchRandom(completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard let url = URL(string: WKRRaceConstants.randomURLString) else {
+        guard let url = URL(string: WKRKitConstants.randomURLString) else {
             completionHandler(nil)
             return
         }

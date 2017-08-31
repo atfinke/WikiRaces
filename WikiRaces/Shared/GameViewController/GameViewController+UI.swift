@@ -27,7 +27,7 @@ extension GameViewController {
 
         flagBarButtonItem = navigationItem.leftBarButtonItem
         quitBarButtonItem = navigationItem.rightBarButtonItem
-        
+
         let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.white
         statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false

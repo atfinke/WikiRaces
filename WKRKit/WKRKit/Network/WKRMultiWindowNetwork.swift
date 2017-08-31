@@ -97,3 +97,19 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     }
 
 }
+
+extension WKRManager {
+
+    @available(*, deprecated, message: "Only for split view debugging")
+    //swiftlint:disable:next identifier_name
+    public convenience init(_playerName: String, isHost: Bool,
+                            stateUpdate: @escaping ((WKRGameState) -> Void),
+                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+
+        let player = WKRPlayer(profile: WKRPlayerProfile(name: _playerName, playerID: _playerName), isHost: isHost)
+        let network = WKRSplitViewNetwork(playerName: _playerName, isHost: isHost)
+
+        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
+    }
+
+}

@@ -115,6 +115,20 @@ extension WKRMultipeerNetwork: MCBrowserViewControllerDelegate {
 
 }
 
+extension WKRManager {
+
+    public convenience init(session: MCSession, isHost: Bool,
+                            stateUpdate:   @escaping ((WKRGameState) -> Void),
+                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+
+        let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isHost)
+        let network = WKRMultipeerNetwork(session: session, isHost: isHost)
+
+        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
+    }
+
+}
+
 extension WKRPlayerProfile {
     init(peerID: MCPeerID) {
         name = peerID.displayName
