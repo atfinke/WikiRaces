@@ -96,9 +96,14 @@ public class WKRManager {
         peerNetwork = network
 
         game = WKRGame(localPlayer: localPlayer)
+        game.allPlayersReadyForNextRound = {
+            if self.localPlayer.isHost && self.gameState == .hostResults {
+                print("READY")
+            }
+        }
 
         if player.isHost {
-            game.hostShouldEndRace = { result in
+            game.finalResultsCreated = { result in
                 DispatchQueue.main.async {
                     let state = WKRGameState.hostResults
                     self.peerNetwork.send(object: WKRCodable(enum: state))
@@ -126,12 +131,15 @@ public class WKRManager {
 
     public func results(timeUpdate: @escaping ((Int) -> Void),
                         infoUpdate: @escaping ((WKRResultsInfo) -> Void),
-                        hostInfoUpdate: @escaping ((WKRResultsInfo) -> Void)) {
+                        hostInfoUpdate: @escaping ((WKRResultsInfo) -> Void),
+                        readyStatesUpdate: @escaping ((WKRReadyStates) -> Void)) {
 
         resultsTimeUpdate = timeUpdate
         resultsInfoUpdate = infoUpdate
         resultsInfoHostUpdate = hostInfoUpdate
-        game.currentResultsInfo = { results in
+
+        game.readyStatesUpdated = readyStatesUpdate
+        game.currentResultsUpdated = { results in
             if self.gameState == .results {
                 self.resultsInfoUpdate?(results)
             }
@@ -163,6 +171,7 @@ public class WKRManager {
         switch action {
         case .ready:
             localPlayer.isReadyForNextRound = true
+            peerNetwork.send(object: WKRCodable(localPlayer))
         case .startedGame:
             let state = WKRGameState.voting
             peerNetwork.send(object: WKRCodable(enum: state))

@@ -12,8 +12,11 @@ public class WKRGame {
 
     // MARK: - Closure
 
-    var hostShouldEndRace: ((WKRResultsInfo) -> Void)?
-    var currentResultsInfo: ((WKRResultsInfo) -> Void)!
+    var allPlayersReadyForNextRound: (() -> Void)?
+    var readyStatesUpdated: ((WKRReadyStates) -> Void)?
+
+    var finalResultsCreated: ((WKRResultsInfo) -> Void)?
+    var currentResultsUpdated: ((WKRResultsInfo) -> Void)?
 
     // MARK: - Properties
 
@@ -83,6 +86,12 @@ public class WKRGame {
         }
         activeRace?.playerUpdated(player)
         checkForRaceEnd()
+
+        let readyStates = WKRReadyStates(players: players)
+        readyStatesUpdated?(readyStates)
+        if readyStates.isReadyForNextRound {
+            allPlayersReadyForNextRound?()
+        }
     }
 
     // MARK: - Race End
@@ -109,12 +118,12 @@ public class WKRGame {
 
         let results = WKRResultsInfo(players: players, points: totalPoints)
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
-            currentResultsInfo(results)
+            currentResultsUpdated?(results)
             return
         }
 
         finishedRace()
-        hostShouldEndRace?(results)
+        finalResultsCreated?(results)
     }
 
 }

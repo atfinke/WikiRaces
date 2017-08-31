@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let twoRows = false
-        let windows = CGFloat(4)
+        let windows = CGFloat(3)
 
         let windowWidth: CGFloat
         if twoRows {

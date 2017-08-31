@@ -35,6 +35,7 @@ class ResultsTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
+        tintColor = UIColor.wkrTextColor
         selectionStyle = .none
         backgroundColor = UIColor.clear
 
@@ -55,22 +56,22 @@ class ResultsTableViewCell: UITableViewCell {
         stackView.addArrangedSubview(playerLabel)
         stackView.addArrangedSubview(detailLabel)
 
-        addSubview(stackView)
+        contentView.addSubview(stackView)
 
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.stopAnimating()
 
-        addSubview(activityIndicatorView)
+        contentView.addSubview(activityIndicatorView)
 
         let constraints = [
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
+            stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
-            activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            activityIndicatorView.rightAnchor.constraint(equalTo: rightAnchor)
+            activityIndicatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            activityIndicatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

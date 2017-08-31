@@ -13,9 +13,9 @@ public class WKRPlayer: Codable, Hashable {
     // MARK: - Properties
 
     internal let isHost: Bool
-    internal var isReadyForNextRound = false
 
     public var raceHistory: WKRHistory?
+    public var isReadyForNextRound = false
     public var state: WKRPlayerState = .connecting
 
     public let profile: WKRPlayerProfile

@@ -19,6 +19,7 @@
 		1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRKitConstants.swift */; };
 		1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */; };
 		1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */; };
+		1497F31A1F588EBE001653DE /* WKRReadyStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497F3191F588EBE001653DE /* WKRReadyStates.swift */; };
 		149FF8121F362B3D000A5D96 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF8081F362B3D000A5D96 /* WKRKit.framework */; };
 		149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8161F362B3D000A5D96 /* WKRKitTests.swift */; };
 		149FF8191F362B3D000A5D96 /* WKRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 149FF80B1F362B3D000A5D96 /* WKRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -69,6 +70,7 @@
 		1452B3731F36529300E81FD8 /* WKRKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitConstants.swift; sourceTree = "<group>"; };
 		1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConstants.swift; sourceTree = "<group>"; };
 		1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageFetcher.swift; sourceTree = "<group>"; };
+		1497F3191F588EBE001653DE /* WKRReadyStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRReadyStates.swift; sourceTree = "<group>"; };
 		149FF8081F362B3D000A5D96 /* WKRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF80B1F362B3D000A5D96 /* WKRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRKit.h; sourceTree = "<group>"; };
 		149FF80C1F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */,
+				1497F3191F588EBE001653DE /* WKRReadyStates.swift */,
 				14EB9F491F3682A000FF1A9E /* WKRGameState.swift */,
 				14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */,
 				14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */,
@@ -437,6 +440,7 @@
 				140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */,
 				14EB9F5A1F3682F900FF1A9E /* WKRManager+Codable.swift in Sources */,
 				14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */,
+				1497F31A1F588EBE001653DE /* WKRReadyStates.swift in Sources */,
 				14EB9F5E1F36830800FF1A9E /* WKRPeerNetwork.swift in Sources */,
 				1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */,
 				1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */,

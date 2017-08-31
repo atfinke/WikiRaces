@@ -53,6 +53,8 @@ extension GameViewController {
             }
         }, hostInfoUpdate: { resultsInfo in
             self.resultsViewController?.resultsInfo = resultsInfo
+        }, readyStatesUpdate: { readyStates in
+            self.resultsViewController?.readyStates = readyStates
         })
     }
 

@@ -34,6 +34,13 @@ class ResultsViewController: CenteredTableViewController {
         }
     }
 
+    var readyStates: WKRReadyStates? {
+        didSet {
+            _debugLog(resultsInfo)
+            tableView.reloadData()
+        }
+    }
+
     var resultsInfo: WKRResultsInfo? {
         didSet {
             _debugLog(resultsInfo)
@@ -82,6 +89,7 @@ class ResultsViewController: CenteredTableViewController {
 
     override func overlayButtonPressed() {
         isPlayerReady = true
+        readyButtonPressed?()
         UIView.animate(withDuration: 0.5) {
             self.isOverlayButtonHidden = true
         }

@@ -29,6 +29,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             let player = resultsInfo.player(at: indexPath.row)
             cell.playerLabel.text = player.name
             cell.isShowingActivityIndicatorView = false
+            cell.accessoryType = (readyStates?.playerReady(player) ?? false) ? .checkmark : .none
 
             if player.state == .racing {
                 cell.isShowingActivityIndicatorView = true
