@@ -52,7 +52,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="flagBarButtonItem" destination="VpH-Y3-50E" id="3rb-HT-ymd"/>
                         <segue destination="32h-KD-ArS" kind="presentation" identifier="showPlayers" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="f9Z-YG-5fp"/>
                         <segue destination="VBE-nT-qAo" kind="presentation" identifier="showVoting" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="t2P-SY-QpF"/>
                         <segue destination="uXR-dP-Jlf" kind="presentation" identifier="showResults" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="a2n-af-vvD"/>

@@ -34,13 +34,8 @@ class GameViewController: UIViewController {
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
 
-    @IBOutlet weak var flagBarButtonItem: UIBarButtonItem!
-    lazy var loadingBarButtonItem: UIBarButtonItem = {
-        let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        activityView.sizeToFit()
-        activityView.startAnimating()
-        return UIBarButtonItem(customView: activityView)
-    }()
+    var flagBarButtonItem: UIBarButtonItem!
+    var quitBarButtonItem: UIBarButtonItem!
 
     // MARK: - View Controllers
 
@@ -85,12 +80,6 @@ class GameViewController: UIViewController {
 
     // MARK: - User Actions
 
-    func disableBarButtonItems() {
-        navigationItem.leftBarButtonItem = loadingBarButtonItem
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        navigationItem.rightBarButtonItem?.isEnabled = false
-    }
-
     //swiftlint:disable line_length
     @IBAction func flagButtonPressed(_ sender: Any) {
         let alertController = UIAlertController(title: "Forfeit The Round?", message: "Are you sure you want to forfeit? Try tapping the help button for a peek at the final article before making up your mind.", preferredStyle: .alert)
@@ -105,7 +94,6 @@ class GameViewController: UIViewController {
         alertController.addAction(helpAction)
 
         let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .destructive) { _ in
-            self.disableBarButtonItems()
             self.manager.player(.forfeited)
         }
         alertController.addAction(forfeitAction)
@@ -120,13 +108,11 @@ class GameViewController: UIViewController {
         alertController.addAction(cancelAction)
 
         let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .default) { _ in
-            self.disableBarButtonItems()
             self.manager.player(.forfeited)
         }
         alertController.addAction(forfeitAction)
 
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
-            self.disableBarButtonItems()
             self.manager.player(.quit)
         }
         alertController.addAction(quitAction)

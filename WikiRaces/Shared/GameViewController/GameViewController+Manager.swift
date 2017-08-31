@@ -38,6 +38,9 @@ extension GameViewController {
         }, finalPageUpdate: { page in
             self.title = page.title?.uppercased()
             self.votingViewController?.finalPageSelected(page)
+            UIView.animate(withDuration: 0.5, delay: 0.75, options: .beginFromCurrentState, animations: {
+                self.webView.alpha = 1.0
+            }, completion: nil)
         })
 
         manager.results(timeUpdate: { time in
@@ -74,25 +77,40 @@ extension GameViewController {
             }
         }
 
+        func hideBarButtonItems() {
+            navigationItem.leftBarButtonItem = nil
+            navigationItem.rightBarButtonItem = nil
+        }
+
         switch state {
         case .voting:
             self.title = "VOTING"
             dismissActiveController(completion: {
                 self.performSegue(.showVoting)
             })
+            hideBarButtonItems()
         case .results, .hostResults, .points:
             if let controller = activeViewController, controller != resultsViewController {
                 dismissActiveController(completion: {
                     self.performSegue(.showResults)
+                    UIView.animate(withDuration: 0.5, delay: 2.5, options: .beginFromCurrentState, animations: {
+                        self.webView.alpha = 0.0
+                    }, completion: nil)
                 })
             } else if resultsViewController == nil {
                 performSegue(.showResults)
+                UIView.animate(withDuration: 0.5, delay: 2.5, options: .beginFromCurrentState, animations: {
+                    self.webView.alpha = 0.0
+                }, completion: nil)
             } else {
                 resultsViewController?.state = state
             }
             navigationController?.setNavigationBarHidden(false, animated: true)
+            hideBarButtonItems()
         case .race:
             dismissActiveController(completion: nil)
+            navigationItem.leftBarButtonItem = flagBarButtonItem
+            navigationItem.rightBarButtonItem = quitBarButtonItem
         default: break
         }
     }

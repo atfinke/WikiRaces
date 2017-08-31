@@ -18,7 +18,7 @@ extension GameViewController {
         case showResults
         case showHelp
     }
-
+    
     // MARK: - Performing Segues
 
     func performSegue(_ segue: Segue) {
@@ -65,10 +65,6 @@ extension GameViewController {
                 fatalError()
             }
 
-            navigationItem.leftBarButtonItem = flagBarButtonItem
-            navigationItem.leftBarButtonItem?.isEnabled = true
-            navigationItem.rightBarButtonItem?.isEnabled = true
-
             destination.playerVoted = { page in
                 self.manager.player(.voted(page))
             }
@@ -81,6 +77,10 @@ extension GameViewController {
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {
                 fatalError()
+            }
+
+            destination.addPlayersButtonPressed = { viewController in
+                self.manager.presentNetworkInterface(on: viewController)
             }
 
             destination.state = manager.gameState

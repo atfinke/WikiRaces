@@ -25,6 +25,9 @@ extension GameViewController {
         let action = #selector(navigationControllerPanGestureUpdated(_:))
         navigationController.barHideOnSwipeGestureRecognizer.addTarget(self, action: action)
 
+        flagBarButtonItem = navigationItem.leftBarButtonItem
+        quitBarButtonItem = navigationItem.rightBarButtonItem
+        
         let statusBarBackgroundView = UIView()
         statusBarBackgroundView.backgroundColor = UIColor.white
         statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -70,6 +73,8 @@ extension GameViewController {
     // MARK: - Elements
 
     private func setupWebView() {
+        webView.alpha = 0.0
+
         var contentInset = webView.scrollView.contentInset
         contentInset.bottom = -20
         webView.scrollView.contentInset = contentInset
