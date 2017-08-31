@@ -15,6 +15,7 @@ class ResultsViewController: CenteredTableViewController {
     // MARK: - Properties
 
     var isPlayerHost = false
+    var isPlayerReady = false
 
     var players: [WKRPlayer]? {
         didSet {
@@ -29,6 +30,7 @@ class ResultsViewController: CenteredTableViewController {
         didSet {
             _debugLog(state)
             tableView.reloadData()
+            updateOverlayButtonState()
         }
     }
 
@@ -56,6 +58,7 @@ class ResultsViewController: CenteredTableViewController {
     private var playersViewController: PlayersViewController?
 
     var readyForNextRound: (() -> Void)?
+    var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
     // MARK: - View Life Cycle
 
@@ -73,11 +76,23 @@ class ResultsViewController: CenteredTableViewController {
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
         overlayButtonTitle = "Ready up"
+        isOverlayButtonHidden = true
+        updateOverlayButtonState()
     }
 
     override func overlayButtonPressed() {
+        isPlayerReady = true
         UIView.animate(withDuration: 0.5) {
             self.isOverlayButtonHidden = true
+        }
+    }
+
+    func updateOverlayButtonState() {
+        guard isViewLoaded && state == .hostResults && !isPlayerReady else {
+            return
+        }
+        UIView.animate(withDuration: 0.5) {
+            self.isOverlayButtonHidden = false
         }
     }
 
@@ -107,6 +122,7 @@ class ResultsViewController: CenteredTableViewController {
             destination.player = player
             historyViewController = destination
         } else if let destination = destinationNavigationController.rootViewController as? PlayersViewController {
+            destination.addPlayersButtonPressed = addPlayersButtonPressed
             destination.displayedPlayers = players ?? []
             destination.isPlayerHost = isPlayerHost
             playersViewController = destination

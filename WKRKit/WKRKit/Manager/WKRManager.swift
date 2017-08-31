@@ -195,6 +195,7 @@ public class WKRManager {
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.forfeited))
             localPlayer.state = .forfeited
             peerNetwork.send(object: WKRCodable(localPlayer))
+            transitionGameState(to: .results)
         case .quit:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.quit))
             localPlayer.state = .quit
