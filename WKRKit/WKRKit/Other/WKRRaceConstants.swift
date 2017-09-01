@@ -10,14 +10,17 @@ import Foundation
 
 struct WKRRaceConstants {
 
-    static let votingDuration           = 3
+    static let bonusPointReward         = 1
+    static let bonusPointInterval       = 60.0
+
+    static let votingDuration           = 10
     static let votingArticlesCount      = 8
 
-    static let votingPreHoldDuration    = 1.0
-    static let votingPostHoldDuration   = 1.0
+    static let votingPreHoldDuration    = 1.5
+    static let votingPostHoldDuration   = 2.0
 
-    static let resultsDuration          = 20
+    static let resultsDuration          = 60
     static let resultsPreHoldDuration   = 5.0
-    static let resultsPostHoldDuration  = 10.0
+    static let resultsPostHoldDuration  = 5.0
 
 }

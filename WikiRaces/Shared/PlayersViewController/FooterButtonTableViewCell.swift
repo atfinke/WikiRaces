@@ -14,6 +14,7 @@ class FooterButtonTableViewCell: UITableViewCell {
 
     // MARK: - Properties
 
+    let thinLine = UIView()
     let button = WKRUIButton(style: .small)
 
     // MARK: - Initialization
@@ -21,7 +22,6 @@ class FooterButtonTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        let thinLine = UIView()
         thinLine.alpha = 0.25
         thinLine.backgroundColor = UIColor.wkrTextColor
         thinLine.translatesAutoresizingMaskIntoConstraints = false

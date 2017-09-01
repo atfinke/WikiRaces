@@ -77,6 +77,9 @@ extension GameViewController {
             } else {
                 completion?()
             }
+            votingViewController = nil
+            playersViewController = nil
+            resultsViewController = nil
         }
 
         switch state {

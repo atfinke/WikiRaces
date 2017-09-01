@@ -12,6 +12,8 @@ struct WKRActiveRace {
 
     // MARK: - Properties
 
+    var bonusPoints = 0
+
     private let finalPage: WKRPage
     private let linkedPagesFetcher = WKRLinkedPagesFetcher()
 
@@ -61,7 +63,6 @@ struct WKRActiveRace {
         let positions = times.keys.sorted { (lhs, rhs) -> Bool in
             return times[lhs] ?? 0 < times[rhs] ?? 0
         }
-        let bonusPoints = 0
         for (index, player) in positions.enumerated() {
             points[player.profile] = players.count - index - 1 + bonusPoints
         }

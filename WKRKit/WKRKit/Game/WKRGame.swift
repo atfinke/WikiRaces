@@ -12,6 +12,8 @@ public class WKRGame {
 
     // MARK: - Closure
 
+    var bonusPointsUpdated: ((Int) -> Void)?
+
     var allPlayersReadyForNextRound: (() -> Void)?
     var readyStatesUpdated: ((WKRReadyStates) -> Void)?
 
@@ -20,7 +22,9 @@ public class WKRGame {
 
     // MARK: - Properties
 
+    private var bonusTimer: Timer?
     private let localPlayer: WKRPlayer
+
     internal private(set) var players = [WKRPlayer]()
 
     internal var raceConfig: WKRRaceConfig?
@@ -44,6 +48,12 @@ public class WKRGame {
         raceConfig = config
         activeRace = WKRActiveRace(config: config)
         preRaceConfig = nil
+        bonusTimer?.invalidate()
+        bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
+                                          repeats: true,
+                                          block: { _ in
+                                            self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
+        })
     }
 
     func createRaceConfig() -> WKRRaceConfig? {
@@ -55,6 +65,7 @@ public class WKRGame {
             completedRaces.append(race)
         }
         activeRace = nil
+        bonusTimer?.invalidate()
     }
 
     // MARK: - Player Voting
@@ -89,7 +100,7 @@ public class WKRGame {
 
         let readyStates = WKRReadyStates(players: players)
         readyStatesUpdated?(readyStates)
-        if readyStates.isReadyForNextRound {
+        if localPlayer.isHost && readyStates.isReadyForNextRound {
             allPlayersReadyForNextRound?()
         }
     }

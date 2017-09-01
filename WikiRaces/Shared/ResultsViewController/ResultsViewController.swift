@@ -22,7 +22,6 @@ class ResultsViewController: CenteredTableViewController {
             resultsInfo?.updatePlayers(players ?? [])
             tableView.reloadData()
             updateHistoryController()
-            playersViewController?.updatedConnectedPlayers(players: players ?? [])
         }
     }
 
@@ -61,8 +60,9 @@ class ResultsViewController: CenteredTableViewController {
         }
     }
 
+    let footerCellReuseIdentifier = "disclaimerCell"
+
     private var historyViewController: HistoryViewController?
-    private var playersViewController: PlayersViewController?
 
     var readyButtonPressed: (() -> Void)?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
@@ -81,6 +81,7 @@ class ResultsViewController: CenteredTableViewController {
         descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(FooterButtonTableViewCell.self, forCellReuseIdentifier: footerCellReuseIdentifier)
 
         overlayButtonTitle = "Ready up"
         isOverlayButtonHidden = true
@@ -106,6 +107,11 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Helpers
 
+    @objc func footerButtonPressed() {
+        _debugLog(nil)
+        addPlayersButtonPressed?(self)
+    }
+
     func resultsEnded() {
         _debugLog(nil)
         descriptionLabel.text = "VOTING STARTS SOON"
@@ -129,11 +135,6 @@ class ResultsViewController: CenteredTableViewController {
             let player = sender as? WKRPlayer {
             destination.player = player
             historyViewController = destination
-        } else if let destination = destinationNavigationController.rootViewController as? PlayersViewController {
-            destination.addPlayersButtonPressed = addPlayersButtonPressed
-            destination.displayedPlayers = players ?? []
-            destination.isPlayerHost = isPlayerHost
-            playersViewController = destination
         } else {
             fatalError()
         }

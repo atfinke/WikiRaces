@@ -13,7 +13,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 
     // MARK: - Properties
 
-    static let serviceType = "WKRPeer3.0"
+    static let serviceType = "WKRPeer30"
 
     let isHost: Bool
     private let session: MCSession
@@ -52,10 +52,11 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
     }
 
     func presentNetworkInterface(on viewController: UIViewController) {
-        let browserViewController = MCBrowserViewController(serviceType: WKRMultipeerNetwork.serviceType, session: session)
+        let browserViewController = MCBrowserViewController(serviceType: WKRMultipeerNetwork.serviceType,
+                                                            session: session)
         browserViewController.maximumNumberOfPeers = 8
         browserViewController.delegate = self
-        viewController.present(viewController, animated: true, completion: nil)
+        viewController.present(browserViewController, animated: true, completion: nil)
     }
 
     // MARK: - MCSessionDelegate
@@ -63,7 +64,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
     open func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
-            delegate?.network(self, didReceive: object, fromPlayer: WKRPlayerProfile(peerID: session.myPeerID))
+            delegate?.network(self, didReceive: object, fromPlayer: WKRPlayerProfile(peerID: peerID))
         } catch {
             fatalError(data.description)
         }

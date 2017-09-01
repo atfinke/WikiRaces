@@ -14,13 +14,22 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resultsInfo?.playerCount ?? 0
+        return (resultsInfo?.playerCount ?? 0) + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if indexPath.row == (resultsInfo?.playerCount ?? 0) {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else { fatalError() }
+            cell.button.title = "Invite Players"
+            cell.button.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
+            cell.thinLine.isHidden = true
+            return cell
+        }
+
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
-            let resultsInfo = resultsInfo else {
+        let resultsInfo = resultsInfo else {
                 fatalError()
         }
 
@@ -54,6 +63,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         case .points:
             let points = resultsInfo.pointsInfo(at: indexPath.row)
             cell.playerLabel.text = points.player.name
+            cell.accessoryType = .none
             if points.points == 1 {
                 cell.detailLabel.text = points.points.description + " PT"
             } else {
@@ -70,7 +80,10 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _debugLog(indexPath)
-        let player = resultsInfo?.player(at: indexPath.row)
+        guard let resultsInfo = resultsInfo, indexPath.row != resultsInfo.playerCount else {
+            return
+        }
+        let player = resultsInfo.player(at: indexPath.row)
         performSegue(withIdentifier: "showHistory", sender: player)
     }
 

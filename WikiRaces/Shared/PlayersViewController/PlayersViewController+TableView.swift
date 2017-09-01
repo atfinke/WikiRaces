@@ -24,7 +24,7 @@ extension PlayersViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == displayedPlayers.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else { fatalError() }
-            cell.button.title = "Add Players"
+            cell.button.title = "Invite Players"
             cell.button.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
             return cell
         } else {
