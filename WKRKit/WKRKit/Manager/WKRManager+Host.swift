@@ -9,41 +9,7 @@
 import Foundation
 extension WKRManager {
 
-    /*// MARK: - Host Actions
-
-     public func hostActionStartSession() {
-     hostAction(sendMessage: .hostStartedSession)
-     }
-
-     //public func hostAction(transferHost: WKRPlayer) {}
-
-     func hostActionShowVotingView() {}
-     func hostAction(updatedVotingInfo: [WKRPage: Int]) {}
-
-     func hostAction(updateVotingCountdown time: Int) {}
-     func hostAction(updateHistoryCountdown time: Int) {}
-
-     func hostAction(startingPageSelected: WKRPage) {}
-     func hostAction(endingPageSelected: WKRPage) {}
-
-     func hostActionSendHint(hint: String) {
-
-     }
-
-     func hostActionStartRace() {
-     hostAction(sendMessage: .hostStartedRace)
-     }
-     func hostActionEndRace() {
-     hostAction(sendMessage: .hostEndedRace)
-     }
-     func hostActionEndHistoryCountdown() {
-     //hostAction(sendMessage: .hostEndedHistoryCountdown)
-     }
-
-     func hostAction(sendMessage message: WKRMessage) {
-     send(message: message)
-     // recieve local
-     }*/
+    // MARK: - Results
 
     func prepareResultsCountdown() {
         _debugLog()
@@ -80,6 +46,8 @@ extension WKRManager {
             self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
         })
     }
+
+    // MARK: - Voting
 
     func prepareVotingCountdown() {
         _debugLog()

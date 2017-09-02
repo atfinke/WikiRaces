@@ -10,8 +10,8 @@ import Foundation
 
 struct WKRRaceConstants {
 
-    static let bonusPointReward         = 1
-    static let bonusPointInterval       = 60.0
+    static let bonusPointReward         = 2
+    static let bonusPointInterval       = 120.0
 
     static let votingArticlesCount      = 8
 
