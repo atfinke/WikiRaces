@@ -78,7 +78,7 @@ public struct WKRPreRaceConfig: Codable {
             _debugLog("startingPageOperation")
             WKRPageFetcher.fetchRandom { page in
                 startingPage = page
-                startingPageOperation.state = .finished
+                startingPageOperation.state = .isFinished
             }
         }
         completedOperation.addDependency(startingPageOperation)
@@ -91,7 +91,7 @@ public struct WKRPreRaceConfig: Codable {
                     if let page = page {
                         pages.append(page)
                     }
-                    operation.state = .finished
+                    operation.state = .isFinished
                 }
             }
             completedOperation.addDependency(operation)

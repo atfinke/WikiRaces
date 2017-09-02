@@ -7,46 +7,39 @@
 //
 
 import Foundation
-extension WKRManager: WKRPageNavigationDelegate {
 
-    func navigation(_ navigation: WKRPageNavigation, startedLoading url: URL) {
-        _debugLog(url)
-        localPlayer.finishedViewingLastPage()
-        peerNetwork.send(object: WKRCodable(localPlayer))
-        webView.startedPageLoad()
-    }
+extension WKRManager {
 
-    func navigation(_ navigation: WKRPageNavigation, failedLoading error: Error) {
-        _debugLog(error)
-        webView.completedPageLoad()
-    }
+    func newPageNavigation() -> WKRPageNavigation {
+        return WKRPageNavigation(pageURLBlocked: {
+            self.enqueue(message: "Link not allowed", duration: 1.0)
+        }, pageLoadingError: {
+            self.enqueue(message: "Error loading page", duration: 5.0)
+            self.webView.completedPageLoad()
+        }, pageStartedLoading: {
+            self.localPlayer.finishedViewingLastPage()
+            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+            self.webView.startedPageLoad()
+        }, pageLoaded: { page in
+            var linkHere = false
 
-    func navigation(_ navigation: WKRPageNavigation, loadedPage page: WKRPage) {
-        _debugLog(page)
-
-        var linkHere = false
-
-        if let attributes = game.activeRace?.attributesFor(page) {
-            _debugLog(attributes)
-            if attributes.foundPage {
-                localPlayer.state = .foundPage
-                transitionGameState(to: .results)
-                peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
-            } else if attributes.linkOnPage {
-                linkHere = true
-                peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+            if let attributes = self.game.activeRace?.attributesFor(page) {
+                _debugLog(attributes)
+                if attributes.foundPage {
+                    self.localPlayer.state = .foundPage
+                    self.transitionGameState(to: .results)
+                    self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
+                } else if attributes.linkOnPage {
+                    linkHere = true
+                    self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+                }
             }
-        }
 
-        localPlayer.viewed(page: page, linkHere: linkHere)
-        peerNetwork.send(object: WKRCodable(localPlayer))
+            self.localPlayer.viewed(page: page, linkHere: linkHere)
+            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
 
-        webView.completedPageLoad()
-    }
-
-    func navigation(_ navigation: WKRPageNavigation, blockedURL url: URL) {
-        _debugLog(url)
-        enqueue(message: "Link not allowed", duration: 1.0)
+            self.webView.completedPageLoad()
+        })
     }
 
 }

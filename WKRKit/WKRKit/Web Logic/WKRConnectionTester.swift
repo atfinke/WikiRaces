@@ -13,16 +13,13 @@ public struct WKRConnectionTester {
     public static func start(completionHandler: @escaping (_ connected: Bool) -> Void) {
         let startDate = Date()
         var timedOut = false
-        var timer = Timer()
 
-        DispatchQueue.main.async {
-            timer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
-                timedOut = true
-                completionHandler(false)
-            }
+        let timer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
+            timedOut = true
+            completionHandler(false)
         }
 
-        WKRPageFetcher.fetchRandom { (page) in
+        WKRPageFetcher.fetch(path: "/United_States") { (page) in
             timer.invalidate()
             if timedOut {
                 // Timer fired, completion handler already called

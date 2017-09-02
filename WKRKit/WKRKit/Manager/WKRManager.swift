@@ -20,7 +20,7 @@ public enum WKRPlayerAction {
 
 public class WKRManager {
 
-    // MARK: - Public
+    // MARK: - Public Getters
 
     public var finalPageURL: URL? {
         return game.raceConfig?.endingPage.url
@@ -44,30 +44,26 @@ public class WKRManager {
 
     public var hostResultsInfo: WKRResultsInfo?
 
-    // MARK: - Other
+    // MARK: - Properties
 
     internal let game: WKRGame
     internal let localPlayer: WKRPlayer
+    internal let peerNetwork: WKRPeerNetwork
 
     internal var resultsTimer: Timer?
+    internal var pageNavigation: WKRPageNavigation!
 
     // MARK: - Callbacks
 
     internal let stateUpdate: ((WKRGameState) -> Void)
     internal let playersUpdate: (([WKRPlayer]) -> Void)
 
+    internal var resultsTimeUpdate: ((Int) -> Void)?
+    internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
+
     internal var voteTimeUpdate: ((Int) -> Void)?
     internal var voteInfoUpdate: ((WKRVoteInfo) -> Void)?
     internal var voteFinalPageUpdate: ((WKRPage) -> Void)?
-
-    internal var resultsTimeUpdate: ((Int) -> Void)?
-    internal var resultsInfoUpdate: ((WKRResultsInfo) -> Void)?
-    internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
-
-    // MARK: - Components
-
-    internal let peerNetwork: WKRPeerNetwork
-    private let pageNavigation = WKRPageNavigation()
 
     // MARK: - User Interface
 
@@ -99,10 +95,10 @@ public class WKRManager {
 
         game = WKRGame(localPlayer: localPlayer)
         if player.isHost {
-            register(for: game)
+            configure(game: game)
         }
 
-        peerNetwork.delegate = self
+        configure(network: peerNetwork)
         peerNetwork.send(object: WKRCodable(self.localPlayer))
 
         playersUpdate(game.players)
@@ -124,13 +120,12 @@ public class WKRManager {
                         readyStatesUpdate: @escaping ((WKRReadyStates) -> Void)) {
 
         resultsTimeUpdate = timeUpdate
-        resultsInfoUpdate = infoUpdate
         resultsInfoHostUpdate = hostInfoUpdate
 
         game.readyStatesUpdated = readyStatesUpdate
         game.currentResultsUpdated = { results in
             if self.gameState == .results {
-                self.resultsInfoUpdate?(results)
+                infoUpdate(results)
             }
         }
     }
@@ -141,7 +136,7 @@ public class WKRManager {
         self.webView = webView
         self.alertView = alertView
 
-        pageNavigation.delegate = self
+        pageNavigation = newPageNavigation()
         webView.navigationDelegate = pageNavigation
     }
 

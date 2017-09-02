@@ -1,5 +1,5 @@
 //
-//  WKRPlayersInfo.swift
+//  WKRResultsInfo.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -7,7 +7,7 @@
 //
 
 import Foundation
-//WKRPlayersInfo
+
 public struct WKRResultsInfo: Codable {
 
     // MARK: - Properties
@@ -16,13 +16,32 @@ public struct WKRResultsInfo: Codable {
         return players.count
     }
 
-    internal var players: [WKRPlayer]
+    private var players: [WKRPlayer]
+    private let points: [WKRPlayerProfile: Int]
 
-    // MARK: - Properties
+    // MARK: Initialization
 
-    internal let points: [WKRPlayerProfile: Int]
+    init(players: [WKRPlayer], points: [WKRPlayerProfile: Int]) {
+        self.players = players
+        self.points = points
 
-    internal var keys: [WKRPlayer] {
+        self.players = sortedPlayers()
+    }
+
+    // MARK: - Player Order
+
+    /**
+     1. Players that found page
+     2. Players that were racing when game ended
+     3. Players that forfeited (no effort = no reward ;) )
+     4. Players that quit
+
+     [Below will only be shown if race still in progress (i.e. one person finished but not others)]
+
+     5. Players that are still racing
+     6. Players that are stuck in connecting phase
+     */
+    private func sortedPlayers() -> [WKRPlayer] {
         // The players the found the page
         let foundPagePlayers = players.filter({ $0.state == .foundPage })
             .sorted(by: { (lhs, rhs) -> Bool in
@@ -61,18 +80,21 @@ public struct WKRResultsInfo: Codable {
 
         // Figure out what the difference between disconnected and quit should be
 
-        return foundPagePlayers
+        let sortedPlayers = foundPagePlayers
             + forcedFinishPlayers
             + forfeitedPlayers
             + quitPlayers
             + racingPlayers
             + connectingPlayers
+
+        let otherPlayers = players.filter { !sortedPlayers.contains($0) }
+        return sortedPlayers + otherPlayers
     }
 
     // MARK: - Helpers
 
     public func pointsInfo(at index: Int) -> (player: WKRPlayer, points: Int) {
-        let player = keys[index]
+        let player = players[index]
         if let points = points[player.profile] {
             return (player, points)
         } else {
@@ -81,7 +103,7 @@ public struct WKRResultsInfo: Codable {
     }
 
     public func player(at index: Int) -> WKRPlayer {
-        return keys[index]
+        return players[index]
     }
 
     public func player(for profile: WKRPlayerProfile) -> WKRPlayer? {
@@ -91,11 +113,12 @@ public struct WKRResultsInfo: Codable {
         return nil
     }
 
-    public func updatePlayers(_ newPlayers: [WKRPlayer]) {
+    public mutating func updatePlayers(_ newPlayers: [WKRPlayer]) {
         for player in newPlayers {
             if let index = players.index(of: player) {
                 players[index].state = player.state
             }
         }
+        players = sortedPlayers()
     }
 }

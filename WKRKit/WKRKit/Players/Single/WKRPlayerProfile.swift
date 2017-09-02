@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRPlayerProfile: Codable {
+public struct WKRPlayerProfile: Codable, Hashable, Equatable {
 
     // MARK: - Properties
 
@@ -21,10 +21,6 @@ public struct WKRPlayerProfile: Codable {
         self.name = name
         self.playerID = playerID
     }
-
-}
-
-extension WKRPlayerProfile: Hashable, Equatable {
 
     // MARK: - Hashable
 

@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-struct WKRUIConstants {
+public struct WKRUIConstants {
     static let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit")
 
     static let webViewAnimateInDuration   = 0.25
@@ -17,6 +17,7 @@ struct WKRUIConstants {
     static let progessViewAnimateOutDelay     = 0.85
     static let progessViewAnimateOutDuration  = 0.4
 
+    public static let alertDefaultDuration     = 5.0
     static let alertHeight: CGFloat     = 40.0
     static let alertAnimateInDuration   = 0.25
     static let alertAnimateOutDuration  = 0.25

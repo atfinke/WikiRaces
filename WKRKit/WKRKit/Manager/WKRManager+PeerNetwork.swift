@@ -7,25 +7,26 @@
 //
 
 import Foundation
-extension WKRManager: WKRPeerNetworkDelegate {
 
-    // MARK: - WKRPeerNetworkDelegate
+extension WKRManager {
 
-    func network(_ network: WKRPeerNetwork, playerConnected profile: WKRPlayerProfile) {
-        _debugLog(player)
-        peerNetwork.send(object: WKRCodable(localPlayer))
-    }
+    // MARK: - WKRPeerNetwort
 
-    func network(_ network: WKRPeerNetwork, playerDisconnected profile: WKRPlayerProfile) {
-        _debugLog(player)
-        game.player(profile, stateUpdated: .disconnected)
-    }
-
-    func network(_ network: WKRPeerNetwork, didReceive object: WKRCodable, fromPlayer profile: WKRPlayerProfile) {
-        _debugLog(profile)
-        _debugLog(object)
-        DispatchQueue.main.async {
-            self.receivedCodable(object, from: profile)
+    func configure(network: WKRPeerNetwork) {
+        network.objectReceived = { object, profile in
+            _debugLog(profile)
+            _debugLog(object)
+            DispatchQueue.main.async {
+                self.receivedCodable(object, from: profile)
+            }
+        }
+        network.playerConnected = { profile in
+            _debugLog(profile)
+            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+        }
+        network.playerDisconnected = { profile in
+            _debugLog(profile)
+            self.game.player(profile, stateUpdated: .disconnected)
         }
     }
 

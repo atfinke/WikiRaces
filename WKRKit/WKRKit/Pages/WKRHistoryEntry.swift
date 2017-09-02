@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRHistoryEntry: Codable {
+public struct WKRHistoryEntry: Codable, Equatable {
 
     // MARK: - Properties
 
@@ -29,10 +29,6 @@ public struct WKRHistoryEntry: Codable {
     mutating func set(duration: Int) {
         self.duration = duration
     }
-
-}
-
-extension WKRHistoryEntry: Equatable {
 
     // MARK: - Equatable
 

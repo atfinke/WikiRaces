@@ -33,8 +33,13 @@ class ResultsViewController: CenteredTableViewController {
 
             if state == .results {
                 title = "RESULTS"
+                tableView.isUserInteractionEnabled = true
             } else {
                 title = "STANDINGS"
+                tableView.isUserInteractionEnabled = false
+                if historyViewController != nil {
+                     dismiss(animated: true, completion: nil)
+                }
             }
         }
     }

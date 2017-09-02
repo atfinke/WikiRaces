@@ -79,7 +79,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Enqueuing Messages
 
-    public func enqueue(text: String, duration: Double = 5.0) {
+    public func enqueue(text: String, duration: Double = WKRUIConstants.alertDefaultDuration) {
         let message = WKRAlertMessage(text: text, duration: duration)
 
         // Make sure message doesn't equal most recent in queue.
@@ -89,7 +89,13 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
                 queue.append(message)
                 present()
             }
-        } else if let currentMessageText = label.text, currentMessageText != text {
+        } else if let currentMessageText = label.text {
+            if currentMessageText != text {
+                queue.append(message)
+                present()
+            }
+
+        } else {
             queue.append(message)
             present()
         }

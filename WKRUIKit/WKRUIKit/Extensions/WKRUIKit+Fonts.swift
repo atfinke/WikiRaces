@@ -35,11 +35,10 @@ extension NSAttributedString {
                             textColor: UIColor = UIColor.wkrTextColor) {
 
         let attributes: [NSAttributedStringKey: Any] = [
+            .font: font,
             .kern: spacing,
-            .foregroundColor: textColor,
-            .font: font
+            .foregroundColor: textColor
         ]
-
         self.init(string: string, attributes: attributes)
     }
 

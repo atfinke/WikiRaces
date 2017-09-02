@@ -8,17 +8,12 @@
 
 import Foundation
 
-protocol WKRPeerNetworkDelegate: class {
-    func network(_ network: WKRPeerNetwork, playerConnected profile: WKRPlayerProfile)
-    func network(_ network: WKRPeerNetwork, playerDisconnected profile: WKRPlayerProfile)
-    func network(_ network: WKRPeerNetwork, didReceive object: WKRCodable, fromPlayer profile: WKRPlayerProfile)
-}
-
 protocol WKRPeerNetwork: class {
-    var isHost: Bool { get }
     var connectedPlayers: Int { get }
 
-    weak var delegate: WKRPeerNetworkDelegate? { get set }
+    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)? { get set }
+    var playerConnected: ((WKRPlayerProfile) -> Void)? { get set }
+    var playerDisconnected: ((WKRPlayerProfile) -> Void)? { get set }
 
     func disconnect()
     func send(object: WKRCodable)

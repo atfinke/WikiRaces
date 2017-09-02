@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRPage: Codable {
+public struct WKRPage: Codable, Hashable, Equatable {
 
     // MARK: - Properties
 
@@ -35,10 +35,6 @@ public struct WKRPage: Codable {
             return title.replacingOccurrences(of: WKRKitConstants.pageTitleStringToReplace, with: "").capitalized
         }
     }
-
-}
-
-extension WKRPage: Hashable, Equatable {
 
     // MARK: - Hashable
 

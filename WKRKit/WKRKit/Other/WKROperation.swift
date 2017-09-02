@@ -14,14 +14,12 @@ public class WKROperation: BlockOperation {
     // MARK: - Types
 
     public enum State: String {
-        case ready = "isReady"
-        case executing = "isExecuting"
-        case finished = "isFinished"
+        case isReady, isExecuting, isFinished
     }
 
     // MARK: - Properties
 
-    public var state = State.ready {
+    public var state = State.isReady {
         willSet {
             willChangeValue(forKey: newValue.rawValue)
             willChangeValue(forKey: state.rawValue)
@@ -33,15 +31,15 @@ public class WKROperation: BlockOperation {
     }
 
     public override var isReady: Bool {
-        return super.isReady && state == .ready
+        return super.isReady && state == .isReady
     }
 
     public override var isExecuting: Bool {
-        return state == .executing
+        return state == .isExecuting
     }
 
     public override var isFinished: Bool {
-        return state == .finished
+        return state == .isFinished
     }
 
     public override var isAsynchronous: Bool {

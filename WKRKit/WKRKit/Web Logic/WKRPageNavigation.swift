@@ -9,18 +9,26 @@
 import Foundation
 import WebKit
 
-protocol WKRPageNavigationDelegate: class {
-    func navigation(_ navigation: WKRPageNavigation, blockedURL url: URL)
-    func navigation(_ navigation: WKRPageNavigation, startedLoading url: URL)
-    func navigation(_ navigation: WKRPageNavigation, loadedPage page: WKRPage)
-    func navigation(_ navigation: WKRPageNavigation, failedLoading error: Error)
-}
-
 class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     // MARK: - Properties
 
-    weak var delegate: WKRPageNavigationDelegate?
+    let pageURLBlocked: (() -> Void)
+    let pageLoadingError: (() -> Void)
+    let pageStartedLoading: (() -> Void)
+    let pageLoaded: ((WKRPage) -> Void)
+
+    // MARK: - Initialization
+
+    init(pageURLBlocked: @escaping (() -> Void),
+         pageLoadingError: @escaping (() -> Void),
+         pageStartedLoading: @escaping (() -> Void),
+         pageLoaded: @escaping ((WKRPage) -> Void)) {
+        self.pageURLBlocked = pageURLBlocked
+        self.pageLoadingError = pageLoadingError
+        self.pageStartedLoading = pageStartedLoading
+        self.pageLoaded = pageLoaded
+    }
 
     // MARK: - Helpers
 
@@ -52,7 +60,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
         guard allow(url: requestURL) else {
             decisionHandler(.cancel)
-            delegate?.navigation(self, blockedURL: requestURL)
+            pageURLBlocked()
             return
         }
 
@@ -65,7 +73,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         if navigationAction.navigationType == .other {
             decisionHandler(.allow)
         } else {
-            delegate?.navigation(self, startedLoading: requestURL)
+            pageStartedLoading()
 
             WKRPageFetcher.fetchSource(url: requestURL) { (source) in
                 DispatchQueue.main.async {
@@ -81,7 +89,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = webView.url {
-            delegate?.navigation(self, loadedPage: WKRPage(title: webView.title, url: url))
+            pageLoaded(WKRPage(title: webView.title, url: url))
         } else {
             fatalError("webView didFinish with no url")
         }
@@ -89,12 +97,12 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        delegate?.navigation(self, failedLoading: error)
+        pageLoadingError()
         webView.scrollView.refreshControl?.endRefreshing()
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        delegate?.navigation(self, failedLoading: error)
+        pageLoadingError()
         webView.scrollView.refreshControl?.endRefreshing()
     }
 

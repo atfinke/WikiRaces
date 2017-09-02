@@ -20,12 +20,9 @@ public class WKRUIWebView: WKWebView {
         return formatter
     }()
 
+    // MARK: - User Interface
+
     private let timeLabel = UILabel()
-
-    private var refreshControl: UIRefreshControl? {
-        return scrollView.refreshControl
-    }
-
     public var progressView: WKRUIProgressView? {
         didSet {
             progressView?.isHidden = true
@@ -52,10 +49,12 @@ public class WKRUIWebView: WKWebView {
         timeLabel.textAlignment = .center
         timeLabel.adjustsFontSizeToFitWidth = true
 
-        let features: [[UIFontDescriptor.FeatureKey: Int]] = [[
-            .featureIdentifier: kNumberSpacingType,
-            .typeIdentifier: kMonospacedNumbersSelector
-            ]]
+        let features: [[UIFontDescriptor.FeatureKey: Int]] = [
+            [
+                .featureIdentifier: kNumberSpacingType,
+                .typeIdentifier: kMonospacedNumbersSelector
+            ]
+        ]
         let fontDescriptor = UIFont.boldSystemFont(ofSize: 100.0).fontDescriptor.addingAttributes(
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
@@ -131,11 +130,10 @@ public class WKRUIWebView: WKWebView {
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
 
-        //swiftlint:disable:next nesting
-        class BundleClass {}
         //swiftlint:disable line_length
-        guard let preHideScript = WKUserScript(named: "WKRPreHideScript", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentStart),
-            let postHideScript = WKUserScript(named: "WKRPostHideScript", in: Bundle(for: BundleClass.self), injectionTime: .atDocumentEnd) else {
+        guard let bundle = WKRUIConstants.bundle,
+            let preHideScript = WKUserScript(named: "WKRPreHideScript", in: bundle, injectionTime: .atDocumentStart),
+            let postHideScript = WKUserScript(named: "WKRPostHideScript", in: bundle, injectionTime: .atDocumentEnd) else {
                 return nil
         }
         //swiftlint:enable line_length

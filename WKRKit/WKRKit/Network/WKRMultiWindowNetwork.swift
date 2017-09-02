@@ -10,6 +10,12 @@ import Foundation
 
 class WKRSplitViewNetwork: WKRPeerNetwork {
 
+     // MARK: - Callbacks
+
+    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
+    var playerConnected: ((WKRPlayerProfile) -> Void)?
+    var playerDisconnected: ((WKRPlayerProfile) -> Void)?
+
     // MARK: Types
 
     private class WKRSplitMessage: NSObject {
@@ -28,7 +34,6 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     let playerName: String
 
     var totalData = 0
-    weak var delegate: WKRPeerNetworkDelegate?
 
     var players = [WKRPlayerProfile]()
     var connectedPlayers: Int {
@@ -54,18 +59,18 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
                 if splitMessage.sender != playerName {
                     if !self.players.contains(messageSender) {
                         self.players.append(messageSender)
-                        self.delegate?.network(self, playerConnected: messageSender)
+                        self.playerConnected?(messageSender)
                     }
                     do {
                         let object = try WKRCodable.decoder.decode(WKRCodable.self, from: splitMessage.data)
-                        self.delegate?.network(self, didReceive: object, fromPlayer: messageSender)
+                        self.objectReceived?(object, messageSender)
                     } catch {
                         fatalError(splitMessage.description)
                     }
                 }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.delegate?.network(self, playerConnected: localPlayer)
+            self.playerConnected?(localPlayer)
         }
         Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
             let formatter = ByteCountFormatter()
@@ -83,7 +88,7 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
         let messageSender = WKRPlayerProfile(name: splitMessage.sender, playerID: splitMessage.sender)
 
         NotificationCenter.default.post(name: Notification.Name("Object"), object: splitMessage, userInfo: nil)
-        delegate?.network(self, didReceive: object, fromPlayer: messageSender)
+        objectReceived?(object, messageSender)
 
         totalData += data.count
     }
@@ -97,6 +102,8 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     }
 
 }
+
+// MARK: - WKRKit Extensions
 
 extension WKRManager {
 

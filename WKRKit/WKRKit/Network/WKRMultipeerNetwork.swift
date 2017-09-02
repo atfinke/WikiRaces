@@ -9,15 +9,18 @@
 import Foundation
 import MultipeerConnectivity
 
-class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
+class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
+
+    // MARK: - Callbacks
+
+    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
+    var playerConnected: ((WKRPlayerProfile) -> Void)?
+    var playerDisconnected: ((WKRPlayerProfile) -> Void)?
 
     // MARK: - Properties
 
-    static let serviceType = "WKRPeer30"
-
-    let isHost: Bool
     private let session: MCSession
-    weak var delegate: WKRPeerNetworkDelegate?
+    private let serviceType = "WKRPeer30"
 
     var connectedPlayers: Int {
         return session.connectedPeers.count
@@ -25,12 +28,9 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 
     // MARK: - Initialization
 
-    init(session: MCSession, isHost: Bool) {
+    init(session: MCSession) {
         self.session = session
-        self.isHost = isHost
-
         super.init()
-
         session.delegate = self
     }
 
@@ -45,15 +45,14 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
         guard let data = try? WKRCodable.encoder.encode(object) else { return }
         do {
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
-            delegate?.network(self, didReceive: object, fromPlayer: WKRPlayerProfile(peerID: session.myPeerID))
+            objectReceived?(object, WKRPlayerProfile(peerID: session.myPeerID))
         } catch {
             print(error)
         }
     }
 
     func presentNetworkInterface(on viewController: UIViewController) {
-        let browserViewController = MCBrowserViewController(serviceType: WKRMultipeerNetwork.serviceType,
-                                                            session: session)
+        let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
         browserViewController.maximumNumberOfPeers = 8
         browserViewController.delegate = self
         viewController.present(browserViewController, animated: true, completion: nil)
@@ -64,7 +63,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
     open func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
-            delegate?.network(self, didReceive: object, fromPlayer: WKRPlayerProfile(peerID: peerID))
+            objectReceived?(object, WKRPlayerProfile(peerID: peerID))
         } catch {
             fatalError(data.description)
         }
@@ -73,12 +72,20 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
     open func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         _debugLog(state)
         switch state {
-        case .connected:
-            delegate?.network(self, playerConnected: WKRPlayerProfile(peerID: peerID))
-        case .notConnected:
-            delegate?.network(self, playerDisconnected: WKRPlayerProfile(peerID: peerID))
+        case .connected: playerConnected?(WKRPlayerProfile(peerID: peerID))
+        case .notConnected: playerDisconnected?(WKRPlayerProfile(peerID: peerID))
         default: break
         }
+    }
+
+    // MARK: - MCBrowserViewControllerDelegate
+
+    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
+        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
+        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
     // Not needed
@@ -104,17 +111,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, WKRPeerNetwork {
 
 }
 
-extension WKRMultipeerNetwork: MCBrowserViewControllerDelegate {
-
-    func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
-    func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
-}
+// MARK: - WKRKit Extensions
 
 extension WKRManager {
 
@@ -123,7 +120,7 @@ extension WKRManager {
                             playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isHost)
-        let network = WKRMultipeerNetwork(session: session, isHost: isHost)
+        let network = WKRMultipeerNetwork(session: session)
 
         self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
     }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140FCFC31F36547E00FFA84E /* WKRPlayersInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */; };
+		140FCFC31F36547E00FFA84E /* WKRResultsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */; };
 		140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC41F36549900FFA84E /* WKRPlayer.swift */; };
 		140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */; };
 		140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
@@ -59,7 +59,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayersInfo.swift; sourceTree = "<group>"; };
+		140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRResultsInfo.swift; sourceTree = "<group>"; };
 		140FCFC41F36549900FFA84E /* WKRPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayer.swift; sourceTree = "<group>"; };
 		140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerProfile.swift; sourceTree = "<group>"; };
 		140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerState.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		14EB9F481F36828F00FF1A9E /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				140FCFC21F36547E00FFA84E /* WKRPlayersInfo.swift */,
+				140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14EB9F581F3682F200FF1A9E /* WKRManager+PageNavigation.swift in Sources */,
-				140FCFC31F36547E00FFA84E /* WKRPlayersInfo.swift in Sources */,
+				140FCFC31F36547E00FFA84E /* WKRResultsInfo.swift in Sources */,
 				14EB9F641F36833400FF1A9E /* WKRCodable.swift in Sources */,
 				14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */,
 				14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */,

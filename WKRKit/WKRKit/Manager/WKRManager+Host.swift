@@ -11,7 +11,7 @@ extension WKRManager {
 
     // MARK: - Game Updates
 
-    func register(for game: WKRGame) {
+    func configure(game: WKRGame) {
         game.allPlayersReadyForNextRound = {
             if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
                 self.finishResultsCountdown()

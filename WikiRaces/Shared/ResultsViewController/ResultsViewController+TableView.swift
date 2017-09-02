@@ -19,7 +19,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard indexPath.row != (resultsInfo?.playerCount ?? 0) else {
+        if indexPath.row == (resultsInfo?.playerCount ?? 0) {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else {
                 fatalError()
             }
@@ -27,23 +27,27 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.button.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
             cell.thinLine.isHidden = true
             return cell
+        } else {
+            //swiftlint:disable:next line_length
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
+                let resultsInfo = resultsInfo else {
+                    fatalError()
+            }
+            configure(cell: cell, with: resultsInfo, at: indexPath.row)
+            return cell
         }
+    }
 
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
-            let resultsInfo = resultsInfo else {
-                fatalError()
-        }
-
+    private func configure(cell: ResultsTableViewCell, with resultsInfo: WKRResultsInfo, at index: Int) {
         switch state {
         case .results, .hostResults:
-            let player = resultsInfo.player(at: indexPath.row)
+            let player = resultsInfo.player(at: index)
             cell.playerLabel.text = player.name
             cell.isShowingActivityIndicatorView = false
             cell.accessoryType = (readyStates?.playerReady(player) ?? false) ? .checkmark : .none
 
             if player.state == .racing {
                 cell.isShowingActivityIndicatorView = true
-
                 if player.raceHistory?.entries.last?.linkHere ?? false {
                     let detail = " Link On Page"
                     let attributedText = NSMutableAttributedString(string: player.name + detail, attributes: nil)
@@ -62,7 +66,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.detailLabel.text = player.state.text
             }
         case .points:
-            let points = resultsInfo.pointsInfo(at: indexPath.row)
+            let points = resultsInfo.pointsInfo(at: index)
             cell.playerLabel.text = points.player.name
             cell.accessoryType = .none
             if points.points == 1 {
@@ -73,8 +77,6 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             fatalError()
         }
-
-        return cell
     }
 
     // MARK: - UITableViewDelegate

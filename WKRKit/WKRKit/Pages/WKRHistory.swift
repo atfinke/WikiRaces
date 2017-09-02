@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRHistory: Codable {
+public struct WKRHistory: Codable, Equatable {
 
     // MARK: - Properties
 
@@ -28,7 +28,6 @@ public struct WKRHistory: Codable {
 
     // MARK: - Initialization
 
-    init() {}
     init(firstPage page: WKRPage) {
         append(page, linkHere: false)
     }
@@ -46,10 +45,6 @@ public struct WKRHistory: Codable {
         entry.set(duration: Int(-date.timeIntervalSinceNow))
         entries[entries.count - 1] = entry
     }
-
-}
-
-extension WKRHistory: Equatable {
 
     // MARK: - Equatable
 
