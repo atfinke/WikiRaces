@@ -20,6 +20,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == (resultsInfo?.playerCount ?? 0) {
+            //swiftlint:disable:next line_length
             guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else {
                 fatalError()
             }

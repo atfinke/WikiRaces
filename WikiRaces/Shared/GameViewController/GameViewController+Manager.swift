@@ -32,18 +32,20 @@ extension GameViewController {
         #endif
 
         manager.voting(timeUpdate: { time in
-            self.votingViewController?.updateVoteTimeRemaining(to: time)
+            self.votingViewController?.voteTimeRemaing = time
         }, infoUpdate: { voteInfo in
-            self.votingViewController?.updateVotingInfo(to: voteInfo)
+            self.votingViewController?.voteInfo = voteInfo
         }, finalPageUpdate: { page in
             self.title = page.title?.uppercased()
             self.votingViewController?.finalPageSelected(page)
-            UIView.animate(withDuration: 0.5, delay: 0.75, options: .beginFromCurrentState, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
                 self.webView.alpha = 1.0
             }, completion: nil)
         })
 
-        manager.results(timeUpdate: { time in
+        manager.results(showReady: {
+            self.resultsViewController?.showReadyUpButton()
+        }, timeUpdate: { time in
             self.resultsViewController?.timeRemaining = time
         }, infoUpdate: { resultsInfo in
             if self.resultsViewController?.state != .hostResults {

@@ -29,7 +29,6 @@ class ResultsViewController: CenteredTableViewController {
         didSet {
             _debugLog(state)
             tableView.reloadData()
-            updateOverlayButtonState()
 
             if state == .results {
                 title = "RESULTS"
@@ -95,7 +94,6 @@ class ResultsViewController: CenteredTableViewController {
 
         overlayButtonTitle = "Ready up"
         isOverlayButtonHidden = true
-        updateOverlayButtonState()
     }
 
     override func overlayButtonPressed() {
@@ -106,10 +104,7 @@ class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    func updateOverlayButtonState() {
-        guard isViewLoaded && state == .hostResults && !isPlayerReady else {
-            return
-        }
+    func showReadyUpButton() {
         UIView.animate(withDuration: 0.5, delay: 5.0, options: .beginFromCurrentState, animations: {
             self.isOverlayButtonHidden = false
         }, completion: nil)

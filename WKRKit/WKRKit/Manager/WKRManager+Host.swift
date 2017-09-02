@@ -56,6 +56,9 @@ extension WKRManager {
 
             if timeLeft <= 0 {
                 self.finishResultsCountdown()
+            } else if timeLeft == WKRRaceConstants.resultsDuration - WKRRaceConstants.resultsHoldReadyDuration {
+                let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
+                self.peerNetwork.send(object: showReady)
             }
         }
     }

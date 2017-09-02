@@ -26,7 +26,7 @@ public class WKRManager {
         return game.raceConfig?.endingPage.url
     }
 
-    public var votingInfo: WKRVoteInfo? {
+    public var voteInfo: WKRVoteInfo? {
         return game.preRaceConfig?.voteInfo
     }
 
@@ -58,6 +58,7 @@ public class WKRManager {
     internal let stateUpdate: ((WKRGameState) -> Void)
     internal let playersUpdate: (([WKRPlayer]) -> Void)
 
+    internal var resultsShowReady: (() -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
     internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
 
@@ -114,11 +115,13 @@ public class WKRManager {
         voteFinalPageUpdate = finalPageUpdate
     }
 
-    public func results(timeUpdate: @escaping ((Int) -> Void),
+    public func results(showReady: @escaping (() -> Void),
+                        timeUpdate: @escaping ((Int) -> Void),
                         infoUpdate: @escaping ((WKRResultsInfo) -> Void),
                         hostInfoUpdate: @escaping ((WKRResultsInfo) -> Void),
                         readyStatesUpdate: @escaping ((WKRReadyStates) -> Void)) {
 
+        resultsShowReady = showReady
         resultsTimeUpdate = timeUpdate
         resultsInfoHostUpdate = hostInfoUpdate
 

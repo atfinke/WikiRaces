@@ -15,6 +15,20 @@ extension IndexPath {
     }
 }
 
+extension UIView {
+    static func animate(withDuration duration: Double,
+                        delay: Double,
+                        animations: @escaping () -> Void,
+                        completion: ((Bool) -> Void)? = nil) {
+        
+        UIView.animate(withDuration: duration,
+                       delay: delay,
+                       options: .beginFromCurrentState,
+                       animations: animations,
+                       completion: completion)
+    }
+}
+
 extension UINavigationController {
     var rootViewController: UIViewController? {
         return viewControllers.first

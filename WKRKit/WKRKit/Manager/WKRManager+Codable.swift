@@ -15,7 +15,10 @@ extension WKRManager {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
             _debugLog(preRaceConfig)
             game.preRaceConfig = preRaceConfig
-            webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
+
+            if webView.url != preRaceConfig.startingPage.url {
+                webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
+            }
 
             voteInfoUpdate?(preRaceConfig.voteInfo)
             debugEntry.append(WKRDebugEntry(object: preRaceConfig, sender: player))
@@ -99,6 +102,8 @@ extension WKRManager {
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Match Bonus Now \(int.value) " + string
             enqueue(message: message)
+        case .showReady:
+            resultsShowReady?()
         }
     }
 
@@ -108,8 +113,13 @@ extension WKRManager {
         _debugLog(state)
         game.state = state
 
-        if state == .voting && localPlayer.isHost {
-            fetchPreRaceConfig()
+        if state == .voting {
+            localPlayer.startedVoting()
+            peerNetwork.send(object: WKRCodable(localPlayer))
+
+            if localPlayer.isHost {
+                fetchPreRaceConfig()
+            }
         } else if state == .race, let raceConfig = game.raceConfig {
             let state = WKRPlayerState.racing
             peerNetwork.send(object: WKRCodable(enum: state))

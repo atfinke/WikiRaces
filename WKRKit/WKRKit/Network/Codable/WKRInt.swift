@@ -15,6 +15,7 @@ struct WKRInt: Codable {
         case votingPreRaceTime
         case resultsTime
         case bonusPoints
+        case showReady
     }
 
     let type: WKRIntType

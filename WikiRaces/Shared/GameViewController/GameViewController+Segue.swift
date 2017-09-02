@@ -69,10 +69,7 @@ extension GameViewController {
                 self.manager.player(.voted(page))
             }
 
-            if let votingInfo = manager?.votingInfo {
-                destination.updateVotingInfo(to: votingInfo)
-            }
-
+            destination.voteInfo = manager.voteInfo
             self.votingViewController = destination
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {

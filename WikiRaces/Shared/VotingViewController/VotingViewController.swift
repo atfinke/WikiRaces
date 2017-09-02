@@ -15,9 +15,40 @@ class VotingViewController: CenteredTableViewController {
     // MARK: - Properties
 
     var isShowingVoteCountdown = true
-
-    var voteInfo: WKRVoteInfo?
     var playerVoted: ((WKRPage) -> Void)?
+
+    var voteInfo: WKRVoteInfo? {
+        didSet {
+            if oldValue == nil && voteInfo != nil {
+                UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
+                    self.tableView.alpha = 1.0
+                })
+            }
+            let selectedPath = tableView.indexPathForSelectedRow
+            tableView.reloadData()
+            tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
+        }
+    }
+    var voteTimeRemaing = 100 {
+        didSet {
+            if isShowingVoteCountdown {
+                if voteTimeRemaing == 0 {
+                    votingEnded()
+                } else {
+                    tableView.isUserInteractionEnabled = true
+                    descriptionLabel.text = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
+                }
+            } else {
+                if descriptionLabel.alpha != 1.0 {
+                    UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                        self.descriptionLabel.alpha = 1.0
+                    })
+                }
+                descriptionLabel.text = "RACE STARTS IN " + voteTimeRemaing.description + " S"
+            }
+        }
+    }
+
 
     // MARK: - View Life Cycle
 
@@ -25,6 +56,7 @@ class VotingViewController: CenteredTableViewController {
         super.viewDidLoad()
         _debugLog(nil)
 
+        tableView.alpha = 0.0
         registerTableView(for: self)
 
         title = "VOTING"
@@ -44,35 +76,6 @@ class VotingViewController: CenteredTableViewController {
         tableView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5) {
             self.descriptionLabel.alpha = 0.0
-        }
-    }
-
-    func updateVotingInfo(to newVoteInfo: WKRVoteInfo) {
-        _debugLog(newVoteInfo)
-        self.voteInfo = newVoteInfo
-
-        let selectedPath = tableView.indexPathForSelectedRow
-        tableView.reloadData()
-        tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
-    }
-
-    func updateVoteTimeRemaining(to time: Int) {
-        _debugLog(time)
-
-        if isShowingVoteCountdown {
-            if time == 0 {
-                votingEnded()
-            } else {
-                tableView.isUserInteractionEnabled = true
-                descriptionLabel.text = "VOTING CLOSES IN " + time.description + " S"
-            }
-        } else {
-            if descriptionLabel.alpha != 1.0 {
-                UIView.animate(withDuration: 0.5) {
-                    self.descriptionLabel.alpha = 1.0
-                }
-            }
-            descriptionLabel.text = "RACE STARTS IN " + time.description + " S"
         }
     }
 

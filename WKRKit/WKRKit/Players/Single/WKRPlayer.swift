@@ -32,10 +32,14 @@ public class WKRPlayer: Codable, Hashable {
 
     // MARK: - Race Actions
 
+    func startedVoting() {
+        state = .connecting
+        isReadyForNextRound = false
+    }
+
     func startedNewRace(on page: WKRPage) {
         _debugLog(page)
         state = .racing
-        isReadyForNextRound = false
         raceHistory = WKRHistory(firstPage: page)
     }
 
