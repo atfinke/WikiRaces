@@ -12,9 +12,14 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Types
 
-    private struct WKRAlertMessage {
+    private struct WKRAlertMessage: Equatable {
         let text: String
         let duration: Double
+
+        //swiftlint:disable:next operator_whitespace
+        static func ==(lhs: WKRAlertMessage, rhs: WKRAlertMessage) -> Bool {
+            return lhs.text == rhs.text
+        }
     }
 
     // MARK: - Properties
@@ -76,8 +81,18 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     public func enqueue(text: String, duration: Double = 5.0) {
         let message = WKRAlertMessage(text: text, duration: duration)
-        queue.append(message)
-        present()
+
+        // Make sure message doesn't equal most recent in queue.
+        // If queue empty, make sure message isn't the same as the one being displayed.
+        if let lastMessage = queue.last {
+            if lastMessage != message {
+                queue.append(message)
+                present()
+            }
+        } else if let currentMessageText = label.text, currentMessageText != text {
+            queue.append(message)
+            present()
+        }
     }
 
     // MARK: - State
@@ -112,6 +127,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         UIView.animate(withDuration: WKRUIConstants.alertAnimateOutDuration, animations: {
             self.alertWindow.layoutIfNeeded()
         }, completion: { _ in
+            self.label.text = nil
             self.present()
         })
     }
