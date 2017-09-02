@@ -68,7 +68,7 @@ class VotingViewController: CenteredTableViewController {
             }
         } else {
             if descriptionLabel.alpha != 1.0 {
-                UIView.animate(withDuration: 0.25) {
+                UIView.animate(withDuration: 0.5) {
                     self.descriptionLabel.alpha = 1.0
                 }
             }
