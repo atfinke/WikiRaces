@@ -42,9 +42,9 @@ class VotingViewController: CenteredTableViewController {
         isShowingVoteCountdown = false
         descriptionLabel.text = "VOTING CLOSES IN 0 S"
         tableView.isUserInteractionEnabled = false
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.5) {
             self.descriptionLabel.alpha = 0.0
-        })
+        }
     }
 
     func updateVotingInfo(to newVoteInfo: WKRVoteInfo) {
@@ -68,14 +68,12 @@ class VotingViewController: CenteredTableViewController {
             }
         } else {
             if descriptionLabel.alpha != 1.0 {
-                UIView.animate(withDuration: 0.25, animations: {
+                UIView.animate(withDuration: 0.25) {
                     self.descriptionLabel.alpha = 1.0
-                })
+                }
             }
             descriptionLabel.text = "RACE STARTS IN " + time.description + " S"
         }
-
-
     }
 
     func finalPageSelected(_ page: WKRPage) {
@@ -83,12 +81,12 @@ class VotingViewController: CenteredTableViewController {
 
         guard let votingObject = voteInfo, let index = votingObject.index(of: page) else { fatalError() }
 
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: 1.5) {
             for i in 0...votingObject.pageCount where i != index {
                 let indexPath = IndexPath(row: i)
                 self.tableView.cellForRow(at: indexPath)?.alpha = 0.05
             }
-        })
+        }
     }
 
 }

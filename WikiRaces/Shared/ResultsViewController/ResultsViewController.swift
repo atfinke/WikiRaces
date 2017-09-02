@@ -119,9 +119,9 @@ class ResultsViewController: CenteredTableViewController {
 
     func resultsEnded() {
         _debugLog(nil)
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.5) {
             self.descriptionLabel.alpha = 0.0
-        })
+        }
     }
 
     func updateHistoryController() {

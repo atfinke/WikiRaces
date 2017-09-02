@@ -50,13 +50,12 @@ public class WKRGame {
         preRaceConfig = nil
         bonusTimer?.invalidate()
         bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
-                                          repeats: true,
-                                          block: { _ in
+                                          repeats: true) { _ in
                                             self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
                                             if let points = self.activeRace?.bonusPoints {
                                                 self.bonusPointsUpdated?(points)
                                             }
-        })
+        }
     }
 
     func createRaceConfig() -> WKRRaceConfig? {

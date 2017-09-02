@@ -67,13 +67,13 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         } else {
             delegate?.navigation(self, startedLoading: requestURL)
 
-            WKRPageFetcher.fetchSource(url: requestURL, completionHandler: { (source) in
-                OperationQueue.main.addOperation {
+            WKRPageFetcher.fetchSource(url: requestURL) { (source) in
+                DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
                     }
                 }
-            })
+            }
 
             decisionHandler(.cancel)
         }

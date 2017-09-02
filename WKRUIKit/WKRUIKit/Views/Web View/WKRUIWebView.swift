@@ -105,9 +105,9 @@ public class WKRUIWebView: WKWebView {
         isUserInteractionEnabled = false
 
         let duration = WKRUIConstants.webViewAnimateOutDuration
-        UIView.animate(withDuration: duration, animations: {
+        UIView.animate(withDuration: duration) {
             self.timeLabel.alpha = 1.0
-        })
+        }
     }
 
     public func completedPageLoad() {

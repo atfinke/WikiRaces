@@ -64,9 +64,9 @@ extension WKRManager {
         resultsTimer?.invalidate()
 
         self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration) {
             self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
-        })
+        }
     }
 
     // MARK: - Voting

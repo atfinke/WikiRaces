@@ -101,13 +101,13 @@ extension GameViewController {
     @objc func navigationControllerPanGestureUpdated(_ sender: UIPanGestureRecognizer) {
         guard let yCord = navigationController?.navigationBar.frame.origin.y, sender.state == .ended else { return }
         if yCord < 0 {
-            UIView.animate(withDuration: 0.25, animations: {
+            UIView.animate(withDuration: 0.25) {
                 self.thinLine.alpha = 0.2
-            })
+            }
         } else {
-            UIView.animate(withDuration: 0.25, animations: {
+            UIView.animate(withDuration: 0.25) {
                 self.thinLine.alpha = 0.0
-            })
+            }
         }
     }
 

@@ -40,9 +40,9 @@ extension GameViewController {
 
             destination.didFinish = {
                 DispatchQueue.main.async {
-                    self.lobbyViewController?.dismiss(animated: true, completion: {
+                    self.lobbyViewController?.dismiss(animated: true) {
                         self.lobbyViewController = nil
-                    })
+                    }
                 }
             }
 

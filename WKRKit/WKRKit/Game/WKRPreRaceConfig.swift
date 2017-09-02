@@ -87,12 +87,12 @@ public struct WKRPreRaceConfig: Codable {
             let operation = WKROperation()
             operation.addExecutionBlock {
                 _debugLog("endingPageOperation")
-                WKRPageFetcher.fetch(path: path, completionHandler: { (page) in
+                WKRPageFetcher.fetch(path: path) { (page) in
                     if let page = page {
                         pages.append(page)
                     }
                     operation.state = .finished
-                })
+                }
             }
             completedOperation.addDependency(operation)
             return operation
