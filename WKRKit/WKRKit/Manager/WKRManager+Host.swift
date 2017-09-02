@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 extension WKRManager {
 
     // MARK: - Game Updates
@@ -58,6 +59,9 @@ extension WKRManager {
                 self.finishResultsCountdown()
             } else if timeLeft == WKRRaceConstants.resultsDuration - WKRRaceConstants.resultsHoldReadyDuration {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
+                self.peerNetwork.send(object: showReady)
+            } else if timeLeft == WKRRaceConstants.resultsDisableReadyTime {
+                let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 0))
                 self.peerNetwork.send(object: showReady)
             }
         }

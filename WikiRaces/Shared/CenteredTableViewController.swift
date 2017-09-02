@@ -25,7 +25,6 @@ class CenteredTableViewController: UIViewController {
     var isOverlayButtonHidden: Bool {
         set {
             overlayBottomConstraint.constant = newValue ? 70 : 0
-            view.layoutIfNeeded()
         }
         get {
             return overlayBottomConstraint.constant == 70
@@ -65,7 +64,7 @@ class CenteredTableViewController: UIViewController {
         self.view = visualEffectView
 
         let overlayView = setupBottomOverlayView()
-        overlayBottomConstraint = overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        overlayBottomConstraint = overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 70)
 
         let fakeWidth = tableView.widthAnchor.constraint(equalToConstant: 500)
         fakeWidth.priority = UILayoutPriority.defaultLow
@@ -87,7 +86,7 @@ class CenteredTableViewController: UIViewController {
             descriptionLabel.leftAnchor.constraint(equalTo: visualEffectView.leftAnchor),
             descriptionLabel.rightAnchor.constraint(equalTo: visualEffectView.rightAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: overlayView.topAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 100)
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 50)
         ]
         NSLayoutConstraint.activate(constraints)
     }

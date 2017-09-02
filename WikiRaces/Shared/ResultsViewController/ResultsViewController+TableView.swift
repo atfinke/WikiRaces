@@ -14,29 +14,17 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let playerCount = resultsInfo?.playerCount ?? 0
-        return (isPlayerHost && state == .hostResults) ? playerCount + 1 : playerCount
+        return resultsInfo?.playerCount ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == (resultsInfo?.playerCount ?? 0) {
-            //swiftlint:disable:next line_length
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else {
+        //swiftlint:disable:next line_length
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
+            let resultsInfo = resultsInfo else {
                 fatalError()
-            }
-            cell.button.title = "Invite Players"
-            cell.button.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
-            cell.thinLine.isHidden = true
-            return cell
-        } else {
-            //swiftlint:disable:next line_length
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
-                let resultsInfo = resultsInfo else {
-                    fatalError()
-            }
-            configure(cell: cell, with: resultsInfo, at: indexPath.row)
-            return cell
         }
+        configure(cell: cell, with: resultsInfo, at: indexPath.row)
+        return cell
     }
 
     private func configure(cell: ResultsTableViewCell, with resultsInfo: WKRResultsInfo, at index: Int) {
@@ -84,7 +72,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         _debugLog(indexPath)
-        guard let resultsInfo = resultsInfo, indexPath.row != resultsInfo.playerCount else {
+        guard let resultsInfo = resultsInfo else {
             return
         }
         let player = resultsInfo.player(at: indexPath.row)

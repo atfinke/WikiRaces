@@ -14,30 +14,30 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    var isPlayerHost = false
-    var isPlayerReady = false
-
-    var players: [WKRPlayer]? {
+    var isPlayerHost = false {
         didSet {
-            resultsInfo?.updatePlayers(players ?? [])
-            tableView.reloadData()
-            updateHistoryController()
+            if isPlayerHost {
+                navigationItem.leftBarButtonItem?.isEnabled = false
+            } else {
+                navigationItem.leftBarButtonItem = nil
+            }
         }
     }
 
     var state: WKRGameState = .results {
         didSet {
-            _debugLog(state)
             tableView.reloadData()
-
-            if state == .results {
+            if state == .results || state == .hostResults {
                 title = "RESULTS"
                 tableView.isUserInteractionEnabled = true
             } else {
                 title = "STANDINGS"
                 tableView.isUserInteractionEnabled = false
                 if historyViewController != nil {
-                     dismiss(animated: true, completion: nil)
+                    dismiss(animated: true, completion: nil)
+                }
+                UIView.animate(withDuration: 0.5) {
+                    self.descriptionLabel.alpha = 0.0
                 }
             }
         }
@@ -61,19 +61,17 @@ class ResultsViewController: CenteredTableViewController {
     var timeRemaining: Int = 100 {
         didSet {
             _debugLog(timeRemaining)
-            if timeRemaining == 0 {
-                resultsEnded()
-            } else {
-                tableView.isUserInteractionEnabled = true
-                descriptionLabel.text = "VOTING STARTS IN " + timeRemaining.description + " S"
-            }
+            tableView.isUserInteractionEnabled = true
+            descriptionLabel.text = "VOTING STARTS IN " + timeRemaining.description + " S"
         }
     }
 
     let footerCellReuseIdentifier = "disclaimerCell"
 
     private var historyViewController: HistoryViewController?
+    @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
 
+    var quitButtonPressed: ((UIViewController) -> Void)?
     var readyButtonPressed: (() -> Void)?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
@@ -90,59 +88,61 @@ class ResultsViewController: CenteredTableViewController {
         descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-        tableView.register(FooterButtonTableViewCell.self, forCellReuseIdentifier: footerCellReuseIdentifier)
 
         overlayButtonTitle = "Ready up"
-        isOverlayButtonHidden = true
+    }
+
+    // MARK: - Actions
+
+    @IBAction func quitBarButtonItemPressed(_ sender: Any) {
+        quitButtonPressed?(self)
+    }
+
+    @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
+        addPlayersButtonPressed?(self)
     }
 
     override func overlayButtonPressed() {
-        isPlayerReady = true
+        navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
+        isOverlayButtonHidden = true
         UIView.animate(withDuration: 0.5) {
-            self.isOverlayButtonHidden = true
+            self.view.layoutIfNeeded()
         }
-    }
-
-    func showReadyUpButton() {
-        UIView.animate(withDuration: 0.5, delay: 5.0, options: .beginFromCurrentState, animations: {
-            self.isOverlayButtonHidden = false
-        }, completion: nil)
     }
 
     // MARK: - Helpers
 
-    @objc func footerButtonPressed() {
-        _debugLog(nil)
-        addPlayersButtonPressed?(self)
-    }
-
     func resultsEnded() {
-        _debugLog(nil)
         UIView.animate(withDuration: 0.5) {
             self.descriptionLabel.alpha = 0.0
         }
     }
 
     func updateHistoryController() {
-        if let currentPlayer = historyViewController?.player,
-            let updatedPlayer = resultsInfo?.player(for: currentPlayer.profile) {
-            historyViewController?.player = updatedPlayer
+        guard let player = historyViewController?.player,
+            let updatedPlayer = resultsInfo?.player(for: player.profile) else {
+                return
+        }
+        historyViewController?.player = updatedPlayer
+    }
+
+    func showReadyUpButton(_ showReady: Bool) {
+        navigationItem.leftBarButtonItem?.isEnabled = showReady
+        isOverlayButtonHidden = false
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationNavigationController = segue.destination as? UINavigationController else {
-            return
+        guard let destinationNavigationController = segue.destination as? UINavigationController,
+            let destination = destinationNavigationController.rootViewController as? HistoryViewController else {
+                fatalError()
         }
-        if let destination = destinationNavigationController.rootViewController as? HistoryViewController,
-            let player = sender as? WKRPlayer {
-            destination.player = player
-            historyViewController = destination
-        } else {
-            fatalError()
-        }
-
+        let player = sender as? WKRPlayer
+        destination.player = player
+        historyViewController = destination
     }
 
 }

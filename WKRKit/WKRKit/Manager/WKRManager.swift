@@ -58,7 +58,7 @@ public class WKRManager {
     internal let stateUpdate: ((WKRGameState) -> Void)
     internal let playersUpdate: (([WKRPlayer]) -> Void)
 
-    internal var resultsShowReady: (() -> Void)?
+    internal var resultsShowReady: ((Bool) -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
     internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
 
@@ -115,7 +115,7 @@ public class WKRManager {
         voteFinalPageUpdate = finalPageUpdate
     }
 
-    public func results(showReady: @escaping (() -> Void),
+    public func results(showReady: @escaping ((Bool) -> Void),
                         timeUpdate: @escaping ((Int) -> Void),
                         infoUpdate: @escaping ((WKRResultsInfo) -> Void),
                         hostInfoUpdate: @escaping ((WKRResultsInfo) -> Void),

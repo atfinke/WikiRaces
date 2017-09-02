@@ -23,6 +23,7 @@ struct WKRRaceConstants {
 
     static let resultsDuration          = 60
     static let resultsHoldReadyDuration = 5
+    static let resultsDisableReadyTime  = 5
     static let resultsPreHoldDuration   = 5.0
     static let resultsPostHoldDuration  = 5.0
 

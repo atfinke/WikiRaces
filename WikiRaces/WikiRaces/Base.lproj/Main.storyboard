@@ -133,7 +133,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="sRS-qO-b4W"/>
                     </view>
-                    <navigationItem key="navigationItem" id="M6O-wg-txp"/>
+                    <navigationItem key="navigationItem" id="M6O-wg-txp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="GqT-4H-giZ">
+                            <connections>
+                                <action selector="quitBarButtonItemPressed:" destination="VyK-N1-Rm3" id="w2p-oL-v8N"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ysB-70-ouw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -169,7 +175,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="aIP-ZQ-Xx4"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jFv-d4-tHl"/>
+                    <navigationItem key="navigationItem" id="jFv-d4-tHl">
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="CRx-lN-0I0">
+                            <connections>
+                                <action selector="quitBarButtonItemPressed:" destination="55U-JC-03Q" id="tVL-Z3-ZoG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TNs-6h-fHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,8 +217,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="GmB-Br-Fo0"/>
                     </view>
-                    <navigationItem key="navigationItem" id="P7i-8g-E6l"/>
+                    <navigationItem key="navigationItem" id="P7i-8g-E6l">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="VEI-Pl-A1w">
+                            <connections>
+                                <action selector="addPlayersBarButtonItemPressed:" destination="s0x-IM-dO9" id="NVi-Rq-Xps"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="6kY-QH-M2w">
+                            <connections>
+                                <action selector="quitBarButtonItemPressed:" destination="s0x-IM-dO9" id="cUC-fa-Oq0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addPlayersBarButtonItem" destination="VEI-Pl-A1w" id="f5s-j2-v41"/>
                         <segue destination="Jyb-XV-U6B" kind="presentation" identifier="showHistory" modalPresentationStyle="formSheet" id="msj-C0-M1Y"/>
                     </connections>
                 </viewController>
@@ -297,18 +321,18 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="43D-4O-BQn" id="BWp-gR-Vtt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANp-nN-6qW">
-                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
+                                            <rect key="frame" x="20" y="12" width="33.5" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mjt-BM-2HT">
-                                            <rect key="frame" x="355" y="11.999999999999998" width="44" height="20.333333333333332"/>
+                                            <rect key="frame" x="355" y="12" width="44" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

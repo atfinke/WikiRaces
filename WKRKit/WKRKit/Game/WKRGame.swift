@@ -129,11 +129,17 @@ public class WKRGame {
             }
         }
 
-        let results = WKRResultsInfo(players: players, points: totalPoints)
+        let currentResults = WKRResultsInfo(players: players, points: totalPoints)
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
-            currentResultsUpdated?(results)
+            currentResultsUpdated?(currentResults)
             return
         }
+
+        let adjustedPlayers = players
+        for player in adjustedPlayers where player.state == .racing {
+            player.state = .forcedEnd
+        }
+        let results = WKRResultsInfo(players: adjustedPlayers, points: totalPoints)
 
         finishedRace()
         finalResultsCreated?(results)

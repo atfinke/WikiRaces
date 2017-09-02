@@ -13,13 +13,16 @@ import WKRUIKit
 class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
-
+    @IBAction func quitBarButtonItemPressed(_ sender: Any) {
+    }
+    
     var isShowingVoteCountdown = true
+    var quitButtonPressed: ((UIViewController) -> Void)?
     var playerVoted: ((WKRPage) -> Void)?
 
     var voteInfo: WKRVoteInfo? {
         didSet {
-            if oldValue == nil && voteInfo != nil {
+            if self.tableView.alpha != 1.0 {
                 UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
                     self.tableView.alpha = 1.0
                 })
@@ -49,7 +52,6 @@ class VotingViewController: CenteredTableViewController {
         }
     }
 
-
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -63,7 +65,6 @@ class VotingViewController: CenteredTableViewController {
         descriptionLabel.text = "VOTING STARTS SOON"
         descriptionLabel.textColor = UIColor.wkrTextColor
 
-        isOverlayButtonHidden = true
         tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 

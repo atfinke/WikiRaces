@@ -103,7 +103,7 @@ extension WKRManager {
             let message = "Match Bonus Now \(int.value) " + string
             enqueue(message: message)
         case .showReady:
-            resultsShowReady?()
+            resultsShowReady?(int.value == 1)
         }
     }
 
@@ -125,6 +125,9 @@ extension WKRManager {
             peerNetwork.send(object: WKRCodable(enum: state))
 
             localPlayer.startedNewRace(on: raceConfig.startingPage)
+            peerNetwork.send(object: WKRCodable(localPlayer))
+        } else if state == .hostResults {
+            localPlayer.raceHistory = nil
             peerNetwork.send(object: WKRCodable(localPlayer))
         }
 

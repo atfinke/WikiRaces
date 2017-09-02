@@ -79,7 +79,9 @@ extension LobbyViewController {
         label.isHidden = isPlayerHost
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = NSAttributedString(string: "WAITING FOR HOST", spacing: 2.0)
+        label.attributedText = NSAttributedString(string: "WAITING FOR HOST",
+                                                  spacing: 2.0,
+                                                  font: UIFont.systemFont(ofSize: 19.0))
         bottomOverlayView.contentView.addSubview(label)
 
         let constraints = [

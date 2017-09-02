@@ -65,13 +65,13 @@ class ResultsTableViewCell: UITableViewCell {
         contentView.addSubview(activityIndicatorView)
 
         let constraints = [
-            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5),
+            stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 15),
+            stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             activityIndicatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            activityIndicatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor)
+            activityIndicatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
         ]
         NSLayoutConstraint.activate(constraints)
     }
