@@ -30,6 +30,12 @@ class ResultsViewController: CenteredTableViewController {
             _debugLog(state)
             tableView.reloadData()
             updateOverlayButtonState()
+
+            if state == .results {
+                title = "RESULTS"
+            } else {
+                title = "STANDINGS"
+            }
         }
     }
 
@@ -76,8 +82,7 @@ class ResultsViewController: CenteredTableViewController {
         registerTableView(for: self)
         tableView.isUserInteractionEnabled = true
 
-        title = "RESULTS"
-        descriptionLabel.text = ""
+        descriptionLabel.text = "WAITING FOR PLAYERS"
         descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
@@ -100,9 +105,9 @@ class ResultsViewController: CenteredTableViewController {
         guard isViewLoaded && state == .hostResults && !isPlayerReady else {
             return
         }
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.5, delay: 5.0, options: .beginFromCurrentState, animations: {
             self.isOverlayButtonHidden = false
-        }
+        }, completion: nil)
     }
 
     // MARK: - Helpers
@@ -114,7 +119,6 @@ class ResultsViewController: CenteredTableViewController {
 
     func resultsEnded() {
         _debugLog(nil)
-        descriptionLabel.text = "VOTING STARTS SOON"
         UIView.animate(withDuration: 0.5, animations: {
             self.descriptionLabel.alpha = 0.0
         })

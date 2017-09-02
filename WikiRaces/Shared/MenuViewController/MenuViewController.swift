@@ -30,7 +30,7 @@ class MenuViewController: UIViewController {
     var advertiser: MCNearbyServiceAdvertiser?
 
     let peerID = MCPeerID(displayName: UIDevice.current.name)
-    let serviceType = "wikiraces160212"
+    let serviceType = "WKRPeer30"
 
     lazy var session: MCSession = {
         return MCSession(peer: self.peerID)

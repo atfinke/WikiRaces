@@ -53,6 +53,9 @@ public class WKRGame {
                                           repeats: true,
                                           block: { _ in
                                             self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
+                                            if let points = self.activeRace?.bonusPoints {
+                                                self.bonusPointsUpdated?(points)
+                                            }
         })
     }
 

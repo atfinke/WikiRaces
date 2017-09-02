@@ -13,6 +13,7 @@ struct WKRInt: Codable {
     enum WKRIntType: Int, Codable {
         case votingTime
         case resultsTime
+        case bonusPoints
     }
 
     let type: WKRIntType

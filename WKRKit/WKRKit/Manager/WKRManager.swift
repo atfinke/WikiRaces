@@ -46,41 +46,43 @@ public class WKRManager {
 
     // MARK: - Other
 
-    let game: WKRGame
-    let localPlayer: WKRPlayer
+    internal let game: WKRGame
+    internal let localPlayer: WKRPlayer
 
+    internal var resultsTimer: Timer?
+    
     // MARK: - Callbacks
 
-    let stateUpdate: ((WKRGameState) -> Void)
-    let playersUpdate: (([WKRPlayer]) -> Void)
+    internal let stateUpdate: ((WKRGameState) -> Void)
+    internal let playersUpdate: (([WKRPlayer]) -> Void)
 
-    var voteTimeUpdate: ((Int) -> Void)?
-    var voteInfoUpdate: ((WKRVoteInfo) -> Void)?
-    var voteFinalPageUpdate: ((WKRPage) -> Void)?
+    internal var voteTimeUpdate: ((Int) -> Void)?
+    internal var voteInfoUpdate: ((WKRVoteInfo) -> Void)?
+    internal var voteFinalPageUpdate: ((WKRPage) -> Void)?
 
-    var resultsTimeUpdate: ((Int) -> Void)?
-    var resultsInfoUpdate: ((WKRResultsInfo) -> Void)?
-    var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
+    internal var resultsTimeUpdate: ((Int) -> Void)?
+    internal var resultsInfoUpdate: ((WKRResultsInfo) -> Void)?
+    internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
 
     // MARK: - Components
 
-    let peerNetwork: WKRPeerNetwork
-    let pageNavigation = WKRPageNavigation()
+    internal let peerNetwork: WKRPeerNetwork
+    private let pageNavigation = WKRPageNavigation()
 
     // MARK: - User Interface
 
-    var webView: WKRUIWebView!
-    var alertView: WKRUIAlertView!
+   internal var webView: WKRUIWebView!
+    internal var alertView: WKRUIAlertView!
 
     // MARK: - Debug
 
-    struct WKRDebugEntry {
+    internal struct WKRDebugEntry {
         let date = Date()
         let object: Any
         let sender: WKRPlayerProfile
     }
 
-    var debugEntry = [WKRDebugEntry]()
+    internal var debugEntry = [WKRDebugEntry]()
 
     // MARK: - Initialization
 
@@ -96,13 +98,17 @@ public class WKRManager {
         peerNetwork = network
 
         game = WKRGame(localPlayer: localPlayer)
-        game.allPlayersReadyForNextRound = {
-            if self.localPlayer.isHost && self.gameState == .hostResults {
-                print("READY")
-            }
-        }
 
         if player.isHost {
+            game.allPlayersReadyForNextRound = {
+                if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
+                    self.finishResultsCountdown()
+                }
+            }
+            game.bonusPointsUpdated = { points in
+                let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
+                self.peerNetwork.send(object: bonusPoints)
+            }
             game.finalResultsCreated = { result in
                 DispatchQueue.main.async {
                     let state = WKRGameState.hostResults

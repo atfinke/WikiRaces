@@ -59,22 +59,26 @@ extension WKRManager {
         assert(localPlayer.isHost)
 
         var timeLeft = WKRRaceConstants.resultsDuration
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        resultsTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
             _debugLog(timeLeft)
             timeLeft -= 1
 
-            let voteTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
-            self.peerNetwork.send(object: voteTime)
+            let resultsTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
+            self.peerNetwork.send(object: resultsTime)
 
             if timeLeft <= 0 {
-                timer.invalidate()
-
-                self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
-                DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration, execute: {
-                    self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
-                })
+                self.finishResultsCountdown()
             }
         }
+    }
+
+    internal func finishResultsCountdown() {
+        resultsTimer?.invalidate()
+
+        self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
+        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration, execute: {
+            self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
+        })
     }
 
     func prepareVotingCountdown() {

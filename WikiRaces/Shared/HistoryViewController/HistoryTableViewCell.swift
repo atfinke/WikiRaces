@@ -26,6 +26,8 @@ class HistoryTableViewCell: UITableViewCell {
         }
     }
 
+    // MARK: - View Life Cycle
+
     override func awakeFromNib() {
         super.awakeFromNib()
 

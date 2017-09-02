@@ -82,6 +82,10 @@ extension WKRManager {
         case .resultsTime:
             resultsTimeUpdate?(int.value)
             debugEntry.append(WKRDebugEntry(object: int, sender: player))
+        case .bonusPoints:
+            let string = int.value == 1 ? "Point" : "Points"
+            let message = "Match Bonus Now \(int.value) " + string
+            enqueue(message: message)
         }
     }
 
@@ -128,7 +132,7 @@ extension WKRManager {
 
         // Make sure game hasn't already started
         guard game.activeRace == nil else {
-           return
+            return
         }
 
         guard let unwrappedObject = game.preRaceConfig else {
@@ -142,3 +146,4 @@ extension WKRManager {
     }
 
 }
+
