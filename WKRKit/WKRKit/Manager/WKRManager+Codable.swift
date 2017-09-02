@@ -73,7 +73,7 @@ extension WKRManager {
         } else if let message = object.typeOfEnum(WKRPlayerMessage.self) {
             _debugLog(message)
             if player != localPlayer.profile {
-                alertView?.enqueue(text: message.text(for: player), duration: 2.0)
+                enqueue(message: message.text(for: player), duration: 2.0)
             }
             debugEntry.append(WKRDebugEntry(object: message, sender: player))
         } else if let message = object.typeOfEnum(WKRPlayerState.self) {

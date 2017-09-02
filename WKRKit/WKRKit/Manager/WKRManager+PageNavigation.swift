@@ -46,7 +46,7 @@ extension WKRManager: WKRPageNavigationDelegate {
 
     func navigation(_ navigation: WKRPageNavigation, blockedURL url: URL) {
         _debugLog(url)
-        alertView.enqueue(text: "Link not allowed", duration: 1.0)
+        enqueue(message: "Link not allowed", duration: 1.0)
     }
 
 }

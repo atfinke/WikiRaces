@@ -9,6 +9,28 @@
 import Foundation
 extension WKRManager {
 
+    // MARK: - Game Updates
+
+    func register(for game: WKRGame) {
+        game.allPlayersReadyForNextRound = {
+            if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
+                self.finishResultsCountdown()
+            }
+        }
+        game.bonusPointsUpdated = { points in
+            let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
+            self.peerNetwork.send(object: bonusPoints)
+        }
+        game.finalResultsCreated = { result in
+            DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.racePostHoldDuration) {
+                let state = WKRGameState.hostResults
+                self.peerNetwork.send(object: WKRCodable(enum: state))
+                self.peerNetwork.send(object: WKRCodable(result))
+                self.prepareResultsCountdown()
+            }
+        }
+    }
+
     // MARK: - Results
 
     func prepareResultsCountdown() {

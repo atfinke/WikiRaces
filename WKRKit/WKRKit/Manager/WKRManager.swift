@@ -71,7 +71,7 @@ public class WKRManager {
 
     // MARK: - User Interface
 
-   internal var webView: WKRUIWebView!
+    internal var webView: WKRUIWebView!
     internal var alertView: WKRUIAlertView!
 
     // MARK: - Debug
@@ -98,25 +98,8 @@ public class WKRManager {
         peerNetwork = network
 
         game = WKRGame(localPlayer: localPlayer)
-
         if player.isHost {
-            game.allPlayersReadyForNextRound = {
-                if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
-                    self.finishResultsCountdown()
-                }
-            }
-            game.bonusPointsUpdated = { points in
-                let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
-                self.peerNetwork.send(object: bonusPoints)
-            }
-            game.finalResultsCreated = { result in
-                DispatchQueue.main.async {
-                    let state = WKRGameState.hostResults
-                    self.peerNetwork.send(object: WKRCodable(enum: state))
-                    self.peerNetwork.send(object: WKRCodable(result))
-                    self.prepareResultsCountdown()
-                }
-            }
+            register(for: game)
         }
 
         peerNetwork.delegate = self
