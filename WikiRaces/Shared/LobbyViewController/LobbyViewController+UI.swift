@@ -1,5 +1,5 @@
 //
-//  PlayersViewController+UI.swift
+//  LobbyViewController+UI.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-extension PlayersViewController {
+extension LobbyViewController {
 
     // MARK: - Interface
 

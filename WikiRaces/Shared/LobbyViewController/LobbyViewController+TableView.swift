@@ -1,5 +1,5 @@
 //
-//  PlayersViewController+TableView.swift
+//  LobbyViewController+TableView.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension PlayersViewController: UITableViewDataSource, UITableViewDelegate {
+extension LobbyViewController: UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - UITableViewDataSource
 

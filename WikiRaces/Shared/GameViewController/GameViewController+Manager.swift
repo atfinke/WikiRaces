@@ -26,7 +26,7 @@ extension GameViewController {
             manager = WKRManager(session: session, isHost: isPlayerHost, stateUpdate: { state in
                 self.transition(to: state)
             }, playersUpdate: { players in
-                self.playersViewController?.updatedConnectedPlayers(players: players)
+                self.lobbyViewController?.updatedConnectedPlayers(players: players)
                 self.resultsViewController?.players = players
             })
         #endif
@@ -78,7 +78,7 @@ extension GameViewController {
                 completion?()
             }
             votingViewController = nil
-            playersViewController = nil
+            lobbyViewController = nil
             resultsViewController = nil
         }
 

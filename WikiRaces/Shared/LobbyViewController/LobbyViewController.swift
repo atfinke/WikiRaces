@@ -1,5 +1,5 @@
 //
-//  PlayersViewController.swift
+//  LobbyViewController.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class PlayersViewController: UIViewController {
+class LobbyViewController: UIViewController {
 
     // MARK: - Properties
 

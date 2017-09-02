@@ -47,9 +47,9 @@ class GameViewController: UIViewController {
             }
         }
     }
-    weak var playersViewController: PlayersViewController? {
+    weak var lobbyViewController: LobbyViewController? {
         didSet {
-            if let viewController = playersViewController {
+            if let viewController = lobbyViewController {
                 activeViewController = viewController
             }
         }

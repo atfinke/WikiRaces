@@ -31,7 +31,6 @@ class PlayerStateTableViewCell: UITableViewCell {
             } else {
                 stateLabel.text = state?.text
             }
-
         }
     }
 

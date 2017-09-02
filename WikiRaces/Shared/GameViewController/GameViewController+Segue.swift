@@ -34,14 +34,14 @@ extension GameViewController {
 
         switch segueIdentifier {
         case .showPlayers:
-            guard let destination = navigationController.rootViewController as? PlayersViewController else {
+            guard let destination = navigationController.rootViewController as? LobbyViewController else {
                 fatalError()
             }
 
             destination.didFinish = {
                 DispatchQueue.main.async {
-                    self.playersViewController?.dismiss(animated: true, completion: {
-                        self.playersViewController = nil
+                    self.lobbyViewController?.dismiss(animated: true, completion: {
+                        self.lobbyViewController = nil
                     })
                 }
             }
@@ -59,7 +59,7 @@ extension GameViewController {
             destination.isPreMatch = manager.gameState == .preMatch
             destination.displayedPlayers = manager.allPlayers
 
-            self.playersViewController = destination
+            self.lobbyViewController = destination
         case .showVoting:
             guard let destination = navigationController.rootViewController as? VotingViewController else {
                 fatalError()

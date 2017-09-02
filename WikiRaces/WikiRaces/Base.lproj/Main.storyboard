@@ -119,10 +119,10 @@
             </objects>
             <point key="canvasLocation" x="-1336" y="3446"/>
         </scene>
-        <!--Players View Controller-->
+        <!--Lobby View Controller-->
         <scene sceneID="sPw-ab-gIu">
             <objects>
-                <viewController id="VyK-N1-Rm3" customClass="PlayersViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VyK-N1-Rm3" customClass="LobbyViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zde-hX-YiP"/>
                         <viewControllerLayoutGuide type="bottom" id="utc-iv-FNl"/>
