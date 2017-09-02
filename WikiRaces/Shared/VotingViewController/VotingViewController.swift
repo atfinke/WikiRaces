@@ -14,6 +14,8 @@ class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
+    var isShowingVoteCountdown = true
+
     var voteInfo: WKRVoteInfo?
     var playerVoted: ((WKRPage) -> Void)?
 
@@ -37,6 +39,7 @@ class VotingViewController: CenteredTableViewController {
 
     func votingEnded() {
         _debugLog(nil)
+        isShowingVoteCountdown = false
         descriptionLabel.text = "VOTING CLOSES IN 0 S"
         tableView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5, animations: {
@@ -55,12 +58,24 @@ class VotingViewController: CenteredTableViewController {
 
     func updateVoteTimeRemaining(to time: Int) {
         _debugLog(time)
-        if time == 0 {
-            votingEnded()
+
+        if isShowingVoteCountdown {
+            if time == 0 {
+                votingEnded()
+            } else {
+                tableView.isUserInteractionEnabled = true
+                descriptionLabel.text = "VOTING CLOSES IN " + time.description + " S"
+            }
         } else {
-            tableView.isUserInteractionEnabled = true
-            descriptionLabel.text = "VOTING CLOSES IN " + time.description + " S"
+            if descriptionLabel.alpha != 1.0 {
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.descriptionLabel.alpha = 1.0
+                })
+            }
+            descriptionLabel.text = "RACE STARTS IN " + time.description + " S"
         }
+
+
     }
 
     func finalPageSelected(_ page: WKRPage) {
@@ -71,7 +86,7 @@ class VotingViewController: CenteredTableViewController {
         UIView.animate(withDuration: 1.5, animations: {
             for i in 0...votingObject.pageCount where i != index {
                 let indexPath = IndexPath(row: i)
-                self.tableView.cellForRow(at: indexPath)?.alpha = 0.2
+                self.tableView.cellForRow(at: indexPath)?.alpha = 0.05
             }
         })
     }

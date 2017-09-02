@@ -119,10 +119,19 @@ extension WKRManager {
         }
 
         peerNetwork.send(object: WKRCodable(raceConfig))
+        var timeLeft = WKRRaceConstants.votingPreRaceDuration
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            _debugLog(timeLeft)
+            timeLeft -= 1
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPostHoldDuration) {
-            let state = WKRGameState.race
-            self.peerNetwork.send(object: WKRCodable(enum: state))
+            let voteTime = WKRCodable(int: WKRInt(type: .votingPreRaceTime, value: timeLeft))
+            self.peerNetwork.send(object: voteTime)
+
+            if timeLeft <= 0 {
+                let state = WKRGameState.race
+                self.peerNetwork.send(object: WKRCodable(enum: state))
+                timer.invalidate()
+            }
         }
     }
 }

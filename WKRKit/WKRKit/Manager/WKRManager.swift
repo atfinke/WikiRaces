@@ -50,7 +50,7 @@ public class WKRManager {
     internal let localPlayer: WKRPlayer
 
     internal var resultsTimer: Timer?
-    
+
     // MARK: - Callbacks
 
     internal let stateUpdate: ((WKRGameState) -> Void)

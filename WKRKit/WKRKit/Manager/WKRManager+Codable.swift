@@ -28,8 +28,21 @@ extension WKRManager {
             _debugLog(playerObject)
             game.playerUpdated(playerObject)
             playersUpdate(allPlayers)
+
+            // Player joined mid-session
+            if playerObject.state == .connecting && localPlayer.state != .connecting {
+                // Send self
+                peerNetwork.send(object: WKRCodable(localPlayer))
+                if localPlayer.isHost {
+                    // Send latest results
+                    // TODO: Send ready states
+                    if let results = hostResultsInfo {
+                        peerNetwork.send(object: WKRCodable(results))
+                    }
+                }
+            }
             debugEntry.append(WKRDebugEntry(object: playerObject, sender: player))
-        } else if let resultsInfo = object.typeOf(WKRResultsInfo.self) {
+        } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
             _debugLog(resultsInfo)
             game.finishedRace()
             hostResultsInfo = resultsInfo
@@ -48,7 +61,7 @@ extension WKRManager {
             }
             debugEntry.append(WKRDebugEntry(object: pageVote, sender: player))
         } else {
-            fatalError()
+            _debugLog("No Case")
         }
     }
 
@@ -76,7 +89,7 @@ extension WKRManager {
     internal func receivedInt(_ object: WKRCodable, from player: WKRPlayerProfile) {
         guard let int = object.typeOf(WKRInt.self) else { fatalError() }
         switch int.type {
-        case .votingTime:
+        case .votingTime, .votingPreRaceTime:
             voteTimeUpdate?(int.value)
             debugEntry.append(WKRDebugEntry(object: int, sender: player))
         case .resultsTime:
@@ -146,4 +159,3 @@ extension WKRManager {
     }
 
 }
-

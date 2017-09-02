@@ -12,6 +12,7 @@ struct WKRInt: Codable {
 
     enum WKRIntType: Int, Codable {
         case votingTime
+        case votingPreRaceTime
         case resultsTime
         case bonusPoints
     }
