@@ -53,7 +53,9 @@ class ResultsViewController: CenteredTableViewController {
 
     var readyStates: WKRReadyStates? {
         didSet {
-            tableView.reloadData()
+            if state != .points {
+                tableView.reloadData()
+            }
         }
     }
 

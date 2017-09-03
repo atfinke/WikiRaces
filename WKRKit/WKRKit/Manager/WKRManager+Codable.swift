@@ -39,7 +39,7 @@ extension WKRManager {
                     peerNetwork.send(object: WKRCodable(enum: gameState))
                 }
             }*/
-        } else if let resultsInfo = object.typeOf(WKRResultsInfo.self) {
+        } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
             game.finishedRace()
 
             if gameState != .hostResults {
@@ -96,6 +96,7 @@ extension WKRManager {
 
         switch state {
         case .voting:
+            hostResultsInfo = nil
             localPlayer.state = .voting
             localPlayer.raceHistory = nil
             if localPlayer.isHost {

@@ -45,8 +45,6 @@ public class WKRManager {
     internal let game: WKRGame
     internal let localPlayer: WKRPlayer
     internal let peerNetwork: WKRPeerNetwork
-
-    internal var resultsTimer: Timer?
     internal var pageNavigation: WKRPageNavigation!
 
     // MARK: - Callbacks

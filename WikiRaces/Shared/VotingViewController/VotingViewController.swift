@@ -15,7 +15,7 @@ class VotingViewController: CenteredTableViewController {
     // MARK: - Properties
     @IBAction func quitBarButtonItemPressed(_ sender: Any) {
     }
-    
+
     var isShowingVoteCountdown = true
     var quitButtonPressed: ((UIViewController) -> Void)?
     var playerVoted: ((WKRPage) -> Void)?

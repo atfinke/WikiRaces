@@ -20,7 +20,7 @@ extension UIView {
                         delay: Double,
                         animations: @escaping () -> Void,
                         completion: ((Bool) -> Void)? = nil) {
-        
+
         UIView.animate(withDuration: duration,
                        delay: delay,
                        options: .beginFromCurrentState,

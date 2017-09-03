@@ -96,6 +96,10 @@ public class WKRGame {
         activeRace?.playerUpdated(player)
         checkForRaceEnd()
 
+        guard state == .hostResults else {
+            return
+        }
+
         let readyStates = WKRReadyStates(players: players)
         readyStatesUpdated?(readyStates)
         if localPlayer.isHost && readyStates.isReadyForNextRound {

@@ -16,7 +16,7 @@ extension WKRManager {
         guard localPlayer.isHost else { fatalError() }
 
         game.allPlayersReadyForNextRound = {
-            if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
+            if self.localPlayer.isHost && self.gameState == .hostResults {
                 self.finishResultsCountdown()
             }
         }
@@ -48,7 +48,13 @@ extension WKRManager {
         guard localPlayer.isHost else { fatalError() }
 
         var timeLeft = WKRRaceConstants.resultsDuration
-        resultsTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+
+            if self.gameState == .points {
+                timer.invalidate()
+                return
+            }
+
             timeLeft -= 1
 
             let resultsTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
@@ -56,11 +62,11 @@ extension WKRManager {
 
             if timeLeft <= 0 {
                 self.finishResultsCountdown()
+                timer.invalidate()
             } else if timeLeft == WKRRaceConstants.resultsDuration - WKRRaceConstants.resultsHoldReadyDuration {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
                 self.peerNetwork.send(object: showReady)
             } else if timeLeft == WKRRaceConstants.resultsDisableReadyTime {
-                self.game.players = []
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 0))
                 self.peerNetwork.send(object: showReady)
             }
@@ -68,9 +74,9 @@ extension WKRManager {
     }
 
     internal func finishResultsCountdown() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost && gameState != .points else { fatalError() }
 
-        resultsTimer?.invalidate()
+        self.game.players = []
 
         self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration) {
@@ -107,7 +113,6 @@ extension WKRManager {
     private func prepareRaceConfig() {
         guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
             fatalError("Failed to create race")
-            return
         }
 
         peerNetwork.send(object: WKRCodable(raceConfig))

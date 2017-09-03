@@ -60,9 +60,9 @@ class LobbyViewController: UIViewController {
 
     // MARK: - Button Pressed
     @IBAction func quitBarButtonItemPressed(_ sender: Any) {
-        
+
     }
-    
+
     @IBAction func doneButtonPressed() {
         didFinish?()
     }
