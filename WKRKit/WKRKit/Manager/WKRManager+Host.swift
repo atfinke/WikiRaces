@@ -13,6 +13,8 @@ extension WKRManager {
     // MARK: - Game Updates
 
     func configure(game: WKRGame) {
+        guard localPlayer.isHost else { fatalError() }
+
         game.allPlayersReadyForNextRound = {
             if self.localPlayer.isHost && self.gameState == .hostResults && self.resultsTimer != nil {
                 self.finishResultsCountdown()
@@ -22,8 +24,8 @@ extension WKRManager {
             let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
             self.peerNetwork.send(object: bonusPoints)
         }
-        game.finalResultsCreated = { result in
-            DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.racePostHoldDuration) {
+        game.hostResultsCreated = { result in
+            DispatchQueue.main.async {
                 let state = WKRGameState.hostResults
                 self.peerNetwork.send(object: WKRCodable(enum: state))
                 self.peerNetwork.send(object: WKRCodable(result))
@@ -35,8 +37,7 @@ extension WKRManager {
     // MARK: - Results
 
     func prepareResultsCountdown() {
-        _debugLog()
-        assert(localPlayer.isHost)
+        guard localPlayer.isHost else { fatalError() }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPreHoldDuration) {
             self.startResultsCountdown()
@@ -44,7 +45,7 @@ extension WKRManager {
     }
 
     private func startResultsCountdown() {
-        assert(localPlayer.isHost)
+        guard localPlayer.isHost else { fatalError() }
 
         var timeLeft = WKRRaceConstants.resultsDuration
         resultsTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
@@ -59,6 +60,7 @@ extension WKRManager {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
                 self.peerNetwork.send(object: showReady)
             } else if timeLeft == WKRRaceConstants.resultsDisableReadyTime {
+                self.game.players = []
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 0))
                 self.peerNetwork.send(object: showReady)
             }
@@ -66,6 +68,8 @@ extension WKRManager {
     }
 
     internal func finishResultsCountdown() {
+        guard localPlayer.isHost else { fatalError() }
+
         resultsTimer?.invalidate()
 
         self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
@@ -77,15 +81,14 @@ extension WKRManager {
     // MARK: - Voting
 
     func prepareVotingCountdown() {
-        assert(localPlayer.isHost)
-
+        guard localPlayer.isHost else { fatalError() }
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPreHoldDuration) {
             self.startVotingCountdown()
         }
     }
 
     private func startVotingCountdown() {
-        assert(localPlayer.isHost)
+        guard localPlayer.isHost else { fatalError() }
 
         var timeLeft = WKRRaceConstants.votingDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
@@ -103,7 +106,7 @@ extension WKRManager {
 
     private func prepareRaceConfig() {
         guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
-            _debugLog("Failed to create race")
+            fatalError("Failed to create race")
             return
         }
 
@@ -121,5 +124,34 @@ extension WKRManager {
                 timer.invalidate()
             }
         }
+    }
+
+    internal func fetchPreRaceConfig() {
+        guard localPlayer.isHost else { fatalError() }
+
+        WKRPreRaceConfig.new { preRaceConfig in
+            if let config = preRaceConfig {
+                self.game.preRaceConfig = config
+                self.sendPreRaceConfig()
+                self.prepareVotingCountdown()
+            } else {
+                fatalError("Need to add connection failed error")
+            }
+        }
+    }
+
+    internal func sendPreRaceConfig() {
+        guard localPlayer.isHost else { fatalError() }
+
+        // Make sure game hasn't already started
+        guard game.activeRace == nil else {
+            return
+        }
+
+        guard let unwrappedObject = game.preRaceConfig else {
+            fatalError()
+        }
+
+        peerNetwork.send(object: WKRCodable(unwrappedObject))
     }
 }

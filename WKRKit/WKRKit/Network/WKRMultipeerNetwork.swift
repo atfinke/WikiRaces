@@ -41,7 +41,6 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     func send(object: WKRCodable) {
-        _debugLog(object)
         guard let data = try? WKRCodable.encoder.encode(object) else { return }
         do {
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
@@ -70,7 +69,6 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     open func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        _debugLog(state)
         switch state {
         case .connected: playerConnected?(WKRPlayerProfile(peerID: peerID))
         case .notConnected: playerDisconnected?(WKRPlayerProfile(peerID: peerID))

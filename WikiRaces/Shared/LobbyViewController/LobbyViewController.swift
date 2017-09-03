@@ -38,7 +38,6 @@ class LobbyViewController: UIViewController {
     // MARK: - WKRGame
 
     func updatedConnectedPlayers(players: [WKRPlayer]) {
-        _debugLog(players)
         var removedPlayers = 0
         for player in players {
             if let index = displayedPlayers.index(of: player) {
@@ -65,17 +64,14 @@ class LobbyViewController: UIViewController {
     }
     
     @IBAction func doneButtonPressed() {
-        _debugLog(nil)
         didFinish?()
     }
 
     @objc func startRaceButtonPressed() {
-        _debugLog(nil)
         startButtonPressed?()
     }
 
     @objc func footerButtonPressed() {
-        _debugLog(nil)
         addPlayersButtonPressed?(self)
     }
 

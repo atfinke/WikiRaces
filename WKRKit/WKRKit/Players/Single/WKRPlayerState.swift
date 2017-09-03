@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum WKRPlayerState: Int, Codable {
+public enum WKRPlayerState: String, Codable {
 
     case foundPage
     case forcedEnd
@@ -16,6 +16,8 @@ public enum WKRPlayerState: Int, Codable {
     case quit
     case racing
     case connecting
+    case readyForNextRound
+    case voting
     case disconnected
 
     var isRacing: Bool {
@@ -34,6 +36,7 @@ public enum WKRPlayerState: Int, Codable {
         case .racing: return "Racing"
         case .connecting: return "Ready"
         case .disconnected: return "Disconnected"
+        default: fatalError()
         }
     }
 

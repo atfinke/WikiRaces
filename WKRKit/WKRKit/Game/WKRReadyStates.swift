@@ -16,14 +16,11 @@ public struct WKRReadyStates: Codable {
 
     public func playerReady(_ player: WKRPlayer) -> Bool {
         guard let index = players.index(of: player) else { return false }
-        return players[index].isReadyForNextRound
+        return players[index].state == .readyForNextRound
     }
 
     var isReadyForNextRound: Bool {
-        for player in players where player.state != .connecting &&
-            player.state != .disconnected &&
-            player.state != .quit &&
-            !player.isReadyForNextRound {
+        for player in players where player.state != .readyForNextRound {
                 return false
         }
         return true

@@ -19,12 +19,10 @@ extension WKRManager {
             }
         }
         network.playerConnected = { profile in
-            _debugLog(profile)
             self.peerNetwork.send(object: WKRCodable(self.localPlayer))
         }
         network.playerDisconnected = { profile in
-            _debugLog(profile)
-            self.game.player(profile, stateUpdated: .disconnected)
+            self.game.playerDisconnected(profile)
         }
     }
 

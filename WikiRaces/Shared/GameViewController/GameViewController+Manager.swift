@@ -26,7 +26,6 @@ extension GameViewController {
                 self.transition(to: state)
             }, playersUpdate: { players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
-                self.resultsViewController?.players = players
             })
         #endif
 
@@ -35,7 +34,7 @@ extension GameViewController {
         }, infoUpdate: { voteInfo in
             self.votingViewController?.voteInfo = voteInfo
         }, finalPageUpdate: { page in
-            self.title = page.title?.uppercased()
+            self.finalPage = page
             self.votingViewController?.finalPageSelected(page)
             UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
                 self.webView.alpha = 1.0
@@ -49,8 +48,6 @@ extension GameViewController {
         }, infoUpdate: { resultsInfo in
             if self.resultsViewController?.state != .hostResults {
                 self.resultsViewController?.resultsInfo = resultsInfo
-            } else {
-                _debugLog("Not updating results")
             }
         }, hostInfoUpdate: { resultsInfo in
             self.resultsViewController?.resultsInfo = resultsInfo

@@ -57,7 +57,6 @@ extension GameViewController {
 
             destination.isPlayerHost = isPlayerHost
             destination.isPreMatch = manager.gameState == .preMatch
-            destination.displayedPlayers = manager.allPlayers
 
             self.lobbyViewController = destination
         case .showVoting:
@@ -88,6 +87,11 @@ extension GameViewController {
             destination.resultsInfo = manager.hostResultsInfo
             destination.isPlayerHost = isPlayerHost
             self.resultsViewController = destination
+
+            #if MULTIWINDOWDEBUG
+                //swiftlint:disable:next identifier_name
+                destination.playerName = _playerName
+            #endif
         case .showHelp:
             guard let destination = navigationController.rootViewController as? HelpViewController else {
                 fatalError()

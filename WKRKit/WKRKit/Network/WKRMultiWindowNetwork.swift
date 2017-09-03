@@ -33,8 +33,6 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     let isHost: Bool
     let playerName: String
 
-    var totalData = 0
-
     var players = [WKRPlayerProfile]()
     var connectedPlayers: Int {
         return players.count
@@ -72,16 +70,11 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.playerConnected?(localPlayer)
         }
-        Timer.scheduledTimer(withTimeInterval: 30.0, repeats: true) { _ in
-            let formatter = ByteCountFormatter()
-            _debugLog("Total bytes sent: \(formatter.string(fromByteCount: Int64(self.totalData)))")
-        }
     }
 
     // MARK: - WKRNetwork
 
     func send(object: WKRCodable) {
-        _debugLog(object)
         guard let data = try? WKRCodable.encoder.encode(object) else { return }
 
         let splitMessage = WKRSplitMessage(playerName, data)
@@ -91,8 +84,6 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
             NotificationCenter.default.post(name: Notification.Name("Object"), object: splitMessage, userInfo: nil)
         }
         objectReceived?(object, messageSender)
-
-        totalData += data.count
     }
 
     func disconnect() {

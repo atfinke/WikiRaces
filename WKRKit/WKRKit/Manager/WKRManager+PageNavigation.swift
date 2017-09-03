@@ -24,7 +24,6 @@ extension WKRManager {
             var linkHere = false
 
             if let attributes = self.game.activeRace?.attributesFor(page) {
-                _debugLog(attributes)
                 if attributes.foundPage {
                     self.localPlayer.state = .foundPage
                     self.transitionGameState(to: .results)
@@ -35,9 +34,8 @@ extension WKRManager {
                 }
             }
 
-            self.localPlayer.viewed(page: page, linkHere: linkHere)
+            self.localPlayer.nowViewing(page: page, linkHere: linkHere)
             self.peerNetwork.send(object: WKRCodable(self.localPlayer))
-
             self.webView.completedPageLoad()
         })
     }

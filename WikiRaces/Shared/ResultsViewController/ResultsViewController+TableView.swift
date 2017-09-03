@@ -60,7 +60,6 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        _debugLog(indexPath)
         guard let resultsInfo = resultsInfo else {
             return
         }

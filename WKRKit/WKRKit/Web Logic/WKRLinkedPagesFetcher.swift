@@ -79,7 +79,6 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     }
 
     private func load(url: URL?) {
-        _debugLog("Found \(foundURLs.count) links")
         guard let webView = webView, let url = url else { return }
         nextPageURL = nil
         viewPageURLs.append(url)

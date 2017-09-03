@@ -7,7 +7,7 @@
 //
 
 import Foundation
-public struct WKRPreRaceConfig: Codable {
+public struct WKRPreRaceConfig: Codable, Equatable {
 
     // MARK: - Properties
 
@@ -25,7 +25,6 @@ public struct WKRPreRaceConfig: Codable {
 
     internal func raceConfig() -> WKRRaceConfig? {
         guard let finalPage = voteInfo.selectFinalPage() else {
-            _debugLog("Failed to get final article")
             return nil
         }
         return WKRRaceConfig(starting: startingPage, ending: finalPage)
@@ -48,14 +47,11 @@ public struct WKRPreRaceConfig: Codable {
                 randomPaths.append(randomPath)
             }
         }
-        _debugLog(randomPaths)
 
         var pages = [WKRPage]()
         var startingPage: WKRPage?
 
         let completedOperation = BlockOperation {
-            _debugLog("completedOperation")
-
             if WKRKitConstants.quickRaceTest {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
@@ -73,7 +69,6 @@ public struct WKRPreRaceConfig: Codable {
 
         let startingPageOperation = WKROperation()
         startingPageOperation.addExecutionBlock {
-            _debugLog("startingPageOperation")
             WKRPageFetcher.fetchRandom { page in
                 startingPage = page
                 startingPageOperation.state = .isFinished
@@ -84,7 +79,6 @@ public struct WKRPreRaceConfig: Codable {
         let operations = randomPaths.map { path -> WKROperation in
             let operation = WKROperation()
             operation.addExecutionBlock {
-                _debugLog("endingPageOperation")
                 WKRPageFetcher.fetch(path: path) { (page) in
                     if let page = page {
                         pages.append(page)
@@ -106,9 +100,6 @@ public struct WKRPreRaceConfig: Codable {
         }
         return nil
     }
-}
-
-extension WKRPreRaceConfig: Equatable {
 
     // MARK: - Equatable
 

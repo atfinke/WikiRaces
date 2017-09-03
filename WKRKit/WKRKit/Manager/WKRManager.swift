@@ -34,10 +34,6 @@ public class WKRManager {
         return game.state
     }
 
-    public var allPlayers: [WKRPlayer] {
-        return game.players
-    }
-
     public var racePlayers: [WKRPlayer] {
         return game.activeRace?.players ?? []
     }
@@ -70,16 +66,6 @@ public class WKRManager {
 
     internal var webView: WKRUIWebView!
     internal var alertView: WKRUIAlertView!
-
-    // MARK: - Debug
-
-    internal struct WKRDebugEntry {
-        let date = Date()
-        let object: Any
-        let sender: WKRPlayerProfile
-    }
-
-    internal var debugEntry = [WKRDebugEntry]()
 
     // MARK: - Initialization
 
@@ -126,8 +112,8 @@ public class WKRManager {
         resultsInfoHostUpdate = hostInfoUpdate
 
         game.readyStatesUpdated = readyStatesUpdate
-        game.currentResultsUpdated = { results in
-            if self.gameState == .results {
+        game.localResultsUpdated = { results in
+            if self.gameState == .results || self.gameState == .race {
                 infoUpdate(results)
             }
         }
@@ -156,7 +142,7 @@ public class WKRManager {
     public func player(_ action: WKRPlayerAction) {
         switch action {
         case .ready:
-            localPlayer.isReadyForNextRound = true
+            localPlayer.state = .readyForNextRound
             peerNetwork.send(object: WKRCodable(localPlayer))
         case .startedGame:
             let state = WKRGameState.voting
@@ -167,7 +153,7 @@ public class WKRManager {
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.neededHelp))
         case .forfeited:
             localPlayer.state = .forfeited
-            peerNetwork.send(object: WKRCodable(enum: localPlayer.state))
+            peerNetwork.send(object: WKRCodable(localPlayer))
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.forfeited))
             transitionGameState(to: .results)
         case .quit:
@@ -175,19 +161,5 @@ public class WKRManager {
             peerNetwork.disconnect()
         default: fatalError("\(action)")
         }
-    }
-}
-
-extension Array where Element == WKRManager.WKRDebugEntry {
-    func printFormatted() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm:ss"
-
-        var string = ""
-        for entry in self {
-            string += "=========\n\nDate: \(formatter.string(from: entry.date))\nFrom: \(entry.sender.name)\n"
-            string += "Object: \(entry.object)\n\n"
-        }
-        print(string)
     }
 }

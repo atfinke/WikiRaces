@@ -25,6 +25,11 @@ class GameViewController: UIViewController {
     #endif
 
     var session: MCSession!
+    var finalPage: WKRPage? {
+        didSet {
+            title = finalPage?.title?.uppercased()
+        }
+    }
     var manager: WKRManager!
 
     // MARK: - User Interface

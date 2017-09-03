@@ -14,6 +14,7 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
+    var playerName = ""
     var isPlayerHost = false {
         didSet {
             if isPlayerHost {

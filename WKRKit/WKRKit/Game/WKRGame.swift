@@ -17,15 +17,15 @@ public class WKRGame {
     var allPlayersReadyForNextRound: (() -> Void)?
     var readyStatesUpdated: ((WKRReadyStates) -> Void)?
 
-    var finalResultsCreated: ((WKRResultsInfo) -> Void)?
-    var currentResultsUpdated: ((WKRResultsInfo) -> Void)?
+    var hostResultsCreated: ((WKRResultsInfo) -> Void)?
+    var localResultsUpdated: ((WKRResultsInfo) -> Void)?
 
     // MARK: - Properties
 
     private var bonusTimer: Timer?
     private let localPlayer: WKRPlayer
 
-    internal private(set) var players = [WKRPlayer]()
+    internal var players = [WKRPlayer]()
 
     internal var raceConfig: WKRRaceConfig?
     internal var preRaceConfig: WKRPreRaceConfig?
@@ -47,17 +47,22 @@ public class WKRGame {
         raceConfig = config
         activeRace = WKRActiveRace(config: config)
         preRaceConfig = nil
-        bonusTimer?.invalidate()
-        bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
-                                          repeats: true) { _ in
-                                            self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
-                                            if let points = self.activeRace?.bonusPoints {
-                                                self.bonusPointsUpdated?(points)
-                                            }
+
+        if localPlayer.isHost {
+            bonusTimer?.invalidate()
+            bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
+                                              repeats: true) { _ in
+                                                self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
+                                                if let points = self.activeRace?.bonusPoints {
+                                                    self.bonusPointsUpdated?(points)
+                                                }
+            }
         }
+
     }
 
     func createRaceConfig() -> WKRRaceConfig? {
+        guard localPlayer.isHost else { fatalError() }
         return preRaceConfig?.raceConfig()
     }
 
@@ -81,14 +86,6 @@ public class WKRGame {
     }
 
     // MARK: - Player States
-
-    internal func player(_ profile: WKRPlayerProfile, stateUpdated state: WKRPlayerState) {
-        for player in players where player.profile == profile {
-            player.state = state
-            activeRace?.playerUpdated(player)
-        }
-        checkForRaceEnd()
-    }
 
     internal func playerUpdated(_ player: WKRPlayer) {
         if let index = players.index(of: player) {
@@ -128,9 +125,9 @@ public class WKRGame {
             }
         }
 
-        let currentResults = WKRResultsInfo(players: players, points: totalPoints)
+        let currentResults = WKRResultsInfo(isFinal: false, players: players, points: totalPoints)
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
-            currentResultsUpdated?(currentResults)
+            localResultsUpdated?(currentResults)
             return
         }
 
@@ -138,10 +135,16 @@ public class WKRGame {
         for player in adjustedPlayers where player.state == .racing {
             player.state = .forcedEnd
         }
-        let results = WKRResultsInfo(players: adjustedPlayers, points: totalPoints)
+        let results = WKRResultsInfo(isFinal: true, players: adjustedPlayers, points: totalPoints)
+
+        print("\n\n=========\nHOST SENDING")
+
+        for x in 0..<results.playerCount {
+            print(results.player(at: x).name + ": " + results.player(at: x).state.text + "  (\(results.player(at: x).raceHistory?.duration ?? 0))")
+        }
 
         finishedRace()
-        finalResultsCreated?(results)
+        hostResultsCreated?(results)
     }
 
 }
