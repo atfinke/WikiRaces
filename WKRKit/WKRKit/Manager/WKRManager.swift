@@ -154,7 +154,6 @@ public class WKRManager {
     // MARK: - Actions
 
     public func player(_ action: WKRPlayerAction) {
-        _debugLog(action)
         switch action {
         case .ready:
             localPlayer.isReadyForNextRound = true
@@ -167,14 +166,12 @@ public class WKRManager {
         case .neededHelp:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.neededHelp))
         case .forfeited:
-            peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.forfeited))
             localPlayer.state = .forfeited
-            peerNetwork.send(object: WKRCodable(localPlayer))
+            peerNetwork.send(object: WKRCodable(enum: localPlayer.state))
+            peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.forfeited))
             transitionGameState(to: .results)
         case .quit:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.quit))
-            localPlayer.state = .quit
-            peerNetwork.send(object: WKRCodable(localPlayer))
             peerNetwork.disconnect()
         default: fatalError("\(action)")
         }

@@ -114,8 +114,6 @@ extension GameViewController {
     // MARK: - Alerts
 
     func alertViewWillAppear() {
-        wikiDebugLog(nil)
-
         let scrollView = webView.scrollView
         var contentOffset = scrollView.contentOffset
         let trueContentOffset = contentOffset.y - scrollView.contentInset.bottom
@@ -133,8 +131,6 @@ extension GameViewController {
     }
 
     func alertViewWillDisappear() {
-        wikiDebugLog(nil)
-
         bottomConstraint?.constant = 0
         view.setNeedsUpdateConstraints()
         UIView.animate(withDuration: alertViewAnimateOutDuration) {

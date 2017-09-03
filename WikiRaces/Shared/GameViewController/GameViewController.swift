@@ -17,6 +17,8 @@ class GameViewController: UIViewController {
     // MARK: - Properties
 
     var isPlayerHost = false
+    var gameState = WKRGameState.preMatch
+    
     #if MULTIWINDOWDEBUG
     //swiftlint:disable:next identifier_name
     var _playerName: String!

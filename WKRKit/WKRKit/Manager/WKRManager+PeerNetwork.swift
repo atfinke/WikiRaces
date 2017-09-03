@@ -14,8 +14,6 @@ extension WKRManager {
 
     func configure(network: WKRPeerNetwork) {
         network.objectReceived = { object, profile in
-            _debugLog(profile)
-            _debugLog(object)
             DispatchQueue.main.async {
                 self.receivedCodable(object, from: profile)
             }

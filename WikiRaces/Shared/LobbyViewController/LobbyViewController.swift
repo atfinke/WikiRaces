@@ -43,31 +43,25 @@ class LobbyViewController: UIViewController {
         for player in players {
             if let index = displayedPlayers.index(of: player) {
                 if displayedPlayers[index].state != player.state {
-                    _debugLog("updating player")
                     displayedPlayers[index].state = player.state
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .none)
                 }
             }
         }
-        for (index, player) in displayedPlayers.map({ $0 }).enumerated() {
-            if !players.contains(player) {
-                _debugLog("removed player")
-                displayedPlayers.remove(at: index - removedPlayers)
-                tableView.deleteRows(at: [IndexPath(row: index)], with: .fade)
-                removedPlayers += 1
-            }
+        for (index, player) in displayedPlayers.map({ $0 }).enumerated() where !players.contains(player) {
+            displayedPlayers.remove(at: index - removedPlayers)
+            tableView.deleteRows(at: [IndexPath(row: index)], with: .fade)
+            removedPlayers += 1
         }
-        for player in players {
-            if !displayedPlayers.contains(player) {
-                _debugLog("adding player")
-                displayedPlayers.append(player)
-                tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .automatic)
-            }
+        for player in players where !displayedPlayers.contains(player) {
+            displayedPlayers.append(player)
+            tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .automatic)
         }
     }
 
     // MARK: - Button Pressed
     @IBAction func quitBarButtonItemPressed(_ sender: Any) {
+        
     }
     
     @IBAction func doneButtonPressed() {

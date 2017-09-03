@@ -87,7 +87,9 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
         let splitMessage = WKRSplitMessage(playerName, data)
         let messageSender = WKRPlayerProfile(name: splitMessage.sender, playerID: splitMessage.sender)
 
-        NotificationCenter.default.post(name: Notification.Name("Object"), object: splitMessage, userInfo: nil)
+        DispatchQueue.main.asyncAfter(deadline: .now() + (1.5 / Double(arc4random() % 100))) {
+            NotificationCenter.default.post(name: Notification.Name("Object"), object: splitMessage, userInfo: nil)
+        }
         objectReceived?(object, messageSender)
 
         totalData += data.count

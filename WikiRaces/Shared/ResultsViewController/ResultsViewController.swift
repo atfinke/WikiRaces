@@ -26,33 +26,38 @@ class ResultsViewController: CenteredTableViewController {
 
     var state: WKRGameState = .results {
         didSet {
-            tableView.reloadData()
             if state == .results || state == .hostResults {
                 title = "RESULTS"
                 tableView.isUserInteractionEnabled = true
+                tableView.reloadData()
             } else {
                 title = "STANDINGS"
                 tableView.isUserInteractionEnabled = false
                 if historyViewController != nil {
                     dismiss(animated: true, completion: nil)
                 }
-                UIView.animate(withDuration: 0.5) {
+
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.tableView.alpha = 0.0
                     self.descriptionLabel.alpha = 0.0
-                }
+                }, completion: { _ in
+                    self.tableView.reloadData()
+                    UIView.animate(withDuration: 0.5) {
+                        self.tableView.alpha = 1.0
+                    }
+                })
             }
         }
     }
 
     var readyStates: WKRReadyStates? {
         didSet {
-            _debugLog(resultsInfo)
             tableView.reloadData()
         }
     }
 
     var resultsInfo: WKRResultsInfo? {
         didSet {
-            _debugLog(resultsInfo)
             tableView.reloadData()
             updateHistoryController()
         }
@@ -60,7 +65,6 @@ class ResultsViewController: CenteredTableViewController {
 
     var timeRemaining: Int = 100 {
         didSet {
-            _debugLog(timeRemaining)
             tableView.isUserInteractionEnabled = true
             descriptionLabel.text = "VOTING STARTS IN " + timeRemaining.description + " S"
         }
@@ -79,17 +83,15 @@ class ResultsViewController: CenteredTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _debugLog(nil)
 
         registerTableView(for: self)
-        tableView.isUserInteractionEnabled = true
+        overlayButtonTitle = "Ready up"
 
         descriptionLabel.text = "WAITING FOR PLAYERS"
         descriptionLabel.textColor = UIColor.wkrTextColor
 
+        tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-
-        overlayButtonTitle = "Ready up"
     }
 
     // MARK: - Actions
@@ -129,7 +131,7 @@ class ResultsViewController: CenteredTableViewController {
 
     func showReadyUpButton(_ showReady: Bool) {
         navigationItem.leftBarButtonItem?.isEnabled = showReady
-        isOverlayButtonHidden = false
+        isOverlayButtonHidden = !showReady
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }

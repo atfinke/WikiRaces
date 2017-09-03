@@ -44,5 +44,5 @@ public func _debugLog(_ object: Any? = nil, file: String = #file, function: Stri
         objectString = "\n" + object.debugDescription + "\n\n"
     }
 
-    print(fileNameString + functionString + objectString)
+    //print(fileNameString + functionString + objectString)
 }

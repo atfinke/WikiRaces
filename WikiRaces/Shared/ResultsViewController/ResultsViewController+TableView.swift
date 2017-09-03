@@ -37,18 +37,6 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
 
             if player.state == .racing {
                 cell.isShowingActivityIndicatorView = true
-                if player.raceHistory?.entries.last?.linkHere ?? false {
-                    let detail = " Link On Page"
-                    let attributedText = NSMutableAttributedString(string: player.name + detail, attributes: nil)
-
-                    let range = NSRange(location: player.name.characters.count, length: detail.characters.count)
-                    let attributes: [NSAttributedStringKey: Any] = [
-                        .foregroundColor: UIColor.lightGray,
-                        .font: UIFont.systemFont(ofSize: 15)
-                    ]
-                    attributedText.addAttributes(attributes, range: range)
-                    cell.playerLabel.attributedText = attributedText
-                }
             } else if player.state == .foundPage {
                 cell.detailLabel.text = DurationFormatter.string(for: player.raceHistory?.duration)
             } else {
@@ -56,6 +44,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             }
         case .points:
             let points = resultsInfo.pointsInfo(at: index)
+            cell.isShowingActivityIndicatorView = false
             cell.playerLabel.text = points.player.name
             cell.accessoryType = .none
             if points.points == 1 {

@@ -44,12 +44,10 @@ extension WKRManager {
     }
 
     private func startResultsCountdown() {
-        _debugLog()
         assert(localPlayer.isHost)
 
         var timeLeft = WKRRaceConstants.resultsDuration
         resultsTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
-            _debugLog(timeLeft)
             timeLeft -= 1
 
             let resultsTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
@@ -79,7 +77,6 @@ extension WKRManager {
     // MARK: - Voting
 
     func prepareVotingCountdown() {
-        _debugLog()
         assert(localPlayer.isHost)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPreHoldDuration) {
@@ -88,12 +85,10 @@ extension WKRManager {
     }
 
     private func startVotingCountdown() {
-        _debugLog()
         assert(localPlayer.isHost)
 
         var timeLeft = WKRRaceConstants.votingDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            _debugLog(timeLeft)
             timeLeft -= 1
 
             let voteTime = WKRCodable(int: WKRInt(type: .votingTime, value: timeLeft))
@@ -107,10 +102,7 @@ extension WKRManager {
     }
 
     private func prepareRaceConfig() {
-        _debugLog()
-        assert(localPlayer.isHost)
-
-        guard let raceConfig = game.createRaceConfig() else {
+        guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
             _debugLog("Failed to create race")
             return
         }
@@ -118,7 +110,6 @@ extension WKRManager {
         peerNetwork.send(object: WKRCodable(raceConfig))
         var timeLeft = WKRRaceConstants.votingPreRaceDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            _debugLog(timeLeft)
             timeLeft -= 1
 
             let voteTime = WKRCodable(int: WKRInt(type: .votingPreRaceTime, value: timeLeft))

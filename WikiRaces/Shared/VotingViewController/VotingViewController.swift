@@ -71,7 +71,6 @@ class VotingViewController: CenteredTableViewController {
     // MARK: - Helpers
 
     func votingEnded() {
-        _debugLog(nil)
         isShowingVoteCountdown = false
         descriptionLabel.text = "VOTING CLOSES IN 0 S"
         tableView.isUserInteractionEnabled = false
@@ -81,9 +80,9 @@ class VotingViewController: CenteredTableViewController {
     }
 
     func finalPageSelected(_ page: WKRPage) {
-        _debugLog(page)
-
-        guard let votingObject = voteInfo, let index = votingObject.index(of: page) else { fatalError() }
+        guard let votingObject = voteInfo, let index = votingObject.index(of: page) else {
+            fatalError()
+        }
 
         UIView.animate(withDuration: 1.5) {
             for i in 0...votingObject.pageCount where i != index {

@@ -13,6 +13,7 @@ extension WKRManager {
 
     internal func receivedRaw(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
+            print(localPlayer.profile.name + ": Got PreRace Config")
             _debugLog(preRaceConfig)
             game.preRaceConfig = preRaceConfig
 
@@ -23,11 +24,13 @@ extension WKRManager {
             voteInfoUpdate?(preRaceConfig.voteInfo)
             debugEntry.append(WKRDebugEntry(object: preRaceConfig, sender: player))
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
+            print(localPlayer.profile.name + ": Got Race Config")
             _debugLog(raceConfig)
             game.startRace(with: raceConfig)
             voteFinalPageUpdate?(raceConfig.endingPage)
             debugEntry.append(WKRDebugEntry(object: raceConfig, sender: player))
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
+            print(localPlayer.profile.name + ": Got Player (\(player.name))")
             _debugLog(playerObject)
             game.playerUpdated(playerObject)
             playersUpdate(allPlayers)
@@ -42,10 +45,12 @@ extension WKRManager {
                     if let results = hostResultsInfo {
                         peerNetwork.send(object: WKRCodable(results))
                     }
+                    peerNetwork.send(object: WKRCodable(enum: gameState))
                 }
             }
             debugEntry.append(WKRDebugEntry(object: playerObject, sender: player))
         } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
+            print(localPlayer.profile.name + ": Got Results")
             _debugLog(resultsInfo)
             game.finishedRace()
             hostResultsInfo = resultsInfo
@@ -53,11 +58,12 @@ extension WKRManager {
 
             if localPlayer.state.isRacing {
                 localPlayer.state = .forcedEnd
-                peerNetwork.send(object: WKRCodable(localPlayer))
+                peerNetwork.send(object: WKRCodable(enum: localPlayer.state))
             }
 
             debugEntry.append(WKRDebugEntry(object: resultsInfo, sender: player))
         } else if let pageVote = object.typeOf(WKRPage.self) {
+            print(localPlayer.profile.name + ": Got Vote")
             if localPlayer.isHost {
                 game.player(player, votedFor: pageVote)
                 sendPreRaceConfig()
@@ -121,9 +127,6 @@ extension WKRManager {
                 fetchPreRaceConfig()
             }
         } else if state == .race, let raceConfig = game.raceConfig {
-            let state = WKRPlayerState.racing
-            peerNetwork.send(object: WKRCodable(enum: state))
-
             localPlayer.startedNewRace(on: raceConfig.startingPage)
             peerNetwork.send(object: WKRCodable(localPlayer))
         } else if state == .hostResults {

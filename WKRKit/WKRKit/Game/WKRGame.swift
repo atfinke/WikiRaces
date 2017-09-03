@@ -44,7 +44,6 @@ public class WKRGame {
     // MARK: - Race Config
 
     internal func startRace(with config: WKRRaceConfig) {
-        _debugLog(config)
         raceConfig = config
         activeRace = WKRActiveRace(config: config)
         preRaceConfig = nil

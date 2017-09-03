@@ -24,7 +24,6 @@ public struct WKRPreRaceConfig: Codable {
     // MARK: - Creation
 
     internal func raceConfig() -> WKRRaceConfig? {
-        _debugLog()
         guard let finalPage = voteInfo.selectFinalPage() else {
             _debugLog("Failed to get final article")
             return nil
@@ -34,7 +33,6 @@ public struct WKRPreRaceConfig: Codable {
 
     //swiftlint:disable:next function_body_length
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        _debugLog()
         guard let bundle = WKRKitConstants.bundle,
             let url = bundle.url(forResource: WKRKitConstants.articlesPlistName, withExtension: "plist"),
             let arrayFromURL = NSArray(contentsOf: url), let array = arrayFromURL as? [String] else {

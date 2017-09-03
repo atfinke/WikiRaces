@@ -27,8 +27,7 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        wikiDebugLog(indexPath)
-        guard let lastIndexPath = tableView.indexPathForSelectedRow else {
+        guard let lastIndexPath = tableView.indexPathForSelectedRow, lastIndexPath != indexPath else {
             return indexPath
         }
         if lastIndexPath == indexPath {
@@ -38,11 +37,10 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        wikiDebugLog(indexPath)
-        if let vote = voteInfo?.page(for: indexPath.row) {
-            wikiDebugLog(vote)
-            playerVoted?(vote.page)
+        guard let vote = voteInfo?.page(for: indexPath.row) else {
+            return
         }
+        playerVoted?(vote.page)
     }
 
 }

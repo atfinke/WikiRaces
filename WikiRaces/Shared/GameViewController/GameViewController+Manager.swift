@@ -60,7 +60,10 @@ extension GameViewController {
     }
 
     private func transition(to state: WKRGameState) {
-        _debugLog(state)
+        guard state != gameState else {
+            return
+        }
+        gameState = state
 
         func dismissActiveController(completion: (() -> Void)?) {
             if let viewController = activeViewController {
@@ -70,7 +73,6 @@ extension GameViewController {
                 }
 
                 controllerToDismiss.dismiss(animated: true, completion: {
-                    _debugLog(nil)
                     self.activeViewController = nil
                     completion?()
                     return

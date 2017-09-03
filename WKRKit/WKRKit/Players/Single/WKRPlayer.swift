@@ -38,18 +38,15 @@ public class WKRPlayer: Codable, Hashable {
     }
 
     func startedNewRace(on page: WKRPage) {
-        _debugLog(page)
         state = .racing
         raceHistory = WKRHistory(firstPage: page)
     }
 
     func viewed(page: WKRPage, linkHere: Bool) {
-        _debugLog(page)
         raceHistory?.append(page, linkHere: linkHere)
     }
 
     func finishedViewingLastPage() {
-        _debugLog()
         raceHistory?.finishedViewingLastPage()
     }
 
