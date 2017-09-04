@@ -13,41 +13,40 @@ import WKRUIKit
 class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
-    @IBAction func quitBarButtonItemPressed(_ sender: Any) {
-    }
 
     var isShowingVoteCountdown = true
-    var quitButtonPressed: ((UIViewController) -> Void)?
     var playerVoted: ((WKRPage) -> Void)?
+    var quitAlertController: UIAlertController?
 
     var voteInfo: WKRVoteInfo? {
         didSet {
+            let selectedPath = tableView.indexPathForSelectedRow
+            tableView.reloadData()
+            tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
             if self.tableView.alpha != 1.0 {
                 UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
                     self.tableView.alpha = 1.0
                 })
             }
-            let selectedPath = tableView.indexPathForSelectedRow
-            tableView.reloadData()
-            tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
         }
     }
+
     var voteTimeRemaing = 100 {
         didSet {
             if isShowingVoteCountdown {
+                descriptionLabel.text = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
                 if voteTimeRemaing == 0 {
                     votingEnded()
                 } else {
                     tableView.isUserInteractionEnabled = true
-                    descriptionLabel.text = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
                 }
             } else {
+                descriptionLabel.text = "RACE STARTS IN " + voteTimeRemaing.description + " S"
                 if descriptionLabel.alpha != 1.0 {
                     UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
                         self.descriptionLabel.alpha = 1.0
                     })
                 }
-                descriptionLabel.text = "RACE STARTS IN " + voteTimeRemaing.description + " S"
             }
         }
     }
@@ -67,11 +66,17 @@ class VotingViewController: CenteredTableViewController {
         tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
+    // MARK: = Actions
+
+    @IBAction func quitButtonPressed(_ sender: Any) {
+        guard let alertController = quitAlertController else { fatalError() }
+        present(alertController, animated: true, completion: nil)
+    }
+
     // MARK: - Helpers
 
     func votingEnded() {
         isShowingVoteCountdown = false
-        descriptionLabel.text = "VOTING CLOSES IN 0 S"
         tableView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5) {
             self.descriptionLabel.alpha = 0.0

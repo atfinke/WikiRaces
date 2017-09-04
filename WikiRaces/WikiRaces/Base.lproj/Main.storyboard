@@ -136,7 +136,7 @@
                     <navigationItem key="navigationItem" id="M6O-wg-txp">
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="GqT-4H-giZ">
                             <connections>
-                                <action selector="quitBarButtonItemPressed:" destination="VyK-N1-Rm3" id="w2p-oL-v8N"/>
+                                <action selector="quitButtonPressed:" destination="VyK-N1-Rm3" id="479-PR-0xv"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -178,7 +178,7 @@
                     <navigationItem key="navigationItem" id="jFv-d4-tHl">
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="CRx-lN-0I0">
                             <connections>
-                                <action selector="quitBarButtonItemPressed:" destination="55U-JC-03Q" id="tVL-Z3-ZoG"/>
+                                <action selector="quitButtonPressed:" destination="55U-JC-03Q" id="HnS-z7-lvi"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -225,7 +225,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="6kY-QH-M2w">
                             <connections>
-                                <action selector="quitBarButtonItemPressed:" destination="s0x-IM-dO9" id="cUC-fa-Oq0"/>
+                                <action selector="quitButtonPressed:" destination="s0x-IM-dO9" id="qrf-Ya-BvA"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -321,18 +321,18 @@
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="43D-4O-BQn" id="BWp-gR-Vtt">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ANp-nN-6qW">
-                                            <rect key="frame" x="20" y="12" width="33.5" height="20"/>
+                                            <rect key="frame" x="20.000000000000004" y="11.999999999999998" width="33.333333333333336" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Mjt-BM-2HT">
-                                            <rect key="frame" x="355" y="12" width="44" height="20"/>
+                                            <rect key="frame" x="355" y="11.999999999999998" width="44" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

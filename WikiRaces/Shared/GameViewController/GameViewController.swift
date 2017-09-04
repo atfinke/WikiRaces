@@ -109,22 +109,32 @@ class GameViewController: UIViewController {
     }
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        let alertController = UIAlertController(title: "Leave The Match?", message: "Are you sure you want to quit? You will be disconnected from the match and returned to the menu. Press the forfeit button to give up on the round but stay in the match.", preferredStyle: .alert)
+        let alertController = quitAlertController(raceStarted: true)
+        present(alertController, animated: true, completion: nil)
+    }
 
-        let cancelAction = UIAlertAction(title: "Resume", style: .cancel, handler: nil)
+    func quitAlertController(raceStarted: Bool) -> UIAlertController {
+        var message = "Are you sure you want to quit? You will be disconnected from the match and returned to the menu."
+        if raceStarted {
+            message += " Press the forfeit button to give up on the race but stay in the match."
+        }
+
+        let alertController = UIAlertController(title: "Leave The Match?", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
 
-        let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .default) { _ in
-            self.manager.player(.forfeited)
+        if raceStarted {
+            let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) { _ in
+                self.manager.player(.forfeited)
+            }
+            alertController.addAction(forfeitAction)
         }
-        alertController.addAction(forfeitAction)
-
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
             self.manager.player(.quit)
+            // TODO: Back to menu
         }
         alertController.addAction(quitAction)
-
-        present(alertController, animated: true, completion: nil)
+        return alertController
     }
     //swiftlint:enable line_length
 

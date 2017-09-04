@@ -38,17 +38,11 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.didFinish = {
-                DispatchQueue.main.async {
-                    self.lobbyViewController?.dismiss(animated: true) {
-                        self.lobbyViewController = nil
-                    }
-                }
-            }
-
             destination.startButtonPressed = {
                 self.manager.player(.startedGame)
-                destination.didFinish?()
+                self.lobbyViewController?.dismiss(animated: true) {
+                    self.lobbyViewController = nil
+                }
             }
 
             destination.addPlayersButtonPressed = { viewController in
@@ -57,6 +51,8 @@ extension GameViewController {
 
             destination.isPlayerHost = isPlayerHost
             destination.isPreMatch = manager.gameState == .preMatch
+
+            destination.quitAlertController = quitAlertController(raceStarted: false)
 
             self.lobbyViewController = destination
         case .showVoting:
@@ -69,6 +65,8 @@ extension GameViewController {
             }
 
             destination.voteInfo = manager.voteInfo
+            destination.quitAlertController = quitAlertController(raceStarted: false)
+
             self.votingViewController = destination
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {
@@ -86,12 +84,9 @@ extension GameViewController {
             destination.state = manager.gameState
             destination.resultsInfo = manager.hostResultsInfo
             destination.isPlayerHost = isPlayerHost
-            self.resultsViewController = destination
+            destination.quitAlertController = quitAlertController(raceStarted: false)
 
-            #if MULTIWINDOWDEBUG
-                //swiftlint:disable:next identifier_name
-                destination.playerName = _playerName
-            #endif
+            self.resultsViewController = destination
         case .showHelp:
             guard let destination = navigationController.rootViewController as? HelpViewController else {
                 fatalError()

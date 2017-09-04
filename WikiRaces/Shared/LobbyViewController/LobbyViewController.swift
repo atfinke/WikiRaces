@@ -13,7 +13,8 @@ class LobbyViewController: UIViewController {
 
     // MARK: - Properties
 
-    var didFinish: (() -> Void)?
+    var quitAlertController: UIAlertController?
+
     var startButtonPressed: (() -> Void)?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
@@ -21,7 +22,7 @@ class LobbyViewController: UIViewController {
     let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
     let playerCellReuseIdentifier = "playerCell"
-    let footerCellReuseIdentifier = "disclaimerCell"
+    let footerCellReuseIdentifier = "inviteCell"
 
     var isPlayerHost = false
     var isPreMatch = false
@@ -58,13 +59,11 @@ class LobbyViewController: UIViewController {
         }
     }
 
-    // MARK: - Button Pressed
-    @IBAction func quitBarButtonItemPressed(_ sender: Any) {
-
-    }
-
-    @IBAction func doneButtonPressed() {
-        didFinish?()
+    // MARK: - Actions
+    
+    @IBAction func quitButtonPressed(_ sender: Any) {
+        guard let alertController = quitAlertController else { fatalError() }
+        present(alertController, animated: true, completion: nil)
     }
 
     @objc func startRaceButtonPressed() {

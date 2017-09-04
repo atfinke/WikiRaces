@@ -11,7 +11,7 @@ import Foundation
 public struct WKRResultsInfo: Codable {
 
     // MARK: - Properties
-    public let isFinal: Bool
+
     public var playerCount: Int {
         return players.count
     }
@@ -21,13 +21,10 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: Initialization
 
-    init(isFinal: Bool, players: [WKRPlayer], points: [WKRPlayerProfile: Int]) {
+    init(players: [WKRPlayer], points: [WKRPlayerProfile: Int]) {
         self.players = players
         self.points = points
-
-        self.isFinal = isFinal
         self.players = sortedPlayers()
-
     }
 
     // MARK: - Player Order

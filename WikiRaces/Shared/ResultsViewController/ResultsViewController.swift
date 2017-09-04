@@ -14,7 +14,6 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    var playerName = ""
     var isPlayerHost = false {
         didSet {
             if isPlayerHost {
@@ -38,13 +37,17 @@ class ResultsViewController: CenteredTableViewController {
                     dismiss(animated: true, completion: nil)
                 }
 
+                guard let cells = tableView.visibleCells as? [ResultsTableViewCell] else {
+                    return
+                }
+
                 UIView.animate(withDuration: 0.5, animations: {
-                    self.tableView.alpha = 0.0
+                    cells.forEach { $0.detailLabel.alpha = 0.0 }
                     self.descriptionLabel.alpha = 0.0
                 }, completion: { _ in
                     self.tableView.reloadData()
                     UIView.animate(withDuration: 0.5) {
-                        self.tableView.alpha = 1.0
+                        cells.forEach { $0.detailLabel.alpha = 1.0 }
                     }
                 })
             }
@@ -73,12 +76,10 @@ class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    let footerCellReuseIdentifier = "disclaimerCell"
-
     private var historyViewController: HistoryViewController?
     @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
 
-    var quitButtonPressed: ((UIViewController) -> Void)?
+    var quitAlertController: UIAlertController?
     var readyButtonPressed: (() -> Void)?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
@@ -99,8 +100,9 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Actions
 
-    @IBAction func quitBarButtonItemPressed(_ sender: Any) {
-        quitButtonPressed?(self)
+    @IBAction func quitButtonPressed(_ sender: Any) {
+        guard let alertController = quitAlertController else { fatalError() }
+        present(alertController, animated: true, completion: nil)
     }
 
     @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
