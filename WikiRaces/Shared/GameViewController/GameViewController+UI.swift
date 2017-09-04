@@ -15,7 +15,9 @@ extension GameViewController {
 
     func setupInterface() {
         guard let navigationController = navigationController,
-            let navigationView = navigationController.view else { fatalError() }
+            let navigationView = navigationController.view else {
+                fatalError()
+        }
 
         navigationItem.hidesBackButton = true
         navigationController.hidesBarsOnSwipe = true

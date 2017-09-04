@@ -60,7 +60,7 @@ class LobbyViewController: UIViewController {
     }
 
     // MARK: - Actions
-    
+
     @IBAction func quitButtonPressed(_ sender: Any) {
         guard let alertController = quitAlertController else { fatalError() }
         present(alertController, animated: true, completion: nil)

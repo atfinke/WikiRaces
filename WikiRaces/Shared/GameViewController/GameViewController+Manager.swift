@@ -57,9 +57,7 @@ extension GameViewController {
     }
 
     private func transition(to state: WKRGameState) {
-        guard state != gameState else {
-            return
-        }
+        guard state != gameState else { return }
         gameState = state
 
         func dismissActiveController(completion: (() -> Void)?) {

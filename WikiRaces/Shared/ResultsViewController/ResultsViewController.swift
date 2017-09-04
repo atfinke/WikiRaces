@@ -14,6 +14,13 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
+    var quitAlertController: UIAlertController?
+    private var historyViewController: HistoryViewController?
+
+    var readyButtonPressed: (() -> Void)?
+    var addPlayersButtonPressed: ((UIViewController) -> Void)?
+    @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
+
     var isPlayerHost = false {
         didSet {
             if isPlayerHost {
@@ -33,7 +40,8 @@ class ResultsViewController: CenteredTableViewController {
             } else {
                 title = "STANDINGS"
                 tableView.isUserInteractionEnabled = false
-                if historyViewController != nil {
+                if let activeViewController = presentedViewController,
+                    type(of: activeViewController) != UIAlertController.self {
                     dismiss(animated: true, completion: nil)
                 }
 
@@ -56,7 +64,7 @@ class ResultsViewController: CenteredTableViewController {
 
     var readyStates: WKRReadyStates? {
         didSet {
-            if state != .points {
+            if state == .hostResults {
                 tableView.reloadData()
             }
         }
@@ -72,16 +80,9 @@ class ResultsViewController: CenteredTableViewController {
     var timeRemaining: Int = 100 {
         didSet {
             tableView.isUserInteractionEnabled = true
-            descriptionLabel.text = "VOTING STARTS IN " + timeRemaining.description + " S"
+            descriptionLabel.text = "NEXT RACE STARTS IN " + timeRemaining.description + " S"
         }
     }
-
-    private var historyViewController: HistoryViewController?
-    @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
-
-    var quitAlertController: UIAlertController?
-    var readyButtonPressed: (() -> Void)?
-    var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
     // MARK: - View Life Cycle
 
