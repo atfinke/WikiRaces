@@ -49,9 +49,9 @@ class CenteredTableViewController: UIViewController {
     private func setupInterface() {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
+        tableView.estimatedRowHeight = 0
         tableView.isUserInteractionEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.estimatedRowHeight = 0
 
         visualEffectView.contentView.addSubview(tableView)
         tableView.allowsSelection = true
@@ -68,6 +68,11 @@ class CenteredTableViewController: UIViewController {
 
         let fakeWidth = tableView.widthAnchor.constraint(equalToConstant: 500)
         fakeWidth.priority = UILayoutPriority.defaultLow
+
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.view.backgroundColor = .clear
 
         let constraints: [NSLayoutConstraint] = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -117,6 +122,7 @@ class CenteredTableViewController: UIViewController {
         return bottomOverlayView
     }
 
+    @objc func overlayButtonPressed() {}
 
     func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
         tableView.delegate = controller
