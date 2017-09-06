@@ -22,6 +22,8 @@ class MenuViewController: UIViewController {
     let bottomView = UIView()
 
     let createButton = WKRUIButton()
+    let joinButton = WKRUIButton()
+
     let puzzleView = UIScrollView()
 
     var puzzleTimer: Timer?

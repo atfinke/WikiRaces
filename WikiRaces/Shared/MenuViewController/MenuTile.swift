@@ -32,13 +32,13 @@ class MenuTile: UIView {
                                                        font: titleLabelFont(),
                                                        textColor: UIColor.wkrTextColor)
 
-        titleLabel.textAlignment = .center
+        //titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 2
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
 
         valueLabel.text = MenuTile.numberFormatter.string(from: NSNumber(value: value))
-        valueLabel.textAlignment = .center
+        //valueLabel.textAlignment = .center
         valueLabel.textColor = UIColor.wkrTextColor
         valueLabel.font = valueLabelFont()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -46,12 +46,12 @@ class MenuTile: UIView {
 
         let constraints = [
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
-            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             titleLabel.heightAnchor.constraint(equalToConstant: 50),
 
             valueLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
-            valueLabel.leftAnchor.constraint(equalTo: leftAnchor),
+            valueLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 15),
             valueLabel.rightAnchor.constraint(equalTo: rightAnchor),
             valueLabel.heightAnchor.constraint(equalToConstant: 80)
         ]

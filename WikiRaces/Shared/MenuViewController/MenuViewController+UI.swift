@@ -37,7 +37,16 @@ extension MenuViewController {
             topView.leftAnchor.constraint(equalTo: view.leftAnchor),
             topView.rightAnchor.constraint(equalTo: view.rightAnchor),
 
-            createButton.bottomAnchor.constraint(equalTo: labels.descriptionLabel.bottomAnchor, constant: 70.0),
+            joinButton.bottomAnchor.constraint(equalTo: labels.descriptionLabel.bottomAnchor, constant: 90.0),
+            createButton.topAnchor.constraint(equalTo: joinButton.bottomAnchor, constant: 20.0),
+
+            joinButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            joinButton.widthAnchor.constraint(equalToConstant: 175),
+            joinButton.heightAnchor.constraint(equalToConstant: 40),
+
+            createButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            createButton.widthAnchor.constraint(equalToConstant: 205),
+            createButton.heightAnchor.constraint(equalToConstant: 40),
 
             bottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
             bottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
@@ -45,30 +54,24 @@ extension MenuViewController {
             bottomViewAnchorConstraint!
         ]
         NSLayoutConstraint.activate(constraints)
-
-        // MPC Debug
-        view.bringSubview(toFront: view.viewWithTag(1)!)
-        view.bringSubview(toFront: view.viewWithTag(2)!)
     }
 
     func setupButton() {
+        joinButton.title = "Join race"
+        joinButton.translatesAutoresizingMaskIntoConstraints = false
+        joinButton.addTarget(self, action: #selector(advertise(_:)), for: .touchUpInside)
+        topView.addSubview(joinButton)
+
         createButton.title = "Create race"
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.addTarget(self, action: #selector(createButtonPressed), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(browse(_:)), for: .touchUpInside)
         topView.addSubview(createButton)
 
-        let constraints = [
-            createButton.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
-            createButton.widthAnchor.constraint(equalToConstant: 250),
-            createButton.heightAnchor.constraint(equalToConstant: 40)
-        ]
-        NSLayoutConstraint.activate(constraints)
     }
 
     func setupLabels() -> (titleLabel: UILabel, descriptionLabel: UILabel) {
         let label = UILabel()
         label.text = "WikiRaces"
-        label.textAlignment = .center
         label.textColor = UIColor.wkrTextColor
         label.font = titleLabelFont()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -77,32 +80,20 @@ extension MenuViewController {
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Conquer the encyclopedia\nof everything."
         descriptionLabel.numberOfLines = 2
-        descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = UIColor.wkrTextColor
         descriptionLabel.font = descriptionLabelFont()
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.clipsToBounds = true
         topView.addSubview(descriptionLabel)
 
-        let centerYConstraint = NSLayoutConstraint(item: label,
-                                                   attribute: .centerY,
-                                                   relatedBy: .equal,
-                                                   toItem: view,
-                                                   attribute: .centerY,
-                                                   multiplier: 0.35,
-                                                   constant: 0.0)
-
-        let constants = descriptionLabelConstants()
         let contraints = [
-            centerYConstraint,
-            label.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
+            label.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
             label.widthAnchor.constraint(equalTo: topView.widthAnchor),
-            label.heightAnchor.constraint(equalToConstant: 50),
+            label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 0),
 
-            descriptionLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: label.bottomAnchor, constant: constants.topAnchorConstant),
+            descriptionLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
             descriptionLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
-            descriptionLabel.heightAnchor.constraint(equalToConstant: constants.heightConstant)
+            descriptionLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -280)
         ]
         NSLayoutConstraint.activate(contraints)
 
@@ -132,15 +123,15 @@ extension MenuViewController {
             leftThinLine.leftAnchor.constraint(equalTo: middleMenuTitle.leftAnchor),
             leftThinLine.topAnchor.constraint(equalTo: middleMenuTitle.topAnchor, constant: 30),
             leftThinLine.bottomAnchor.constraint(equalTo: middleMenuTitle.bottomAnchor, constant: -25),
-            leftThinLine.widthAnchor.constraint(equalToConstant: 1.5),
+            leftThinLine.widthAnchor.constraint(equalToConstant: 2),
 
             rightThinLine.rightAnchor.constraint(equalTo: middleMenuTitle.rightAnchor),
             rightThinLine.topAnchor.constraint(equalTo: middleMenuTitle.topAnchor, constant: 30),
             rightThinLine.bottomAnchor.constraint(equalTo: middleMenuTitle.bottomAnchor, constant: -25),
-            rightThinLine.widthAnchor.constraint(equalToConstant: 1.5),
+            rightThinLine.widthAnchor.constraint(equalToConstant: 2),
 
-            statsStackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
-            statsStackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
+            statsStackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15),
+            statsStackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15),
             statsStackView.topAnchor.constraint(equalTo: bottomView.topAnchor),
             statsStackView.heightAnchor.constraint(equalToConstant: 160)
         ]
