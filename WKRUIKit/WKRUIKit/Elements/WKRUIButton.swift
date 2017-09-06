@@ -12,7 +12,11 @@ public class WKRUIButton: UIButton {
 
     // MARK: - Properties
 
-    private let style: WKRButtonStyle
+    public var style: WKRUIButtonStyle {
+        didSet {
+            title = attributedTitle(for: .normal)?.string ?? ""
+        }
+    }
 
     public var title: String = "" {
         didSet {
@@ -37,7 +41,7 @@ public class WKRUIButton: UIButton {
 
     // MARK: - Initialization
 
-    public init(style: WKRButtonStyle = .normal) {
+    public init(style: WKRUIButtonStyle = .normal) {
         self.style = style
         super.init(frame: .zero)
 

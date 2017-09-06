@@ -13,6 +13,54 @@ extension MenuViewController {
 
     // MARK: - Interface
 
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        print(size.height)
+        bottomViewAnchorConstraint.constant = 0
+        if size.height > 1200 {
+            titleLabelConstraint.constant = 400
+        } else if size.height > 1000 {
+            titleLabelConstraint.constant = 250
+        } else if size.height > 800 {
+            titleLabelConstraint.constant = 120
+        } else if size.height > 730 {
+            titleLabelConstraint.constant = 100
+        } else if size.height > 650 {
+            titleLabelConstraint.constant = 90
+        } else if size.height > 0 {
+            titleLabelConstraint.constant = 80
+            bottomViewAnchorConstraint.constant = 75
+        }
+
+        let buttonStyle: WKRUIButtonStyle
+        let buttonWidth: CGFloat
+        let buttonHeight: CGFloat
+        if size.width < 370 {
+            buttonStyle = .normal
+            buttonWidth = 175
+            buttonHeight = 40
+        } else {
+            buttonStyle = .large
+            buttonWidth = 195
+            buttonHeight = 50
+        }
+
+        titleLabel.font = titleLabelFont(for: size.width)
+        subtitleLabel.font = descriptionLabelFont(for: size.width)
+
+        createButton.style = buttonStyle
+        joinButton.style = buttonStyle
+
+        createButtonWidthConstraint.constant = buttonWidth + 30
+        createButtonHeightConstraint.constant = buttonHeight
+
+        joinButtonWidthConstraint.constant = buttonWidth
+        joinButtonHeightConstraint.constant = buttonHeight
+
+        coordinator.animate(alongsideTransition: { _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+
     func setupInterface() {
         UIApplication.shared.keyWindow?.backgroundColor = UIColor.white
 
@@ -23,40 +71,68 @@ extension MenuViewController {
         bottomView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bottomView)
+
+        topViewLeftConstraint = topView.leftAnchor.constraint(equalTo: view.leftAnchor)
         bottomViewAnchorConstraint = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 250)
 
-        setupButton()
-        setupPuzzleView()
-        setupStackView()
+        setupTopView()
+        setupBottomView()
 
-        let labels = setupLabels()
 
         let constraints = [
             topView.topAnchor.constraint(equalTo: view.topAnchor),
             topView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
-            topView.leftAnchor.constraint(equalTo: view.leftAnchor),
             topView.rightAnchor.constraint(equalTo: view.rightAnchor),
-
-            joinButton.bottomAnchor.constraint(equalTo: labels.descriptionLabel.bottomAnchor, constant: 90.0),
-            createButton.topAnchor.constraint(equalTo: joinButton.bottomAnchor, constant: 20.0),
-
-            joinButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            joinButton.widthAnchor.constraint(equalToConstant: 175),
-            joinButton.heightAnchor.constraint(equalToConstant: 40),
-
-            createButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
-            createButton.widthAnchor.constraint(equalToConstant: 205),
-            createButton.heightAnchor.constraint(equalToConstant: 40),
 
             bottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
             bottomView.rightAnchor.constraint(equalTo: view.rightAnchor),
             bottomView.heightAnchor.constraint(equalToConstant: 250),
+
+            topViewLeftConstraint!,
             bottomViewAnchorConstraint!
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
-    func setupButton() {
+    // MARK: - Top View
+
+    private func setupTopView() {
+        setupLabels()
+        setupButtons()
+
+        titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: 200)
+
+        createButtonWidthConstraint = createButton.widthAnchor.constraint(equalToConstant: 215)
+        createButtonHeightConstraint = createButton.heightAnchor.constraint(equalToConstant: 45)
+        joinButtonWidthConstraint = joinButton.widthAnchor.constraint(equalToConstant: 185)
+        joinButtonHeightConstraint = joinButton.heightAnchor.constraint(equalToConstant: 45)
+
+        let constraints = [
+            titleLabelConstraint!,
+
+            joinButtonWidthConstraint!,
+            joinButtonHeightConstraint!,
+
+            createButtonWidthConstraint!,
+            createButtonHeightConstraint!,
+
+            titleLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
+            titleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
+
+            subtitleLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
+            subtitleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+
+            joinButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40.0),
+            joinButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+
+            createButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30),
+            createButton.topAnchor.constraint(equalTo: joinButton.bottomAnchor, constant: 20.0)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+
+    private func setupButtons() {
         joinButton.title = "Join race"
         joinButton.translatesAutoresizingMaskIntoConstraints = false
         joinButton.addTarget(self, action: #selector(advertise(_:)), for: .touchUpInside)
@@ -66,41 +142,43 @@ extension MenuViewController {
         createButton.translatesAutoresizingMaskIntoConstraints = false
         createButton.addTarget(self, action: #selector(browse(_:)), for: .touchUpInside)
         topView.addSubview(createButton)
-
     }
 
-    func setupLabels() -> (titleLabel: UILabel, descriptionLabel: UILabel) {
-        let label = UILabel()
-        label.text = "WikiRaces"
-        label.textColor = UIColor.wkrTextColor
-        label.font = titleLabelFont()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        topView.addSubview(label)
+    private func setupLabels() {
+        titleLabel.text = "WikiRaces"
+        titleLabel.textColor = UIColor.wkrTextColor
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        topView.addSubview(titleLabel)
 
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = "Conquer the encyclopedia\nof everything."
-        descriptionLabel.numberOfLines = 2
-        descriptionLabel.textColor = UIColor.wkrTextColor
-        descriptionLabel.font = descriptionLabelFont()
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.clipsToBounds = true
-        topView.addSubview(descriptionLabel)
+        subtitleLabel.text = "Conquer the encyclopedia\nof everything."
+        subtitleLabel.numberOfLines = 2
+        subtitleLabel.textColor = UIColor.wkrTextColor
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.clipsToBounds = true
+        topView.addSubview(subtitleLabel)
+    }
 
-        let contraints = [
-            label.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
-            label.widthAnchor.constraint(equalTo: topView.widthAnchor),
-            label.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: 0),
+    // MARK: - Bottom View
 
-            descriptionLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
-            descriptionLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: topView.bottomAnchor, constant: -280)
+    private func setupBottomView() {
+        let stackView = setupStatsStackView()
+        let puzzleView = setupPuzzleView()
+
+        let constraints = [
+            puzzleView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
+            puzzleView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
+            puzzleView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            puzzleView.heightAnchor.constraint(equalToConstant: 75),
+
+            stackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15),
+            stackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15),
+            stackView.topAnchor.constraint(equalTo: bottomView.topAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 160)
         ]
-        NSLayoutConstraint.activate(contraints)
-
-        return (label, descriptionLabel)
+        NSLayoutConstraint.activate(constraints)
     }
 
-    func setupStackView() {
+    private func setupStatsStackView() -> UIStackView {
         let statsStackView = UIStackView()
         statsStackView.distribution = .fillEqually
         statsStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,17 +206,14 @@ extension MenuViewController {
             rightThinLine.rightAnchor.constraint(equalTo: middleMenuTitle.rightAnchor),
             rightThinLine.topAnchor.constraint(equalTo: middleMenuTitle.topAnchor, constant: 30),
             rightThinLine.bottomAnchor.constraint(equalTo: middleMenuTitle.bottomAnchor, constant: -25),
-            rightThinLine.widthAnchor.constraint(equalToConstant: 2),
-
-            statsStackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15),
-            statsStackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15),
-            statsStackView.topAnchor.constraint(equalTo: bottomView.topAnchor),
-            statsStackView.heightAnchor.constraint(equalToConstant: 160)
+            rightThinLine.widthAnchor.constraint(equalToConstant: 2)
         ]
         NSLayoutConstraint.activate(constraints)
+
+        return statsStackView
     }
 
-    func setupPuzzleView() {
+    private func setupPuzzleView() -> UIView {
         let puzzleBackgroundView = UIView()
 
         let color = UIColor(red: 218.0/255.0, green: 218.0/255.0, blue: 218.0/255.0, alpha: 1.0)
@@ -151,17 +226,14 @@ extension MenuViewController {
         puzzleBackgroundView.addSubview(puzzleView)
 
         let constraints = [
-            puzzleBackgroundView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
-            puzzleBackgroundView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
-            puzzleBackgroundView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-            puzzleBackgroundView.heightAnchor.constraint(equalToConstant: 75),
-
             puzzleView.leftAnchor.constraint(equalTo: puzzleBackgroundView.leftAnchor),
             puzzleView.rightAnchor.constraint(equalTo: puzzleBackgroundView.rightAnchor),
             puzzleView.centerYAnchor.constraint(equalTo: puzzleBackgroundView.centerYAnchor),
             puzzleView.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(constraints)
+
+        return puzzleBackgroundView
     }
 
 }

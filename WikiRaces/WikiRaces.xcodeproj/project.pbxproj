@@ -362,9 +362,9 @@
 			isa = PBXGroup;
 			children = (
 				14C4AB381F3689A90086B77F /* MenuTile.swift */,
-				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
 				1425A7981F5DB33D00C302C0 /* Reachability.h */,
 				1425A7991F5DB33D00C302C0 /* Reachability.m */,
+				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */,
 			);

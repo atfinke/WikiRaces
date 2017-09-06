@@ -21,13 +21,24 @@ class MenuViewController: UIViewController {
     let topView = UIView()
     let bottomView = UIView()
 
+    let titleLabel = UILabel()
+    let subtitleLabel = UILabel()
+
     let createButton = WKRUIButton()
     let joinButton = WKRUIButton()
 
     let puzzleView = UIScrollView()
 
     var puzzleTimer: Timer?
+    
+    var topViewLeftConstraint: NSLayoutConstraint!
     var bottomViewAnchorConstraint: NSLayoutConstraint!
+
+    var titleLabelConstraint: NSLayoutConstraint!
+    var joinButtonWidthConstraint: NSLayoutConstraint!
+    var joinButtonHeightConstraint: NSLayoutConstraint!
+    var createButtonWidthConstraint: NSLayoutConstraint!
+    var createButtonHeightConstraint: NSLayoutConstraint!
 
     var advertiser: MCNearbyServiceAdvertiser?
 
@@ -120,29 +131,32 @@ class MenuViewController: UIViewController {
 
     // MARK: - Fonts
 
-    func titleLabelFont() -> UIFont {
-        if UIDevice.current.userInterfaceIdiom == .pad {
+    func titleLabelFont(for width: CGFloat) -> UIFont {
+        print(width)
+        print("A")
+        if width > 600 {
             return UIFont.boldSystemFont(ofSize: 55)
-        } else {
+        } else if width > 420 {
+            return UIFont.boldSystemFont(ofSize: 44)
+        } else if width > 370 {
             return UIFont.boldSystemFont(ofSize: 37)
+        } else {
+            return UIFont.boldSystemFont(ofSize: 32)
         }
     }
 
-    func descriptionLabelFont() -> UIFont {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UIFont.systemFont(ofSize: 30, weight: UIFont.Weight.medium)
+    func descriptionLabelFont(for width: CGFloat) -> UIFont {
+        if width > 600 {
+            return UIFont.systemFont(ofSize: 30, weight: .medium)
+        } else if width > 420 {
+            return UIFont.systemFont(ofSize: 25, weight: .medium)
+        } else if width > 370 {
+            return UIFont.systemFont(ofSize: 20, weight: .medium)
         } else {
-            return UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.medium)
+            return UIFont.systemFont(ofSize: 18, weight: .medium)
         }
     }
 
-    func descriptionLabelConstants() -> (topAnchorConstant: CGFloat, heightConstant: CGFloat) {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return (-20, 140)
-        } else {
-            return (0, 70)
-        }
-    }
 
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      if segue.identifier == "showConnecting", let isHost = sender as? Bool {

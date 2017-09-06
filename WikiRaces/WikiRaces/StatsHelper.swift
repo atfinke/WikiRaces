@@ -88,13 +88,8 @@ class StatsHelper {
             return
         }
 
-        print("migrating")
-
         let oldPoints = Double(UserDefaults.standard.integer(forKey: "Points"))
         let oldRaces = Double(UserDefaults.standard.integer(forKey: "Rounds"))
-
-print(oldPoints)
-        print(oldRaces)
 
         defaults.set(oldPoints, forKey: Stat.points.key)
         defaults.set(oldRaces, forKey: Stat.races.key)
@@ -130,16 +125,6 @@ print(oldPoints)
     }
 
     private func cloudSync() {
-        print("DEVICE")
-        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
-            print("\(key) = \(value)")
-        }
-        print("CLOUD")
-        for (key, value) in keyValueStore.dictionaryRepresentation {
-
-            print("\(key) = \(value)")
-        }
-
         let stats = [Stat.points, Stat.races]
         for stat in stats {
             let deviceValue = defaults.double(forKey: stat.key)
