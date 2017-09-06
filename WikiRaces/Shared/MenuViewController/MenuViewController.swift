@@ -29,6 +29,10 @@ class MenuViewController: UIViewController {
 
     let puzzleView = UIScrollView()
 
+    var leftMenuTile: MenuTile?
+    var middleMenuTile: MenuTile?
+    var rightMenuTile: MenuTile?
+
     var puzzleTimer: Timer?
     
     var topViewLeftConstraint: NSLayoutConstraint!
@@ -131,31 +135,7 @@ class MenuViewController: UIViewController {
 
     // MARK: - Fonts
 
-    func titleLabelFont(for width: CGFloat) -> UIFont {
-        print(width)
-        print("A")
-        if width > 600 {
-            return UIFont.boldSystemFont(ofSize: 55)
-        } else if width > 420 {
-            return UIFont.boldSystemFont(ofSize: 44)
-        } else if width > 370 {
-            return UIFont.boldSystemFont(ofSize: 37)
-        } else {
-            return UIFont.boldSystemFont(ofSize: 32)
-        }
-    }
 
-    func descriptionLabelFont(for width: CGFloat) -> UIFont {
-        if width > 600 {
-            return UIFont.systemFont(ofSize: 30, weight: .medium)
-        } else if width > 420 {
-            return UIFont.systemFont(ofSize: 25, weight: .medium)
-        } else if width > 370 {
-            return UIFont.systemFont(ofSize: 20, weight: .medium)
-        } else {
-            return UIFont.systemFont(ofSize: 18, weight: .medium)
-        }
-    }
 
 
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

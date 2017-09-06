@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuTile: UIView {
+class MenuTile: UIControl {
 
     // MARK: - Properties
 
@@ -22,25 +22,71 @@ class MenuTile: UIView {
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
 
+
+
+
+    var title: String? {
+        set {
+            guard let text = newValue else {
+                titleLabel.text = nil
+                return
+            }
+            titleLabel.attributedText = NSAttributedString(string: text,
+                                                           spacing: 3.0,
+                                                           font: titleLabel.font,
+                                                           textColor: UIColor.wkrTextColor)
+        }
+        get {
+            return titleLabel.attributedText?.string
+        }
+    }
+
+    var value: String? {
+        set {
+            guard let text = newValue else {
+                valueLabel.text = nil
+                return
+            }
+            valueLabel.attributedText = NSAttributedString(string: text,
+                                                           spacing: 3.0,
+                                                           font: valueLabel.font,
+                                                           textColor: UIColor.wkrTextColor)
+        }
+        get {
+            return valueLabel.attributedText?.string
+        }
+    }
+
+    override var bounds: CGRect {
+        didSet {
+            if bounds.width > 200 {
+                titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+                valueLabel.font = UIFont.systemFont(ofSize: 46)
+            } else if bounds.width > 100 {
+                titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+                valueLabel.font = UIFont.systemFont(ofSize: 38)
+            } else {
+                titleLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
+                valueLabel.font = UIFont.systemFont(ofSize: 30)
+            }
+        }
+    }
+
+
     // MARK: - Initialization
 
-    init(title: String, value: Double) {
+    init(title: String) {
         super.init(frame: .zero)
 
-        titleLabel.attributedText = NSAttributedString(string: title,
-                                                       spacing: 3.0,
-                                                       font: titleLabelFont(),
-                                                       textColor: UIColor.wkrTextColor)
-
-        //titleLabel.textAlignment = .center
+        self.title = title
+        self.value = "0"
+        
         titleLabel.numberOfLines = 2
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
 
-        valueLabel.text = MenuTile.numberFormatter.string(from: NSNumber(value: value))
-        //valueLabel.textAlignment = .center
         valueLabel.textColor = UIColor.wkrTextColor
-        valueLabel.font = valueLabelFont()
+        valueLabel.adjustsFontSizeToFitWidth = true
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(valueLabel)
 
@@ -62,26 +108,6 @@ class MenuTile: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Fonts
 
-    func titleLabelFont() -> UIFont {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UIFont.boldSystemFont(ofSize: 18)
-        } else if UIScreen.main.bounds.height > 575 {
-            return UIFont.boldSystemFont(ofSize: 14)
-        } else {
-            return UIFont.boldSystemFont(ofSize: 12)
-        }
-    }
-
-    func valueLabelFont() -> UIFont {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return UIFont.systemFont(ofSize: 46)
-        } else if UIScreen.main.bounds.height > 575 {
-            return UIFont.systemFont(ofSize: 38)
-        } else {
-            return UIFont.systemFont(ofSize: 28)
-        }
-    }
 
 }

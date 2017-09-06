@@ -13,10 +13,16 @@ extension MenuViewController {
 
     // MARK: - Interface
 
+    // By WikiRaces 4 I hope there is a better way to do this
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        print(size.height)
         bottomViewAnchorConstraint.constant = 0
-        if size.height > 1200 {
+        titleLabelConstraint.constant = size.height / 7
+
+        if size.height < 650 {
+            bottomViewAnchorConstraint.constant = 75
+        }
+
+        /*if size.height > 1200 {
             titleLabelConstraint.constant = 400
         } else if size.height > 1000 {
             titleLabelConstraint.constant = 250
@@ -29,23 +35,45 @@ extension MenuViewController {
         } else if size.height > 0 {
             titleLabelConstraint.constant = 80
             bottomViewAnchorConstraint.constant = 75
-        }
+        }*/
+
 
         let buttonStyle: WKRUIButtonStyle
         let buttonWidth: CGFloat
         let buttonHeight: CGFloat
-        if size.width < 370 {
-            buttonStyle = .normal
-            buttonWidth = 175
-            buttonHeight = 40
-        } else {
+        if size.width > 420 {
             buttonStyle = .large
             buttonWidth = 195
             buttonHeight = 50
+        } else {
+            buttonStyle = .normal
+            buttonWidth = 175
+            buttonHeight = 40
         }
 
-        titleLabel.font = titleLabelFont(for: size.width)
-        subtitleLabel.font = descriptionLabelFont(for: size.width)
+        if size.width > 600 {
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 55)
+            subtitleLabel.font = UIFont.systemFont(ofSize: 30, weight: .medium)
+        } else if size.width > 420 {
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 44)
+            subtitleLabel.font = UIFont.systemFont(ofSize: 25, weight: .medium)
+        } else if size.width > 370 {
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 37)
+            subtitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        } else {
+            titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+            subtitleLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        }
+
+        if size.width < UIScreen.main.bounds.width / 1.8 {
+            leftMenuTile?.title = "WIKI\nPOINTS"
+            middleMenuTile?.title = "AVG PER\nRACE"
+            rightMenuTile?.title = "RACES\nPLAYED"
+        } else {
+            leftMenuTile?.title = "WIKI POINTS"
+            middleMenuTile?.title = "AVG PER RACE"
+            rightMenuTile?.title = "RACES PLAYED"
+        }
 
         createButton.style = buttonStyle
         joinButton.style = buttonStyle
@@ -77,7 +105,6 @@ extension MenuViewController {
 
         setupTopView()
         setupBottomView()
-
 
         let constraints = [
             topView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -184,31 +211,35 @@ extension MenuViewController {
         statsStackView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.addSubview(statsStackView)
 
-        let leftMenuTitle = MenuTile(title: "WIKI POINTS", value: 86)
-        statsStackView.addArrangedSubview(leftMenuTitle)
+        let leftMenuTile = MenuTile(title: "WIKI POINTS")
+        statsStackView.addArrangedSubview(leftMenuTile)
 
-        let middleMenuTitle = MenuTile(title: "AVG PER RACE", value: 0.6)
-        statsStackView.addArrangedSubview(middleMenuTitle)
+        let middleMenuTile = MenuTile(title: "AVG PER RACE")
+        statsStackView.addArrangedSubview(middleMenuTile)
         let leftThinLine = WKRUIThinLineView()
-        middleMenuTitle.addSubview(leftThinLine)
+        middleMenuTile.addSubview(leftThinLine)
         let rightThinLine = WKRUIThinLineView()
-        middleMenuTitle.addSubview(rightThinLine)
+        middleMenuTile.addSubview(rightThinLine)
 
-        let rightMenuTitle = MenuTile(title: "RACES PLAYED", value: 123)
-        statsStackView.addArrangedSubview(rightMenuTitle)
+        let rightMenuTile = MenuTile(title: "RACES PLAYED")
+        statsStackView.addArrangedSubview(rightMenuTile)
 
         let constraints = [
-            leftThinLine.leftAnchor.constraint(equalTo: middleMenuTitle.leftAnchor),
-            leftThinLine.topAnchor.constraint(equalTo: middleMenuTitle.topAnchor, constant: 30),
-            leftThinLine.bottomAnchor.constraint(equalTo: middleMenuTitle.bottomAnchor, constant: -25),
+            leftThinLine.leftAnchor.constraint(equalTo: middleMenuTile.leftAnchor),
+            leftThinLine.topAnchor.constraint(equalTo: middleMenuTile.topAnchor, constant: 30),
+            leftThinLine.bottomAnchor.constraint(equalTo: middleMenuTile.bottomAnchor, constant: -25),
             leftThinLine.widthAnchor.constraint(equalToConstant: 2),
 
-            rightThinLine.rightAnchor.constraint(equalTo: middleMenuTitle.rightAnchor),
-            rightThinLine.topAnchor.constraint(equalTo: middleMenuTitle.topAnchor, constant: 30),
-            rightThinLine.bottomAnchor.constraint(equalTo: middleMenuTitle.bottomAnchor, constant: -25),
+            rightThinLine.rightAnchor.constraint(equalTo: middleMenuTile.rightAnchor),
+            rightThinLine.topAnchor.constraint(equalTo: middleMenuTile.topAnchor, constant: 30),
+            rightThinLine.bottomAnchor.constraint(equalTo: middleMenuTile.bottomAnchor, constant: -25),
             rightThinLine.widthAnchor.constraint(equalToConstant: 2)
         ]
         NSLayoutConstraint.activate(constraints)
+
+        self.leftMenuTile = leftMenuTile
+        self.middleMenuTile = middleMenuTile
+        self.rightMenuTile = rightMenuTile
 
         return statsStackView
     }

@@ -30,7 +30,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         return WKRRaceConfig(starting: startingPage, ending: finalPage)
     }
 
-    //swiftlint:disable:next function_body_length
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
         guard let bundle = WKRKitConstants.bundle,
             let url = bundle.url(forResource: WKRKitConstants.articlesPlistName, withExtension: "plist"),

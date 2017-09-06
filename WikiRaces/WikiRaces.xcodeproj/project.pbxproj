@@ -25,6 +25,7 @@
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
+		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
 		148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
@@ -191,6 +192,10 @@
 		1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CenteredTableViewController.swift; path = Shared/CenteredTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../../../WKRKit/WKRKit.xcodeproj; sourceTree = "<group>"; };
 		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../../../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = "<group>"; };
+		147593CB1F609902005DFC90 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Deliverfile; sourceTree = SOURCE_ROOT; };
+		147593CE1F609902005DFC90 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = SOURCE_ROOT; };
+		147593CF1F609902005DFC90 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
+		147593D01F609911005DFC90 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Segue.swift"; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -342,6 +347,10 @@
 		149FF88F1F362BF1000A5D96 /* WikiRacesScreenshots */ = {
 			isa = PBXGroup;
 			children = (
+				147593CB1F609902005DFC90 /* Deliverfile */,
+				147593CE1F609902005DFC90 /* Fastfile */,
+				147593CF1F609902005DFC90 /* Snapfile */,
+				147593D01F609911005DFC90 /* SnapshotHelper.swift */,
 				149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */,
 				149FF8921F362BF1000A5D96 /* Info.plist */,
 			);
@@ -767,6 +776,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */,
+				147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

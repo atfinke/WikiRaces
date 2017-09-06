@@ -61,7 +61,8 @@ Carthage/Build
 # For more information about the recommended setup visit:
 # https://docs.fastlane.tools/best-practices/source-control/#source-control
 
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
+WikiRaces/report.xml
+WikiRaces/Preview.html
+WikiRaces/screenshots
+WikiRaces/metadata
+WikiRaces/test_output
