@@ -117,9 +117,6 @@ class CenteredTableViewController: UIViewController {
         return bottomOverlayView
     }
 
-    @objc func overlayButtonPressed() {
-
-    }
 
     func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
         tableView.delegate = controller

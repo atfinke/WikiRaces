@@ -47,26 +47,17 @@ class GameViewController: UIViewController {
     // MARK: - View Controllers
 
     weak var activeViewController: UIViewController?
-    weak var votingViewController: VotingViewController? {
-        didSet {
-            if let viewController = votingViewController {
-                activeViewController = viewController
-            }
-        }
+    weak var alertController: UIAlertController? {
+        didSet { activeViewController = alertController }
     }
     weak var lobbyViewController: LobbyViewController? {
-        didSet {
-            if let viewController = lobbyViewController {
-                activeViewController = viewController
-            }
-        }
+        didSet { activeViewController = lobbyViewController }
+    }
+    weak var votingViewController: VotingViewController? {
+        didSet { activeViewController = votingViewController }
     }
     weak var resultsViewController: ResultsViewController? {
-        didSet {
-            if let viewController = resultsViewController {
-                activeViewController = viewController
-            }
-        }
+        didSet { activeViewController = resultsViewController }
     }
 
     // MARK: - View Life Cycle
@@ -106,11 +97,13 @@ class GameViewController: UIViewController {
         alertController.addAction(forfeitAction)
 
         present(alertController, animated: true, completion: nil)
+        self.alertController = alertController
     }
 
     @IBAction func quitButtonPressed(_ sender: Any) {
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
+        self.alertController = alertController
     }
 
     func quitAlertController(raceStarted: Bool) -> UIAlertController {
@@ -131,7 +124,7 @@ class GameViewController: UIViewController {
         }
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
             self.manager.player(.quit)
-            // TODO: Back to menu
+            self.navigationController?.popViewController(animated: true)
         }
         alertController.addAction(quitAction)
         return alertController

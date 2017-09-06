@@ -27,12 +27,24 @@ public struct WKRPage: Codable, Hashable, Equatable {
     /// Removes extra characters in page title ("Wikipedia - Apple Inc." -> "Apple Inc.")
     private static func formattedTitle(for title: String?) -> String? {
         guard let title = title else { return nil }
+
+        func smartCapitalize(_ title: String) -> String {
+            // I can't stand Iphone / Os X
+            if title.first == "i" {
+                return title
+            } else if title.contains("OS X") {
+                return title
+            } else {
+                return title.capitalized
+            }
+        }
         let charactersToRemove = WKRKitConstants.pageTitleCharactersToRemove
         if charactersToRemove > 0 && title.characters.count > charactersToRemove {
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
-            return title[..<index].capitalized
+            let clippedTitle = title[..<index].capitalized
+            return smartCapitalize(clippedTitle)
         } else {
-            return title.replacingOccurrences(of: WKRKitConstants.pageTitleStringToReplace, with: "").capitalized
+            return smartCapitalize(title.replacingOccurrences(of: WKRKitConstants.pageTitleStringToReplace, with: ""))
         }
     }
 

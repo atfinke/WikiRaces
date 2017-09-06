@@ -20,6 +20,8 @@
 		1410DB4E1F4F55BB00F5CAD7 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
 		1410DB541F4F55BF00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1425A79A1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
+		1425A79B1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
@@ -180,6 +182,8 @@
 /* Begin PBXFileReference section */
 		140C580C1F56A0FE00DFA1E6 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1425A7981F5DB33D00C302C0 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		1425A7991F5DB33D00C302C0 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		143A8BBB1F58746800580AA2 /* StatsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		144280EC1F5883AB002D977F /* WikiRaces.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WikiRaces.entitlements; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
@@ -359,6 +363,8 @@
 			children = (
 				14C4AB381F3689A90086B77F /* MenuTile.swift */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
+				1425A7981F5DB33D00C302C0 /* Reachability.h */,
+				1425A7991F5DB33D00C302C0 /* Reachability.m */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */,
 			);
@@ -691,6 +697,7 @@
 				14C4AB711F368A3C0086B77F /* LobbyViewController+TableView.swift in Sources */,
 				143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				1425A79A1F5DB33D00C302C0 /* Reachability.m in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
@@ -732,6 +739,7 @@
 				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				140C580F1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
+				1425A79B1F5DB33D00C302C0 /* Reachability.m in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB471F3689BE0086B77F /* MenuViewController+MPC.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,

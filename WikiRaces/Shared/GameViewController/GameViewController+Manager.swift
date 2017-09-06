@@ -60,47 +60,48 @@ extension GameViewController {
         guard state != gameState else { return }
         gameState = state
 
-        func dismissActiveController(completion: (() -> Void)?) {
-            if let viewController = activeViewController {
-                var controllerToDismiss = viewController
-                if let presentingViewController = viewController.presentingViewController {
-                    controllerToDismiss = presentingViewController
-                }
+        func resetActiveControllers() {
+            alertController = nil
+            lobbyViewController = nil
+            votingViewController = nil
+            resultsViewController = nil
+        }
 
-                controllerToDismiss.dismiss(animated: true, completion: {
-                    self.activeViewController = nil
+        func dismissActiveController(completion: (() -> Void)?) {
+            if let activeViewController = activeViewController, activeViewController.view.window != nil {
+                let controller: UIViewController?
+                if activeViewController.presentingViewController == self {
+                    controller = activeViewController
+                } else {
+                    controller = activeViewController.presentingViewController
+                }
+                controller?.dismiss(animated: true, completion: {
+                    resetActiveControllers()
                     completion?()
                     return
                 })
             } else {
+                resetActiveControllers()
                 completion?()
             }
-            votingViewController = nil
-            lobbyViewController = nil
-            resultsViewController = nil
         }
 
         switch state {
         case .voting:
-            self.title = "VOTING"
+            self.title = ""
             dismissActiveController(completion: {
                 self.performSegue(.showVoting)
             })
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .results, .hostResults, .points:
-            if let controller = activeViewController, controller != resultsViewController {
+            if activeViewController != resultsViewController || resultsViewController == nil {
                 dismissActiveController(completion: {
                     self.performSegue(.showResults)
                     UIView.animate(withDuration: 0.5, delay: 2.5, options: .beginFromCurrentState, animations: {
                         self.webView.alpha = 0.0
                     }, completion: nil)
                 })
-            } else if resultsViewController == nil {
-                performSegue(.showResults)
-                UIView.animate(withDuration: 0.5, delay: 2.5, options: .beginFromCurrentState, animations: {
-                    self.webView.alpha = 0.0
-                }, completion: nil)
             } else {
                 resultsViewController?.state = state
             }

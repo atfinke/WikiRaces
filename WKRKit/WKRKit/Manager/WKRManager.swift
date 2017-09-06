@@ -62,8 +62,8 @@ public class WKRManager {
 
     // MARK: - User Interface
 
-    internal var webView: WKRUIWebView!
-    internal var alertView: WKRUIAlertView!
+    internal weak var webView: WKRUIWebView!
+    internal weak var alertView: WKRUIAlertView!
 
     // MARK: - Initialization
 

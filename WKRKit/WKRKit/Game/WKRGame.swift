@@ -140,13 +140,6 @@ public class WKRGame {
             player.state = .forcedEnd
         }
         let results = WKRResultsInfo(players: adjustedPlayers, points: totalPoints)
-
-        print("\n\n=========\nHOST SENDING")
-
-        for x in 0..<results.playerCount {
-            print(results.player(at: x).name + ": " + results.player(at: x).state.text + "  (\(results.player(at: x).raceHistory?.duration ?? 0))")
-        }
-
         finishedRace()
         hostResultsCreated?(results)
     }

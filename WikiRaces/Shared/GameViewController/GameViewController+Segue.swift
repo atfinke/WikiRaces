@@ -40,9 +40,6 @@ extension GameViewController {
 
             destination.startButtonPressed = {
                 self.manager.player(.startedGame)
-                self.lobbyViewController?.dismiss(animated: true) {
-                    self.lobbyViewController = nil
-                }
             }
 
             destination.addPlayersButtonPressed = { viewController in

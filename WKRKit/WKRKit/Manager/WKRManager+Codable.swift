@@ -27,18 +27,12 @@ extension WKRManager {
             playersUpdate(game.players)
 
             // Player joined mid-session
-            /*if playerObject.state == .connecting && localPlayer.state != .connecting {
-                // Send self
+            if playerObject.state == .connecting {
                 peerNetwork.send(object: WKRCodable(localPlayer))
-                if localPlayer.isHost {
-                    // Send latest results
-                    // TODO: Send ready states
-                    if let results = hostResultsInfo {
-                        peerNetwork.send(object: WKRCodable(results))
-                    }
-                    peerNetwork.send(object: WKRCodable(enum: gameState))
+                if let results = hostResultsInfo, localPlayer.isHost && gameState == .hostResults {
+                    peerNetwork.send(object: WKRCodable(results))
                 }
-            }*/
+            }
         } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
             game.finishedRace()
 
