@@ -101,6 +101,16 @@ public struct WKRResultsInfo: Codable {
         }
     }
 
+    internal func pointsInfo(for player: WKRPlayer) -> Int? {
+        guard pointsInfo(at: 0).points > 0 else {
+            return nil
+        }
+        if let index = players.index(of: player) {
+            return pointsInfo(at: index).points
+        }
+        return nil
+    }
+
     public func player(at index: Int) -> WKRPlayer {
         return players[index]
     }

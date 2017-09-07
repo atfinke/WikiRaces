@@ -21,12 +21,14 @@ extension WKRManager {
             self.peerNetwork.send(object: WKRCodable(self.localPlayer))
             self.webView.startedPageLoad()
         }, pageLoaded: { page in
+            self.webView.completedPageLoad()
+
             var linkHere = false
+            var foundPage = false
 
             if let attributes = self.game.activeRace?.attributesFor(page) {
                 if attributes.foundPage {
-                    self.localPlayer.state = .foundPage
-                    self.transitionGameState(to: .results)
+                    foundPage = true
                     self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
                 } else if attributes.linkOnPage {
                     linkHere = true
@@ -35,8 +37,12 @@ extension WKRManager {
             }
 
             self.localPlayer.nowViewing(page: page, linkHere: linkHere)
-            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
-            self.webView.completedPageLoad()
+
+            if foundPage {
+                self.localPlayer.state = .foundPage
+                self.transitionGameState(to: .results)
+                self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+            }
         })
     }
 

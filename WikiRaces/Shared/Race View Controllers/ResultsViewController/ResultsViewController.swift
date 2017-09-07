@@ -49,12 +49,12 @@ class ResultsViewController: CenteredTableViewController {
                     return
                 }
 
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: 0.75, animations: {
                     cells.forEach { $0.detailLabel.alpha = 0.0 }
                     self.descriptionLabel.alpha = 0.0
                 }, completion: { _ in
                     self.tableView.reloadData()
-                    UIView.animate(withDuration: 0.5) {
+                    UIView.animate(withDuration: 0.75) {
                         cells.forEach { $0.detailLabel.alpha = 1.0 }
                     }
                 })
@@ -99,6 +99,10 @@ class ResultsViewController: CenteredTableViewController {
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
+    deinit {
+        print("DEINIT: RSULTS")
+    }
+
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
@@ -138,14 +142,6 @@ class ResultsViewController: CenteredTableViewController {
     func showReadyUpButton(_ showReady: Bool) {
         navigationItem.leftBarButtonItem?.isEnabled = showReady
         isOverlayButtonHidden = !showReady
-
-        if !showReady {
-            if presentedViewController != nil {
-                dismiss(animated: true, completion: nil)
-            }
-            tableView.isUserInteractionEnabled = false
-        }
-
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }

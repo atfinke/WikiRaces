@@ -52,6 +52,10 @@ class HistoryViewController: UITableViewController {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
+    deinit {
+        print("DEINIT:  his")
+    }
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

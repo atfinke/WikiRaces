@@ -13,6 +13,7 @@ public class WKRPlayer: Codable, Hashable {
     // MARK: - Properties
 
     internal let isHost: Bool
+    internal var shouldGetPoints = false
 
     public var raceHistory: WKRHistory?
     public var state: WKRPlayerState = .connecting

@@ -115,6 +115,30 @@ extension GameViewController {
 
     // MARK: - Alerts
 
+    func quitAlertController(raceStarted: Bool) -> UIAlertController {
+        var message = "Are you sure you want to quit? You will be disconnected from the match and returned to the menu."
+        if raceStarted {
+            message += " Press the forfeit button to give up on the race but stay in the match."
+        }
+
+        let alertController = UIAlertController(title: "Leave The Match?", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+
+        if raceStarted {
+            let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) { _ in
+                self.manager.player(.forfeited)
+            }
+            alertController.addAction(forfeitAction)
+        }
+        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
+            self.manager.player(.quit)
+            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+        }
+        alertController.addAction(quitAction)
+        return alertController
+    }
+
     func alertViewWillAppear() {
         let scrollView = webView.scrollView
         var contentOffset = scrollView.contentOffset

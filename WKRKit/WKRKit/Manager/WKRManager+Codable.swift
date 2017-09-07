@@ -39,21 +39,7 @@ extension WKRManager {
                 peerNetwork.send(object: WKRCodable(results))
             }
         } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
-            game.finishedRace()
-
-            if gameState != .hostResults {
-                transitionGameState(to: .hostResults)
-            }
-
-            hostResultsInfo = resultsInfo
-            resultsInfoHostUpdate?(resultsInfo)
-
-            if localPlayer.state.isRacing {
-                localPlayer.state = .forcedEnd
-            }
-
-            localPlayer.raceHistory = nil
-            peerNetwork.send(object: WKRCodable(localPlayer))
+            receivedFinalResults(resultsInfo)
         } else if let pageVote = object.typeOf(WKRPage.self), localPlayer.isHost {
             game.player(player, votedFor: pageVote)
             sendPreRaceConfig()
@@ -90,6 +76,29 @@ extension WKRManager {
 
     // MARK: - Game Updates
 
+    private func receivedFinalResults(_ resultsInfo: WKRResultsInfo) {
+        game.finishedRace()
+
+        if gameState != .hostResults {
+            transitionGameState(to: .hostResults)
+        }
+
+        hostResultsInfo = resultsInfo
+        resultsInfoHostUpdate?(resultsInfo)
+
+        if localPlayer.state.isRacing {
+            localPlayer.state = .forcedEnd
+        }
+        if localPlayer.shouldGetPoints {
+            localPlayer.shouldGetPoints = false
+            if let localPlayerPoints = resultsInfo.pointsInfo(for: localPlayer) {
+                pointsUpdate(localPlayerPoints)
+            }
+        }
+
+        peerNetwork.send(object: WKRCodable(localPlayer))
+    }
+
     internal func transitionGameState(to state: WKRGameState) {
         game.state = state
 
@@ -98,6 +107,7 @@ extension WKRManager {
             hostResultsInfo = nil
             localPlayer.state = .voting
             localPlayer.raceHistory = nil
+            localPlayer.shouldGetPoints = true
             if localPlayer.isHost {
                 fetchPreRaceConfig()
             }

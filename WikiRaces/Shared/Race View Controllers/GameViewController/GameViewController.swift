@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
-    var alertView: WKRUIAlertView!
+    weak var alertView: WKRUIAlertView!
     var bottomConstraint: NSLayoutConstraint!
 
     let thinLine = UIView()
@@ -79,8 +79,8 @@ class GameViewController: UIViewController {
 
     // MARK: - User Actions
 
-    //swiftlint:disable line_length
     @IBAction func flagButtonPressed(_ sender: Any) {
+        //swiftlint:disable:next line_length
         let alertController = UIAlertController(title: "Forfeit The Round?", message: "Are you sure you want to forfeit? Try tapping the help button for a peek at the final article before making up your mind.", preferredStyle: .alert)
 
         let cancelAction = UIAlertAction(title: "Resume", style: .cancel, handler: nil)
@@ -106,31 +106,6 @@ class GameViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
     }
-
-    func quitAlertController(raceStarted: Bool) -> UIAlertController {
-        var message = "Are you sure you want to quit? You will be disconnected from the match and returned to the menu."
-        if raceStarted {
-            message += " Press the forfeit button to give up on the race but stay in the match."
-        }
-
-        let alertController = UIAlertController(title: "Leave The Match?", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-
-        if raceStarted {
-            let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) { _ in
-                self.manager.player(.forfeited)
-            }
-            alertController.addAction(forfeitAction)
-        }
-        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
-            self.manager.player(.quit)
-            self.navigationController?.navigationController?.popToRootViewController(animated: true)
-        }
-        alertController.addAction(quitAction)
-        return alertController
-    }
-    //swiftlint:enable line_length
 
     deinit {
         alertView?.removeFromSuperview()

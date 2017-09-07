@@ -23,7 +23,7 @@ class VotingViewController: CenteredTableViewController {
             let selectedPath = tableView.indexPathForSelectedRow
             tableView.reloadData()
             tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
-            if self.tableView.alpha != 1.0 {
+            if isViewLoaded && self.tableView.alpha != 1.0 {
                 UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
                     self.tableView.alpha = 1.0
                 })
@@ -56,7 +56,6 @@ class VotingViewController: CenteredTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.alpha = 0.0
         registerTableView(for: self)
 
         title = "VOTING"
@@ -65,6 +64,17 @@ class VotingViewController: CenteredTableViewController {
 
         tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if voteInfo != nil {
+            UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
+                self.tableView.alpha = 1.0
+            })
+        }
+    }
+
+
 
     // MARK: = Actions
 
