@@ -61,7 +61,7 @@ class LobbyViewController: UIViewController {
             tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .automatic)
         }
 
-        if players.count > 1 && overlayHeightConstraint.constant != 70 {
+        if isViewLoaded && players.count > 1 && overlayHeightConstraint.constant != 70 {
             overlayHeightConstraint.constant = 70
             view.layoutIfNeeded()
             startButton.isHidden = false

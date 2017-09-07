@@ -57,6 +57,13 @@ class MenuViewController: UIViewController {
         versionGesture.numberOfTapsRequired = 2
         versionGesture.numberOfTouchesRequired = 2
         view.addGestureRecognizer(versionGesture)
+
+        //swiftlint:disable:next discarded_notification_center_observer line_length
+        NotificationCenter.default.addObserver(forName: NSNotification.Name("PlayerQuit"), object: nil, queue: nil) { _ in
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -68,6 +75,10 @@ class MenuViewController: UIViewController {
         #else
             attemptGCAuthentication()
         #endif
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Actions

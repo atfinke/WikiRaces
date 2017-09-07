@@ -1,9 +1,8 @@
 WikiRaces 3.0 Plans:
 
-
 3.0 (September)
 
-- Complete rewrite
+- Complete rewrite (Core + Kits)
 - Cloud syncing
 - Join match mid session
 - Network protocol for adding new services
@@ -16,6 +15,7 @@ WikiRaces 3.0 Plans:
 
 - Bug Fixes
 - General polish / cleanup
+- Better internal documentation
 
 3.1 (Late 2017)
 

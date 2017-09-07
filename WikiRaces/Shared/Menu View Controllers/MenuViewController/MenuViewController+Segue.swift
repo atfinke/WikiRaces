@@ -42,10 +42,13 @@ extension MenuViewController {
                 destination.windowName = (view.window as! DebugWindow).playerName
             #endif
         case .showConnecting:
-            guard let destination = navigationController.rootViewController as? MPCConnectViewController else {
+            #if !MULTIWINDOWDEBUG
+                guard let destination = navigationController.rootViewController as? MPCConnectViewController else {
                     fatalError()
-            }
-            destination.isPlayerHost = isPlayerHost
+                }
+                destination.isPlayerHost = isPlayerHost
+            #endif
+
         }
     }
 

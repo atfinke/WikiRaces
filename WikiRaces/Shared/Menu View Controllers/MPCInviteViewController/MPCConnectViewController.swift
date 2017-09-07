@@ -124,10 +124,12 @@ class MPCConnectViewController: UIViewController {
 
     func showMatch(isPlayerHost: Bool) {
         DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.05) {
+                self.activityIndicatorView.alpha = 0.0
+            }
             UIView.animate(withDuration: 0.25, animations: {
                 self.descriptionLabel.alpha = 0.0
                 self.inviteView.alpha = 0.0
-                self.activityIndicatorView.alpha = 0.0
                 self.cancelButton.alpha = 0.0
             }, completion: { _ in
                 self.activityIndicatorView.stopAnimating()
