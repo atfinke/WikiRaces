@@ -161,13 +161,11 @@ class StatsHelper {
         racesScore.value = Int64(races)
 
         var scores = [pointsScore, racesScore]
-
         if races >= 5 {
             let averageScore = GKScore(leaderboardIdentifier: Stat.average.leaderboard)
             averageScore.value = Int64(average * 1000)
             scores.append(averageScore)
         }
-
         GKScore.report(scores, withCompletionHandler: nil)
     }
 

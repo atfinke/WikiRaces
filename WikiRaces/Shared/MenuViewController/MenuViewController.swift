@@ -12,21 +12,11 @@ import GameKit
 import WKRKit
 import WKRUIKit
 
-import MultipeerConnectivity
-
 class MenuViewController: UIViewController {
 
     // MARK: - Properties
 
-    var advertiser: MCNearbyServiceAdvertiser?
     var isMenuVisable = false
-
-    let peerID = MCPeerID(displayName: UIDevice.current.name)
-    let serviceType = "WKRPeer30"
-
-    lazy var session: MCSession = {
-        return MCSession(peer: self.peerID)
-    }()
 
     // MARK: - Interface Elements
 
@@ -74,8 +64,7 @@ class MenuViewController: UIViewController {
         animateMenuIn()
 
         #if MULTIWINDOWDEBUG
-            tempIsHost = view.window!.frame.origin == .zero
-            self.performSegue(withIdentifier: "showConnecting", sender: false)
+            performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
         #else
             attemptGCAuthentication()
         #endif
@@ -93,25 +82,18 @@ class MenuViewController: UIViewController {
         titleLabel.text = appVersion + "\(WKRKitConstants.version) / \(WKRUIConstants.version)"
     }
 
-    @IBAction func advertise(_ sender: Any) {
-        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
-        advertiser?.delegate = self
-        advertiser?.startAdvertisingPeer()
-    }
-
-    @IBAction func browse(_ sender: Any) {
+    @objc
+    func joinRace() {
         animateMenuOut {
-            let browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
-            browser.delegate = self
-            self.present(browser, animated: true, completion: nil)
+            self.performSegue(.showConnecting, isHost: false)
         }
     }
 
-    // MARK: - Other
-
-    func startSession(isHost: Bool) {
-        tempIsHost = isHost
-        self.performSegue(withIdentifier: "showConnecting", sender: false)
+    @objc
+    func createRace() {
+        animateMenuOut {
+            self.performSegue(.showConnecting, isHost: true)
+        }
     }
 
     // MARK: - Menu Animations
@@ -147,33 +129,6 @@ class MenuViewController: UIViewController {
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
         })
-    }
-
-    // MARK: - Fonts
-
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     if segue.identifier == "showConnecting", let isHost = sender as? Bool {
-     guard let navController = segue.destination as? UINavigationController else { fatalError() }
-     guard let controller = navController.rootViewController as? ConnectingViewController else { fatalError() }
-     controller.hostMode = isHost
-     }
-     }*/
-
-    var tempIsHost: Bool!
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = (segue.destination as? UINavigationController)?
-            .rootViewController as? GameViewController else {
-                fatalError()
-        }
-
-        #if MULTIWINDOWDEBUG
-            //swiftlint:disable:next force_cast
-            destination._playerName = (view.window as! DebugWindow).playerName
-        #else
-            destination.session = session
-        #endif
-
-        destination.isPlayerHost = tempIsHost
     }
 
 }

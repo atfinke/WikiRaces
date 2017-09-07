@@ -47,7 +47,7 @@ public class WKRManager {
     internal let peerNetwork: WKRPeerNetwork
     internal var pageNavigation: WKRPageNavigation!
 
-    // MARK: - Callbacks
+    // MARK: - Closures
 
     internal let stateUpdate: ((WKRGameState) -> Void)
     internal let playersUpdate: (([WKRPlayer]) -> Void)
@@ -84,12 +84,12 @@ public class WKRManager {
         }
 
         configure(network: peerNetwork)
+        
         peerNetwork.send(object: WKRCodable(self.localPlayer))
-
         playersUpdate(game.players)
     }
 
-    // MARK: View Controller Callbacks
+    // MARK: View Controller Closures
 
     public func voting(timeUpdate: @escaping ((Int) -> Void),
                        infoUpdate: @escaping ((WKRVoteInfo) -> Void),
@@ -127,8 +127,8 @@ public class WKRManager {
         webView.navigationDelegate = pageNavigation
     }
 
-    public func presentNetworkInterface(on viewController: UIViewController) {
-        peerNetwork.presentNetworkInterface(on: viewController)
+    public func hostNetworkInterface() -> UIViewController {
+        return peerNetwork.hostNetworkInterface()
     }
 
     public func enqueue(message: String, duration: Double = 5.0) {

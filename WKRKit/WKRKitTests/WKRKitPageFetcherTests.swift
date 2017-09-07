@@ -43,12 +43,12 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
             WKRPageFetcher.fetchRandom { page in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
-                    XCTFail()
+                    XCTFail("Page nil")
                     return
                 }
                 XCTAssertNotNil(unwrappedPage.title)
                 guard let title = unwrappedPage.title else {
-                    XCTFail()
+                    XCTFail("Title nil")
                     return
                 }
                 XCTAssert(!title.characters.isEmpty)
@@ -68,12 +68,12 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
             WKRPageFetcher.fetch(path: "/Apple_Inc.") { page in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
-                    XCTFail()
+                    XCTFail("Page nil")
                     return
                 }
                 XCTAssertNotNil(unwrappedPage.title)
                 guard let title = unwrappedPage.title else {
-                    XCTFail()
+                    XCTFail("Title nil")
                     return
                 }
                 XCTAssertEqual(title, "Apple Inc.")
@@ -92,12 +92,12 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
             WKRPageFetcher.fetch(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!) { page in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
-                    XCTFail()
+                    XCTFail("Page nil")
                     return
                 }
                 XCTAssertNotNil(unwrappedPage.title)
                 guard let title = unwrappedPage.title else {
-                    XCTFail()
+                    XCTFail("Title nil")
                     return
                 }
                 XCTAssertEqual(title, "Apple Inc.")

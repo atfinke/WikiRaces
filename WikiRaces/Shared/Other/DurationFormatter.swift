@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 struct DurationFormatter {
     private static let maxSeconds = 300
 

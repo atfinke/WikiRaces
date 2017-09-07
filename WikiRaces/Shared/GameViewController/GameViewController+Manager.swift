@@ -16,13 +16,13 @@ extension GameViewController {
 
     func setupManager() {
         #if MULTIWINDOWDEBUG
-            manager = WKRManager(_playerName: _playerName, isHost: isPlayerHost, stateUpdate: { state in
+            manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state in
                 self.transition(to: state)
             }, playersUpdate: { players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
             })
         #else
-            manager = WKRManager(session: session, isHost: isPlayerHost, stateUpdate: { state in
+            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: { state in
                 self.transition(to: state)
             }, playersUpdate: { players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
@@ -56,6 +56,7 @@ extension GameViewController {
         })
     }
 
+    //swiftlint:disable:next function_body_length
     private func transition(to state: WKRGameState) {
         guard state != gameState else { return }
         gameState = state

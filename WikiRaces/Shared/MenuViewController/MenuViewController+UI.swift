@@ -145,12 +145,12 @@ extension MenuViewController {
     private func setupButtons() {
         joinButton.title = "Join race"
         joinButton.translatesAutoresizingMaskIntoConstraints = false
-        joinButton.addTarget(self, action: #selector(advertise(_:)), for: .touchUpInside)
+        joinButton.addTarget(self, action: #selector(joinRace), for: .touchUpInside)
         topView.addSubview(joinButton)
 
         createButton.title = "Create race"
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.addTarget(self, action: #selector(browse(_:)), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(createRace), for: .touchUpInside)
         topView.addSubview(createButton)
     }
 
@@ -188,6 +188,7 @@ extension MenuViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
+    //swiftlint:disable:next function_body_length
     private func setupStatsStackView() -> UIStackView {
         let statsStackView = UIStackView()
         statsStackView.distribution = .fillEqually

@@ -25,6 +25,7 @@ extension GameViewController {
         performSegue(withIdentifier: segue.rawValue, sender: nil)
     }
 
+    //swiftlint:disable:next function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController,
             let unwrappedSegueIdentifier = segue.identifier,
@@ -43,7 +44,7 @@ extension GameViewController {
             }
 
             destination.addPlayersButtonPressed = { viewController in
-                self.manager.presentNetworkInterface(on: viewController)
+                viewController.present(self.manager.hostNetworkInterface(), animated: true, completion: nil)
             }
 
             destination.isPlayerHost = isPlayerHost
@@ -75,7 +76,7 @@ extension GameViewController {
             }
 
             destination.addPlayersButtonPressed = { viewController in
-                self.manager.presentNetworkInterface(on: viewController)
+                viewController.present(self.manager.hostNetworkInterface(), animated: true, completion: nil)
             }
 
             destination.state = manager.gameState

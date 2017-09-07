@@ -14,23 +14,24 @@ import WKRUIKit
 
 class GameViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - Game Properties
 
     var isPlayerHost = false
     var gameState = WKRGameState.preMatch
 
-    #if MULTIWINDOWDEBUG
-    //swiftlint:disable:next identifier_name
-    var _playerName: String!
-    #endif
-
-    var session: MCSession!
+    var manager: WKRManager!
     var finalPage: WKRPage? {
         didSet {
             title = finalPage?.title?.uppercased()
         }
     }
-    var manager: WKRManager!
+
+    #if MULTIWINDOWDEBUG
+    var windowName: String!
+    #else
+    var serviceType: String!
+    var session: MCSession!
+    #endif
 
     // MARK: - User Interface
 

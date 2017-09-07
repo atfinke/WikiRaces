@@ -17,5 +17,5 @@ protocol WKRPeerNetwork: class {
 
     func disconnect()
     func send(object: WKRCodable)
-    func presentNetworkInterface(on viewController: UIViewController)
+    func hostNetworkInterface() -> UIViewController
 }

@@ -138,6 +138,14 @@ class ResultsViewController: CenteredTableViewController {
     func showReadyUpButton(_ showReady: Bool) {
         navigationItem.leftBarButtonItem?.isEnabled = showReady
         isOverlayButtonHidden = !showReady
+
+        if !showReady {
+            if presentedViewController != nil {
+                dismiss(animated: true, completion: nil)
+            }
+            tableView.isUserInteractionEnabled = false
+        }
+
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }

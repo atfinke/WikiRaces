@@ -10,7 +10,7 @@ import Foundation
 
 class WKRSplitViewNetwork: WKRPeerNetwork {
 
-     // MARK: - Callbacks
+     // MARK: - Closures
 
     var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
     var playerConnected: ((WKRPlayerProfile) -> Void)?
@@ -90,7 +90,7 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
         fatalError()
     }
 
-    func presentNetworkInterface(on viewController: UIViewController) {
+    func hostNetworkInterface() -> UIViewController {
         fatalError()
     }
 
@@ -101,13 +101,13 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
 extension WKRManager {
 
     @available(*, deprecated, message: "Only for split view debugging")
-    //swiftlint:disable:next identifier_name
-    public convenience init(_playerName: String, isHost: Bool,
+    public convenience init(windowName: String,
+                            isPlayerHost: Bool,
                             stateUpdate: @escaping ((WKRGameState) -> Void),
                             playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
-        let player = WKRPlayer(profile: WKRPlayerProfile(name: _playerName, playerID: _playerName), isHost: isHost)
-        let network = WKRSplitViewNetwork(playerName: _playerName, isHost: isHost)
+        let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
+        let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)
 
         self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
     }

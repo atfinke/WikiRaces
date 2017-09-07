@@ -1,17 +1,22 @@
 //
-//  _Extensions.swift
+//  CommonExtensions.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
-import WKRKit
+import UIKit
 
 extension IndexPath {
     init(row: Int) {
         self.init(row: row, section: 0)
+    }
+}
+
+extension UINavigationController {
+    var rootViewController: UIViewController? {
+        return viewControllers.first
     }
 }
 
@@ -26,11 +31,5 @@ extension UIView {
                        options: .beginFromCurrentState,
                        animations: animations,
                        completion: completion)
-    }
-}
-
-extension UINavigationController {
-    var rootViewController: UIViewController? {
-        return viewControllers.first
     }
 }
