@@ -22,9 +22,7 @@ class MenuTile: UIControl {
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
 
-
-
-
+    var stat: StatsHelper.Stat?
     var title: String? {
         set {
             guard let text = newValue else {
@@ -41,19 +39,18 @@ class MenuTile: UIControl {
         }
     }
 
-    var value: String? {
+    var value: Double? {
         set {
-            guard let text = newValue else {
+            guard let value = newValue,
+             let formattedValue = MenuTile.numberFormatter.string(from: NSNumber(value: value)) else {
                 valueLabel.text = nil
                 return
             }
-            valueLabel.attributedText = NSAttributedString(string: text,
-                                                           spacing: 3.0,
-                                                           font: valueLabel.font,
-                                                           textColor: UIColor.wkrTextColor)
+
+            valueLabel.text = formattedValue
         }
         get {
-            return valueLabel.attributedText?.string
+            return nil
         }
     }
 
@@ -72,15 +69,14 @@ class MenuTile: UIControl {
         }
     }
 
-
     // MARK: - Initialization
 
     init(title: String) {
         super.init(frame: .zero)
 
         self.title = title
-        self.value = "0"
-        
+        self.value = 0
+
         titleLabel.numberOfLines = 2
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
@@ -107,7 +103,5 @@ class MenuTile: UIControl {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
 
 }

@@ -23,6 +23,9 @@
 		1425A79A1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
 		1425A79B1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
+		143BB7151F60AEC900D00541 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
+		143BB7181F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
+		143BB7191F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
@@ -186,6 +189,7 @@
 		1425A7981F5DB33D00C302C0 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		1425A7991F5DB33D00C302C0 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		143A8BBB1F58746800580AA2 /* StatsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
+		143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Leaderboards.swift"; sourceTree = "<group>"; };
 		144280EC1F5883AB002D977F /* WikiRaces.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WikiRaces.entitlements; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
 		1468138B1F56B32900F427F4 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Shared/HelpViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -321,7 +325,6 @@
 			children = (
 				144280EC1F5883AB002D977F /* WikiRaces.entitlements */,
 				149FF84C1F362B83000A5D96 /* AppDelegate.swift */,
-				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				149FF8501F362B83000A5D96 /* Main.storyboard */,
 				149FF8531F362B83000A5D96 /* Assets.xcassets */,
 				149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */,
@@ -374,6 +377,7 @@
 				1425A7981F5DB33D00C302C0 /* Reachability.h */,
 				1425A7991F5DB33D00C302C0 /* Reachability.m */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
+				143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				14C4AB441F3689BE0086B77F /* MenuViewController+MPC.swift */,
 			);
@@ -425,6 +429,7 @@
 		14B55C951F3A499C0090E092 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				1468138B1F56B32900F427F4 /* HelpViewController.swift */,
 				1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
@@ -703,6 +708,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C4AB291F3689890086B77F /* CenteredTableViewController.swift in Sources */,
+				143BB7181F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */,
 				14C4AB711F368A3C0086B77F /* LobbyViewController+TableView.swift in Sources */,
 				143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
@@ -744,6 +750,8 @@
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				143BB7151F60AEC900D00541 /* StatsHelper.swift in Sources */,
+				143BB7191F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				140C580F1F56A0FE00DFA1E6 /* HelpViewController.swift in Sources */,

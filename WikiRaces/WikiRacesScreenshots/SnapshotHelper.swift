@@ -37,7 +37,7 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
     case cannotFindHomeDirectory
     case cannotFindSimulatorHomeDirectory
     case cannotAccessSimulatorHomeDirectory(String)
-    
+
     var debugDescription: String {
         switch self {
         case .cannotDetectUser:

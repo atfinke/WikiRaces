@@ -35,7 +35,7 @@ class StatsHelper {
 
     static let shared = StatsHelper()
 
-    var statsUpdated: ((Double, Double, Double) -> Void)?
+    var statsUpdated: ((_ points: Double, _ races: Double, _ average: Double) -> Void)?
     private let migrationKey = "WKR3StatMigrationComplete"
 
     private let defaults = UserDefaults.standard
@@ -62,11 +62,16 @@ class StatsHelper {
         keyValueStore.synchronize()
     }
 
+    func updateStatsClosure() {
+        statsUpdated?(statValue(for: .points), statValue(for: .races), statValue(for: .average))
+    }
+
     // MARK: - Set/Get Stats
 
     func statValue(for stat: Stat) -> Double {
         if stat == .average {
-            return statValue(for: .points) / statValue(for: .races)
+            let value = statValue(for: .points) / statValue(for: .races)
+            return value.isNaN ? 0.0 : value
         } else {
             return defaults.double(forKey: stat.key)
         }
@@ -81,6 +86,7 @@ class StatsHelper {
 
         cloudSync()
         leaderboardSync()
+        updateStatsClosure()
     }
 
     private func attemptMigration() {
@@ -97,6 +103,7 @@ class StatsHelper {
 
         cloudSync()
         leaderboardSync()
+        updateStatsClosure()
     }
 
     // MARK: - Syncing
@@ -122,6 +129,7 @@ class StatsHelper {
         }
 
         leaderboardSync()
+        updateStatsClosure()
     }
 
     private func cloudSync() {
@@ -132,7 +140,7 @@ class StatsHelper {
             if deviceValue > cloudValue {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             } else {
-                defaults.set(deviceValue, forKey: stat.key)
+                defaults.set(cloudValue, forKey: stat.key)
             }
         }
     }

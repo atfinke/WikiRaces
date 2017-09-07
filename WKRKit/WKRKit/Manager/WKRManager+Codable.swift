@@ -23,15 +23,21 @@ extension WKRManager {
             game.startRace(with: raceConfig)
             voteFinalPageUpdate?(raceConfig.endingPage)
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
+            if !game.players.contains(playerObject) && playerObject != localPlayer {
+                print("NEW PLAYER")
+                peerNetwork.send(object: WKRCodable(localPlayer))
+            }
+
             game.playerUpdated(playerObject)
             playersUpdate(game.players)
 
             // Player joined mid-session
-            if playerObject.state == .connecting {
-                peerNetwork.send(object: WKRCodable(localPlayer))
-                if let results = hostResultsInfo, localPlayer.isHost && gameState == .hostResults {
-                    peerNetwork.send(object: WKRCodable(results))
-                }
+            if playerObject.state == .connecting
+                && localPlayer.state != .connecting
+                && localPlayer.isHost
+                && gameState == .hostResults,
+                let results = hostResultsInfo {
+                peerNetwork.send(object: WKRCodable(results))
             }
         } else if let resultsInfo = object.typeOf(WKRResultsInfo.self), hostResultsInfo == nil {
             game.finishedRace()

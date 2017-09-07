@@ -18,23 +18,36 @@ class MenuViewController: UIViewController {
 
     // MARK: - Properties
 
+    var advertiser: MCNearbyServiceAdvertiser?
+    var isMenuVisable = false
+
+    let peerID = MCPeerID(displayName: UIDevice.current.name)
+    let serviceType = "WKRPeer30"
+
+    lazy var session: MCSession = {
+        return MCSession(peer: self.peerID)
+    }()
+
+    // MARK: - Interface Elements
+
     let topView = UIView()
     let bottomView = UIView()
 
     let titleLabel = UILabel()
     let subtitleLabel = UILabel()
 
-    let createButton = WKRUIButton()
     let joinButton = WKRUIButton()
-
-    let puzzleView = UIScrollView()
+    let createButton = WKRUIButton()
 
     var leftMenuTile: MenuTile?
     var middleMenuTile: MenuTile?
     var rightMenuTile: MenuTile?
 
     var puzzleTimer: Timer?
-    
+    let puzzleView = UIScrollView()
+
+    // MARK: - Constraints
+
     var topViewLeftConstraint: NSLayoutConstraint!
     var bottomViewAnchorConstraint: NSLayoutConstraint!
 
@@ -44,20 +57,16 @@ class MenuViewController: UIViewController {
     var createButtonWidthConstraint: NSLayoutConstraint!
     var createButtonHeightConstraint: NSLayoutConstraint!
 
-    var advertiser: MCNearbyServiceAdvertiser?
-
-    let peerID = MCPeerID(displayName: UIDevice.current.name)
-    let serviceType = "WKRPeer30"
-
-    lazy var session: MCSession = {
-        return MCSession(peer: self.peerID)
-    }()
-
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+
+        let versionGesture = UITapGestureRecognizer(target: self, action: #selector(showVersionInfo))
+        versionGesture.numberOfTapsRequired = 2
+        versionGesture.numberOfTouchesRequired = 2
+        view.addGestureRecognizer(versionGesture)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -67,10 +76,22 @@ class MenuViewController: UIViewController {
         #if MULTIWINDOWDEBUG
             tempIsHost = view.window!.frame.origin == .zero
             self.performSegue(withIdentifier: "showConnecting", sender: false)
+        #else
+            attemptGCAuthentication()
         #endif
     }
 
     // MARK: - Actions
+
+    @objc
+    func showVersionInfo() {
+        guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+            fatalError()
+        }
+        let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
+        titleLabel.text = appVersion + "\(WKRKitConstants.version) / \(WKRUIConstants.version)"
+    }
 
     @IBAction func advertise(_ sender: Any) {
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
@@ -79,9 +100,11 @@ class MenuViewController: UIViewController {
     }
 
     @IBAction func browse(_ sender: Any) {
-        let browser = MCBrowserViewController(serviceType: serviceType, session: session)
-        browser.delegate = self
-        present(browser, animated: true, completion: nil)
+        animateMenuOut {
+            let browser = MCBrowserViewController(serviceType: self.serviceType, session: self.session)
+            browser.delegate = self
+            self.present(browser, animated: true, completion: nil)
+        }
     }
 
     // MARK: - Other
@@ -91,27 +114,17 @@ class MenuViewController: UIViewController {
         self.performSegue(withIdentifier: "showConnecting", sender: false)
     }
 
-    @objc
-    func createButtonPressed() {
-        /*animateMenuOut {
-         DispatchQueue.main.async {
-         let vc = _ConnectViewController()
-         self.present(vc, animated: true, completion: nil)
-         vc.startMultipeer(isHost: true)
-         }
-         self.performSegue(withIdentifier: "showConnecting", sender: true)
-         }*/
-    }
-
     // MARK: - Menu Animations
 
     func animateMenuOut(completion: (() -> Void)?) {
-        createButton.isEnabled = false
+        view.isUserInteractionEnabled = false
         bottomViewAnchorConstraint.constant = bottomView.frame.height
 
-        UIView.animate(withDuration: 0.5, animations: {
+        isMenuVisable = false
+        view.setNeedsLayout()
+
+        UIView.animate(withDuration: 0.75, animations: {
             self.view.layoutIfNeeded()
-            self.topView.alpha = 0.0
         }, completion: { _ in
             self.puzzleTimer?.invalidate()
             completion?()
@@ -119,24 +132,24 @@ class MenuViewController: UIViewController {
     }
 
     func animateMenuIn() {
+        view.isUserInteractionEnabled = false
+
         puzzleTimer?.invalidate()
         puzzleTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
             self.puzzleView.contentOffset = CGPoint(x: self.puzzleView.contentOffset.x + 0.5, y: 0)
         }
-        bottomViewAnchorConstraint.constant = 0
+
+        isMenuVisable = true
+        view.setNeedsLayout()
 
         UIView.animate(withDuration: 0.75, animations: {
             self.view.layoutIfNeeded()
-            self.topView.alpha = 1.0
         }, completion: { _ in
-            self.createButton.isEnabled = true
+            self.view.isUserInteractionEnabled = true
         })
     }
 
     // MARK: - Fonts
-
-
-
 
     /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      if segue.identifier == "showConnecting", let isHost = sender as? Bool {

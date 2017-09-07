@@ -124,7 +124,7 @@ class GameViewController: UIViewController {
         }
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
             self.manager.player(.quit)
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.navigationController?.popToRootViewController(animated: true)
         }
         alertController.addAction(quitAction)
         return alertController
