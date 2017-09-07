@@ -66,3 +66,6 @@ WikiRaces/Preview.html
 WikiRaces/screenshots
 WikiRaces/metadata
 WikiRaces/test_output
+
+WikiRaces/fabric.apikey
+WikiRaces/fabric.buildsecret

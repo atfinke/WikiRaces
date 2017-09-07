@@ -17,7 +17,21 @@
 	<key>CFBundleShortVersionString</key>
 	<string>3.0</string>
 	<key>CFBundleVersion</key>
-	<string>778</string>
+	<string>844</string>
+	<key>Fabric</key>
+	<dict>
+		<key>APIKey</key>
+		<string>80c3b2d37f1bca4e182e7fbf7976e6f069340b4d</string>
+		<key>Kits</key>
+		<array>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>Crashlytics</string>
+			</dict>
+		</array>
+	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -24,7 +24,6 @@ extension WKRManager {
             voteFinalPageUpdate?(raceConfig.endingPage)
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
-                print("NEW PLAYER")
                 peerNetwork.send(object: WKRCodable(localPlayer))
             }
 
