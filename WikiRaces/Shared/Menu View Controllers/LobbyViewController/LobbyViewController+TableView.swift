@@ -25,7 +25,7 @@ extension LobbyViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == displayedPlayers.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: footerCellReuseIdentifier, for: indexPath) as? FooterButtonTableViewCell else { fatalError() }
             cell.button.title = "Invite Players"
-            cell.button.addTarget(self, action: #selector(footerButtonPressed), for: .touchUpInside)
+            cell.button.addTarget(self, action: #selector(addPlayers), for: .touchUpInside)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: playerCellReuseIdentifier, for: indexPath) as? PlayerStateTableViewCell else { fatalError() }

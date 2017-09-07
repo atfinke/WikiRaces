@@ -80,7 +80,7 @@ class LobbyViewController: UIViewController {
         startButtonPressed?()
     }
 
-    @objc func footerButtonPressed() {
+    @objc func addPlayers() {
         addPlayersButtonPressed?(self)
     }
 

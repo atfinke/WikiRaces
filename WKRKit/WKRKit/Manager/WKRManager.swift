@@ -34,10 +34,6 @@ public class WKRManager {
         return game.state
     }
 
-    public var racePlayers: [WKRPlayer] {
-        return game.activeRace?.players ?? []
-    }
-
     public var hostResultsInfo: WKRResultsInfo?
 
     // MARK: - Properties

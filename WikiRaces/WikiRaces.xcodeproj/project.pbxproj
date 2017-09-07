@@ -25,8 +25,6 @@
 		141892F91F60F26E006748F0 /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */; };
 		141892FA1F60F2A0006748F0 /* MPCConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7341F60DF4A00D00541 /* MPCConnectViewController.swift */; };
 		141892FB1F60F2A0006748F0 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
-		1425A79A1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
-		1425A79B1F5DB33D00C302C0 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1425A7991F5DB33D00C302C0 /* Reachability.m */; };
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		143BB7151F60AEC900D00541 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		143BB7181F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
@@ -196,8 +194,6 @@
 		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
-		1425A7981F5DB33D00C302C0 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		1425A7991F5DB33D00C302C0 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		143A8BBB1F58746800580AA2 /* StatsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Leaderboards.swift"; sourceTree = "<group>"; };
 		143BB7211F60C6E300D00541 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
@@ -208,8 +204,8 @@
 		143BB7341F60DF4A00D00541 /* MPCConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCConnectViewController.swift; sourceTree = "<group>"; };
 		144280EC1F5883AB002D977F /* WikiRaces.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WikiRaces.entitlements; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
-		1468138B1F56B32900F427F4 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = Shared/HelpViewController.swift; sourceTree = SOURCE_ROOT; };
-		1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CenteredTableViewController.swift; path = Shared/CenteredTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		1468138B1F56B32900F427F4 /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = "Shared/Race View Controllers/HelpViewController.swift"; sourceTree = SOURCE_ROOT; };
+		1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CenteredTableViewController.swift; path = "Shared/Race View Controllers/CenteredTableViewController.swift"; sourceTree = SOURCE_ROOT; };
 		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../../../WKRKit/WKRKit.xcodeproj; sourceTree = "<group>"; };
 		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../../../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = "<group>"; };
 		147593CB1F609902005DFC90 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Deliverfile; sourceTree = SOURCE_ROOT; };
@@ -233,6 +229,7 @@
 		149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14A778281F61A9A100823DE8 /* Plans.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Plans.txt; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14C4AB2C1F3689900086B77F /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+TableView.swift"; sourceTree = "<group>"; };
@@ -353,6 +350,7 @@
 				144280EC1F5883AB002D977F /* WikiRaces.entitlements */,
 				143BB72F1F60D84100D00541 /* fabric.apikey */,
 				143BB72E1F60D84100D00541 /* fabric.buildsecret */,
+				14A778281F61A9A100823DE8 /* Plans.txt */,
 				149FF84C1F362B83000A5D96 /* AppDelegate.swift */,
 				149FF8501F362B83000A5D96 /* Main.storyboard */,
 				149FF8531F362B83000A5D96 /* Assets.xcassets */,
@@ -389,6 +387,38 @@
 			path = WikiRacesScreenshots;
 			sourceTree = "<group>";
 		};
+		14A778251F6133C700823DE8 /* Race View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1468138B1F56B32900F427F4 /* HelpViewController.swift */,
+				1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */,
+				14B55C931F3A49820090E092 /* GameViewController */,
+				14B55C8F1F3A495C0090E092 /* ResultsViewController */,
+				14B55C911F3A496D0090E092 /* HistoryViewController */,
+				14B55C921F3A497B0090E092 /* VotingViewController */,
+			);
+			path = "Race View Controllers";
+			sourceTree = "<group>";
+		};
+		14A778261F6133EE00823DE8 /* Menu View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14B55C901F3A49670090E092 /* MenuViewController */,
+				143BB7331F60DF0200D00541 /* MPCInviteViewController */,
+				14B55C941F3A498C0090E092 /* LobbyViewController */,
+			);
+			path = "Menu View Controllers";
+			sourceTree = "<group>";
+		};
+		14A778271F61341100823DE8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				143BB7321F60DE9300D00541 /* Settings.bundle */,
+				1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		14B55C8F1F3A495C0090E092 /* ResultsViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,8 +433,6 @@
 			isa = PBXGroup;
 			children = (
 				14C4AB381F3689A90086B77F /* MenuTile.swift */,
-				1425A7981F5DB33D00C302C0 /* Reachability.h */,
-				1425A7991F5DB33D00C302C0 /* Reachability.m */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */,
@@ -459,13 +487,9 @@
 			isa = PBXGroup;
 			children = (
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
-				1468138B1F56B32900F427F4 /* HelpViewController.swift */,
-				1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
-				143BB7321F60DE9300D00541 /* Settings.bundle */,
-				1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -473,13 +497,9 @@
 		14C4AB251F3689400086B77F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				14B55C901F3A49670090E092 /* MenuViewController */,
-				143BB7331F60DF0200D00541 /* MPCInviteViewController */,
-				14B55C941F3A498C0090E092 /* LobbyViewController */,
-				14B55C931F3A49820090E092 /* GameViewController */,
-				14B55C8F1F3A495C0090E092 /* ResultsViewController */,
-				14B55C911F3A496D0090E092 /* HistoryViewController */,
-				14B55C921F3A497B0090E092 /* VotingViewController */,
+				14A778261F6133EE00823DE8 /* Menu View Controllers */,
+				14A778251F6133C700823DE8 /* Race View Controllers */,
+				14A778271F61341100823DE8 /* Resources */,
 				14B55C951F3A499C0090E092 /* Other */,
 				149FDED51F4F4AAF003A71D0 /* Frameworks */,
 			);
@@ -757,7 +777,6 @@
 				143BB7291F60C98200D00541 /* CenteredTableViewController.swift in Sources */,
 				143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
-				1425A79A1F5DB33D00C302C0 /* Reachability.m in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
@@ -803,7 +822,6 @@
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
-				1425A79B1F5DB33D00C302C0 /* Reachability.m in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
