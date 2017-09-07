@@ -13,6 +13,8 @@
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
 
+//swiftlint:disable line_length
+
 import Foundation
 import XCTest
 

@@ -84,7 +84,7 @@ public class WKRManager {
         }
 
         configure(network: peerNetwork)
-        
+
         peerNetwork.send(object: WKRCodable(self.localPlayer))
         playersUpdate(game.players)
     }

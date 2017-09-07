@@ -15,7 +15,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate {
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         advertiser?.delegate = self
         advertiser?.startAdvertisingPeer()
-        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE", spacing: 2.0)
+        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
     }
 
     // MARK: - MCAdvertiserAssistantDelegate
@@ -47,7 +49,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             self.inviteView.alpha = 1.0
         })
-        descriptionLabel.attributedText = NSAttributedString(string: "INVITE RECEIVED", spacing: 2.0)
+        descriptionLabel.attributedText = NSAttributedString(string: "INVITE RECEIVED",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
     }
 
     // MARK: - User Actions
@@ -59,7 +63,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate {
 
     @IBAction func declinedInvite() {
         activeInvite?(false, session)
-        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE", spacing: 2.0)
+        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 1.0
             self.activityIndicatorView.alpha = 1.0

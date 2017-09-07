@@ -48,8 +48,6 @@ extension GameViewController {
             }
 
             destination.isPlayerHost = isPlayerHost
-            destination.isPreMatch = manager.gameState == .preMatch
-
             destination.quitAlertController = quitAlertController(raceStarted: false)
 
             self.lobbyViewController = destination

@@ -56,7 +56,9 @@ class MPCConnectViewController: UIViewController {
         peerID = MCPeerID(displayName: playerName)
 
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION", spacing: 2.0)
+        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
 
         cancelButton.alpha = 0.0
         activityIndicatorView.alpha = 0.0
@@ -103,7 +105,9 @@ class MPCConnectViewController: UIViewController {
     }
 
     func showConnectionError() {
-        descriptionLabel.attributedText = NSAttributedString(string: "FAILED TO CONNECT", spacing: 2.0)
+        descriptionLabel.attributedText = NSAttributedString(string: "FAILED TO CONNECT",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
         UIView.animate(withDuration: 0.5, animations: {
             self.activityIndicatorView.alpha = 0.0
             self.cancelButton.alpha = 0.0
@@ -112,13 +116,7 @@ class MPCConnectViewController: UIViewController {
         //swiftlint:disable:next line_length
         let alertController = UIAlertController(title: "Internet Not Reachable", message: "A fast internet connection is required to play WikiRaces.", preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default) { _ in
-            UIView.animate(withDuration: 0.25, animations: {
-                self.descriptionLabel.alpha = 0.0
-                self.activityIndicatorView.alpha = 0.0
-                self.cancelButton.alpha = 0.0
-            }, completion: { _ in
-                self.navigationController?.popToRootViewController(animated: false)
-            })
+            self.pressedCancelButton()
         }
         alertController.addAction(action)
         present(alertController, animated: true, completion: nil)
@@ -128,6 +126,7 @@ class MPCConnectViewController: UIViewController {
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.25, animations: {
                 self.descriptionLabel.alpha = 0.0
+                self.inviteView.alpha = 0.0
                 self.activityIndicatorView.alpha = 0.0
                 self.cancelButton.alpha = 0.0
             }, completion: { _ in
@@ -140,6 +139,7 @@ class MPCConnectViewController: UIViewController {
     @IBAction func pressedCancelButton() {
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 0.0
+            self.inviteView.alpha = 0.0
             self.activityIndicatorView.alpha = 0.0
             self.cancelButton.alpha = 0.0
         }, completion: { _ in

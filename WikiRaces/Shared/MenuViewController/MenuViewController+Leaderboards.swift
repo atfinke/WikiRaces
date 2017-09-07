@@ -36,6 +36,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                 if let viewController = viewController {
                     self.present(viewController, animated:true, completion: nil)
                 } else if !GKLocalPlayer.localPlayer().isAuthenticated {
+                    // "error._code" ?!?!
+                    if let error = error, error._code == 2 {
+                        return
+                    }
                     //swiftlint:disable:next line_length
                     let controller = UIAlertController(title: "Leaderboards Unavailable", message: "You must be logged into Game Center to access leaderboards", preferredStyle: .alert)
                     controller.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in

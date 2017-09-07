@@ -371,23 +371,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="PUN-Mp-tEZ">
-                                <rect key="frame" x="189" y="172" width="37" height="37"/>
+                                <rect key="frame" x="189" y="169" width="37" height="37"/>
                                 <color key="color" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING FOR INVITE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGO-Gp-Gig">
-                                <rect key="frame" x="20" y="132" width="374" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="9ig-vw-cDA"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJs-0q-T0F">
-                                <rect key="frame" x="87" y="161" width="240" height="106"/>
+                                <rect key="frame" x="87" y="149" width="240" height="106"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FROM ANDREW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boz-Uf-mgc">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aF5-0y-Ui0">
-                                        <rect key="frame" x="135" y="44" width="49" height="30"/>
+                                        <rect key="frame" x="135" y="68" width="49" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Accept"/>
                                         <connections>
@@ -395,7 +393,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KvX-CH-Aud">
-                                        <rect key="frame" x="57" y="44" width="52" height="30"/>
+                                        <rect key="frame" x="57" y="68" width="52" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Decline">
                                             <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -404,13 +402,6 @@
                                             <action selector="declinedInvite" destination="Rm3-nl-L5i" eventType="touchUpInside" id="Fbd-lh-Bzo"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FROM ANDREW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="boz-Uf-mgc">
-                                        <rect key="frame" x="0.0" y="0.0" width="232" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                        <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -428,6 +419,15 @@
                                     <action selector="pressedCancelButton" destination="Rm3-nl-L5i" eventType="touchUpInside" id="MIo-Md-3mC"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING FOR INVITE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oGO-Gp-Gig">
+                                <rect key="frame" x="20" y="118" width="374" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9ig-vw-cDA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -435,9 +435,9 @@
                             <constraint firstItem="XJs-0q-T0F" firstAttribute="centerX" secondItem="BEb-xd-suc" secondAttribute="centerX" id="Fn7-sC-4tM"/>
                             <constraint firstItem="PUN-Mp-tEZ" firstAttribute="centerX" secondItem="BEb-xd-suc" secondAttribute="centerX" id="HSD-ND-PiQ"/>
                             <constraint firstAttribute="bottom" secondItem="gkC-03-qgZ" secondAttribute="bottom" constant="50" id="ICz-ln-7oM"/>
-                            <constraint firstItem="XJs-0q-T0F" firstAttribute="top" secondItem="oGO-Gp-Gig" secondAttribute="bottom" constant="8" id="KE8-fQ-5Bh"/>
-                            <constraint firstItem="PUN-Mp-tEZ" firstAttribute="top" secondItem="oGO-Gp-Gig" secondAttribute="bottom" constant="19" id="RxR-ZS-7RP"/>
-                            <constraint firstItem="oGO-Gp-Gig" firstAttribute="top" secondItem="CZ9-y1-HMI" secondAttribute="bottom" constant="112" id="Vuc-5x-Zzl"/>
+                            <constraint firstItem="XJs-0q-T0F" firstAttribute="top" secondItem="oGO-Gp-Gig" secondAttribute="bottom" constant="10" id="KE8-fQ-5Bh"/>
+                            <constraint firstItem="PUN-Mp-tEZ" firstAttribute="top" secondItem="oGO-Gp-Gig" secondAttribute="bottom" constant="30" id="RxR-ZS-7RP"/>
+                            <constraint firstItem="oGO-Gp-Gig" firstAttribute="top" secondItem="CZ9-y1-HMI" secondAttribute="bottom" constant="98" id="Vuc-5x-Zzl"/>
                             <constraint firstItem="oGO-Gp-Gig" firstAttribute="leading" secondItem="Hre-4L-x8z" secondAttribute="leadingMargin" id="gTJ-0L-SAD"/>
                             <constraint firstItem="gkC-03-qgZ" firstAttribute="centerX" secondItem="BEb-xd-suc" secondAttribute="centerX" id="hWy-Dh-ddh"/>
                         </constraints>
@@ -455,7 +455,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ynY-1P-Axz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1858" y="4344"/>
+            <point key="canvasLocation" x="-1859.4202898550725" y="4343.4782608695659"/>
         </scene>
     </scenes>
     <resources>

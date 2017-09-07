@@ -21,9 +21,9 @@ extension LobbyViewController {
         setupTableView()
         let overlayView = setupBottomOverlayView()
 
-        let overlayHeight = isPlayerHost ? 70 : alertViewHeight
         let fakeWidth = tableView.widthAnchor.constraint(equalToConstant: 500)
         fakeWidth.priority = UILayoutPriority.defaultLow
+        overlayHeightConstraint = overlayView.heightAnchor.constraint(equalToConstant: alertViewHeight)
 
         let constraints = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -34,10 +34,10 @@ extension LobbyViewController {
             tableView.widthAnchor.constraint(lessThanOrEqualToConstant: 400),
             fakeWidth,
 
-            overlayView.bottomAnchor.constraint(equalTo: visualEffectView.bottomAnchor),
             overlayView.leftAnchor.constraint(equalTo: visualEffectView.leftAnchor),
             overlayView.rightAnchor.constraint(equalTo: visualEffectView.rightAnchor),
-            overlayView.heightAnchor.constraint(equalToConstant: isPreMatch ? overlayHeight : 0)
+            overlayView.bottomAnchor.constraint(equalTo: visualEffectView.bottomAnchor),
+            overlayHeightConstraint!
         ]
 
         NSLayoutConstraint.activate(constraints)
@@ -68,32 +68,31 @@ extension LobbyViewController {
         bottomOverlayView.clipsToBounds = true
         visualEffectView.contentView.addSubview(bottomOverlayView)
 
-        let button = WKRUIButton()
-        button.isHidden = !isPlayerHost
-        button.title = "Start Race"
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(startRaceButtonPressed), for: UIControlEvents.touchUpInside)
-        bottomOverlayView.contentView.addSubview(button)
+        startButton.isHidden = true
+        startButton.title = "Start Race"
+        startButton.translatesAutoresizingMaskIntoConstraints = false
+        startButton.addTarget(self, action: #selector(startRaceButtonPressed), for: UIControlEvents.touchUpInside)
+        bottomOverlayView.contentView.addSubview(startButton)
 
-        let label = UILabel()
-        label.isHidden = isPlayerHost
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.attributedText = NSAttributedString(string: "WAITING FOR HOST",
+        overlayLabel.textAlignment = .center
+        overlayLabel.adjustsFontSizeToFitWidth = true
+        overlayLabel.translatesAutoresizingMaskIntoConstraints = false
+        let string = isPlayerHost ? "INVITE PLAYERS TO RACE" : "WAITING FOR HOST"
+        overlayLabel.attributedText = NSAttributedString(string: string,
                                                   spacing: 2.0,
                                                   font: UIFont.systemFont(ofSize: 19.0))
-        bottomOverlayView.contentView.addSubview(label)
+        bottomOverlayView.contentView.addSubview(overlayLabel)
 
         let constraints = [
-            button.centerXAnchor.constraint(equalTo: bottomOverlayView.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: bottomOverlayView.centerYAnchor),
-            button.widthAnchor.constraint(equalToConstant: 250),
-            button.heightAnchor.constraint(equalToConstant: 40),
+            startButton.centerXAnchor.constraint(equalTo: bottomOverlayView.centerXAnchor),
+            startButton.centerYAnchor.constraint(equalTo: bottomOverlayView.centerYAnchor),
+            startButton.widthAnchor.constraint(equalToConstant: 250),
+            startButton.heightAnchor.constraint(equalToConstant: 40),
 
-            label.centerXAnchor.constraint(equalTo: bottomOverlayView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: bottomOverlayView.centerYAnchor),
-            label.widthAnchor.constraint(equalToConstant: 250),
-            label.heightAnchor.constraint(equalToConstant: 40)
+            overlayLabel.centerXAnchor.constraint(equalTo: bottomOverlayView.centerXAnchor),
+            overlayLabel.centerYAnchor.constraint(equalTo: bottomOverlayView.centerYAnchor),
+            overlayLabel.widthAnchor.constraint(equalTo: bottomOverlayView.widthAnchor),
+            overlayLabel.heightAnchor.constraint(equalTo: bottomOverlayView.heightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 
