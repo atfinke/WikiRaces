@@ -1,10 +1,16 @@
+var styleElement = document.createElement('style');
+document.documentElement.appendChild(styleElement);
+styleElement.textContent = `
+a[href^="/wiki/"] { background-color: #f5f5f5; font-weight: 500; }
+a[href*=":"] { background-color: white; font-weight: 400; }
+`;
+
 var special = document.getElementsByClassName("floatnone");
 for (var i = 0; i < special.length; i++) {
     special[i].innerHTML = "";
 }
 
 function makeThingsLookNice() {
-    
     // Close the sections
     var headers = document.getElementsByClassName("section-heading");
     for (var i = 0; i < headers.length; i++) {
@@ -12,7 +18,7 @@ function makeThingsLookNice() {
             headers[i].click();
         }
     }
-    
+
     // Hide dynamic tags
     var tagsToRemove = ["footer"]
     for (var i = 0; i < tagsToRemove.length; i++) {
@@ -21,15 +27,15 @@ function makeThingsLookNice() {
             elements[i].parentElement.removeChild(elements[i]);
         }
     }
-    
+
     // Remove sections
     var sectionsToRemove = ["Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
     for (var i = 0; i < sectionsToRemove.length; i++) {
         var sectionHeaderContent = document.getElementById(sectionsToRemove[i]);
-        
+
         if (typeof sectionHeaderContent !== 'undefined' && sectionHeaderContent != null) {
             var sectionHeader = sectionHeaderContent.parentElement;
-            
+
             var sectionContentID = sectionHeader.getAttribute("aria-controls");
             var sectionContent = document.getElementById(sectionContentID);
             if (typeof sectionContent !== 'undefined' && sectionContent != null) {
@@ -42,11 +48,7 @@ function makeThingsLookNice() {
             }
         }
     }
-    
 }
-document.body.style.background = 'white'
-
-
 
 var firstLength = 0;
 var checks = 0;

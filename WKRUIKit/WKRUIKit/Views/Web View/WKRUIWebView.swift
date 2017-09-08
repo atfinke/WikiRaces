@@ -38,7 +38,7 @@ public class WKRUIWebView: WKWebView {
         super.init(frame: .zero, configuration: config)
 
         isOpaque = false
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.white
         translatesAutoresizingMaskIntoConstraints = false
 
         allowsLinkPreview = false
