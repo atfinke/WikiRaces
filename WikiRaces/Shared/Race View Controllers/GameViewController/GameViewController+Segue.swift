@@ -58,7 +58,7 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.playerVoted = { [weak self] page in 
+            destination.playerVoted = { [weak self] page in
                 self?.manager.player(.voted(page))
             }
 
