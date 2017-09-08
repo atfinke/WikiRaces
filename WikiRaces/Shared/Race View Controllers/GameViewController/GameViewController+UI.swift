@@ -45,12 +45,7 @@ extension GameViewController {
             fatalError("Couldn't get window")
         }
 
-        alertView = WKRUIAlertView(window: window, presentationHandler: { [weak self] in
-            self?.alertViewWillAppear()
-        }, dismissalHandler: { [weak self] in
-            self?.alertViewWillDisappear()
-        })
-
+        alertView = WKRUIAlertView(window: window)
         manager.configure(webView: webView, alertView: alertView)
     }
 
@@ -67,13 +62,11 @@ extension GameViewController {
         view.addSubview(progressView)
         webView.progressView = progressView
 
-        bottomConstraint = webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-
         let constraints: [NSLayoutConstraint] = [
             webView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            bottomConstraint!,
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
             progressView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
             progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -131,31 +124,6 @@ extension GameViewController {
         }
         alertController.addAction(quitAction)
         return alertController
-    }
-
-    func alertViewWillAppear() {
-        let scrollView = webView.scrollView
-        var contentOffset = scrollView.contentOffset
-        let trueContentOffset = contentOffset.y - scrollView.contentInset.bottom
-
-        if trueContentOffset + scrollView.frame.height == scrollView.contentSize.height {
-            contentOffset.y += alertViewHeight
-        }
-
-        bottomConstraint?.constant = -alertViewHeight
-        view.setNeedsUpdateConstraints()
-        UIView.animate(withDuration: alertViewAnimateInDuration) {
-            self.view.layoutIfNeeded()
-            self.webView.scrollView.contentOffset = contentOffset
-        }
-    }
-
-    func alertViewWillDisappear() {
-        bottomConstraint?.constant = 0
-        view.setNeedsUpdateConstraints()
-        UIView.animate(withDuration: alertViewAnimateOutDuration) {
-            self.view.layoutIfNeeded()
-        }
     }
 
 }

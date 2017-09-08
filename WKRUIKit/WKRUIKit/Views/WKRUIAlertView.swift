@@ -26,9 +26,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     private var queue = [WKRAlertMessage]()
 
-    private let presentationHandler: () -> Void
-    private let dismissalHandler: () -> Void
-
     private let label = UILabel()
     private let alertWindow: UIWindow
     private var bottomConstraint: NSLayoutConstraint!
@@ -39,14 +36,8 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Initalization
 
-    public init(window: UIWindow,
-                presentationHandler: @escaping () -> Void,
-                dismissalHandler: @escaping () -> Void) {
-
+    public init(window: UIWindow) {
         alertWindow = window
-        self.presentationHandler = presentationHandler
-        self.dismissalHandler = dismissalHandler
-
         super.init()
 
         alertWindow.addSubview(self)
@@ -106,8 +97,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     private func present() {
         guard !queue.isEmpty, bottomConstraint.constant == height else { return }
 
-        presentationHandler()
-
         let message = queue.removeFirst()
         label.text = message.text.uppercased()
 
@@ -128,8 +117,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         bottomConstraint.constant = height
         alertWindow.setNeedsUpdateConstraints()
 
-        dismissalHandler()
-
         UIView.animate(withDuration: WKRUIConstants.alertAnimateOutDuration, animations: {
             self.alertWindow.layoutIfNeeded()
         }, completion: { _ in
@@ -138,18 +125,4 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         })
     }
 
-}
-
-extension UIViewController {
-    public var alertViewHeight: CGFloat {
-        return WKRUIConstants.alertHeight
-    }
-
-    public var alertViewAnimateInDuration: Double {
-        return WKRUIConstants.alertAnimateInDuration
-    }
-
-    public var alertViewAnimateOutDuration: Double {
-        return WKRUIConstants.alertAnimateOutDuration
-    }
 }

@@ -35,13 +35,11 @@ class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
-    var alertView: WKRUIAlertView!
-    var bottomConstraint: NSLayoutConstraint!
-
     let thinLine = UIView()
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
 
+    var alertView: WKRUIAlertView!
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 

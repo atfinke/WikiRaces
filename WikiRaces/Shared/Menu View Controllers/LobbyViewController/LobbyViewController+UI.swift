@@ -23,7 +23,7 @@ extension LobbyViewController {
 
         let fakeWidth = tableView.widthAnchor.constraint(equalToConstant: 500)
         fakeWidth.priority = UILayoutPriority.defaultLow
-        overlayHeightConstraint = overlayView.heightAnchor.constraint(equalToConstant: alertViewHeight)
+        overlayHeightConstraint = overlayView.heightAnchor.constraint(equalToConstant: 50)
 
         let constraints = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
