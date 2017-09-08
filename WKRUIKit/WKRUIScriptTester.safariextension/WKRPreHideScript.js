@@ -3,8 +3,8 @@ document.documentElement.appendChild(styleElement);
 
 styleElement.textContent = `
 sup { display: none !important; }
-a[href^="/wiki/"] { background-color: #f5f5f5; }
-a[href*=":"] { background-color: white; }
+a[href^="/wiki/"] { background-color: #f5f5f5; font-weight: 500; }
+a[href*=":"] { background-color: white; font-weight: 400; }
 
 .header { display : none !important; }
 .toc-mobile { display : none !important; }
@@ -32,5 +32,5 @@ a[href*=":"] { background-color: white; }
 #centralNotice { display: none !important; }
 `;
 
-document.documentElement.style.webkitTouchCallout='none'
-document.documentElement.style.webkitUserSelect='none'
+document.documentElement.style.webkitTouchCallout='none';
+document.documentElement.style.webkitUserSelect='none';
