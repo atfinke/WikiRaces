@@ -83,7 +83,7 @@ class GameViewController: UIViewController {
         //swiftlint:disable:next line_length
         let alertController = UIAlertController(title: "Forfeit The Round?", message: "Are you sure you want to forfeit? Try tapping the help button for a peek at the final article before making up your mind.", preferredStyle: .alert)
 
-        let cancelAction = UIAlertAction(title: "Resume", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
 
         let helpAction = UIAlertAction(title: "Help", style: .default) { _ in
@@ -91,6 +91,11 @@ class GameViewController: UIViewController {
             self.performSegue(.showHelp)
         }
         alertController.addAction(helpAction)
+
+        let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
+            self.webView.reload()
+        }
+        alertController.addAction(reloadAction)
 
         let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .destructive) { _ in
             self.manager.player(.forfeited)

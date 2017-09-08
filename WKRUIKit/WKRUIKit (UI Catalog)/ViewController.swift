@@ -13,7 +13,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = WKRUIWebView()
+        let webView = WKRUIWebView()
+        view = webView
+        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!))
         // Do any additional setup after loading the view, typically from a nib.
     }
 

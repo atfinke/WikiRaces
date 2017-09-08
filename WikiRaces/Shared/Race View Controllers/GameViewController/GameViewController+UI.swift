@@ -20,21 +20,9 @@ extension GameViewController {
         }
 
         navigationItem.hidesBackButton = true
-        navigationController.hidesBarsOnSwipe = true
-        navigationController.navigationBar.layer.zPosition = 0
-        navigationController.navigationBar.isTranslucent = false
-
-        let action = #selector(navigationControllerPanGestureUpdated(_:))
-        navigationController.barHideOnSwipeGestureRecognizer.addTarget(self, action: action)
 
         flagBarButtonItem = navigationItem.leftBarButtonItem
         quitBarButtonItem = navigationItem.rightBarButtonItem
-
-        let statusBarBackgroundView = UIView()
-        statusBarBackgroundView.backgroundColor = UIColor.white
-        statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        statusBarBackgroundView.layer.zPosition = 1
-        navigationView.addSubview(statusBarBackgroundView)
 
         thinLine.alpha = 0
         thinLine.backgroundColor = UIColor.wkrTextColor
@@ -44,15 +32,9 @@ extension GameViewController {
         setupWebView()
 
         let constraints: [NSLayoutConstraint] = [
-            statusBarBackgroundView.topAnchor.constraint(equalTo: navigationView.topAnchor),
-            statusBarBackgroundView.leftAnchor.constraint(equalTo: navigationView.leftAnchor),
-            statusBarBackgroundView.rightAnchor.constraint(equalTo: navigationView.rightAnchor),
-            statusBarBackgroundView.heightAnchor.constraint(
-                equalToConstant: UIApplication.shared.statusBarFrame.height),
-
-            thinLine.topAnchor.constraint(equalTo: statusBarBackgroundView.bottomAnchor),
-            thinLine.leftAnchor.constraint(equalTo: statusBarBackgroundView.leftAnchor),
-            thinLine.rightAnchor.constraint(equalTo: statusBarBackgroundView.rightAnchor),
+            thinLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
+            thinLine.leftAnchor.constraint(equalTo: navigationView.leftAnchor),
+            thinLine.rightAnchor.constraint(equalTo: navigationView.rightAnchor),
             thinLine.heightAnchor.constraint(equalToConstant: 1)
         ]
         NSLayoutConstraint.activate(constraints)
@@ -98,19 +80,6 @@ extension GameViewController {
             progressView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-    }
-
-    @objc func navigationControllerPanGestureUpdated(_ sender: UIPanGestureRecognizer) {
-        guard let yCord = navigationController?.navigationBar.frame.origin.y, sender.state == .ended else { return }
-        if yCord < 0 {
-            UIView.animate(withDuration: 0.25) {
-                self.thinLine.alpha = 0.2
-            }
-        } else {
-            UIView.animate(withDuration: 0.25) {
-                self.thinLine.alpha = 0.0
-            }
-        }
     }
 
     // MARK: - Alerts

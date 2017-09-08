@@ -112,7 +112,6 @@ extension GameViewController {
             } else {
                 resultsViewController?.state = state
             }
-            navigationController?.setNavigationBarHidden(false, animated: true)
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .race:

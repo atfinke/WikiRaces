@@ -35,6 +35,8 @@ extension WKRManager {
                 } else if attributes.linkOnPage {
                     linkHere = true
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+                } else if let wasViewingLink = self?.localPlayer.raceHistory?.entries.last?.linkHere, wasViewingLink {
+                    self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
                 }
             }
 

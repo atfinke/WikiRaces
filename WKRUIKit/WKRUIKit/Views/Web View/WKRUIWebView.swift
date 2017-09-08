@@ -76,10 +76,6 @@ public class WKRUIWebView: WKWebView {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(reload), for: .valueChanged)
-        scrollView.refreshControl = refreshControl
-
         addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),

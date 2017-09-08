@@ -49,11 +49,10 @@ class ResultsViewController: CenteredTableViewController {
                     return
                 }
 
+                tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .fade)
                 UIView.animate(withDuration: 0.75, animations: {
-                    cells.forEach { $0.detailLabel.alpha = 0.0 }
                     self.descriptionLabel.alpha = 0.0
                 }, completion: { _ in
-                    self.tableView.reloadData()
                     UIView.animate(withDuration: 0.75) {
                         cells.forEach { $0.detailLabel.alpha = 1.0 }
                     }
