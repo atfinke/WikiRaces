@@ -19,6 +19,7 @@ struct WKRCodable: Codable {
             case gameState = "WKRGameState"
             case playerState = "WKRPlayerState"
             case playerMessage = "WKRPlayerMessage"
+            case fatalError = "WKRFatalError"
         }
 
         private let type: WKREnumType

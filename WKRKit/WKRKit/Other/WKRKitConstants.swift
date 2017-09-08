@@ -10,8 +10,8 @@ import Foundation
 
 public class WKRKitConstants {
 
-    public static let version                          = 1
-    static let quickRaceTest                    = true
+    public static let version                   = 1
+    static let quickRaceTest                    = false
 
     static let articlesPlistName                = "WKRArticlesData"
     static let bundle                           = Bundle(identifier: "com.andrewfinke.WKRKit")

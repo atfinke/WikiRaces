@@ -22,6 +22,15 @@ public class WKRUIWebView: WKWebView {
 
     // MARK: - User Interface
 
+    public var text: String? {
+        set {
+            timeLabel.text = newValue
+        }
+        get {
+            return timeLabel.text
+        }
+    }
+
     private let timeLabel = UILabel()
     public var progressView: WKRUIProgressView? {
         didSet {
@@ -108,13 +117,12 @@ public class WKRUIWebView: WKWebView {
     public func completedPageLoad() {
         progressView?.hide()
 
+        isUserInteractionEnabled = true
         let duration = WKRUIConstants.webViewAnimateInDuration
 
         UIView.animate(withDuration: duration, delay: 0.0, options: .beginFromCurrentState, animations: {
             self.timeLabel.alpha = 0.0
-        }, completion: { _ in
-            self.isUserInteractionEnabled = true
-        })
+        }, completion: nil)
     }
 
     // MARK: - Web View Configuration

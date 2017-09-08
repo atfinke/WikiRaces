@@ -17,20 +17,26 @@ extension GameViewController {
     //swiftlint:disable line_length
     func setupManager() {
         #if MULTIWINDOWDEBUG
-            manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state in
+            manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
                 self.transition(to: state)
             }, pointsUpdate: { playerPoints in
                 StatsHelper.shared.completedRace(points: playerPoints)
-            }, playersUpdate: { players in
+            }, playersUpdate: { localPlayer, players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
+                self.webView.text = localPlayer.raceHistory?.entries.count.description
             })
         #else
-            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state in
-                self?.transition(to: state)
+            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
+                if let error = error {
+                    self?.errorOccurred(error)
+                } else {
+                    self?.transition(to: state)
+                }
             }, pointsUpdate: { playerPoints in
                 StatsHelper.shared.completedRace(points: playerPoints)
-            }, playersUpdate: {  [weak self] players in
+            }, playersUpdate: {  [weak self] localPlayer, players in
                 self?.lobbyViewController?.updatedConnectedPlayers(players: players)
+                self?.webView.text = localPlayer.raceHistory?.entries.count.description
             })
         #endif
 
@@ -62,36 +68,50 @@ extension GameViewController {
     }
     //swiftlint:enable line_length
 
-    //swiftlint:disable:next function_body_length
+    private func errorOccurred(_ error: WKRFatalError) {
+        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
+            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+        }
+        alertController.addAction(quitAction)
+
+        DispatchQueue.main.async {
+            self.dismissActiveController(completion: {
+                self.present(alertController, animated: true, completion: nil)
+                self.activeViewController = alertController
+            })
+        }
+    }
+
+    private func resetActiveControllers() {
+        alertController = nil
+        lobbyViewController = nil
+        votingViewController = nil
+        resultsViewController = nil
+    }
+
+    private func dismissActiveController(completion: (() -> Void)?) {
+        if let activeViewController = activeViewController, activeViewController.view.window != nil {
+            let controller: UIViewController?
+            if activeViewController.presentingViewController == self {
+                controller = activeViewController
+            } else {
+                controller = activeViewController.presentingViewController
+            }
+            controller?.dismiss(animated: true, completion: {
+                self.resetActiveControllers()
+                completion?()
+                return
+            })
+        } else {
+            resetActiveControllers()
+            completion?()
+        }
+    }
+
     private func transition(to state: WKRGameState) {
         guard state != gameState else { return }
         gameState = state
-
-        func resetActiveControllers() {
-            alertController = nil
-            lobbyViewController = nil
-            votingViewController = nil
-            resultsViewController = nil
-        }
-
-        func dismissActiveController(completion: (() -> Void)?) {
-            if let activeViewController = activeViewController, activeViewController.view.window != nil {
-                let controller: UIViewController?
-                if activeViewController.presentingViewController == self {
-                    controller = activeViewController
-                } else {
-                    controller = activeViewController.presentingViewController
-                }
-                controller?.dismiss(animated: true, completion: {
-                    resetActiveControllers()
-                    completion?()
-                    return
-                })
-            } else {
-                resetActiveControllers()
-                completion?()
-            }
-        }
 
         switch state {
         case .voting:

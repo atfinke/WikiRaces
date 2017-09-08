@@ -38,6 +38,8 @@ public class WKRManager {
 
     // MARK: - Properties
 
+    internal var isFailing = false
+
     internal let game: WKRGame
     internal let localPlayer: WKRPlayer
     internal let peerNetwork: WKRPeerNetwork
@@ -45,9 +47,9 @@ public class WKRManager {
 
     // MARK: - Closures
 
-    internal let stateUpdate: ((WKRGameState) -> Void)
+    internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
     internal let pointsUpdate: ((Int) -> Void)
-    internal let playersUpdate: (([WKRPlayer]) -> Void)
+    internal let playersUpdate: ((WKRPlayer, [WKRPlayer]) -> Void)
 
     internal var resultsShowReady: ((Bool) -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
@@ -66,9 +68,9 @@ public class WKRManager {
 
     internal init(player: WKRPlayer,
                   network: WKRPeerNetwork,
-                  stateUpdate: @escaping ((WKRGameState) -> Void),
+                  stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                   pointsUpdate: @escaping ((Int) -> Void),
-                  playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+                  playersUpdate: @escaping ((WKRPlayer, [WKRPlayer]) -> Void)) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
@@ -85,7 +87,7 @@ public class WKRManager {
         configure(network: peerNetwork)
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
-        playersUpdate(game.players)
+        playersUpdate(localPlayer, game.players)
     }
 
     // MARK: View Controller Closures

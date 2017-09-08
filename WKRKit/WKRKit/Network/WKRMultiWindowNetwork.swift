@@ -103,9 +103,9 @@ extension WKRManager {
     @available(*, deprecated, message: "Only for split view debugging")
     public convenience init(windowName: String,
                             isPlayerHost: Bool,
-                            stateUpdate: @escaping ((WKRGameState) -> Void),
+                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
-                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+                            playersUpdate: @escaping ((WKRPlayer, [WKRPlayer]) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
         let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)

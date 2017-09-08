@@ -115,7 +115,9 @@ extension WKRManager {
 
     private func prepareRaceConfig() {
         guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
-            fatalError("Failed to create race")
+            peerNetwork.send(object: WKRCodable(enum: WKRFatalError.configCreationFailed))
+            peerNetwork.disconnect()
+            return
         }
 
         peerNetwork.send(object: WKRCodable(raceConfig))
@@ -143,7 +145,8 @@ extension WKRManager {
                 self.sendPreRaceConfig()
                 self.prepareVotingCountdown()
             } else {
-                fatalError("Need to add connection failed error")
+                self.peerNetwork.send(object: WKRCodable(enum: WKRFatalError.configCreationFailed))
+                self.peerNetwork.disconnect()
             }
         }
     }
@@ -157,7 +160,9 @@ extension WKRManager {
         }
 
         guard let unwrappedObject = game.preRaceConfig else {
-            fatalError()
+            peerNetwork.send(object: WKRCodable(enum: WKRFatalError.configCreationFailed))
+            peerNetwork.disconnect()
+            return
         }
 
         peerNetwork.send(object: WKRCodable(unwrappedObject))

@@ -118,9 +118,9 @@ extension WKRManager {
     public convenience init(serviceType: String,
                             session: MCSession,
                             isPlayerHost: Bool,
-                            stateUpdate: @escaping ((WKRGameState) -> Void),
+                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
-                            playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
+                            playersUpdate: @escaping ((WKRPlayer, [WKRPlayer]) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)

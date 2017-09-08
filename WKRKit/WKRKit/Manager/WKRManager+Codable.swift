@@ -28,7 +28,7 @@ extension WKRManager {
             }
 
             game.playerUpdated(playerObject)
-            playersUpdate(game.players)
+            playersUpdate(localPlayer, game.players)
 
             // Player joined mid-session
             if playerObject.state == .connecting
@@ -53,6 +53,12 @@ extension WKRManager {
             if player != localPlayer.profile {
                 enqueue(message: message.text(for: player), duration: 2.0)
             }
+        } else if let error = object.typeOfEnum(WKRFatalError.self) {
+            isFailing = true
+            localPlayer.state = .quit
+            peerNetwork.send(object: WKRCodable(localPlayer))
+            peerNetwork.disconnect()
+            stateUpdate(gameState, error)
         } else {
             fatalError()
         }
@@ -123,7 +129,7 @@ extension WKRManager {
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
-        stateUpdate(state)
+        stateUpdate(state, nil)
     }
 
 }

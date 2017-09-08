@@ -16,7 +16,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
 
     var url: URL?
     var linkTapped: (() -> Void)?
-    
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -52,10 +52,6 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
             decisionHandler(.cancel)
             linkTapped?()
         }
-    }
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-
     }
 
 }

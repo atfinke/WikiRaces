@@ -14,7 +14,7 @@ struct DurationFormatter {
     static func string(for duration: Int?) -> String? {
         guard let duration = duration else { return nil }
         if duration > maxSeconds {
-            return (duration / 60).description + " S"
+            return (duration / 60).description + " M"
         } else {
             return duration.description + " S"
         }

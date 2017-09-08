@@ -71,7 +71,7 @@ function cleanPage() {
   console.log("WKRUIKit: Removed Tags");
 
   // Remove sections
-  var sectionsToRemove = ["Sources", "Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
+  var sectionsToRemove = ["Notes_and_references", "Sources", "Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
   for (var i = 0; i < sectionsToRemove.length; i++) {
     var sectionHeaderContent = document.getElementById(sectionsToRemove[i]);
 

@@ -79,7 +79,7 @@ class ResultsViewController: CenteredTableViewController {
     var timeRemaining: Int = 100 {
         didSet {
             tableView.isUserInteractionEnabled = true
-            descriptionLabel.text = "NEXT RACE STARTS IN " + timeRemaining.description + " S"
+            descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
         }
     }
 

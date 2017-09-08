@@ -25,7 +25,6 @@ extension GameViewController {
         performSegue(withIdentifier: segue.rawValue, sender: nil)
     }
 
-    //swiftlint:disable:next function_body_length
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController,
             let unwrappedSegueIdentifier = segue.identifier,
@@ -38,67 +37,79 @@ extension GameViewController {
             guard let destination = navigationController.rootViewController as? LobbyViewController else {
                 fatalError()
             }
-
-            destination.startButtonPressed = { [weak self] in
-                self?.manager.player(.startedGame)
-            }
-
-            destination.addPlayersButtonPressed = { [weak self] viewController in
-                if let controller = self?.manager.hostNetworkInterface() {
-                    viewController.present(controller, animated: true, completion: nil)
-                }
-            }
-
-            destination.isPlayerHost = isPlayerHost
-            destination.quitAlertController = quitAlertController(raceStarted: false)
-
-            self.lobbyViewController = destination
+            prepare(lobbyViewController: destination)
         case .showVoting:
             guard let destination = navigationController.rootViewController as? VotingViewController else {
                 fatalError()
             }
-
-            destination.playerVoted = { [weak self] page in
-                self?.manager.player(.voted(page))
-            }
-
-            destination.voteInfo = manager.voteInfo
-            destination.quitAlertController = quitAlertController(raceStarted: false)
-
-            self.votingViewController = destination
+            prepare(votingViewController: destination)
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {
                 fatalError()
             }
-
-            destination.readyButtonPressed = { [weak self] in
-                self?.manager.player(.ready)
-            }
-
-            destination.addPlayersButtonPressed = { [weak self] viewController in
-                if let controller = self?.manager.hostNetworkInterface() {
-                    viewController.present(controller, animated: true, completion: nil)
-                }
-            }
-
-            destination.state = manager.gameState
-            destination.resultsInfo = manager.hostResultsInfo
-            destination.isPlayerHost = isPlayerHost
-            destination.quitAlertController = quitAlertController(raceStarted: false)
-
-            self.resultsViewController = destination
+            prepare(resultsViewController: destination)
         case .showHelp:
             guard let destination = navigationController.rootViewController as? HelpViewController else {
                 fatalError()
             }
-
-            destination.linkTapped = { [weak self] in
-                self?.manager.enqueue(message: "Links disabled in help", duration: 2.0)
-            }
-
-            destination.url = manager.finalPageURL
-            self.activeViewController = destination
+            prepare(helpViewController: destination)
         }
+    }
+
+    private func prepare(lobbyViewController: LobbyViewController) {
+        lobbyViewController.startButtonPressed = { [weak self] in
+            self?.manager.player(.startedGame)
+        }
+
+        lobbyViewController.addPlayersButtonPressed = { [weak self] viewController in
+            if let controller = self?.manager.hostNetworkInterface() {
+                viewController.present(controller, animated: true, completion: nil)
+            }
+        }
+
+        lobbyViewController.isPlayerHost = isPlayerHost
+        lobbyViewController.quitAlertController = quitAlertController(raceStarted: false)
+
+        self.lobbyViewController = lobbyViewController
+    }
+
+    private func prepare(votingViewController: VotingViewController) {
+        votingViewController.playerVoted = { [weak self] page in
+            self?.manager.player(.voted(page))
+        }
+
+        votingViewController.voteInfo = manager.voteInfo
+        votingViewController.quitAlertController = quitAlertController(raceStarted: false)
+
+        self.votingViewController = votingViewController
+    }
+
+    private func prepare(resultsViewController: ResultsViewController) {
+        resultsViewController.readyButtonPressed = { [weak self] in
+            self?.manager.player(.ready)
+        }
+
+        resultsViewController.addPlayersButtonPressed = { [weak self] viewController in
+            if let controller = self?.manager.hostNetworkInterface() {
+                viewController.present(controller, animated: true, completion: nil)
+            }
+        }
+
+        resultsViewController.state = manager.gameState
+        resultsViewController.resultsInfo = manager.hostResultsInfo
+        resultsViewController.isPlayerHost = isPlayerHost
+        resultsViewController.quitAlertController = quitAlertController(raceStarted: false)
+
+        self.resultsViewController = resultsViewController
+    }
+
+    private func prepare(helpViewController: HelpViewController) {
+        helpViewController.linkTapped = { [weak self] in
+            self?.manager.enqueue(message: "Links disabled in help", duration: 2.0)
+        }
+
+        helpViewController.url = manager.finalPageURL
+        self.activeViewController = helpViewController
     }
 
 }
