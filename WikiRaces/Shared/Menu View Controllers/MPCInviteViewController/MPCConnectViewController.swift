@@ -27,7 +27,7 @@ class MPCConnectViewController: UIViewController {
 
     var isPlayerHost = false
     var isShowingInvite = false
-    var isFadingInElements = true
+    var isFirstAppear = true
 
     // MARK: - MPC Properties
 
@@ -78,6 +78,11 @@ class MPCConnectViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        guard isFirstAppear else {
+            return
+        }
+        isFirstAppear = false
+
         WKRConnectionTester.start { (success) in
             DispatchQueue.main.async {
                 if success {
@@ -92,11 +97,6 @@ class MPCConnectViewController: UIViewController {
             }
         }
 
-        guard isFadingInElements else {
-            return
-        }
-
-        isFadingInElements = false
         UIView.animate(withDuration: 0.5, animations: {
             self.descriptionLabel.alpha = 1.0
             self.activityIndicatorView.alpha = 1.0

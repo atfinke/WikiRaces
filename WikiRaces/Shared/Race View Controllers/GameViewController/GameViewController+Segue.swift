@@ -39,12 +39,14 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.startButtonPressed = {
-                self.manager.player(.startedGame)
+            destination.startButtonPressed = { [weak self] in
+                self?.manager.player(.startedGame)
             }
 
-            destination.addPlayersButtonPressed = { viewController in
-                viewController.present(self.manager.hostNetworkInterface(), animated: true, completion: nil)
+            destination.addPlayersButtonPressed = { [weak self] viewController in
+                if let controller = self?.manager.hostNetworkInterface() {
+                    viewController.present(controller, animated: true, completion: nil)
+                }
             }
 
             destination.isPlayerHost = isPlayerHost
@@ -56,8 +58,8 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.playerVoted = { page in
-                self.manager.player(.voted(page))
+            destination.playerVoted = { [weak self] page in 
+                self?.manager.player(.voted(page))
             }
 
             destination.voteInfo = manager.voteInfo
@@ -69,12 +71,14 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.readyButtonPressed = {
-                self.manager.player(.ready)
+            destination.readyButtonPressed = { [weak self] in
+                self?.manager.player(.ready)
             }
 
-            destination.addPlayersButtonPressed = { viewController in
-                viewController.present(self.manager.hostNetworkInterface(), animated: true, completion: nil)
+            destination.addPlayersButtonPressed = { [weak self] viewController in
+                if let controller = self?.manager.hostNetworkInterface() {
+                    viewController.present(controller, animated: true, completion: nil)
+                }
             }
 
             destination.state = manager.gameState
@@ -88,8 +92,8 @@ extension GameViewController {
                 fatalError()
             }
 
-            destination.linkTapped = {
-                self.manager.enqueue(message: "Links disabled in help", duration: 2.0)
+            destination.linkTapped = { [weak self] in
+                self?.manager.enqueue(message: "Links disabled in help", duration: 2.0)
             }
 
             destination.url = manager.finalPageURL

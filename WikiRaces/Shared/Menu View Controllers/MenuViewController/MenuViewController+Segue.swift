@@ -24,8 +24,7 @@ extension MenuViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationController = segue.destination as? UINavigationController,
-            let unwrappedSegueIdentifier = segue.identifier,
+        guard let unwrappedSegueIdentifier = segue.identifier,
             let segueIdentifier = Segue(rawValue: unwrappedSegueIdentifier),
             let isPlayerHost = sender as? Bool else {
                 fatalError("Unknown segue \(String(describing: segue.identifier))")
@@ -33,7 +32,8 @@ extension MenuViewController {
 
         switch segueIdentifier {
         case .debugBypass:
-            guard let destination = navigationController.rootViewController as? GameViewController else {
+            guard let destination = (segue.destination as? UINavigationController)?
+                .rootViewController as? GameViewController else {
                 fatalError()
             }
             destination.isPlayerHost = isPlayerHost
@@ -43,7 +43,7 @@ extension MenuViewController {
             #endif
         case .showConnecting:
             #if !MULTIWINDOWDEBUG
-                guard let destination = navigationController.rootViewController as? MPCConnectViewController else {
+                guard let destination = segue.destination as? MPCConnectViewController else {
                     fatalError()
                 }
                 destination.isPlayerHost = isPlayerHost

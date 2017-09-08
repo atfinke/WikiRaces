@@ -63,10 +63,10 @@ extension GameViewController {
             fatalError("Couldn't get window")
         }
 
-        alertView = WKRUIAlertView(window: window, presentationHandler: {
-            self.alertViewWillAppear()
-        }, dismissalHandler: {
-            self.alertViewWillDisappear()
+        alertView = WKRUIAlertView(window: window, presentationHandler: { [weak self] in
+            self?.alertViewWillAppear()
+        }, dismissalHandler: { [weak self] in
+            self?.alertViewWillDisappear()
         })
 
         manager.configure(webView: webView, alertView: alertView)
@@ -126,14 +126,39 @@ extension GameViewController {
         alertController.addAction(cancelAction)
 
         if raceStarted {
-            let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) { _ in
-                self.manager.player(.forfeited)
+            let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
+                self?.manager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
         }
-        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
-            self.manager.player(.quit)
-            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) {  [weak self] _ in
+            self?.manager.player(.quit)
+
+            guard let window = self?.view.window else {
+                NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+                return
+            }
+            let fadeView = UIView()
+            fadeView.backgroundColor = UIColor.white
+            fadeView.alpha = 0.0
+            fadeView.translatesAutoresizingMaskIntoConstraints = false
+            window.addSubview(fadeView)
+
+            let constraints = [
+                fadeView.leftAnchor.constraint(equalTo: window.leftAnchor),
+                fadeView.rightAnchor.constraint(equalTo: window.rightAnchor),
+                fadeView.topAnchor.constraint(equalTo: window.topAnchor),
+                fadeView.bottomAnchor.constraint(equalTo: window.bottomAnchor)
+            ]
+            NSLayoutConstraint.activate(constraints)
+
+            UIView.animate(withDuration: 0.5, animations: {
+                //fadeView.alpha = 1.0
+            }, completion: { _ in
+                //self?.navigationController?.dismiss(animated: true, completion: nil)
+                NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+                fadeView.removeFromSuperview()
+            })
         }
         alertController.addAction(quitAction)
         return alertController

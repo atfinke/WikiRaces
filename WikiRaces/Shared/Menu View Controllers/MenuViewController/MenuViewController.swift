@@ -61,7 +61,9 @@ class MenuViewController: UIViewController {
         //swiftlint:disable:next discarded_notification_center_observer line_length
         NotificationCenter.default.addObserver(forName: NSNotification.Name("PlayerQuit"), object: nil, queue: nil) { _ in
             DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
             }
         }
     }

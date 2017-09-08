@@ -35,7 +35,7 @@ class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
-    weak var alertView: WKRUIAlertView!
+    var alertView: WKRUIAlertView!
     var bottomConstraint: NSLayoutConstraint!
 
     let thinLine = UIView()
@@ -47,17 +47,17 @@ class GameViewController: UIViewController {
 
     // MARK: - View Controllers
 
-    weak var activeViewController: UIViewController?
-    weak var alertController: UIAlertController? {
+    var activeViewController: UIViewController?
+    var alertController: UIAlertController? {
         didSet { activeViewController = alertController }
     }
-    weak var lobbyViewController: LobbyViewController? {
+    var lobbyViewController: LobbyViewController? {
         didSet { activeViewController = lobbyViewController }
     }
-    weak var votingViewController: VotingViewController? {
+    var votingViewController: VotingViewController? {
         didSet { activeViewController = votingViewController }
     }
-    weak var resultsViewController: ResultsViewController? {
+    var resultsViewController: ResultsViewController? {
         didSet { activeViewController = resultsViewController }
     }
 

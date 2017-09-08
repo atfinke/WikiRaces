@@ -46,6 +46,7 @@ public class WKRManager {
     // MARK: - Closures
 
     internal let stateUpdate: ((WKRGameState) -> Void)
+    internal let pointsUpdate: ((Int) -> Void)
     internal let playersUpdate: (([WKRPlayer]) -> Void)
 
     internal var resultsShowReady: ((Bool) -> Void)?
@@ -66,9 +67,11 @@ public class WKRManager {
     internal init(player: WKRPlayer,
                   network: WKRPeerNetwork,
                   stateUpdate: @escaping ((WKRGameState) -> Void),
+                  pointsUpdate: @escaping ((Int) -> Void),
                   playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
         self.stateUpdate = stateUpdate
+        self.pointsUpdate = pointsUpdate
         self.playersUpdate = playersUpdate
 
         localPlayer = player
@@ -106,8 +109,8 @@ public class WKRManager {
         resultsInfoHostUpdate = hostInfoUpdate
 
         game.readyStatesUpdated = readyStatesUpdate
-        game.localResultsUpdated = { results in
-            if self.gameState == .results || self.gameState == .race {
+        game.localResultsUpdated = { [weak self] results in
+            if self?.gameState == .results || self?.gameState == .race {
                 infoUpdate(results)
             }
         }

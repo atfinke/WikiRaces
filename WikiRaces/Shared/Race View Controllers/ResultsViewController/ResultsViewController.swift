@@ -99,8 +99,9 @@ class ResultsViewController: CenteredTableViewController {
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
 
-    deinit {
-        print("DEINIT: RSULTS")
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        quitAlertController = nil
     }
 
     // MARK: - Actions

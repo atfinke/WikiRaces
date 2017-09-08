@@ -19,41 +19,45 @@ extension GameViewController {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state in
                 self.transition(to: state)
+            }, pointsUpdate: { playerPoints in
+                StatsHelper.shared.completedRace(points: playerPoints)
             }, playersUpdate: { players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
             })
         #else
-            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: { state in
-                self.transition(to: state)
-            }, playersUpdate: { players in
-                self.lobbyViewController?.updatedConnectedPlayers(players: players)
+            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state in
+                self?.transition(to: state)
+            }, pointsUpdate: { playerPoints in
+                StatsHelper.shared.completedRace(points: playerPoints)
+            }, playersUpdate: {  [weak self] players in
+                self?.lobbyViewController?.updatedConnectedPlayers(players: players)
             })
         #endif
 
-        manager.voting(timeUpdate: { time in
-            self.votingViewController?.voteTimeRemaing = time
-        }, infoUpdate: { voteInfo in
-            self.votingViewController?.voteInfo = voteInfo
-        }, finalPageUpdate: { page in
-            self.finalPage = page
-            self.votingViewController?.finalPageSelected(page)
+        manager.voting(timeUpdate: { [weak self] time in
+            self?.votingViewController?.voteTimeRemaing = time
+        }, infoUpdate: { [weak self] voteInfo in
+            self?.votingViewController?.voteInfo = voteInfo
+        }, finalPageUpdate: { [weak self] page in
+            self?.finalPage = page
+            self?.votingViewController?.finalPageSelected(page)
             UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
-                self.webView.alpha = 1.0
+                self?.webView.alpha = 1.0
             }, completion: nil)
         })
 
-        manager.results(showReady: { showReady in
-            self.resultsViewController?.showReadyUpButton(showReady)
-        }, timeUpdate: { time in
-            self.resultsViewController?.timeRemaining = time
-        }, infoUpdate: { resultsInfo in
-            if self.resultsViewController?.state != .hostResults {
-                self.resultsViewController?.resultsInfo = resultsInfo
+        manager.results(showReady: { [weak self] showReady in
+            self?.resultsViewController?.showReadyUpButton(showReady)
+        }, timeUpdate: { [weak self] time in
+            self?.resultsViewController?.timeRemaining = time
+        }, infoUpdate: { [weak self] resultsInfo in
+            if self?.resultsViewController?.state != .hostResults {
+                self?.resultsViewController?.resultsInfo = resultsInfo
             }
-        }, hostInfoUpdate: { resultsInfo in
-            self.resultsViewController?.resultsInfo = resultsInfo
-        }, readyStatesUpdate: { readyStates in
-            self.resultsViewController?.readyStates = readyStates
+        }, hostInfoUpdate: { [weak self] resultsInfo in
+            self?.resultsViewController?.resultsInfo = resultsInfo
+        }, readyStatesUpdate: { [weak self] readyStates in
+            self?.resultsViewController?.readyStates = readyStates
         })
     }
     //swiftlint:enable line_length

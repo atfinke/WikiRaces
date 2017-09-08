@@ -39,6 +39,11 @@ class LobbyViewController: UIViewController {
         setupInterface()
     }
 
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        quitAlertController = nil
+    }
+
     // MARK: - WKRGame
 
     func updatedConnectedPlayers(players: [WKRPlayer]) {
@@ -61,7 +66,7 @@ class LobbyViewController: UIViewController {
             tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .automatic)
         }
 
-        if isViewLoaded && players.count > 1 && overlayHeightConstraint.constant != 70 {
+        if isViewLoaded && isPlayerHost && players.count > 1 && overlayHeightConstraint.constant != 70 {
             overlayHeightConstraint.constant = 70
             view.layoutIfNeeded()
             startButton.isHidden = false

@@ -33,10 +33,6 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
         webView.load(URLRequest(url: url))
     }
 
-    deinit {
-        print("DEINIT HELP")
-    }
-    
     // MARK: - Actions
 
     @IBAction func doneButtonPressed() {

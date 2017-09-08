@@ -15,21 +15,24 @@ extension WKRManager {
     func configure(game: WKRGame) {
         guard localPlayer.isHost else { fatalError() }
 
-        game.allPlayersReadyForNextRound = {
-            if self.localPlayer.isHost && self.gameState == .hostResults {
-                self.finishResultsCountdown()
+        game.allPlayersReadyForNextRound = { [weak self] in
+            guard let isHost = self?.localPlayer.isHost, let gameState = self?.gameState else {
+                return
+            }
+            if isHost && gameState == .hostResults {
+                self?.finishResultsCountdown()
             }
         }
-        game.bonusPointsUpdated = { points in
+        game.bonusPointsUpdated = { [weak self] points in
             let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
-            self.peerNetwork.send(object: bonusPoints)
+            self?.peerNetwork.send(object: bonusPoints)
         }
-        game.hostResultsCreated = { result in
+        game.hostResultsCreated = { [weak self] result in
             DispatchQueue.main.async {
                 let state = WKRGameState.hostResults
-                self.peerNetwork.send(object: WKRCodable(enum: state))
-                self.peerNetwork.send(object: WKRCodable(result))
-                self.prepareResultsCountdown()
+                self?.peerNetwork.send(object: WKRCodable(enum: state))
+                self?.peerNetwork.send(object: WKRCodable(result))
+                self?.prepareResultsCountdown()
             }
         }
     }

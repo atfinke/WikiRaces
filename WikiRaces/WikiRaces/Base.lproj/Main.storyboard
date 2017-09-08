@@ -24,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qql-th-QPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3706" y="3413"/>
+            <point key="canvasLocation" x="-3600" y="3460"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="Hht-95-HbY">
@@ -79,13 +79,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="z3G-gq-PJH"/>
                     <connections>
-                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="debugBypass" animates="NO" id="k21-21-dCC"/>
-                        <segue destination="I8K-Sx-emB" kind="presentation" identifier="showConnecting" animates="NO" modalTransitionStyle="crossDissolve" id="KLB-Im-FQP"/>
+                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="debugBypass" modalTransitionStyle="crossDissolve" id="k21-21-dCC"/>
+                        <segue destination="Rm3-nl-L5i" kind="show" identifier="showConnecting" animates="NO" id="6EH-uo-IMt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h6-Ob-HSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2979" y="3414"/>
+            <point key="canvasLocation" x="-2880" y="3460"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6H5-H1-hFz">
@@ -343,21 +343,6 @@
             </objects>
             <point key="canvasLocation" x="2438" y="2767"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="RpP-jd-SOH">
-            <objects>
-                <navigationController navigationBarHidden="YES" id="I8K-Sx-emB" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Kom-b0-Fp8">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Rm3-nl-L5i" kind="relationship" relationship="rootViewController" id="SSp-vy-QUR"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xZS-sd-Eae" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2392" y="4344"/>
-        </scene>
         <!--Connect View Controller-->
         <scene sceneID="DlZ-aT-q9j">
             <objects>
@@ -450,18 +435,18 @@
                         <outlet property="descriptionLabel" destination="oGO-Gp-Gig" id="AqL-H2-U2t"/>
                         <outlet property="inviteView" destination="XJs-0q-T0F" id="gOC-Jp-Bgv"/>
                         <outlet property="senderLabel" destination="boz-Uf-mgc" id="bOx-GA-LFi"/>
-                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="showRace" animates="NO" id="KE1-Om-bnI"/>
+                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="showRace" modalTransitionStyle="crossDissolve" id="KE1-Om-bnI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ynY-1P-Axz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1859.4202898550725" y="4343.4782608695659"/>
+            <point key="canvasLocation" x="-2109" y="3022"/>
         </scene>
     </scenes>
     <resources>
         <image name="flag" width="17" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KE1-Om-bnI"/>
+        <segue reference="k21-21-dCC"/>
     </inferredMetricsTieBreakers>
 </document>

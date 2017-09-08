@@ -13,16 +13,18 @@ extension WKRManager {
     // MARK: - WKRPeerNetwort
 
     func configure(network: WKRPeerNetwork) {
-        network.objectReceived = { object, profile in
+        network.objectReceived = { [weak self]object, profile in
             DispatchQueue.main.async {
-                self.receivedCodable(object, from: profile)
+                self?.receivedCodable(object, from: profile)
             }
         }
-        network.playerConnected = { profile in
-            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+        network.playerConnected = { [weak self] profile in
+            if let player = self?.localPlayer {
+                self?.peerNetwork.send(object: WKRCodable(player))
+            }
         }
-        network.playerDisconnected = { profile in
-            self.game.playerDisconnected(profile)
+        network.playerDisconnected = { [weak self] profile in
+            self?.game.playerDisconnected(profile)
         }
     }
 

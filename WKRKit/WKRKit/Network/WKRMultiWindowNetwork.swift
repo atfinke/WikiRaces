@@ -87,7 +87,7 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     }
 
     func disconnect() {
-        fatalError()
+        print("Would Disconnect")
     }
 
     func hostNetworkInterface() -> UIViewController {
@@ -104,12 +104,17 @@ extension WKRManager {
     public convenience init(windowName: String,
                             isPlayerHost: Bool,
                             stateUpdate: @escaping ((WKRGameState) -> Void),
+                            pointsUpdate: @escaping ((Int) -> Void),
                             playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
         let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)
 
-        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
+        self.init(player: player,
+                  network: network,
+                  stateUpdate: stateUpdate,
+                  pointsUpdate: pointsUpdate,
+                  playersUpdate: playersUpdate)
     }
 
 }

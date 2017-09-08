@@ -74,7 +74,10 @@ class VotingViewController: CenteredTableViewController {
         }
     }
 
-
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        quitAlertController = nil
+    }
 
     // MARK: = Actions
 

@@ -19,11 +19,11 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
 
     // MARK: - Properties
 
-    private let session: MCSession
+    private weak var session: MCSession?
     private let serviceType: String
 
     var connectedPlayers: Int {
-        return session.connectedPeers.count
+        return session?.connectedPeers.count ?? 0
     }
 
     // MARK: - Initialization
@@ -38,11 +38,11 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     // MARK: - WKRNetwork
 
     func disconnect() {
-        session.disconnect()
+        session?.disconnect()
     }
 
     func send(object: WKRCodable) {
-        guard let data = try? WKRCodable.encoder.encode(object) else { return }
+        guard let session = session, let data = try? WKRCodable.encoder.encode(object) else { return }
         do {
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
             objectReceived?(object, WKRPlayerProfile(peerID: session.myPeerID))
@@ -52,6 +52,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     internal func hostNetworkInterface() -> UIViewController {
+        guard let session = session else { fatalError() }
         let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
         browserViewController.maximumNumberOfPeers = 8
         browserViewController.delegate = self
@@ -117,13 +118,18 @@ extension WKRManager {
     public convenience init(serviceType: String,
                             session: MCSession,
                             isPlayerHost: Bool,
-                            stateUpdate:   @escaping ((WKRGameState) -> Void),
+                            stateUpdate: @escaping ((WKRGameState) -> Void),
+                            pointsUpdate: @escaping ((Int) -> Void),
                             playersUpdate: @escaping (([WKRPlayer]) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)
 
-        self.init(player: player, network: network, stateUpdate: stateUpdate, playersUpdate: playersUpdate)
+        self.init(player: player,
+                  network: network,
+                  stateUpdate: stateUpdate,
+                  pointsUpdate: pointsUpdate,
+                  playersUpdate: playersUpdate)
     }
 
 }
