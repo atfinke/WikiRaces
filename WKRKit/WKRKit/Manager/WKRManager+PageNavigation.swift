@@ -28,14 +28,17 @@ extension WKRManager {
             var linkHere = false
             var foundPage = false
 
+            let lastPageHadLink = self?.localPlayer.raceHistory?.entries.last?.linkHere ?? false
             if let attributes = self?.game.activeRace?.attributesFor(page) {
                 if attributes.foundPage {
                     foundPage = true
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
                 } else if attributes.linkOnPage {
                     linkHere = true
-                    self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
-                } else if let wasViewingLink = self?.localPlayer.raceHistory?.entries.last?.linkHere, wasViewingLink {
+                    if !lastPageHadLink {
+                        self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+                    }
+                } else if lastPageHadLink {
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
                 }
             }

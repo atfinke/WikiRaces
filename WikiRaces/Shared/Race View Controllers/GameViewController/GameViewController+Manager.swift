@@ -23,7 +23,8 @@ extension GameViewController {
                 StatsHelper.shared.completedRace(points: playerPoints)
             }, playersUpdate: { localPlayer, players in
                 self.lobbyViewController?.updatedConnectedPlayers(players: players)
-                self.webView.text = localPlayer.raceHistory?.entries.count.description
+                // remove counter increment during page load
+                self.webView.text = localPlayer.raceHistory?.entries.filter({ $0.duration != nil }).count.description
             })
         #else
             manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
@@ -36,7 +37,8 @@ extension GameViewController {
                 StatsHelper.shared.completedRace(points: playerPoints)
             }, playersUpdate: {  [weak self] localPlayer, players in
                 self?.lobbyViewController?.updatedConnectedPlayers(players: players)
-                self?.webView.text = localPlayer.raceHistory?.entries.count.description
+                // remove counter increment during page load
+                self?.webView.text = localPlayer.raceHistory?.entries.filter({ $0.duration != nil }).count.description
             })
         #endif
 

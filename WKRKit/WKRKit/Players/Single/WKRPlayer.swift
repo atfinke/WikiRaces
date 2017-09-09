@@ -18,7 +18,7 @@ public class WKRPlayer: Codable, Hashable {
     public var raceHistory: WKRHistory?
     public var state: WKRPlayerState = .connecting
 
-    public let profile: WKRPlayerProfile
+    internal let profile: WKRPlayerProfile
     public var name: String {
         return profile.name
     }

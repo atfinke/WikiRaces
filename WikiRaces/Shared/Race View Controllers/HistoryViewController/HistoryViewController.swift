@@ -12,13 +12,13 @@ import WKRKit
 class HistoryViewController: UITableViewController {
 
     private var entries = [WKRHistoryEntry]()
-    private var playerState = WKRPlayerState.connecting
+    private var currentPlayerState = WKRPlayerState.connecting
 
     var player: WKRPlayer? {
         didSet {
             guard let player = player, let history = player.raceHistory else {
                 entries = []
-                playerState = .connecting
+                currentPlayerState = .connecting
                 tableView.reloadData()
                 return
             }
@@ -26,11 +26,11 @@ class HistoryViewController: UITableViewController {
             title = player.name
 
             tableView.beginUpdates()
-            if player.state != playerState {
+            if player.state != currentPlayerState {
                 let lastIndex = IndexPath(row: history.entries.count - 1)
                 tableView.reloadRows(at: [lastIndex], with: .top)
             }
-            playerState = player.state
+            currentPlayerState = player.state
 
             for (index, entry) in history.entries.enumerated() {
                 if index < entries.count {
@@ -83,10 +83,10 @@ class HistoryViewController: UITableViewController {
         cell.isShowingActivityIndicatorView = false
         if let duration = DurationFormatter.string(for: entry.duration) {
             cell.detailTextLabel?.text = duration
-        } else if playerState == .racing {
+        } else if currentPlayerState == .racing {
             cell.isShowingActivityIndicatorView = true
         } else {
-            cell.detailTextLabel?.text = playerState.text
+            cell.detailTextLabel?.text = currentPlayerState.text
         }
 
         return cell

@@ -32,7 +32,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
             // I can't stand Iphone / Os X
             if title.first == "i" {
                 return title
-            } else if title.contains("OS X") {
+            } else if title.contains("OS X") || title.contains("R2-D2") || title.contains("C-3PO") {
                 return title
             } else {
                 return title.capitalized

@@ -12,23 +12,31 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Properties
 
-    public var playerRaceCount: Int {
-        return players.count
+    public var playerCount: Int {
+        return playersSortedByState.count
     }
 
-    public var playerPointsCount: Int {
-        return points.count
-    }
+    private var playersSortedByState: [WKRPlayer]!
+    private var playersSortedByPoints: [WKRPlayer]
 
-    private var players: [WKRPlayer]
-    private let points: [WKRPlayerProfile: Int]
+    private let racePoints: [WKRPlayerProfile: Int]
+    private let sessionPoints: [WKRPlayerProfile: Int]
 
     // MARK: Initialization
 
-    init(players: [WKRPlayer], points: [WKRPlayerProfile: Int]) {
-        self.players = players
-        self.points = points
-        self.players = sortedPlayers()
+    init(players: [WKRPlayer], racePoints: [WKRPlayerProfile: Int], sessionPoints: [WKRPlayerProfile: Int]) {
+        self.racePoints = racePoints
+
+        // remove players that weren't in race
+        let playerProfiles = players.map { $0.profile }
+        self.sessionPoints = sessionPoints.filter { playerProfiles.contains($0.key) }
+        self.playersSortedByPoints = players.sorted(by: { (lhs, rhs) -> Bool in
+            return lhs.profile.name < rhs.profile.name
+        }).sorted(by: { (lhs, rhs) -> Bool in
+            return sessionPoints[lhs.profile] ?? 0 > sessionPoints[rhs.profile] ?? 0
+        })
+
+        self.playersSortedByState = sortedPlayers(players: players)
     }
 
     // MARK: - Player Order
@@ -44,7 +52,7 @@ public struct WKRResultsInfo: Codable {
      5. Players that are still racing
      6. Players that are stuck in connecting phase
      */
-    private func sortedPlayers() -> [WKRPlayer] {
+    private func sortedPlayers(players: [WKRPlayer]) -> [WKRPlayer] {
         // The players the found the page
         let foundPagePlayers = players.filter({ $0.state == .foundPage })
             .sorted(by: { (lhs, rhs) -> Bool in
@@ -96,36 +104,24 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Helpers
 
-    public func pointsInfo(at index: Int) -> (profile: WKRPlayerProfile, points: Int) {
-        let sortedPlayers = points.sorted(by: { $0.value > $1.value })
-        let player = sortedPlayers[index]
-        return (player.key, player.value)
+    internal func raceRewardPoints(for player: WKRPlayer) -> Int? {
+        return racePoints[player.profile]
     }
 
-    internal func pointsInfo(for player: WKRPlayer) -> Int? {
-        guard playerPointsCount > 0 && pointsInfo(at: 0).points > 0 else {
-            return nil
-        }
-        return points[player.profile]
+    // used to update history controller cells
+    public func updatedPlayer(for player: WKRPlayer) -> WKRPlayer? {
+        guard let updatedPlayerIndex = playersSortedByState.index(of: player) else { return nil }
+        return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func player(at index: Int) -> WKRPlayer {
-        return players[index]
+    public func raceResults(at index: Int) ->(player: WKRPlayer, playerState: WKRPlayerState) {
+        let player = playersSortedByState[index]
+        return (player, player.state)
     }
 
-    public func player(for profile: WKRPlayerProfile) -> WKRPlayer? {
-        for player in players where player.profile == profile {
-            return player
-        }
-        return nil
+    public func sessionResults(at index: Int) -> (profile: WKRPlayerProfile, points: Int) {
+        let player = playersSortedByPoints[index]
+        return (player.profile, sessionPoints[player.profile] ?? 0)
     }
 
-    public mutating func updatePlayers(_ newPlayers: [WKRPlayer]) {
-        for player in newPlayers {
-            if let index = players.index(of: player) {
-                players[index].state = player.state
-            }
-        }
-        players = sortedPlayers()
-    }
 }

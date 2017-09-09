@@ -28,8 +28,7 @@ extension WKRManager {
         network.playerDisconnected = { [weak self] profile in
             let disconnectedPlayerIsHost = self?.game.players.filter({ $0.profile == profile }).first?.isHost ?? false
             if disconnectedPlayerIsHost {
-                self?.peerNetwork.send(object: WKRCodable(enum: WKRFatalError.disconnected))
-                self?.peerNetwork.disconnect()
+                self?.errorOccurred(.disconnected)
             }
             self?.game.playerDisconnected(profile)
         }

@@ -138,6 +138,19 @@ public class WKRManager {
 
     // MARK: - Actions
 
+    internal func errorOccurred(_ error: WKRFatalError) {
+        isFailing = true
+        let codable = WKRCodable(enum: error)
+        receivedEnum(codable, from: localPlayer.profile)
+        if error == .configCreationFailed {
+            peerNetwork.send(object: codable)
+        }
+        localPlayer.state = .quit
+        peerNetwork.send(object: WKRCodable(localPlayer))
+        stateUpdate(gameState, error)
+        peerNetwork.disconnect()
+    }
+
     public func player(_ action: WKRPlayerAction) {
         switch action {
         case .ready:

@@ -14,11 +14,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if state == .points {
-            return resultsInfo?.playerPointsCount ?? 0
-        } else {
-            return resultsInfo?.playerRaceCount ?? 0
-        }
+        return resultsInfo?.playerCount ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -34,29 +30,27 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     private func configure(cell: ResultsTableViewCell, with resultsInfo: WKRResultsInfo, at index: Int) {
         switch state {
         case .results, .hostResults:
-            let player = resultsInfo.player(at: index)
-            cell.playerLabel.text = player.name
+            let raceResults = resultsInfo.raceResults(at: index)
+            cell.playerLabel.text = raceResults.player.name
             cell.isShowingActivityIndicatorView = false
-            cell.accessoryType = (readyStates?.playerReady(player) ?? false) ? .checkmark : .none
+            cell.accessoryType = (readyStates?.playerReady(raceResults.player) ?? false) ? .checkmark : .none
 
-            if player.state == .racing {
+            if raceResults.playerState == .racing {
                 cell.isShowingActivityIndicatorView = true
-            } else if player.state == .foundPage {
-                cell.playerLabel.text = player.name
-                cell.detailLabel.text = DurationFormatter.string(for: player.raceHistory?.duration)
+            } else if raceResults.playerState == .foundPage {
+                cell.detailLabel.text = DurationFormatter.string(for: raceResults.player.raceHistory?.duration)
             } else {
-                cell.playerLabel.text = player.name
-                cell.detailLabel.text = player.state.text
+                cell.detailLabel.text = raceResults.playerState.text
             }
         case .points:
-            let pointsInfo = resultsInfo.pointsInfo(at: index)
+            let sessionResults = resultsInfo.sessionResults(at: index)
             cell.isShowingActivityIndicatorView = false
-            cell.playerLabel.text = pointsInfo.profile.name
+            cell.playerLabel.text = (index + 1).description + ". " + sessionResults.profile.name
             cell.accessoryType = .none
-            if pointsInfo.points == 1 {
-                cell.detailLabel.text = pointsInfo.points.description + " PT"
+            if sessionResults.points == 1 {
+                cell.detailLabel.text = sessionResults.points.description + " PT"
             } else {
-                cell.detailLabel.text = pointsInfo.points.description + " PTS"
+                cell.detailLabel.text = sessionResults.points.description + " PTS"
             }
         default:
             fatalError()
@@ -69,8 +63,8 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         guard let resultsInfo = resultsInfo else {
             return
         }
-        let player = resultsInfo.player(at: indexPath.row)
-        performSegue(withIdentifier: "showHistory", sender: player)
+        let raceResults = resultsInfo.raceResults(at: indexPath.row)
+        performSegue(withIdentifier: "showHistory", sender: raceResults.player)
     }
 
 }

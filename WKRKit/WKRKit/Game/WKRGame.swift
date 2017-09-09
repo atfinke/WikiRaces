@@ -115,26 +115,27 @@ public class WKRGame {
     // MARK: - Race End
 
     func checkForRaceEnd() {
-        var totalPoints = [WKRPlayerProfile: Int]()
+        var sessionPoints = [WKRPlayerProfile: Int]()
         for race in completedRaces {
             for (player, points) in race.calculatePoints() {
-                if let previousPoints = totalPoints[player] {
-                    totalPoints[player] = previousPoints + points
+                if let previousPoints = sessionPoints[player] {
+                    sessionPoints[player] = previousPoints + points
                 } else {
-                    totalPoints[player] = points
+                    sessionPoints[player] = points
                 }
             }
         }
 
-        for (player, points) in activeRace?.calculatePoints() ?? [:] {
-            if let previousPoints = totalPoints[player] {
-                totalPoints[player] = previousPoints + points
+        let racePoints = activeRace?.calculatePoints() ?? [:]
+        for (player, points) in racePoints {
+            if let previousPoints = sessionPoints[player] {
+                sessionPoints[player] = previousPoints + points
             } else {
-                totalPoints[player] = points
+                sessionPoints[player] = points
             }
         }
 
-        let currentResults = WKRResultsInfo(players: players, points: totalPoints)
+        let currentResults = WKRResultsInfo(players: players, racePoints: racePoints, sessionPoints: sessionPoints)
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
             localResultsUpdated?(currentResults)
             return
@@ -144,7 +145,7 @@ public class WKRGame {
         for player in adjustedPlayers where player.state == .racing {
             player.state = .forcedEnd
         }
-        let results = WKRResultsInfo(players: adjustedPlayers, points: totalPoints)
+        let results = WKRResultsInfo(players: adjustedPlayers, racePoints: racePoints, sessionPoints: sessionPoints)
         finishedRace()
         hostResultsCreated?(results)
     }

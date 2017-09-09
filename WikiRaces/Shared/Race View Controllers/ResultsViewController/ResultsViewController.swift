@@ -22,6 +22,8 @@ class ResultsViewController: CenteredTableViewController {
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
     @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
 
+    // MARK: - Game States
+
     var isPlayerHost = false {
         didSet {
             if isPlayerHost {
@@ -173,7 +175,7 @@ class ResultsViewController: CenteredTableViewController {
 
     func updateHistoryController() {
         guard let player = historyViewController?.player,
-            let updatedPlayer = resultsInfo?.player(for: player.profile) else {
+            let updatedPlayer = resultsInfo?.updatedPlayer(for: player) else {
                 return
         }
         historyViewController?.player = updatedPlayer

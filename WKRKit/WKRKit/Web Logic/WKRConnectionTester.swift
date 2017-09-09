@@ -10,11 +10,11 @@ import Foundation
 
 public struct WKRConnectionTester {
 
-    public static func start(completionHandler: @escaping (_ connected: Bool) -> Void) {
+    public static func start(timeout: Double = 4.0, completionHandler: @escaping (_ connected: Bool) -> Void) {
         let startDate = Date()
         var timedOut = false
 
-        let timer = Timer.scheduledTimer(withTimeInterval: 4.0, repeats: false) { _ in
+        let timer = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { _ in
             timedOut = true
             completionHandler(false)
         }
