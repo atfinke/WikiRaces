@@ -51,7 +51,7 @@ extension WKRManager {
             transitionGameState(to: gameState)
         } else if let message = object.typeOfEnum(WKRPlayerMessage.self) {
             if player != localPlayer.profile {
-                enqueue(message: message.text(for: player), duration: 2.0)
+                enqueue(message: message.text(for: player), duration: 5.0)
             }
         } else if let error = object.typeOfEnum(WKRFatalError.self) {
             isFailing = true
@@ -119,7 +119,9 @@ extension WKRManager {
             }
         case .race:
             guard let raceConfig = game.raceConfig else {
-                fatalError()
+                self.peerNetwork.send(object: WKRCodable(enum: WKRFatalError.configCreationFailed))
+                self.peerNetwork.disconnect()
+                return
             }
             localPlayer.startedNewRace(on: raceConfig.startingPage)
         case .hostResults:

@@ -49,8 +49,8 @@ extension WKRManager {
             if foundPage {
                 localPlayer.state = .foundPage
                 self?.transitionGameState(to: .results)
-                self?.peerNetwork.send(object: WKRCodable(localPlayer))
             }
+            self?.peerNetwork.send(object: WKRCodable(localPlayer))
         })
     }
 

@@ -101,5 +101,5 @@ extension GameViewController {
         alertController.addAction(quitAction)
         return alertController
     }
-    
+
 }

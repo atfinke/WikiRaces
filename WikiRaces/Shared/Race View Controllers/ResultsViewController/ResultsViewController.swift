@@ -14,6 +14,7 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
+    let idleLabel = UILabel()
     var quitAlertController: UIAlertController?
     private var historyViewController: HistoryViewController?
 
@@ -33,31 +34,7 @@ class ResultsViewController: CenteredTableViewController {
 
     var state: WKRGameState = .results {
         didSet {
-            if state == .results || state == .hostResults {
-                title = "RESULTS"
-                tableView.isUserInteractionEnabled = true
-                tableView.reloadData()
-            } else {
-                title = "STANDINGS"
-                tableView.isUserInteractionEnabled = false
-                if let activeViewController = presentedViewController,
-                    type(of: activeViewController) != UIAlertController.self {
-                    dismiss(animated: true, completion: nil)
-                }
-
-                guard let cells = tableView.visibleCells as? [ResultsTableViewCell] else {
-                    return
-                }
-
-                tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .fade)
-                UIView.animate(withDuration: 0.75, animations: {
-                    self.descriptionLabel.alpha = 0.0
-                }, completion: { _ in
-                    UIView.animate(withDuration: 0.75) {
-                        cells.forEach { $0.detailLabel.alpha = 1.0 }
-                    }
-                })
-            }
+            updatedState(oldState: oldValue)
         }
     }
 
@@ -78,8 +55,7 @@ class ResultsViewController: CenteredTableViewController {
 
     var timeRemaining: Int = 100 {
         didSet {
-            tableView.isUserInteractionEnabled = true
-            descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
+            updatedTime(oldTime: oldValue)
         }
     }
 
@@ -91,11 +67,26 @@ class ResultsViewController: CenteredTableViewController {
         registerTableView(for: self)
         overlayButtonTitle = "Ready up"
 
-        descriptionLabel.text = "WAITING FOR PLAYERS"
+        descriptionLabel.text = "TAP PLAYER TO VIEW PROGRESS"
         descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+
+        idleLabel.textAlignment = .center
+        idleLabel.textColor = UIColor.wkrLightTextColor
+        idleLabel.text = "WAITING FOR PLAYERS TO FINISH"
+        idleLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        idleLabel.adjustsFontSizeToFitWidth = true
+        idleLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(idleLabel)
+
+        let constraints = [
+            idleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            idleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            idleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -123,13 +114,62 @@ class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - Helpers
+    // MARK: - Game Updates
 
-    func resultsEnded() {
-        UIView.animate(withDuration: 0.5) {
-            self.descriptionLabel.alpha = 0.0
+    private func updatedState(oldState: WKRGameState) {
+        if state == .results || state == .hostResults {
+            title = "RESULTS"
+            tableView.isUserInteractionEnabled = true
+            tableView.reloadData()
+            if state == .hostResults && idleLabel.alpha != 0 {
+                UIView.animate(withDuration: 0.5) {
+                    self.idleLabel.alpha = 0.0
+                }
+            }
+        } else {
+            title = "STANDINGS"
+            tableView.isUserInteractionEnabled = false
+            if let activeViewController = presentedViewController,
+                type(of: activeViewController) != UIAlertController.self {
+                dismiss(animated: true, completion: nil)
+            }
+
+            if oldState != .points {
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.tableView.alpha = 0.0
+                }, completion: { _ in
+                    self.tableView.reloadData()
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.tableView.alpha = 1.0
+                    })
+                })
+            } else {
+                self.tableView.reloadData()
+            }
+
+            UIView.animate(withDuration: 0.75, animations: {
+                self.descriptionLabel.alpha = 0.0
+            })
         }
     }
+
+    private func updatedTime(oldTime: Int) {
+        tableView.isUserInteractionEnabled = true
+        if oldTime == 100 {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.descriptionLabel.alpha = 0.0
+            }, completion: { _ in
+                self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
+                UIView.animate(withDuration: 0.25, animations: {
+                    self.descriptionLabel.alpha = 1.0
+                })
+            })
+        } else {
+            descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
+        }
+    }
+
+    // MARK: - Helpers
 
     func updateHistoryController() {
         guard let player = historyViewController?.player,

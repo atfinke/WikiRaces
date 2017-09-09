@@ -64,7 +64,11 @@ struct WKRActiveRace {
             return times[lhs] ?? 0 < times[rhs] ?? 0
         }
         for (index, player) in positions.enumerated() {
-            points[player.profile] = players.count - index - 1 + bonusPoints
+            if index == 0 {
+                points[player.profile] = players.count - 1 + bonusPoints
+            } else {
+                points[player.profile] = players.count - index - 1 + bonusPoints
+            }
         }
         return points
     }

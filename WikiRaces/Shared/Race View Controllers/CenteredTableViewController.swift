@@ -35,6 +35,8 @@ class CenteredTableViewController: UIViewController {
     let overlayButton = WKRUIButton()
     let descriptionLabel = UILabel()
     let tableView = WKRUICenteredTableView()
+
+    var contentView: UIView!
     var overlayBottomConstraint: NSLayoutConstraint!
 
     // MARK: - View Life Cycle
@@ -58,10 +60,12 @@ class CenteredTableViewController: UIViewController {
 
         descriptionLabel.textAlignment = .center
         descriptionLabel.font = UIFont(monospaceSize: 20.0)
+        descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         visualEffectView.contentView.addSubview(descriptionLabel)
 
         self.view = visualEffectView
+        self.contentView = visualEffectView.contentView
 
         let overlayView = setupBottomOverlayView()
         overlayBottomConstraint = overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 70)

@@ -30,6 +30,8 @@ extension MenuViewController {
                 fatalError("Unknown segue \(String(describing: segue.identifier))")
         }
 
+        UIApplication.shared.isIdleTimerDisabled = true
+
         switch segueIdentifier {
         case .debugBypass:
             guard let destination = (segue.destination as? UINavigationController)?

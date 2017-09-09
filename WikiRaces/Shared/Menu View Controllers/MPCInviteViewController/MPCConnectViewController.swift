@@ -145,7 +145,7 @@ class MPCConnectViewController: UIViewController {
             self.activityIndicatorView.alpha = 0.0
             self.cancelButton.alpha = 0.0
         }, completion: { _ in
-            self.navigationController?.presentingViewController?.dismiss(animated: true, completion: nil)
+            self.navigationController?.popToRootViewController(animated: false)
         })
     }
 

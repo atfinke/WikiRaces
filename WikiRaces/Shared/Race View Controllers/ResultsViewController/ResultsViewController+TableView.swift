@@ -14,7 +14,11 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resultsInfo?.playerCount ?? 0
+        if state == .points {
+            return resultsInfo?.playerPointsCount ?? 0
+        } else {
+            return resultsInfo?.playerRaceCount ?? 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,19 +42,21 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             if player.state == .racing {
                 cell.isShowingActivityIndicatorView = true
             } else if player.state == .foundPage {
+                cell.playerLabel.text = player.name
                 cell.detailLabel.text = DurationFormatter.string(for: player.raceHistory?.duration)
             } else {
+                cell.playerLabel.text = player.name
                 cell.detailLabel.text = player.state.text
             }
         case .points:
-            let points = resultsInfo.pointsInfo(at: index)
+            let pointsInfo = resultsInfo.pointsInfo(at: index)
             cell.isShowingActivityIndicatorView = false
-            cell.playerLabel.text = points.player.name
+            cell.playerLabel.text = place + ": " + pointsInfo.profile.name
             cell.accessoryType = .none
-            if points.points == 1 {
-                cell.detailLabel.text = points.points.description + " PT"
+            if pointsInfo.points == 1 {
+                cell.detailLabel.text = pointsInfo.points.description + " PT"
             } else {
-                cell.detailLabel.text = points.points.description + " PTS"
+                cell.detailLabel.text = pointsInfo.points.description + " PTS"
             }
         default:
             fatalError()

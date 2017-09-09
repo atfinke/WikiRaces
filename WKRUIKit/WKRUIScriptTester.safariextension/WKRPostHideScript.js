@@ -19,6 +19,7 @@ a[href*=":"] { background-color: white; font-weight: 400; }
 .read-more-container { display: none !important; }
 .cleanup.mw-mf-cleanup { display: none !important; }
 
+.mbox-small { display : none !important; }
 #edit-page { display : none !important; }
 #page-actions { display : none !important; }
 #page-secondary-actions { display : none !important; }
@@ -42,10 +43,9 @@ for (var i = 0; i < special.length; i++) {
   special[i].innerHTML = "";
 }
 
-console.log("WKRUIKit: Remove Floats");
+console.log("WKRUIKit: Removed Floats");
 
 function cleanPage() {
-
   console.log("WKRUIKit: cleanPage");
 
   // Close the sections
@@ -72,7 +72,7 @@ function cleanPage() {
   console.log("WKRUIKit: Removed Tags");
 
   // Remove sections
-  var sectionsToRemove = ["Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
+  var sectionsToRemove = ["Notes_and_references", "Sources", "Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
   for (var i = 0; i < sectionsToRemove.length; i++) {
     var sectionHeaderContent = document.getElementById(sectionsToRemove[i]);
 
@@ -104,8 +104,9 @@ function setUserInteracted() {
   userInteracted = true
   console.log("WKRUIKit: User Interacted");
 }
-document.onmousedown = setUserInteracted;
 document.ontouchstart = setUserInteracted;
+document.onmousedown = setUserInteracted;
+window.onload = cleanPage();
 
 var firstLength = 0;
 var checks = 0;
@@ -114,14 +115,14 @@ var interval = setInterval(function() {
   console.log("WKRUIKit: Check (" + checks.toString() + ")");
   if (firstLength == 0) {
     firstLength = document.documentElement.innerHTML.length;
-    console.log("WKRUIKit: Got first page length" + firstLength.toString());
-  } else if (firstLength < document.documentElement.innerHTML.length) {
+    console.log("WKRUIKit: Got first page length (" + firstLength.toString() + ")");
+  } else if (firstLength + 100 < document.documentElement.innerHTML.length) {
     setTimeout(function() { cleanPage() }, 200);
     clearInterval(interval);
-    console.log("WKRUIKit: Got longer page length" + document.documentElement.innerHTML.length.toString());
+    console.log("WKRUIKit: Got longer page length (" + document.documentElement.innerHTML.length.toString() + ")");
     return;
-  } else if (checks > 250) {
-    setTimeout(function() { cleanPage() }, 6000);
+  } else if (checks > 500) {
+    cleanPage();
     clearInterval(interval);
     console.log("WKRUIKit: Stopped checking for load due to check count");
     return;

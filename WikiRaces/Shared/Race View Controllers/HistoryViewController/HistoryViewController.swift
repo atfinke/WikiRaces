@@ -28,7 +28,7 @@ class HistoryViewController: UITableViewController {
             tableView.beginUpdates()
             if player.state != playerState {
                 let lastIndex = IndexPath(row: history.entries.count - 1)
-                tableView.reloadRows(at: [lastIndex], with: .automatic)
+                tableView.reloadRows(at: [lastIndex], with: .top)
             }
             playerState = player.state
 

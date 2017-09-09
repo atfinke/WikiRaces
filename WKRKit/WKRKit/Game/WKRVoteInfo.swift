@@ -34,10 +34,6 @@ public struct WKRVoteInfo: Codable {
         playerVotes[profile] = page
     }
 
-    internal mutating func playerDisconnected(_ profile: WKRPlayerProfile) {
-        playerVotes[profile] = nil
-    }
-
     internal func selectFinalPage() -> WKRPage? {
         var votes = [WKRPage: Int]()
         pages.forEach { votes[$0] = 0 }

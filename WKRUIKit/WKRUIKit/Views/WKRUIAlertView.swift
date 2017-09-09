@@ -45,7 +45,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         label.textColor = UIColor.wkrTextColor
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.font = UIFont.systemFont(ofSize: 19)
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(label)
 

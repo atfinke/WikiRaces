@@ -12,8 +12,12 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Properties
 
-    public var playerCount: Int {
+    public var playerRaceCount: Int {
         return players.count
+    }
+
+    public var playerPointsCount: Int {
+        return points.count
     }
 
     private var players: [WKRPlayer]
@@ -92,23 +96,17 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Helpers
 
-    public func pointsInfo(at index: Int) -> (player: WKRPlayer, points: Int) {
-        let player = players[index]
-        if let points = points[player.profile] {
-            return (player, points)
-        } else {
-            return (player, 0)
-        }
+    public func pointsInfo(at index: Int) -> (profile: WKRPlayerProfile, points: Int) {
+        let sortedPlayers = points.sorted(by: { $0.value > $1.value })
+        let player = sortedPlayers[index]
+        return (player.key, player.value)
     }
 
     internal func pointsInfo(for player: WKRPlayer) -> Int? {
-        guard pointsInfo(at: 0).points > 0 else {
+        guard playerPointsCount > 0 && pointsInfo(at: 0).points > 0 else {
             return nil
         }
-        if let index = players.index(of: player) {
-            return pointsInfo(at: index).points
-        }
-        return nil
+        return points[player.profile]
     }
 
     public func player(at index: Int) -> WKRPlayer {

@@ -14,7 +14,7 @@ extension GameViewController {
 
     // MARK: - WKRManager
 
-    //swiftlint:disable line_length
+    //swiftlint:disable line_length function_body_length
     func setupManager() {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
@@ -70,7 +70,7 @@ extension GameViewController {
 
     private func errorOccurred(_ error: WKRFatalError) {
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
-        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) { _ in
+        let quitAction = UIAlertAction(title: "Menu", style: .default) { _ in
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
         alertController.addAction(quitAction)

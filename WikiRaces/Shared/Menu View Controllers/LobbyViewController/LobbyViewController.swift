@@ -63,7 +63,7 @@ class LobbyViewController: UIViewController {
         }
         for player in players where !displayedPlayers.contains(player) {
             displayedPlayers.append(player)
-            tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .automatic)
+            tableView.insertRows(at: [IndexPath(row: displayedPlayers.count - 1)], with: .fade)
         }
 
         if isViewLoaded && isPlayerHost && players.count > 1 && overlayHeightConstraint.constant != 70 {

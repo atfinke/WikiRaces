@@ -81,7 +81,8 @@ public class WKRGame {
     }
 
     internal func playerDisconnected(_ profile: WKRPlayerProfile) {
-        preRaceConfig?.voteInfo.playerDisconnected(profile)
+        guard let player = players.filter({ $0.profile == profile }).first else { return }
+        player.state = .disconnected
         checkForRaceEnd()
     }
 
@@ -93,6 +94,10 @@ public class WKRGame {
         } else {
             players.append(player)
         }
+        if player.state == .foundPage {
+            bonusTimer?.invalidate()
+        }
+
         activeRace?.playerUpdated(player)
         checkForRaceEnd()
 

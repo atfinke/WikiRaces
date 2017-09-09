@@ -2,6 +2,7 @@ var styleElement = document.createElement('style');
 document.documentElement.appendChild(styleElement);
 
 styleElement.textContent = `
+
 sup { display: none !important; }
 a[href^="/wiki/"] { background-color: #f5f5f5; font-weight: 500; }
 a[href*=":"] { background-color: white; font-weight: 400; }
@@ -19,6 +20,7 @@ a[href*=":"] { background-color: white; font-weight: 400; }
 .read-more-container { display: none !important; }
 .cleanup.mw-mf-cleanup { display: none !important; }
 
+.mbox-small { display : none !important; }
 #edit-page { display : none !important; }
 #page-actions { display : none !important; }
 #page-secondary-actions { display : none !important; }

@@ -128,6 +128,7 @@ class MenuViewController: UIViewController {
 
     func animateMenuIn() {
         view.isUserInteractionEnabled = false
+        UIApplication.shared.isIdleTimerDisabled = false
 
         puzzleTimer?.invalidate()
         puzzleTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
