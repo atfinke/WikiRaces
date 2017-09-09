@@ -51,7 +51,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         case .points:
             let pointsInfo = resultsInfo.pointsInfo(at: index)
             cell.isShowingActivityIndicatorView = false
-            cell.playerLabel.text = place + ": " + pointsInfo.profile.name
+            cell.playerLabel.text = pointsInfo.profile.name
             cell.accessoryType = .none
             if pointsInfo.points == 1 {
                 cell.detailLabel.text = pointsInfo.points.description + " PT"
