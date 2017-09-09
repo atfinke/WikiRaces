@@ -49,18 +49,14 @@ extension WKRManager {
     internal func receivedEnum(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let gameState = object.typeOfEnum(WKRGameState.self) {
             transitionGameState(to: gameState)
-        } else if let message = object.typeOfEnum(WKRPlayerMessage.self) {
-            if player != localPlayer.profile {
-                enqueue(message: message.text(for: player), duration: 5.0)
-            }
+        } else if let message = object.typeOfEnum(WKRPlayerMessage.self), player != localPlayer.profile {
+            enqueue(message: message.text(for: player), duration: 5.0)
         } else if let error = object.typeOfEnum(WKRFatalError.self), !isFailing {
             isFailing = true
             localPlayer.state = .quit
             peerNetwork.send(object: WKRCodable(localPlayer))
             peerNetwork.disconnect()
             stateUpdate(gameState, error)
-        } else {
-            fatalError()
         }
     }
 

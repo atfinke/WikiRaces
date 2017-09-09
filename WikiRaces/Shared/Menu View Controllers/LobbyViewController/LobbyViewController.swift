@@ -20,10 +20,9 @@ class LobbyViewController: UIViewController {
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
 
     let startButton = WKRUIButton()
-
+    let descriptionLabel = UILabel()
+    
     let tableView = UITableView()
-    let overlayLabel = UILabel()
-    let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
     var overlayHeightConstraint: NSLayoutConstraint!
 
     let playerCellReuseIdentifier = "playerCell"
@@ -70,7 +69,7 @@ class LobbyViewController: UIViewController {
             overlayHeightConstraint.constant = 70
             view.layoutIfNeeded()
             startButton.isHidden = false
-            overlayLabel.isHidden = true
+            descriptionLabel.isHidden = true
         }
     }
 
