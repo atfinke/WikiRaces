@@ -26,11 +26,19 @@ extension WKRManager {
             }
         }
         network.playerDisconnected = { [weak self] profile in
-            let disconnectedPlayerIsHost = self?.game.players.filter({ $0.profile == profile }).first?.isHost ?? false
-            if disconnectedPlayerIsHost {
-                self?.errorOccurred(.disconnected)
+            if profile == self?.localPlayer.profile {
+                if self?.gameState != .preMatch {
+                    self?.errorOccurred(.noPeers)
+                }
+            } else {
+                let disconnectedPlayerIsHost = self?.game.players.filter({
+                    return $0.profile == profile
+                }).first?.isHost ?? false
+                if disconnectedPlayerIsHost {
+                    self?.errorOccurred(.disconnected)
+                }
+                self?.game.playerDisconnected(profile)
             }
-            self?.game.playerDisconnected(profile)
         }
     }
 

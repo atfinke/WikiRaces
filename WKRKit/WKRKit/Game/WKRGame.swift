@@ -82,7 +82,7 @@ public class WKRGame {
 
     internal func playerDisconnected(_ profile: WKRPlayerProfile) {
         guard let player = players.filter({ $0.profile == profile }).first else { return }
-        player.state = .disconnected
+        player.state = .quit
         checkForRaceEnd()
     }
 

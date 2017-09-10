@@ -23,6 +23,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.white
+        navigationController?.view.backgroundColor = UIColor.white
 
         let webView = WKRUIWebView()
         webView.navigationDelegate = self

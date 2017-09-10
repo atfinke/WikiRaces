@@ -22,6 +22,7 @@ extension WKRManager {
                 player.finishedViewingLastPage()
                 self?.peerNetwork.send(object: WKRCodable(player))
             }
+            self?.linkCountUpdate(self?.localPlayer.raceHistory?.count ?? 0)
         }, pageLoaded: { [weak self] page in
             self?.webView.completedPageLoad()
 

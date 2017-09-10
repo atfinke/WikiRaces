@@ -14,13 +14,12 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    let idleLabel = UILabel()
-    var quitAlertController: UIAlertController?
+    private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
 
     var readyButtonPressed: (() -> Void)?
+    var quitAlertController: UIAlertController?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
-    @IBOutlet weak var addPlayersBarButtonItem: UIBarButtonItem?
 
     // MARK: - Game States
 
@@ -69,31 +68,26 @@ class ResultsViewController: CenteredTableViewController {
         registerTableView(for: self)
         overlayButtonTitle = "Ready up"
 
-        descriptionLabel.text = "TAP PLAYER TO VIEW PROGRESS"
+        descriptionLabel.text = "WAITING FOR PLAYERS TO FINISH"
         descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
 
-        idleLabel.textAlignment = .center
-        idleLabel.textColor = UIColor.wkrLightTextColor
-        idleLabel.text = "WAITING FOR PLAYERS TO FINISH"
-        idleLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
-        idleLabel.adjustsFontSizeToFitWidth = true
-        idleLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(idleLabel)
+        infoLabel.textAlignment = .center
+        infoLabel.textColor = UIColor.wkrLightTextColor
+        infoLabel.text = "TAP PLAYER TO VIEW PROGRESS"
+        infoLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        infoLabel.adjustsFontSizeToFitWidth = true
+        infoLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(infoLabel)
 
         let constraints = [
-            idleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            idleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            idleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
+            infoLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
+            infoLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
+            infoLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        quitAlertController = nil
     }
 
     // MARK: - Actions
@@ -123,11 +117,6 @@ class ResultsViewController: CenteredTableViewController {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
             tableView.reloadData()
-            if state == .hostResults && idleLabel.alpha != 0 {
-                UIView.animate(withDuration: 0.5) {
-                    self.idleLabel.alpha = 0.0
-                }
-            }
         } else {
             title = "STANDINGS"
             tableView.isUserInteractionEnabled = false
@@ -139,6 +128,7 @@ class ResultsViewController: CenteredTableViewController {
             if oldState != .points {
                 UIView.animate(withDuration: 0.4, animations: {
                     self.tableView.alpha = 0.0
+                    self.infoLabel.alpha = 0.0
                 }, completion: { _ in
                     self.tableView.reloadData()
                     UIView.animate(withDuration: 0.4, animations: {
@@ -191,10 +181,11 @@ class ResultsViewController: CenteredTableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationNavigationController = segue.destination as? UINavigationController,
-            let destination = destinationNavigationController.rootViewController as? HistoryViewController else {
+            let destination = destinationNavigationController.rootViewController as? HistoryViewController,
+            let player = sender as? WKRPlayer else {
                 fatalError()
         }
-        let player = sender as? WKRPlayer
+
         destination.player = player
         historyViewController = destination
     }

@@ -26,9 +26,7 @@ extension WKRManager {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
                 peerNetwork.send(object: WKRCodable(localPlayer))
             }
-
             game.playerUpdated(playerObject)
-            playersUpdate(localPlayer, game.players)
 
             // Player joined mid-session
             if playerObject.state == .connecting

@@ -19,10 +19,14 @@ extension GameViewController {
                 fatalError()
         }
 
-        navigationItem.hidesBackButton = true
+        navigationController.setNavigationBarHidden(true, animated: false)
 
         flagBarButtonItem = navigationItem.leftBarButtonItem
         quitBarButtonItem = navigationItem.rightBarButtonItem
+
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
 
         thinLine.alpha = 0
         thinLine.backgroundColor = UIColor.wkrTextColor

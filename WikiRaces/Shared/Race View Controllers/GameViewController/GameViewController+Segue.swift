@@ -13,7 +13,6 @@ extension GameViewController {
     // MARK: - Types
 
     enum Segue: String {
-        case showPlayers
         case showVoting
         case showResults
         case showHelp
@@ -33,11 +32,6 @@ extension GameViewController {
         }
 
         switch segueIdentifier {
-        case .showPlayers:
-            guard let destination = navigationController.rootViewController as? LobbyViewController else {
-                fatalError()
-            }
-            prepare(lobbyViewController: destination)
         case .showVoting:
             guard let destination = navigationController.rootViewController as? VotingViewController else {
                 fatalError()
@@ -55,24 +49,6 @@ extension GameViewController {
             prepare(helpViewController: destination)
         }
     }
-
-    private func prepare(lobbyViewController: LobbyViewController) {
-        lobbyViewController.startButtonPressed = { [weak self] in
-            self?.manager.player(.startedGame)
-        }
-
-        lobbyViewController.addPlayersButtonPressed = { [weak self] viewController in
-            if let controller = self?.manager.hostNetworkInterface() {
-                viewController.present(controller, animated: true, completion: nil)
-            }
-        }
-
-        lobbyViewController.isPlayerHost = isPlayerHost
-        lobbyViewController.quitAlertController = quitAlertController(raceStarted: false)
-
-        self.lobbyViewController = lobbyViewController
-    }
-
     private func prepare(votingViewController: VotingViewController) {
         votingViewController.playerVoted = { [weak self] page in
             self?.manager.player(.voted(page))

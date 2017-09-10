@@ -76,6 +76,9 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
         case .notConnected: playerDisconnected?(WKRPlayerProfile(peerID: peerID))
         default: break
         }
+        if session.connectedPeers.isEmpty {
+            playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
+        }
     }
 
     // MARK: - MCBrowserViewControllerDelegate
@@ -120,7 +123,7 @@ extension WKRManager {
                             isPlayerHost: Bool,
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
-                            playersUpdate: @escaping ((WKRPlayer, [WKRPlayer]) -> Void)) {
+                            linkCountUpdate: @escaping ((Int) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)
@@ -129,7 +132,7 @@ extension WKRManager {
                   network: network,
                   stateUpdate: stateUpdate,
                   pointsUpdate: pointsUpdate,
-                  playersUpdate: playersUpdate)
+                  linkCountUpdate: linkCountUpdate)
     }
 
 }

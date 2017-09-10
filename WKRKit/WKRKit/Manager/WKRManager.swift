@@ -49,7 +49,7 @@ public class WKRManager {
 
     internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
     internal let pointsUpdate: ((Int) -> Void)
-    internal let playersUpdate: ((WKRPlayer, [WKRPlayer]) -> Void)
+    internal let linkCountUpdate: ((Int) -> Void)
 
     internal var resultsShowReady: ((Bool) -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
@@ -70,11 +70,11 @@ public class WKRManager {
                   network: WKRPeerNetwork,
                   stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                   pointsUpdate: @escaping ((Int) -> Void),
-                  playersUpdate: @escaping ((WKRPlayer, [WKRPlayer]) -> Void)) {
+                  linkCountUpdate: @escaping ((Int) -> Void)) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
-        self.playersUpdate = playersUpdate
+        self.linkCountUpdate = linkCountUpdate
 
         localPlayer = player
         peerNetwork = network
@@ -87,7 +87,6 @@ public class WKRManager {
         configure(network: peerNetwork)
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
-        playersUpdate(localPlayer, game.players)
     }
 
     // MARK: View Controller Closures
@@ -142,7 +141,7 @@ public class WKRManager {
         isFailing = true
         let codable = WKRCodable(enum: error)
         receivedEnum(codable, from: localPlayer.profile)
-        if error == .configCreationFailed {
+        if error == .configCreationFailed && localPlayer.isHost {
             peerNetwork.send(object: codable)
         }
         localPlayer.state = .quit

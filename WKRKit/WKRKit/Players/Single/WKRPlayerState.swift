@@ -18,7 +18,6 @@ public enum WKRPlayerState: String, Codable {
     case connecting
     case readyForNextRound
     case voting
-    case disconnected
 
     var isRacing: Bool {
         switch self {
@@ -35,14 +34,13 @@ public enum WKRPlayerState: String, Codable {
         case .quit: return "Quit"
         case .racing: return "Racing"
         case .connecting: return "Ready"
-        case .disconnected: return "Disconnected"
         case .voting: return "Voting"
         default: fatalError()
         }
     }
 
     public var connected: Bool {
-        return self != .disconnected || self != .quit || self != .connecting
+        return self != .quit || self != .connecting
     }
 
 }

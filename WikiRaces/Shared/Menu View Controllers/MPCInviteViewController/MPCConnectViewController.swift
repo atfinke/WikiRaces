@@ -27,7 +27,9 @@ class MPCConnectViewController: UIViewController {
 
     var isPlayerHost = false
     var isShowingInvite = false
+
     var isFirstAppear = true
+    var isShowingMatch = false
 
     // MARK: - MPC Properties
 
@@ -53,7 +55,16 @@ class MPCConnectViewController: UIViewController {
         } else if GKLocalPlayer.localPlayer().isAuthenticated, let alias = GKLocalPlayer.localPlayer().alias {
             playerName = alias
         }
-        peerID = MCPeerID(displayName: playerName)
+
+        if let pastPeerIDData = UserDefaults.standard.data(forKey: "PeerID"),
+            let lastPeerID = NSKeyedUnarchiver.unarchiveObject(with: pastPeerIDData) as? MCPeerID,
+            lastPeerID.displayName == playerName {
+            peerID = lastPeerID
+        } else {
+            peerID = MCPeerID(displayName: playerName)
+            let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
+            UserDefaults.standard.set(data, forKey: "PeerID")
+        }
 
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
         descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
@@ -87,7 +98,14 @@ class MPCConnectViewController: UIViewController {
             DispatchQueue.main.async {
                 if success {
                     if self.isPlayerHost {
-                        self.showMatch(isPlayerHost: true)
+                        UIView.animate(withDuration: 0.25, animations: {
+                            self.descriptionLabel.alpha = 0.0
+                            self.inviteView.alpha = 0.0
+                            self.cancelButton.alpha = 0.0
+                            self.activityIndicatorView.alpha = 0.0
+                        }, completion: { _ in
+                            self.performSegue(withIdentifier: "showHost", sender: nil)
+                        })
                     } else {
                         self.startAdvertising()
                     }
@@ -103,6 +121,8 @@ class MPCConnectViewController: UIViewController {
             self.cancelButton.alpha = 1.0
         })
     }
+
+    // MARK: - Interface Updates
 
     func showConnectionError() {
         descriptionLabel.attributedText = NSAttributedString(string: "FAILED TO CONNECT",
@@ -123,6 +143,9 @@ class MPCConnectViewController: UIViewController {
     }
 
     func showMatch(isPlayerHost: Bool) {
+        guard !isShowingMatch else { return }
+        isShowingMatch = true
+
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.05) {
                 self.activityIndicatorView.alpha = 0.0
@@ -150,14 +173,36 @@ class MPCConnectViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destination = (segue.destination as? UINavigationController)?
-            .rootViewController as? GameViewController,
-            let isPlayerHost = sender as? Bool else {
-                fatalError()
+        guard let navigationController = segue.destination as? UINavigationController else {
+            fatalError()
         }
-        destination.session = session
-        destination.serviceType = serviceType
-        destination.isPlayerHost = isPlayerHost
+
+        if segue.identifier == "showHost" {
+            guard let destination = navigationController.rootViewController as? MPCHostViewController else {
+                fatalError()
+            }
+            destination.peerID = peerID
+            destination.session = session
+            destination.serviceType = serviceType
+            destination.didStartMatch = { [weak self] in
+                self?.dismiss(animated: true, completion: {
+                    self?.showMatch(isPlayerHost: true)
+                })
+            }
+            destination.didCancelMatch = { [weak self] in
+                self?.dismiss(animated: true, completion: {
+                    self?.navigationController?.popToRootViewController(animated: false)
+                })
+            }
+        } else {
+            guard let destination = navigationController.rootViewController as? GameViewController,
+                let isPlayerHost = sender as? Bool else {
+                    fatalError()
+            }
+            destination.session = session
+            destination.serviceType = serviceType
+            destination.isPlayerHost = isPlayerHost
+        }
     }
 
 }

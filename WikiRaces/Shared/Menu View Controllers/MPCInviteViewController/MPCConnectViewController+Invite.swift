@@ -9,9 +9,40 @@
 import UIKit
 import MultipeerConnectivity
 
-extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate {
+extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
+
+    // MARK: - MCSessionDelegate
+
+    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+        session.delegate = nil
+        showMatch(isPlayerHost: false)
+    }
+
+    func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        guard session.connectedPeers.isEmpty && state != .connecting else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.descriptionLabel.attributedText = NSAttributedString(string: "HOST FAILED TO CONNECT",
+                                                                      spacing: 2.0,
+                                                                      font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+            UIView.animate(withDuration: 0.25, animations: {
+                self.activityIndicatorView.alpha = 0.0
+            })
+            self.session.delegate = nil
+            self.session.disconnect()
+        }
+    }
+
+    func session(_ session: MCSession, didReceive stream: InputStream,
+                 withName streamName: String, fromPeer peerID: MCPeerID) {}
+    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID, with progress: Progress) {}
+    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
 
     func startAdvertising() {
+        session.delegate = self
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         advertiser?.delegate = self
         advertiser?.startAdvertisingPeer()
@@ -58,7 +89,13 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate {
 
     @IBAction func acceptedInvite() {
         activeInvite?(true, session)
-        showMatch(isPlayerHost: false)
+        advertiser?.stopAdvertisingPeer()
+        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR HOST",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        UIView.animate(withDuration: 0.5) {
+            self.inviteView.alpha = 0.0
+        }
     }
 
     @IBAction func declinedInvite() {

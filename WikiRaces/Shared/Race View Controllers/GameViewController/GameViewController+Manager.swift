@@ -21,10 +21,8 @@ extension GameViewController {
                 self.transition(to: state)
             }, pointsUpdate: { playerPoints in
                 StatsHelper.shared.completedRace(points: playerPoints)
-            }, playersUpdate: { localPlayer, players in
-                self.lobbyViewController?.updatedConnectedPlayers(players: players)
-                // remove counter increment during page load
-                self.webView.text = localPlayer.raceHistory?.entries.filter({ $0.duration != nil }).count.description
+            }, linkCountUpdate: { linkCount in
+                self.webView.text = linkCount.description
             })
         #else
             manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
@@ -35,10 +33,8 @@ extension GameViewController {
                 }
             }, pointsUpdate: { playerPoints in
                 StatsHelper.shared.completedRace(points: playerPoints)
-            }, playersUpdate: {  [weak self] localPlayer, players in
-                self?.lobbyViewController?.updatedConnectedPlayers(players: players)
-                // remove counter increment during page load
-                self?.webView.text = localPlayer.raceHistory?.entries.filter({ $0.duration != nil }).count.description
+            }, linkCountUpdate: { [weak self] linkCount in
+                self?.webView.text = linkCount.description
             })
         #endif
 
@@ -87,8 +83,9 @@ extension GameViewController {
 
     private func resetActiveControllers() {
         alertController = nil
-        lobbyViewController = nil
+        votingViewController?.quitAlertController = nil
         votingViewController = nil
+        resultsViewController?.quitAlertController = nil
         resultsViewController = nil
     }
 
@@ -137,6 +134,8 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .race:
+            activityIndicatorView.stopAnimating()
+            navigationController?.setNavigationBarHidden(false, animated: false)
             dismissActiveController(completion: nil)
             navigationItem.leftBarButtonItem = flagBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem

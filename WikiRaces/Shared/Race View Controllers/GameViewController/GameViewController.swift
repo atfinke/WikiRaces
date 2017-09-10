@@ -42,15 +42,13 @@ class GameViewController: UIViewController {
     var alertView: WKRUIAlertView!
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: - View Controllers
 
     var activeViewController: UIViewController?
     var alertController: UIAlertController? {
         didSet { activeViewController = alertController }
-    }
-    var lobbyViewController: LobbyViewController? {
-        didSet { activeViewController = lobbyViewController }
     }
     var votingViewController: VotingViewController? {
         didSet { activeViewController = votingViewController }
@@ -70,8 +68,10 @@ class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if manager.gameState == .preMatch {
-            performSegue(.showPlayers)
             setupAlertView()
+            if isPlayerHost {
+                manager.player(.startedGame)
+            }
         }
     }
 

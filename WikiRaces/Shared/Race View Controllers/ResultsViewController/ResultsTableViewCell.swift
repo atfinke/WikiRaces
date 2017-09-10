@@ -71,7 +71,7 @@ class ResultsTableViewCell: UITableViewCell {
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             activityIndicatorView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            activityIndicatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -15)
+            activityIndicatorView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -17.5)
         ]
         NSLayoutConstraint.activate(constraints)
     }

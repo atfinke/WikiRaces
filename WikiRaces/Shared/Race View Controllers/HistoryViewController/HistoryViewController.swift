@@ -16,7 +16,9 @@ class HistoryViewController: UITableViewController {
 
     var player: WKRPlayer? {
         didSet {
-            guard let player = player, let history = player.raceHistory else {
+            guard let player = player,
+                let history = player.raceHistory,
+                player == oldValue else {
                 entries = []
                 currentPlayerState = .connecting
                 tableView.reloadData()

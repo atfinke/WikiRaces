@@ -17,7 +17,7 @@ struct WKRRaceConstants {
 
     static let votingPreHoldDuration    = 1.5
     static let votingDuration           = 10
-    static let votingPreRaceDuration    = 6
+    static let votingPreRaceDuration    = 7
 
     static let resultsDuration          = 60
     static let resultsHoldReadyDuration = 5
