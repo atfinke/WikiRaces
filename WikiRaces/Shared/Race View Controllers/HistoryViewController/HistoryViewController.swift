@@ -16,9 +16,7 @@ class HistoryViewController: UITableViewController {
 
     var player: WKRPlayer? {
         didSet {
-            guard let player = player,
-                let history = player.raceHistory,
-                player == oldValue else {
+            guard let player = player, let history = player.raceHistory else {
                 entries = []
                 currentPlayerState = .connecting
                 tableView.reloadData()
@@ -26,13 +24,19 @@ class HistoryViewController: UITableViewController {
             }
 
             title = player.name
+            currentPlayerState = player.state
+
+            guard player == oldValue else {
+                entries = player.raceHistory?.entries ?? []
+                tableView.reloadData()
+                return
+            }
 
             tableView.beginUpdates()
             if player.state != currentPlayerState {
                 let lastIndex = IndexPath(row: history.entries.count - 1)
                 tableView.reloadRows(at: [lastIndex], with: .top)
             }
-            currentPlayerState = player.state
 
             for (index, entry) in history.entries.enumerated() {
                 if index < entries.count {

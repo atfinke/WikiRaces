@@ -10,7 +10,7 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Custom Name</string>
+			<string>Name</string>
 			<key>Key</key>
 			<string>name_preference</string>
 			<key>DefaultValue</key>

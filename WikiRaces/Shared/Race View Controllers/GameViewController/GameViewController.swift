@@ -17,6 +17,9 @@ class GameViewController: UIViewController {
     // MARK: - Game Properties
 
     var isPlayerHost = false
+    var isPlayerQuitting = false
+
+    var needsUIConfigured = true
     var gameState = WKRGameState.preMatch
 
     var manager: WKRManager!
@@ -42,6 +45,8 @@ class GameViewController: UIViewController {
     var alertView: WKRUIAlertView!
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
+
+    @IBOutlet weak var connectingLabel: UILabel!
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: - View Controllers
@@ -67,11 +72,16 @@ class GameViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if manager.gameState == .preMatch {
+        if needsUIConfigured {
+            needsUIConfigured = false
             setupAlertView()
-            if isPlayerHost {
-                manager.player(.startedGame)
-            }
+            UIView.animate(withDuration: 0.5, animations: {
+                self.connectingLabel.alpha = 1.0
+                self.activityIndicatorView.alpha = 1.0
+            })
+        }
+        if manager.gameState == .preMatch && isPlayerHost {
+            manager.player(.startedGame)
         }
     }
 
@@ -112,6 +122,7 @@ class GameViewController: UIViewController {
 
     deinit {
         alertView?.removeFromSuperview()
+        NotificationCenter.default.removeObserver(self)
     }
 
 }

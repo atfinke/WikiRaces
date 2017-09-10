@@ -56,6 +56,7 @@ class VotingViewController: CenteredTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.alpha = 0.0
         registerTableView(for: self)
 
         title = "VOTING"

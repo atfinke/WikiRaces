@@ -24,11 +24,9 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     // MARK: - Properties
 
     private var peers = [MCPeerID: PeerState]()
-    private var sortedPeerNames: [String] {
-        return peers.keys.map({
-            return $0.displayName
-        }).sorted(by: { (lhs, rhs) -> Bool in
-            lhs < rhs
+    private var sortedPeers: [MCPeerID] {
+        return peers.keys.sorted(by: { (lhs, rhs) -> Bool in
+            lhs.displayName < rhs.displayName
         })
     }
 
@@ -94,7 +92,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
     private func update(peerID: MCPeerID, to newState: PeerState?) {
         guard let newState = newState else {
-            if let index = sortedPeerNames.index(of: peerID.displayName) {
+            if let index = sortedPeers.index(of: peerID) {
                 peers[peerID] = nil
                 if peers.count == 0 {
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
@@ -107,14 +105,14 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
         if let state = peers[peerID], state != newState {
             peers[peerID] = newState
-            if let index = sortedPeerNames.index(of: peerID.displayName) {
+            if let index = sortedPeers.index(of: peerID) {
                 tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
             } else {
                 tableView.reloadData()
             }
         } else if peers[peerID] == nil {
             peers[peerID] = newState
-            if let index = sortedPeerNames.index(of: peerID.displayName) {
+            if let index = sortedPeers.index(of: peerID) {
                 if peers.count == 1 {
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
                 } else {
@@ -131,7 +129,10 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
-            self.update(peerID: peerID, to: nil)
+            let state = self.peers[peerID] ?? .found
+            if state != .invited && state != .joining && state != .joined {
+                self.update(peerID: peerID, to: nil)
+            }
         }
     }
 
@@ -177,18 +178,17 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
             cell.textLabel?.textColor = UIColor.black
         }
 
-        let displayName = sortedPeerNames[indexPath.row]
-        guard let peer = peers.keys.filter({ $0.displayName == displayName }).first,
-            let state = peers[peer] else {
+        let peerID = sortedPeers[indexPath.row]
+        guard let state = peers[peerID] else {
             fatalError()
         }
 
-        cell.textLabel?.text = displayName
+        cell.textLabel?.text = peerID.displayName
         if state == .found {
             cell.detailTextLabel?.text = nil
             cell.isUserInteractionEnabled = true
         } else {
-            cell.detailTextLabel?.text = peers[peer]?.rawValue.capitalized
+            cell.detailTextLabel?.text = peers[peerID]?.rawValue.capitalized
             cell.isUserInteractionEnabled = state == .found
         }
         return cell
@@ -197,8 +197,8 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard peers.count > 0 else { return }
 
-        let displayName = sortedPeerNames[indexPath.row]
-        guard let session = session, let peerID = peers.keys.filter({ $0.displayName == displayName }).first else {
+        let peerID = sortedPeers[indexPath.row]
+        guard let session = session else {
             fatalError()
         }
         update(peerID: peerID, to: .invited)

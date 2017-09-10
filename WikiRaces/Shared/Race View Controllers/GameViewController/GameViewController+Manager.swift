@@ -14,7 +14,7 @@ extension GameViewController {
 
     // MARK: - WKRManager
 
-    //swiftlint:disable line_length function_body_length
+    //swiftlint:disable line_length
     func setupManager() {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
@@ -67,6 +67,12 @@ extension GameViewController {
     //swiftlint:enable line_length
 
     private func errorOccurred(_ error: WKRFatalError) {
+        guard self.view.window != nil  && !isPlayerQuitting else { return }
+
+        webView.isUserInteractionEnabled = false
+        navigationItem.leftBarButtonItem?.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
+
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         let quitAction = UIAlertAction(title: "Menu", style: .default) { _ in
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
@@ -75,13 +81,15 @@ extension GameViewController {
 
         DispatchQueue.main.async {
             self.dismissActiveController(completion: {
-                self.present(alertController, animated: true, completion: nil)
-                self.activeViewController = alertController
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                    self.present(alertController, animated: true, completion: nil)
+                    self.activeViewController = alertController
+                })
             })
         }
     }
 
-    private func resetActiveControllers() {
+    func resetActiveControllers() {
         alertController = nil
         votingViewController?.quitAlertController = nil
         votingViewController = nil
@@ -109,6 +117,9 @@ extension GameViewController {
     }
 
     private func transition(to state: WKRGameState) {
+        connectingLabel.isHidden = true
+        activityIndicatorView.stopAnimating()
+
         guard state != gameState else { return }
         gameState = state
 
@@ -134,11 +145,12 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .race:
-            activityIndicatorView.stopAnimating()
             navigationController?.setNavigationBarHidden(false, animated: false)
-            dismissActiveController(completion: nil)
+
             navigationItem.leftBarButtonItem = flagBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
+
+            dismissActiveController(completion: nil)
         default: break
         }
     }

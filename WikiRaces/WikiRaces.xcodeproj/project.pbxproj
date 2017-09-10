@@ -49,6 +49,7 @@
 		149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8811F362BE4000A5D96 /* Assets.xcassets */; };
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
+		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
 		14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
@@ -640,6 +641,7 @@
 				149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */,
 				144AFF8F1F622D2800212FF2 /* fabric.apikey in Resources */,
 				1410DB3B1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
+				14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */,
 				149FF8521F362B83000A5D96 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

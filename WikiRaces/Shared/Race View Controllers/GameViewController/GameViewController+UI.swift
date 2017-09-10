@@ -99,6 +99,8 @@ extension GameViewController {
             alertController.addAction(forfeitAction)
         }
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) {  [weak self] _ in
+            self?.isPlayerQuitting = true
+            self?.resetActiveControllers()
             self?.manager.player(.quit)
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
