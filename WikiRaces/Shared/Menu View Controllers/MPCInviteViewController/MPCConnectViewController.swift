@@ -35,9 +35,10 @@ class MPCConnectViewController: UIViewController {
 
     var advertiser: MCNearbyServiceAdvertiser?
     var activeInvite: ((Bool, MCSession) -> Void)?
-    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: String)]()
+    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID)]()
 
     var peerID: MCPeerID!
+    var hostPeerID: MCPeerID?
 
     let serviceType = "WKRPeer30"
     lazy var session: MCSession = {
@@ -110,7 +111,8 @@ class MPCConnectViewController: UIViewController {
                         self.startAdvertising()
                     }
                 } else {
-                    self.showConnectionError()
+                    self.showError(title: "Internet Not Reachable",
+                                   message: "A fast internet connection is required to play WikiRaces.")
                 }
             }
         }
@@ -124,18 +126,17 @@ class MPCConnectViewController: UIViewController {
 
     // MARK: - Interface Updates
 
-    func showConnectionError() {
-        descriptionLabel.attributedText = NSAttributedString(string: "FAILED TO CONNECT",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+    func showError(title: String, message: String) {
+        self.session.delegate = nil
+        self.session.disconnect()
+
         UIView.animate(withDuration: 0.5, animations: {
             self.activityIndicatorView.alpha = 0.0
             self.cancelButton.alpha = 0.0
         })
 
-        //swiftlint:disable:next line_length
-        let alertController = UIAlertController(title: "Internet Not Reachable", message: "A fast internet connection is required to play WikiRaces.", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Ok", style: .default) { _ in
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Menu", style: .default) { _ in
             self.pressedCancelButton()
         }
         alertController.addAction(action)
@@ -147,15 +148,11 @@ class MPCConnectViewController: UIViewController {
         isShowingMatch = true
 
         DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.05) {
-                self.activityIndicatorView.alpha = 0.0
-            }
             UIView.animate(withDuration: 0.25, animations: {
                 self.descriptionLabel.alpha = 0.0
                 self.inviteView.alpha = 0.0
                 self.cancelButton.alpha = 0.0
             }, completion: { _ in
-                self.activityIndicatorView.stopAnimating()
                 self.performSegue(withIdentifier: "showRace", sender: isPlayerHost)
             })
         }

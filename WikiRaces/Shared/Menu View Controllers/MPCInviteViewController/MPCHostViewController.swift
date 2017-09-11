@@ -81,7 +81,9 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
         guard let session = session else { fatalError() }
         do {
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
+            try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.didStartMatch?()
             }
         } catch {

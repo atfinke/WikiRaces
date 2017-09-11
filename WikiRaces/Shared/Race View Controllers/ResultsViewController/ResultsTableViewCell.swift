@@ -47,6 +47,7 @@ class ResultsTableViewCell: UITableViewCell {
         playerLabel.text = ""
         playerLabel.textAlignment = .left
         playerLabel.font = UIFont.systemFont(ofSize: 17)
+        playerLabel.adjustsFontSizeToFitWidth = true
 
         detailLabel.text = "0"
         detailLabel.textAlignment = .right

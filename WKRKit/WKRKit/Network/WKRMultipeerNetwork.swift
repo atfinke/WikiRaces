@@ -66,7 +66,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
             objectReceived?(object, WKRPlayerProfile(peerID: peerID))
         } catch {
-            fatalError(data.description)
+            print(data.description)
         }
     }
 

@@ -24,9 +24,9 @@ class HistoryViewController: UITableViewController {
             }
 
             title = player.name
-            currentPlayerState = player.state
 
             guard player == oldValue else {
+                currentPlayerState = player.state
                 entries = player.raceHistory?.entries ?? []
                 tableView.reloadData()
                 return
@@ -34,8 +34,10 @@ class HistoryViewController: UITableViewController {
 
             tableView.beginUpdates()
             if player.state != currentPlayerState {
+                currentPlayerState = player.state
                 let lastIndex = IndexPath(row: history.entries.count - 1)
-                tableView.reloadRows(at: [lastIndex], with: .top)
+                tableView.reloadRows(at: [lastIndex], with: .fade)
+                print("Reloading row")
             }
 
             for (index, entry) in history.entries.enumerated() {
@@ -43,11 +45,11 @@ class HistoryViewController: UITableViewController {
                     if entry != entries[index] {
                         entries.remove(at: index)
                         entries.insert(entry, at: index)
-                        tableView.reloadRows(at: [IndexPath(row: index)], with: .automatic)
+                        tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
                     }
                 } else {
                     entries.insert(entry, at: index)
-                    tableView.insertRows(at: [IndexPath(row: index)], with: .automatic)
+                    tableView.insertRows(at: [IndexPath(row: index)], with: .top)
                 }
             }
             tableView.endUpdates()

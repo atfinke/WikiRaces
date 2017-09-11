@@ -17,6 +17,7 @@ class ResultsViewController: CenteredTableViewController {
     private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
 
+    private var isAnimatingStateChange = false
     var readyButtonPressed: (() -> Void)?
     var quitAlertController: UIAlertController?
     var addPlayersButtonPressed: ((UIViewController) -> Void)?
@@ -42,14 +43,14 @@ class ResultsViewController: CenteredTableViewController {
     var readyStates: WKRReadyStates? {
         didSet {
             if state == .hostResults {
-                tableView.reloadData()
+                updateTableView()
             }
         }
     }
 
     var resultsInfo: WKRResultsInfo? {
         didSet {
-            tableView.reloadData()
+            updateTableView()
             updateHistoryController()
         }
     }
@@ -116,7 +117,7 @@ class ResultsViewController: CenteredTableViewController {
         if state == .results || state == .hostResults {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
-            tableView.reloadData()
+            updateTableView()
         } else {
             title = "STANDINGS"
             tableView.isUserInteractionEnabled = false
@@ -126,17 +127,19 @@ class ResultsViewController: CenteredTableViewController {
             }
 
             if oldState != .points {
+                isAnimatingStateChange = true
                 UIView.animate(withDuration: 0.4, animations: {
                     self.tableView.alpha = 0.0
                     self.infoLabel.alpha = 0.0
                 }, completion: { _ in
-                    self.tableView.reloadData()
+                    self.isAnimatingStateChange = false
+                    self.updateTableView()
                     UIView.animate(withDuration: 0.4, animations: {
                         self.tableView.alpha = 1.0
                     })
                 })
             } else {
-                self.tableView.reloadData()
+                self.updateTableView()
             }
 
             UIView.animate(withDuration: 0.75, animations: {
@@ -162,6 +165,11 @@ class ResultsViewController: CenteredTableViewController {
     }
 
     // MARK: - Helpers
+
+    private func updateTableView() {
+        guard !isAnimatingStateChange else { return }
+        tableView.reloadData()
+    }
 
     func updateHistoryController() {
         guard let player = historyViewController?.player,

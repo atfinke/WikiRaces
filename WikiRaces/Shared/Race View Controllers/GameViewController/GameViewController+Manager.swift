@@ -27,7 +27,9 @@ extension GameViewController {
         #else
             manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
                 if let error = error {
-                    self?.errorOccurred(error)
+                    DispatchQueue.main.async {
+                        self?.errorOccurred(error)
+                    }
                 } else {
                     self?.transition(to: state)
                 }
@@ -78,15 +80,12 @@ extension GameViewController {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
         alertController.addAction(quitAction)
-
-        DispatchQueue.main.async {
-            self.dismissActiveController(completion: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                    self.present(alertController, animated: true, completion: nil)
-                    self.activeViewController = alertController
-                })
+        self.dismissActiveController(completion: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.present(alertController, animated: true, completion: nil)
+                self.activeViewController = alertController
             })
-        }
+        })
     }
 
     func resetActiveControllers() {
@@ -117,9 +116,6 @@ extension GameViewController {
     }
 
     private func transition(to state: WKRGameState) {
-        connectingLabel.isHidden = true
-        activityIndicatorView.stopAnimating()
-
         guard state != gameState else { return }
         gameState = state
 
@@ -149,6 +145,9 @@ extension GameViewController {
 
             navigationItem.leftBarButtonItem = flagBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
+
+            connectingLabel.alpha = 0.0
+            activityIndicatorView.alpha = 0.0
 
             dismissActiveController(completion: nil)
         default: break

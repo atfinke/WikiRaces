@@ -19,18 +19,13 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     }
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        guard session.connectedPeers.isEmpty && state != .connecting else {
-            return
-        }
         DispatchQueue.main.async {
-            self.descriptionLabel.attributedText = NSAttributedString(string: "HOST FAILED TO CONNECT",
-                                                                      spacing: 2.0,
-                                                                      font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
-            UIView.animate(withDuration: 0.25, animations: {
-                self.activityIndicatorView.alpha = 0.0
-            })
-            self.session.delegate = nil
-            self.session.disconnect()
+            if state == .connected && peerID == self.hostPeerID {
+                //swiftlint:disable:next line_length
+                self.descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR HOST", spacing: 2.0, font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+            } else if state == .notConnected && peerID == self.hostPeerID {
+                self.showError(title: "Connection Issue", message: "The connection to the host was lost.")
+            }
         }
     }
 
@@ -62,7 +57,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 
-        invites.append((invitationHandler, peerID.displayName))
+        invites.append((invitationHandler, peerID))
         showNextInvite()
     }
 
@@ -75,8 +70,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         let invite = invites.removeFirst()
         activeInvite = invite.handler
+        hostPeerID = invite.host
 
-        senderLabel.text = "FROM " + invite.host.uppercased()
+        senderLabel.text = "FROM " + invite.host.displayName.uppercased()
         UIView.animate(withDuration: 0.25, animations: {
             self.inviteView.alpha = 1.0
         })
@@ -90,7 +86,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     @IBAction func acceptedInvite() {
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
-        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR HOST",
+        descriptionLabel.attributedText = NSAttributedString(string: "CONNECTING TO HOST",
                                                              spacing: 2.0,
                                                              font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
         UIView.animate(withDuration: 0.5) {
