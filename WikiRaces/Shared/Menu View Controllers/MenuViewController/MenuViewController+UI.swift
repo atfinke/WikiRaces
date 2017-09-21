@@ -13,7 +13,7 @@ extension MenuViewController {
 
     // MARK: - Interface
 
-    // By WikiRaces 4 I hope there is a better way to do this
+    /// By WikiRaces 4 I hope there is a better way to do this
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
@@ -73,6 +73,7 @@ extension MenuViewController {
         joinButtonHeightConstraint.constant = buttonHeight
     }
 
+    /// One-off setup
     func setupInterface() {
         UIApplication.shared.keyWindow?.backgroundColor = UIColor.white
 
@@ -85,6 +86,7 @@ extension MenuViewController {
 
         topViewLeftConstraint = topView.leftAnchor.constraint(equalTo: view.leftAnchor)
         bottomViewAnchorConstraint = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 250)
+        bottomViewHeightConstraint = bottomView.heightAnchor.constraint(equalToConstant: 250)
 
         setupTopView()
         setupBottomView()
@@ -96,7 +98,7 @@ extension MenuViewController {
 
             bottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
             bottomView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            bottomView.heightAnchor.constraint(equalToConstant: 250),
+            bottomViewHeightConstraint!,
 
             topViewLeftConstraint!,
             bottomViewAnchorConstraint!
@@ -104,8 +106,16 @@ extension MenuViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        puzzleViewHeightConstraint.constant = 75 + view.safeAreaInsets.bottom / 2
+        bottomViewHeightConstraint.constant = 250 + view.safeAreaInsets.bottom / 2
+    }
+
     // MARK: - Top View
 
+    /// Sets up the top view of the menu
     private func setupTopView() {
         setupLabels()
         setupButtons()
@@ -142,6 +152,7 @@ extension MenuViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
+    /// Sets up the buttons
     private func setupButtons() {
         joinButton.title = "Join race"
         joinButton.translatesAutoresizingMaskIntoConstraints = false
@@ -154,6 +165,7 @@ extension MenuViewController {
         topView.addSubview(createButton)
     }
 
+    /// Sets up the labels
     private func setupLabels() {
         titleLabel.text = "WikiRaces"
         titleLabel.textColor = UIColor.wkrTextColor
@@ -170,24 +182,27 @@ extension MenuViewController {
 
     // MARK: - Bottom View
 
+    /// Sets up the bottom views
     private func setupBottomView() {
         let stackView = setupStatsStackView()
         let puzzleView = setupPuzzleView()
+        puzzleViewHeightConstraint = puzzleView.heightAnchor.constraint(equalToConstant: 75)
 
         let constraints = [
+            puzzleViewHeightConstraint!,
             puzzleView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
             puzzleView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
             puzzleView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
-            puzzleView.heightAnchor.constraint(equalToConstant: 75),
 
             stackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15),
             stackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: bottomView.topAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 160)
+            stackView.bottomAnchor.constraint(equalTo: puzzleView.topAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
+    /// Sets up the stack view that holds the menu tiles
     //swiftlint:disable:next function_body_length
     private func setupStatsStackView() -> UIStackView {
         let statsStackView = UIStackView()
@@ -247,6 +262,7 @@ extension MenuViewController {
         return statsStackView
     }
 
+    /// Sets up the view that animates the puzzzle pieces
     private func setupPuzzleView() -> UIView {
         let puzzleBackgroundView = UIView()
 
@@ -262,7 +278,7 @@ extension MenuViewController {
         let constraints = [
             puzzleView.leftAnchor.constraint(equalTo: puzzleBackgroundView.leftAnchor),
             puzzleView.rightAnchor.constraint(equalTo: puzzleBackgroundView.rightAnchor),
-            puzzleView.centerYAnchor.constraint(equalTo: puzzleBackgroundView.centerYAnchor),
+            puzzleView.topAnchor.constraint(equalTo: puzzleBackgroundView.topAnchor, constant: 22.5),
             puzzleView.heightAnchor.constraint(equalToConstant: 30)
         ]
         NSLayoutConstraint.activate(constraints)

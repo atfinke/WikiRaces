@@ -14,7 +14,6 @@ WikiRaces 3.0 Plans:
 3.0.X (TBD)
 
 - Bug Fixes
-- iPhone X
 - Improve error messages
 - General polish / cleanup
 - Better internal documentation

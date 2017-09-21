@@ -70,6 +70,7 @@ extension GameViewController {
 
     private func errorOccurred(_ error: WKRFatalError) {
         guard self.view.window != nil  && !isPlayerQuitting else { return }
+        isPlayerQuitting = true
 
         webView.isUserInteractionEnabled = false
         navigationItem.leftBarButtonItem?.isEnabled = false

@@ -19,6 +19,12 @@ extension MenuViewController {
 
     // MARK: - Performing Segues
 
+
+    /// Perform as segue with host parameter
+    ///
+    /// - Parameters:
+    ///   - segue: The segue to perform
+    ///   - isHost: Is the local player host
     func performSegue(_ segue: Segue, isHost: Bool) {
         performSegue(withIdentifier: segue.rawValue, sender: isHost)
     }
@@ -50,7 +56,6 @@ extension MenuViewController {
                 }
                 destination.isPlayerHost = isPlayerHost
             #endif
-
         }
     }
 

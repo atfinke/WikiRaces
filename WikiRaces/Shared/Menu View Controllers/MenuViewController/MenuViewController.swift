@@ -12,36 +12,56 @@ import GameKit
 import WKRKit
 import WKRUIKit
 
+/// The main menu view controller
 class MenuViewController: UIViewController {
 
     // MARK: - Properties
 
+    /// Used to track if the menu should be animating
     var isMenuVisable = false
 
     // MARK: - Interface Elements
 
+    /// The top of the menu (everything on white). Animates out of the left side.
     let topView = UIView()
+    /// The bottom of the menu (everything not white). Animates out of the bottom.
     let bottomView = UIView()
 
+    /// The "WikiRaces" label
     let titleLabel = UILabel()
+    /// The "Conquer..." label
     let subtitleLabel = UILabel()
 
     let joinButton = WKRUIButton()
     let createButton = WKRUIButton()
 
+    /// The Wiki Points tile
     var leftMenuTile: MenuTile?
+    /// The average points tile
     var middleMenuTile: MenuTile?
+    /// The races tile
     var rightMenuTile: MenuTile?
 
+    /// Timer for moving the puzzle pieces
     var puzzleTimer: Timer?
+    /// The puzzle piece view
     let puzzleView = UIScrollView()
 
     // MARK: - Constraints
 
+    /// Used to animate the top view in and out
     var topViewLeftConstraint: NSLayoutConstraint!
+    /// Used to animate the bottom view in and out
     var bottomViewAnchorConstraint: NSLayoutConstraint!
 
+    /// Used for safe area layout adjustments
+    var bottomViewHeightConstraint: NSLayoutConstraint!
+    var puzzleViewHeightConstraint: NSLayoutConstraint!
+
+    /// Used for adjusting y coord of title label based on screen height
     var titleLabelConstraint: NSLayoutConstraint!
+
+    /// Used for adjusting button widths and heights based on screen width
     var joinButtonWidthConstraint: NSLayoutConstraint!
     var joinButtonHeightConstraint: NSLayoutConstraint!
     var createButtonWidthConstraint: NSLayoutConstraint!
@@ -86,6 +106,7 @@ class MenuViewController: UIViewController {
     // MARK: - Actions
 
     @objc
+    /// Changes title label to build info
     func showVersionInfo() {
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
@@ -96,6 +117,7 @@ class MenuViewController: UIViewController {
     }
 
     @objc
+    /// Join button pressed
     func joinRace() {
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: false)
@@ -103,6 +125,7 @@ class MenuViewController: UIViewController {
     }
 
     @objc
+    /// Create button pressed
     func createRace() {
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: true)
@@ -111,6 +134,9 @@ class MenuViewController: UIViewController {
 
     // MARK: - Menu Animations
 
+    /// Animates the views off screen
+    ///
+    /// - Parameter completion: The completion handler
     func animateMenuOut(completion: (() -> Void)?) {
         view.isUserInteractionEnabled = false
         bottomViewAnchorConstraint.constant = bottomView.frame.height
@@ -126,6 +152,7 @@ class MenuViewController: UIViewController {
         })
     }
 
+    /// Animates the views on screen
     func animateMenuIn() {
         view.isUserInteractionEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false

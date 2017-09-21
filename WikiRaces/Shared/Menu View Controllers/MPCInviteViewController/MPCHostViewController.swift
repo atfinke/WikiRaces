@@ -35,7 +35,9 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     var serviceType: String?
     private var browser: MCNearbyServiceBrowser?
 
+    /// Called when the start button is pressed
     var didStartMatch: (() -> Void)?
+    /// Called when the cancel button is pressed
     var didCancelMatch: (() -> Void)?
 
     // MARK: - View Life Cycle
@@ -80,6 +82,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
         guard let session = session else { fatalError() }
         do {
+            // Participants move to the game view and wait for "real" data when they receive first data chunk
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
@@ -92,6 +95,12 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
         }
     }
 
+
+    /// Updates the peerID to a new state and updates the table view
+    ///
+    /// - Parameters:
+    ///   - peerID: Peer ID updated
+    ///   - newState: The new state
     private func update(peerID: MCPeerID, to newState: PeerState?) {
         guard let newState = newState else {
             if let index = sortedPeers.index(of: peerID) {
@@ -197,6 +206,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Hits this case when the "Searching..." placeholder cell is selected
         guard peers.count > 0 else { return }
 
         let peerID = sortedPeers[indexPath.row]
@@ -222,6 +232,8 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
             }
         }
     }
+
+    // MARK: - Unused MCSessionDelegate
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {}
     func session(_ session: MCSession, didReceive stream: InputStream,

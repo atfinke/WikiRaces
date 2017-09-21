@@ -12,6 +12,7 @@ class MenuTile: UIControl {
 
     // MARK: - Properties
 
+    /// Used for displaying the stat number (i.e. 3.33333 to 3.33)
     static private let numberFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
@@ -54,6 +55,7 @@ class MenuTile: UIControl {
         }
     }
 
+    /// Updates the font sizes based on width changes
     override var bounds: CGRect {
         didSet {
             if bounds.width > 200 {
@@ -71,6 +73,9 @@ class MenuTile: UIControl {
 
     // MARK: - Initialization
 
+    /// Init with the tile's title
+    ///
+    /// - Parameter title: The title
     init(title: String) {
         super.init(frame: .zero)
 

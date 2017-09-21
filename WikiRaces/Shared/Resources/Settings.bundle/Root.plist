@@ -24,6 +24,12 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Varun helped a little...</string>
+		</dict>
 	</array>
 </dict>
 </plist>

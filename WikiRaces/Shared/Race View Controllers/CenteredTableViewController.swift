@@ -24,10 +24,13 @@ class CenteredTableViewController: UIViewController {
 
     var isOverlayButtonHidden: Bool {
         set {
-            overlayBottomConstraint.constant = newValue ? 70 : 0
+            overlayBottomConstraint.constant = newValue ? overlayHeightConstraint.constant : 0
+            if #available(iOS 11.0, *) {
+                descriptionLabelBottomConstraint.constant = newValue ? -view.safeAreaInsets.bottom: 0
+            }
         }
         get {
-            return overlayBottomConstraint.constant == 70
+            return overlayBottomConstraint.constant == overlayHeightConstraint.constant
         }
     }
 
@@ -38,6 +41,8 @@ class CenteredTableViewController: UIViewController {
 
     var contentView: UIView!
     var overlayBottomConstraint: NSLayoutConstraint!
+    var overlayHeightConstraint: NSLayoutConstraint!
+    var descriptionLabelBottomConstraint: NSLayoutConstraint!
 
     // MARK: - View Life Cycle
 
@@ -69,6 +74,7 @@ class CenteredTableViewController: UIViewController {
 
         let overlayView = setupBottomOverlayView()
         overlayBottomConstraint = overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 70)
+        overlayHeightConstraint = overlayView.heightAnchor.constraint(equalToConstant: 70)
 
         let fakeWidth = tableView.widthAnchor.constraint(equalToConstant: 500)
         fakeWidth.priority = UILayoutPriority.defaultLow
@@ -77,6 +83,8 @@ class CenteredTableViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
+
+        descriptionLabelBottomConstraint = descriptionLabel.bottomAnchor.constraint(equalTo: overlayView.topAnchor)
 
         let constraints: [NSLayoutConstraint] = [
             tableView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
@@ -89,14 +97,15 @@ class CenteredTableViewController: UIViewController {
 
             overlayView.leftAnchor.constraint(equalTo: view.leftAnchor),
             overlayView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            overlayView.heightAnchor.constraint(equalToConstant: 70),
+            overlayHeightConstraint,
             overlayBottomConstraint,
 
             descriptionLabel.leftAnchor.constraint(equalTo: visualEffectView.leftAnchor),
             descriptionLabel.rightAnchor.constraint(equalTo: visualEffectView.rightAnchor),
-            descriptionLabel.bottomAnchor.constraint(equalTo: overlayView.topAnchor),
+            descriptionLabelBottomConstraint,
             descriptionLabel.heightAnchor.constraint(equalToConstant: 50)
         ]
+
         NSLayoutConstraint.activate(constraints)
     }
 
@@ -117,7 +126,7 @@ class CenteredTableViewController: UIViewController {
 
         let constraints = [
             overlayButton.centerXAnchor.constraint(equalTo: bottomOverlayView.centerXAnchor),
-            overlayButton.centerYAnchor.constraint(equalTo: bottomOverlayView.centerYAnchor),
+            overlayButton.topAnchor.constraint(equalTo: bottomOverlayView.topAnchor, constant: 15),
             overlayButton.widthAnchor.constraint(equalToConstant: 250),
             overlayButton.heightAnchor.constraint(equalToConstant: 40)
         ]
@@ -131,6 +140,14 @@ class CenteredTableViewController: UIViewController {
     func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
         tableView.delegate = controller
         tableView.dataSource = controller
+    }
+
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        descriptionLabelBottomConstraint.constant = -view.safeAreaInsets.bottom
+        overlayHeightConstraint.constant = 70 + view.safeAreaInsets.bottom
+        isOverlayButtonHidden = true
     }
 
 }

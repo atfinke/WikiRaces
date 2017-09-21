@@ -61,6 +61,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         showNextInvite()
     }
 
+    /// Shows the next invite
     func showNextInvite() {
         guard !invites.isEmpty && !isShowingInvite else {
             return
@@ -83,6 +84,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
     // MARK: - User Actions
 
+    /// Accepts the displayed invite
     @IBAction func acceptedInvite() {
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
@@ -94,6 +96,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         }
     }
 
+    /// Declines the displayed invite
     @IBAction func declinedInvite() {
         activeInvite?(false, session)
         descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",

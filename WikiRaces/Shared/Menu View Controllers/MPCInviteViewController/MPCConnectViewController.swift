@@ -17,10 +17,15 @@ class MPCConnectViewController: UIViewController {
 
     // MARK: - Interafce Elements
 
+    /// View that contains accept/cancel buttons, sender label
     @IBOutlet weak var inviteView: UIView!
+    /// Shows the sender of the invie
     @IBOutlet weak var senderLabel: UILabel!
+    /// The button to cancel joining/creating a race
     @IBOutlet weak var cancelButton: UIButton!
+    /// General status label
     @IBOutlet weak var descriptionLabel: UILabel!
+    /// Activity spinner
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
 
     // MARK: - Properties
@@ -50,6 +55,7 @@ class MPCConnectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Gets either the player name specified in settings.app, then GK alias, the device name
         var playerName = UIDevice.current.name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
@@ -57,6 +63,7 @@ class MPCConnectViewController: UIViewController {
             playerName = alias
         }
 
+        // Uses existing peer ID object if already created (recommended per Apple docs)
         if let pastPeerIDData = UserDefaults.standard.data(forKey: "PeerID"),
             let lastPeerID = NSKeyedUnarchiver.unarchiveObject(with: pastPeerIDData) as? MCPeerID,
             lastPeerID.displayName == playerName {
@@ -82,6 +89,7 @@ class MPCConnectViewController: UIViewController {
         super.viewWillDisappear(animated)
         advertiser?.stopAdvertisingPeer()
 
+        // Reject all the pending invites
         for invite in invites {
             invite.handler?(false, session)
         }
@@ -95,6 +103,7 @@ class MPCConnectViewController: UIViewController {
         }
         isFirstAppear = false
 
+        // Test the connection to Wikipedia
         WKRConnectionTester.start { (success) in
             DispatchQueue.main.async {
                 if success {
@@ -126,6 +135,12 @@ class MPCConnectViewController: UIViewController {
 
     // MARK: - Interface Updates
 
+
+    /// Shows an error with a title
+    ///
+    /// - Parameters:
+    ///   - title: The title of the error message
+    ///   - message: The message body of the error
     func showError(title: String, message: String) {
         self.session.delegate = nil
         self.session.disconnect()
@@ -143,6 +158,10 @@ class MPCConnectViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
+
+    /// Prepares to start the match
+    ///
+    /// - Parameter isPlayerHost: Is the local player is host
     func showMatch(isPlayerHost: Bool) {
         guard !isShowingMatch else { return }
         isShowingMatch = true
@@ -152,12 +171,15 @@ class MPCConnectViewController: UIViewController {
                 self.descriptionLabel.alpha = 0.0
                 self.inviteView.alpha = 0.0
                 self.cancelButton.alpha = 0.0
+                self.activityIndicatorView.alpha = 0.0
             }, completion: { _ in
                 self.performSegue(withIdentifier: "showRace", sender: isPlayerHost)
             })
         }
     }
 
+
+    /// Cancels the join/create a race action and sends player back to main menu
     @IBAction func pressedCancelButton() {
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 0.0

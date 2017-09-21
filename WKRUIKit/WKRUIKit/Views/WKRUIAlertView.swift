@@ -31,7 +31,11 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     private var bottomConstraint: NSLayoutConstraint!
 
     private var height: CGFloat {
-        return WKRUIConstants.alertHeight
+        if #available(iOS 11.0, *) {
+            return WKRUIConstants.alertHeight + (window?.safeAreaInsets.bottom ?? 0) / 2
+        } else {
+            return WKRUIConstants.alertHeight
+        }
     }
 
     // MARK: - Initalization
@@ -57,7 +61,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
             rightAnchor.constraint(equalTo: alertWindow.rightAnchor),
 
             label.topAnchor.constraint(equalTo: topAnchor),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor),
+            label.heightAnchor.constraint(equalToConstant: WKRUIConstants.alertHeight),
             label.leftAnchor.constraint(equalTo: leftAnchor, constant: 10.0),
             label.rightAnchor.constraint(equalTo: rightAnchor, constant: -10.0)
         ]
