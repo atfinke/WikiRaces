@@ -95,7 +95,6 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
         }
     }
 
-
     /// Updates the peerID to a new state and updates the table view
     ///
     /// - Parameters:

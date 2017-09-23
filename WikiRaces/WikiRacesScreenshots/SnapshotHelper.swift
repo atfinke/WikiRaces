@@ -13,8 +13,6 @@
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
 
-//swiftlint:disable line_length
-
 import Foundation
 import XCTest
 
@@ -39,7 +37,7 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
     case cannotFindHomeDirectory
     case cannotFindSimulatorHomeDirectory
     case cannotAccessSimulatorHomeDirectory(String)
-
+    
     var debugDescription: String {
         switch self {
         case .cannotDetectUser:

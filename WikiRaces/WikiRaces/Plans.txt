@@ -24,3 +24,4 @@ WikiRaces 3.0 Plans:
 - Ability to remotely update final article list
 - Ability to remotely update js page modifiers
 - New leaderboards (Total time / Fastest Time)
+- Remove iOS 10.0

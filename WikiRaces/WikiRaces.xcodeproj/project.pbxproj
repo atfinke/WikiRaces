@@ -23,6 +23,10 @@
 		141892F71F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
 		141892F81F60F26E006748F0 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138B1F56B32900F427F4 /* HelpViewController.swift */; };
 		141892F91F60F26E006748F0 /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */; };
+		142B7A541F77170E004A8AA1 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; };
+		142B7A551F77170E004A8AA1 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		142B7A591F771712004A8AA1 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
+		142B7A5A1F771712004A8AA1 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		143BB7151F60AEC900D00541 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
 		143BB7181F60BDC000D00541 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
@@ -147,6 +151,27 @@
 			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
 			remoteInfo = WKRUIKit;
 		};
+		142B7A4B1F771278004A8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 14C25FDC1F6F025A00CD7373;
+			remoteInfo = "WikiRaces (UI Catalog)";
+		};
+		142B7A561F77170E004A8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		142B7A5B1F771712004A8AA1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
 		146B9A021F4F4B5900507B3F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
@@ -209,12 +234,25 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		142B7A581F77170F004A8AA1 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				142B7A5A1F771712004A8AA1 /* WKRUIKit.framework in Embed Frameworks */,
+				142B7A551F77170E004A8AA1 /* WKRKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
+		142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesCatalogScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		143A8BBB1F58746800580AA2 /* StatsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
 		143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Leaderboards.swift"; sourceTree = "<group>"; };
 		143BB7211F60C6E300D00541 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
@@ -279,6 +317,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		142B7A431F771278004A8AA1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		149FF8461F362B83000A5D96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -310,6 +355,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				142B7A591F771712004A8AA1 /* WKRUIKit.framework in Frameworks */,
+				142B7A541F77170E004A8AA1 /* WKRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +421,7 @@
 				149FF8781F362BE4000A5D96 /* WikiRaces (Multi-Window).app */,
 				149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */,
 				14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */,
+				142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -543,6 +591,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		142B7A451F771278004A8AA1 /* WikiRacesCatalogScreenshots */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 142B7A511F771278004A8AA1 /* Build configuration list for PBXNativeTarget "WikiRacesCatalogScreenshots" */;
+			buildPhases = (
+				142B7A421F771278004A8AA1 /* Sources */,
+				142B7A431F771278004A8AA1 /* Frameworks */,
+				142B7A441F771278004A8AA1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				142B7A4C1F771278004A8AA1 /* PBXTargetDependency */,
+			);
+			name = WikiRacesCatalogScreenshots;
+			productName = WikiRacesCatalogScreenshots;
+			productReference = 142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		149FF8481F362B83000A5D96 /* WikiRaces */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF85B1F362B83000A5D96 /* Build configuration list for PBXNativeTarget "WikiRaces" */;
@@ -613,10 +679,13 @@
 				14C25FD91F6F025A00CD7373 /* Sources */,
 				14C25FDA1F6F025A00CD7373 /* Frameworks */,
 				14C25FDB1F6F025A00CD7373 /* Resources */,
+				142B7A581F77170F004A8AA1 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				142B7A571F77170E004A8AA1 /* PBXTargetDependency */,
+				142B7A5C1F771712004A8AA1 /* PBXTargetDependency */,
 			);
 			name = "WikiRaces (UI Catalog)";
 			productName = "WikiRaces (UI Catalog)";
@@ -633,6 +702,11 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
+					142B7A451F771278004A8AA1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 14C25FDC1F6F025A00CD7373;
+					};
 					149FF8481F362B83000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
 						SystemCapabilities = {
@@ -681,6 +755,7 @@
 				149FF8771F362BE4000A5D96 /* WikiRaces (Multi-Window) */,
 				149FF88D1F362BF1000A5D96 /* WikiRacesScreenshots */,
 				14C25FDC1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
+				142B7A451F771278004A8AA1 /* WikiRacesCatalogScreenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -717,6 +792,13 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		142B7A441F771278004A8AA1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		149FF8471F362B83000A5D96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -837,6 +919,13 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		142B7A421F771278004A8AA1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		149FF8451F362B83000A5D96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -971,6 +1060,21 @@
 			name = WKRUIKit;
 			targetProxy = 1410DB551F4F55BF00F5CAD7 /* PBXContainerItemProxy */;
 		};
+		142B7A4C1F771278004A8AA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 14C25FDC1F6F025A00CD7373 /* WikiRaces (UI Catalog) */;
+			targetProxy = 142B7A4B1F771278004A8AA1 /* PBXContainerItemProxy */;
+		};
+		142B7A571F77170E004A8AA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 142B7A561F77170E004A8AA1 /* PBXContainerItemProxy */;
+		};
+		142B7A5C1F771712004A8AA1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 142B7A5B1F771712004A8AA1 /* PBXContainerItemProxy */;
+		};
 		149FF8941F362BF1000A5D96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
@@ -1030,6 +1134,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		142B7A4D1F771278004A8AA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = WikiRacesCatalogScreenshots/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesCatalogScreenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WikiRaces (UI Catalog)";
+			};
+			name = Debug;
+		};
+		142B7A4E1F771278004A8AA1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = WikiRacesCatalogScreenshots/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesCatalogScreenshots;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "WikiRaces (UI Catalog)";
+			};
+			name = Release;
+		};
 		149FF8591F362B83000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1244,6 +1378,7 @@
 		14C25FEC1F6F025A00CD7373 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -1259,6 +1394,7 @@
 		14C25FED1F6F025A00CD7373 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -1274,6 +1410,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		142B7A511F771278004A8AA1 /* Build configuration list for PBXNativeTarget "WikiRacesCatalogScreenshots" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				142B7A4D1F771278004A8AA1 /* Debug */,
+				142B7A4E1F771278004A8AA1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		149FF8441F362B83000A5D96 /* Build configuration list for PBXProject "WikiRaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

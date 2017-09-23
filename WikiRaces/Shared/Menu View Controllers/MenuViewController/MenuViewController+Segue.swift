@@ -19,7 +19,6 @@ extension MenuViewController {
 
     // MARK: - Performing Segues
 
-
     /// Perform as segue with host parameter
     ///
     /// - Parameters:

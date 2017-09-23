@@ -135,7 +135,6 @@ class MPCConnectViewController: UIViewController {
 
     // MARK: - Interface Updates
 
-
     /// Shows an error with a title
     ///
     /// - Parameters:
@@ -158,7 +157,6 @@ class MPCConnectViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-
     /// Prepares to start the match
     ///
     /// - Parameter isPlayerHost: Is the local player is host
@@ -177,7 +175,6 @@ class MPCConnectViewController: UIViewController {
             })
         }
     }
-
 
     /// Cancels the join/create a race action and sends player back to main menu
     @IBAction func pressedCancelButton() {

@@ -58,7 +58,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             }
         }
     }
-    
+
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         dismiss(animated: true) {
             self.animateMenuIn()
