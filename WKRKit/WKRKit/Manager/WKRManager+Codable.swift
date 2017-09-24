@@ -97,9 +97,7 @@ extension WKRManager {
         }
         if localPlayer.shouldGetPoints {
             localPlayer.shouldGetPoints = false
-            if let localPlayerPoints = resultsInfo.raceRewardPoints(for: localPlayer) {
-                pointsUpdate(localPlayerPoints)
-            }
+            pointsUpdate(resultsInfo.raceRewardPoints(for: localPlayer))
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))

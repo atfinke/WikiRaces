@@ -104,8 +104,8 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Helpers
 
-    internal func raceRewardPoints(for player: WKRPlayer) -> Int? {
-        return racePoints[player.profile]
+    internal func raceRewardPoints(for player: WKRPlayer) -> Int {
+        return racePoints[player.profile] ?? 0
     }
 
     // used to update history controller cells

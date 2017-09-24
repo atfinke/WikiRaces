@@ -75,10 +75,12 @@ class GameViewController: UIViewController {
         if needsUIConfigured {
             needsUIConfigured = false
             setupAlertView()
-            UIView.animate(withDuration: 0.5, animations: {
-                self.connectingLabel.alpha = 1.0
-                self.activityIndicatorView.alpha = 1.0
-            })
+            if !isPlayerHost {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.connectingLabel.alpha = 1.0
+                    self.activityIndicatorView.alpha = 1.0
+                })
+            }
         }
         if manager.gameState == .preMatch && isPlayerHost {
             manager.player(.startedGame)
