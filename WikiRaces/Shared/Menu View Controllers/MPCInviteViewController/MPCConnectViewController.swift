@@ -59,8 +59,12 @@ class MPCConnectViewController: UIViewController {
         var playerName = UIDevice.current.name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
+            PlayerAnalytics.log(event: .usingCustomName(playerName))
         } else if GKLocalPlayer.localPlayer().isAuthenticated, let alias = GKLocalPlayer.localPlayer().alias {
             playerName = alias
+            PlayerAnalytics.log(event: .usingGCAlias(playerName))
+        } else {
+            PlayerAnalytics.log(event: .usingDeviceName(playerName))
         }
 
         // Uses existing peer ID object if already created (recommended per Apple docs)

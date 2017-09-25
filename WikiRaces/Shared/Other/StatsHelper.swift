@@ -63,7 +63,11 @@ class StatsHelper {
     }
 
     func updateStatsClosure() {
-        statsUpdated?(statValue(for: .points), statValue(for: .races), statValue(for: .average))
+        let races = statValue(for: .races)
+        let points = statValue(for: .points)
+
+        statsUpdated?(points, races, statValue(for: .average))
+        PlayerAnalytics.log(event: .updatedStats(points: Int(points), races: Int(races)))
     }
 
     // MARK: - Set/Get Stats

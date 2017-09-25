@@ -84,6 +84,7 @@ class GameViewController: UIViewController {
         }
         if manager.gameState == .preMatch && isPlayerHost {
             manager.player(.startedGame)
+            PlayerAnalytics.log(event: .hostStartedMatch)
         }
     }
 
@@ -99,6 +100,7 @@ class GameViewController: UIViewController {
         let helpAction = UIAlertAction(title: "Help", style: .default) { _ in
             self.manager.player(.neededHelp)
             self.performSegue(.showHelp)
+            PlayerAnalytics.log(event: .usedHelp)
         }
         alertController.addAction(helpAction)
 
@@ -109,6 +111,7 @@ class GameViewController: UIViewController {
 
         let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .destructive) { _ in
             self.manager.player(.forfeited)
+            PlayerAnalytics.log(event: .forfeited)
         }
         alertController.addAction(forfeitAction)
 

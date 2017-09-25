@@ -68,6 +68,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     @IBAction func cancelMatch(_ sender: Any) {
         session?.disconnect()
         didCancelMatch?()
+        PlayerAnalytics.log(event: .hostCancelledPreMatch)
     }
 
     @IBAction func startMatch(_ sender: Any) {
