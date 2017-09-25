@@ -120,6 +120,9 @@
 		14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 		14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
+		14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
+		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -314,6 +317,8 @@
 		14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		14C4AB801F368A630086B77F /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
+		14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnalytics.swift; sourceTree = "<group>"; };
+		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */,
 				1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */,
 				144AFF8B1F622D1E00212FF2 /* Crashlytics.framework in Frameworks */,
 				1410DB2C1F4F4BEA00F5CAD7 /* WKRKit.framework in Frameworks */,
@@ -411,6 +417,7 @@
 				14C25FDE1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
 				149FF88F1F362BF1000A5D96 /* WikiRacesScreenshots */,
 				149FF84A1F362B83000A5D96 /* Products */,
+				14E1B19F1F798A520082F4FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -557,6 +564,7 @@
 			children = (
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
+				14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */,
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
 			);
@@ -586,6 +594,14 @@
 				149FDED51F4F4AAF003A71D0 /* Frameworks */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		14E1B19F1F798A520082F4FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14E1B1A01F798A520082F4FA /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -710,6 +726,9 @@
 					149FF8481F362B83000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -935,6 +954,7 @@
 				143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
+				14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -977,6 +997,7 @@
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
+				14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
@@ -1211,6 +1232,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1262,6 +1285,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

@@ -31,18 +31,16 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     }
 
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        guard let bundle = WKRKitConstants.bundle,
-            let url = bundle.url(forResource: WKRKitConstants.articlesPlistName, withExtension: "plist"),
-            let arrayFromURL = NSArray(contentsOf: url), let array = arrayFromURL as? [String] else {
-                completionHandler(nil)
-                fatalError()
+        guard let finalArticles = WKRKitConstants.finalArticles() else {
+            completionHandler(nil)
+            fatalError()
         }
 
         let operationQueue = OperationQueue()
 
         var randomPaths = [String]()
         while randomPaths.count < Int(Double(WKRRaceConstants.votingArticlesCount) * 1.5) {
-            if let randomPath = array.randomElement, !randomPaths.contains(randomPath) {
+            if let randomPath = finalArticles.randomElement, !randomPaths.contains(randomPath) {
                 randomPaths.append(randomPath)
             }
         }
@@ -51,7 +49,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         var startingPage: WKRPage?
 
         let completedOperation = BlockOperation {
-            if WKRKitConstants.quickRaceTest {
+            if WKRKitConstants.current.quickRace {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
 

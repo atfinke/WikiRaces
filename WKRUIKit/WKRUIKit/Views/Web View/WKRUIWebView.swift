@@ -12,16 +12,6 @@ public class WKRUIWebView: WKWebView {
 
     // MARK: - Properties
 
-    private static let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 1
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
-
-    // MARK: - User Interface
-
     public var text: String? {
         set {
             timeLabel.text = newValue
@@ -53,11 +43,6 @@ public class WKRUIWebView: WKWebView {
         allowsLinkPreview = false
         allowsBackForwardNavigationGestures = false
 
-        timeLabel.text = "0"
-        timeLabel.textColor = UIColor.white
-        timeLabel.textAlignment = .center
-        timeLabel.adjustsFontSizeToFitWidth = true
-
         let features: [[UIFontDescriptor.FeatureKey: Int]] = [
             [
                 .featureIdentifier: kNumberSpacingType,
@@ -68,13 +53,20 @@ public class WKRUIWebView: WKWebView {
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
 
-        timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        timeLabel.text = "0"
+        timeLabel.textColor = UIColor.white
+        timeLabel.textAlignment = .center
+
         timeLabel.alpha = 0.0
         timeLabel.numberOfLines = 0
+
+        timeLabel.adjustsFontSizeToFitWidth = true
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
+        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+
         addSubview(timeLabel)
 
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
 
         let constraints = [

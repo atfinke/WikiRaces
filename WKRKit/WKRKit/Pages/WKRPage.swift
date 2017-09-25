@@ -38,13 +38,13 @@ public struct WKRPage: Codable, Hashable, Equatable {
                 return title.capitalized
             }
         }
-        let charactersToRemove = WKRKitConstants.pageTitleCharactersToRemove
+        let charactersToRemove = WKRKitConstants.current.pageTitleCharactersToRemove
         if charactersToRemove > 0 && title.characters.count > charactersToRemove {
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
             let clippedTitle = title[..<index].capitalized
             return smartCapitalize(clippedTitle)
         } else {
-            return smartCapitalize(title.replacingOccurrences(of: WKRKitConstants.pageTitleStringToReplace, with: ""))
+            return smartCapitalize(title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: ""))
         }
     }
 

@@ -87,6 +87,8 @@ extension GameViewController {
                 self.activeViewController = alertController
             })
         })
+
+        PlayerAnalytics.log(event: .fatalError)
     }
 
     func resetActiveControllers() {
@@ -141,6 +143,10 @@ extension GameViewController {
             }
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
+
+            if state == .hostResults && isPlayerHost {
+                PlayerAnalytics.log(event: .hostEndedRace)
+            }
         case .race:
             navigationController?.setNavigationBarHidden(false, animated: false)
 
@@ -151,6 +157,10 @@ extension GameViewController {
             activityIndicatorView.alpha = 0.0
 
             dismissActiveController(completion: nil)
+
+            if isPlayerHost {
+                PlayerAnalytics.log(event: .hostStartedRace)
+            }
         default: break
         }
     }
