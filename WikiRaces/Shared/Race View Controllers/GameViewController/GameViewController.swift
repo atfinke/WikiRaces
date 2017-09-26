@@ -22,6 +22,9 @@ class GameViewController: UIViewController {
     var needsUIConfigured = true
     var gameState = WKRGameState.preMatch
 
+    var timeRaced = 0
+    var raceTimer: Timer?
+
     var manager: WKRManager!
     var finalPage: WKRPage? {
         didSet {

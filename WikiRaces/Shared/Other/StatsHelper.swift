@@ -18,15 +18,22 @@ class StatsHelper {
         case races
         case average
 
+        // minutes
+        case totalTime
+        // seconds
+        case fastestTime
+
         var key: String {
             return "WKRStat-" + self.rawValue
         }
 
         var leaderboard: String {
             switch self {
-            case .points:   return "com.andrewfinke.wikiraces.points"
-            case .races:    return "com.andrewfinke.wikiraces.races"
-            case .average:  return "com.andrewfinke.wikiraces.ppr"
+            case .points:       return "com.andrewfinke.wikiraces.points"
+            case .races:        return "com.andrewfinke.wikiraces.races"
+            case .average:      return "com.andrewfinke.wikiraces.ppr"
+            case .totalTime:    return "com.andrewfinke.wikiraces.totaltime"
+            case .fastestTime:  return "com.andrewfinke.wikiraces.fastesttime"
             }
         }
     }
@@ -35,7 +42,7 @@ class StatsHelper {
 
     static let shared = StatsHelper()
 
-    var statsUpdated: ((_ points: Double, _ races: Double, _ average: Double) -> Void)?
+    var keyStatsUpdated: ((_ points: Double, _ races: Double, _ average: Double) -> Void)?
     private let migrationKey = "WKR3StatMigrationComplete"
 
     private let defaults = UserDefaults.standard
@@ -66,7 +73,7 @@ class StatsHelper {
         let races = statValue(for: .races)
         let points = statValue(for: .points)
 
-        statsUpdated?(points, races, statValue(for: .average))
+        keyStatsUpdated?(points, races, statValue(for: .average))
         PlayerAnalytics.log(event: .updatedStats(points: Int(points), races: Int(races)))
     }
 
@@ -81,12 +88,25 @@ class StatsHelper {
         }
     }
 
-	func completedRace(points: Int) {
+    func completedRace(points: Int, timeRaced: Int) {
         let newPoints = statValue(for: .points) + Double(points)
         let newRaces = statValue(for: .races) + 1
+        let newTotalTime = statValue(for: .totalTime) + Double(timeRaced)
 
         defaults.set(newPoints, forKey: Stat.points.key)
         defaults.set(newRaces, forKey: Stat.races.key)
+        defaults.set(newTotalTime, forKey: Stat.totalTime.key)
+
+        // If found page, check for fastest completion time
+        if points > 0 {
+            let currentFastestTime = statValue(for: .fastestTime)
+            if currentFastestTime == 0 {
+                defaults.set(timeRaced, forKey: Stat.fastestTime.key)
+            } else if timeRaced < Int(currentFastestTime) {
+                print("Setting \(timeRaced)")
+                defaults.set(timeRaced, forKey: Stat.fastestTime.key)
+            }
+        }
 
         cloudSync()
         leaderboardSync()
@@ -137,11 +157,21 @@ class StatsHelper {
     }
 
     private func cloudSync() {
-        let stats = [Stat.points, Stat.races]
-        for stat in stats {
+        let highValueStats = [Stat.points, Stat.races, Stat.totalTime]
+        for stat in highValueStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if deviceValue > cloudValue {
+                keyValueStore.set(deviceValue, forKey: stat.key)
+            } else {
+                defaults.set(cloudValue, forKey: stat.key)
+            }
+        }
+        let lowValueStats = [Stat.fastestTime]
+        for stat in lowValueStats {
+            let deviceValue = defaults.double(forKey: stat.key)
+            let cloudValue = keyValueStore.double(forKey: stat.key)
+            if deviceValue < cloudValue {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             } else {
                 defaults.set(cloudValue, forKey: stat.key)
@@ -158,17 +188,28 @@ class StatsHelper {
         let races = statValue(for: .races)
         let average = statValue(for: .average)
 
+        let totalTime = statValue(for: .totalTime)
+        let fastestTime = statValue(for: .fastestTime)
+
         let pointsScore = GKScore(leaderboardIdentifier: Stat.points.leaderboard)
         pointsScore.value = Int64(points)
 
         let racesScore = GKScore(leaderboardIdentifier: Stat.races.leaderboard)
         racesScore.value = Int64(races)
 
-        var scores = [pointsScore, racesScore]
+        let totalTimeScore = GKScore(leaderboardIdentifier: Stat.totalTime.leaderboard)
+        totalTimeScore.value = Int64(totalTime / 60)
+
+        var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore]
         if races >= 5 {
             let averageScore = GKScore(leaderboardIdentifier: Stat.average.leaderboard)
             averageScore.value = Int64(average * 1000)
             scores.append(averageScore)
+        }
+        if fastestTime > 0 {
+            let fastestTimeScore = GKScore(leaderboardIdentifier: Stat.fastestTime.leaderboard)
+            fastestTimeScore.value = Int64(fastestTime)
+            scores.append(fastestTimeScore)
         }
         GKScore.report(scores, withCompletionHandler: nil)
     }

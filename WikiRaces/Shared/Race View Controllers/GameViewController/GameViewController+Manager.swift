@@ -19,8 +19,8 @@ extension GameViewController {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
                 self.transition(to: state)
-            }, pointsUpdate: { playerPoints in
-                StatsHelper.shared.completedRace(points: playerPoints)
+            }, pointsUpdate: { points in
+                StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced)
             }, linkCountUpdate: { linkCount in
                 self.webView.text = linkCount.description
             })
@@ -33,8 +33,10 @@ extension GameViewController {
                 } else {
                     self?.transition(to: state)
                 }
-            }, pointsUpdate: { playerPoints in
-                StatsHelper.shared.completedRace(points: playerPoints)
+            }, pointsUpdate: { [weak self] points in
+                if let timeRaced = self?.timeRaced {
+                    StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced)
+                }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
             })
@@ -131,6 +133,7 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .results, .hostResults, .points:
+            raceTimer?.invalidate()
             if activeViewController != resultsViewController || resultsViewController == nil {
                 dismissActiveController(completion: {
                     self.performSegue(.showResults)
@@ -148,6 +151,11 @@ extension GameViewController {
                 PlayerAnalytics.log(event: .hostEndedRace)
             }
         case .race:
+            timeRaced = 0
+            raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+                self?.timeRaced += 1
+            })
+
             navigationController?.setNavigationBarHidden(false, animated: false)
 
             navigationItem.leftBarButtonItem = flagBarButtonItem

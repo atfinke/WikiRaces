@@ -7,6 +7,7 @@
 //
 
 import Foundation
+
 extension WKRManager {
 
     // MARK: - Object Handling

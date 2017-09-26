@@ -251,7 +251,7 @@ extension MenuViewController {
         self.middleMenuTile = middleMenuTile
         self.rightMenuTile = rightMenuTile
 
-        StatsHelper.shared.statsUpdated = { points, races, average in
+        StatsHelper.shared.keyStatsUpdated = { points, races, average in
             DispatchQueue.main.async {
                 self.leftMenuTile?.value = points
                 self.middleMenuTile?.value = average
