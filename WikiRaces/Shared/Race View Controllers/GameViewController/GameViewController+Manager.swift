@@ -14,7 +14,7 @@ extension GameViewController {
 
     // MARK: - WKRManager
 
-    //swiftlint:disable line_length
+    //swiftlint:disable function_body_length line_length
     func setupManager() {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in

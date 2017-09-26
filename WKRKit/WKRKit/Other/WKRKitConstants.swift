@@ -101,14 +101,14 @@ public class WKRKitConstants {
             print("WKRKitConstants Cloud: Attempt to copy")
 
             copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                          newArticlesFileURL: recordArticlesAsset.fileURL,
-                          newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+                        newArticlesFileURL: recordArticlesAsset.fileURL,
+                        newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
         }
     }
 
     static private func copyIfNewer(newConstantsFileURL: URL,
-                                      newArticlesFileURL: URL,
-                                      newGetLinksScriptFileURL: URL) {
+                                    newArticlesFileURL: URL,
+                                    newGetLinksScriptFileURL: URL) {
 
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newArticlesFileURL.path),
@@ -164,8 +164,8 @@ public class WKRKitConstants {
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
-                      newArticlesFileURL: bundledArticlesURL,
-                      newGetLinksScriptFileURL: bundledGetLinksScriptURL)
+                    newArticlesFileURL: bundledArticlesURL,
+                    newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
     internal func finalArticles() -> [String] {

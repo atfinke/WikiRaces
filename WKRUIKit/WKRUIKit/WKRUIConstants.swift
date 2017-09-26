@@ -74,14 +74,14 @@ public struct WKRUIConstants {
             print("WKRKitConstants Cloud: Attempt to copy")
 
             copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                          newPreHideScriptFileURL: recordPreHideScriptAsset.fileURL,
-                          newPostHideScriptFileURL: recordPostHideScriptAsset.fileURL)
+                        newPreHideScriptFileURL: recordPreHideScriptAsset.fileURL,
+                        newPostHideScriptFileURL: recordPostHideScriptAsset.fileURL)
         }
     }
 
     static private func copyIfNewer(newConstantsFileURL: URL,
-                                      newPreHideScriptFileURL: URL,
-                                      newPostHideScriptFileURL: URL) {
+                                    newPreHideScriptFileURL: URL,
+                                    newPostHideScriptFileURL: URL) {
 
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newPreHideScriptFileURL.path),
@@ -137,8 +137,8 @@ public struct WKRUIConstants {
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
-                      newPreHideScriptFileURL: bundledPreHideScriptURL,
-                      newPostHideScriptFileURL: bundledPostHideScriptURL)
+                    newPreHideScriptFileURL: bundledPreHideScriptURL,
+                    newPostHideScriptFileURL: bundledPostHideScriptURL)
     }
 
     internal func preHideScript() -> String {

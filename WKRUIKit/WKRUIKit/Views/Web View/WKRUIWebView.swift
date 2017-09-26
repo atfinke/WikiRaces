@@ -126,8 +126,10 @@ public class WKRUIWebView: WKWebView {
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
 
-        let preHideScript = WKUserScript(source: WKRUIConstants.current.preHideScript(), injectionTime: .atDocumentStart)
-        let postHideScript = WKUserScript(source: WKRUIConstants.current.postHideScript(), injectionTime: .atDocumentEnd)
+        let preHideScript = WKUserScript(source: WKRUIConstants.current.preHideScript(),
+                                         injectionTime: .atDocumentStart)
+        let postHideScript = WKUserScript(source: WKRUIConstants.current.postHideScript(),
+                                          injectionTime: .atDocumentEnd)
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(preHideScript)
