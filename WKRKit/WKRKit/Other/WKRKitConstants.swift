@@ -86,7 +86,7 @@ public class WKRKitConstants {
                 let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
                     return
             }
-            
+
             copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
                         newArticlesFileURL: recordArticlesAsset.fileURL,
                         newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)

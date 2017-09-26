@@ -167,7 +167,7 @@ extension MenuViewController {
 
     /// Sets up the labels
     private func setupLabels() {
-        titleLabel.text = "WikiRaces"
+        titleLabel.text = "WikiRaces Beta"
         titleLabel.textColor = UIColor.wkrTextColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.addSubview(titleLabel)
