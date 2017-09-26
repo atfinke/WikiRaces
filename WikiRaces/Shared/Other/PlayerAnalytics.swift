@@ -8,7 +8,10 @@
 
 import CloudKit
 import Foundation
+
+#if !MULTIWINDOWDEBUG
 import Crashlytics
+#endif
 
 struct PlayerAnalytics {
 
@@ -16,7 +19,7 @@ struct PlayerAnalytics {
 
     enum ValueEvent {
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
-        case updatedStats(points: Int, races: Int)
+        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int)
     }
 
     enum Event: String {
@@ -54,9 +57,11 @@ struct PlayerAnalytics {
                         record["DeviceName"] = name as NSString
                     case .usingCustomName(let name):
                         record["CustomName"] = name as NSString
-                    case .updatedStats(let points, let races):
+                    case .updatedStats(let points, let races, let totalTime, let fastestTime):
                         record["Points"] = NSNumber(value: points)
                         record["Races"] = NSNumber(value: races)
+                        record["TotalTime"] = NSNumber(value: totalTime)
+                        record["FastestTime"] = NSNumber(value: fastestTime)
                     }
 
                     publicDB.save(record, completionHandler: { (_, _) in })

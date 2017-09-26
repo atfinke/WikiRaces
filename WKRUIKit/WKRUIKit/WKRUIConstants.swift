@@ -51,27 +51,14 @@ public struct WKRUIConstants {
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
-                print("WKRUIConstants Cloud: Failed to get record")
-                return
-            }
-            guard let recordVersion = record["Version"] as? Int else {
-                print("WKRUIConstants Cloud: Failed to get version")
-                return
-            }
-
-            guard recordVersion > WKRUIConstants.current.version else {
-                print("WKRUIConstants Cloud: Have same or newer constants on device")
                 return
             }
 
             guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
                 let recordPreHideScriptAsset = record["PreHideScriptFile"] as? CKAsset,
                 let recordPostHideScriptAsset = record["PostHideScriptFile"] as? CKAsset else {
-                    print("WKRKitConstants Cloud: No assets")
                     return
             }
-
-            print("WKRKitConstants Cloud: Attempt to copy")
 
             copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
                         newPreHideScriptFileURL: recordPreHideScriptAsset.fileURL,
@@ -103,13 +90,12 @@ public struct WKRUIConstants {
         if FileManager.default.fileExists(atPath: documentsConstantsURL.path),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL),
             let documentsConstantsVersions = documentsConstants["Version"] as? Int {
-            print("WKRUIConstants: Existing constants (v\(documentsConstantsVersions)) @ \(documentsConstantsURL.path)")
+
             if newConstantsVersion <= documentsConstantsVersions {
                 shouldReplaceExisitingConstants = false
             }
         }
 
-        print("WKRUIConstants: Replacing existing constants with bundled: \(shouldReplaceExisitingConstants)")
         if shouldReplaceExisitingConstants {
             do {
                 try? FileManager.default.removeItem(at: documentsPreHideScriptURL)

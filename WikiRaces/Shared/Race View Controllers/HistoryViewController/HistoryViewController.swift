@@ -37,7 +37,6 @@ class HistoryViewController: UITableViewController {
                 currentPlayerState = player.state
                 let lastIndex = IndexPath(row: history.entries.count - 1)
                 tableView.reloadRows(at: [lastIndex], with: .fade)
-                print("Reloading row")
             }
 
             for (index, entry) in history.entries.enumerated() {

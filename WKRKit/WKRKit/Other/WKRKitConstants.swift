@@ -78,28 +78,15 @@ public class WKRKitConstants {
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
-                print("WKRKitConstants Cloud: Failed to get record")
-                return
-            }
-            guard let recordVersion = record["Version"] as? Int else {
-                print("WKRKitConstants Cloud: Failed to get version")
-                return
-            }
-
-            guard recordVersion > WKRKitConstants.current.version else {
-                print("WKRKitConstants Cloud: Have same or newer constants on device")
                 return
             }
 
             guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
                 let recordArticlesAsset = record["ArticlesFile"] as? CKAsset,
                 let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
-                    print("WKRKitConstants Cloud: No assets")
                     return
             }
-
-            print("WKRKitConstants Cloud: Attempt to copy")
-
+            
             copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
                         newArticlesFileURL: recordArticlesAsset.fileURL,
                         newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
@@ -130,13 +117,12 @@ public class WKRKitConstants {
         if FileManager.default.fileExists(atPath: documentsConstantsURL.path),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL),
             let documentsConstantsVersions = documentsConstants["Version"] as? Int {
-            print("WKRKitConstants: Existing constants (v\(documentsConstantsVersions)) @ \(documentsConstantsURL.path)")
+
             if newConstantsVersion <= documentsConstantsVersions {
                 shouldReplaceExisitingConstants = false
             }
         }
 
-        print("WKRKitConstants: Replacing existing constants with bundled: \(shouldReplaceExisitingConstants)")
         if shouldReplaceExisitingConstants {
             do {
                 try? FileManager.default.removeItem(at: documentsArticlesURL)

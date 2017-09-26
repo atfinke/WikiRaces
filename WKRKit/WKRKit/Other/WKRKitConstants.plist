@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>Version</key>
-	<integer>2</integer>
+	<integer>10</integer>
 	<key>QuickRace</key>
-	<true/>
+	<false/>
 	<key>PageTitleStringToReplace</key>
 	<string> - Wikipedia</string>
 	<key>PageTitleCharactersToRemove</key>

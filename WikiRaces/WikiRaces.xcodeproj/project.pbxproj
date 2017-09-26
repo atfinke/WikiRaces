@@ -54,6 +54,7 @@
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
+		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */; };
 		14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FE11F6F025A00CD7373 /* ViewController.swift */; };
@@ -293,6 +294,7 @@
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A778281F61A9A100823DE8 /* Plans.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Plans.txt; sourceTree = "<group>"; };
+		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */,
 				1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */,
 				1410DB4D1F4F55BB00F5CAD7 /* WKRKit.framework in Frameworks */,
 			);
@@ -452,6 +455,7 @@
 		149FF8791F362BE4000A5D96 /* WikiRaces (Multi-Window) */ = {
 			isa = PBXGroup;
 			children = (
+				14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */,
 				149FF87A1F362BE4000A5D96 /* AppDelegate.swift */,
 				14B55C981F3A49D20090E092 /* DebugWindow.swift */,
 				149FF87C1F362BE4000A5D96 /* ViewController.swift */,
@@ -736,6 +740,14 @@
 					};
 					149FF8771F362BE4000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					149FF88D1F362BF1000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
@@ -1343,6 +1355,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WikiRaces (Multi-Window)/WikiRaces (Multi-Window).entitlements";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1360,6 +1373,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WikiRaces (Multi-Window)/WikiRaces (Multi-Window).entitlements";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

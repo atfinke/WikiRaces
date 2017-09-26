@@ -28,4 +28,8 @@ class AppDelegate: WKRAppDelegate {
         return true
     }
 
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        configureConstants()
+    }
+
 }

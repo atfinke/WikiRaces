@@ -73,8 +73,14 @@ class StatsHelper {
         let races = statValue(for: .races)
         let points = statValue(for: .points)
 
+        let totalTime = statValue(for: .totalTime)
+        let fastestTime = statValue(for: .fastestTime)
+
         keyStatsUpdated?(points, races, statValue(for: .average))
-        PlayerAnalytics.log(event: .updatedStats(points: Int(points), races: Int(races)))
+        PlayerAnalytics.log(event: .updatedStats(points: Int(points),
+                                                 races: Int(races),
+                                                 totalTime: Int(totalTime),
+                                                 fastestTime: Int(fastestTime)))
     }
 
     // MARK: - Set/Get Stats
@@ -103,7 +109,6 @@ class StatsHelper {
             if currentFastestTime == 0 {
                 defaults.set(timeRaced, forKey: Stat.fastestTime.key)
             } else if timeRaced < Int(currentFastestTime) {
-                print("Setting \(timeRaced)")
                 defaults.set(timeRaced, forKey: Stat.fastestTime.key)
             }
         }

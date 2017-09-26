@@ -20,7 +20,7 @@ extension GameViewController {
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
                 self.transition(to: state)
             }, pointsUpdate: { points in
-                StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced)
+                StatsHelper.shared.completedRace(points: points, timeRaced: self.timeRaced)
             }, linkCountUpdate: { linkCount in
                 self.webView.text = linkCount.description
             })
