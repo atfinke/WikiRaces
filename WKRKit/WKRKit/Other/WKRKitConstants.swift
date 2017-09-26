@@ -71,42 +71,42 @@ public class WKRKitConstants {
     }
 
     static public func updateConstants() {
-        copyBundledPlistToDocuments()
+        copyBundledResourcesToDocuments()
 
         let publicDB = CKContainer.default().publicCloudDatabase
         let recordID = CKRecordID(recordName: "WKRKitConstantsRecord")
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
-                print("WKRKitConstants: Failed to get record")
+                print("WKRKitConstants Cloud: Failed to get record")
                 return
             }
             guard let recordVersion = record["Version"] as? Int else {
-                print("WKRKitConstants: Failed to get version")
+                print("WKRKitConstants Cloud: Failed to get version")
                 return
             }
 
             guard recordVersion > WKRKitConstants.current.version else {
-                print("WKRKitConstants: Have same or newer constants on device")
+                print("WKRKitConstants Cloud: Have same or newer constants on device")
                 return
             }
 
             guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
                 let recordArticlesAsset = record["ArticlesFile"] as? CKAsset,
                 let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
+                    print("WKRKitConstants Cloud: No assets")
                     return
             }
-            attemptToCopy(newConstantsFileURL: recordConstantsAsset.fileURL,
+
+            print("WKRKitConstants Cloud: Attempt to copy")
+
+            copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
                           newArticlesFileURL: recordArticlesAsset.fileURL,
                           newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
         }
     }
 
-    static public func updatedConstants() {
-        current = WKRKitConstants()
-    }
-
-    static private func attemptToCopy(newConstantsFileURL: URL,
+    static private func copyIfNewer(newConstantsFileURL: URL,
                                       newArticlesFileURL: URL,
                                       newGetLinksScriptFileURL: URL) {
 
@@ -141,7 +141,7 @@ public class WKRKitConstants {
             do {
                 try? FileManager.default.removeItem(at: documentsArticlesURL)
                 try FileManager.default.copyItem(at: newArticlesFileURL, to: documentsArticlesURL)
-                
+
                 try? FileManager.default.removeItem(at: documentsGetLinksScriptURL)
                 try FileManager.default.copyItem(at: newGetLinksScriptFileURL, to: documentsGetLinksScriptURL)
 
@@ -151,10 +151,11 @@ public class WKRKitConstants {
                 fatalError("WKRKitConstants: Something really bad happened")
             }
         }
-        updatedConstants()
+
+        current = WKRKitConstants()
     }
 
-    static private func copyBundledPlistToDocuments() {
+    static private func copyBundledResourcesToDocuments() {
         guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: "WKRKitConstants", withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
@@ -162,12 +163,12 @@ public class WKRKitConstants {
                 fatalError()
         }
 
-        attemptToCopy(newConstantsFileURL: bundledPlistURL,
+        copyIfNewer(newConstantsFileURL: bundledPlistURL,
                       newArticlesFileURL: bundledArticlesURL,
                       newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
-    static internal func finalArticles() -> [String] {
+    internal func finalArticles() -> [String] {
         //swiftlint:disable:next line_length
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
@@ -177,10 +178,10 @@ public class WKRKitConstants {
         return array
     }
 
-    static internal func getLinksScript() -> String {
+    internal func getLinksScript() -> String {
         //swiftlint:disable:next line_length
-        guard let documentsGetLinksScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
-            let source = try? String(contentsOf: documentsGetLinksScriptURL) else {
+        guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
+            let source = try? String(contentsOf: documentsScriptURL) else {
                 fatalError()
         }
         return source

@@ -30,7 +30,7 @@ struct PlayerAnalytics {
     }
 
     // MARK: - Events
-    
+
     public static func log(event: Event) {
         #if !MULTIWINDOWDEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: nil)

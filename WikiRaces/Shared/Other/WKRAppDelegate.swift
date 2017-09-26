@@ -16,6 +16,7 @@ class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureConstants() {
         WKRKitConstants.updateConstants()
+        WKRUIConstants.updateConstants()
     }
 
     func configureAppearance() {

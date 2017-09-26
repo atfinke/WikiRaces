@@ -27,7 +27,7 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         super.init()
 
         let config = WKWebViewConfiguration()
-        let linksScript = WKUserScript(source: WKRKitConstants.getLinksScript(), injectionTime: .atDocumentEnd)
+        let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd)
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)

@@ -229,8 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
-				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
 				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
+				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
 				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,

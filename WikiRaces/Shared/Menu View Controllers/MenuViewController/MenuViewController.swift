@@ -113,7 +113,7 @@ class MenuViewController: UIViewController {
             fatalError()
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
-        titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.version)"
+        titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
     }
 
     @objc

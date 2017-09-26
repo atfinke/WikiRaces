@@ -31,7 +31,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     }
 
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        let finalArticles = WKRKitConstants.finalArticles()
+        let finalArticles = WKRKitConstants.current.finalArticles()
         let operationQueue = OperationQueue()
 
         var randomPaths = [String]()
