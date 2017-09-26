@@ -59,6 +59,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             let config = preRaceConfig(startingPage: startingPage, pages)
             completionHandler(config)
         }
+        completedOperation.name = "Completion Operation"
 
         let startingPageOperation = WKROperation()
         startingPageOperation.addExecutionBlock {
@@ -67,6 +68,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 startingPageOperation.state = .isFinished
             }
         }
+        startingPageOperation.name = "Starting Page Operation"
         completedOperation.addDependency(startingPageOperation)
 
         let operations = randomPaths.map { path -> WKROperation in
@@ -79,6 +81,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                     operation.state = .isFinished
                 }
             }
+            operation.name = "Page Fetch Operation"
             completedOperation.addDependency(operation)
             return operation
         }

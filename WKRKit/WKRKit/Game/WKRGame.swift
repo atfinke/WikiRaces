@@ -67,7 +67,8 @@ public class WKRGame {
     }
 
     func finishedRace() {
-        if let race = activeRace {
+        if var race = activeRace {
+            race.linkedPagesFetcher = nil
             completedRaces.append(race)
         }
         activeRace = nil

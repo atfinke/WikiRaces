@@ -15,7 +15,7 @@ struct WKRActiveRace {
     var bonusPoints = 0
 
     private let finalPage: WKRPage
-    private let linkedPagesFetcher = WKRLinkedPagesFetcher()
+    internal var linkedPagesFetcher: WKRLinkedPagesFetcher? = WKRLinkedPagesFetcher()
 
     internal private(set) var players = [WKRPlayer]()
 
@@ -23,7 +23,7 @@ struct WKRActiveRace {
 
     internal init(config: WKRRaceConfig) {
         finalPage = config.endingPage
-        linkedPagesFetcher.start(for: finalPage)
+        linkedPagesFetcher?.start(for: finalPage)
     }
 
     // MARK: - Player Updates
@@ -45,7 +45,7 @@ struct WKRActiveRace {
             return (true, false)
         } else if page.title == finalPage.title {
             return (true, false)
-        } else if linkedPagesFetcher.foundLinkOn(page) {
+        } else if linkedPagesFetcher?.foundLinkOn(page) ?? false {
             return (false, true)
         }
         return (false, false)
