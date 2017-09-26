@@ -8,10 +8,11 @@
 
 import CloudKit
 import Foundation
-
 import Crashlytics
 
 struct PlayerAnalytics {
+
+    // MARK: - Types
 
     enum ValueEvent {
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
@@ -28,6 +29,8 @@ struct PlayerAnalytics {
         case hostCancelledPreMatch, hostStartMidMatchInviting
     }
 
+    // MARK: - Events
+    
     public static func log(event: Event) {
         #if !MULTIWINDOWDEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: nil)

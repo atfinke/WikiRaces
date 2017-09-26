@@ -44,7 +44,8 @@ public struct WKRPage: Codable, Hashable, Equatable {
             let clippedTitle = title[..<index].capitalized
             return smartCapitalize(clippedTitle)
         } else {
-            return smartCapitalize(title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: ""))
+            let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")
+            return smartCapitalize(title)
         }
     }
 

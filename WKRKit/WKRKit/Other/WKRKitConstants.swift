@@ -92,11 +92,13 @@ public class WKRKitConstants {
             }
 
             guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
-                let recordArticlesAsset = record["ArticlesFile"] as? CKAsset else {
+                let recordArticlesAsset = record["ArticlesFile"] as? CKAsset,
+                let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
                     return
             }
             attemptToCopy(newConstantsFileURL: recordConstantsAsset.fileURL,
-                          newArticlesFileURL: recordArticlesAsset.fileURL)
+                          newArticlesFileURL: recordArticlesAsset.fileURL,
+                          newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
         }
     }
 
@@ -104,9 +106,13 @@ public class WKRKitConstants {
         current = WKRKitConstants()
     }
 
-    static private func attemptToCopy(newConstantsFileURL: URL, newArticlesFileURL: URL) {
+    static private func attemptToCopy(newConstantsFileURL: URL,
+                                      newArticlesFileURL: URL,
+                                      newGetLinksScriptFileURL: URL) {
+
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
-            FileManager.default.fileExists(atPath: newArticlesFileURL.path) else {
+            FileManager.default.fileExists(atPath: newArticlesFileURL.path),
+            FileManager.default.fileExists(atPath: newGetLinksScriptFileURL.path) else {
                 fatalError("WKRKitConstants: This shouldn't be fatal in shipping")
         }
 
@@ -118,6 +124,7 @@ public class WKRKitConstants {
 
         let documentsArticlesURL = documentsDirectory.appendingPathComponent("WKRArticlesData.plist")
         let documentsConstantsURL = documentsDirectory.appendingPathComponent("WKRKitConstants.plist")
+        let documentsGetLinksScriptURL = documentsDirectory.appendingPathComponent("WKRGetLinks.js")
 
         var shouldReplaceExisitingConstants = true
         if FileManager.default.fileExists(atPath: documentsConstantsURL.path),
@@ -134,6 +141,10 @@ public class WKRKitConstants {
             do {
                 try? FileManager.default.removeItem(at: documentsArticlesURL)
                 try FileManager.default.copyItem(at: newArticlesFileURL, to: documentsArticlesURL)
+                
+                try? FileManager.default.removeItem(at: documentsGetLinksScriptURL)
+                try FileManager.default.copyItem(at: newGetLinksScriptFileURL, to: documentsGetLinksScriptURL)
+
                 try? FileManager.default.removeItem(at: documentsConstantsURL)
                 try FileManager.default.copyItem(at: newConstantsFileURL, to: documentsConstantsURL)
             } catch {
@@ -146,21 +157,33 @@ public class WKRKitConstants {
     static private func copyBundledPlistToDocuments() {
         guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: "WKRKitConstants", withExtension: "plist"),
-            let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist") else {
+            let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
+            let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {
                 fatalError()
         }
 
-        attemptToCopy(newConstantsFileURL: bundledPlistURL, newArticlesFileURL: bundledArticlesURL)
+        attemptToCopy(newConstantsFileURL: bundledPlistURL,
+                      newArticlesFileURL: bundledArticlesURL,
+                      newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
-    static internal func finalArticles() -> [String]? {
-        guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
-            let url = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
-            let arrayFromURL = NSArray(contentsOf: url),
+    static internal func finalArticles() -> [String] {
+        //swiftlint:disable:next line_length
+        guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
+            let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
             let array = arrayFromURL as? [String] else {
-                return nil
+                fatalError()
         }
         return array
+    }
+
+    static internal func getLinksScript() -> String {
+        //swiftlint:disable:next line_length
+        guard let documentsGetLinksScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
+            let source = try? String(contentsOf: documentsGetLinksScriptURL) else {
+                fatalError()
+        }
+        return source
     }
 
 }
