@@ -10,7 +10,7 @@ import Foundation
 
 public class WKRGame {
 
-    // MARK: - Closure
+    // MARK: - Closures
 
     var bonusPointsUpdated: ((Int) -> Void)?
 

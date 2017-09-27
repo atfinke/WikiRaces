@@ -7,22 +7,34 @@
 //
 
 import Foundation
+
+/// Used to transmit voting data and starting page
 public struct WKRPreRaceConfig: Codable, Equatable {
 
     // MARK: - Properties
 
+    /// The voting info
     internal var voteInfo: WKRVoteInfo
+    /// The starting page
     internal let startingPage: WKRPage
 
     // MARK: Initialization
 
-    init(startingPage: WKRPage, voteInfo: WKRVoteInfo) {
+    /// Creates a WKRPreRaceConfig object
+    ///
+    /// - Parameters:
+    ///   - startingPage: The starting page
+    ///   - voteInfo: The voting info
+    private init(startingPage: WKRPage, voteInfo: WKRVoteInfo) {
         self.voteInfo = voteInfo
         self.startingPage = startingPage
     }
 
     // MARK: - Creation
 
+    /// Creates a race config object based on starting page and voting data
+    ///
+    /// - Returns: The new race config
     internal func raceConfig() -> WKRRaceConfig? {
         guard let finalPage = voteInfo.selectFinalPage() else {
             return nil
@@ -30,10 +42,14 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         return WKRRaceConfig(starting: startingPage, ending: finalPage)
     }
 
+    /// Creates a WKRPreRaceConfig object
+    ///
+    /// - Parameter completionHandler: The handler holding the new config object
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
         let finalArticles = WKRKitConstants.current.finalArticles()
         let operationQueue = OperationQueue()
 
+        // Get a few more than neccessary random paths in case some final articles are no longer valid
         var randomPaths = [String]()
         while randomPaths.count < Int(Double(WKRRaceConstants.votingArticlesCount) * 1.5) {
             if let randomPath = finalArticles.randomElement, !randomPaths.contains(randomPath) {
@@ -45,6 +61,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         var startingPage: WKRPage?
 
         let completedOperation = BlockOperation {
+            // Used for quick debug to set first page to Apple and final page to first link on page.
             if WKRKitConstants.current.quickRace {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
@@ -56,10 +73,17 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 pages.insert(fakeEnd, at: 0)
             }
 
-            let config = preRaceConfig(startingPage: startingPage, pages)
-            completionHandler(config)
+            let finalPages = Array(pages.prefix(WKRRaceConstants.votingArticlesCount))
+            if !finalPages.isEmpty, let page = startingPage {
+                let config =  WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
+                completionHandler(config)
+            } else {
+                completionHandler(nil)
+            }
+
         }
 
+        // Gets the starting page
         let startingPageOperation = WKROperation()
         startingPageOperation.addExecutionBlock { [unowned startingPageOperation] in
             WKRPageFetcher.fetchRandom { page in
@@ -69,6 +93,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         }
         completedOperation.addDependency(startingPageOperation)
 
+        // All the operations for get WKRPage objects to vote on
         let operations = randomPaths.map { path -> WKROperation in
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
@@ -84,14 +109,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         }
         operationQueue.addOperations(operations, waitUntilFinished: false)
         operationQueue.addOperations([startingPageOperation, completedOperation], waitUntilFinished: false)
-    }
-
-    private static func preRaceConfig(startingPage: WKRPage?, _ pages: [WKRPage]) -> WKRPreRaceConfig? {
-        let finalPages = Array(pages.prefix(WKRRaceConstants.votingArticlesCount))
-        if !finalPages.isEmpty, let page = startingPage {
-            return WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
-        }
-        return nil
     }
 
     // MARK: - Equatable
