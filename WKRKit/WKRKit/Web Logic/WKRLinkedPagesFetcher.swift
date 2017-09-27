@@ -80,7 +80,6 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     // MARK: - State
 
     func start(for page: WKRPage) {
-        print(#function)
         let path = page.url.lastPathComponent
         let query = "&namespace=0&limit=500&hidetrans=1"
         guard let url = URL(string: WKRKitConstants.current.whatLinksHereURLString + "/" + path + query) else { return }
@@ -88,7 +87,6 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     }
 
     func stop() {
-        print(#function)
         hintIndex = 0
         nextPageURL = nil
         webView?.stopLoading()
@@ -108,7 +106,6 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     }
 
     private func load(url: URL?) {
-        print(#function)
         guard let webView = webView, let url = url else { return }
         nextPageURL = nil
         viewPageURLs.append(url)

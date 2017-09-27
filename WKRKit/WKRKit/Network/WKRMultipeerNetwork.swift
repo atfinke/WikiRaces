@@ -77,6 +77,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
             case .notConnected: self.playerDisconnected?(WKRPlayerProfile(peerID: peerID))
             default: break
             }
+
             if session.connectedPeers.isEmpty {
                 self.playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
             }
