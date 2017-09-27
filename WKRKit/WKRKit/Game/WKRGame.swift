@@ -30,8 +30,8 @@ public class WKRGame {
     internal var raceConfig: WKRRaceConfig?
     internal var preRaceConfig: WKRPreRaceConfig?
 
-    internal private(set) var activeRace: WKRActiveRace?
-    internal private(set) var completedRaces = [WKRActiveRace]()
+    internal private(set) var activeRace: WKRRace?
+    internal private(set) var completedRaces = [WKRRace]()
 
     public internal(set) var state = WKRGameState.preMatch
 
@@ -45,7 +45,7 @@ public class WKRGame {
 
     internal func startRace(with config: WKRRaceConfig) {
         raceConfig = config
-        activeRace = WKRActiveRace(config: config)
+        activeRace = WKRRace(config: config)
         preRaceConfig = nil
 
         if localPlayer.isHost {

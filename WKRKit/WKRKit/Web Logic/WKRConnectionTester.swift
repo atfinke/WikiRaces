@@ -8,8 +8,14 @@
 
 import Foundation
 
+/// Tests the connection to Wikipedia.
 public struct WKRConnectionTester {
 
+    /// Tests the connection to Wikipedia.
+    ///
+    /// - Parameters:
+    ///   - timeout: The maximum time to wait for the page load. If it takes longer than the time out, returns false
+    ///   - completionHandler: Handler with Bool indicating connectivity.
     public static func start(timeout: Double = 4.0, completionHandler: @escaping (_ connected: Bool) -> Void) {
         let startDate = Date()
         var timedOut = false

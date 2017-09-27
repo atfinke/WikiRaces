@@ -8,15 +8,23 @@
 
 import Foundation
 
+/// A Wikipedia page
 public struct WKRPage: Codable, Hashable, Equatable {
 
     // MARK: - Properties
 
+    // The title of the page
     public let title: String?
+    // The url of the page
     internal let url: URL
 
     // MARK: - Initialization
 
+    /// Creates a WKRPage object
+    ///
+    /// - Parameters:
+    ///   - title: The title of the page
+    ///   - url: The url of the page
     public init(title: String?, url: URL) {
         self.title = WKRPage.formattedTitle(for: title)
         self.url = url
@@ -38,12 +46,17 @@ public struct WKRPage: Codable, Hashable, Equatable {
                 return title.capitalized
             }
         }
+
+        // charactersToRemove is a fallback if simply replacing the "Wikipedia - " fails one day.
         let charactersToRemove = WKRKitConstants.current.pageTitleCharactersToRemove
         if charactersToRemove > 0 && title.characters.count > charactersToRemove {
+            // Again, will only be used if the constants plist
+            // is updated one day to use raw character replacment instead of a string.
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
             let clippedTitle = title[..<index].capitalized
             return smartCapitalize(clippedTitle)
         } else {
+            // The expected path
             let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")
             return smartCapitalize(title)
         }
