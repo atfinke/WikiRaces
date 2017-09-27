@@ -71,13 +71,15 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     open func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
-        switch state {
-        case .connected: playerConnected?(WKRPlayerProfile(peerID: peerID))
-        case .notConnected: playerDisconnected?(WKRPlayerProfile(peerID: peerID))
-        default: break
-        }
-        if session.connectedPeers.isEmpty {
-            playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
+        DispatchQueue.main.async {
+            switch state {
+            case .connected: self.playerConnected?(WKRPlayerProfile(peerID: peerID))
+            case .notConnected: self.playerDisconnected?(WKRPlayerProfile(peerID: peerID))
+            default: break
+            }
+            if session.connectedPeers.isEmpty {
+                self.playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
+            }
         }
     }
 

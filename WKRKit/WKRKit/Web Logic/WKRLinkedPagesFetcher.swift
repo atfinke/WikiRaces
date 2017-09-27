@@ -53,15 +53,22 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         let config = WKWebViewConfiguration()
         let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd)
 
-        let test = ScriptMessageDelegate(delegate: self)
+        let messageDelegate = ScriptMessageDelegate(delegate: self)
+
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)
-        userContentController.add(test, name: "linkedPage")
-        userContentController.add(test, name: "nextPage")
-        userContentController.add(test, name: "finishedPage")
+        userContentController.add(messageDelegate, name: "linkedPage")
+        userContentController.add(messageDelegate, name: "nextPage")
+        userContentController.add(messageDelegate, name: "finishedPage")
         config.userContentController = userContentController
 
         webView = WKWebView(frame: .zero, configuration: config)
+    }
+
+    deinit {
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "linkedPage")
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "nextPage")
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "finishedPage")
     }
 
     // MARK: - Helpers

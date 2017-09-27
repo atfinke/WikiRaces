@@ -62,7 +62,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         completedOperation.name = "Completion Operation"
 
         let startingPageOperation = WKROperation()
-        startingPageOperation.addExecutionBlock {
+        startingPageOperation.addExecutionBlock { [unowned startingPageOperation] in
             WKRPageFetcher.fetchRandom { page in
                 startingPage = page
                 startingPageOperation.state = .isFinished
@@ -73,7 +73,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
         let operations = randomPaths.map { path -> WKROperation in
             let operation = WKROperation()
-            operation.addExecutionBlock {
+            operation.addExecutionBlock { [unowned operation] in
                 WKRPageFetcher.fetch(path: path) { (page) in
                     if let page = page {
                         pages.append(page)

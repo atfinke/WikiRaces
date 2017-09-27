@@ -79,7 +79,8 @@ extension GameViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
 
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
-        let quitAction = UIAlertAction(title: "Menu", style: .default) { _ in
+        let quitAction = UIAlertAction(title: "Menu", style: .default) { [weak self] _ in
+            self?.resetActiveControllers()
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
         alertController.addAction(quitAction)
