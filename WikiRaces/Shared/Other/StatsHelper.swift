@@ -27,6 +27,16 @@ class StatsHelper {
             return "WKRStat-" + self.rawValue
         }
 
+        var sortHigh: Bool {
+            switch self {
+            case .points:       return true
+            case .races:        return true
+            case .average:      return true
+            case .totalTime:    return true
+            case .fastestTime:  return false
+            }
+        }
+
         var leaderboard: String {
             switch self {
             case .points:       return "com.andrewfinke.wikiraces.points"
@@ -147,9 +157,10 @@ class StatsHelper {
         let reason = reasonForChange.intValue
         if reason == NSUbiquitousKeyValueStoreServerChange || reason == NSUbiquitousKeyValueStoreInitialSyncChange {
             for key in changedKeys {
+                guard let stat = Stat(rawValue: key) else { return }
                 let deviceValue = defaults.double(forKey: key)
                 let cloudValue = keyValueStore.double(forKey: key)
-                if deviceValue > cloudValue {
+                if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
                     keyValueStore.set(deviceValue, forKey: key)
                 } else {
                     defaults.set(deviceValue, forKey: key)
@@ -162,24 +173,13 @@ class StatsHelper {
     }
 
     private func cloudSync() {
-        let highValueStats = [Stat.points, Stat.races, Stat.totalTime]
-        for stat in highValueStats {
+        for stat in [Stat.points, Stat.races, Stat.totalTime, Stat.fastestTime] {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
-            if deviceValue > cloudValue {
+            if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             } else {
-                defaults.set(cloudValue, forKey: stat.key)
-            }
-        }
-        let lowValueStats = [Stat.fastestTime]
-        for stat in lowValueStats {
-            let deviceValue = defaults.double(forKey: stat.key)
-            let cloudValue = keyValueStore.double(forKey: stat.key)
-            if deviceValue < cloudValue {
-                keyValueStore.set(deviceValue, forKey: stat.key)
-            } else {
-                defaults.set(cloudValue, forKey: stat.key)
+                defaults.set(deviceValue, forKey: stat.key)
             }
         }
     }

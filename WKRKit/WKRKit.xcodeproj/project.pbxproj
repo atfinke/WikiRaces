@@ -133,6 +133,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140192221F7C694F00E67857 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
+				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
+				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
+				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		149FF7FE1F362B3D000A5D96 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				149FF80B1F362B3D000A5D96 /* WKRKit.h */,
+				140192221F7C694F00E67857 /* Constants */,
 				14E6DFB31F3686EE002755C3 /* Game */,
 				14E6DFB11F3686B1002755C3 /* Manager */,
 				14EB9F6F1F3684FC00FF1A9E /* Network */,
@@ -228,13 +240,9 @@
 		14E6DFB41F368742002755C3 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
-				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
-				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
-				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+				14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
-				14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";

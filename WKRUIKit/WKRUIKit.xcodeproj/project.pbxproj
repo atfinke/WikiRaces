@@ -105,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140192231F7C6BBC00E67857 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				145E903C1F79F80A00D31554 /* WKRUIConstants.plist */,
+				149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		1410DB421F4F51B200F5CAD7 /* Web View */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,8 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				1413AB1D1F364F2000873ACA /* WKRUIKit.h */,
-				145E903C1F79F80A00D31554 /* WKRUIConstants.plist */,
-				149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */,
+				140192231F7C6BBC00E67857 /* Constants */,
 				14A3D4B61F3634960038388F /* Elements */,
 				14A3D4B71F3634A20038388F /* Extensions */,
 				14A3D4B81F3634DF0038388F /* Views */,
