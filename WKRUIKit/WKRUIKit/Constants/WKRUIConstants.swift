@@ -73,13 +73,13 @@ public struct WKRUIConstants {
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newPreHideScriptFileURL.path),
             FileManager.default.fileExists(atPath: newPostHideScriptFileURL.path) else {
-                fatalError("WKRUIConstants: This shouldn't be fatal in shipping")
+                return
         }
 
         guard let newConstants = NSDictionary(contentsOf: newConstantsFileURL),
             let newConstantsVersion = newConstants["Version"] as? Int,
             let documentsDirectory = FileManager.default.documentsDirectory else {
-                fatalError("WKRUIConstants: This shouldn't be fatal in shipping")
+                return
         }
 
         let documentsConstantsURL = documentsDirectory.appendingPathComponent("WKRUIConstants.plist")
@@ -107,7 +107,7 @@ public struct WKRUIConstants {
                 try? FileManager.default.removeItem(at: documentsConstantsURL)
                 try FileManager.default.copyItem(at: newConstantsFileURL, to: documentsConstantsURL)
             } catch {
-                fatalError("WKRUIConstants: Something really bad happened")
+                return
             }
         }
 

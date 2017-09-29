@@ -100,13 +100,13 @@ public class WKRKitConstants {
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newArticlesFileURL.path),
             FileManager.default.fileExists(atPath: newGetLinksScriptFileURL.path) else {
-                fatalError("WKRKitConstants: This shouldn't be fatal in shipping")
+                return
         }
 
         guard let newConstants = NSDictionary(contentsOf: newConstantsFileURL),
             let newConstantsVersion = newConstants["Version"] as? Int,
             let documentsDirectory = FileManager.default.documentsDirectory else {
-                fatalError("WKRKitConstants: This shouldn't be fatal in shipping")
+                return
         }
 
         let documentsArticlesURL = documentsDirectory.appendingPathComponent("WKRArticlesData.plist")
@@ -134,7 +134,7 @@ public class WKRKitConstants {
                 try? FileManager.default.removeItem(at: documentsConstantsURL)
                 try FileManager.default.copyItem(at: newConstantsFileURL, to: documentsConstantsURL)
             } catch {
-                fatalError("WKRKitConstants: Something really bad happened")
+                print(error)
             }
         }
 

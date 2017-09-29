@@ -18,11 +18,11 @@
 	<key>PageTitleStringToReplace</key>
 	<string> - Wikipedia</string>
 	<key>QuickRace</key>
-	<true/>
+	<false/>
 	<key>RandomURLString</key>
 	<string>https://en.m.wikipedia.org/wiki/Special:Random</string>
 	<key>Version</key>
-	<integer>310</integer>
+	<integer>1</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
 </dict>
