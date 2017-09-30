@@ -8,10 +8,18 @@
 
 import Foundation
 
+/// A race config. Lightweight object for sending out information about the race.
 struct WKRRaceConfig: Codable {
+    /// The starting page for the race
     let startingPage: WKRPage
+    /// The final page for the race
     let endingPage: WKRPage
 
+    /// Creates a new config object
+    ///
+    /// - Parameters:
+    ///   - starting: The starting page for the race
+    ///   - ending: The final page for the race
     init(starting: WKRPage, ending: WKRPage) {
         self.startingPage = starting
         self.endingPage = ending

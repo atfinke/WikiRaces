@@ -14,13 +14,13 @@ extension GameViewController {
 
     // MARK: - WKRManager
 
-    //swiftlint:disable line_length
+    //swiftlint:disable function_body_length line_length
     func setupManager() {
         #if MULTIWINDOWDEBUG
             manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
                 self.transition(to: state)
-            }, pointsUpdate: { playerPoints in
-                StatsHelper.shared.completedRace(points: playerPoints)
+            }, pointsUpdate: { points in
+                StatsHelper.shared.completedRace(points: points, timeRaced: self.timeRaced)
             }, linkCountUpdate: { linkCount in
                 self.webView.text = linkCount.description
             })
@@ -33,8 +33,10 @@ extension GameViewController {
                 } else {
                     self?.transition(to: state)
                 }
-            }, pointsUpdate: { playerPoints in
-                StatsHelper.shared.completedRace(points: playerPoints)
+            }, pointsUpdate: { [weak self] points in
+                if let timeRaced = self?.timeRaced {
+                    StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced)
+                }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
             })
@@ -77,7 +79,8 @@ extension GameViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
 
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
-        let quitAction = UIAlertAction(title: "Menu", style: .default) { _ in
+        let quitAction = UIAlertAction(title: "Menu", style: .default) { [weak self] _ in
+            self?.resetActiveControllers()
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
         alertController.addAction(quitAction)
@@ -87,6 +90,8 @@ extension GameViewController {
                 self.activeViewController = alertController
             })
         })
+
+        PlayerAnalytics.log(event: .fatalError)
     }
 
     func resetActiveControllers() {
@@ -129,6 +134,7 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
         case .results, .hostResults, .points:
+            raceTimer?.invalidate()
             if activeViewController != resultsViewController || resultsViewController == nil {
                 dismissActiveController(completion: {
                     self.performSegue(.showResults)
@@ -141,7 +147,16 @@ extension GameViewController {
             }
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
+
+            if state == .hostResults && isPlayerHost {
+                PlayerAnalytics.log(event: .hostEndedRace)
+            }
         case .race:
+            timeRaced = 0
+            raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+                self?.timeRaced += 1
+            })
+
             navigationController?.setNavigationBarHidden(false, animated: false)
 
             navigationItem.leftBarButtonItem = flagBarButtonItem
@@ -151,6 +166,10 @@ extension GameViewController {
             activityIndicatorView.alpha = 0.0
 
             dismissActiveController(completion: nil)
+
+            if isPlayerHost {
+                PlayerAnalytics.log(event: .hostStartedRace)
+            }
         default: break
         }
     }

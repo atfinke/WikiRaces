@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import WKRKit
 import WKRUIKit
 
 class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+
+    func configureConstants() {
+        WKRKitConstants.updateConstants()
+        WKRUIConstants.updateConstants()
+    }
 
     func configureAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.wkrTextColor

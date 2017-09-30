@@ -12,8 +12,8 @@
 		1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
 		1410DB341F4F4BEE00F5CAD7 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
-		1410DB3B1F4F510900F5CAD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
-		1410DB3D1F4F510900F5CAD7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
+		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
+		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB4D1F4F55BB00F5CAD7 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; };
 		1410DB4E1F4F55BB00F5CAD7 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A031F4F4B5900507B3F /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146B9A141F4F4B7200507B3F /* WKRUIKit.framework */; };
@@ -54,6 +54,7 @@
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
+		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */; };
 		14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FE11F6F025A00CD7373 /* ViewController.swift */; };
@@ -87,7 +88,7 @@
 		14C260091F6F02A500CD7373 /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		14C2600B1F6F032200CD7373 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
-		14C2600D1F6F04A200CD7373 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */; };
+		14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
 		14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
 		14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */; };
@@ -120,6 +121,9 @@
 		14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 		14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
+		14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
+		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -249,7 +253,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
 		142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesCatalogScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +294,7 @@
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A778281F61A9A100823DE8 /* Plans.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Plans.txt; sourceTree = "<group>"; };
+		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -314,6 +319,8 @@
 		14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		14C4AB801F368A630086B77F /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
+		14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnalytics.swift; sourceTree = "<group>"; };
+		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */,
 				1410DB331F4F4BEE00F5CAD7 /* WKRUIKit.framework in Frameworks */,
 				144AFF8B1F622D1E00212FF2 /* Crashlytics.framework in Frameworks */,
 				1410DB2C1F4F4BEA00F5CAD7 /* WKRKit.framework in Frameworks */,
@@ -339,6 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */,
 				1410DB531F4F55BF00F5CAD7 /* WKRUIKit.framework in Frameworks */,
 				1410DB4D1F4F55BB00F5CAD7 /* WKRKit.framework in Frameworks */,
 			);
@@ -411,6 +420,7 @@
 				14C25FDE1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
 				149FF88F1F362BF1000A5D96 /* WikiRacesScreenshots */,
 				149FF84A1F362B83000A5D96 /* Products */,
+				14E1B19F1F798A520082F4FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,6 +455,7 @@
 		149FF8791F362BE4000A5D96 /* WikiRaces (Multi-Window) */ = {
 			isa = PBXGroup;
 			children = (
+				14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */,
 				149FF87A1F362BE4000A5D96 /* AppDelegate.swift */,
 				14B55C981F3A49D20090E092 /* DebugWindow.swift */,
 				149FF87C1F362BE4000A5D96 /* ViewController.swift */,
@@ -495,7 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				143BB7321F60DE9300D00541 /* Settings.bundle */,
-				1410DB3A1F4F510900F5CAD7 /* Assets.xcassets */,
+				1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -557,6 +568,7 @@
 			children = (
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
+				14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */,
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
 			);
@@ -586,6 +598,14 @@
 				149FDED51F4F4AAF003A71D0 /* Frameworks */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		14E1B19F1F798A520082F4FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14E1B1A01F798A520082F4FA /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -710,6 +730,9 @@
 					149FF8481F362B83000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -717,6 +740,14 @@
 					};
 					149FF8771F362BE4000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 					149FF88D1F362BF1000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
@@ -806,7 +837,7 @@
 				149FF8571F362B83000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */,
 				144AFF8F1F622D2800212FF2 /* fabric.apikey in Resources */,
-				1410DB3B1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
+				1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */,
 				14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */,
 				149FF8521F362B83000A5D96 /* Main.storyboard in Resources */,
 			);
@@ -820,7 +851,7 @@
 				149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */,
 				149FF8801F362BE4000A5D96 /* Main-MultiWindow.storyboard in Resources */,
 				1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */,
-				1410DB3D1F4F510900F5CAD7 /* Assets.xcassets in Resources */,
+				1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,7 +870,7 @@
 				14C25FE71F6F025A00CD7373 /* Assets.xcassets in Resources */,
 				14C25FE51F6F025A00CD7373 /* Main-Catalog.storyboard in Resources */,
 				14C2600B1F6F032200CD7373 /* Main.storyboard in Resources */,
-				14C2600D1F6F04A200CD7373 /* Assets.xcassets in Resources */,
+				14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,6 +966,7 @@
 				143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
+				14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -977,6 +1009,7 @@
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
+				14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
@@ -1211,6 +1244,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1262,6 +1297,8 @@
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -1318,6 +1355,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WikiRaces (Multi-Window)/WikiRaces (Multi-Window).entitlements";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1335,6 +1373,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "WikiRaces (Multi-Window)/WikiRaces (Multi-Window).entitlements";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

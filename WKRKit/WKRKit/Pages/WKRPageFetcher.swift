@@ -8,10 +8,12 @@
 
 import Foundation
 
+/// Feteched Wikipedia pages
 struct WKRPageFetcher {
 
     // MARK: - Properties
 
+    /// The standard URLSession
     static private let session: URLSession = {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 5.0
@@ -35,21 +37,23 @@ struct WKRPageFetcher {
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
     static func fetch(path: String, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard let url = URL(string: WKRKitConstants.baseURLString + path) else {
+        guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
             completionHandler(nil)
             return
         }
         fetch(url: url, completionHandler: completionHandler)
     }
 
+    /// Fetches a random Wikipedia page
     static func fetchRandom(completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard let url = URL(string: WKRKitConstants.randomURLString) else {
+        guard let url = URL(string: WKRKitConstants.current.randomURLString) else {
             completionHandler(nil)
             return
         }
         fetch(url: url, completionHandler: completionHandler)
     }
 
+    /// Fetches a Wikipedia page at a given url
     static func fetch(url: URL, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
         let task = WKRPageFetcher.session.dataTask(with: url) { (data, response, _) in
             if let data = data, let string = String(data: data, encoding: .utf8), let responseUrl = response?.url {
@@ -61,6 +65,7 @@ struct WKRPageFetcher {
         task.resume()
     }
 
+    /// Fetches a Wikipedia page source.
     static func fetchSource(url: URL, completionHandler: @escaping (_ source: String?) -> Void) {
         let task = WKRPageFetcher.session.dataTask(with: url) { (data, _, _) in
             if let data = data, let string = String(data: data, encoding: .utf8) {

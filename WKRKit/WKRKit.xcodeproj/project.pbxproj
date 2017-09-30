@@ -27,13 +27,14 @@
 		149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8161F362B3D000A5D96 /* WKRKitTests.swift */; };
 		149FF8191F362B3D000A5D96 /* WKRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 149FF80B1F362B3D000A5D96 /* WKRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AF1CB81F57C52E000EFC2B /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */; };
+		14E1B1981F7954A00082F4FA /* WKRKitConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */; };
 		14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */; };
 		14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */; };
 		14E9E16D1F63462500D2CAB4 /* WKRFatalError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */; };
 		14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */; };
 		14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F491F3682A000FF1A9E /* WKRGameState.swift */; };
 		14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */; };
-		14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */; };
+		14EB9F4E1F3682C500FF1A9E /* WKRRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4D1F3682C500FF1A9E /* WKRRace.swift */; };
 		14EB9F501F3682CA00FF1A9E /* WKRGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */; };
 		14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F511F3682D000FF1A9E /* WKRManager.swift */; };
 		14EB9F541F3682D600FF1A9E /* WKRManager+Host.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F531F3682D600FF1A9E /* WKRManager+Host.swift */; };
@@ -85,14 +86,15 @@
 		149FF8161F362B3D000A5D96 /* WKRKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTests.swift; sourceTree = "<group>"; };
 		149FF8181F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRKitConstants.plist; sourceTree = "<group>"; };
 		14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPreRaceConfig.swift; sourceTree = "<group>"; };
 		14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRKit+Array.swift"; sourceTree = "<group>"; };
-		14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = WKRGetLinks.js; path = WKRKit/WKRGetLinks.js; sourceTree = SOURCE_ROOT; };
+		14E6DFB61F3687B5002755C3 /* WKRGetLinks.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = WKRGetLinks.js; path = "WKRKit/Web Logic/WKRGetLinks.js"; sourceTree = SOURCE_ROOT; };
 		14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRFatalError.swift; sourceTree = "<group>"; };
 		14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerMessage.swift; sourceTree = "<group>"; };
 		14EB9F491F3682A000FF1A9E /* WKRGameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGameState.swift; sourceTree = "<group>"; };
 		14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConfig.swift; sourceTree = "<group>"; };
-		14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRActiveRace.swift; sourceTree = "<group>"; };
+		14EB9F4D1F3682C500FF1A9E /* WKRRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRace.swift; sourceTree = "<group>"; };
 		14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGame.swift; sourceTree = "<group>"; };
 		14EB9F511F3682D000FF1A9E /* WKRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRManager.swift; sourceTree = "<group>"; };
 		14EB9F531F3682D600FF1A9E /* WKRManager+Host.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+Host.swift"; sourceTree = "<group>"; };
@@ -131,6 +133,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140192221F7C694F00E67857 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
+				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
+				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
+				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		149FF7FE1F362B3D000A5D96 = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				149FF80B1F362B3D000A5D96 /* WKRKit.h */,
+				140192221F7C694F00E67857 /* Constants */,
 				14E6DFB31F3686EE002755C3 /* Game */,
 				14E6DFB11F3686B1002755C3 /* Manager */,
 				14EB9F6F1F3684FC00FF1A9E /* Network */,
@@ -216,7 +230,7 @@
 				1497F3191F588EBE001653DE /* WKRReadyStates.swift */,
 				14EB9F491F3682A000FF1A9E /* WKRGameState.swift */,
 				14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */,
-				14EB9F4D1F3682C500FF1A9E /* WKRActiveRace.swift */,
+				14EB9F4D1F3682C500FF1A9E /* WKRRace.swift */,
 				14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */,
 				14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */,
 			);
@@ -226,12 +240,9 @@
 		14E6DFB41F368742002755C3 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
-				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
-				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+				14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
-				14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -391,6 +402,7 @@
 			files = (
 				1410DB4B1F4F552200F5CAD7 /* WKRGetLinks.js in Resources */,
 				1410DB481F4F544300F5CAD7 /* WKRArticlesData.plist in Resources */,
+				14E1B1981F7954A00082F4FA /* WKRKitConstants.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,7 +454,7 @@
 				14EB9F581F3682F200FF1A9E /* WKRManager+PageNavigation.swift in Sources */,
 				140FCFC31F36547E00FFA84E /* WKRResultsInfo.swift in Sources */,
 				14EB9F641F36833400FF1A9E /* WKRCodable.swift in Sources */,
-				14EB9F4E1F3682C500FF1A9E /* WKRActiveRace.swift in Sources */,
+				14EB9F4E1F3682C500FF1A9E /* WKRRace.swift in Sources */,
 				14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */,
 				140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */,
 				14EB9F541F3682D600FF1A9E /* WKRManager+Host.swift in Sources */,

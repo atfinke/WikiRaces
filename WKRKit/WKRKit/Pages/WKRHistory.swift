@@ -8,19 +8,18 @@
 
 import Foundation
 
+/// A playyer's Wikipedia history during a race
 public struct WKRHistory: Codable, Equatable {
 
     // MARK: - Properties
 
+    /// The time the player opened the last page
     private var lastPageOpenTime: Date?
+    /// The history entries
     public fileprivate(set) var entries = [WKRHistoryEntry]()
-
-    internal var count: Int {
-        return entries.count
-    }
-
+    /// The total time the player has been racing (not including page load times)
     public var duration: Int {
-        if entries.count <= 1, entries.first?.duration == nil {
+        if entries.first?.duration == nil {
             return Int.max
         }
         return entries.flatMap { $0.duration }.reduce(0, +)
@@ -28,6 +27,9 @@ public struct WKRHistory: Codable, Equatable {
 
     // MARK: - Initialization
 
+    /// Creates a WKRHistory object
+    ///
+    /// - Parameter page: The first page in the history
     init(firstPage page: WKRPage) {
         append(page, linkHere: false)
     }

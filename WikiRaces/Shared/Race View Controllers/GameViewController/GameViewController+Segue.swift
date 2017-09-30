@@ -52,6 +52,7 @@ extension GameViewController {
     private func prepare(votingViewController: VotingViewController) {
         votingViewController.playerVoted = { [weak self] page in
             self?.manager.player(.voted(page))
+            PlayerAnalytics.log(event: .voted)
         }
 
         votingViewController.voteInfo = manager.voteInfo
@@ -63,11 +64,13 @@ extension GameViewController {
     private func prepare(resultsViewController: ResultsViewController) {
         resultsViewController.readyButtonPressed = { [weak self] in
             self?.manager.player(.ready)
+            PlayerAnalytics.log(event: .pressedReadyButton)
         }
 
         resultsViewController.addPlayersButtonPressed = { [weak self] viewController in
             if let controller = self?.manager.hostNetworkInterface() {
                 viewController.present(controller, animated: true, completion: nil)
+                PlayerAnalytics.log(event: .hostStartMidMatchInviting)
             }
         }
 

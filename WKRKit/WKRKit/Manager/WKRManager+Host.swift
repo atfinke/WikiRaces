@@ -51,9 +51,9 @@ extension WKRManager {
         guard localPlayer.isHost else { fatalError() }
 
         var timeLeft = WKRRaceConstants.resultsDuration
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
 
-            if self.gameState == .points {
+            if self?.gameState == .points {
                 timer.invalidate()
                 return
             }
@@ -61,17 +61,17 @@ extension WKRManager {
             timeLeft -= 1
 
             let resultsTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
-            self.peerNetwork.send(object: resultsTime)
+            self?.peerNetwork.send(object: resultsTime)
 
             if timeLeft <= 0 {
-                self.finishResultsCountdown()
+                self?.finishResultsCountdown()
                 timer.invalidate()
             } else if timeLeft == WKRRaceConstants.resultsDuration - WKRRaceConstants.resultsHoldReadyDuration {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
-                self.peerNetwork.send(object: showReady)
+                self?.peerNetwork.send(object: showReady)
             } else if timeLeft == WKRRaceConstants.resultsDisableReadyTime {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 0))
-                self.peerNetwork.send(object: showReady)
+                self?.peerNetwork.send(object: showReady)
             }
         }
     }
@@ -100,14 +100,14 @@ extension WKRManager {
         guard localPlayer.isHost else { fatalError() }
 
         var timeLeft = WKRRaceConstants.votingDuration
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             timeLeft -= 1
 
             let voteTime = WKRCodable(int: WKRInt(type: .votingTime, value: timeLeft))
-            self.peerNetwork.send(object: voteTime)
+            self?.peerNetwork.send(object: voteTime)
 
             if timeLeft <= 0 {
-                self.prepareRaceConfig()
+                self?.prepareRaceConfig()
                 timer.invalidate()
             }
         }
@@ -121,15 +121,15 @@ extension WKRManager {
 
         peerNetwork.send(object: WKRCodable(raceConfig))
         var timeLeft = WKRRaceConstants.votingPreRaceDuration
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             timeLeft -= 1
 
             let voteTime = WKRCodable(int: WKRInt(type: .votingPreRaceTime, value: timeLeft))
-            self.peerNetwork.send(object: voteTime)
+            self?.peerNetwork.send(object: voteTime)
 
             if timeLeft <= 0 {
                 let state = WKRGameState.race
-                self.peerNetwork.send(object: WKRCodable(enum: state))
+                self?.peerNetwork.send(object: WKRCodable(enum: state))
                 timer.invalidate()
             }
         }

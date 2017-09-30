@@ -20,6 +20,7 @@
 		1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC668B1F3631F5001868C4 /* WKRUILabel.swift */; };
 		1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89B1F362C05000A5D96 /* WKRUIProgressView.swift */; };
 		1413AB2C1F36500400873ACA /* WKRUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413AB2B1F36500400873ACA /* WKRUIWebView.swift */; };
+		145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145E903C1F79F80A00D31554 /* WKRUIConstants.plist */; };
 		149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */; };
 		14A3D4A21F3634110038388F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3D4A11F3634110038388F /* AppDelegate.swift */; };
 		14A3D4A41F3634110038388F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3D4A31F3634110038388F /* ViewController.swift */; };
@@ -61,6 +62,7 @@
 		1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPostHideScript.js; sourceTree = "<group>"; };
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
 		1413AB2B1F36500400873ACA /* WKRUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWebView.swift; sourceTree = "<group>"; };
+		145E903C1F79F80A00D31554 /* WKRUIConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRUIConstants.plist; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF7F71F362B0D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		149FF89A1F362C05000A5D96 /* WKRUICenteredTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUICenteredTableView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140192231F7C6BBC00E67857 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				145E903C1F79F80A00D31554 /* WKRUIConstants.plist */,
+				149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		1410DB421F4F51B200F5CAD7 /* Web View */ = {
 			isa = PBXGroup;
 			children = (
@@ -135,7 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				1413AB1D1F364F2000873ACA /* WKRUIKit.h */,
-				149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */,
+				140192231F7C6BBC00E67857 /* Constants */,
 				14A3D4B61F3634960038388F /* Elements */,
 				14A3D4B71F3634A20038388F /* Extensions */,
 				14A3D4B81F3634DF0038388F /* Views */,
@@ -288,6 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */,
 				1410DB411F4F51AC00F5CAD7 /* WKRPostHideScript.js in Resources */,
 				1410DB401F4F51AC00F5CAD7 /* WKRPreHideScript.js in Resources */,
 			);

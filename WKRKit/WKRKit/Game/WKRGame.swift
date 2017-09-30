@@ -10,7 +10,7 @@ import Foundation
 
 public class WKRGame {
 
-    // MARK: - Closure
+    // MARK: - Closures
 
     var bonusPointsUpdated: ((Int) -> Void)?
 
@@ -30,8 +30,8 @@ public class WKRGame {
     internal var raceConfig: WKRRaceConfig?
     internal var preRaceConfig: WKRPreRaceConfig?
 
-    internal private(set) var activeRace: WKRActiveRace?
-    internal private(set) var completedRaces = [WKRActiveRace]()
+    internal private(set) var activeRace: WKRRace?
+    internal private(set) var completedRaces = [WKRRace]()
 
     public internal(set) var state = WKRGameState.preMatch
 
@@ -45,16 +45,16 @@ public class WKRGame {
 
     internal func startRace(with config: WKRRaceConfig) {
         raceConfig = config
-        activeRace = WKRActiveRace(config: config)
+        activeRace = WKRRace(config: config)
         preRaceConfig = nil
 
         if localPlayer.isHost {
             bonusTimer?.invalidate()
             bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
-                                              repeats: true) { _ in
-                                                self.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
-                                                if let points = self.activeRace?.bonusPoints {
-                                                    self.bonusPointsUpdated?(points)
+                                              repeats: true) { [weak self] _ in
+                                                self?.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
+                                                if let points = self?.activeRace?.bonusPoints {
+                                                    self?.bonusPointsUpdated?(points)
                                                 }
             }
         }
@@ -67,7 +67,8 @@ public class WKRGame {
     }
 
     func finishedRace() {
-        if let race = activeRace {
+        if var race = activeRace {
+            race.linkedPagesFetcher = nil
             completedRaces.append(race)
         }
         activeRace = nil

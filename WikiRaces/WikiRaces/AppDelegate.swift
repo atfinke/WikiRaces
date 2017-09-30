@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Fabric
 import Crashlytics
 
 @UIApplicationMain
@@ -23,9 +22,14 @@ class AppDelegate: WKRAppDelegate {
         Crashlytics.start(withAPIKey: key.replacingOccurrences(of: "\n", with: ""))
 
         StatsHelper.shared.start()
+        configureConstants()
         configureAppearance()
 
         return true
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        configureConstants()
     }
 
 }

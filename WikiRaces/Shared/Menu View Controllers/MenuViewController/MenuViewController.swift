@@ -113,7 +113,7 @@ class MenuViewController: UIViewController {
             fatalError()
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
-        titleLabel.text = appVersion + "\(WKRKitConstants.version) / \(WKRUIConstants.version)"
+        titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
     }
 
     @objc
@@ -122,6 +122,7 @@ class MenuViewController: UIViewController {
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: false)
         }
+        PlayerAnalytics.log(event: .pressedJoin)
     }
 
     @objc
@@ -130,6 +131,7 @@ class MenuViewController: UIViewController {
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: true)
         }
+        PlayerAnalytics.log(event: .pressedHost)
     }
 
     // MARK: - Menu Animations

@@ -9,17 +9,29 @@
 import Foundation
 import WebKit
 
+/// A WKNavigationDelegate for controlling Wikipedia page loads during the race
 class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     // MARK: - Properties
 
+    /// Called when the user taps a banned link (i.e. an image)
     let pageURLBlocked: (() -> Void)
+    /// Called when there is an issue loading the page
     let pageLoadingError: (() -> Void)
+    /// Called when the page starts to load
     let pageStartedLoading: (() -> Void)
+    /// Called when the page has completed loading
     let pageLoaded: ((WKRPage) -> Void)
 
     // MARK: - Initialization
 
+    /// Creates a new WKRPageNavigation object
+    ///
+    /// - Parameters:
+    ///   - pageURLBlocked: Called when the user taps a banned link (i.e. an image)
+    ///   - pageLoadingError: Called when there is an issue loading the page
+    ///   - pageStartedLoading: Called when the page starts to load
+    ///   - pageLoaded: Called when the page has completed loading
     init(pageURLBlocked: @escaping (() -> Void),
          pageLoadingError: @escaping (() -> Void),
          pageStartedLoading: @escaping (() -> Void),
@@ -32,19 +44,23 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     // MARK: - Helpers
 
+    /// Determines the url is allowed (i.e. is a Wikipedia link, not an image, etc)
+    ///
+    /// - Parameter url: The url to check
+    /// - Returns: If the page is legal for the race
     private func allow(url: URL?) -> Bool {
         guard let urlString = url?.absoluteString else {
             return false
         }
-        for bannedFragment in WKRKitConstants.bannedURLFragments {
+        if urlString == "about:blank" {
+            return true
+        }
+        for bannedFragment in WKRKitConstants.current.bannedURLFragments {
             if urlString.contains(bannedFragment) {
                 return false
             }
         }
-        if urlString == "about:blank" {
-            return true
-        }
-        return urlString.contains(WKRKitConstants.baseURLString)
+        return urlString.contains(WKRKitConstants.current.baseURLString)
     }
 
     // MARK: - WKNavigationDelegate
@@ -53,23 +69,27 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
                  decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: (@escaping (WKNavigationActionPolicy) -> Void)) {
 
+        // Not quite sure when request.url would be nil...
         guard let requestURL = navigationAction.request.url else {
             decisionHandler(.allow)
             return
         }
 
+        // Make sure the url is legal for the race
         guard allow(url: requestURL) else {
             decisionHandler(.cancel)
             pageURLBlocked()
             return
         }
 
+        // If the url is for something on the same page, allow it, but don't add it to the history.
         guard requestURL.lastPathComponent != webView.url?.lastPathComponent else {
             // For pages with internal links, don't count the page twice and don't show loading
             decisionHandler(.allow)
             return
         }
 
+        // True when using webView.loadHTMLString
         if navigationAction.navigationType == .other {
             decisionHandler(.allow)
         } else {
@@ -93,17 +113,14 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         } else {
             fatalError("webView didFinish with no url")
         }
-        webView.scrollView.refreshControl?.endRefreshing()
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         pageLoadingError()
-        webView.scrollView.refreshControl?.endRefreshing()
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         pageLoadingError()
-        webView.scrollView.refreshControl?.endRefreshing()
     }
 
 }

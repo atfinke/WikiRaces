@@ -12,16 +12,6 @@ public class WKRUIWebView: WKWebView {
 
     // MARK: - Properties
 
-    private static let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.minimumFractionDigits = 1
-        formatter.maximumFractionDigits = 1
-        return formatter
-    }()
-
-    // MARK: - User Interface
-
     public var text: String? {
         set {
             timeLabel.text = newValue
@@ -53,11 +43,6 @@ public class WKRUIWebView: WKWebView {
         allowsLinkPreview = false
         allowsBackForwardNavigationGestures = false
 
-        timeLabel.text = "0"
-        timeLabel.textColor = UIColor.white
-        timeLabel.textAlignment = .center
-        timeLabel.adjustsFontSizeToFitWidth = true
-
         let features: [[UIFontDescriptor.FeatureKey: Int]] = [
             [
                 .featureIdentifier: kNumberSpacingType,
@@ -68,13 +53,20 @@ public class WKRUIWebView: WKWebView {
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
 
-        timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        timeLabel.text = "0"
+        timeLabel.textColor = UIColor.white
+        timeLabel.textAlignment = .center
+
         timeLabel.alpha = 0.0
         timeLabel.numberOfLines = 0
+
+        timeLabel.adjustsFontSizeToFitWidth = true
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
+        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+
         addSubview(timeLabel)
 
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
         scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
 
         let constraints = [
@@ -134,13 +126,10 @@ public class WKRUIWebView: WKWebView {
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
 
-        //swiftlint:disable line_length
-        guard let bundle = WKRUIConstants.bundle,
-            let preHideScript = WKUserScript(named: "WKRPreHideScript", in: bundle, injectionTime: .atDocumentStart),
-            let postHideScript = WKUserScript(named: "WKRPostHideScript", in: bundle, injectionTime: .atDocumentEnd) else {
-                return nil
-        }
-        //swiftlint:enable line_length
+        let preHideScript = WKUserScript(source: WKRUIConstants.current.preHideScript(),
+                                         injectionTime: .atDocumentStart)
+        let postHideScript = WKUserScript(source: WKRUIConstants.current.postHideScript(),
+                                          injectionTime: .atDocumentEnd)
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(preHideScript)

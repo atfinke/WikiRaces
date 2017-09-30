@@ -10,6 +10,30 @@ import WebKit
 
 class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
 
+    // MARK: - Types
+
+    // WKScriptMessageHandler leaks due to a retain cycle
+    private class ScriptMessageDelegate: NSObject, WKScriptMessageHandler {
+
+        // MARK: - Properties
+
+        weak var delegate: WKScriptMessageHandler?
+
+        // MARK: - Initalization
+
+        init(delegate: WKScriptMessageHandler) {
+            self.delegate = delegate
+            super.init()
+        }
+
+        // MARK: - WKScriptMessageHandler
+
+        func userContentController(_ userContentController: WKUserContentController,
+                                   didReceive message: WKScriptMessage) {
+            self.delegate?.userContentController(userContentController, didReceive: message)
+        }
+    }
+
     // MARK: - Properties
 
     private let pageFetcher = WKRPageFetcher()
@@ -27,21 +51,24 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         super.init()
 
         let config = WKWebViewConfiguration()
+        let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd)
 
-        guard let linksScript = WKUserScript(named: "WKRGetLinks",
-                                             in: WKRKitConstants.bundle,
-                                             injectionTime: .atDocumentEnd) else {
-            fatalError("WKRLinkGetter couldn't load linksScript")
-        }
+        let messageDelegate = ScriptMessageDelegate(delegate: self)
 
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)
-        userContentController.add(self, name: "linkedPage")
-        userContentController.add(self, name: "nextPage")
-        userContentController.add(self, name: "finishedPage")
+        userContentController.add(messageDelegate, name: "linkedPage")
+        userContentController.add(messageDelegate, name: "nextPage")
+        userContentController.add(messageDelegate, name: "finishedPage")
         config.userContentController = userContentController
 
         webView = WKWebView(frame: .zero, configuration: config)
+    }
+
+    deinit {
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "linkedPage")
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "nextPage")
+        webView?.configuration.userContentController.removeScriptMessageHandler(forName: "finishedPage")
     }
 
     // MARK: - Helpers
@@ -55,7 +82,7 @@ class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     func start(for page: WKRPage) {
         let path = page.url.lastPathComponent
         let query = "&namespace=0&limit=500&hidetrans=1"
-        guard let url = URL(string: WKRKitConstants.whatLinksHereURLString + "/" + path + query) else { return }
+        guard let url = URL(string: WKRKitConstants.current.whatLinksHereURLString + "/" + path + query) else { return }
         load(url: url)
     }
 

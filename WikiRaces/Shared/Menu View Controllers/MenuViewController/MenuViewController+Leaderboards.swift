@@ -18,7 +18,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     ///
     /// - Parameter sender: The pressed tile
     func menuTilePressed(sender: MenuTile) {
-        guard let stat = sender.stat, GKLocalPlayer.localPlayer().isAuthenticated else {
+        guard GKLocalPlayer.localPlayer().isAuthenticated else {
             attemptGCAuthentication()
             return
         }
@@ -27,7 +27,6 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             controller.gameCenterDelegate = self
             controller.viewState = .leaderboards
             controller.leaderboardTimeScope = .allTime
-            controller.leaderboardIdentifier = stat.leaderboard
             self.present(controller, animated: true, completion: nil)
         }
     }
