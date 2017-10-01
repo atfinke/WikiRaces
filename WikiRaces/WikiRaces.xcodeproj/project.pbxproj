@@ -68,8 +68,6 @@
 		14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
 		14C25FF61F6F028100CD7373 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138B1F56B32900F427F4 /* HelpViewController.swift */; };
 		14C25FF71F6F028100CD7373 /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */; };
-		14C25FF81F6F02A500CD7373 /* MPCConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7341F60DF4A00D00541 /* MPCConnectViewController.swift */; };
-		14C25FF91F6F02A500CD7373 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
 		14C25FFA1F6F02A500CD7373 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14892FE61F646E5000572C50 /* MPCHostViewController.swift */; };
 		14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
 		14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
@@ -121,6 +119,8 @@
 		14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 		14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14D8AD471F81828D00914E5A /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
+		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
 		14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
 		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
@@ -1050,16 +1050,16 @@
 				14C260011F6F02A500CD7373 /* ResultsTableViewCell.swift in Sources */,
 				14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
-				14C25FF81F6F02A500CD7373 /* MPCConnectViewController.swift in Sources */,
 				14C25FF31F6F028100CD7373 /* MenuViewController+UI.swift in Sources */,
 				14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
 				14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */,
+				14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */,
 				14C260031F6F02A500CD7373 /* HistoryViewController.swift in Sources */,
 				14C25FFA1F6F02A500CD7373 /* MPCHostViewController.swift in Sources */,
 				14C25FF71F6F028100CD7373 /* CenteredTableViewController.swift in Sources */,
 				14C260021F6F02A500CD7373 /* HistoryTableViewCell.swift in Sources */,
-				14C25FF91F6F02A500CD7373 /* MPCConnectViewController+Invite.swift in Sources */,
+				14D8AD471F81828D00914E5A /* PlayerAnalytics.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
@@ -1423,6 +1423,7 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1439,6 +1440,7 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

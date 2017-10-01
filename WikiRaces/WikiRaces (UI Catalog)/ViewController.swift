@@ -8,37 +8,51 @@
 
 import UIKit
 import WKRUIKit
+@testable import WKRKit
 
 class ViewController: UIViewController {
 
-    //swiftlint:disable line_length function_body_length
+    //swiftlint:disable line_length function_body_length force_cast
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "Star Wars: Galaxy's Edge".uppercased()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "flag"), landscapeImagePhone: nil, style: .done, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: nil, action: nil)
-        let webView = WKRUIWebView()
-        self.view = webView
-        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!))
+        let historyNav = viewController() as! UINavigationController
+        let historyController = historyNav.rootViewController as! HistoryViewController
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.navigationController?.setNavigationBarHidden(true, animated: false)
-            let window = UIWindow(frame: CGRect( x:0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-            window.rootViewController = self.viewController()
-            window.makeKeyAndVisible()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                window.rootViewController?.viewDidAppear(false)
+        present(historyNav, animated: true, completion: nil)
+
+        let url = URL(string: "https://www.apple.com")!
+
+        let player = WKRPlayer(profile: WKRPlayerProfile(name: "andrew", playerID: "andrew"), isHost: false)
+        player.state = .racing
+        player.startedNewRace(on: WKRPage(title: "Page 1", url: url))
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            historyController.player = player
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                player.finishedViewingLastPage()
+                player.nowViewing(page: WKRPage(title: "Page 2", url: url), linkHere: true)
+                player.finishedViewingLastPage()
+                player.nowViewing(page: WKRPage(title: "Page 3", url: url), linkHere: true)
+                player.state = WKRPlayerState.foundPage
+                historyController.player = player
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    player.finishedViewingLastPage()
+                    player.nowViewing(page: WKRPage(title: "Page 4", url: url), linkHere: true)
+                    player.finishedViewingLastPage()
+                    player.nowViewing(page: WKRPage(title: "Page 5", url: url), linkHere: true)
+                    player.state = WKRPlayerState.foundPage
+                    historyController.player = player
+                }
             }
-            self.view.backgroundColor = UIColor.purple
-            self.view.addSubview(window)
-
         }
+
     }
 
     //swiftlint:disable force_cast
     func viewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HistoryNav")
     }
 
 }
