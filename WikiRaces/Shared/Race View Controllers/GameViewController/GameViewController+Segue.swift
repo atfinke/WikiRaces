@@ -67,12 +67,7 @@ extension GameViewController {
             PlayerAnalytics.log(event: .pressedReadyButton)
         }
 
-        resultsViewController.addPlayersButtonPressed = { [weak self] viewController in
-            if let controller = self?.manager.hostNetworkInterface() {
-                viewController.present(controller, animated: true, completion: nil)
-                PlayerAnalytics.log(event: .hostStartMidMatchInviting)
-            }
-        }
+        resultsViewController.addPlayersViewController = manager.hostNetworkInterface()
 
         resultsViewController.state = manager.gameState
         resultsViewController.resultsInfo = manager.hostResultsInfo
