@@ -24,6 +24,12 @@ class CenteredTableViewController: UIViewController {
 
     var isOverlayButtonHidden: Bool {
         set {
+            guard isInterfaceLoaded else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+                    self.isOverlayButtonHidden = newValue
+                })
+                return
+            }
             overlayBottomConstraint.constant = newValue ? overlayHeightConstraint.constant : 0
             if #available(iOS 11.0, *) {
                 descriptionLabelBottomConstraint.constant = newValue ? -view.safeAreaInsets.bottom: 0
@@ -44,11 +50,14 @@ class CenteredTableViewController: UIViewController {
     var overlayHeightConstraint: NSLayoutConstraint!
     var descriptionLabelBottomConstraint: NSLayoutConstraint!
 
+    private var isInterfaceLoaded = false
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInterface()
+        isInterfaceLoaded = true
     }
 
     // MARK: - Helpers
