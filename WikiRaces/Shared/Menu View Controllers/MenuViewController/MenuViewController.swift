@@ -8,6 +8,7 @@
 
 import UIKit
 import GameKit
+import StoreKit
 
 import WKRKit
 import WKRUIKit
@@ -171,6 +172,9 @@ class MenuViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
+            if #available(iOS 10.3, *) {
+                SKStoreReviewController.requestReview()
+            }
         })
     }
 
