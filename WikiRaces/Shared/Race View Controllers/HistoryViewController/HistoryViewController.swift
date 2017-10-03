@@ -32,25 +32,34 @@ class HistoryViewController: UITableViewController {
                 return
             }
 
-            tableView.beginUpdates()
+            var rowsToReload = [IndexPath]()
+            var rowsToInsert = [IndexPath]()
+
             if player.state != currentPlayerState {
                 currentPlayerState = player.state
-                let lastIndex = IndexPath(row: history.entries.count - 1)
-                tableView.reloadRows(at: [lastIndex], with: .fade)
+                rowsToReload.append(IndexPath(row: history.entries.count - 1))
             }
 
             for (index, entry) in history.entries.enumerated() {
                 if index < entries.count {
                     if entry != entries[index] {
-                        entries.remove(at: index)
-                        entries.insert(entry, at: index)
-                        tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
+                        entries[index] = entry
+                        rowsToReload.append(IndexPath(row: index))
+
                     }
                 } else {
                     entries.insert(entry, at: index)
-                    tableView.insertRows(at: [IndexPath(row: index)], with: .top)
+                    rowsToInsert.append(IndexPath(row: index))
                 }
             }
+
+            let adjustedRowsToReload = rowsToReload.filter { indexPath -> Bool in
+                return !rowsToInsert.contains(indexPath)
+            }
+
+            tableView.beginUpdates()
+            tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
+            tableView.insertRows(at: rowsToInsert, with: .top)
             tableView.endUpdates()
         }
     }

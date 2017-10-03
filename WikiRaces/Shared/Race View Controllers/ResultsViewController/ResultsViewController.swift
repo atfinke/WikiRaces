@@ -20,7 +20,7 @@ class ResultsViewController: CenteredTableViewController {
     private var isAnimatingStateChange = false
     var readyButtonPressed: (() -> Void)?
     var quitAlertController: UIAlertController?
-    var addPlayersButtonPressed: ((UIViewController) -> Void)?
+    var addPlayersViewController: UIViewController?
 
     // MARK: - Game States
 
@@ -99,7 +99,9 @@ class ResultsViewController: CenteredTableViewController {
     }
 
     @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
-        addPlayersButtonPressed?(self)
+        guard let controller = addPlayersViewController else { return }
+        present(controller, animated: true, completion: nil)
+        PlayerAnalytics.log(event: .hostStartMidMatchInviting)
     }
 
     override func overlayButtonPressed() {
