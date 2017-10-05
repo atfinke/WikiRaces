@@ -91,7 +91,7 @@ extension GameViewController {
             })
         })
 
-        PlayerAnalytics.log(event: .fatalError)
+        PlayerAnalytics.log(event: .fatalError, attributes: ["Error": error.title as Any])
     }
 
     func resetActiveControllers() {
@@ -168,7 +168,7 @@ extension GameViewController {
             dismissActiveController(completion: nil)
 
             if isPlayerHost {
-                PlayerAnalytics.log(event: .hostStartedRace)
+                PlayerAnalytics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
             }
         default: break
         }
