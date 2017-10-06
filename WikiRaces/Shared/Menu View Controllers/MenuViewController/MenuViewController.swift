@@ -172,7 +172,7 @@ class MenuViewController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
-            if #available(iOS 10.3, *) {
+            if StatsHelper.shared.statValue(for: .points) > 0, #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
         })

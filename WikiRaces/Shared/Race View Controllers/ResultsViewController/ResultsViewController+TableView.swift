@@ -66,7 +66,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         let raceResults = resultsInfo.raceResults(at: indexPath.row)
         performSegue(withIdentifier: "showHistory", sender: raceResults.player)
 
-        PlayerAnalytics.log(event: .openedHistory)
+        PlayerAnalytics.log(event: .openedHistory, attributes: ["GameState": state.rawValue as Any])
     }
 
 }
