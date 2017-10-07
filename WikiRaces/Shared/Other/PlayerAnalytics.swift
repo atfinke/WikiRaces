@@ -19,15 +19,18 @@ struct PlayerAnalytics {
 
     enum ValueEvent {
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
-        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int)
+        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
     }
 
     enum Event: String {
-        // All Players
+        // Non Game
+        case leaderboard, versionInfo
         case pressedJoin, pressedHost
-        case quitRace, forfeited, usedHelp, fatalError
+        // Game All Players
+        case pageView
+        case quitRace, forfeited, usedHelp, fatalError, backupQuit
         case openedHistory, pressedReadyButton, voted
-        // Host
+        // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
     }
@@ -57,11 +60,12 @@ struct PlayerAnalytics {
                         record["DeviceName"] = name as NSString
                     case .usingCustomName(let name):
                         record["CustomName"] = name as NSString
-                    case .updatedStats(let points, let races, let totalTime, let fastestTime):
+                    case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
                         record["Points"] = NSNumber(value: points)
                         record["Races"] = NSNumber(value: races)
                         record["TotalTime"] = NSNumber(value: totalTime)
                         record["FastestTime"] = NSNumber(value: fastestTime)
+                        record["Pages"] = NSNumber(value: pages)
                     }
 
                     publicDB.save(record, completionHandler: { (_, _) in })

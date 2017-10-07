@@ -23,6 +23,8 @@ class StatsHelper {
         // seconds
         case fastestTime
 
+        case pages
+
         var key: String {
             return "WKRStat-" + self.rawValue
         }
@@ -34,6 +36,7 @@ class StatsHelper {
             case .average:      return true
             case .totalTime:    return true
             case .fastestTime:  return false
+            case .pages:        return true
             }
         }
 
@@ -44,6 +47,7 @@ class StatsHelper {
             case .average:      return "com.andrewfinke.wikiraces.ppr"
             case .totalTime:    return "com.andrewfinke.wikiraces.totaltime"
             case .fastestTime:  return "com.andrewfinke.wikiraces.fastesttime"
+            case .pages:        return "com.andrewfinke.wikiraces.pages"
             }
         }
     }
@@ -86,11 +90,14 @@ class StatsHelper {
         let totalTime = statValue(for: .totalTime)
         let fastestTime = statValue(for: .fastestTime)
 
+        let pages = statValue(for: .pages)
+
         keyStatsUpdated?(points, races, statValue(for: .average))
         PlayerAnalytics.log(event: .updatedStats(points: Int(points),
                                                  races: Int(races),
                                                  totalTime: Int(totalTime),
-                                                 fastestTime: Int(fastestTime)))
+                                                 fastestTime: Int(fastestTime),
+                                                 pages: Int(pages)))
     }
 
     // MARK: - Set/Get Stats
@@ -102,6 +109,11 @@ class StatsHelper {
         } else {
             return defaults.double(forKey: stat.key)
         }
+    }
+
+    func viewedPage() {
+        let newPages = statValue(for: .pages) + 1
+        defaults.set(newPages, forKey: Stat.pages.key)
     }
 
     func completedRace(points: Int, timeRaced: Int) {
@@ -196,6 +208,8 @@ class StatsHelper {
         let totalTime = statValue(for: .totalTime)
         let fastestTime = statValue(for: .fastestTime)
 
+        let pagesViewed = statValue(for: .pages)
+
         let pointsScore = GKScore(leaderboardIdentifier: Stat.points.leaderboard)
         pointsScore.value = Int64(points)
 
@@ -205,7 +219,10 @@ class StatsHelper {
         let totalTimeScore = GKScore(leaderboardIdentifier: Stat.totalTime.leaderboard)
         totalTimeScore.value = Int64(totalTime / 60)
 
-        var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore]
+        let pagesViewedScore = GKScore(leaderboardIdentifier: Stat.pages.leaderboard)
+        pagesViewedScore.value = Int64(pagesViewed)
+
+        var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore, pagesViewedScore]
         if races >= 5 {
             let averageScore = GKScore(leaderboardIdentifier: Stat.average.leaderboard)
             averageScore.value = Int64(average * 1000)
