@@ -115,6 +115,7 @@ class MenuViewController: UIViewController {
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
+        PlayerAnalytics.log(event: .versionInfo)
     }
 
     @objc

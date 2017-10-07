@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A playyer's Wikipedia history during a race
+/// A player's Wikipedia history during a race
 public struct WKRHistory: Codable, Equatable {
 
     // MARK: - Properties

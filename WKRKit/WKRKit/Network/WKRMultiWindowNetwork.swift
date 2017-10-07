@@ -105,7 +105,8 @@ extension WKRManager {
                             isPlayerHost: Bool,
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
-                            linkCountUpdate: @escaping ((Int) -> Void)) {
+                            linkCountUpdate: @escaping ((Int) -> Void),
+                            pageViewUpdate: @escaping ((WKRPage) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
         let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)
@@ -114,7 +115,8 @@ extension WKRManager {
                   network: network,
                   stateUpdate: stateUpdate,
                   pointsUpdate: pointsUpdate,
-                  linkCountUpdate: linkCountUpdate)
+                  linkCountUpdate: linkCountUpdate,
+                  pageViewUpdate: pageViewUpdate)
     }
 
 }

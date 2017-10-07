@@ -55,6 +55,7 @@ extension WKRManager {
                 self?.transitionGameState(to: .results)
             }
             self?.peerNetwork.send(object: WKRCodable(localPlayer))
+            self?.pageViewUpdate(page)
         })
     }
 
