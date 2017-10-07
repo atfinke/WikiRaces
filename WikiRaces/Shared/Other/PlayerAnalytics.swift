@@ -26,6 +26,7 @@ struct PlayerAnalytics {
         // Non Game
         case leaderboard, versionInfo
         case pressedJoin, pressedHost
+        case namePromptResult, nameType
         // Game All Players
         case pageView
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
@@ -56,10 +57,13 @@ struct PlayerAnalytics {
                     switch event {
                     case .usingGCAlias(let alias):
                         record["GCAlias"] = alias as NSString
+                        log(event: .nameType, attributes: ["Type": "GCAlias"])
                     case .usingDeviceName(let name):
                         record["DeviceName"] = name as NSString
+                        log(event: .nameType, attributes: ["Type": "DeviceName"])
                     case .usingCustomName(let name):
                         record["CustomName"] = name as NSString
+                        log(event: .nameType, attributes: ["Type": "CustomName"])
                     case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
                         record["Points"] = NSNumber(value: points)
                         record["Races"] = NSNumber(value: races)
