@@ -11,6 +11,7 @@ import Foundation
 
 #if !MULTIWINDOWDEBUG
 import Crashlytics
+import FirebaseCore
 #endif
 
 struct PlayerAnalytics {
@@ -41,6 +42,12 @@ struct PlayerAnalytics {
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !MULTIWINDOWDEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
+            if !(attributes?.values.flatMap({$0}).isEmpty ?? true) {
+                Analytics.logEvent(event.rawValue, parameters: attributes)
+            } else {
+                Analytics.logEvent(event.rawValue, parameters: nil)
+            }
+
         #endif
     }
 
