@@ -30,7 +30,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
         view = webView
 
         guard let url = url else {
-            fatalError("When would this happen?")
+           return // When would this happen?
         }
 
         webView.load(URLRequest(url: url))

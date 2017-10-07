@@ -35,7 +35,7 @@ public enum WKRPlayerState: String, Codable {
         case .racing: return "Racing"
         case .connecting: return "Ready"
         case .voting: return "Voting"
-        default: fatalError()
+        case .readyForNextRound: return "Ready"
         }
     }
 
