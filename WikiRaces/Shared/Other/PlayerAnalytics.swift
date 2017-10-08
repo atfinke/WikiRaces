@@ -18,7 +18,7 @@ struct PlayerAnalytics {
 
     // MARK: - Types
 
-    enum ValueEvent {
+    enum StatEvent {
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
         case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
     }
@@ -47,39 +47,58 @@ struct PlayerAnalytics {
             } else {
                 Analytics.logEvent(event.rawValue, parameters: nil)
             }
-
         #endif
     }
 
-    public static func log(event: ValueEvent) {
+    public static func log(event: StatEvent) {
         #if !MULTIWINDOWDEBUG
             let container = CKContainer.default()
-            container.fetchUserRecordID(completionHandler: { (recordID, _) in
-                guard let recordID = recordID else { return }
+            let publicDB = container.publicCloudDatabase
 
-                let publicDB = container.publicCloudDatabase
-                publicDB.fetch(withRecordID: recordID, completionHandler: { (record, _) in
-                    guard let record = record else { return }
+            // Fetch user record ID, then user record.
+            container.fetchUserRecordID(completionHandler: { (userRecordID, _) in
+                guard let userRecordID = userRecordID else { return }
+                publicDB.fetch(withRecordID: userRecordID, completionHandler: { (userRecord, _) in
+                    guard let userRecord = userRecord else { return }
 
-                    switch event {
-                    case .usingGCAlias(let alias):
-                        record["GCAlias"] = alias as NSString
-                        log(event: .nameType, attributes: ["Type": "GCAlias"])
-                    case .usingDeviceName(let name):
-                        record["DeviceName"] = name as NSString
-                        log(event: .nameType, attributes: ["Type": "DeviceName"])
-                    case .usingCustomName(let name):
-                        record["CustomName"] = name as NSString
-                        log(event: .nameType, attributes: ["Type": "CustomName"])
-                    case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
-                        record["Points"] = NSNumber(value: points)
-                        record["Races"] = NSNumber(value: races)
-                        record["TotalTime"] = NSNumber(value: totalTime)
-                        record["FastestTime"] = NSNumber(value: fastestTime)
-                        record["Pages"] = NSNumber(value: pages)
-                    }
+                    // Get user stats record, or create new one.
+                    let statsRecordName = userRecord.object(forKey: "UserStatsName") as? NSString ?? " "
+                    let userStatsRecordID = CKRecordID(recordName: statsRecordName as String)
+                    publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { (userStatsRecord, error) in
 
-                    publicDB.save(record, completionHandler: { (_, _) in })
+                        var userStatsRecord = userStatsRecord
+                        if let error = error as? CKError, error.code == CKError.unknownItem {
+                            userStatsRecord = CKRecord(recordType: "UserStats")
+                        }
+                        guard let record = userStatsRecord else { return }
+
+                        // Update user stats record.
+                        switch event {
+                        case .usingGCAlias(let alias):
+                            record["GCAlias"] = alias as NSString
+                            log(event: .nameType, attributes: ["Type": "GCAlias"])
+                        case .usingDeviceName(let name):
+                            record["DeviceName"] = name as NSString
+                            log(event: .nameType, attributes: ["Type": "DeviceName"])
+                        case .usingCustomName(let name):
+                            record["CustomName"] = name as NSString
+                            log(event: .nameType, attributes: ["Type": "CustomName"])
+                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
+                            record["Points"] = NSNumber(value: points)
+                            record["Races"] = NSNumber(value: races)
+                            record["TotalTime"] = NSNumber(value: totalTime)
+                            record["FastestTime"] = NSNumber(value: fastestTime)
+                            record["Pages"] = NSNumber(value: pages)
+                        }
+
+                        // Save updated stats record and update user record with stats record ID.
+                        publicDB.save(record, completionHandler: { (savedUserStatsRecord, _) in
+                            guard let savedUserStatsRecord = savedUserStatsRecord else { return }
+                            userRecord["UserStatsName"] = savedUserStatsRecord.recordID.recordName as NSString
+                            publicDB.save(userRecord, completionHandler: { (_, _) in })
+                        })
+
+                    })
                 })
             })
         #endif
