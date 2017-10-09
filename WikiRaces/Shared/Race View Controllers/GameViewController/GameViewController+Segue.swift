@@ -64,8 +64,6 @@ extension GameViewController {
     private func prepare(resultsViewController: ResultsViewController) {
         resultsViewController.readyButtonPressed = { [weak self] in
             self?.manager.player(.ready)
-            PlayerAnalytics.log(event: .pressedReadyButton,
-                                attributes: ["Time": resultsViewController.timeRemaining as Any])
         }
 
         resultsViewController.addPlayersViewController = manager.hostNetworkInterface()

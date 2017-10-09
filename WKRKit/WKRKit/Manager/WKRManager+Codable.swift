@@ -17,7 +17,7 @@ extension WKRManager {
             game.preRaceConfig = preRaceConfig
             voteInfoUpdate?(preRaceConfig.voteInfo)
 
-            if webView.url != preRaceConfig.startingPage.url {
+            if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
             }
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {

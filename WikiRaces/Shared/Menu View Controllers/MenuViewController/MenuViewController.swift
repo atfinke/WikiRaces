@@ -115,11 +115,15 @@ class MenuViewController: UIViewController {
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
+        PlayerAnalytics.log(event: .versionInfo)
     }
 
     @objc
     /// Join button pressed
     func joinRace() {
+        guard !promptForCustomNamePrompt(isHost: false) else {
+            return
+        }
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: false)
         }
@@ -129,10 +133,40 @@ class MenuViewController: UIViewController {
     @objc
     /// Create button pressed
     func createRace() {
+        guard !promptForCustomNamePrompt(isHost: true) else {
+            return
+        }
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: true)
         }
         PlayerAnalytics.log(event: .pressedHost)
+    }
+
+    func promptForCustomNamePrompt(isHost: Bool) -> Bool {
+        guard !UserDefaults.standard.bool(forKey: "PromptedCustomName") else {
+            return false
+        }
+        UserDefaults.standard.set(true, forKey: "PromptedCustomName")
+
+        let message = "Would you like to set a custom player name before racing?"
+        let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
+
+        alertController.addAction(UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
+            if isHost {
+                self.createRace()
+            } else {
+                self.joinRace()
+            }
+            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
+        }))
+        alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
+                                      options: [:], completionHandler: nil)
+            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
+        }))
+
+        present(alertController, animated: true, completion: nil)
+        return true
     }
 
     // MARK: - Menu Animations

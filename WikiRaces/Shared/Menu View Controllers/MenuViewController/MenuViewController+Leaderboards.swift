@@ -29,6 +29,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
         }
+
+        if let leaderboard = sender.stat?.leaderboard {
+            PlayerAnalytics.log(event: .leaderboard, attributes: ["Leaderboard": leaderboard as Any])
+        }
     }
 
     // MARK: - Game Center

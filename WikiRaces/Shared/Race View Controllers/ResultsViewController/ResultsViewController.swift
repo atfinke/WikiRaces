@@ -94,7 +94,11 @@ class ResultsViewController: CenteredTableViewController {
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        guard let alertController = quitAlertController else { fatalError() }
+        guard let alertController = quitAlertController else {
+            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+            PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
+            return
+        }
         present(alertController, animated: true, completion: nil)
     }
 
@@ -108,6 +112,7 @@ class ResultsViewController: CenteredTableViewController {
         navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
         isOverlayButtonHidden = true
+        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
