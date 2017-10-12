@@ -69,3 +69,5 @@ WikiRaces/test_output
 
 WikiRaces/fabric.apikey
 WikiRaces/fabric.buildsecret
+
+WikiRaces/WikiRaces/GoogleService-Info.plist

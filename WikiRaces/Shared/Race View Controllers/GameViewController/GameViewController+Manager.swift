@@ -41,7 +41,7 @@ extension GameViewController {
                 self?.webView.text = linkCount.description
             }, pageViewUpdate: { page in
                 StatsHelper.shared.viewedPage()
-                PlayerAnalytics.log(event: .pageView, attributes: ["Title": page.title as Any])
+                PlayerAnalytics.log(event: .pageView, attributes: ["Page": page.title as Any])
             })
         #endif
 

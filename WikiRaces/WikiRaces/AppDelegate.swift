@@ -8,6 +8,7 @@
 
 import UIKit
 import Crashlytics
+import FirebaseCore
 
 @UIApplicationMain
 class AppDelegate: WKRAppDelegate {
@@ -20,6 +21,7 @@ class AppDelegate: WKRAppDelegate {
                 fatalError()
         }
         Crashlytics.start(withAPIKey: key.replacingOccurrences(of: "\n", with: ""))
+        FirebaseApp.configure()
 
         StatsHelper.shared.start()
         configureConstants()
