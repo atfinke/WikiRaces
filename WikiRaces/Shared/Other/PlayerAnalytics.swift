@@ -21,6 +21,7 @@ struct PlayerAnalytics {
     enum StatEvent {
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
         case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
+        case buildInfo(version: String, build: String)
     }
 
     enum Event: String {
@@ -89,6 +90,9 @@ struct PlayerAnalytics {
                             record["TotalTime"] = NSNumber(value: totalTime)
                             record["FastestTime"] = NSNumber(value: fastestTime)
                             record["Pages"] = NSNumber(value: pages)
+                        case .buildInfo(let version, let build):
+                            record["BundleVersion"] = version as NSString
+                            record["BundleBuild"] = build as NSString
                         }
 
                         // Save updated stats record and update user record with stats record ID.

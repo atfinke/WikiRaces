@@ -32,6 +32,7 @@ class MPCConnectViewController: UIViewController {
 
     var isPlayerHost = false
     var isShowingInvite = false
+    var isValidPlayerName = false
 
     var isFirstAppear = true
     var isShowingMatch = false
@@ -66,6 +67,20 @@ class MPCConnectViewController: UIViewController {
         } else {
             PlayerAnalytics.log(event: .usingDeviceName(playerName))
         }
+        Crashlytics.sharedInstance().setUserName(playerName)
+
+        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
+        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+
+        cancelButton.alpha = 0.0
+        activityIndicatorView.alpha = 0.0
+        inviteView.alpha = 0.0
+        descriptionLabel.alpha = 0.0
+
+        isValidPlayerName = [UInt8](playerName.utf8).count < 40
+        guard isValidPlayerName else { return }
 
         // Uses existing peer ID object if already created (recommended per Apple docs)
         if let pastPeerIDData = UserDefaults.standard.data(forKey: "PeerID"),
@@ -77,16 +92,6 @@ class MPCConnectViewController: UIViewController {
             let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
             UserDefaults.standard.set(data, forKey: "PeerID")
         }
-
-        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
-
-        cancelButton.alpha = 0.0
-        activityIndicatorView.alpha = 0.0
-        inviteView.alpha = 0.0
-        descriptionLabel.alpha = 0.0
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -110,7 +115,7 @@ class MPCConnectViewController: UIViewController {
         // Test the connection to Wikipedia
         WKRConnectionTester.start { (success) in
             DispatchQueue.main.async {
-                if success {
+                if success && self.isValidPlayerName {
                     if self.isPlayerHost {
                         UIView.animate(withDuration: 0.25, animations: {
                             self.descriptionLabel.alpha = 0.0
@@ -123,7 +128,7 @@ class MPCConnectViewController: UIViewController {
                     } else {
                         self.startAdvertising()
                     }
-                } else {
+                } else if !success {
                     self.showError(title: "Internet Not Reachable",
                                    message: "A fast internet connection is required to play WikiRaces.")
                 }
@@ -135,6 +140,12 @@ class MPCConnectViewController: UIViewController {
             self.activityIndicatorView.alpha = 1.0
             self.cancelButton.alpha = 1.0
         })
+
+        if !isValidPlayerName {
+            showError(title: "Player Name Too Long",
+                      message: "Your player name is too long. Would you like to open settings to adjust it?",
+                      showSettingsButton: true)
+        }
     }
 
     // MARK: - Interface Updates
@@ -144,9 +155,11 @@ class MPCConnectViewController: UIViewController {
     /// - Parameters:
     ///   - title: The title of the error message
     ///   - message: The message body of the error
-    func showError(title: String, message: String) {
-        self.session.delegate = nil
-        self.session.disconnect()
+    func showError(title: String, message: String, showSettingsButton: Bool = false) {
+        if isValidPlayerName {
+            self.session.delegate = nil
+            self.session.disconnect()
+        }
 
         UIView.animate(withDuration: 0.5, animations: {
             self.activityIndicatorView.alpha = 0.0
@@ -158,6 +171,13 @@ class MPCConnectViewController: UIViewController {
             self.pressedCancelButton()
         }
         alertController.addAction(action)
+        if showSettingsButton {
+            alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
+                                          options: [:], completionHandler: nil)
+                self.pressedCancelButton()
+            }))
+        }
         present(alertController, animated: true, completion: nil)
     }
 
