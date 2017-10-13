@@ -117,6 +117,10 @@
 		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14DC66D11F90700A0026C6ED /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 143BB72F1F60D84100D00541 /* fabric.apikey */; };
 		14DC66D21F90700D0026C6ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143054BD1F89581100C0BC27 /* GoogleService-Info.plist */; };
+		14DC66D31F9072180026C6ED /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
+		14DC66D41F9072180026C6ED /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14DC66D71F9072200026C6ED /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
+		14DC66D81F9072200026C6ED /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E1B19A1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
 		14E1B19B1F7981C70082F4FA /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
 		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
@@ -140,6 +144,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 149FF8481F362B83000A5D96;
 			remoteInfo = WikiRaces;
+		};
+		14DC66D51F9072180026C6ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		14DC66D91F9072200026C6ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
 		};
 		14E6D5511F86A1B0005EB3B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -204,6 +222,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				14DC66D81F9072200026C6ED /* WKRUIKit.framework in Embed Frameworks */,
+				14DC66D41F9072180026C6ED /* WKRKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -332,7 +352,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14DC66D31F9072180026C6ED /* WKRKit.framework in Frameworks */,
 				14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */,
+				14DC66D71F9072200026C6ED /* WKRUIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +687,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				14DC66D61F9072180026C6ED /* PBXTargetDependency */,
+				14DC66DA1F9072200026C6ED /* PBXTargetDependency */,
 			);
 			name = "WikiRaces (Multi-Window)";
 			productName = "WikiRaces (Multi-Window)";
@@ -1078,6 +1102,16 @@
 			isa = PBXTargetDependency;
 			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
 			targetProxy = 149FF8931F362BF1000A5D96 /* PBXContainerItemProxy */;
+		};
+		14DC66D61F9072180026C6ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 14DC66D51F9072180026C6ED /* PBXContainerItemProxy */;
+		};
+		14DC66DA1F9072200026C6ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 14DC66D91F9072200026C6ED /* PBXContainerItemProxy */;
 		};
 		14E6D5601F86A1CA005EB3B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
