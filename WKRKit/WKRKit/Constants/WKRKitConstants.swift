@@ -165,7 +165,6 @@ public class WKRKitConstants {
     }
 
     internal func getLinksScript() -> String {
-        //swiftlint:disable:next line_length
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
             let source = try? String(contentsOf: documentsScriptURL) else {
                 fatalError()
