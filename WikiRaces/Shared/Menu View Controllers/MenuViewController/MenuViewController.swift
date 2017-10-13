@@ -87,6 +87,12 @@ class MenuViewController: UIViewController {
                 })
             }
         }
+
+        guard let bundleBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+                fatalError()
+        }
+        PlayerAnalytics.log(event: .buildInfo(version: bundleVersion, build: bundleBuild))
     }
 
     override func viewDidAppear(_ animated: Bool) {
