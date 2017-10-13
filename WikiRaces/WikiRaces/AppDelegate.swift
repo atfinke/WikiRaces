@@ -17,10 +17,10 @@ class AppDelegate: WKRAppDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
-            let key = try? String(contentsOf: url) else {
+            let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
                 fatalError()
         }
-        Crashlytics.start(withAPIKey: key.replacingOccurrences(of: "\n", with: ""))
+        Crashlytics.start(withAPIKey: key)
         FirebaseApp.configure()
 
         StatsHelper.shared.start()

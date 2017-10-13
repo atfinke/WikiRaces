@@ -48,6 +48,16 @@ extension GameViewController {
 
         manager.voting(timeUpdate: { [weak self] time in
             self?.votingViewController?.voteTimeRemaing = time
+
+            if self?.isPlayerHost ?? false && time == 0, let votingInfo = self?.manager.voteInfo {
+                for index in 0..<votingInfo.pageCount {
+                    if let info = votingInfo.page(for: index) {
+                        for _ in 0..<info.votes {
+                            PlayerAnalytics.log(event: .finalVotes, attributes: ["Page": info.page.title as Any])
+                        }
+                    }
+                }
+            }
         }, infoUpdate: { [weak self] voteInfo in
             self?.votingViewController?.voteInfo = voteInfo
         }, finalPageUpdate: { [weak self] page in
