@@ -19,6 +19,7 @@ struct PlayerAnalytics {
     // MARK: - Types
 
     enum StatEvent {
+        case players(unique: Int, total: Int)
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
         case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
         case buildInfo(version: String, build: String)
@@ -33,6 +34,8 @@ struct PlayerAnalytics {
         case pageView
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
         case openedHistory, pressedReadyButton, voted
+        case finalVotes
+        
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
@@ -51,6 +54,7 @@ struct PlayerAnalytics {
         #endif
     }
 
+    //swiftlint:disable:next cyclomatic_complexity
     public static func log(event: StatEvent) {
         #if !MULTIWINDOWDEBUG
             let container = CKContainer.default()
@@ -93,6 +97,9 @@ struct PlayerAnalytics {
                         case .buildInfo(let version, let build):
                             record["BundleVersion"] = version as NSString
                             record["BundleBuild"] = build as NSString
+                        case .players(let unique, let total):
+                            record["TotalPlayers"] = NSNumber(value: total)
+                            record["UniquePlayers"] = NSNumber(value: unique)
                         }
 
                         // Save updated stats record and update user record with stats record ID.

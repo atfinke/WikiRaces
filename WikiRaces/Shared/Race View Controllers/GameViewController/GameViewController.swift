@@ -84,10 +84,23 @@ class GameViewController: UIViewController {
                     self.activityIndicatorView.alpha = 1.0
                 })
             }
+
+            #if !MULTIWINDOWDEBUG
+                // Due to low usage, not accounting for players joining mid session
+                let playerNames = session.connectedPeers.filter({ peerID -> Bool in
+                    return peerID != session.myPeerID
+                }).map({ peerID -> String in
+                    return peerID.displayName
+                })
+                StatsHelper.shared.connected(to: playerNames)
+            #endif
         }
         if manager.gameState == .preMatch && isPlayerHost {
             manager.player(.startedGame)
-            PlayerAnalytics.log(event: .hostStartedMatch, attributes: ["ConnectedPeers": session.connectedPeers.count])
+            #if !MULTIWINDOWDEBUG
+                PlayerAnalytics.log(event: .hostStartedMatch, 
+                                    attributes: ["ConnectedPeers": session.connectedPeers.count])
+            #endif
         }
     }
 

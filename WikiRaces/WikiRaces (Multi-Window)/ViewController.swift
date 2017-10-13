@@ -8,9 +8,9 @@
 
 import UIKit
 
+//swiftlint:disable line_length function_body_length force_cast superfluous_disable_command
 class ViewController: UIViewController {
 
-    //swiftlint:disable line_length function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -68,7 +68,6 @@ class ViewController: UIViewController {
         view.backgroundColor = UIColor.purple
     }
 
-    //swiftlint:disable force_cast
     func menuViewController() -> MenuViewController {
         let controller = UIStoryboard(name: "Main", bundle: nil)
             .instantiateInitialViewController() as! UINavigationController

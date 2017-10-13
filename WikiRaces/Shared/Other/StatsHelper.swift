@@ -25,29 +25,36 @@ class StatsHelper {
 
         case pages
 
+        case totalPlayers
+        case uniquePlayers
+
         var key: String {
             return "WKRStat-" + self.rawValue
         }
 
         var sortHigh: Bool {
             switch self {
-            case .points:       return true
-            case .races:        return true
-            case .average:      return true
-            case .totalTime:    return true
-            case .fastestTime:  return false
-            case .pages:        return true
+            case .points:        return true
+            case .races:         return true
+            case .average:       return true
+            case .totalTime:     return true
+            case .fastestTime:   return false
+            case .pages:         return true
+            case .totalPlayers:  return true
+            case .uniquePlayers: return true
             }
         }
 
         var leaderboard: String {
             switch self {
-            case .points:       return "com.andrewfinke.wikiraces.points"
-            case .races:        return "com.andrewfinke.wikiraces.races"
-            case .average:      return "com.andrewfinke.wikiraces.ppr"
-            case .totalTime:    return "com.andrewfinke.wikiraces.totaltime"
-            case .fastestTime:  return "com.andrewfinke.wikiraces.fastesttime"
-            case .pages:        return "com.andrewfinke.wikiraces.pages"
+            case .points:        return "com.andrewfinke.wikiraces.points"
+            case .races:         return "com.andrewfinke.wikiraces.races"
+            case .average:       return "com.andrewfinke.wikiraces.ppr"
+            case .totalTime:     return "com.andrewfinke.wikiraces.totaltime"
+            case .fastestTime:   return "com.andrewfinke.wikiraces.fastesttime"
+            case .pages:         return "com.andrewfinke.wikiraces.pages"
+            case .totalPlayers:  return "com.andrewfinke.wikiraces.totalPlayers"
+            case .uniquePlayers: return "com.andrewfinke.wikiraces.uniquePlayers"
             }
         }
     }
@@ -116,6 +123,20 @@ class StatsHelper {
         defaults.set(newPages, forKey: Stat.pages.key)
     }
 
+    func connected(to players: [String]) {
+        var existingPlayers = defaults.array(forKey: "PlayersArray") as? [String] ?? []
+        existingPlayers += players
+        defaults.set(existingPlayers, forKey: "PlayersArray")
+
+        let uniquePlayers = Array(Set(existingPlayers)).count
+        let totalPlayers = existingPlayers.count
+
+        defaults.set(uniquePlayers, forKey: Stat.uniquePlayers.key)
+        defaults.set(totalPlayers, forKey: Stat.totalPlayers.key)
+        
+        PlayerAnalytics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
+    }
+
     func completedRace(points: Int, timeRaced: Int) {
         let newPoints = statValue(for: .points) + Double(points)
         let newRaces = statValue(for: .races) + 1
@@ -169,7 +190,9 @@ class StatsHelper {
         let reason = reasonForChange.intValue
         if reason == NSUbiquitousKeyValueStoreServerChange || reason == NSUbiquitousKeyValueStoreInitialSyncChange {
             for key in changedKeys {
+                // Not currently syncing unique players array
                 guard let stat = Stat(rawValue: key) else { return }
+
                 let deviceValue = defaults.double(forKey: key)
                 let cloudValue = keyValueStore.double(forKey: key)
                 if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
@@ -209,6 +232,7 @@ class StatsHelper {
         let fastestTime = statValue(for: .fastestTime)
 
         let pagesViewed = statValue(for: .pages)
+        let playersRaced = statValue(for: .uniquePlayers)
 
         let pointsScore = GKScore(leaderboardIdentifier: Stat.points.leaderboard)
         pointsScore.value = Int64(points)
@@ -221,6 +245,10 @@ class StatsHelper {
 
         let pagesViewedScore = GKScore(leaderboardIdentifier: Stat.pages.leaderboard)
         pagesViewedScore.value = Int64(pagesViewed)
+
+        // Waiting to see what these stats look like
+        // let playersRacedScore = GKScore(leaderboardIdentifier: Stat.uniquePlayers.leaderboard)
+        // playersRacedScore.value = Int64(playersRaced)
 
         var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore, pagesViewedScore]
         if races >= 5 {
