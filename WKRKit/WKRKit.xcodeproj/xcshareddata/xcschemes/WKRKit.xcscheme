@@ -29,7 +29,26 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "149FF8101F362B3D000A5D96"
+               BuildableName = "WKRKitTests.xctest"
+               BlueprintName = "WKRKitTests"
+               ReferencedContainer = "container:WKRKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "149FF8071F362B3D000A5D96"
+            BuildableName = "WKRKit.framework"
+            BlueprintName = "WKRKit"
+            ReferencedContainer = "container:WKRKit.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

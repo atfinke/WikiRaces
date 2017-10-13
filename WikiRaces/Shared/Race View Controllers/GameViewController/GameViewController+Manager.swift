@@ -23,6 +23,7 @@ extension GameViewController {
                 StatsHelper.shared.completedRace(points: points, timeRaced: self.timeRaced)
             }, linkCountUpdate: { linkCount in
                 self.webView.text = linkCount.description
+            }, pageViewUpdate: { _ in
             })
         #else
             manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
