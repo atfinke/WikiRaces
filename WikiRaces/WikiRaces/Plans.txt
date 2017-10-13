@@ -26,3 +26,4 @@ WikiRaces 3.0 Plans:
 - Better internal documentation
 - Fix rare retain cycles
 - Remove iOS 10.0
+- Fix broken tests from remote update
