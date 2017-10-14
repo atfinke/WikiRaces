@@ -36,6 +36,10 @@ class ViewController: NSViewController {
             "Pages",
             "FastestTime",
             "TotalTime",
+            "UniquePlayers",
+            "TotalPlayers",
+            "BundleVersion",
+            "BundleBuild",
             "CreatedAt",
             "ModifiedAt"
         ]
@@ -71,7 +75,7 @@ class ViewController: NSViewController {
 
     private func queryStats() {
         let query = CKQuery(recordType: "UserStats", predicate: NSPredicate(value: true))
-        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
+        query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         let queryOperation = CKQueryOperation(query: query)
         queryOperation.qualityOfService = .userInitiated
