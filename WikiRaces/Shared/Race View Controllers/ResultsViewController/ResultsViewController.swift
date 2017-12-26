@@ -17,7 +17,9 @@ class ResultsViewController: CenteredTableViewController {
     private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
 
-    private var isAnimatingStateChange = false
+    private var isAnimatingPointsStateChange = false
+    private var isAnimatingResultsStateChange = false
+
     var readyButtonPressed: (() -> Void)?
     var quitAlertController: UIAlertController?
     var addPlayersViewController: UIViewController?
@@ -77,7 +79,7 @@ class ResultsViewController: CenteredTableViewController {
 
         infoLabel.textAlignment = .center
         infoLabel.textColor = UIColor.wkrLightTextColor
-        infoLabel.text = "TAP PLAYER TO VIEW PROGRESS"
+        infoLabel.text = "TAP PLAYER TO VIEW LIVE PROGRESS"
         infoLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
         infoLabel.adjustsFontSizeToFitWidth = true
         infoLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -125,6 +127,19 @@ class ResultsViewController: CenteredTableViewController {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
             updateTableView()
+
+            if state == .hostResults && !isAnimatingResultsStateChange {
+                isAnimatingResultsStateChange = true
+                UIView.animate(withDuration: 0.4, animations: {
+                    self.infoLabel.alpha = 0.0
+                }, completion: { _ in
+                    self.isAnimatingResultsStateChange = false
+                    self.infoLabel.text = "TAP PLAYER TO VIEW HISTORY"
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.infoLabel.alpha = 1.0
+                    })
+                })
+            }
         } else {
             title = "STANDINGS"
             tableView.isUserInteractionEnabled = false
@@ -134,12 +149,12 @@ class ResultsViewController: CenteredTableViewController {
             }
 
             if oldState != .points {
-                isAnimatingStateChange = true
+                isAnimatingPointsStateChange = true
                 UIView.animate(withDuration: 0.4, animations: {
                     self.tableView.alpha = 0.0
                     self.infoLabel.alpha = 0.0
                 }, completion: { _ in
-                    self.isAnimatingStateChange = false
+                    self.isAnimatingPointsStateChange = false
                     self.updateTableView()
                     UIView.animate(withDuration: 0.4, animations: {
                         self.tableView.alpha = 1.0
@@ -174,7 +189,7 @@ class ResultsViewController: CenteredTableViewController {
     // MARK: - Helpers
 
     private func updateTableView() {
-        guard !isAnimatingStateChange else { return }
+        guard !isAnimatingPointsStateChange else { return }
         tableView.reloadData()
     }
 
