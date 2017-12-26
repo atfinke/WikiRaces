@@ -35,7 +35,7 @@ struct PlayerAnalytics {
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
         case openedHistory, pressedReadyButton, voted
         case finalVotes
-        
+
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
@@ -54,7 +54,7 @@ struct PlayerAnalytics {
         #endif
     }
 
-    //swiftlint:disable:next cyclomatic_complexity
+    //swiftlint:disable:next cyclomatic_complexity function_body_length
     public static func log(event: StatEvent) {
         #if !MULTIWINDOWDEBUG
             let container = CKContainer.default()

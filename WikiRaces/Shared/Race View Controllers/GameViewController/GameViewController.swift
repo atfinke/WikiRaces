@@ -98,7 +98,7 @@ class GameViewController: UIViewController {
         if manager.gameState == .preMatch && isPlayerHost {
             manager.player(.startedGame)
             #if !MULTIWINDOWDEBUG
-                PlayerAnalytics.log(event: .hostStartedMatch, 
+                PlayerAnalytics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             #endif
         }

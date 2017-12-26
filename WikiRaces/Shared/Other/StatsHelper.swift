@@ -133,7 +133,7 @@ class StatsHelper {
 
         defaults.set(uniquePlayers, forKey: Stat.uniquePlayers.key)
         defaults.set(totalPlayers, forKey: Stat.totalPlayers.key)
-        
+
         PlayerAnalytics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
     }
 
@@ -232,7 +232,7 @@ class StatsHelper {
         let fastestTime = statValue(for: .fastestTime)
 
         let pagesViewed = statValue(for: .pages)
-        let playersRaced = statValue(for: .uniquePlayers)
+        // let playersRaced = statValue(for: .uniquePlayers)
 
         let pointsScore = GKScore(leaderboardIdentifier: Stat.points.leaderboard)
         pointsScore.value = Int64(points)
