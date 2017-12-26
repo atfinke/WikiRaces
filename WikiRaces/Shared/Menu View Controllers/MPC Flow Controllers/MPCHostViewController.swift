@@ -44,7 +44,9 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let peerID = peerID, let serviceType = serviceType else { fatalError() }
+        guard let peerID = peerID, let serviceType = serviceType else {
+            fatalError("Required properties peerID or serviceType not set")
+        }
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         browser?.delegate = self
         session?.delegate = self
@@ -161,7 +163,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     // MARK: - UITableViewDataSource
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if peers.count == 0 {
+        if peers.isEmpty {
             return 1
         } else {
             return peers.count
@@ -177,17 +179,12 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        if peers.count == 0 {
-            cell.textLabel?.text = "Searching..."
-            cell.textLabel?.textColor = UIColor.lightGray
-            cell.detailTextLabel?.text = ""
-            cell.isUserInteractionEnabled = false
-            return cell
-        } else {
-            cell.textLabel?.textColor = UIColor.black
+        if peers.isEmpty {
+            return tableView.dequeueReusableCell(withIdentifier: "searchingCell", for: indexPath)
         }
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         let peerID = sortedPeers[indexPath.row]
         guard let state = peers[peerID] else {
@@ -207,7 +204,7 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Hits this case when the "Searching..." placeholder cell is selected
-        guard peers.count > 0 else { return }
+        guard !peers.isEmpty else { return }
 
         let peerID = sortedPeers[indexPath.row]
         guard let session = session else {
