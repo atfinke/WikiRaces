@@ -22,6 +22,7 @@
 		148164AF1F5C94E800AC7178 /* WKRKitRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */; };
 		148164B11F5C94F200AC7178 /* WKRKitPageFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */; };
 		148164B31F5C94FC00AC7178 /* WKRKitTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */; };
+		1497A8511FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */; };
 		1497F31A1F588EBE001653DE /* WKRReadyStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497F3191F588EBE001653DE /* WKRReadyStates.swift */; };
 		149FF8121F362B3D000A5D96 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF8081F362B3D000A5D96 /* WKRKit.framework */; };
 		149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8161F362B3D000A5D96 /* WKRKitTests.swift */; };
@@ -78,6 +79,7 @@
 		148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitRaceTests.swift; sourceTree = "<group>"; };
 		148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitPageFetcherTests.swift; sourceTree = "<group>"; };
 		148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTestCase.swift; sourceTree = "<group>"; };
+		1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WKRKitConstants-TESTING_ONLY.plist"; sourceTree = "<group>"; };
 		1497F3191F588EBE001653DE /* WKRReadyStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRReadyStates.swift; sourceTree = "<group>"; };
 		149FF8081F362B3D000A5D96 /* WKRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF80B1F362B3D000A5D96 /* WKRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRKit.h; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				1410DB471F4F53E200F5CAD7 /* WKRArticlesData.plist */,
 				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
+				1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */,
 				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
 				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
 			);
@@ -403,6 +406,7 @@
 				1410DB4B1F4F552200F5CAD7 /* WKRGetLinks.js in Resources */,
 				1410DB481F4F544300F5CAD7 /* WKRArticlesData.plist in Resources */,
 				14E1B1981F7954A00082F4FA /* WKRKitConstants.plist in Resources */,
+				1497A8511FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

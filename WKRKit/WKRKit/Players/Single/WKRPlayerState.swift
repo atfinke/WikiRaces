@@ -39,8 +39,4 @@ public enum WKRPlayerState: String, Codable {
         }
     }
 
-    public var connected: Bool {
-        return self != .quit || self != .connecting
-    }
-
 }

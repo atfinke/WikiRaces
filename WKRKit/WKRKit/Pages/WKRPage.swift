@@ -53,8 +53,8 @@ public struct WKRPage: Codable, Hashable, Equatable {
             // Again, will only be used if the constants plist
             // is updated one day to use raw character replacment instead of a string.
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
-            let clippedTitle = title[..<index].capitalized
-            return smartCapitalize(clippedTitle)
+            let clippedTitle = title[..<index]
+            return smartCapitalize(String(clippedTitle))
         } else {
             // The expected path
             let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")

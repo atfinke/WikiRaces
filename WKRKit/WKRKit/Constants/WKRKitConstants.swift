@@ -70,6 +70,27 @@ public class WKRKitConstants {
         self.bannedURLFragments = bannedURLFragments
     }
 
+    @available(*, deprecated, message: "Only for debugging")
+    static public func removeConstants() {
+        let fileManager = FileManager.default
+        let folderPath = FileManager.default.documentsDirectory!.path
+        guard let filePaths = try? fileManager.contentsOfDirectory(atPath: folderPath) else {
+            fatalError()
+        }
+        for filePath in filePaths {
+            do {
+                try fileManager.removeItem(atPath: folderPath + "/" + filePath)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
+    @available(*, deprecated, message: "Only for debugging")
+    static public func updateConstantsForTestingCharacterClipping() {
+        copyBundledResourcesToDocuments(constantsFileName: "WKRKitConstants-TESTING_ONLY")
+    }
+
     static public func updateConstants() {
         copyBundledResourcesToDocuments()
 
@@ -145,9 +166,9 @@ public class WKRKitConstants {
         current = WKRKitConstants()
     }
 
-    static private func copyBundledResourcesToDocuments() {
+    static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
         guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
-            let bundledPlistURL = bundle.url(forResource: "WKRKitConstants", withExtension: "plist"),
+            let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
             let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {
                 fatalError()
