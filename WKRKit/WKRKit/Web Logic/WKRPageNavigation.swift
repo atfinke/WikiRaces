@@ -15,7 +15,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
     // MARK: - Properties
 
     /// Called when the user taps a banned link (i.e. an image)
-    let pageURLBlocked: (() -> Void)
+    let pageURLBlocked: ((URL) -> Void)
     /// Called when there is an issue loading the page
     let pageLoadingError: (() -> Void)
     /// Called when the page starts to load
@@ -32,7 +32,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
     ///   - pageLoadingError: Called when there is an issue loading the page
     ///   - pageStartedLoading: Called when the page starts to load
     ///   - pageLoaded: Called when the page has completed loading
-    init(pageURLBlocked: @escaping (() -> Void),
+    init(pageURLBlocked: @escaping ((URL) -> Void),
          pageLoadingError: @escaping (() -> Void),
          pageStartedLoading: @escaping (() -> Void),
          pageLoaded: @escaping ((WKRPage) -> Void)) {
@@ -78,7 +78,7 @@ class WKRPageNavigation: NSObject, WKNavigationDelegate {
         // Make sure the url is legal for the race
         guard allow(url: requestURL) else {
             decisionHandler(.cancel)
-            pageURLBlocked()
+            pageURLBlocked(requestURL)
             return
         }
 

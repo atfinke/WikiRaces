@@ -31,7 +31,7 @@ struct PlayerAnalytics {
         case pressedJoin, pressedHost
         case namePromptResult, nameType
         // Game All Players
-        case pageView
+        case pageView, pageBlocked, pageError
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
         case openedHistory, pressedReadyButton, voted
         case finalVotes

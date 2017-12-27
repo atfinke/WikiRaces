@@ -91,7 +91,8 @@ class WKRSplitViewNetwork: WKRPeerNetwork {
     }
 
     func hostNetworkInterface() -> UIViewController {
-        fatalError()
+        print("hostNetworkInterface called")
+        return UIViewController()
     }
 
 }
@@ -106,7 +107,7 @@ extension WKRManager {
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
-                            pageViewUpdate: @escaping ((WKRPage) -> Void)) {
+                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
         let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)
@@ -116,7 +117,7 @@ extension WKRManager {
                   stateUpdate: stateUpdate,
                   pointsUpdate: pointsUpdate,
                   linkCountUpdate: linkCountUpdate,
-                  pageViewUpdate: pageViewUpdate)
+                  logEvent: logEvent)
     }
 
 }

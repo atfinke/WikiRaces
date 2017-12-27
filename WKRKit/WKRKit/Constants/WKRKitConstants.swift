@@ -73,6 +73,10 @@ public class WKRKitConstants {
     static public func updateConstants() {
         copyBundledResourcesToDocuments()
 
+        guard ProcessInfo.processInfo.environment["Cloud_Enabled"] != nil else {
+            return
+        }
+
         let publicDB = CKContainer.default().publicCloudDatabase
         let recordID = CKRecordID(recordName: "WKRKitConstantsRecord")
 

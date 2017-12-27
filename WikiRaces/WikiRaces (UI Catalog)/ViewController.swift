@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import MultipeerConnectivity
+
 @testable import WKRKit
+@testable import WKRUIKit
 
 class ViewController: UIViewController {
 
@@ -17,45 +18,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let historyNav = viewController() as! UINavigationController
-        let historyController = historyNav.rootViewController as! MPCHostViewController
-historyController.peerID = MCPeerID(displayName: "h")
-        historyController.serviceType = "gj"
-//        let players = [
-//            WKRPlayer(profile: WKRPlayerProfile(name: "A", playerID: "A"), isHost: true),
-//            WKRPlayer(profile: WKRPlayerProfile(name: "B", playerID: "B"), isHost: false)
-//        ]
-//
-//        let results = WKRResultsInfo(players: players, racePoints: [:], sessionPoints: [:])
-//
-//        historyController.state = .results
-//        historyController.resultsInfo = results
+
+        let historyController = historyNav.rootViewController as! GameViewController
+
         present(historyNav, animated: true, completion: nil)
 
-//        let url = URL(string: "https://www.apple.com")!
-//
-//        let player = WKRPlayer(profile: WKRPlayerProfile(name: "andrew", playerID: "andrew"), isHost: false)
-//        player.state = .racing
-//        player.startedNewRace(on: WKRPage(title: "Page 1", url: url))
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            historyController.state = .hostResults
-//            historyController.player = player
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                player.finishedViewingLastPage()
-//                player.nowViewing(page: WKRPage(title: "Page 2", url: url), linkHere: true)
-//                player.finishedViewingLastPage()
-//                player.nowViewing(page: WKRPage(title: "Page 3", url: url), linkHere: true)
-//                player.state = WKRPlayerState.foundPage
-//                historyController.player = player
-
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    player.finishedViewingLastPage()
-//                    player.nowViewing(page: WKRPage(title: "Page 4", url: url), linkHere: true)
-//                    player.finishedViewingLastPage()
-//                    player.nowViewing(page: WKRPage(title: "Page 5", url: url), linkHere: true)
-//                    player.state = WKRPlayerState.foundPage
-//                    historyController.player = player
-                }
+               }
             }
         }
 
@@ -63,7 +34,7 @@ historyController.peerID = MCPeerID(displayName: "h")
 
     //swiftlint:disable force_cast
     func viewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MPCHostNav")
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameNav")
     }
 
 }

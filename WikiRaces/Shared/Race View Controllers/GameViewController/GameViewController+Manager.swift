@@ -23,10 +23,10 @@ extension GameViewController {
                 StatsHelper.shared.completedRace(points: points, timeRaced: self.timeRaced)
             }, linkCountUpdate: { linkCount in
                 self.webView.text = linkCount.description
-            }, pageViewUpdate: { _ in
+            }, logEvent: { _, _ in
             })
         #else
-            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: {  [weak self] state, error in
+            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: { [weak self] state, error in
                 if let error = error {
                     DispatchQueue.main.async {
                         self?.errorOccurred(error)
@@ -40,9 +40,14 @@ extension GameViewController {
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
-            }, pageViewUpdate: { page in
-                StatsHelper.shared.viewedPage()
-                PlayerAnalytics.log(event: .pageView, attributes: ["Page": page.title as Any])
+            }, logEvent: { event, attributes in
+                guard let eventType = PlayerAnalytics.Event(rawValue: event) else {
+                    fatalError("Invalid event " + event)
+                }
+                if eventType == .pageView {
+                    StatsHelper.shared.viewedPage()
+                }
+                PlayerAnalytics.log(event: eventType, attributes: attributes)
             })
         #endif
 
