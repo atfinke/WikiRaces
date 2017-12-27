@@ -49,7 +49,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
 
         // charactersToRemove is a fallback if simply replacing the "Wikipedia - " fails one day.
         let charactersToRemove = WKRKitConstants.current.pageTitleCharactersToRemove
-        if charactersToRemove > 0 && title.characters.count > charactersToRemove {
+        if charactersToRemove > 0 && title.count > charactersToRemove {
             // Again, will only be used if the constants plist
             // is updated one day to use raw character replacment instead of a string.
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)

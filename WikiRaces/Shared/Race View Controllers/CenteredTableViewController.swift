@@ -41,14 +41,14 @@ class CenteredTableViewController: UIViewController {
     }
 
     let reuseIdentifier = "cell"
-    let overlayButton = WKRUIButton()
     let descriptionLabel = UILabel()
     let tableView = WKRUICenteredTableView()
+    private let overlayButton = WKRUIButton()
 
     var contentView: UIView!
-    var overlayBottomConstraint: NSLayoutConstraint!
-    var overlayHeightConstraint: NSLayoutConstraint!
-    var descriptionLabelBottomConstraint: NSLayoutConstraint!
+    private var overlayBottomConstraint: NSLayoutConstraint!
+    private var overlayHeightConstraint: NSLayoutConstraint!
+    private var descriptionLabelBottomConstraint: NSLayoutConstraint!
 
     private var isInterfaceLoaded = false
 

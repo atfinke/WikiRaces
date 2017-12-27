@@ -16,9 +16,7 @@ class ResultsViewController: CenteredTableViewController {
 
     private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
-
     private var isAnimatingPointsStateChange = false
-    private var isAnimatingResultsStateChange = false
 
     var readyButtonPressed: (() -> Void)?
     var quitAlertController: UIAlertController?
@@ -127,19 +125,6 @@ class ResultsViewController: CenteredTableViewController {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
             updateTableView()
-
-            if state == .hostResults && !isAnimatingResultsStateChange {
-                isAnimatingResultsStateChange = true
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.infoLabel.alpha = 0.0
-                }, completion: { _ in
-                    self.isAnimatingResultsStateChange = false
-                    self.infoLabel.text = "TAP PLAYER TO VIEW HISTORY"
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.infoLabel.alpha = 1.0
-                    })
-                })
-            }
         } else {
             title = "STANDINGS"
             tableView.isUserInteractionEnabled = false
@@ -174,10 +159,13 @@ class ResultsViewController: CenteredTableViewController {
         tableView.isUserInteractionEnabled = true
         if oldTime == 100 {
             UIView.animate(withDuration: 0.25, animations: {
+                self.infoLabel.alpha = 0.0
                 self.descriptionLabel.alpha = 0.0
             }, completion: { _ in
+                self.infoLabel.text = "TAP PLAYER TO VIEW HISTORY"
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
                 UIView.animate(withDuration: 0.25, animations: {
+                    self.infoLabel.alpha = 1.0
                     self.descriptionLabel.alpha = 1.0
                 })
             })

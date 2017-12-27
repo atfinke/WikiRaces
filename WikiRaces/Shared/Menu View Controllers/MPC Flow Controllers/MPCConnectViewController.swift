@@ -129,7 +129,7 @@ class MPCConnectViewController: UIViewController {
                         self.startAdvertising()
                     }
                 } else if !success {
-                    self.showError(title: "Internet Not Reachable",
+                    self.showError(title: "Slow Connection",
                                    message: "A fast internet connection is required to play WikiRaces.")
                 }
             }

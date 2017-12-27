@@ -87,7 +87,7 @@ class HistoryViewController: UITableViewController {
             let detail = " Link Here"
             attributedText = NSMutableAttributedString(string: pageTitle + detail, attributes: nil)
 
-            let range = NSRange(location: pageTitle.characters.count, length: detail.characters.count)
+            let range = NSRange(location: pageTitle.count, length: detail.count)
             let attributes: [NSAttributedStringKey: Any] = [
                 .foregroundColor: UIColor.lightGray,
                 .font: UIFont.systemFont(ofSize: 15)
