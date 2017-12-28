@@ -46,7 +46,7 @@ public struct WKRUIConstants {
     static public func updateConstants() {
         copyBundledResourcesToDocuments()
 
-        guard ProcessInfo.processInfo.environment["Cloud_Enabled"] != nil else {
+        guard ProcessInfo.processInfo.environment["Cloud_Enabled"] == "true" else {
             return
         }
 

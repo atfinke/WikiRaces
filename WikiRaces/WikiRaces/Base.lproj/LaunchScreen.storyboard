@@ -26,9 +26,21 @@
                                     <constraint firstAttribute="width" constant="128" id="Ame-Rt-8U6"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WikiRaces" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N1c-92-9R4">
+                                <rect key="frame" x="33" y="291" width="308" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="TyV-C2-Bk6"/>
+                                    <constraint firstAttribute="width" secondItem="N1c-92-9R4" secondAttribute="height" multiplier="154:45" id="jiz-wR-znl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="35"/>
+                                <color key="textColor" red="0.21176470588235294" green="0.21176470588235294" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="N1c-92-9R4" firstAttribute="centerX" secondItem="QDK-h6-m9h" secondAttribute="centerX" id="XWr-4b-6cb"/>
+                            <constraint firstItem="N1c-92-9R4" firstAttribute="top" secondItem="QDK-h6-m9h" secondAttribute="bottom" constant="-4" id="elT-QC-J1E"/>
                             <constraint firstItem="QDK-h6-m9h" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="147" id="jIg-HA-a8w"/>
                             <constraint firstItem="QDK-h6-m9h" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oqw-jm-pBH"/>
                         </constraints>
@@ -41,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PreviewIcon" width="1536" height="1536"/>
+        <image name="PreviewIcon" width="750" height="750"/>
     </resources>
 </document>

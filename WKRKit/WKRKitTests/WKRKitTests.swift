@@ -138,12 +138,8 @@ class WKRKitTests: WKRKitTestCase {
     // MARK: - WKRPlayerState
 
     func testPlayerState() {
-
-        let racingStates: [WKRPlayerState] = [
-            .racing
-        ]
-
-        let otherStates: [WKRPlayerState] = [
+        let states: [WKRPlayerState] = [
+            .racing,
             .foundPage,
             .forcedEnd,
             .forfeited,
@@ -153,14 +149,7 @@ class WKRKitTests: WKRKitTestCase {
             .connecting
         ]
 
-        for state in racingStates {
-            XCTAssertTrue(state.isRacing)
-        }
-        for state in otherStates {
-            XCTAssertFalse(state.isRacing)
-        }
-
-        for state in racingStates + otherStates {
+        for state in states {
             _ = state.text
         }
     }

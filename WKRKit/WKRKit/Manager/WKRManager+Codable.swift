@@ -93,7 +93,7 @@ extension WKRManager {
         hostResultsInfo = resultsInfo
         resultsInfoHostUpdate?(resultsInfo)
 
-        if localPlayer.state.isRacing {
+        if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
         if localPlayer.shouldGetPoints {

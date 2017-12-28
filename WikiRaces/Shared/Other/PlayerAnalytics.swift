@@ -16,7 +16,7 @@ import FirebaseCore
 
 struct PlayerAnalytics {
 
-    // MARK: - Types
+    // MARK: - Logging Event Types
 
     enum ViewState: String {
         case didLoad
@@ -30,6 +30,8 @@ struct PlayerAnalytics {
         case userAction(String)
         case viewState(String)
     }
+
+    // MARK: - Analytic Event Types
 
     enum StatEvent {
         case players(unique: Int, total: Int)
@@ -55,7 +57,7 @@ struct PlayerAnalytics {
         case hostCancelledPreMatch, hostStartMidMatchInviting
     }
 
-    // MARK: - Events
+    // MARK: - Logging Events
 
     public static func log(state: ViewState, for object: UIViewController) {
         log(event: .viewState("\(type(of: object)): " + state.rawValue))
@@ -81,6 +83,8 @@ struct PlayerAnalytics {
             }
         #endif
     }
+
+    // MARK: - Analytic Events
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !MULTIWINDOWDEBUG

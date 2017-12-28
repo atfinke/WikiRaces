@@ -19,13 +19,6 @@ public enum WKRPlayerState: String, Codable {
     case readyForNextRound
     case voting
 
-    var isRacing: Bool {
-        switch self {
-        case .racing: return true
-        default: return false
-        }
-    }
-
     public var text: String {
         switch self {
         case .foundPage: return "Found Page"
