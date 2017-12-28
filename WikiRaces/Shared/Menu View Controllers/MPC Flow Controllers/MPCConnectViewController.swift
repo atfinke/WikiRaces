@@ -13,7 +13,7 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-class MPCConnectViewController: UIViewController {
+class MPCConnectViewController: StateLogViewController {
 
     // MARK: - Interafce Elements
 
@@ -171,14 +171,19 @@ class MPCConnectViewController: UIViewController {
             self.pressedCancelButton()
         }
         alertController.addAction(action)
+
         if showSettingsButton {
-            alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+            let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+                PlayerAnalytics.log(event: .userAction("showError:settings"))
                 UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
                                           options: [:], completionHandler: nil)
                 self.pressedCancelButton()
-            }))
+            })
+            alertController.addAction(settingsAction)
         }
+        
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     /// Prepares to start the match
@@ -202,6 +207,7 @@ class MPCConnectViewController: UIViewController {
 
     /// Cancels the join/create a race action and sends player back to main menu
     @IBAction func pressedCancelButton() {
+        PlayerAnalytics.log(event: .userAction(#function))
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 0.0
             self.inviteView.alpha = 0.0

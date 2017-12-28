@@ -12,22 +12,28 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
     // MARK: - Interface
 
-    @objc
-
     /// Called when a tile is pressed
     ///
     /// - Parameter sender: The pressed tile
+    @objc
     func menuTilePressed(sender: MenuTile) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard GKLocalPlayer.localPlayer().isAuthenticated else {
             attemptGCAuthentication()
             return
         }
+        guard !isLeaderboardPresented else {
+            return
+        }
+
+        isLeaderboardPresented = true
         animateMenuOut {
             let controller = GKGameCenterViewController()
             controller.gameCenterDelegate = self
             controller.viewState = .leaderboards
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
+            PlayerAnalytics.log(presentingOf: controller, on: self)
         }
 
         if let leaderboard = sender.stat?.leaderboard {
@@ -42,7 +48,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         GKLocalPlayer.localPlayer().authenticateHandler = { viewController, error in
             DispatchQueue.main.async {
                 if let viewController = viewController, self.isMenuVisable {
-                    self.present(viewController, animated:true, completion: nil)
+                    self.present(viewController, animated: true, completion: nil)
+                    PlayerAnalytics.log(presentingOf: viewController, on: self)
                 } else if !GKLocalPlayer.localPlayer().isAuthenticated {
                     // "error._code" ?!?!
                     if let error = error, error._code == 2 {
@@ -50,21 +57,30 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                     }
                     //swiftlint:disable:next line_length
                     let controller = UIAlertController(title: "Leaderboards Unavailable", message: "You must be logged into Game Center to access leaderboards", preferredStyle: .alert)
-                    controller.addAction(UIAlertAction(title: "Settings", style: .default, handler: { _ in
+
+                    let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
+                        PlayerAnalytics.log(event: .userAction("attemptGCAuthentication:settings"))
                         if let url = URL(string: UIApplicationOpenSettingsURLString) {
                             UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         }
-                    }))
-                    controller.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+                    })
+                    controller.addAction(settingsAction)
+
+                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                    controller.addAction(cancelAction)
+                    
                     self.present(controller, animated: true, completion: nil)
+                    PlayerAnalytics.log(presentingOf: controller, on: self)
                 }
             }
         }
     }
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        PlayerAnalytics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.animateMenuIn()
+            self.isLeaderboardPresented = false
         }
     }
 

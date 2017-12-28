@@ -94,18 +94,19 @@ extension GameViewController {
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                self?.manager.player(.forfeited)
+                PlayerAnalytics.log(event: .userAction("quitAlertController:forfeit"))
                 PlayerAnalytics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
+                self?.manager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
         }
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) {  [weak self] _ in
+            PlayerAnalytics.log(event: .userAction("quitAlertController:quit"))
+            PlayerAnalytics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
             self?.isPlayerQuitting = true
             self?.resetActiveControllers()
             self?.manager.player(.quit)
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
-            PlayerAnalytics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
-
         }
         alertController.addAction(quitAction)
         return alertController

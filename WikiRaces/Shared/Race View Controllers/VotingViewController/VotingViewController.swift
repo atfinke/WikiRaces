@@ -78,12 +78,14 @@ class VotingViewController: CenteredTableViewController {
     // MARK: = Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
             PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])
             return
         }
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     // MARK: - Helpers

@@ -9,7 +9,7 @@
 import UIKit
 import MultipeerConnectivity
 
-class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
     // MARK: - Types
 
@@ -68,12 +68,16 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     // MARK: - Actions
 
     @IBAction func cancelMatch(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerAnalytics.log(event: .hostCancelledPreMatch)
+
         session?.disconnect()
         didCancelMatch?()
-        PlayerAnalytics.log(event: .hostCancelledPreMatch)
     }
 
     @IBAction func startMatch(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         tableView.isUserInteractionEnabled = false
 
         let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
@@ -203,6 +207,8 @@ class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyS
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         // Hits this case when the "Searching..." placeholder cell is selected
         guard !peers.isEmpty else { return }
 

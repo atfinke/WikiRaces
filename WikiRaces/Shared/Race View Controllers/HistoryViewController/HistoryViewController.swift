@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class HistoryViewController: UITableViewController {
+class HistoryViewController: StateLogTableViewController {
 
     private var entries = [WKRHistoryEntry]()
     private var currentPlayerState = WKRPlayerState.connecting
@@ -65,6 +65,7 @@ class HistoryViewController: UITableViewController {
     }
 
     @IBAction func doneButtonPressed() {
+        PlayerAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

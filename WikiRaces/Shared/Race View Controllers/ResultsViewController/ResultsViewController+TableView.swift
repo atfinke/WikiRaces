@@ -60,9 +60,12 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         guard let resultsInfo = resultsInfo else {
             return
         }
+
         let raceResults = resultsInfo.raceResults(at: indexPath.row)
         performSegue(withIdentifier: "showHistory", sender: raceResults.player)
 

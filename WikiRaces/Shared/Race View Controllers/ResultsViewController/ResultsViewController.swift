@@ -94,21 +94,26 @@ class ResultsViewController: CenteredTableViewController {
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
             PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
             return
         }
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let controller = addPlayersViewController else { return }
         present(controller, animated: true, completion: nil)
         PlayerAnalytics.log(event: .hostStartMidMatchInviting)
+        PlayerAnalytics.log(presentingOf: controller, on: self)
     }
 
     override func overlayButtonPressed() {
+        PlayerAnalytics.log(event: .userAction(#function))
         navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
         isOverlayButtonHidden = true
@@ -198,6 +203,7 @@ class ResultsViewController: CenteredTableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.rootViewController as? HistoryViewController,
             let player = sender as? WKRPlayer else {

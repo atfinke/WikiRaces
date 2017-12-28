@@ -9,7 +9,7 @@
 import UIKit
 import WKRUIKit
 
-class CenteredTableViewController: UIViewController {
+class CenteredTableViewController: StateLogViewController {
 
     // MARK: Properties
 

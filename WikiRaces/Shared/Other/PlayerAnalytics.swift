@@ -18,6 +18,19 @@ struct PlayerAnalytics {
 
     // MARK: - Types
 
+    enum ViewState: String {
+        case didLoad
+        case willAppear
+        case didAppear
+        case willDisappear
+        case didDisappear
+    }
+
+    enum LogEvent {
+        case userAction(String)
+        case viewState(String)
+    }
+
     enum StatEvent {
         case players(unique: Int, total: Int)
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
@@ -30,6 +43,7 @@ struct PlayerAnalytics {
         case leaderboard, versionInfo
         case pressedJoin, pressedHost
         case namePromptResult, nameType
+
         // Game All Players
         case pageView, pageBlocked, pageError
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
@@ -42,6 +56,31 @@ struct PlayerAnalytics {
     }
 
     // MARK: - Events
+
+    public static func log(state: ViewState, for object: UIViewController) {
+        log(event: .viewState("\(type(of: object)): " + state.rawValue))
+    }
+
+    public static func log(presentingOf modal: UIViewController, on object: UIViewController) {
+        var titleString = "Title: "
+        if let title = modal.title {
+            titleString += title
+        } else {
+            titleString += "nil"
+        }
+        log(event: .viewState("\(type(of: object)): Presenting: \(type(of: modal)) " + titleString))
+    }
+
+    public static func log(event: LogEvent) {
+        #if !MULTIWINDOWDEBUG
+            switch event {
+            case .userAction(let action):
+                CLSNSLogv("UserAction: %@", getVaList([action]))
+            case .viewState(let view):
+                CLSNSLogv("ViewState: %@", getVaList([view]))
+            }
+        #endif
+    }
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !MULTIWINDOWDEBUG

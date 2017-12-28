@@ -36,6 +36,12 @@
 		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
 		148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
+		1497A8551FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8561FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8571FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8591FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
+		1497A85A1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
+		1497A85B1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
 		149FF8521F362B83000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
 		149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8531F362B83000A5D96 /* Assets.xcassets */; };
@@ -290,6 +296,8 @@
 		147593CF1F609902005DFC90 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
 		147593D01F609911005DFC90 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Segue.swift"; sourceTree = "<group>"; };
+		1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLogViewController.swift; sourceTree = "<group>"; };
+		1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLogTableViewController.swift; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF8511F362B83000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -557,8 +565,8 @@
 		14B55C911F3A496D0090E092 /* HistoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
 				14C4AB581F368A050086B77F /* HistoryViewController.swift */,
+				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
 			);
 			path = HistoryViewController;
 			sourceTree = "<group>";
@@ -592,6 +600,8 @@
 				14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */,
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
+				1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */,
+				1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -1022,6 +1032,7 @@
 				14C6B1F61FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */,
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
 				143BB72A1F60C98400D00541 /* HelpViewController.swift in Sources */,
+				1497A8551FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,
@@ -1029,6 +1040,7 @@
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
 				14C4AB411F3689B50086B77F /* MenuViewController+UI.swift in Sources */,
+				1497A8591FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C6B1F41FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1038,6 +1050,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				1497A8561FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
+				1497A85A1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -1101,6 +1115,7 @@
 				14C6B1F71FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */,
 				14C260021F6F02A500CD7373 /* HistoryTableViewCell.swift in Sources */,
 				14D8AD471F81828D00914E5A /* PlayerAnalytics.swift in Sources */,
+				1497A8571FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
@@ -1108,6 +1123,7 @@
 				14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */,
 				14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */,
 				14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */,
+				1497A85B1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1366,6 +1382,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = " -ObjC";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Shared/Frameworks/Analytics/BridgingHeader.h;

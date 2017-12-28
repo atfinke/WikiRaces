@@ -86,6 +86,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
     /// Accepts the displayed invite
     @IBAction func acceptedInvite() {
+        PlayerAnalytics.log(event: .userAction(#function))
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
         descriptionLabel.attributedText = NSAttributedString(string: "CONNECTING TO HOST",
@@ -98,6 +99,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
     /// Declines the displayed invite
     @IBAction func declinedInvite() {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         activeInvite?(false, session)
         descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",
                                                              spacing: 2.0,

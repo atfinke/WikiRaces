@@ -107,6 +107,7 @@ extension GameViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
+                PlayerAnalytics.log(presentingOf: alertController, on: self)
             })
         })
 

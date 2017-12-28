@@ -14,12 +14,14 @@ import WKRKit
 import WKRUIKit
 
 /// The main menu view controller
-class MenuViewController: UIViewController {
+class MenuViewController: StateLogViewController {
 
     // MARK: - Properties
 
     /// Used to track if the menu should be animating
     var isMenuVisable = false
+
+    var isLeaderboardPresented = false
 
     // MARK: - Interface Elements
 
@@ -115,40 +117,42 @@ class MenuViewController: UIViewController {
     @objc
     /// Changes title label to build info
     func showVersionInfo() {
+        PlayerAnalytics.log(event: .versionInfo)
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
             fatalError()
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
-        PlayerAnalytics.log(event: .versionInfo)
     }
 
     @objc
     /// Join button pressed
     func joinRace() {
-        guard !promptForCustomNamePrompt(isHost: false) else {
+        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerAnalytics.log(event: .pressedJoin)
+        guard !promptForCustomName(isHost: false) else {
             return
         }
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: false)
         }
-        PlayerAnalytics.log(event: .pressedJoin)
     }
 
     @objc
     /// Create button pressed
     func createRace() {
-        guard !promptForCustomNamePrompt(isHost: true) else {
+        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerAnalytics.log(event: .pressedHost)
+        guard !promptForCustomName(isHost: true) else {
             return
         }
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: true)
         }
-        PlayerAnalytics.log(event: .pressedHost)
     }
 
-    func promptForCustomNamePrompt(isHost: Bool) -> Bool {
+    func promptForCustomName(isHost: Bool) -> Bool {
         guard !UserDefaults.standard.bool(forKey: "PromptedCustomName") else {
             return false
         }
@@ -157,21 +161,27 @@ class MenuViewController: UIViewController {
         let message = "Would you like to set a custom player name before racing?"
         let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
 
-        alertController.addAction(UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
+        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
+            PlayerAnalytics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
+            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
             if isHost {
                 self.createRace()
             } else {
                 self.joinRace()
             }
-            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
-        }))
-        alertController.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+        })
+        alertController.addAction(laterAction)
+
+        let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
+            PlayerAnalytics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
+            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
             UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
                                       options: [:], completionHandler: nil)
-            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
-        }))
+        })
+        alertController.addAction(settingsAction)
 
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
         return true
     }
 
