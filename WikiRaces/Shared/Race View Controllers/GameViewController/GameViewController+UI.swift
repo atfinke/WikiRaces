@@ -100,6 +100,7 @@ extension GameViewController {
             }
             alertController.addAction(forfeitAction)
         }
+
         let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) {  [weak self] _ in
             PlayerAnalytics.log(event: .userAction("quitAlertController:quit"))
             PlayerAnalytics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
@@ -109,6 +110,7 @@ extension GameViewController {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
         }
         alertController.addAction(quitAction)
+
         return alertController
     }
 

@@ -595,13 +595,13 @@
 		14B55C951F3A499C0090E092 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
+				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */,
-				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
-				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
 				1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */,
 				1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */,
+				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
+				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";

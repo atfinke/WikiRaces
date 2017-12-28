@@ -144,7 +144,9 @@ class CenteredTableViewController: StateLogViewController {
         return bottomOverlayView
     }
 
-    @objc func overlayButtonPressed() {}
+    @objc func overlayButtonPressed() {
+        fatalError("overlayButtonPressed not implemented")
+    }
 
     func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
         tableView.delegate = controller

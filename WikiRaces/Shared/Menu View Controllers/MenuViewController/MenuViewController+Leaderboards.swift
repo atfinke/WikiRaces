@@ -76,6 +76,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         }
     }
 
+    // MARK: - GKGameCenterControllerDelegate
+
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         PlayerAnalytics.log(event: .userAction(#function))
         dismiss(animated: true) {
