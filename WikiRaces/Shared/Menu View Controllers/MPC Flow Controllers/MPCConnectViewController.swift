@@ -181,7 +181,7 @@ class MPCConnectViewController: StateLogViewController {
             })
             alertController.addAction(settingsAction)
         }
-        
+
         present(alertController, animated: true, completion: nil)
         PlayerAnalytics.log(presentingOf: alertController, on: self)
     }

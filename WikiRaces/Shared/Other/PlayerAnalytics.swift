@@ -6,8 +6,8 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
+import UIKit
 import CloudKit
-import Foundation
 
 #if !MULTIWINDOWDEBUG
 import Crashlytics

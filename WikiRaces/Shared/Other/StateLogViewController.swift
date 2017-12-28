@@ -36,5 +36,5 @@ class StateLogViewController: UIViewController {
         super.viewDidAppear(animated)
         PlayerAnalytics.log(state: .didDisappear, for: self)
     }
-    
+
 }

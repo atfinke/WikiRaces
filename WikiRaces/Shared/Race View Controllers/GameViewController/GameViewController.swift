@@ -104,6 +104,11 @@ class GameViewController: StateLogViewController {
         }
     }
 
+    deinit {
+        alertView?.removeFromSuperview()
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - User Actions
 
     @IBAction func flagButtonPressed(_ sender: Any) {
@@ -148,11 +153,6 @@ class GameViewController: StateLogViewController {
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
         PlayerAnalytics.log(presentingOf: alertController, on: self)
-    }
-
-    deinit {
-        alertView?.removeFromSuperview()
-        NotificationCenter.default.removeObserver(self)
     }
 
 }

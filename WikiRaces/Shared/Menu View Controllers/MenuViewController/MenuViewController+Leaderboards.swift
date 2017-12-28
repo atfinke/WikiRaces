@@ -68,7 +68,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
                     let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                     controller.addAction(cancelAction)
-                    
+
                     self.present(controller, animated: true, completion: nil)
                     PlayerAnalytics.log(presentingOf: controller, on: self)
                 }

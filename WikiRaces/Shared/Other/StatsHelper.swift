@@ -69,6 +69,8 @@ class StatsHelper {
     private let defaults = UserDefaults.standard
     private let keyValueStore = NSUbiquitousKeyValueStore.default
 
+    // MARK: - Initalization
+
     init() {
         attemptMigration()
     }
@@ -76,6 +78,8 @@ class StatsHelper {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
+    // MARK: - Helpers
 
     func start() {
         attemptMigration()
@@ -214,7 +218,7 @@ class StatsHelper {
             if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             } else {
-                defaults.set(deviceValue, forKey: stat.key)
+                defaults.set(cloudValue, forKey: stat.key)
             }
         }
     }

@@ -108,14 +108,10 @@ class MenuViewController: StateLogViewController {
         #endif
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: - Actions
 
-    @objc
     /// Changes title label to build info
+    @objc
     func showVersionInfo() {
         PlayerAnalytics.log(event: .versionInfo)
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
@@ -126,8 +122,8 @@ class MenuViewController: StateLogViewController {
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
     }
 
-    @objc
     /// Join button pressed
+    @objc
     func joinRace() {
         PlayerAnalytics.log(event: .userAction(#function))
         PlayerAnalytics.log(event: .pressedJoin)
@@ -139,8 +135,8 @@ class MenuViewController: StateLogViewController {
         }
     }
 
-    @objc
     /// Create button pressed
+    @objc
     func createRace() {
         PlayerAnalytics.log(event: .userAction(#function))
         PlayerAnalytics.log(event: .pressedHost)

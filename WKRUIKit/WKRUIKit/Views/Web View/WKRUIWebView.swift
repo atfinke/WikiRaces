@@ -88,6 +88,11 @@ public class WKRUIWebView: WKWebView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        removeObserver(self, forKeyPath: "estimatedProgress")
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - State Updates
 
     @objc func keyboardWillShow() {
@@ -151,10 +156,6 @@ public class WKRUIWebView: WKWebView {
         }
 
         progressView?.setProgress(Float(progress), animated: true)
-    }
-
-    deinit {
-        removeObserver(self, forKeyPath: "estimatedProgress")
     }
 
 }

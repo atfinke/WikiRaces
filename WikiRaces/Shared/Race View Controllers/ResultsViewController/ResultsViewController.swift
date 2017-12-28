@@ -91,6 +91,10 @@ class ResultsViewController: CenteredTableViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
