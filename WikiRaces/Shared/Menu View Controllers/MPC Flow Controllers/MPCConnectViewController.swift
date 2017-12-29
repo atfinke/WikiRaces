@@ -161,11 +161,6 @@ class MPCConnectViewController: StateLogViewController {
             self.session.disconnect()
         }
 
-        UIView.animate(withDuration: 0.5, animations: {
-            self.activityIndicatorView.alpha = 0.0
-            self.cancelButton.alpha = 0.0
-        })
-
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Menu", style: .default) { _ in
             self.pressedCancelButton()
@@ -202,6 +197,10 @@ class MPCConnectViewController: StateLogViewController {
             }, completion: { _ in
                 self.performSegue(withIdentifier: "showRace", sender: isPlayerHost)
             })
+
+            if !isPlayerHost {
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
+            }
         }
     }
 

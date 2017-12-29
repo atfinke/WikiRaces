@@ -14,7 +14,6 @@ class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
     private var isAnimatingPointsStateChange = false
 
@@ -69,26 +68,11 @@ class ResultsViewController: CenteredTableViewController {
         registerTableView(for: self)
         overlayButtonTitle = "Ready up"
 
+        guideLabel.text = "TAP PLAYER TO VIEW LIVE PROGRESS"
         descriptionLabel.text = "WAITING FOR PLAYERS TO FINISH"
-        descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-
-        infoLabel.textAlignment = .center
-        infoLabel.textColor = UIColor.wkrLightTextColor
-        infoLabel.text = "TAP PLAYER TO VIEW LIVE PROGRESS"
-        infoLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
-        infoLabel.adjustsFontSizeToFitWidth = true
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(infoLabel)
-
-        let constraints = [
-            infoLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            infoLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            infoLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
     }
 
     deinit {
@@ -118,13 +102,16 @@ class ResultsViewController: CenteredTableViewController {
 
     override func overlayButtonPressed() {
         PlayerAnalytics.log(event: .userAction(#function))
+
         navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
         isOverlayButtonHidden = true
-        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
+
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
+
+        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
     // MARK: - Game Updates
@@ -144,21 +131,16 @@ class ResultsViewController: CenteredTableViewController {
 
             if oldState != .points {
                 isAnimatingPointsStateChange = true
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.alpha = 0.0
-                    self.infoLabel.alpha = 0.0
-                }, completion: { _ in
+                flashItems(items: [tableView], duration: 1.0) {
                     self.isAnimatingPointsStateChange = false
                     self.updateTableView()
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.tableView.alpha = 1.0
-                    })
-                })
+                }
             } else {
                 self.updateTableView()
             }
 
-            UIView.animate(withDuration: 0.75, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.guideLabel.alpha = 0.0
                 self.descriptionLabel.alpha = 0.0
             })
         }
@@ -167,17 +149,10 @@ class ResultsViewController: CenteredTableViewController {
     private func updatedTime(oldTime: Int) {
         tableView.isUserInteractionEnabled = true
         if oldTime == 100 {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.infoLabel.alpha = 0.0
-                self.descriptionLabel.alpha = 0.0
-            }, completion: { _ in
-                self.infoLabel.text = "TAP PLAYER TO VIEW HISTORY"
+            flashItems(items: [guideLabel, descriptionLabel], duration: 0.75) {
+                self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.infoLabel.alpha = 1.0
-                    self.descriptionLabel.alpha = 1.0
-                })
-            })
+            }
         } else {
             descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
         }

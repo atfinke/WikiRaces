@@ -127,6 +127,7 @@ class MenuViewController: StateLogViewController {
     func joinRace() {
         PlayerAnalytics.log(event: .userAction(#function))
         PlayerAnalytics.log(event: .pressedJoin)
+
         guard !promptForCustomName(isHost: false) else {
             return
         }
@@ -140,6 +141,7 @@ class MenuViewController: StateLogViewController {
     func createRace() {
         PlayerAnalytics.log(event: .userAction(#function))
         PlayerAnalytics.log(event: .pressedHost)
+
         guard !promptForCustomName(isHost: true) else {
             return
         }

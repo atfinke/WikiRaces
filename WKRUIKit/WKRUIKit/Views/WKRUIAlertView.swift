@@ -108,6 +108,8 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         alertWindow.setNeedsUpdateConstraints()
         alertWindow.bringSubview(toFront: self)
 
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+
         UIView.animate(withDuration: WKRUIConstants.alertAnimateInDuration) {
             self.alertWindow.layoutIfNeeded()
         }

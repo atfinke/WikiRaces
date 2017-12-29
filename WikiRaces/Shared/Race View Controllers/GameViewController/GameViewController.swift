@@ -149,6 +149,7 @@ class GameViewController: StateLogViewController {
 
     @IBAction func quitButtonPressed(_ sender: Any) {
         PlayerAnalytics.log(event: .userAction(#function))
+
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController

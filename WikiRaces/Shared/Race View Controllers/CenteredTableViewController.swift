@@ -40,8 +40,10 @@ class CenteredTableViewController: StateLogViewController {
         }
     }
 
-    let reuseIdentifier = "cell"
+    let guideLabel = UILabel()
     let descriptionLabel = UILabel()
+
+    let reuseIdentifier = "cell"
     let tableView = WKRUICenteredTableView()
     private let overlayButton = WKRUIButton()
 
@@ -60,8 +62,9 @@ class CenteredTableViewController: StateLogViewController {
         isInterfaceLoaded = true
     }
 
-    // MARK: - Helpers
+    // MARK: - Interface
 
+    //swiftlint:disable:next function_body_length
     private func setupInterface() {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
 
@@ -72,7 +75,15 @@ class CenteredTableViewController: StateLogViewController {
         visualEffectView.contentView.addSubview(tableView)
         tableView.allowsSelection = true
 
+        guideLabel.textAlignment = .center
+        guideLabel.textColor = UIColor.wkrLightTextColor
+        guideLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        guideLabel.adjustsFontSizeToFitWidth = true
+        guideLabel.translatesAutoresizingMaskIntoConstraints = false
+        visualEffectView.contentView.addSubview(guideLabel)
+
         descriptionLabel.textAlignment = .center
+        descriptionLabel.textColor = UIColor.wkrTextColor
         descriptionLabel.font = UIFont(monospaceSize: 20.0)
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -112,7 +123,11 @@ class CenteredTableViewController: StateLogViewController {
             descriptionLabel.leftAnchor.constraint(equalTo: visualEffectView.leftAnchor),
             descriptionLabel.rightAnchor.constraint(equalTo: visualEffectView.rightAnchor),
             descriptionLabelBottomConstraint,
-            descriptionLabel.heightAnchor.constraint(equalToConstant: 50)
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 50),
+
+            guideLabel.leftAnchor.constraint(equalTo: visualEffectView.leftAnchor),
+            guideLabel.rightAnchor.constraint(equalTo: visualEffectView.rightAnchor),
+            guideLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
         ]
 
         NSLayoutConstraint.activate(constraints)
@@ -159,6 +174,21 @@ class CenteredTableViewController: StateLogViewController {
         descriptionLabelBottomConstraint.constant = -view.safeAreaInsets.bottom
         overlayHeightConstraint.constant = 70 + view.safeAreaInsets.bottom
         isOverlayButtonHidden = true
+    }
+
+    func flashItems(items: [UIView],
+                    duration: Double,
+                    onHidden: (() -> Void)?) {
+
+        UIView.animate(withDuration: duration / 2.0, animations: {
+            items.forEach { $0.alpha = 0.0 }
+        }, completion: { _ in
+            onHidden?()
+            UIView.animate(withDuration: duration / 2.0, animations: {
+                items.forEach { $0.alpha = 1.0 }
+            })
+        })
+
     }
 
 }

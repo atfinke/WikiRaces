@@ -67,6 +67,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
             return
         }
 
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+
         isShowingInvite = true
 
         let invite = invites.removeFirst()
@@ -87,6 +89,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     /// Accepts the displayed invite
     @IBAction func acceptedInvite() {
         PlayerAnalytics.log(event: .userAction(#function))
+
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
         descriptionLabel.attributedText = NSAttributedString(string: "CONNECTING TO HOST",

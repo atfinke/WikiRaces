@@ -27,12 +27,16 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let lastIndexPath = tableView.indexPathForSelectedRow, lastIndexPath != indexPath else {
+        guard let lastIndexPath = tableView.indexPathForSelectedRow else {
+            UISelectionFeedbackGenerator().selectionChanged()
             return indexPath
         }
         if lastIndexPath == indexPath {
             return nil
         }
+
+        UISelectionFeedbackGenerator().selectionChanged()
+
         return indexPath
     }
 

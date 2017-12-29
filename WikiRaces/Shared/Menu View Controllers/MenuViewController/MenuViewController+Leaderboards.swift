@@ -18,6 +18,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     @objc
     func menuTilePressed(sender: MenuTile) {
         PlayerAnalytics.log(event: .userAction(#function))
+
         guard GKLocalPlayer.localPlayer().isAuthenticated else {
             attemptGCAuthentication()
             return

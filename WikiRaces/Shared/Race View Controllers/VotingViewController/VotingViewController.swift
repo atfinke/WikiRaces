@@ -14,7 +14,9 @@ class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    var isShowingVoteCountdown = true
+    private var isShowingGuide = false
+    private var isShowingVoteCountdown = true
+
     var playerVoted: ((WKRPage) -> Void)?
     var quitAlertController: UIAlertController?
 
@@ -34,10 +36,18 @@ class VotingViewController: CenteredTableViewController {
     var voteTimeRemaing = 100 {
         didSet {
             if isShowingVoteCountdown {
-                descriptionLabel.text = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
-                if voteTimeRemaing == 0 {
+                let timeString = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
+                if !isShowingGuide {
+                    flashItems(items: [guideLabel, descriptionLabel], duration: 0.75) {
+                        self.descriptionLabel.text = timeString
+                        self.isShowingGuide = true
+                    }
+                    tableView.isUserInteractionEnabled = true
+                } else if voteTimeRemaing == 0 {
+                    descriptionLabel.text = timeString
                     votingEnded()
                 } else {
+                    descriptionLabel.text = timeString
                     tableView.isUserInteractionEnabled = true
                 }
             } else {
@@ -60,8 +70,10 @@ class VotingViewController: CenteredTableViewController {
         registerTableView(for: self)
 
         title = "VOTING"
+
+        guideLabel.alpha = 0.0
+        guideLabel.text = "TAP ARTICLE TO VOTE"
         descriptionLabel.text = "VOTING STARTS SOON"
-        descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
@@ -98,6 +110,7 @@ class VotingViewController: CenteredTableViewController {
         isShowingVoteCountdown = false
         tableView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5) {
+            self.guideLabel.alpha = 0.0
             self.descriptionLabel.alpha = 0.0
         }
     }

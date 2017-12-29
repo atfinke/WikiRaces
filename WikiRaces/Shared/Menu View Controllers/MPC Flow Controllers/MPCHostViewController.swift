@@ -228,10 +228,12 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
             switch state {
             case .notConnected:
                 self.update(peerID: peerID, to: .declined)
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
             case .connecting:
                 self.update(peerID: peerID, to: .joining)
             case .connected:
                 self.update(peerID: peerID, to: .joined)
+                UINotificationFeedbackGenerator().notificationOccurred(.success)
             }
         }
     }
