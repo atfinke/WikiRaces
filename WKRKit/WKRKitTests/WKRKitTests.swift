@@ -210,7 +210,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.updateConstants()
 
         let version = WKRKitConstants.current.version
-        XCTAssertEqual(WKRKitConstants.current.version, 2)
+        XCTAssertEqual(WKRKitConstants.current.version, 5)
 
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstants()
@@ -220,7 +220,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstantsForTestingCharacterClipping()
 
-        XCTAssertEqual(WKRKitConstants.current.version, 10000)
+        XCTAssertEqual(WKRKitConstants.current.version, 10_000)
         XCTAssertGreaterThan(WKRKitConstants.current.version, version)
     }
 

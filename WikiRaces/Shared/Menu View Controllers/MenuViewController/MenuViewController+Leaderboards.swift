@@ -61,9 +61,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
                     let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
                         PlayerAnalytics.log(event: .userAction("attemptGCAuthentication:settings"))
-                        if let url = URL(string: UIApplicationOpenSettingsURLString) {
-                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                            fatalError("Settings URL nil")
                         }
+                        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                     })
                     controller.addAction(settingsAction)
 

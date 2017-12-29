@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StateLogViewController: UIViewController {
+internal class StateLogViewController: UIViewController {
 
     // MARK: - View Life Cycle
 
@@ -33,7 +33,7 @@ class StateLogViewController: UIViewController {
     }
 
     override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        super.viewDidDisappear(animated)
         PlayerAnalytics.log(state: .didDisappear, for: self)
     }
 

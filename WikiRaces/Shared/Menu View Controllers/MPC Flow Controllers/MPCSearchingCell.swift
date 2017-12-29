@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MPCSearchingCell: UITableViewCell {
+internal class MPCSearchingCell: UITableViewCell {
 
     // MARK: - Properties
 
-    private var dots = 3
+    private var dots: Int = 3
     private var timer: Timer?
 
     // MARK: - Initialization

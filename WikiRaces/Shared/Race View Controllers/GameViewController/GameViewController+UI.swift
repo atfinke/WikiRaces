@@ -16,7 +16,7 @@ extension GameViewController {
     func setupInterface() {
         guard let navigationController = navigationController,
             let navigationView = navigationController.view else {
-                fatalError()
+                fatalError("No navigation controller view")
         }
 
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -44,15 +44,6 @@ extension GameViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
-    func setupAlertView() {
-        guard let window = navigationController?.view.window else {
-            fatalError("Couldn't get window")
-        }
-
-        alertView = WKRUIAlertView(window: window)
-        manager.configure(webView: webView, alertView: alertView)
-    }
-
     // MARK: - Elements
 
     private func setupWebView() {
@@ -78,6 +69,8 @@ extension GameViewController {
             progressView.heightAnchor.constraint(equalToConstant: 3)
         ]
         NSLayoutConstraint.activate(constraints)
+
+        manager.webView = webView
     }
 
     // MARK: - Alerts

@@ -12,14 +12,14 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-class GameViewController: StateLogViewController {
+internal class GameViewController: StateLogViewController {
 
     // MARK: - Game Properties
 
     var isPlayerHost = false
     var isPlayerQuitting = false
 
-    var needsUIConfigured = true
+    var isInterfaceConfigured = false
     var gameState = WKRGameState.preMatch
 
     var timeRaced = 0
@@ -45,7 +45,6 @@ class GameViewController: StateLogViewController {
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
 
-    var alertView: WKRUIAlertView!
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 
@@ -75,9 +74,8 @@ class GameViewController: StateLogViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if needsUIConfigured {
-            needsUIConfigured = false
-            setupAlertView()
+        if !isInterfaceConfigured {
+            isInterfaceConfigured = true
             if !isPlayerHost {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.connectingLabel.alpha = 1.0
@@ -102,11 +100,6 @@ class GameViewController: StateLogViewController {
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             #endif
         }
-    }
-
-    deinit {
-        alertView?.removeFromSuperview()
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - User Actions

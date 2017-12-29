@@ -8,6 +8,6 @@
 
 import UIKit
 
-class DebugWindow: UIWindow {
+internal class DebugWindow: UIWindow {
     var playerName = ""
 }

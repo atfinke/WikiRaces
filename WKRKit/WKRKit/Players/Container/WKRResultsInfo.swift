@@ -66,13 +66,13 @@ public struct WKRResultsInfo: Codable {
             })
 
         // The players that forfeited
-        let forfeitedPlayers: [WKRPlayer] = players.filter({ $0.state == .forfeited})
+        let forfeitedPlayers: [WKRPlayer] = players.filter({ $0.state == .forfeited })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // The players that quit
-        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit})
+        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })

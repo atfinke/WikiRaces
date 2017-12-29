@@ -8,8 +8,8 @@
 
 import Foundation
 
-struct DurationFormatter {
-    private static let maxSeconds = 300
+internal struct DurationFormatter {
+    private static let maxSeconds: Int = 300
 
     static func string(for duration: Int?) -> String? {
         guard let duration = duration else { return nil }

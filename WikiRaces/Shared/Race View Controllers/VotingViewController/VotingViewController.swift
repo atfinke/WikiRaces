@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-class VotingViewController: CenteredTableViewController {
+internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
@@ -87,10 +87,6 @@ class VotingViewController: CenteredTableViewController {
         }
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     // MARK: = Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
@@ -117,7 +113,7 @@ class VotingViewController: CenteredTableViewController {
 
     func finalPageSelected(_ page: WKRPage) {
         guard let votingObject = voteInfo, let index = votingObject.index(of: page) else {
-            fatalError()
+            fatalError("Failed to select final page with \(String(describing: voteInfo))")
         }
 
         UIView.animate(withDuration: 1.5) {

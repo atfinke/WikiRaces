@@ -46,7 +46,7 @@ public struct WKRHistory: Codable, Equatable {
     }
 
     mutating func finishedViewingLastPage() {
-        guard var entry = entries.last else { fatalError() }
+        guard var entry = entries.last else { fatalError("Entries is empty") }
         entry.set(duration: Int(-lastPageOpenTime.timeIntervalSinceNow))
         entries[entries.count - 1] = entry
     }

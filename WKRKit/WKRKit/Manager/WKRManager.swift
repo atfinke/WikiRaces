@@ -86,7 +86,7 @@ public class WKRManager {
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
     }
-    
+
     deinit {
         alertView.removeFromSuperview()
     }

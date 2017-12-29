@@ -13,11 +13,11 @@ extension UIColor {
     // MARK: - Properties
 
     public static var wkrTextColor: UIColor {
-        return UIColor(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+        return #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     }
 
     public static var wkrLightTextColor: UIColor {
-        return UIColor(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0)
+        return #colorLiteral(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0)
     }
 
 }

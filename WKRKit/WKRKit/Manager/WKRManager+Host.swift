@@ -13,7 +13,7 @@ extension WKRManager {
     // MARK: - Game Updates
 
     func configure(game: WKRGame) {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         game.allPlayersReadyForNextRound = { [weak self] in
             guard let isHost = self?.localPlayer.isHost, let gameState = self?.gameState else {
@@ -40,7 +40,7 @@ extension WKRManager {
     // MARK: - Results
 
     func prepareResultsCountdown() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPreHoldDuration) {
             self.startResultsCountdown()
@@ -48,7 +48,7 @@ extension WKRManager {
     }
 
     private func startResultsCountdown() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         var timeLeft = WKRRaceConstants.resultsDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
@@ -77,7 +77,7 @@ extension WKRManager {
     }
 
     internal func finishResultsCountdown() {
-        guard localPlayer.isHost && gameState != .points else { fatalError() }
+        guard localPlayer.isHost && gameState != .points else { fatalError("Local player not host") }
 
         self.game.players = []
 
@@ -90,14 +90,14 @@ extension WKRManager {
     // MARK: - Voting
 
     func prepareVotingCountdown() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.votingPreHoldDuration) {
             self.startVotingCountdown()
         }
     }
 
     private func startVotingCountdown() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         var timeLeft = WKRRaceConstants.votingDuration
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
@@ -136,7 +136,7 @@ extension WKRManager {
     }
 
     internal func fetchPreRaceConfig() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         WKRPreRaceConfig.new { preRaceConfig in
             if let config = preRaceConfig {
@@ -150,7 +150,7 @@ extension WKRManager {
     }
 
     internal func sendPreRaceConfig() {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
 
         // Make sure game hasn't already started
         guard game.activeRace == nil else {

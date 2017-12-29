@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
+internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
 
     // MARK: - Closures
 
@@ -52,7 +52,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     internal func hostNetworkInterface() -> UIViewController {
-        guard let session = session else { fatalError() }
+        guard let session = session else { fatalError("Session is nil") }
         let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
         browserViewController.maximumNumberOfPeers = 8
         browserViewController.delegate = self

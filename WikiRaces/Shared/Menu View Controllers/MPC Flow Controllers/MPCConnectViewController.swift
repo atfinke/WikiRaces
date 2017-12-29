@@ -6,14 +6,14 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import GameKit
 import MultipeerConnectivity
+import UIKit
 
 import WKRKit
 import WKRUIKit
 
-class MPCConnectViewController: StateLogViewController {
+internal class MPCConnectViewController: StateLogViewController {
 
     // MARK: - Interafce Elements
 
@@ -170,8 +170,10 @@ class MPCConnectViewController: StateLogViewController {
         if showSettingsButton {
             let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
                 PlayerAnalytics.log(event: .userAction("showError:settings"))
-                UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
-                                          options: [:], completionHandler: nil)
+                guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                    fatalError("Settings URL nil")
+                }
+                UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                 self.pressedCancelButton()
             })
             alertController.addAction(settingsAction)
@@ -219,12 +221,12 @@ class MPCConnectViewController: StateLogViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let navigationController = segue.destination as? UINavigationController else {
-            fatalError()
+            fatalError("Destination is not a UINavigationController")
         }
 
         if segue.identifier == "showHost" {
             guard let destination = navigationController.rootViewController as? MPCHostViewController else {
-                fatalError()
+                fatalError("Destination rootViewController is not a MPCHostViewController")
             }
             destination.peerID = peerID
             destination.session = session
@@ -242,7 +244,7 @@ class MPCConnectViewController: StateLogViewController {
         } else {
             guard let destination = navigationController.rootViewController as? GameViewController,
                 let isPlayerHost = sender as? Bool else {
-                    fatalError()
+                    fatalError("Destination rootViewController is not a GameViewController")
             }
             destination.session = session
             destination.serviceType = serviceType

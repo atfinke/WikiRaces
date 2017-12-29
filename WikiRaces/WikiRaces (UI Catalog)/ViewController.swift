@@ -11,7 +11,7 @@ import UIKit
 @testable import WKRKit
 @testable import WKRUIKit
 
-class ViewController: UIViewController {
+internal class ViewController: UIViewController {
 
     //swiftlint:disable line_length function_body_length force_cast
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-               }
+                }
             }
         }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 /// A race config. Lightweight object for sending out information about the race.
-struct WKRRaceConfig: Codable {
+internal struct WKRRaceConfig: Codable {
     /// The starting page for the race
     let startingPage: WKRPage
     /// The final page for the race

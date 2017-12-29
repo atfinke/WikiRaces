@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class HistoryViewController: StateLogTableViewController {
+internal class HistoryViewController: StateLogTableViewController {
 
     private var entries = [WKRHistoryEntry]()
     private var currentPlayerState = WKRPlayerState.connecting
@@ -78,7 +78,7 @@ class HistoryViewController: StateLogTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier, for: indexPath) as? HistoryTableViewCell else {
-            fatalError()
+            fatalError("Unable to create cell")
         }
         let entry = entries[indexPath.row]
 

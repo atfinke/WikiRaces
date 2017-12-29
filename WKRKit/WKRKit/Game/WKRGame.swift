@@ -62,7 +62,7 @@ public class WKRGame {
     }
 
     func createRaceConfig() -> WKRRaceConfig? {
-        guard localPlayer.isHost else { fatalError() }
+        guard localPlayer.isHost else { fatalError("Local player not host") }
         return preRaceConfig?.raceConfig()
     }
 
@@ -82,7 +82,7 @@ public class WKRGame {
     }
 
     internal func playerDisconnected(_ profile: WKRPlayerProfile) {
-        guard let player = players.filter({ $0.profile == profile }).first else { return }
+        guard let player = players.first(where: ({ $0.profile == profile })) else { return }
         player.state = .quit
         checkForRaceEnd()
     }

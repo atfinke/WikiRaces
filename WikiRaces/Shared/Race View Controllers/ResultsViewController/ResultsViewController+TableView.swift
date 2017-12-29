@@ -21,7 +21,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? ResultsTableViewCell,
             let resultsInfo = resultsInfo else {
-                fatalError()
+                fatalError("Unable to create cell")
         }
         configure(cell: cell, with: resultsInfo, at: indexPath.row)
         return cell
@@ -53,7 +53,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.detailLabel.text = sessionResults.points.description + " PTS"
             }
         default:
-            fatalError()
+            fatalError("Unexpected state \(state)")
         }
     }
 

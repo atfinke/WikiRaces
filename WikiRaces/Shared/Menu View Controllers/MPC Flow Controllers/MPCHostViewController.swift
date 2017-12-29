@@ -6,10 +6,10 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import MultipeerConnectivity
+import UIKit
 
-class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+internal class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
     // MARK: - Types
 
@@ -87,7 +87,7 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: activityView)
         navigationItem.leftBarButtonItem?.isEnabled = false
 
-        guard let session = session else { fatalError() }
+        guard let session = session else { fatalError("Session is nil") }
         do {
             // Participants move to the game view and wait for "real" data when they receive first data chunk
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
@@ -111,7 +111,7 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
         guard let newState = newState else {
             if let index = sortedPeers.index(of: peerID) {
                 peers[peerID] = nil
-                if peers.count == 0 {
+                if peers.isEmpty {
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
                 } else {
                     tableView.deleteRows(at: [IndexPath(row: index)], with: .fade)
@@ -139,7 +139,7 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
                 tableView.reloadData()
             }
         }
-        navigationItem.rightBarButtonItem?.isEnabled = peers.values.filter({ $0 == .joined }).count > 0
+        navigationItem.rightBarButtonItem?.isEnabled = !peers.values.filter({ $0 == .joined }).isEmpty
     }
 
     // MARK: - MCNearbyServiceBrowserDelegate
@@ -157,7 +157,8 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
         didCancelMatch?()
     }
 
-    func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
+    func browser(_ browser: MCNearbyServiceBrowser,
+                 foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String : String]?) {
         DispatchQueue.main.async {
             self.update(peerID: peerID, to: .found)
@@ -192,7 +193,7 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
 
         let peerID = sortedPeers[indexPath.row]
         guard let state = peers[peerID] else {
-            fatalError()
+            fatalError("No state for peerID: \(peerID)")
         }
 
         cell.textLabel?.text = peerID.displayName
@@ -214,7 +215,7 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
 
         let peerID = sortedPeers[indexPath.row]
         guard let session = session else {
-            fatalError()
+            fatalError("Session is nil")
         }
         update(peerID: peerID, to: .invited)
         browser?.invitePeer(peerID, to: session, withContext: nil, timeout: 15.0)
@@ -240,12 +241,21 @@ class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCN
 
     // MARK: - Unused MCSessionDelegate
 
-    func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {}
-    func session(_ session: MCSession, didReceive stream: InputStream,
-                 withName streamName: String, fromPeer peerID: MCPeerID) {}
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, with progress: Progress) {}
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+    func session(_ session: MCSession,
+                 didReceive data: Data,
+                 fromPeer peerID: MCPeerID) {}
+    func session(_ session: MCSession,
+                 didReceive stream: InputStream,
+                 withName streamName: String,
+                 fromPeer peerID: MCPeerID) {}
+    func session(_ session: MCSession,
+                 didStartReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID,
+                 with progress: Progress) {}
+    func session(_ session: MCSession,
+                 didFinishReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID,
+                 at localURL: URL?,
+                 withError error: Error?) {}
 
 }

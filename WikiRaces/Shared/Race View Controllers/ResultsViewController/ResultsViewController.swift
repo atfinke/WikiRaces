@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-class ResultsViewController: CenteredTableViewController {
+internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
@@ -73,10 +73,6 @@ class ResultsViewController: CenteredTableViewController {
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 
     // MARK: - Actions
@@ -186,7 +182,7 @@ class ResultsViewController: CenteredTableViewController {
         guard let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.rootViewController as? HistoryViewController,
             let player = sender as? WKRPlayer else {
-                fatalError()
+                fatalError("Destination rootViewController not a HistoryViewController")
         }
 
         destination.player = player

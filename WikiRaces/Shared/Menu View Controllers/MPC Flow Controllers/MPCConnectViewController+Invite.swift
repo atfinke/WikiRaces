@@ -6,8 +6,8 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import MultipeerConnectivity
+import UIKit
 
 extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
 
@@ -29,12 +29,19 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         }
     }
 
-    func session(_ session: MCSession, didReceive stream: InputStream,
-                 withName streamName: String, fromPeer peerID: MCPeerID) {}
-    func session(_ session: MCSession, didStartReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, with progress: Progress) {}
-    func session(_ session: MCSession, didFinishReceivingResourceWithName resourceName: String,
-                 fromPeer peerID: MCPeerID, at localURL: URL?, withError error: Error?) {}
+    func session(_ session: MCSession,
+                 didReceive stream: InputStream,
+                 withName streamName: String,
+                 fromPeer peerID: MCPeerID) {}
+    func session(_ session: MCSession,
+                 didStartReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID,
+                 with progress: Progress) {}
+    func session(_ session: MCSession,
+                 didFinishReceivingResourceWithName resourceName: String,
+                 fromPeer peerID: MCPeerID,
+                 at localURL: URL?,
+                 withError error: Error?) {}
 
     func startAdvertising() {
         session.delegate = self

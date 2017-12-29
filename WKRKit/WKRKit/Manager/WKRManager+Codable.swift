@@ -60,7 +60,7 @@ extension WKRManager {
     }
 
     internal func receivedInt(_ object: WKRCodable, from player: WKRPlayerProfile) {
-        guard let int = object.typeOf(WKRInt.self) else { fatalError() }
+        guard let int = object.typeOf(WKRInt.self) else { fatalError("Object not a WKRInt type") }
         switch int.type {
         case .votingTime, .votingPreRaceTime:
             voteTimeUpdate?(int.value)

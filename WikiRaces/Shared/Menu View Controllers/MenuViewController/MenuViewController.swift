@@ -6,15 +6,15 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import GameKit
 import StoreKit
+import UIKit
 
 import WKRKit
 import WKRUIKit
 
 /// The main menu view controller
-class MenuViewController: StateLogViewController {
+internal class MenuViewController: StateLogViewController {
 
     // MARK: - Properties
 
@@ -92,7 +92,7 @@ class MenuViewController: StateLogViewController {
 
         guard let bundleBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError()
+                fatalError("No bundle info dictionary")
         }
         PlayerAnalytics.log(event: .buildInfo(version: bundleVersion, build: bundleBuild))
     }
@@ -116,7 +116,7 @@ class MenuViewController: StateLogViewController {
         PlayerAnalytics.log(event: .versionInfo)
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            fatalError()
+            fatalError("No bundle info dictionary")
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
@@ -173,8 +173,11 @@ class MenuViewController: StateLogViewController {
         let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
             PlayerAnalytics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
             PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
-            UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
-                                      options: [:], completionHandler: nil)
+
+            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                fatalError("Settings URL nil")
+            }
+            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
         })
         alertController.addAction(settingsAction)
 

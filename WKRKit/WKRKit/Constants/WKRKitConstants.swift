@@ -30,7 +30,7 @@ public class WKRKitConstants {
         //swiftlint:disable:next line_length
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String:Any] else {
-                fatalError()
+                fatalError("Failed to load constants")
         }
 
         guard let version = documentsConstants["Version"] as? Int else {
@@ -176,7 +176,7 @@ public class WKRKitConstants {
             let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
             let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {
-                fatalError()
+                fatalError("Failed to load bundled constants")
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
@@ -189,7 +189,7 @@ public class WKRKitConstants {
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
             let array = arrayFromURL as? [String] else {
-                fatalError()
+                fatalError("Failed to load articles plist")
         }
         return array
     }
@@ -197,7 +197,7 @@ public class WKRKitConstants {
     internal func getLinksScript() -> String {
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
             let source = try? String(contentsOf: documentsScriptURL) else {
-                fatalError()
+                fatalError("Failed to load get links script")
         }
         return source
     }

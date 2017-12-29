@@ -9,7 +9,7 @@
 import UIKit
 import WKRUIKit
 
-class CenteredTableViewController: StateLogViewController {
+internal class CenteredTableViewController: StateLogViewController {
 
     // MARK: Properties
 
@@ -135,7 +135,7 @@ class CenteredTableViewController: StateLogViewController {
 
     private func setupBottomOverlayView() -> WKRUIBottomOverlayView {
         guard let visualEffectView = view as? UIVisualEffectView else {
-            fatalError()
+            fatalError("View not a UIVisualEffectView")
         }
 
         let bottomOverlayView = WKRUIBottomOverlayView()
@@ -159,7 +159,8 @@ class CenteredTableViewController: StateLogViewController {
         return bottomOverlayView
     }
 
-    @objc func overlayButtonPressed() {
+    @objc
+    func overlayButtonPressed() {
         fatalError("overlayButtonPressed not implemented")
     }
 

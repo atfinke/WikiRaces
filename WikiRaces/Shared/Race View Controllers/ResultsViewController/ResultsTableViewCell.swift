@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class ResultsTableViewCell: UITableViewCell {
+internal class ResultsTableViewCell: UITableViewCell {
 
     // MARK: - Properties
 

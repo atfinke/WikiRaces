@@ -6,15 +6,15 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import CloudKit
+import UIKit
 
 #if !MULTIWINDOWDEBUG
 import Crashlytics
 import FirebaseCore
 #endif
 
-struct PlayerAnalytics {
+internal struct PlayerAnalytics {
 
     // MARK: - Logging Event Types
 
@@ -89,7 +89,7 @@ struct PlayerAnalytics {
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !MULTIWINDOWDEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
-            if !(attributes?.values.flatMap({$0}).isEmpty ?? true) {
+            if !(attributes?.values.flatMap({ $0 }).isEmpty ?? true) {
                 Analytics.logEvent(event.rawValue, parameters: attributes)
             } else {
                 Analytics.logEvent(event.rawValue, parameters: nil)

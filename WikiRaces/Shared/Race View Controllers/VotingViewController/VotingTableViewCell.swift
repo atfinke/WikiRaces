@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import WKRKit
 
-class VotingTableViewCell: UITableViewCell {
+internal class VotingTableViewCell: UITableViewCell {
 
     // MARK: - Properties
 

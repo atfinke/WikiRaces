@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-class WKRAppDelegate: UIResponder, UIApplicationDelegate {
+internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -24,7 +24,7 @@ class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().barTintColor = UIColor.white
 
         UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: UIColor(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+            .foregroundColor: #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
         ]
         window?.backgroundColor = UIColor.white
     }

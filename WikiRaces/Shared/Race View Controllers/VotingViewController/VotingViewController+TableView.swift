@@ -18,7 +18,7 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? VotingTableViewCell else {
-            fatalError()
+            fatalError("Failed to create cell")
         }
         cell.vote = voteInfo?.page(for: indexPath.row)
         return cell

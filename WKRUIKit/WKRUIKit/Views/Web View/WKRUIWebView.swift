@@ -63,7 +63,7 @@ public class WKRUIWebView: WKWebView {
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        timeLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
 
         addSubview(timeLabel)
 
@@ -95,7 +95,8 @@ public class WKRUIWebView: WKWebView {
 
     // MARK: - State Updates
 
-    @objc func keyboardWillShow() {
+    @objc
+    func keyboardWillShow() {
         resignFirstResponder()
         endEditing(true)
     }

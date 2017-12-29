@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuTile: UIControl {
+internal class MenuTile: UIControl {
 
     // MARK: - Properties
 

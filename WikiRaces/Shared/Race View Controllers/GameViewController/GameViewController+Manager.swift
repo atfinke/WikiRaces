@@ -108,6 +108,8 @@ extension GameViewController {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
                 PlayerAnalytics.log(presentingOf: alertController, on: self)
+
+                UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
         })
 

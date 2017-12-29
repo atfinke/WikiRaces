@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WKRInt: Codable {
+internal struct WKRInt: Codable {
 
     enum WKRIntType: Int, Codable {
         case votingTime
