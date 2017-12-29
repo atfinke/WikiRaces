@@ -9,6 +9,7 @@
 import Foundation
 
 public enum WKRPlayerMessage: Int {
+
     case linkOnPage
     case missedLink
     case foundPage

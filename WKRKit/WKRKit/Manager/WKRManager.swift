@@ -8,16 +8,6 @@
 
 import WKRUIKit
 
-public enum WKRPlayerAction {
-    case startedGame
-    case neededHelp
-    case voted(WKRPage)
-    case state(WKRPlayerState)
-    case forfeited
-    case quit
-    case ready
-}
-
 public class WKRManager {
 
     // MARK: - Public Getters
