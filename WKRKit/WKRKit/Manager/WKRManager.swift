@@ -52,8 +52,13 @@ public class WKRManager {
 
     // MARK: - User Interface
 
-    internal weak var webView: WKRUIWebView!
-    internal weak var alertView: WKRUIAlertView!
+    public weak var webView: WKRUIWebView! {
+        didSet {
+            pageNavigation = newPageNavigation()
+            webView.navigationDelegate = pageNavigation
+        }
+    }
+    internal let alertView = WKRUIAlertView()
 
     // MARK: - Initialization
 
@@ -80,6 +85,10 @@ public class WKRManager {
         configure(network: peerNetwork)
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
+    }
+    
+    deinit {
+        alertView.removeFromSuperview()
     }
 
     // MARK: View Controller Closures
@@ -111,14 +120,6 @@ public class WKRManager {
     }
 
     // MARK: User Interface
-
-    public func configure(webView: WKRUIWebView, alertView: WKRUIAlertView) {
-        self.webView = webView
-        self.alertView = alertView
-
-        pageNavigation = newPageNavigation()
-        webView.navigationDelegate = pageNavigation
-    }
 
     public func hostNetworkInterface() -> UIViewController {
         return peerNetwork.hostNetworkInterface()
