@@ -15,6 +15,7 @@ public class WKRKitConstants {
     public static var current = WKRKitConstants()
 
     internal let quickRace: Bool
+    public let connectionTestTimeout: Double
 
     internal let pageTitleStringToReplace: String
     internal let pageTitleCharactersToRemove: Int
@@ -38,6 +39,9 @@ public class WKRKitConstants {
         guard let quickRace = documentsConstants["QuickRace"] as? Bool else {
             fatalError("WKRKitConstants: No QuickRace value")
         }
+        guard let connectionTestTimeout = documentsConstants["ConnectionTestTimeout"] as? Double else {
+            fatalError("WKRKitConstants: No ConnectionTestTimeout value")
+        }
         guard let pageTitleStringToReplace = documentsConstants["PageTitleStringToReplace"] as? String else {
             fatalError("WKRKitConstants: No PageTitleStringToReplace value")
         }
@@ -59,6 +63,7 @@ public class WKRKitConstants {
 
         self.version = version
         self.quickRace = quickRace
+        self.connectionTestTimeout = connectionTestTimeout
 
         self.pageTitleStringToReplace = pageTitleStringToReplace
         self.pageTitleCharactersToRemove = pageTitleCharactersToRemove

@@ -16,7 +16,8 @@ public struct WKRConnectionTester {
     /// - Parameters:
     ///   - timeout: The maximum time to wait for the page load. If it takes longer than the time out, returns false
     ///   - completionHandler: Handler with Bool indicating connectivity.
-    public static func start(timeout: Double = 4.0, completionHandler: @escaping (_ connected: Bool) -> Void) {
+    public static func start(timeout: Double = WKRKitConstants.current.connectionTestTimeout,
+                             completionHandler: @escaping (_ connected: Bool) -> Void) {
         let startDate = Date()
         var timedOut = false
 
