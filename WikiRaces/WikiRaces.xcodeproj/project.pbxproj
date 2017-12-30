@@ -34,9 +34,14 @@
 		144AFF8B1F622D1E00212FF2 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143BB7211F60C6E300D00541 /* Crashlytics.framework */; };
 		144AFF8C1F622D1E00212FF2 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 143BB7221F60C6E300D00541 /* Fabric.framework */; };
 		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
-		14892FE71F646E5000572C50 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14892FE61F646E5000572C50 /* MPCHostViewController.swift */; };
 		148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
+		1497A8551FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8561FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8571FF476BC0013E9E3 /* StateLogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */; };
+		1497A8591FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
+		1497A85A1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
+		1497A85B1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
 		149FF8521F362B83000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
 		149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8531F362B83000A5D96 /* Assets.xcassets */; };
@@ -62,7 +67,6 @@
 		14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
 		14C25FF61F6F028100CD7373 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138B1F56B32900F427F4 /* HelpViewController.swift */; };
 		14C25FF71F6F028100CD7373 /* CenteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1468138E1F56B32B00F427F4 /* CenteredTableViewController.swift */; };
-		14C25FFA1F6F02A500CD7373 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14892FE61F646E5000572C50 /* MPCHostViewController.swift */; };
 		14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
 		14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
 		14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
@@ -113,6 +117,10 @@
 		14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 		14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
+		14C6B1F41FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */; };
+		14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */; };
+		14C6B1F61FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCSearchingCell.swift */; };
+		14C6B1F71FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCSearchingCell.swift */; };
 		14D8AD471F81828D00914E5A /* PlayerAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */; };
 		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14DC66D11F90700A0026C6ED /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 143BB72F1F60D84100D00541 /* fabric.apikey */; };
@@ -153,6 +161,20 @@
 			remoteInfo = WKRKit;
 		};
 		14DC66D91F9072200026C6ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
+		14DCC5641FF2E355003AEC95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		14DCC5661FF2E359003AEC95 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
 			proxyType = 1;
@@ -273,8 +295,9 @@
 		147593CE1F609902005DFC90 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = SOURCE_ROOT; };
 		147593CF1F609902005DFC90 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
 		147593D01F609911005DFC90 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
-		14892FE61F646E5000572C50 /* MPCHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostViewController.swift; sourceTree = "<group>"; };
 		148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Segue.swift"; sourceTree = "<group>"; };
+		1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLogViewController.swift; sourceTree = "<group>"; };
+		1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateLogTableViewController.swift; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		149FF8511F362B83000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -317,6 +340,8 @@
 		14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		14C4AB801F368A630086B77F /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
+		14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostViewController.swift; sourceTree = "<group>"; };
+		14C6B1F31FF2EABC00F6B422 /* MPCSearchingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCSearchingCell.swift; sourceTree = "<group>"; };
 		14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnalytics.swift; sourceTree = "<group>"; };
 		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -391,14 +416,15 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
-		143BB7331F60DF0200D00541 /* MPCInviteViewController */ = {
+		143BB7331F60DF0200D00541 /* MPC Flow Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				143BB7341F60DF4A00D00541 /* MPCConnectViewController.swift */,
 				141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */,
-				14892FE61F646E5000572C50 /* MPCHostViewController.swift */,
+				14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */,
+				14C6B1F31FF2EABC00F6B422 /* MPCSearchingCell.swift */,
 			);
-			path = MPCInviteViewController;
+			path = "MPC Flow Controllers";
 			sourceTree = "<group>";
 		};
 		149FDED51F4F4AAF003A71D0 /* Frameworks */ = {
@@ -500,7 +526,7 @@
 			isa = PBXGroup;
 			children = (
 				14B55C901F3A49670090E092 /* MenuViewController */,
-				143BB7331F60DF0200D00541 /* MPCInviteViewController */,
+				143BB7331F60DF0200D00541 /* MPC Flow Controllers */,
 			);
 			path = "Menu View Controllers";
 			sourceTree = "<group>";
@@ -539,8 +565,8 @@
 		14B55C911F3A496D0090E092 /* HistoryViewController */ = {
 			isa = PBXGroup;
 			children = (
-				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
 				14C4AB581F368A050086B77F /* HistoryViewController.swift */,
+				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
 			);
 			path = HistoryViewController;
 			sourceTree = "<group>";
@@ -569,10 +595,12 @@
 		14B55C951F3A499C0090E092 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
+				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14E1B1991F7981C70082F4FA /* PlayerAnalytics.swift */,
-				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
+				1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */,
+				1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */,
+				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
 			);
 			path = Other;
@@ -725,6 +753,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				14DCC5671FF2E359003AEC95 /* PBXTargetDependency */,
+				14DCC5651FF2E355003AEC95 /* PBXTargetDependency */,
 			);
 			name = "WikiRaces (UI Catalog)";
 			productName = "WikiRaces (UI Catalog)";
@@ -991,7 +1021,6 @@
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
 				14C4AB351F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
-				14892FE71F646E5000572C50 /* MPCHostViewController.swift in Sources */,
 				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				143BB7351F60DF4A00D00541 /* MPCConnectViewController.swift in Sources */,
@@ -1000,8 +1029,10 @@
 				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				141892F61F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
+				14C6B1F61FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */,
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
 				143BB72A1F60C98400D00541 /* HelpViewController.swift in Sources */,
+				1497A8551FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,
@@ -1009,6 +1040,8 @@
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
 				14C4AB411F3689B50086B77F /* MenuViewController+UI.swift in Sources */,
+				1497A8591FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
+				14C6B1F41FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1017,6 +1050,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				1497A8561FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
+				1497A85A1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -1076,10 +1111,11 @@
 				14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */,
 				14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */,
 				14C260031F6F02A500CD7373 /* HistoryViewController.swift in Sources */,
-				14C25FFA1F6F02A500CD7373 /* MPCHostViewController.swift in Sources */,
 				14C25FF71F6F028100CD7373 /* CenteredTableViewController.swift in Sources */,
+				14C6B1F71FF2EABD00F6B422 /* MPCSearchingCell.swift in Sources */,
 				14C260021F6F02A500CD7373 /* HistoryTableViewCell.swift in Sources */,
 				14D8AD471F81828D00914E5A /* PlayerAnalytics.swift in Sources */,
+				1497A8571FF476BC0013E9E3 /* StateLogViewController.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
@@ -1087,6 +1123,8 @@
 				14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */,
 				14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */,
 				14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */,
+				1497A85B1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
+				14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1112,6 +1150,16 @@
 			isa = PBXTargetDependency;
 			name = WKRUIKit;
 			targetProxy = 14DC66D91F9072200026C6ED /* PBXContainerItemProxy */;
+		};
+		14DCC5651FF2E355003AEC95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 14DCC5641FF2E355003AEC95 /* PBXContainerItemProxy */;
+		};
+		14DCC5671FF2E359003AEC95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 14DCC5661FF2E359003AEC95 /* PBXContainerItemProxy */;
 		};
 		14E6D5601F86A1CA005EB3B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1334,6 +1382,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = " -ObjC";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Shared/Frameworks/Analytics/BridgingHeader.h;
@@ -1438,6 +1487,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
@@ -1455,6 +1505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";

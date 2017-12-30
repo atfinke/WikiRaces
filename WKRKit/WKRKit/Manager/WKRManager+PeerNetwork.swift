@@ -31,9 +31,9 @@ extension WKRManager {
                     self?.errorOccurred(.noPeers)
                 }
             } else {
-                let disconnectedPlayerIsHost = self?.game.players.filter({
-                    return $0.profile == profile
-                }).first?.isHost ?? false
+                let disconnectedPlayerIsHost = self?.game.players.first(where: { player -> Bool in
+                    return player.profile == profile
+                })?.isHost ?? false
                 if disconnectedPlayerIsHost {
                     self?.errorOccurred(.disconnected)
                 }

@@ -12,14 +12,14 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-class GameViewController: UIViewController {
+internal class GameViewController: StateLogViewController {
 
     // MARK: - Game Properties
 
     var isPlayerHost = false
     var isPlayerQuitting = false
 
-    var needsUIConfigured = true
+    var isInterfaceConfigured = false
     var gameState = WKRGameState.preMatch
 
     var timeRaced = 0
@@ -45,7 +45,6 @@ class GameViewController: UIViewController {
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
 
-    var alertView: WKRUIAlertView!
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 
@@ -75,9 +74,8 @@ class GameViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if needsUIConfigured {
-            needsUIConfigured = false
-            setupAlertView()
+        if !isInterfaceConfigured {
+            isInterfaceConfigured = true
             if !isPlayerHost {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.connectingLabel.alpha = 1.0
@@ -98,7 +96,7 @@ class GameViewController: UIViewController {
         if manager.gameState == .preMatch && isPlayerHost {
             manager.player(.startedGame)
             #if !MULTIWINDOWDEBUG
-                PlayerAnalytics.log(event: .hostStartedMatch, 
+                PlayerAnalytics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             #endif
         }
@@ -107,6 +105,8 @@ class GameViewController: UIViewController {
     // MARK: - User Actions
 
     @IBAction func flagButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         //swiftlint:disable:next line_length
         let alertController = UIAlertController(title: "Forfeit The Round?", message: "Are you sure you want to forfeit? Try tapping the help button for a peek at the final article before making up your mind.", preferredStyle: .alert)
 
@@ -114,6 +114,7 @@ class GameViewController: UIViewController {
         alertController.addAction(cancelAction)
 
         let helpAction = UIAlertAction(title: "Help", style: .default) { _ in
+            PlayerAnalytics.log(event: .userAction("flagButtonPressed:help"))
             self.manager.player(.neededHelp)
             self.performSegue(.showHelp)
             PlayerAnalytics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
@@ -121,11 +122,13 @@ class GameViewController: UIViewController {
         alertController.addAction(helpAction)
 
         let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
+            PlayerAnalytics.log(event: .userAction("flagButtonPressed:reload"))
             self.webView.reload()
         }
         alertController.addAction(reloadAction)
 
         let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .destructive) { _ in
+            PlayerAnalytics.log(event: .userAction("flagButtonPressed:forfeit"))
             self.manager.player(.forfeited)
             PlayerAnalytics.log(event: .forfeited, attributes: ["Page": self.finalPage?.title as Any])
         }
@@ -133,17 +136,17 @@ class GameViewController: UIViewController {
 
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
+
+       PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     @IBAction func quitButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
-    }
-
-    deinit {
-        alertView?.removeFromSuperview()
-        NotificationCenter.default.removeObserver(self)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
 }

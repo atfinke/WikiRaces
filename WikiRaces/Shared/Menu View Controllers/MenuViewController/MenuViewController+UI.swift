@@ -80,7 +80,7 @@ extension MenuViewController {
         topView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(topView)
 
-        bottomView.backgroundColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+        bottomView.backgroundColor = #colorLiteral(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bottomView)
 
@@ -266,12 +266,12 @@ extension MenuViewController {
     private func setupPuzzleView() -> UIView {
         let puzzleBackgroundView = UIView()
 
-        let color = UIColor(red: 218.0/255.0, green: 218.0/255.0, blue: 218.0/255.0, alpha: 1.0)
+        let color = #colorLiteral(red: 218.0/255.0, green: 218.0/255.0, blue: 218.0/255.0, alpha: 1.0)
         puzzleBackgroundView.backgroundColor = color
         puzzleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.addSubview(puzzleBackgroundView)
 
-        puzzleView.backgroundColor = UIColor(patternImage: UIImage(named: "puzzle")!)
+        puzzleView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "puzzle"))
         puzzleView.translatesAutoresizingMaskIntoConstraints = false
         puzzleBackgroundView.addSubview(puzzleView)
 

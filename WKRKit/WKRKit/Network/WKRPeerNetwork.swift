@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol WKRPeerNetwork: class {
+internal protocol WKRPeerNetwork: class {
     var connectedPlayers: Int { get }
 
     var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)? { get set }

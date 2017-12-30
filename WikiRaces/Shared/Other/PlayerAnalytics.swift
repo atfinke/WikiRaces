@@ -7,16 +7,31 @@
 //
 
 import CloudKit
-import Foundation
+import UIKit
 
 #if !MULTIWINDOWDEBUG
 import Crashlytics
 import FirebaseCore
 #endif
 
-struct PlayerAnalytics {
+internal struct PlayerAnalytics {
 
-    // MARK: - Types
+    // MARK: - Logging Event Types
+
+    enum ViewState: String {
+        case didLoad
+        case willAppear
+        case didAppear
+        case willDisappear
+        case didDisappear
+    }
+
+    enum LogEvent {
+        case userAction(String)
+        case viewState(String)
+    }
+
+    // MARK: - Analytic Event Types
 
     enum StatEvent {
         case players(unique: Int, total: Int)
@@ -30,23 +45,51 @@ struct PlayerAnalytics {
         case leaderboard, versionInfo
         case pressedJoin, pressedHost
         case namePromptResult, nameType
+
         // Game All Players
-        case pageView
+        case pageView, pageBlocked, pageError
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
         case openedHistory, pressedReadyButton, voted
         case finalVotes
-        
+
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
     }
 
-    // MARK: - Events
+    // MARK: - Logging Events
+
+    public static func log(state: ViewState, for object: UIViewController) {
+        log(event: .viewState("\(type(of: object)): " + state.rawValue))
+    }
+
+    public static func log(presentingOf modal: UIViewController, on object: UIViewController) {
+        var titleString = "Title: "
+        if let title = modal.title {
+            titleString += title
+        } else {
+            titleString += "nil"
+        }
+        log(event: .viewState("\(type(of: object)): Presenting: \(type(of: modal)) " + titleString))
+    }
+
+    public static func log(event: LogEvent) {
+        #if !MULTIWINDOWDEBUG
+            switch event {
+            case .userAction(let action):
+                CLSNSLogv("UserAction: %@", getVaList([action]))
+            case .viewState(let view):
+                CLSNSLogv("ViewState: %@", getVaList([view]))
+            }
+        #endif
+    }
+
+    // MARK: - Analytic Events
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !MULTIWINDOWDEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
-            if !(attributes?.values.flatMap({$0}).isEmpty ?? true) {
+            if !(attributes?.values.flatMap({ $0 }).isEmpty ?? true) {
                 Analytics.logEvent(event.rawValue, parameters: attributes)
             } else {
                 Analytics.logEvent(event.rawValue, parameters: nil)
@@ -54,7 +97,7 @@ struct PlayerAnalytics {
         #endif
     }
 
-    //swiftlint:disable:next cyclomatic_complexity
+    //swiftlint:disable:next cyclomatic_complexity function_body_length
     public static func log(event: StatEvent) {
         #if !MULTIWINDOWDEBUG
             let container = CKContainer.default()

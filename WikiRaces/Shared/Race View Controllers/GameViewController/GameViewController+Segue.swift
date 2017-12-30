@@ -34,17 +34,17 @@ extension GameViewController {
         switch segueIdentifier {
         case .showVoting:
             guard let destination = navigationController.rootViewController as? VotingViewController else {
-                fatalError()
+                fatalError("Destination rootViewController not a VotingViewController")
             }
             prepare(votingViewController: destination)
         case .showResults:
             guard let destination = navigationController.rootViewController as? ResultsViewController else {
-                fatalError()
+                fatalError("Destination rootViewController not a ResultsViewController")
             }
             prepare(resultsViewController: destination)
         case .showHelp:
             guard let destination = navigationController.rootViewController as? HelpViewController else {
-                fatalError()
+                fatalError("Destination rootViewController not a HelpViewController")
             }
             prepare(helpViewController: destination)
         }

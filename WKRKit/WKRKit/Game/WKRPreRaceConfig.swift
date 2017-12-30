@@ -75,7 +75,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
             let finalPages = Array(pages.prefix(WKRRaceConstants.votingArticlesCount))
             if !finalPages.isEmpty, let page = startingPage {
-                let config =  WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
+                let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
                 completionHandler(config)
             } else {
                 completionHandler(nil)

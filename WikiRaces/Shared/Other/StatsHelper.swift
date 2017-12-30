@@ -6,10 +6,10 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import GameKit
 import CloudKit
+import GameKit
 
-class StatsHelper {
+internal class StatsHelper {
 
     // MARK: - Types
 
@@ -69,6 +69,8 @@ class StatsHelper {
     private let defaults = UserDefaults.standard
     private let keyValueStore = NSUbiquitousKeyValueStore.default
 
+    // MARK: - Initalization
+
     init() {
         attemptMigration()
     }
@@ -76,6 +78,8 @@ class StatsHelper {
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
+
+    // MARK: - Helpers
 
     func start() {
         attemptMigration()
@@ -133,7 +137,7 @@ class StatsHelper {
 
         defaults.set(uniquePlayers, forKey: Stat.uniquePlayers.key)
         defaults.set(totalPlayers, forKey: Stat.totalPlayers.key)
-        
+
         PlayerAnalytics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
     }
 
@@ -180,7 +184,8 @@ class StatsHelper {
 
     // MARK: - Syncing
 
-    @objc private func keyValueStoreChanged(_ notification: NSNotification) {
+    @objc
+    private func keyValueStoreChanged(_ notification: NSNotification) {
         guard let userInfo = notification.userInfo,
             let changedKeys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
             let reasonForChange = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as? NSNumber  else {
@@ -214,7 +219,7 @@ class StatsHelper {
             if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             } else {
-                defaults.set(deviceValue, forKey: stat.key)
+                defaults.set(cloudValue, forKey: stat.key)
             }
         }
     }
@@ -232,7 +237,6 @@ class StatsHelper {
         let fastestTime = statValue(for: .fastestTime)
 
         let pagesViewed = statValue(for: .pages)
-        let playersRaced = statValue(for: .uniquePlayers)
 
         let pointsScore = GKScore(leaderboardIdentifier: Stat.points.leaderboard)
         pointsScore.value = Int64(points)
@@ -253,7 +257,7 @@ class StatsHelper {
         var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore, pagesViewedScore]
         if races >= 5 {
             let averageScore = GKScore(leaderboardIdentifier: Stat.average.leaderboard)
-            averageScore.value = Int64(average * 1000)
+            averageScore.value = Int64(average * 1_000)
             scores.append(averageScore)
         }
         if fastestTime > 0 {

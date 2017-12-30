@@ -10,11 +10,13 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-class VotingViewController: CenteredTableViewController {
+internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    var isShowingVoteCountdown = true
+    private var isShowingGuide = false
+    private var isShowingVoteCountdown = true
+
     var playerVoted: ((WKRPage) -> Void)?
     var quitAlertController: UIAlertController?
 
@@ -34,10 +36,18 @@ class VotingViewController: CenteredTableViewController {
     var voteTimeRemaing = 100 {
         didSet {
             if isShowingVoteCountdown {
-                descriptionLabel.text = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
-                if voteTimeRemaing == 0 {
+                let timeString = "VOTING CLOSES IN " + voteTimeRemaing.description + " S"
+                if !isShowingGuide {
+                    flashItems(items: [guideLabel, descriptionLabel], duration: 0.75) {
+                        self.descriptionLabel.text = timeString
+                        self.isShowingGuide = true
+                    }
+                    tableView.isUserInteractionEnabled = true
+                } else if voteTimeRemaing == 0 {
+                    descriptionLabel.text = timeString
                     votingEnded()
                 } else {
+                    descriptionLabel.text = timeString
                     tableView.isUserInteractionEnabled = true
                 }
             } else {
@@ -60,8 +70,10 @@ class VotingViewController: CenteredTableViewController {
         registerTableView(for: self)
 
         title = "VOTING"
+
+        guideLabel.alpha = 0.0
+        guideLabel.text = "TAP ARTICLE TO VOTE"
         descriptionLabel.text = "VOTING STARTS SOON"
-        descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
     }
@@ -78,12 +90,14 @@ class VotingViewController: CenteredTableViewController {
     // MARK: = Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
             PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])
             return
         }
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     // MARK: - Helpers
@@ -92,13 +106,14 @@ class VotingViewController: CenteredTableViewController {
         isShowingVoteCountdown = false
         tableView.isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.5) {
+            self.guideLabel.alpha = 0.0
             self.descriptionLabel.alpha = 0.0
         }
     }
 
     func finalPageSelected(_ page: WKRPage) {
         guard let votingObject = voteInfo, let index = votingObject.index(of: page) else {
-            fatalError()
+            fatalError("Failed to select final page with \(String(describing: voteInfo))")
         }
 
         UIView.animate(withDuration: 1.5) {

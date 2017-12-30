@@ -15,6 +15,7 @@ public class WKRKitConstants {
     public static var current = WKRKitConstants()
 
     internal let quickRace: Bool
+    public let connectionTestTimeout: Double
 
     internal let pageTitleStringToReplace: String
     internal let pageTitleCharactersToRemove: Int
@@ -29,7 +30,7 @@ public class WKRKitConstants {
         //swiftlint:disable:next line_length
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String:Any] else {
-                fatalError()
+                fatalError("Failed to load constants")
         }
 
         guard let version = documentsConstants["Version"] as? Int else {
@@ -37,6 +38,9 @@ public class WKRKitConstants {
         }
         guard let quickRace = documentsConstants["QuickRace"] as? Bool else {
             fatalError("WKRKitConstants: No QuickRace value")
+        }
+        guard let connectionTestTimeout = documentsConstants["ConnectionTestTimeout"] as? Double else {
+            fatalError("WKRKitConstants: No ConnectionTestTimeout value")
         }
         guard let pageTitleStringToReplace = documentsConstants["PageTitleStringToReplace"] as? String else {
             fatalError("WKRKitConstants: No PageTitleStringToReplace value")
@@ -59,6 +63,7 @@ public class WKRKitConstants {
 
         self.version = version
         self.quickRace = quickRace
+        self.connectionTestTimeout = connectionTestTimeout
 
         self.pageTitleStringToReplace = pageTitleStringToReplace
         self.pageTitleCharactersToRemove = pageTitleCharactersToRemove
@@ -70,8 +75,33 @@ public class WKRKitConstants {
         self.bannedURLFragments = bannedURLFragments
     }
 
+    @available(*, deprecated, message: "Only for debugging")
+    static public func removeConstants() {
+        let fileManager = FileManager.default
+        let folderPath = FileManager.default.documentsDirectory!.path
+        guard let filePaths = try? fileManager.contentsOfDirectory(atPath: folderPath) else {
+            fatalError()
+        }
+        for filePath in filePaths {
+            do {
+                try fileManager.removeItem(atPath: folderPath + "/" + filePath)
+            } catch {
+                print(error)
+            }
+        }
+    }
+
+    @available(*, deprecated, message: "Only for debugging")
+    static public func updateConstantsForTestingCharacterClipping() {
+        copyBundledResourcesToDocuments(constantsFileName: "WKRKitConstants-TESTING_ONLY")
+    }
+
     static public func updateConstants() {
         copyBundledResourcesToDocuments()
+
+        guard ProcessInfo.processInfo.environment["Cloud_Enabled"] == "true" else {
+            return
+        }
 
         let publicDB = CKContainer.default().publicCloudDatabase
         let recordID = CKRecordID(recordName: "WKRKitConstantsRecord")
@@ -141,12 +171,12 @@ public class WKRKitConstants {
         current = WKRKitConstants()
     }
 
-    static private func copyBundledResourcesToDocuments() {
+    static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
         guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
-            let bundledPlistURL = bundle.url(forResource: "WKRKitConstants", withExtension: "plist"),
+            let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
             let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {
-                fatalError()
+                fatalError("Failed to load bundled constants")
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
@@ -159,7 +189,7 @@ public class WKRKitConstants {
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
             let array = arrayFromURL as? [String] else {
-                fatalError()
+                fatalError("Failed to load articles plist")
         }
         return array
     }
@@ -167,7 +197,7 @@ public class WKRKitConstants {
     internal func getLinksScript() -> String {
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
             let source = try? String(contentsOf: documentsScriptURL) else {
-                fatalError()
+                fatalError("Failed to load get links script")
         }
         return source
     }

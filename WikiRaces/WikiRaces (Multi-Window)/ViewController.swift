@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let twoRows = false
-        let windows = CGFloat(3)
+        let windows = CGFloat(2)
 
         let windowWidth: CGFloat
         if twoRows {
@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         ]
 
         if twoRows {
-            for x in 0..<Int(windows/2) {
+            for x in 0..<Int(windows / 2) {
                 let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2))
                 window.playerName = windowNames[x]
                 window.rootViewController = self.menuViewController()
@@ -45,7 +45,7 @@ class ViewController: UIViewController {
                     window.rootViewController?.viewDidAppear(false)
                 }
             }
-            for x in 0..<Int(windows/2) {
+            for x in 0..<Int(windows / 2) {
                 let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2))
                 window.playerName = windowNames[x + Int(windows / 2)]
                 window.rootViewController = self.menuViewController()

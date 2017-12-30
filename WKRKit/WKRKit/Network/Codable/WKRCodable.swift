@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WKRCodable: Codable {
+internal struct WKRCodable: Codable {
 
     // MARK: - Types
 
@@ -28,7 +28,7 @@ struct WKRCodable: Codable {
         init<T: RawRepresentable>(_ object: T) where T.RawValue == Int {
             let subjectType = Mirror(reflecting: object).subjectType
             guard let enumType = WKREnumType(rawValue: "\(subjectType)") else {
-                fatalError()
+                fatalError("Object not a WKREnumType")
             }
             type = enumType
             rawValue = object.rawValue
@@ -38,7 +38,7 @@ struct WKRCodable: Codable {
             guard let potentialObject = T(rawValue: rawValue) else { return nil }
             let subjectType = Mirror(reflecting: potentialObject).subjectType
             guard let enumType = WKREnumType(rawValue: "\(subjectType)") else {
-                fatalError()
+                fatalError("Object not a WKREnumType")
             }
             guard enumType == self.type else {
                 return nil

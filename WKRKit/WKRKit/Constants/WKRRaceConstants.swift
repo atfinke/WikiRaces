@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WKRRaceConstants {
+internal struct WKRRaceConstants {
 
     static let bonusPointReward         = 2
     static let bonusPointInterval       = 120.0

@@ -33,7 +33,7 @@ public struct WKRUIConstants {
         //swiftlint:disable:next line_length
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRUIConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String:Any] else {
-                fatalError()
+                fatalError("Failed to load constants")
         }
 
         guard let version = documentsConstants["Version"] as? Int else {
@@ -45,6 +45,10 @@ public struct WKRUIConstants {
 
     static public func updateConstants() {
         copyBundledResourcesToDocuments()
+
+        guard ProcessInfo.processInfo.environment["Cloud_Enabled"] == "true" else {
+            return
+        }
 
         let publicDB = CKContainer.default().publicCloudDatabase
         let recordID = CKRecordID(recordName: "WKRUIConstantsRecord")
@@ -119,7 +123,7 @@ public struct WKRUIConstants {
             let bundledPlistURL = bundle.url(forResource: "WKRUIConstants", withExtension: "plist"),
             let bundledPreHideScriptURL = bundle.url(forResource: "WKRPreHideScript", withExtension: "js"),
             let bundledPostHideScriptURL = bundle.url(forResource: "WKRPostHideScript", withExtension: "js") else {
-                fatalError()
+                fatalError("Failed to load bundled constants")
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
@@ -131,7 +135,7 @@ public struct WKRUIConstants {
         //swiftlint:disable:next line_length
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRPreHideScript.js"),
             let source = try? String(contentsOf: documentsScriptURL) else {
-                fatalError()
+                fatalError("Failed to load pre hide script")
         }
         return source
     }
@@ -140,7 +144,7 @@ public struct WKRUIConstants {
         //swiftlint:disable:next line_length
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRPostHideScript.js"),
             let source = try? String(contentsOf: documentsScriptURL) else {
-                fatalError()
+                fatalError("Failed to load post hide script")
         }
         return source
     }

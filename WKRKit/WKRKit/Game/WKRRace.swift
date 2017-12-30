@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct WKRRace {
+internal struct WKRRace {
 
     // MARK: - Properties
 
     /// The race's bonus points
-    var bonusPoints = 0
+    internal var bonusPoints = 0
     /// The end page for the race
     private let finalPage: WKRPage
     /// Fetches all the links that link to the page. Torn down at the end of the race.
@@ -92,7 +92,8 @@ struct WKRRace {
     ///
     /// - Returns: If the race should end
     internal func shouldEnd() -> Bool {
-        return players.filter({ $0.state == .racing}).count <= 1 && players.filter({ $0.state != .connecting}).count > 1
+        return players.filter({ $0.state == .racing }).count <= 1
+            && players.filter({ $0.state != .connecting }).count > 1
     }
 
 }

@@ -63,7 +63,7 @@ public class WKRUIWebView: WKWebView {
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
+        timeLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
 
         addSubview(timeLabel)
 
@@ -88,9 +88,15 @@ public class WKRUIWebView: WKWebView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    deinit {
+        removeObserver(self, forKeyPath: "estimatedProgress")
+        NotificationCenter.default.removeObserver(self)
+    }
+
     // MARK: - State Updates
 
-    @objc func keyboardWillShow() {
+    @objc
+    func keyboardWillShow() {
         resignFirstResponder()
         endEditing(true)
     }
@@ -151,10 +157,6 @@ public class WKRUIWebView: WKWebView {
         }
 
         progressView?.setProgress(Float(progress), animated: true)
-    }
-
-    deinit {
-        removeObserver(self, forKeyPath: "estimatedProgress")
     }
 
 }

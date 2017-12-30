@@ -54,51 +54,51 @@ public struct WKRResultsInfo: Codable {
      */
     private func sortedPlayers(players: [WKRPlayer]) -> [WKRPlayer] {
         // The players the found the page
-        let foundPagePlayers = players.filter({ $0.state == .foundPage })
+        let foundPagePlayers: [WKRPlayer] = players.filter({ $0.state == .foundPage })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.raceHistory?.duration ?? Int.max < rhs.raceHistory?.duration ?? Int.max
             })
 
         // The players that participated but didn't quit or forfeit
-        let forcedFinishPlayers = players.filter({ $0.state == .forcedEnd })
+        let forcedFinishPlayers: [WKRPlayer] = players.filter({ $0.state == .forcedEnd })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // The players that forfeited
-        let forfeitedPlayers = players.filter({ $0.state == .forfeited})
+        let forfeitedPlayers: [WKRPlayer] = players.filter({ $0.state == .forfeited })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // The players that quit
-        let quitPlayers = players.filter({ $0.state == .quit})
+        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // The players still racing
-        let racingPlayers = players.filter({ $0.state == .racing })
+        let racingPlayers: [WKRPlayer] = players.filter({ $0.state == .racing })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // The connecting players
-        let connectingPlayers = players.filter({ $0.state == .connecting })
+        let connectingPlayers: [WKRPlayer] = players.filter({ $0.state == .connecting })
             .sorted(by: { (lhs, rhs) -> Bool in
                 return lhs.profile.name < rhs.profile.name
             })
 
         // Figure out what the difference between disconnected and quit should be
 
-        let sortedPlayers = foundPagePlayers
+        let sortedPlayers: [WKRPlayer] = foundPagePlayers
             + forcedFinishPlayers
             + forfeitedPlayers
             + quitPlayers
             + racingPlayers
             + connectingPlayers
 
-        let otherPlayers = players.filter { !sortedPlayers.contains($0) }
+        let otherPlayers: [WKRPlayer] = players.filter { !sortedPlayers.contains($0) }
         return sortedPlayers + otherPlayers
     }
 

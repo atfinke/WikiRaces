@@ -18,7 +18,7 @@ public enum WKRFatalError: Int {
         switch self {
         case .disconnected: return "Disconnected From Race"
         case .noPeers: return "No Racers Left"
-        case .internetSpeed: return "Internet Not Reachable"
+        case .internetSpeed: return "Slow Connection"
         case .configCreationFailed: return "Host Issue"
         }
     }

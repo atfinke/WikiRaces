@@ -8,16 +8,6 @@
 
 import WKRUIKit
 
-public enum WKRPlayerAction {
-    case startedGame
-    case neededHelp
-    case voted(WKRPage)
-    case state(WKRPlayerState)
-    case forfeited
-    case quit
-    case ready
-}
-
 public class WKRManager {
 
     // MARK: - Public Getters
@@ -50,7 +40,7 @@ public class WKRManager {
     internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
     internal let pointsUpdate: ((Int) -> Void)
     internal let linkCountUpdate: ((Int) -> Void)
-    internal let pageViewUpdate: ((WKRPage) -> Void)
+    internal let logEvent: ((String, [String: Any]?) -> Void)
 
     internal var resultsShowReady: ((Bool) -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
@@ -62,8 +52,13 @@ public class WKRManager {
 
     // MARK: - User Interface
 
-    internal weak var webView: WKRUIWebView!
-    internal weak var alertView: WKRUIAlertView!
+    public weak var webView: WKRUIWebView! {
+        didSet {
+            pageNavigation = newPageNavigation()
+            webView.navigationDelegate = pageNavigation
+        }
+    }
+    internal let alertView = WKRUIAlertView()
 
     // MARK: - Initialization
 
@@ -72,12 +67,12 @@ public class WKRManager {
                   stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                   pointsUpdate: @escaping ((Int) -> Void),
                   linkCountUpdate: @escaping ((Int) -> Void),
-                  pageViewUpdate: @escaping ((WKRPage) -> Void)) {
+                  logEvent: @escaping ((String, [String: Any]?)) -> Void) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
         self.linkCountUpdate = linkCountUpdate
-        self.pageViewUpdate = pageViewUpdate
+        self.logEvent = logEvent
 
         localPlayer = player
         peerNetwork = network
@@ -90,6 +85,10 @@ public class WKRManager {
         configure(network: peerNetwork)
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
+    }
+
+    deinit {
+        alertView.removeFromSuperview()
     }
 
     // MARK: View Controller Closures
@@ -121,14 +120,6 @@ public class WKRManager {
     }
 
     // MARK: User Interface
-
-    public func configure(webView: WKRUIWebView, alertView: WKRUIAlertView) {
-        self.webView = webView
-        self.alertView = alertView
-
-        pageNavigation = newPageNavigation()
-        webView.navigationDelegate = pageNavigation
-    }
 
     public func hostNetworkInterface() -> UIViewController {
         return peerNetwork.hostNetworkInterface()

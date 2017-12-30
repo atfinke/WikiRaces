@@ -40,8 +40,13 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Initalization
 
-    public init(window: UIWindow) {
+    public override init() {
+        guard let window = UIApplication.shared.keyWindow else {
+            fatalError("Couldn't get key window")
+        }
+
         alertWindow = window
+
         super.init()
 
         alertWindow.addSubview(self)
@@ -107,6 +112,8 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         bottomConstraint.constant = 0
         alertWindow.setNeedsUpdateConstraints()
         alertWindow.bringSubview(toFront: self)
+
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
 
         UIView.animate(withDuration: WKRUIConstants.alertAnimateInDuration) {
             self.alertWindow.layoutIfNeeded()

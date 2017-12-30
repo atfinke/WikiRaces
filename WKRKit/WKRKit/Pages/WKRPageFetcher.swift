@@ -9,7 +9,7 @@
 import Foundation
 
 /// Feteched Wikipedia pages
-struct WKRPageFetcher {
+internal struct WKRPageFetcher {
 
     // MARK: - Properties
 

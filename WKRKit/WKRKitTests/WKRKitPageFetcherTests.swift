@@ -51,7 +51,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                     XCTFail("Title nil")
                     return
                 }
-                XCTAssert(!title.characters.isEmpty)
+                XCTAssert(!title.isEmpty)
                 XCTAssert(unwrappedPage.url.absoluteString.contains("https://en.m.wikipedia.org/wiki/"))
                 XCTAssertFalse(unwrappedPage.url.absoluteString.contains("Special:Random"))
                 testExpectation.fulfill()

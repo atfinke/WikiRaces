@@ -7,43 +7,25 @@
 //
 
 import UIKit
-import WKRUIKit
-@testable import WKRKit
 
-class ViewController: UIViewController {
+@testable import WKRKit
+@testable import WKRUIKit
+
+internal class ViewController: UIViewController {
 
     //swiftlint:disable line_length function_body_length force_cast
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let historyNav = viewController() as! UINavigationController
-        let historyController = historyNav.rootViewController as! HistoryViewController
+
+        let historyController = historyNav.rootViewController as! GameViewController
 
         present(historyNav, animated: true, completion: nil)
 
-        let url = URL(string: "https://www.apple.com")!
-
-        let player = WKRPlayer(profile: WKRPlayerProfile(name: "andrew", playerID: "andrew"), isHost: false)
-        player.state = .racing
-        player.startedNewRace(on: WKRPage(title: "Page 1", url: url))
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            historyController.player = player
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                player.finishedViewingLastPage()
-                player.nowViewing(page: WKRPage(title: "Page 2", url: url), linkHere: true)
-                player.finishedViewingLastPage()
-                player.nowViewing(page: WKRPage(title: "Page 3", url: url), linkHere: true)
-                player.state = WKRPlayerState.foundPage
-                historyController.player = player
-
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    player.finishedViewingLastPage()
-                    player.nowViewing(page: WKRPage(title: "Page 4", url: url), linkHere: true)
-                    player.finishedViewingLastPage()
-                    player.nowViewing(page: WKRPage(title: "Page 5", url: url), linkHere: true)
-                    player.state = WKRPlayerState.foundPage
-                    historyController.player = player
                 }
             }
         }
@@ -52,7 +34,7 @@ class ViewController: UIViewController {
 
     //swiftlint:disable force_cast
     func viewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HistoryNav")
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "GameNav")
     }
 
 }

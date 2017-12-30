@@ -11,8 +11,9 @@ import Foundation
 extension WKRManager {
 
     func newPageNavigation() -> WKRPageNavigation {
-        return WKRPageNavigation(pageURLBlocked: { [weak self] in
+        return WKRPageNavigation(pageURLBlocked: { [weak self] url in
             self?.enqueue(message: "Link not allowed", duration: 1.0)
+            self?.logEvent("pageBlocked", ["PageURL": self?.truncated(url: url) as Any])
         }, pageLoadingError: { [weak self] in
             self?.enqueue(message: "Error loading page", duration: 5.0)
             self?.webView.completedPageLoad()
@@ -54,9 +55,23 @@ extension WKRManager {
                 localPlayer.state = .foundPage
                 self?.transitionGameState(to: .results)
             }
+
             self?.peerNetwork.send(object: WKRCodable(localPlayer))
-            self?.pageViewUpdate(page)
+            self?.logEvent("pageView", ["Page": page.title as Any])
         })
+    }
+
+    private func truncated(url: URL) -> String {
+        var reportedURLString = url.absoluteString
+        if reportedURLString.starts(with: "https://en.m.wikipedia.org/wiki/") {
+            let index = reportedURLString.index(reportedURLString.startIndex, offsetBy: 31)
+            reportedURLString = String(reportedURLString[index...])
+        }
+        if reportedURLString.count > 100 {
+            let index = reportedURLString.index(reportedURLString.endIndex, offsetBy: -4)
+            reportedURLString = reportedURLString[...index] + "+++"
+        }
+        return reportedURLString
     }
 
 }

@@ -10,14 +10,13 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-class ResultsViewController: CenteredTableViewController {
+internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    private let infoLabel = UILabel()
     private var historyViewController: HistoryViewController?
+    private var isAnimatingPointsStateChange = false
 
-    private var isAnimatingStateChange = false
     var readyButtonPressed: (() -> Void)?
     var quitAlertController: UIAlertController?
     var addPlayersViewController: UIViewController?
@@ -69,53 +68,46 @@ class ResultsViewController: CenteredTableViewController {
         registerTableView(for: self)
         overlayButtonTitle = "Ready up"
 
+        guideLabel.text = "TAP PLAYER TO VIEW LIVE PROGRESS"
         descriptionLabel.text = "WAITING FOR PLAYERS TO FINISH"
-        descriptionLabel.textColor = UIColor.wkrTextColor
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
-
-        infoLabel.textAlignment = .center
-        infoLabel.textColor = UIColor.wkrLightTextColor
-        infoLabel.text = "TAP PLAYER TO VIEW PROGRESS"
-        infoLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
-        infoLabel.adjustsFontSizeToFitWidth = true
-        infoLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(infoLabel)
-
-        let constraints = [
-            infoLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            infoLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            infoLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
     }
 
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
             PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
             return
         }
         present(alertController, animated: true, completion: nil)
+        PlayerAnalytics.log(presentingOf: alertController, on: self)
     }
 
     @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let controller = addPlayersViewController else { return }
         present(controller, animated: true, completion: nil)
         PlayerAnalytics.log(event: .hostStartMidMatchInviting)
+        PlayerAnalytics.log(presentingOf: controller, on: self)
     }
 
     override func overlayButtonPressed() {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
         isOverlayButtonHidden = true
-        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
+
         UIView.animate(withDuration: 0.5) {
             self.view.layoutIfNeeded()
         }
+
+        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
     // MARK: - Game Updates
@@ -134,22 +126,17 @@ class ResultsViewController: CenteredTableViewController {
             }
 
             if oldState != .points {
-                isAnimatingStateChange = true
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.tableView.alpha = 0.0
-                    self.infoLabel.alpha = 0.0
-                }, completion: { _ in
-                    self.isAnimatingStateChange = false
+                isAnimatingPointsStateChange = true
+                flashItems(items: [tableView], duration: 1.0) {
+                    self.isAnimatingPointsStateChange = false
                     self.updateTableView()
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self.tableView.alpha = 1.0
-                    })
-                })
+                }
             } else {
                 self.updateTableView()
             }
 
-            UIView.animate(withDuration: 0.75, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.guideLabel.alpha = 0.0
                 self.descriptionLabel.alpha = 0.0
             })
         }
@@ -158,14 +145,10 @@ class ResultsViewController: CenteredTableViewController {
     private func updatedTime(oldTime: Int) {
         tableView.isUserInteractionEnabled = true
         if oldTime == 100 {
-            UIView.animate(withDuration: 0.25, animations: {
-                self.descriptionLabel.alpha = 0.0
-            }, completion: { _ in
+            flashItems(items: [guideLabel, descriptionLabel], duration: 0.75) {
+                self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
-                UIView.animate(withDuration: 0.25, animations: {
-                    self.descriptionLabel.alpha = 1.0
-                })
-            })
+            }
         } else {
             descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
         }
@@ -174,7 +157,7 @@ class ResultsViewController: CenteredTableViewController {
     // MARK: - Helpers
 
     private func updateTableView() {
-        guard !isAnimatingStateChange else { return }
+        guard !isAnimatingPointsStateChange else { return }
         tableView.reloadData()
     }
 
@@ -195,10 +178,11 @@ class ResultsViewController: CenteredTableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        PlayerAnalytics.log(event: .userAction(#function))
         guard let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.rootViewController as? HistoryViewController,
             let player = sender as? WKRPlayer else {
-                fatalError()
+                fatalError("Destination rootViewController not a HistoryViewController")
         }
 
         destination.player = player

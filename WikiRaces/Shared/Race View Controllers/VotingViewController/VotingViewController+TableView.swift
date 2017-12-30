@@ -18,7 +18,7 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as? VotingTableViewCell else {
-            fatalError()
+            fatalError("Failed to create cell")
         }
         cell.vote = voteInfo?.page(for: indexPath.row)
         return cell
@@ -27,19 +27,26 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard let lastIndexPath = tableView.indexPathForSelectedRow, lastIndexPath != indexPath else {
+        guard let lastIndexPath = tableView.indexPathForSelectedRow else {
+            UISelectionFeedbackGenerator().selectionChanged()
             return indexPath
         }
         if lastIndexPath == indexPath {
             return nil
         }
+
+        UISelectionFeedbackGenerator().selectionChanged()
+
         return indexPath
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        PlayerAnalytics.log(event: .userAction(#function))
+
         guard let vote = voteInfo?.page(for: indexPath.row) else {
             return
         }
+
         playerVoted?(vote.page)
     }
 

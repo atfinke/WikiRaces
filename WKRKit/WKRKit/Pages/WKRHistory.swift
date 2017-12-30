@@ -14,7 +14,7 @@ public struct WKRHistory: Codable, Equatable {
     // MARK: - Properties
 
     /// The time the player opened the last page
-    private var lastPageOpenTime: Date?
+    private var lastPageOpenTime: Date
     /// The history entries
     public fileprivate(set) var entries = [WKRHistoryEntry]()
     /// The total time the player has been racing (not including page load times)
@@ -31,7 +31,10 @@ public struct WKRHistory: Codable, Equatable {
     ///
     /// - Parameter page: The first page in the history
     init(firstPage page: WKRPage) {
-        append(page, linkHere: false)
+        lastPageOpenTime = Date()
+
+        let entry = WKRHistoryEntry(page: page, linkHere: false)
+        entries.append(entry)
     }
 
     // MARK: - Mutating
@@ -43,8 +46,8 @@ public struct WKRHistory: Codable, Equatable {
     }
 
     mutating func finishedViewingLastPage() {
-        guard var entry = entries.last, let date = lastPageOpenTime else { return }
-        entry.set(duration: Int(-date.timeIntervalSinceNow))
+        guard var entry = entries.last else { fatalError("Entries is empty") }
+        entry.set(duration: Int(-lastPageOpenTime.timeIntervalSinceNow))
         entries[entries.count - 1] = entry
     }
 
@@ -55,11 +58,7 @@ public struct WKRHistory: Codable, Equatable {
         guard lhs.entries == rhs.entries else {
             return false
         }
-        if let lhsDate = lhs.lastPageOpenTime, let rhsDate = rhs.lastPageOpenTime {
-            return lhsDate == rhsDate
-        } else {
-            return lhs.lastPageOpenTime == nil && rhs.lastPageOpenTime == nil
-        }
+        return lhs.lastPageOpenTime == rhs.lastPageOpenTime
     }
 
 }

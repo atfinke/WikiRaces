@@ -37,8 +37,8 @@ public class WKRUICenteredTableView: UITableView {
     private func centerContents() {
         let totalHeight = bounds.height
         let contentHeight = contentSize.height
-
-        let adjustedInset = UIEdgeInsets(top: ceil(totalHeight/2 - contentHeight/2 - 64), left: 0, bottom: 0, right: 0)
+        let top = ceil(totalHeight / 2 - contentHeight / 2 - 64)
+        let adjustedInset = UIEdgeInsets(top: top, left: 0, bottom: 0, right: 0)
         contentInset = contentHeight < totalHeight ? adjustedInset : UIEdgeInsets.zero
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import WKRUIKit
 
-class HelpViewController: UIViewController, WKNavigationDelegate {
+internal class HelpViewController: StateLogViewController, WKNavigationDelegate {
 
     // MARK: - Properties
 
@@ -39,6 +39,7 @@ class HelpViewController: UIViewController, WKNavigationDelegate {
     // MARK: - Actions
 
     @IBAction func doneButtonPressed() {
+        PlayerAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

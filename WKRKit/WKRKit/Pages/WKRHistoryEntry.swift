@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// A page the player has viewed in ra ace
+/// A page the player has viewed in race
 public struct WKRHistoryEntry: Codable, Equatable {
 
     // MARK: - Properties

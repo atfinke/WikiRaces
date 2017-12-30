@@ -41,7 +41,7 @@ extension MenuViewController {
         case .debugBypass:
             guard let destination = (segue.destination as? UINavigationController)?
                 .rootViewController as? GameViewController else {
-                fatalError()
+                fatalError("Destination not a GameViewController nav")
             }
             destination.isPlayerHost = isPlayerHost
             #if MULTIWINDOWDEBUG
@@ -51,7 +51,7 @@ extension MenuViewController {
         case .showConnecting:
             #if !MULTIWINDOWDEBUG
                 guard let destination = segue.destination as? MPCConnectViewController else {
-                    fatalError()
+                    fatalError("Destination not a MPCConnectViewController nav")
                 }
                 destination.isPlayerHost = isPlayerHost
             #endif

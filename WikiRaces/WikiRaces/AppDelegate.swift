@@ -6,19 +6,19 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import UIKit
 import Crashlytics
 import FirebaseCore
+import UIKit
 
 @UIApplicationMain
-class AppDelegate: WKRAppDelegate {
+internal class AppDelegate: WKRAppDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
             let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
-                fatalError()
+                fatalError("Failed to get API keys")
         }
         Crashlytics.start(withAPIKey: key)
         FirebaseApp.configure()

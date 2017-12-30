@@ -60,7 +60,7 @@ extension WKRManager {
     }
 
     internal func receivedInt(_ object: WKRCodable, from player: WKRPlayerProfile) {
-        guard let int = object.typeOf(WKRInt.self) else { fatalError() }
+        guard let int = object.typeOf(WKRInt.self) else { fatalError("Object not a WKRInt type") }
         switch int.type {
         case .votingTime, .votingPreRaceTime:
             voteTimeUpdate?(int.value)
@@ -93,7 +93,7 @@ extension WKRManager {
         hostResultsInfo = resultsInfo
         resultsInfoHostUpdate?(resultsInfo)
 
-        if localPlayer.state.isRacing {
+        if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
         if localPlayer.shouldGetPoints {

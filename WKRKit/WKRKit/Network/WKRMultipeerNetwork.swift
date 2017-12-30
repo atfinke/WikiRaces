@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
+internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
 
     // MARK: - Closures
 
@@ -52,7 +52,7 @@ class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerD
     }
 
     internal func hostNetworkInterface() -> UIViewController {
-        guard let session = session else { fatalError() }
+        guard let session = session else { fatalError("Session is nil") }
         let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
         browserViewController.maximumNumberOfPeers = 8
         browserViewController.delegate = self
@@ -127,7 +127,7 @@ extension WKRManager {
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
-                            pageViewUpdate: @escaping ((WKRPage) -> Void)) {
+                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)
@@ -137,7 +137,7 @@ extension WKRManager {
                   stateUpdate: stateUpdate,
                   pointsUpdate: pointsUpdate,
                   linkCountUpdate: linkCountUpdate,
-                  pageViewUpdate: pageViewUpdate)
+                  logEvent: logEvent)
     }
 
 }

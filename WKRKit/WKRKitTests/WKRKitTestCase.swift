@@ -13,17 +13,19 @@ class WKRKitTestCase: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        WKRKitConstants.updateConstants()
+        XCTAssertEqual(WKRKitConstants.current.version, 5, "Installed WKRKitConstants not version 5")
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        WKRKitConstants.removeConstants()
         super.tearDown()
     }
 
     // MARK: - Encoding Validation
 
-    func testEncoding<T: Codable & Equatable>(for original: T) {
+    @discardableResult
+    func testEncoding<T: Codable & Equatable>(for original: T) -> T {
         let encoder = JSONEncoder()
         let decoder = JSONDecoder()
 
@@ -49,12 +51,20 @@ class WKRKitTestCase: XCTestCase {
 
             XCTAssertEqual(codable.data, decodedCodable.data)
 
-            XCTAssertEqual(original, decodedCodable.typeOf(T.self))
+            guard let decodedType = decodedCodable.typeOf(T.self) else {
+                XCTFail("Couldn't decode type \(T.self)")
+                fatalError()
+            }
+
+            XCTAssertEqual(original, decodedType)
             XCTAssertNotEqual(data, Data())
 
+            return decodedType
         } catch {
             XCTFail(error.localizedDescription)
         }
+
+        fatalError("Should have returned decoded type")
     }
 
     func testEnumEncoding<T: Equatable & RawRepresentable>(for original: T) where T.RawValue == Int {
@@ -78,23 +88,11 @@ class WKRKitTestCase: XCTestCase {
         }
     }
 
-    // MARK: - Object Creators
+}
 
-    func uniquePlayer(named name: String? = nil) -> WKRPlayer {
-        let name = name ?? "Andrew"
-        let uuid = arc4random().description
-        let profile = WKRPlayerProfile(name: name, playerID: uuid)
-        return WKRPlayer(profile: profile, isHost: false)
-    }
-
-    func uniqueProfile(named name: String? = nil) -> WKRPlayerProfile {
-        let name = name ?? "Andrew"
-        let uuid = arc4random().description
-        return WKRPlayerProfile(name: name, playerID: uuid)
-    }
-
-    func applePage(withSuffix suffix: String? = nil) -> WKRPage {
-        let title = "Title"
+extension WKRPage {
+    static func mockApple(withSuffix suffix: String? = nil) -> WKRPage {
+        let title = "Apple"
         var urlString = "https://www.apple.com/"
         if let suffix = suffix {
             urlString += suffix
@@ -102,5 +100,19 @@ class WKRKitTestCase: XCTestCase {
         let url = URL(string: urlString)!
         return WKRPage(title: title, url: url)
     }
+}
 
+extension WKRPlayer {
+    static func mock(named name: String? = nil) -> WKRPlayer {
+        let profile = WKRPlayerProfile.mock(named: name)
+        return WKRPlayer(profile: profile, isHost: false)
+    }
+}
+
+extension WKRPlayerProfile {
+    static func mock(named name: String? = nil) -> WKRPlayerProfile {
+        let name = name ?? "Andrew"
+        let uuid = arc4random().description
+        return WKRPlayerProfile(name: name, playerID: uuid)
+    }
 }

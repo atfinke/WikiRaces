@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class HistoryViewController: UITableViewController {
+internal class HistoryViewController: StateLogTableViewController {
 
     private var entries = [WKRHistoryEntry]()
     private var currentPlayerState = WKRPlayerState.connecting
@@ -65,6 +65,7 @@ class HistoryViewController: UITableViewController {
     }
 
     @IBAction func doneButtonPressed() {
+        PlayerAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
@@ -77,7 +78,7 @@ class HistoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier, for: indexPath) as? HistoryTableViewCell else {
-            fatalError()
+            fatalError("Unable to create cell")
         }
         let entry = entries[indexPath.row]
 
@@ -87,7 +88,7 @@ class HistoryViewController: UITableViewController {
             let detail = " Link Here"
             attributedText = NSMutableAttributedString(string: pageTitle + detail, attributes: nil)
 
-            let range = NSRange(location: pageTitle.characters.count, length: detail.characters.count)
+            let range = NSRange(location: pageTitle.count, length: detail.count)
             let attributes: [NSAttributedStringKey: Any] = [
                 .foregroundColor: UIColor.lightGray,
                 .font: UIFont.systemFont(ofSize: 15)
