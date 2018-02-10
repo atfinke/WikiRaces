@@ -172,6 +172,10 @@ extension MenuViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.addSubview(titleLabel)
 
+        #if DEBUG
+            titleLabel.textColor = UIColor.blue
+        #endif
+
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."
         subtitleLabel.numberOfLines = 2
         subtitleLabel.textColor = UIColor.wkrTextColor
