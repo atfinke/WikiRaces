@@ -64,7 +64,7 @@ class WKRKitTests: WKRKitTestCase {
         let ending = WKRPage.mockApple(withSuffix: "2")
         let raceConfig = WKRRaceConfig(starting: starting, ending: ending)
 
-        var race = WKRRace(config: raceConfig)
+        var race = WKRRace(config: raceConfig, isSolo: false)
 
         let playerOne = WKRPlayer.mock(named: "Andrew")
         playerOne.startedNewRace(on: starting)

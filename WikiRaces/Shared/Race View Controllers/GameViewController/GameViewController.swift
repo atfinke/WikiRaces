@@ -88,14 +88,9 @@ internal class GameViewController: StateLogViewController {
         }
         if manager.gameState == .preMatch && config.isHost {
             manager.player(.startedGame)
-
             if case let .mpc(_, session, _)? = config {
-                // what is connected?
                 PlayerAnalytics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
-            } else if case .solo? = config {
-                PlayerAnalytics.log(event: .hostStartedMatch,
-                                    attributes: ["ConnectedPeers": 1])
             }
         }
     }

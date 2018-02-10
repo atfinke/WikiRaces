@@ -116,7 +116,7 @@ internal class MenuViewController: StateLogViewController {
         PlayerAnalytics.log(event: .versionInfo)
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            fatalError("No bundle info dictionary")
+                fatalError("No bundle info dictionary")
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
