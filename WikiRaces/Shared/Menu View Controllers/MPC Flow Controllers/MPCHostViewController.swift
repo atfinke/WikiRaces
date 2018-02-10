@@ -36,7 +36,7 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
     private var browser: MCNearbyServiceBrowser?
 
     /// Called when the start button is pressed
-    var didStartMatch: (() -> Void)?
+    var didStartMatch: ((_ isSolo: Bool) -> Void)?
     /// Called when the cancel button is pressed
     var didCancelMatch: (() -> Void)?
 
@@ -94,7 +94,7 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
             try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.didStartMatch?()
+                self.didStartMatch?(false)
             }
         } catch {
             session.disconnect()
@@ -167,25 +167,45 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
     // MARK: - UITableViewDataSource
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if peers.isEmpty {
-            return 1
+        if section == 0 {
+            if peers.isEmpty {
+                return 1
+            } else {
+                return peers.count
+            }
         } else {
-            return peers.count
+            return 1
         }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Choose 1 to 7 players"
+        if section == 0 {
+            return "Choose 1 to 7 players"
+        } else {
+            return nil
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
+        if section == 0 {
+            return """
+            Make sure all players are on the same Wi-Fi network
+            and have Bluetooth enabled for the best results.
+            """
+        } else {
+            return "Practice your skills in solo races. Solo races will not count towards your stats."
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if peers.isEmpty {
+        if indexPath.section == 1 {
+            return tableView.dequeueReusableCell(withIdentifier: "soloCell", for: indexPath)
+        } else if peers.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: "searchingCell", for: indexPath)
         }
 
@@ -209,6 +229,14 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         PlayerAnalytics.log(event: .userAction(#function))
+
+        if indexPath.section == 1 {
+            PlayerAnalytics.log(event: .hostStartedSoloMatch)
+
+            session?.disconnect()
+            didStartMatch?(true)
+            return
+        }
 
         // Hits this case when the "Searching..." placeholder cell is selected
         guard !peers.isEmpty else { return }
