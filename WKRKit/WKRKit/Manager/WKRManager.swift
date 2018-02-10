@@ -164,6 +164,7 @@ public class WKRManager {
         case .quit:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.quit))
             peerNetwork.disconnect()
+            alertView.forceDismiss()
         default: fatalError("\(action)")
         }
     }

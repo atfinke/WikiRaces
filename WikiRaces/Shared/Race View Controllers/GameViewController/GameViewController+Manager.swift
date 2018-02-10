@@ -33,14 +33,14 @@ extension GameViewController {
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
-            }, logEvent: { event, attributes in
+            }, logEvent: { [weak self] event, attributes in
                 #if !MULTIWINDOWDEBUG
                     guard let eventType = PlayerAnalytics.Event(rawValue: event) else {
                         fatalError("Invalid event " + event)
                     }
                     if eventType == .pageView {
                         var isSolo = false
-                        if case .solo? = self.config {
+                        if case .solo? = self?.config {
                             isSolo = true
                         }
                         StatsHelper.shared.viewedPage(isSolo: isSolo)
