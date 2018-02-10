@@ -20,7 +20,7 @@ a[href*=":"] { background-color: white; font-weight: 400; }
 .cleanup.mw-mf-cleanup { display: none !important; }
 
 .mbox-small { display : none !important; }
-.mbox-small-left { display : none !important; }
+.edit-page { display : none !important; }
 #edit-page { display : none !important; }
 #page-actions { display : none !important; }
 #page-secondary-actions { display : none !important; }
@@ -73,7 +73,7 @@ function cleanPage() {
   console.log("WKRUIKit: Removed Tags");
 
   // Remove sections
-  var sectionsToRemove = ["Notes_and_references", "Sources", "Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links", "Links"];
+  var sectionsToRemove = ["Notes_and_references", "Sources", "Footnotes", "Bibliography", "Notes", "References", "Further_reading", "External_links"];
   for (var i = 0; i < sectionsToRemove.length; i++) {
     var sectionHeaderContent = document.getElementById(sectionsToRemove[i]);
 

@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Andrew Finke</string>
 	<key>Builder Version</key>
-	<string>12603.3.8</string>
+	<string>12604.5.6.1.1</string>
 	<key>CFBundleDisplayName</key>
 	<string>WKRUIScriptTester</string>
 	<key>CFBundleIdentifier</key>
@@ -31,7 +31,7 @@
 		</dict>
 	</dict>
 	<key>DeveloperIdentifier</key>
-	<string>0000000000</string>
+	<string>72S993BNAV</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
