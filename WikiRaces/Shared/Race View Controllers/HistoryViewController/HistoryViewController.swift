@@ -76,8 +76,6 @@ internal class HistoryViewController: StateLogTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //swiftlint:disable:next line_length
-
         let entry = entries[indexPath.row]
         let cellIdentifier = (entry == entries.last && currentPlayerState != .racing) ?
             HistoryTableViewCell.finalReuseIdentifier :
@@ -116,7 +114,7 @@ internal class HistoryViewController: StateLogTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == entries.count - 1 ? 65 : 44
+        return 44
     }
 
 }
