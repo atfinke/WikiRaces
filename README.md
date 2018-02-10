@@ -19,4 +19,4 @@ Feel free to ping me with questions.
 #### /WKRUIKit
 - Framework responsible for the shared UI across the app.
 #### /WikiRaces
-- Contains the main project file with the release and multi-window debug targets.
+- Contains the main project with the release and multi-window debug targets.
