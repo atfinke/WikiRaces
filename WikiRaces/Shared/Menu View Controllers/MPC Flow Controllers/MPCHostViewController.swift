@@ -187,7 +187,7 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         if section == 0 {
             return "Choose 1 to 7 players"
         } else {
-            return nil
+            return " "
         }
     }
 
