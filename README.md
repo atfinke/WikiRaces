@@ -8,6 +8,8 @@ Feel free to ping me with questions.
 ***
 ### Root Directory
 
+#### /Resources
+- Various iconography.
 #### /WikiRaces
 - Contains the main project file with the release and multi-window debug targets.
 #### /WKR Python
