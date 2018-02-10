@@ -34,9 +34,6 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
     let playerName: String
 
     var players = [WKRPlayerProfile]()
-    var connectedPlayers: Int {
-        return players.count
-    }
 
     // MARK: - Initialization
 
@@ -90,9 +87,8 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
         print("Would Disconnect")
     }
 
-    func hostNetworkInterface() -> UIViewController {
-        print("hostNetworkInterface called")
-        return UIViewController()
+    func hostNetworkInterface() -> UIViewController? {
+        return nil
     }
 
 }
@@ -101,13 +97,12 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
 extension WKRManager {
 
-    @available(*, deprecated, message: "Only for split view debugging")
-    public convenience init(windowName: String,
-                            isPlayerHost: Bool,
-                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                            pointsUpdate: @escaping ((Int) -> Void),
-                            linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+    internal convenience init(windowName: String,
+                              isPlayerHost: Bool,
+                              stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
+                              pointsUpdate: @escaping ((Int) -> Void),
+                              linkCountUpdate: @escaping ((Int) -> Void),
+                              logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
         let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)

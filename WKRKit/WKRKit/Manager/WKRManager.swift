@@ -77,7 +77,7 @@ public class WKRManager {
         localPlayer = player
         peerNetwork = network
 
-        game = WKRGame(localPlayer: localPlayer)
+        game = WKRGame(localPlayer: localPlayer, isSolo: network is WKRSoloNetwork)
         if player.isHost {
             configure(game: game)
         }
@@ -121,7 +121,7 @@ public class WKRManager {
 
     // MARK: User Interface
 
-    public func hostNetworkInterface() -> UIViewController {
+    public func hostNetworkInterface() -> UIViewController? {
         return peerNetwork.hostNetworkInterface()
     }
 
@@ -167,4 +167,40 @@ public class WKRManager {
         default: fatalError("\(action)")
         }
     }
+}
+
+extension WKRManager {
+
+    public convenience init(networkConfig: WKRPeerNetworkConfig,
+                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
+                            pointsUpdate: @escaping ((Int) -> Void),
+                            linkCountUpdate: @escaping ((Int) -> Void),
+                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+
+        switch networkConfig {
+        case .solo(let name):
+            self.init(soloPlayerName: name,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        case .multiwindow(let windowName, let isHost):
+            self.init(windowName: windowName,
+                      isPlayerHost: isHost,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        case .mpc(let serviceType, let session, let isHost):
+            self.init(serviceType: serviceType,
+                      session: session,
+                      isPlayerHost: isHost,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        }
+
+    }
+
 }

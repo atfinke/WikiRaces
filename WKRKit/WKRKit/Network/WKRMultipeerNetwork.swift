@@ -22,10 +22,6 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
     private weak var session: MCSession?
     private let serviceType: String
 
-    var connectedPlayers: Int {
-        return session?.connectedPeers.count ?? 0
-    }
-
     // MARK: - Initialization
 
     init(serviceType: String, session: MCSession) {
@@ -51,7 +47,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
         }
     }
 
-    internal func hostNetworkInterface() -> UIViewController {
+    internal func hostNetworkInterface() -> UIViewController? {
         guard let session = session else { fatalError("Session is nil") }
         let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
         browserViewController.maximumNumberOfPeers = 8
@@ -121,13 +117,13 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
 
 extension WKRManager {
 
-    public convenience init(serviceType: String,
-                            session: MCSession,
-                            isPlayerHost: Bool,
-                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                            pointsUpdate: @escaping ((Int) -> Void),
-                            linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+    internal convenience init(serviceType: String,
+                              session: MCSession,
+                              isPlayerHost: Bool,
+                              stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
+                              pointsUpdate: @escaping ((Int) -> Void),
+                              linkCountUpdate: @escaping ((Int) -> Void),
+                              logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)

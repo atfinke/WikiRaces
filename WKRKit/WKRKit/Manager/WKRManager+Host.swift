@@ -20,7 +20,15 @@ extension WKRManager {
                 return
             }
             if isHost && gameState == .hostResults {
-                self?.finishResultsCountdown()
+                if self?.peerNetwork is WKRSoloNetwork {
+                    // So I don't have to rewrite animation timing in the results controller
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                        self?.finishResultsCountdown()
+                    })
+                } else {
+                    self?.finishResultsCountdown()
+                }
+
             }
         }
         game.bonusPointsUpdated = { [weak self] points in
@@ -80,8 +88,12 @@ extension WKRManager {
         guard localPlayer.isHost && gameState != .points else { fatalError("Local player not host") }
 
         self.game.players = []
-
         self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
+
+        if self.peerNetwork is WKRSoloNetwork {
+            self.alertView.enqueue(text: "No stats in solo races", duration: 5)
+        }
+
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceConstants.resultsPostHoldDuration) {
             self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
         }

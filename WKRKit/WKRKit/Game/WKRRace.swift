@@ -12,6 +12,8 @@ internal struct WKRRace {
 
     // MARK: - Properties
 
+    private let isSolo: Bool
+
     /// The race's bonus points
     internal var bonusPoints = 0
     /// The end page for the race
@@ -23,7 +25,8 @@ internal struct WKRRace {
 
     // MARK: - Initialization
 
-    internal init(config: WKRRaceConfig) {
+    internal init(config: WKRRaceConfig, isSolo: Bool) {
+        self.isSolo = isSolo
         finalPage = config.endingPage
         linkedPagesFetcher?.start(for: finalPage)
     }
@@ -92,8 +95,12 @@ internal struct WKRRace {
     ///
     /// - Returns: If the race should end
     internal func shouldEnd() -> Bool {
-        return players.filter({ $0.state == .racing }).count <= 1
-            && players.filter({ $0.state != .connecting }).count > 1
+        if isSolo {
+            return players.first?.state != .racing
+        } else {
+            return players.filter({ $0.state == .racing }).count <= 1
+                && players.filter({ $0.state != .connecting }).count > 1
+        }
     }
 
 }
