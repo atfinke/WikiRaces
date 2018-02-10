@@ -77,10 +77,16 @@ internal class HistoryViewController: StateLogTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //swiftlint:disable:next line_length
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier, for: indexPath) as? HistoryTableViewCell else {
+
+        let entry = entries[indexPath.row]
+        let cellIdentifier = (entry == entries.last && currentPlayerState != .racing) ?
+            HistoryTableViewCell.finalReuseIdentifier :
+            HistoryTableViewCell.reuseIdentifier
+
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                       for: indexPath) as? HistoryTableViewCell else {
             fatalError("Unable to create cell")
         }
-        let entry = entries[indexPath.row]
 
         let pageTitle = entry.page.title ?? "Unknown Page"
         var attributedText = NSMutableAttributedString(string: pageTitle, attributes: nil)
@@ -107,6 +113,10 @@ internal class HistoryViewController: StateLogTableViewController {
         }
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.row == entries.count - 1 ? 65 : 44
     }
 
 }

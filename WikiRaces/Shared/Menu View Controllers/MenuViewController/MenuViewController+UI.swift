@@ -263,6 +263,12 @@ extension MenuViewController {
             }
         }
 
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            self.leftMenuTile?.value = 140
+            self.middleMenuTile?.value = 140/72
+            self.rightMenuTile?.value = 72
+        }
+
         return statsStackView
     }
 

@@ -46,7 +46,7 @@ public class WKRUIButton: UIButton {
         super.init(frame: .zero)
 
         layer.cornerRadius = 5
-        layer.borderWidth = 1.3
+        layer.borderWidth = 1.7
         layer.borderColor = UIColor.wkrTextColor.cgColor
         backgroundColor = UIColor.clear
 

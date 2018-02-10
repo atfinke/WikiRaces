@@ -62,6 +62,7 @@
 		1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPostHideScript.js; sourceTree = "<group>"; };
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
 		1413AB2B1F36500400873ACA /* WKRUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWebView.swift; sourceTree = "<group>"; };
+		144A101B202F6D61003DB51A /* WKRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WKRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		145E903C1F79F80A00D31554 /* WKRUIConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRUIConstants.plist; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF7F71F362B0D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +128,7 @@
 		149FF7E91F362B0D000A5D96 = {
 			isa = PBXGroup;
 			children = (
+				144A101B202F6D61003DB51A /* WKRKit.framework */,
 				149FF7F51F362B0D000A5D96 /* WKRUIKit */,
 				14A3D4A01F3634110038388F /* WKRUIKit (UI Catalog) */,
 				149FF7F41F362B0D000A5D96 /* Products */,
