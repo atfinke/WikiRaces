@@ -36,7 +36,8 @@ internal struct PlayerAnalytics {
     enum StatEvent {
         case players(unique: Int, total: Int)
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
-        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
+        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int,
+            soloTotalTime: Int, soloPages: Int)
         case buildInfo(version: String, build: String)
     }
 
@@ -55,6 +56,7 @@ internal struct PlayerAnalytics {
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
+        case hostStartedSoloMatch
     }
 
     // MARK: - Logging Events
@@ -131,12 +133,15 @@ internal struct PlayerAnalytics {
                         case .usingCustomName(let name):
                             record["CustomName"] = name as NSString
                             log(event: .nameType, attributes: ["Type": "CustomName"])
-                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
+                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages,
+                                           let soloTotalTime, let soloPages):
                             record["Points"] = NSNumber(value: points)
                             record["Races"] = NSNumber(value: races)
                             record["TotalTime"] = NSNumber(value: totalTime)
                             record["FastestTime"] = NSNumber(value: fastestTime)
                             record["Pages"] = NSNumber(value: pages)
+                            record["SoloTotalTime"] = NSNumber(value: soloTotalTime)
+                            record["SoloPages"] = NSNumber(value: soloPages)
                         case .buildInfo(let version, let build):
                             record["BundleVersion"] = version as NSString
                             record["BundleBuild"] = build as NSString
