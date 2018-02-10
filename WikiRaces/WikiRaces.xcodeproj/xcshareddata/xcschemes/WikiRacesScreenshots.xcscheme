@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "149FF8771F362BE4000A5D96"
-               BuildableName = "WikiRaces (Multi-Window).app"
-               BlueprintName = "WikiRaces (Multi-Window)"
+               BlueprintIdentifier = "149FF88D1F362BF1000A5D96"
+               BuildableName = "WikiRacesScreenshots.xctest"
+               BlueprintName = "WikiRacesScreenshots"
                ReferencedContainer = "container:WikiRaces.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -29,16 +29,17 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "149FF88D1F362BF1000A5D96"
+               BuildableName = "WikiRacesScreenshots.xctest"
+               BlueprintName = "WikiRacesScreenshots"
+               ReferencedContainer = "container:WikiRaces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "149FF8771F362BE4000A5D96"
-            BuildableName = "WikiRaces (Multi-Window).app"
-            BlueprintName = "WikiRaces (Multi-Window)"
-            ReferencedContainer = "container:WikiRaces.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -53,23 +54,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "149FF8771F362BE4000A5D96"
-            BuildableName = "WikiRaces (Multi-Window).app"
-            BlueprintName = "WikiRaces (Multi-Window)"
+            BlueprintIdentifier = "149FF88D1F362BF1000A5D96"
+            BuildableName = "WikiRacesScreenshots.xctest"
+            BlueprintName = "WikiRacesScreenshots"
             ReferencedContainer = "container:WikiRaces.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "Cloud_Disabled"
-            value = "true"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -79,16 +72,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "149FF8771F362BE4000A5D96"
-            BuildableName = "WikiRaces (Multi-Window).app"
-            BlueprintName = "WikiRaces (Multi-Window)"
+            BlueprintIdentifier = "149FF88D1F362BF1000A5D96"
+            BuildableName = "WikiRacesScreenshots.xctest"
+            BlueprintName = "WikiRacesScreenshots"
             ReferencedContainer = "container:WikiRaces.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

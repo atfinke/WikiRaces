@@ -2,6 +2,7 @@
 
 # A list of devices you want to take the screenshots from
  devices([
+"iPhone X",
 "iPhone 8",
 "iPhone 8 Plus",
 "iPad Pro (9.7-inch)",
@@ -14,7 +15,7 @@ languages([
 ])
 
 # The name of the scheme which contains the UI Tests
- scheme "WikiRacesCatalogScreenshots"
+ scheme "WikiRacesScreenshots"
 
 # Where should the resulting screenshots be stored?
 # output_directory "./screenshots"

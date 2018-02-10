@@ -46,6 +46,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
     /// Attempts Game Center login
     func attemptGCAuthentication() {
+        guard !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
+            return
+        }
+
         GKLocalPlayer.localPlayer().authenticateHandler = { viewController, error in
             DispatchQueue.main.async {
                 if let viewController = viewController, self.isMenuVisable {
