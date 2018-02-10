@@ -131,6 +131,9 @@ internal class ResultsViewController: CenteredTableViewController {
                     self.isAnimatingPointsStateChange = false
                     self.updateTableView()
                 }
+                if isPlayerHost, let results = resultsInfo {
+                    PlayerAnalytics.record(results: results)
+                }
             } else {
                 self.updateTableView()
             }
