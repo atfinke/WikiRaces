@@ -10,8 +10,6 @@ Feel free to ping me with questions.
 
 #### /Resources
 - Various iconography.
-#### /WikiRaces
-- Contains the main project file with the release and multi-window debug targets.
 #### /WKR Python
 - Python scripts I use to compile the final articles list.
 #### /WKRCloudStats
@@ -20,3 +18,5 @@ Feel free to ping me with questions.
 - Framework responsible for most of the core game logic.
 #### /WKRUIKit
 - Framework responsible for the shared UI across the app.
+#### /WikiRaces
+- Contains the main project file with the release and multi-window debug targets.
