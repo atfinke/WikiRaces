@@ -72,9 +72,7 @@ internal class MPCConnectViewController: StateLogViewController {
         Crashlytics.sharedInstance().setUserName(playerName)
 
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "CHECKING CONNECTION")
 
         cancelButton.alpha = 0.0
         activityIndicatorView.alpha = 0.0
@@ -151,6 +149,12 @@ internal class MPCConnectViewController: StateLogViewController {
     }
 
     // MARK: - Interface Updates
+
+    func updateDescriptionLabel(to text: String) {
+        descriptionLabel.attributedText = NSAttributedString(string: text,
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .semibold))
+    }
 
     /// Shows an error with a title
     ///
