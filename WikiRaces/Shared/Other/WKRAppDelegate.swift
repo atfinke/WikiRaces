@@ -17,6 +17,9 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
     func configureConstants() {
         WKRKitConstants.updateConstants()
         WKRUIConstants.updateConstants()
+
+        // Don't be that app that prompts people when they first open it
+        UserDefaults.standard.set(false, forKey: "ShouldPromptForRating")
     }
 
     func configureAppearance() {
