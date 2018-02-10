@@ -25,7 +25,7 @@ internal class ResultsViewController: CenteredTableViewController {
 
     var isPlayerHost = false {
         didSet {
-            if isPlayerHost {
+            if isPlayerHost && addPlayersViewController != nil {
                 navigationItem.leftBarButtonItem?.isEnabled = false
             } else {
                 navigationItem.leftBarButtonItem = nil
