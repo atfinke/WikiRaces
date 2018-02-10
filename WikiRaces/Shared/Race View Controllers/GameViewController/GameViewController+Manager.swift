@@ -14,47 +14,49 @@ extension GameViewController {
 
     // MARK: - WKRManager
 
-    //swiftlint:disable function_body_length line_length
     func setupManager() {
-        #if MULTIWINDOWDEBUG
-            manager = WKRManager(windowName: windowName, isPlayerHost: isPlayerHost, stateUpdate: { state, _ in
-                self.transition(to: state)
-            }, pointsUpdate: { points in
-                StatsHelper.shared.completedRace(points: points, timeRaced: self.timeRaced)
-            }, linkCountUpdate: { linkCount in
-                self.webView.text = linkCount.description
-            }, logEvent: { _, _ in
-            })
-        #else
-            manager = WKRManager(serviceType: serviceType, session: session, isPlayerHost: isPlayerHost, stateUpdate: { [weak self] state, error in
-                if let error = error {
-                    DispatchQueue.main.async {
-                        self?.errorOccurred(error)
-                    }
-                } else {
-                    self?.transition(to: state)
+        manager = WKRManager(networkConfig: config, stateUpdate: { [weak self] state, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self?.errorOccurred(error)
                 }
+            } else {
+                self?.transition(to: state)
+            }
             }, pointsUpdate: { [weak self] points in
                 if let timeRaced = self?.timeRaced {
-                    StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced)
+                    var isSolo = false
+                    if case .solo? = self?.config {
+                        isSolo = true
+                    }
+                    StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced, isSolo: isSolo)
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
             }, logEvent: { event, attributes in
-                guard let eventType = PlayerAnalytics.Event(rawValue: event) else {
-                    fatalError("Invalid event " + event)
-                }
-                if eventType == .pageView {
-                    StatsHelper.shared.viewedPage()
-                }
-                PlayerAnalytics.log(event: eventType, attributes: attributes)
-            })
-        #endif
+                #if !MULTIWINDOWDEBUG
+                    guard let eventType = PlayerAnalytics.Event(rawValue: event) else {
+                        fatalError("Invalid event " + event)
+                    }
+                    if eventType == .pageView {
+                        var isSolo = false
+                        if case .solo? = self.config {
+                            isSolo = true
+                        }
+                        StatsHelper.shared.viewedPage(isSolo: isSolo)
+                    }
+                    PlayerAnalytics.log(event: eventType, attributes: attributes)
+                #endif
+        })
 
+        configureManagerControllerClosures()
+    }
+
+    private func configureManagerControllerClosures() {
         manager.voting(timeUpdate: { [weak self] time in
             self?.votingViewController?.voteTimeRemaing = time
 
-            if self?.isPlayerHost ?? false && time == 0, let votingInfo = self?.manager.voteInfo {
+            if self?.config.isHost ?? false && time == 0, let votingInfo = self?.manager.voteInfo {
                 for index in 0..<votingInfo.pageCount {
                     if let info = votingInfo.page(for: index) {
                         for _ in 0..<info.votes {
@@ -63,31 +65,30 @@ extension GameViewController {
                     }
                 }
             }
-        }, infoUpdate: { [weak self] voteInfo in
-            self?.votingViewController?.voteInfo = voteInfo
-        }, finalPageUpdate: { [weak self] page in
-            self?.finalPage = page
-            self?.votingViewController?.finalPageSelected(page)
-            UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
-                self?.webView.alpha = 1.0
-            }, completion: nil)
+            }, infoUpdate: { [weak self] voteInfo in
+                self?.votingViewController?.voteInfo = voteInfo
+            }, finalPageUpdate: { [weak self] page in
+                self?.finalPage = page
+                self?.votingViewController?.finalPageSelected(page)
+                UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
+                    self?.webView.alpha = 1.0
+                }, completion: nil)
         })
 
         manager.results(showReady: { [weak self] showReady in
             self?.resultsViewController?.showReadyUpButton(showReady)
-        }, timeUpdate: { [weak self] time in
-            self?.resultsViewController?.timeRemaining = time
-        }, infoUpdate: { [weak self] resultsInfo in
-            if self?.resultsViewController?.state != .hostResults {
+            }, timeUpdate: { [weak self] time in
+                self?.resultsViewController?.timeRemaining = time
+            }, infoUpdate: { [weak self] resultsInfo in
+                if self?.resultsViewController?.state != .hostResults {
+                    self?.resultsViewController?.resultsInfo = resultsInfo
+                }
+            }, hostInfoUpdate: { [weak self] resultsInfo in
                 self?.resultsViewController?.resultsInfo = resultsInfo
-            }
-        }, hostInfoUpdate: { [weak self] resultsInfo in
-            self?.resultsViewController?.resultsInfo = resultsInfo
-        }, readyStatesUpdate: { [weak self] readyStates in
-            self?.resultsViewController?.readyStates = readyStates
+            }, readyStatesUpdate: { [weak self] readyStates in
+                self?.resultsViewController?.readyStates = readyStates
         })
     }
-    //swiftlint:enable line_length
 
     private func errorOccurred(_ error: WKRFatalError) {
         guard self.view.window != nil  && !isPlayerQuitting else { return }
@@ -170,7 +171,7 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
 
-            if state == .hostResults && isPlayerHost {
+            if state == .hostResults && config.isHost {
                 PlayerAnalytics.log(event: .hostEndedRace)
             }
         case .race:
@@ -189,7 +190,7 @@ extension GameViewController {
 
             dismissActiveController(completion: nil)
 
-            if isPlayerHost {
+            if config.isHost {
                 PlayerAnalytics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
             }
         default: break
