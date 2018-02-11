@@ -34,9 +34,9 @@ internal class GameViewController: StateLogViewController {
 
     // MARK: - User Interface
 
-    let thinLine = UIView()
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
+    let navigationBarBottomLine = UIView()
 
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!

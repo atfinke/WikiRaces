@@ -132,7 +132,9 @@ internal class ResultsViewController: CenteredTableViewController {
                     self.updateTableView()
                 }
                 if isPlayerHost, let results = resultsInfo {
-                    PlayerAnalytics.record(results: results)
+                    DispatchQueue.global().async {
+                        PlayerAnalytics.record(results: results)
+                    }
                 }
             } else {
                 self.updateTableView()

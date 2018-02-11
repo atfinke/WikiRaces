@@ -11,6 +11,8 @@ import WKRKit
 
 internal class HistoryViewController: StateLogTableViewController {
 
+    // MARK: - Properties
+
     private var entries = [WKRHistoryEntry]()
     private var currentPlayerState = WKRPlayerState.connecting
 
@@ -63,6 +65,8 @@ internal class HistoryViewController: StateLogTableViewController {
             tableView.endUpdates()
         }
     }
+
+    // MARK: - Actions
 
     @IBAction func doneButtonPressed() {
         PlayerAnalytics.log(event: .userAction(#function))

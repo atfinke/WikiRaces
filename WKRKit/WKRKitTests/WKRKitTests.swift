@@ -30,12 +30,12 @@ class WKRKitTests: WKRKitTestCase {
 
         var historyOne = WKRHistory(firstPage: startingPage)
         historyOne.append(startingPage, linkHere: false)
-        XCTAssertEqual(historyOne.duration, Int.max)
+        XCTAssertNil(historyOne.duration)
 
         historyOne.finishedViewingLastPage()
         XCTAssertNotNil(historyOne.entries.first?.duration)
         XCTAssertLessThan(historyOne.entries[0].duration ?? 1, 1)
-        XCTAssertLessThan(historyOne.duration, 1)
+        XCTAssertLessThan(historyOne.duration!, 1)
 
         historyOne.append(endingPage, linkHere: false)
 
