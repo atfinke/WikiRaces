@@ -12,10 +12,13 @@ import WKRUIKit
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+
+        WKRUIConstants.updateConstants()
+
         super.viewDidLoad()
         let webView = WKRUIWebView()
         view = webView
-        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple")!))
+        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!))
         // Do any additional setup after loading the view, typically from a nib.
     }
 

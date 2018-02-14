@@ -116,7 +116,7 @@ internal class MenuViewController: StateLogViewController {
         PlayerAnalytics.log(event: .versionInfo)
         guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            fatalError("No bundle info dictionary")
+                fatalError("No bundle info dictionary")
         }
         let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
         titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
@@ -223,7 +223,7 @@ internal class MenuViewController: StateLogViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
-            if StatsHelper.shared.statValue(for: .points) > 0, #available(iOS 10.3, *) {
+            if UserDefaults.standard.bool(forKey: "ShouldPromptForRating"), #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
             }
         })

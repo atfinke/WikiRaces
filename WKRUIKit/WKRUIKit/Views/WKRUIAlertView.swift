@@ -101,6 +101,11 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         }
     }
 
+    public func forceDismiss() {
+        queue = []
+        self.dismiss()
+    }
+
     // MARK: - State
 
     private func present() {

@@ -21,8 +21,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DispatchQueue.main.async {
             if state == .connected && peerID == self.hostPeerID {
-                //swiftlint:disable:next line_length
-                self.descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR HOST", spacing: 2.0, font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+                self.updateDescriptionLabel(to: "WAITING FOR HOST")
             } else if state == .notConnected && peerID == self.hostPeerID {
                 self.showError(title: "Connection Issue", message: "The connection to the host was lost.")
             }
@@ -48,9 +47,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: serviceType)
         advertiser?.delegate = self
         advertiser?.startAdvertisingPeer()
-        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "WAITING FOR INVITE")
     }
 
     // MARK: - MCAdvertiserAssistantDelegate
@@ -86,9 +83,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         UIView.animate(withDuration: 0.25, animations: {
             self.inviteView.alpha = 1.0
         })
-        descriptionLabel.attributedText = NSAttributedString(string: "INVITE RECEIVED",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "INVITE RECEIVED")
     }
 
     // MARK: - User Actions
@@ -99,9 +94,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
-        descriptionLabel.attributedText = NSAttributedString(string: "CONNECTING TO HOST",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "CONNECTING TO HOST")
+
         UIView.animate(withDuration: 0.5) {
             self.inviteView.alpha = 0.0
         }
@@ -112,9 +106,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         PlayerAnalytics.log(event: .userAction(#function))
 
         activeInvite?(false, session)
-        descriptionLabel.attributedText = NSAttributedString(string: "WAITING FOR INVITE",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "WAITING FOR INVITE")
+
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 1.0
             self.activityIndicatorView.alpha = 1.0

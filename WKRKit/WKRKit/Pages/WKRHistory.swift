@@ -18,9 +18,9 @@ public struct WKRHistory: Codable, Equatable {
     /// The history entries
     public fileprivate(set) var entries = [WKRHistoryEntry]()
     /// The total time the player has been racing (not including page load times)
-    public var duration: Int {
+    public var duration: Int? {
         if entries.first?.duration == nil {
-            return Int.max
+            return nil
         }
         return entries.flatMap { $0.duration }.reduce(0, +)
     }

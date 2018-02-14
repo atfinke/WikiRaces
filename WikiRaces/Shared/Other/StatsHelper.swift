@@ -28,6 +28,9 @@ internal class StatsHelper {
         case totalPlayers
         case uniquePlayers
 
+        case soloPages
+        case soloTotalTime
+
         var key: String {
             return "WKRStat-" + self.rawValue
         }
@@ -42,6 +45,8 @@ internal class StatsHelper {
             case .pages:         return true
             case .totalPlayers:  return true
             case .uniquePlayers: return true
+            case .soloPages:     return true
+            case .soloTotalTime: return true
             }
         }
 
@@ -55,6 +60,8 @@ internal class StatsHelper {
             case .pages:         return "com.andrewfinke.wikiraces.pages"
             case .totalPlayers:  return "com.andrewfinke.wikiraces.totalPlayers"
             case .uniquePlayers: return "com.andrewfinke.wikiraces.uniquePlayers"
+            case .soloPages:     fatalError()
+            case .soloTotalTime: fatalError()
             }
         }
     }
@@ -103,12 +110,17 @@ internal class StatsHelper {
 
         let pages = statValue(for: .pages)
 
+        let soloTotalTime = statValue(for: .soloTotalTime)
+        let soloPages = statValue(for: .soloPages)
+
         keyStatsUpdated?(points, races, statValue(for: .average))
         PlayerAnalytics.log(event: .updatedStats(points: Int(points),
                                                  races: Int(races),
                                                  totalTime: Int(totalTime),
                                                  fastestTime: Int(fastestTime),
-                                                 pages: Int(pages)))
+                                                 pages: Int(pages),
+                                                 soloTotalTime: Int(soloTotalTime),
+                                                 soloPages: Int(soloPages)))
     }
 
     // MARK: - Set/Get Stats
@@ -122,9 +134,10 @@ internal class StatsHelper {
         }
     }
 
-    func viewedPage() {
-        let newPages = statValue(for: .pages) + 1
-        defaults.set(newPages, forKey: Stat.pages.key)
+    func viewedPage(isSolo: Bool) {
+        let stat: Stat = isSolo ? .soloPages : .pages
+        let newPages = statValue(for: stat) + 1
+        defaults.set(newPages, forKey: stat.key)
     }
 
     func connected(to players: [String]) {
@@ -141,22 +154,31 @@ internal class StatsHelper {
         PlayerAnalytics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
     }
 
-    func completedRace(points: Int, timeRaced: Int) {
-        let newPoints = statValue(for: .points) + Double(points)
-        let newRaces = statValue(for: .races) + 1
-        let newTotalTime = statValue(for: .totalTime) + Double(timeRaced)
+    func completedRace(points: Int, timeRaced: Int, isSolo: Bool) {
+        if isSolo {
+            let newSoloTotalTime = statValue(for: .soloTotalTime) + Double(timeRaced)
+            defaults.set(newSoloTotalTime, forKey: Stat.soloTotalTime.key)
+            defaults.set(true, forKey: "ShouldPromptForRating")
+        } else {
+            let newPoints = statValue(for: .points) + Double(points)
+            let newRaces = statValue(for: .races) + 1
+            let newTotalTime = statValue(for: .totalTime) + Double(timeRaced)
 
-        defaults.set(newPoints, forKey: Stat.points.key)
-        defaults.set(newRaces, forKey: Stat.races.key)
-        defaults.set(newTotalTime, forKey: Stat.totalTime.key)
+            defaults.set(newPoints, forKey: Stat.points.key)
+            defaults.set(newRaces, forKey: Stat.races.key)
+            defaults.set(newTotalTime, forKey: Stat.totalTime.key)
 
-        // If found page, check for fastest completion time
-        if points > 0 {
-            let currentFastestTime = statValue(for: .fastestTime)
-            if currentFastestTime == 0 {
-                defaults.set(timeRaced, forKey: Stat.fastestTime.key)
-            } else if timeRaced < Int(currentFastestTime) {
-                defaults.set(timeRaced, forKey: Stat.fastestTime.key)
+            // If found page, check for fastest completion time
+            if points > 0 {
+                let currentFastestTime = statValue(for: .fastestTime)
+                if currentFastestTime == 0 {
+                    defaults.set(timeRaced, forKey: Stat.fastestTime.key)
+                } else if timeRaced < Int(currentFastestTime) {
+                    defaults.set(timeRaced, forKey: Stat.fastestTime.key)
+                }
+                defaults.set(true, forKey: "ShouldPromptForRating")
+            } else {
+                defaults.set(false, forKey: "ShouldPromptForRating")
             }
         }
 

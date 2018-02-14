@@ -28,7 +28,7 @@ public enum WKRFatalError: Int {
         case .disconnected: return "You are no longer connected to the host of the race."
         case .noPeers: return "There are no other players left in the game."
         case .internetSpeed: return "A fast internet connection is required to play WikiRaces."
-        case .configCreationFailed: return "The host experienced an unexpected issue."
+        case .configCreationFailed: return "The host's internet connection was too slow to start the race."
         }
     }
 }

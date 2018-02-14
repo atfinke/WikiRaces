@@ -25,7 +25,7 @@ internal class ResultsViewController: CenteredTableViewController {
 
     var isPlayerHost = false {
         didSet {
-            if isPlayerHost {
+            if isPlayerHost && addPlayersViewController != nil {
                 navigationItem.leftBarButtonItem?.isEnabled = false
             } else {
                 navigationItem.leftBarButtonItem = nil
@@ -130,6 +130,11 @@ internal class ResultsViewController: CenteredTableViewController {
                 flashItems(items: [tableView], duration: 1.0) {
                     self.isAnimatingPointsStateChange = false
                     self.updateTableView()
+                }
+                if isPlayerHost, let results = resultsInfo {
+                    DispatchQueue.global().async {
+                        PlayerAnalytics.record(results: results)
+                    }
                 }
             } else {
                 self.updateTableView()

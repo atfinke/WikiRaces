@@ -70,7 +70,7 @@ extension GameViewController {
 
         resultsViewController.state = manager.gameState
         resultsViewController.resultsInfo = manager.hostResultsInfo
-        resultsViewController.isPlayerHost = isPlayerHost
+        resultsViewController.isPlayerHost = config.isHost
         resultsViewController.quitAlertController = quitAlertController(raceStarted: false)
 
         self.resultsViewController = resultsViewController

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRKit
 
 extension MenuViewController {
 
@@ -41,15 +42,20 @@ extension MenuViewController {
         case .debugBypass:
             guard let destination = (segue.destination as? UINavigationController)?
                 .rootViewController as? GameViewController else {
-                fatalError("Destination not a GameViewController nav")
+                    fatalError("Destination not a GameViewController nav")
             }
-            destination.isPlayerHost = isPlayerHost
             #if MULTIWINDOWDEBUG
                 //swiftlint:disable:next force_cast
-                destination.windowName = (view.window as! DebugWindow).playerName
+                destination.config = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
+                                                  isHost: isPlayerHost)
+            #else
+                fatalError()
             #endif
+
         case .showConnecting:
-            #if !MULTIWINDOWDEBUG
+            #if MULTIWINDOWDEBUG
+                fatalError()
+            #else
                 guard let destination = segue.destination as? MPCConnectViewController else {
                     fatalError("Destination not a MPCConnectViewController nav")
                 }

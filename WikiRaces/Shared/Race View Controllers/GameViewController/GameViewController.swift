@@ -16,34 +16,27 @@ internal class GameViewController: StateLogViewController {
 
     // MARK: - Game Properties
 
-    var isPlayerHost = false
     var isPlayerQuitting = false
-
     var isInterfaceConfigured = false
-    var gameState = WKRGameState.preMatch
 
     var timeRaced = 0
     var raceTimer: Timer?
+    var gameState = WKRGameState.preMatch
 
-    var manager: WKRManager!
     var finalPage: WKRPage? {
         didSet {
             title = finalPage?.title?.uppercased()
         }
     }
 
-    #if MULTIWINDOWDEBUG
-    var windowName: String!
-    #else
-    var serviceType: String!
-    var session: MCSession!
-    #endif
+    var manager: WKRManager!
+    var config: WKRPeerNetworkConfig!
 
     // MARK: - User Interface
 
-    let thinLine = UIView()
     let webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
+    let navigationBarBottomLine = UIView()
 
     var flagBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
@@ -76,14 +69,14 @@ internal class GameViewController: StateLogViewController {
         super.viewDidAppear(animated)
         if !isInterfaceConfigured {
             isInterfaceConfigured = true
-            if !isPlayerHost {
+            if !config.isHost {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.connectingLabel.alpha = 1.0
                     self.activityIndicatorView.alpha = 1.0
                 })
             }
 
-            #if !MULTIWINDOWDEBUG
+            if case let .mpc(_, session, _)? = config {
                 // Due to low usage, not accounting for players joining mid session
                 let playerNames = session.connectedPeers.filter({ peerID -> Bool in
                     return peerID != session.myPeerID
@@ -91,14 +84,14 @@ internal class GameViewController: StateLogViewController {
                     return peerID.displayName
                 })
                 StatsHelper.shared.connected(to: playerNames)
-            #endif
+            }
         }
-        if manager.gameState == .preMatch && isPlayerHost {
+        if manager.gameState == .preMatch && config.isHost {
             manager.player(.startedGame)
-            #if !MULTIWINDOWDEBUG
+            if case let .mpc(_, session, _)? = config {
                 PlayerAnalytics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
-            #endif
+            }
         }
     }
 

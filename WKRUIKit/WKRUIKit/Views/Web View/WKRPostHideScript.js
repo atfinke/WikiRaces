@@ -21,6 +21,7 @@ a[href*=":"] { background-color: white; font-weight: 400; }
 
 .mbox-small { display : none !important; }
 .mbox-small-left { display : none !important; }
+.edit-page { display : none !important; }
 #edit-page { display : none !important; }
 #page-actions { display : none !important; }
 #page-secondary-actions { display : none !important; }

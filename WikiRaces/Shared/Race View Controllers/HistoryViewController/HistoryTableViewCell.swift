@@ -13,6 +13,8 @@ internal class HistoryTableViewCell: UITableViewCell {
     // MARK: - Properties
 
     static let reuseIdentifier = "reuseIdentifier"
+    static let finalReuseIdentifier = "finalCell"
+
     private let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
 
     var isShowingActivityIndicatorView: Bool = false {

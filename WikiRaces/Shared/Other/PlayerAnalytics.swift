@@ -8,6 +8,7 @@
 
 import CloudKit
 import UIKit
+import WKRKit
 
 #if !MULTIWINDOWDEBUG
 import Crashlytics
@@ -26,7 +27,7 @@ internal struct PlayerAnalytics {
         case didDisappear
     }
 
-    enum LogEvent {
+    enum CrashLogEvent {
         case userAction(String)
         case viewState(String)
     }
@@ -36,7 +37,8 @@ internal struct PlayerAnalytics {
     enum StatEvent {
         case players(unique: Int, total: Int)
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
-        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int)
+        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int,
+            soloTotalTime: Int, soloPages: Int)
         case buildInfo(version: String, build: String)
     }
 
@@ -55,6 +57,16 @@ internal struct PlayerAnalytics {
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
+        case hostStartedSoloMatch
+    }
+
+    // MARK: - Results Collection Types
+
+    struct ProcessedResults {
+        let csvURL: URL
+        let playerCount: Int
+        let totalPlayerTime: Int
+        let links: Int
     }
 
     // MARK: - Logging Events
@@ -73,7 +85,7 @@ internal struct PlayerAnalytics {
         log(event: .viewState("\(type(of: object)): Presenting: \(type(of: modal)) " + titleString))
     }
 
-    public static func log(event: LogEvent) {
+    public static func log(event: CrashLogEvent) {
         #if !MULTIWINDOWDEBUG
             switch event {
             case .userAction(let action):
@@ -131,12 +143,15 @@ internal struct PlayerAnalytics {
                         case .usingCustomName(let name):
                             record["CustomName"] = name as NSString
                             log(event: .nameType, attributes: ["Type": "CustomName"])
-                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages):
+                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages,
+                                           let soloTotalTime, let soloPages):
                             record["Points"] = NSNumber(value: points)
                             record["Races"] = NSNumber(value: races)
                             record["TotalTime"] = NSNumber(value: totalTime)
                             record["FastestTime"] = NSNumber(value: fastestTime)
                             record["Pages"] = NSNumber(value: pages)
+                            record["SoloTotalTime"] = NSNumber(value: soloTotalTime)
+                            record["SoloPages"] = NSNumber(value: soloPages)
                         case .buildInfo(let version, let build):
                             record["BundleVersion"] = version as NSString
                             record["BundleBuild"] = build as NSString
@@ -156,6 +171,88 @@ internal struct PlayerAnalytics {
                 })
             })
         #endif
+    }
+
+    // MARK: - Results Collection
+
+    public static func record(results: WKRResultsInfo) {
+        #if MULTIWINDOWDEBUG
+            fatalError()
+        #endif
+
+        guard let processedResults = process(results: results) else { return }
+
+        let resultsRecord = CKRecord(recordType: "RaceResult")
+        resultsRecord["CSV"] = CKAsset(fileURL: processedResults.csvURL)
+        resultsRecord["Links"] = NSNumber(value: processedResults.links)
+        resultsRecord["PlayerCount"] = NSNumber(value: processedResults.playerCount)
+        resultsRecord["TotalPlayerTime"] = NSNumber(value: processedResults.totalPlayerTime)
+
+        CKContainer.default().publicCloudDatabase.save(resultsRecord) { (_, _) in
+            try? FileManager.default.removeItem(at: processedResults.csvURL)
+        }
+    }
+
+    private static func process(results: WKRResultsInfo) -> ProcessedResults? {
+
+        func csvRow(for player: WKRPlayer, state: WKRPlayerState) -> String {
+
+            func formatted(row: String?) -> String {
+                return row?.replacingOccurrences(of: ",", with: " ") ?? ""
+            }
+
+            var string = ""
+            string += formatted(row: player.name) + ","
+            string += formatted(row: state.text) + ","
+
+            if state == .foundPage {
+                let time = String(player.raceHistory?.duration ?? 0)
+                string += formatted(row: time) + ","
+            } else {
+                string += ","
+            }
+
+            for entry in player.raceHistory?.entries ?? [] {
+                let title = (entry.page.title ?? "")
+                let duration = String(entry.duration ?? 0)  + "|"
+                string += formatted(row: duration + title) + ","
+            }
+
+            string.removeLast()
+
+            return string
+        }
+
+        var links = 0
+        var totalPlayerTime = 0
+
+        var csvString = "Name,State,Duration,Pages\n"
+        for i in 0..<results.playerCount {
+            let raceResults = results.raceResults(at: i)
+
+            links += raceResults.player.raceHistory?.entries.count ?? 0
+            totalPlayerTime += raceResults.player.raceHistory?.duration ?? 0
+
+            csvString += csvRow(for: raceResults.player, state: raceResults.playerState) + "\n"
+        }
+
+        guard let filePath = FileManager
+            .default
+            .urls(for: .documentDirectory, in: .userDomainMask)
+            .last?
+            .path
+            .appendingFormat("/\(Date()).csv") else {
+                return nil
+        }
+        do {
+            try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)
+            return ProcessedResults(csvURL: URL(fileURLWithPath: filePath),
+                                    playerCount: results.playerCount,
+                                    totalPlayerTime: totalPlayerTime,
+                                    links: links)
+        } catch {
+            return nil
+        }
     }
 
 }

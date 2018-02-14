@@ -172,6 +172,10 @@ extension MenuViewController {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.addSubview(titleLabel)
 
+        #if DEBUG
+            titleLabel.textColor = UIColor.blue
+        #endif
+
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."
         subtitleLabel.numberOfLines = 2
         subtitleLabel.textColor = UIColor.wkrTextColor
@@ -257,6 +261,12 @@ extension MenuViewController {
                 self.middleMenuTile?.value = average
                 self.rightMenuTile?.value = races
             }
+        }
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            self.leftMenuTile?.value = 140
+            self.middleMenuTile?.value = 140/72
+            self.rightMenuTile?.value = 72
         }
 
         return statsStackView

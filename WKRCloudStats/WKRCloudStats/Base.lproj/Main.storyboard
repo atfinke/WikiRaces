@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -711,16 +711,16 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NM2-Hr-yXW">
-                                <rect key="frame" x="20" y="20" width="440" height="230"/>
+                                <rect key="frame" x="20" y="20" width="440" height="189"/>
                                 <clipView key="contentView" id="fkl-jE-QER">
-                                    <rect key="frame" x="1" y="1" width="438" height="228"/>
+                                    <rect key="frame" x="1" y="1" width="438" height="187"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="XYd-Sh-HSm">
-                                            <rect key="frame" x="0.0" y="0.0" width="438" height="228"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="438" height="187"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="438" height="228"/>
+                                            <size key="minSize" width="438" height="187"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                         </textView>
@@ -732,16 +732,38 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="m9N-97-nKY">
-                                    <rect key="frame" x="423" y="1" width="16" height="228"/>
+                                    <rect key="frame" x="423" y="1" width="16" height="187"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0R-tF-PuL">
+                                <rect key="frame" x="52" y="222" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="Download Player Stats" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Vw-Fy-Pgi">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="downloadPlayerStats:" target="XfG-lQ-9wD" id="5xn-fl-Gk0"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfs-8D-WMv">
+                                <rect key="frame" x="248" y="222" width="180" height="32"/>
+                                <buttonCell key="cell" type="push" title="Download Race Stats" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hay-lO-4Fq">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="downloadRaceStats:" target="XfG-lQ-9wD" id="xmu-uu-YG6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="NM2-Hr-yXW" secondAttribute="bottom" constant="20" symbolic="YES" id="Nnr-hC-Yso"/>
-                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="Y4l-mN-h2u"/>
-                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="dyQ-HU-rHH"/>
-                            <constraint firstAttribute="trailing" secondItem="NM2-Hr-yXW" secondAttribute="trailing" constant="20" symbolic="YES" id="j9q-5v-cXn"/>
+                            <constraint firstAttribute="bottom" secondItem="NM2-Hr-yXW" secondAttribute="bottom" constant="20" symbolic="YES" id="0YC-4V-gVf"/>
+                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="61" id="2Si-mT-MYb"/>
+                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="8DA-Sa-z2f"/>
+                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="top" secondItem="O0R-tF-PuL" secondAttribute="bottom" constant="20" symbolic="YES" id="TPr-8p-PGI"/>
+                            <constraint firstItem="NM2-Hr-yXW" firstAttribute="top" secondItem="tfs-8D-WMv" secondAttribute="bottom" constant="20" symbolic="YES" id="W8w-Z3-onu"/>
+                            <constraint firstAttribute="trailing" secondItem="NM2-Hr-yXW" secondAttribute="trailing" constant="20" symbolic="YES" id="qfc-pd-HF0"/>
                         </constraints>
                     </view>
                     <connections>

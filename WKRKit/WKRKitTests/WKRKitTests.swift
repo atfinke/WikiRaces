@@ -30,12 +30,12 @@ class WKRKitTests: WKRKitTestCase {
 
         var historyOne = WKRHistory(firstPage: startingPage)
         historyOne.append(startingPage, linkHere: false)
-        XCTAssertEqual(historyOne.duration, Int.max)
+        XCTAssertNil(historyOne.duration)
 
         historyOne.finishedViewingLastPage()
         XCTAssertNotNil(historyOne.entries.first?.duration)
         XCTAssertLessThan(historyOne.entries[0].duration ?? 1, 1)
-        XCTAssertLessThan(historyOne.duration, 1)
+        XCTAssertLessThan(historyOne.duration!, 1)
 
         historyOne.append(endingPage, linkHere: false)
 
@@ -64,7 +64,7 @@ class WKRKitTests: WKRKitTestCase {
         let ending = WKRPage.mockApple(withSuffix: "2")
         let raceConfig = WKRRaceConfig(starting: starting, ending: ending)
 
-        var race = WKRRace(config: raceConfig)
+        var race = WKRRace(config: raceConfig, isSolo: false)
 
         let playerOne = WKRPlayer.mock(named: "Andrew")
         playerOne.startedNewRace(on: starting)

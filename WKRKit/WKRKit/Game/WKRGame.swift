@@ -22,6 +22,8 @@ public class WKRGame {
 
     // MARK: - Properties
 
+    private let isSolo: Bool
+
     private var bonusTimer: Timer?
     private let localPlayer: WKRPlayer
 
@@ -37,7 +39,8 @@ public class WKRGame {
 
     // MARK: - Initialization
 
-    init(localPlayer: WKRPlayer) {
+    init(localPlayer: WKRPlayer, isSolo: Bool) {
+        self.isSolo = isSolo
         self.localPlayer = localPlayer
     }
 
@@ -45,10 +48,10 @@ public class WKRGame {
 
     internal func startRace(with config: WKRRaceConfig) {
         raceConfig = config
-        activeRace = WKRRace(config: config)
+        activeRace = WKRRace(config: config, isSolo: isSolo)
         preRaceConfig = nil
 
-        if localPlayer.isHost {
+        if localPlayer.isHost && !isSolo {
             bonusTimer?.invalidate()
             bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
                                               repeats: true) { [weak self] _ in

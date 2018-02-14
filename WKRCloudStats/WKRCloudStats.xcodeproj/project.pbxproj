@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		144A101F202F9641003DB51A /* ViewController+Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A101E202F9641003DB51A /* ViewController+Player.swift */; };
+		144A1021202F9649003DB51A /* ViewController+Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1020202F9649003DB51A /* ViewController+Race.swift */; };
 		145623D81F8DE63C00B1ECAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145623D71F8DE63C00B1ECAC /* AppDelegate.swift */; };
 		145623DA1F8DE63C00B1ECAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145623D91F8DE63C00B1ECAC /* ViewController.swift */; };
 		145623DF1F8DE63C00B1ECAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 145623DD1F8DE63C00B1ECAC /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		144A101E202F9641003DB51A /* ViewController+Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Player.swift"; sourceTree = "<group>"; };
+		144A1020202F9649003DB51A /* ViewController+Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Race.swift"; sourceTree = "<group>"; };
 		145623D41F8DE63C00B1ECAC /* WKRCloudStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKRCloudStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		145623D71F8DE63C00B1ECAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		145623D91F8DE63C00B1ECAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				145623D71F8DE63C00B1ECAC /* AppDelegate.swift */,
 				145623EA1F8DF11A00B1ECAC /* CloudStatsAssets.xcassets */,
 				145623D91F8DE63C00B1ECAC /* ViewController.swift */,
+				144A101E202F9641003DB51A /* ViewController+Player.swift */,
+				144A1020202F9649003DB51A /* ViewController+Race.swift */,
 				145623DD1F8DE63C00B1ECAC /* Main.storyboard */,
 				145623E01F8DE63C00B1ECAC /* Info.plist */,
 				145623E11F8DE63C00B1ECAC /* WKRCloudStats.entitlements */,
@@ -112,6 +118,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -155,7 +164,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				145623DA1F8DE63C00B1ECAC /* ViewController.swift in Sources */,
+				144A1021202F9649003DB51A /* ViewController+Race.swift in Sources */,
 				145623D81F8DE63C00B1ECAC /* AppDelegate.swift in Sources */,
+				144A101F202F9641003DB51A /* ViewController+Player.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

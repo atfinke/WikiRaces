@@ -30,12 +30,15 @@ internal class MPCConnectViewController: StateLogViewController {
 
     // MARK: - Properties
 
-    var isPlayerHost = false
-    var isShowingInvite = false
+    var playerName = UIDevice.current.name
     var isValidPlayerName = false
+
+    var isSolo = false
+    var isPlayerHost = false
 
     var isFirstAppear = true
     var isShowingMatch = false
+    var isShowingInvite = false
 
     // MARK: - MPC Properties
 
@@ -57,7 +60,6 @@ internal class MPCConnectViewController: StateLogViewController {
         super.viewDidLoad()
 
         // Gets either the player name specified in settings.app, then GK alias, the device name
-        var playerName = UIDevice.current.name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
             PlayerAnalytics.log(event: .usingCustomName(playerName))
@@ -70,9 +72,7 @@ internal class MPCConnectViewController: StateLogViewController {
         Crashlytics.sharedInstance().setUserName(playerName)
 
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-        descriptionLabel.attributedText = NSAttributedString(string: "CHECKING CONNECTION",
-                                                             spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .medium))
+        updateDescriptionLabel(to: "CHECKING CONNECTION")
 
         cancelButton.alpha = 0.0
         activityIndicatorView.alpha = 0.0
@@ -149,6 +149,12 @@ internal class MPCConnectViewController: StateLogViewController {
     }
 
     // MARK: - Interface Updates
+
+    func updateDescriptionLabel(to text: String) {
+        descriptionLabel.attributedText = NSAttributedString(string: text,
+                                                             spacing: 2.0,
+                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .semibold))
+    }
 
     /// Shows an error with a title
     ///
@@ -231,7 +237,8 @@ internal class MPCConnectViewController: StateLogViewController {
             destination.peerID = peerID
             destination.session = session
             destination.serviceType = serviceType
-            destination.didStartMatch = { [weak self] in
+            destination.didStartMatch = { [weak self] isSolo in
+                self?.isSolo = isSolo
                 self?.dismiss(animated: true, completion: {
                     self?.showMatch(isPlayerHost: true)
                 })
@@ -246,9 +253,11 @@ internal class MPCConnectViewController: StateLogViewController {
                 let isPlayerHost = sender as? Bool else {
                     fatalError("Destination rootViewController is not a GameViewController")
             }
-            destination.session = session
-            destination.serviceType = serviceType
-            destination.isPlayerHost = isPlayerHost
+            if isSolo {
+                destination.config = .solo(name: playerName)
+            } else {
+                destination.config = .mpc(serviceType: serviceType, session: session, isHost: isPlayerHost)
+            }
         }
     }
 

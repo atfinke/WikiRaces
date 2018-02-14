@@ -28,18 +28,18 @@ extension GameViewController {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
-        thinLine.alpha = 0
-        thinLine.backgroundColor = UIColor.wkrTextColor
-        thinLine.translatesAutoresizingMaskIntoConstraints = false
-        navigationView.addSubview(thinLine)
+        navigationBarBottomLine.alpha = 0
+        navigationBarBottomLine.backgroundColor = UIColor.wkrTextColor
+        navigationBarBottomLine.translatesAutoresizingMaskIntoConstraints = false
+        navigationView.addSubview(navigationBarBottomLine)
 
         setupWebView()
 
         let constraints: [NSLayoutConstraint] = [
-            thinLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
-            thinLine.leftAnchor.constraint(equalTo: navigationView.leftAnchor),
-            thinLine.rightAnchor.constraint(equalTo: navigationView.rightAnchor),
-            thinLine.heightAnchor.constraint(equalToConstant: 1)
+            navigationBarBottomLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
+            navigationBarBottomLine.leftAnchor.constraint(equalTo: navigationView.leftAnchor),
+            navigationBarBottomLine.rightAnchor.constraint(equalTo: navigationView.rightAnchor),
+            navigationBarBottomLine.heightAnchor.constraint(equalToConstant: 1)
         ]
         NSLayoutConstraint.activate(constraints)
     }
