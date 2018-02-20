@@ -13,6 +13,9 @@
    <FileRef
       location = "group:WKRCloudStats/WKRCloudStats.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:WKRVisualizer/WKRVisualizer.xcodeproj">
+   </FileRef>
    <Group
       location = "group:WKR Python"
       name = "WKR Python">
