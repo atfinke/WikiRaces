@@ -23,7 +23,7 @@ class WKRKitRaceTests: WKRKitTestCase {
 
             testExpectation.fulfill()
         }
-        waitForExpectations(timeout: 2.0, handler: nil)
+        waitForExpectations(timeout: 6.0, handler: nil)
     }
 
 }
