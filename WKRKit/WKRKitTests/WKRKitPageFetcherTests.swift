@@ -18,7 +18,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssert(connected)
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 1.0, handler: { _ in
+            waitForExpectations(timeout: 3.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -31,7 +31,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssertNil(page)
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 0.5, handler: { _ in
+            waitForExpectations(timeout: 1.5, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -56,7 +56,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssertFalse(unwrappedPage.url.absoluteString.contains("Special:Random"))
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 1.0, handler: { _ in
+            waitForExpectations(timeout: 3.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -80,7 +80,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssertEqual(unwrappedPage.url.absoluteString, "https://en.m.wikipedia.org/wiki/Apple_Inc.")
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 1.0, handler: { _ in
+            waitForExpectations(timeout: 3.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -104,7 +104,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssertEqual(unwrappedPage.url.absoluteString, "https://en.m.wikipedia.org/wiki/Apple_Inc.")
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 1.0, handler: { _ in
+            waitForExpectations(timeout: 3.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -117,7 +117,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 XCTAssertNotNil(source)
                 testExpectation.fulfill()
             }
-            waitForExpectations(timeout: 1.0, handler: { _ in
+            waitForExpectations(timeout: 3.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
@@ -131,13 +131,13 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
 
             let testExpectation = expectation(description: "testLinkedPageFetcher")
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
                 XCTAssertGreaterThan(fetcher.foundURLs.count, 200)
                 XCTAssertLessThan(fetcher.foundURLs.count, 500)
                 testExpectation.fulfill()
             }
 
-            waitForExpectations(timeout: 3.0, handler: { _ in
+            waitForExpectations(timeout: 6.0, handler: { _ in
                 self.stopMeasuring()
             })
         }
