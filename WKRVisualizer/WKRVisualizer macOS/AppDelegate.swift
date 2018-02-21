@@ -15,9 +15,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        let url = URL(fileURLWithPath: "/Users/andrewfinke/Desktop/WKRRaceState")
-        let results = WKRResultsGetter.fetchResults(atDirectory: url)
-        print(results)
+       
         
     }
 
