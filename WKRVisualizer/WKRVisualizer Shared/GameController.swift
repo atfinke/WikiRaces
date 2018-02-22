@@ -22,17 +22,49 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
     let scene: SCNScene
     let sceneRenderer: SCNSceneRenderer
-    
+
+    var index = 0
+    var allResults = [[WKRPlayerResult]]()
+
     init(sceneRenderer renderer: SCNSceneRenderer) {
         sceneRenderer = renderer
         scene = SCNScene(named: "Art.scnassets/ship.scn")!
-        
+
         super.init()
-        
+
         sceneRenderer.delegate = self
 
-        
+
         sceneRenderer.scene = scene
+
+        let url = URL(fileURLWithPath: "/Users/andrewfinke/Desktop/WKRRaceState")
+        allResults = WKRResultsGetter.fetchResults(atDirectory: url)
+
+
+        gen(index: 0)
+
+
+
+    }
+
+    func next() {
+        index = min(100, index + 1)
+        gen(index: index)
+    }
+
+    func prev() {
+        index = max(0, index - 1)
+        gen(index: index)
+    }
+    
+
+    func gen(index: Int) {
+
+        for node in scene.rootNode.childNodes {
+            if node.name?.count ?? 0 < 5 {
+                node.removeFromParentNode()
+            }
+        }
 
 
         func generateRandomColor() -> SCNColor {
@@ -43,13 +75,10 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             return SCNColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1)
         }
 
-        let colors: [SCNColor] = [generateRandomColor(), generateRandomColor(), generateRandomColor(), generateRandomColor(), generateRandomColor(), .red, .green, .blue, .cyan, .yellow, .magenta, .orange, .purple, .brown]
+        var colors: [SCNColor] = [.red, .green, .blue, .cyan, .yellow, .magenta, .orange, .purple, .brown]
 
 
-        let url = URL(fileURLWithPath: "/Users/andrewfinke/Desktop/WKRRaceState")
-        let results = WKRResultsGetter.fetchResults(atDirectory: url)[0]
-
-        let playerOne = results[0]
+        let results = allResults[index]
 
 
         let maxTime = results.map({ $0.pages }).reduce([], +).sorted(by: { (lhs, rhs) -> Bool in
@@ -61,6 +90,7 @@ class GameController: NSObject, SCNSceneRendererDelegate {
 
 
         var existingPages = [String: [SCNNode]]()
+        var existingColors = [String: SCNColor]()
 
         for (playerIndex, player) in results.enumerated() {
 
@@ -86,13 +116,18 @@ class GameController: NSObject, SCNSceneRendererDelegate {
                 scene.rootNode.addChildNode(node)
 
                 if let existingNodes = existingPages[page.title] {
-                    print(page.title)
 
-                    colorIndex += 1
-                    if colorIndex > colors.count - 1 {
-                        colorIndex = 0
+                    let color: SCNColor
+                    if let existingColor = existingColors[page.title] {
+                        color = existingColor
+                    } else {
+                        colorIndex += 1
+                        if colorIndex > colors.count - 1 {
+                            colors.append(generateRandomColor())
+                        }
+                        color = colors[colorIndex]
+                        existingColors[page.title] = color
                     }
-                    let randColor = colors[colorIndex]
 
                     for existingNode in existingNodes {
 
@@ -101,11 +136,31 @@ class GameController: NSObject, SCNSceneRendererDelegate {
                         scene.rootNode.addChildNode(newNode)
 
 
-                        geo.firstMaterial?.diffuse.contents = randColor
-                        existingNode.geometry?.firstMaterial?.diffuse.contents = randColor
+                        geo.firstMaterial?.diffuse.contents = color
+                        existingNode.geometry?.firstMaterial?.diffuse.contents = color
 
-                        scene.rootNode.addChildNode(newNode.buildLineInTwoPointsWithRotation(
-                            from: node.position, to: existingNode.position, radius: 0.1, color: randColor))
+                        if existingNode.position.y == node.position.y {
+
+                            let dif = node.position.x - existingNode.position.x
+
+                            let midPoint = SCNVector3((existingNode.position.x + node.position.x) / 2,CGFloat(playerIndex) * 12.0, dif)
+
+                            let midNode = SCNNode()
+                            midNode.position = midPoint
+                            scene.rootNode.addChildNode(midNode)
+
+                            scene.rootNode.addChildNode(newNode.buildLineInTwoPointsWithRotation(
+                                from: midPoint, to: newNode.position, radius: 0.1, color: color))
+
+                            scene.rootNode.addChildNode(midNode.buildLineInTwoPointsWithRotation(
+                                from: existingNode.position, to: midNode.position, radius: 0.1, color: color))
+
+                        } else {
+                            scene.rootNode.addChildNode(newNode.buildLineInTwoPointsWithRotation(
+                                from: node.position, to: existingNode.position, radius: 0.1, color: color))
+                        }
+
+
                     }
 
                     existingPages[page.title] = existingNodes + [node]
@@ -116,11 +171,8 @@ class GameController: NSObject, SCNSceneRendererDelegate {
             }
         }
 
-
-
     }
 
-    
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // Called before each frame is rendered
     }
@@ -212,10 +264,3 @@ extension SCNNode {
         return self
     }
 }
-
-//extension ended.
-
-//in your code, you can like this.
-
-//end
-

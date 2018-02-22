@@ -29,21 +29,12 @@ class GameViewController: UIViewController {
         self.gameView.showsStatistics = true
         
         // Configure the view
-        self.gameView.backgroundColor = UIColor.black
+        self.gameView.backgroundColor = UIColor.white
         
-        // Add a tap gesture recognizer
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        var gestureRecognizers = gameView.gestureRecognizers ?? []
-        gestureRecognizers.insert(tapGesture, at: 0)
-        self.gameView.gestureRecognizers = gestureRecognizers
+
     }
     
-    @objc
-    func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
-        // Highlight the tapped nodes
-        let p = gestureRecognizer.location(in: gameView)
-        gameController.highlightNodes(atPoint: p)
-    }
+
     
     override var shouldAutorotate: Bool {
         return true

@@ -124,6 +124,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14E6FCCE203B899A00409580 /* Build configuration list for PBXNativeTarget "WKRVisualizer iOS" */;
 			buildPhases = (
+				1479EE33203E43EB00ACE3F4 /* Build Number */,
 				14E6FCA6203B899A00409580 /* Sources */,
 				14E6FCA7203B899A00409580 /* Frameworks */,
 				14E6FCA8203B899A00409580 /* Resources */,
@@ -141,6 +142,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14E6FCD1203B899A00409580 /* Build configuration list for PBXNativeTarget "WKRVisualizer macOS" */;
 			buildPhases = (
+				1479EE32203E43CD00ACE3F4 /* Build Number */,
 				14E6FCB8203B899A00409580 /* Sources */,
 				14E6FCB9203B899A00409580 /* Frameworks */,
 				14E6FCBA203B899A00409580 /* Resources */,
@@ -216,6 +218,37 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1479EE32203E43CD00ACE3F4 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		1479EE33203E43EB00ACE3F4 /* Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14E6FCA6203B899A00409580 /* Sources */ = {

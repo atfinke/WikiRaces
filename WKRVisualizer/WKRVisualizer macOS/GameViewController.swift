@@ -30,6 +30,18 @@ class GameViewController: NSViewController {
         
         // Configure the view
         self.gameView.backgroundColor = NSColor.white
+
+
+    }
+
+    override func keyUp(with event: NSEvent) {
+        super.keyUp(with: event)
+
+        if event.keyCode == 123 {
+            gameController.prev()
+        } else if event.keyCode == 124 {
+            gameController.next()
+        }
     }
 
 }
