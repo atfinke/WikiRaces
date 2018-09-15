@@ -15,11 +15,15 @@ internal class ResultsViewController: CenteredTableViewController {
     // MARK: - Properties
 
     private var historyViewController: HistoryViewController?
-    private var isAnimatingPointsStateChange = false
 
     var readyButtonPressed: (() -> Void)?
+
+    var backupQuit: (() -> Void)?
     var quitAlertController: UIAlertController?
     var addPlayersViewController: UIViewController?
+
+    var isAnimatingToPointsStandings = false
+    var hasAnimatedToPointsStandings = false
 
     // MARK: - Game States
 
@@ -42,14 +46,14 @@ internal class ResultsViewController: CenteredTableViewController {
     var readyStates: WKRReadyStates? {
         didSet {
             if state == .hostResults {
-                updateTableView()
+                updateTableViewForNewReadyStates()
             }
         }
     }
 
     var resultsInfo: WKRResultsInfo? {
         didSet {
-            updateTableView()
+            updateTableView(oldValue)
             updateHistoryController()
         }
     }
@@ -65,49 +69,57 @@ internal class ResultsViewController: CenteredTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        becomeFirstResponder()
+
         registerTableView(for: self)
         overlayButtonTitle = "Ready up"
 
-        guideLabel.text = "TAP PLAYER TO VIEW LIVE PROGRESS"
+        guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
         descriptionLabel.text = "WAITING FOR PLAYERS TO FINISH"
 
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.wkrStatusBarStyle
     }
 
     // MARK: - Actions
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
-            PlayerAnalytics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
+            PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
+            self.backupQuit?()
             return
         }
         present(alertController, animated: true, completion: nil)
-        PlayerAnalytics.log(presentingOf: alertController, on: self)
+        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         guard let controller = addPlayersViewController else { return }
         present(controller, animated: true, completion: nil)
-        PlayerAnalytics.log(event: .hostStartMidMatchInviting)
-        PlayerAnalytics.log(presentingOf: controller, on: self)
+        PlayerMetrics.log(event: .hostStartMidMatchInviting)
+        PlayerMetrics.log(presentingOf: controller, on: self)
     }
 
     override func overlayButtonPressed() {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
 
         navigationItem.leftBarButtonItem?.isEnabled = false
         readyButtonPressed?()
         isOverlayButtonHidden = true
 
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {
             self.view.layoutIfNeeded()
         }
 
-        PlayerAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
+        PlayerMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
     // MARK: - Game Updates
@@ -118,26 +130,44 @@ internal class ResultsViewController: CenteredTableViewController {
             tableView.isUserInteractionEnabled = true
             updateTableView()
         } else {
-            title = "STANDINGS"
             tableView.isUserInteractionEnabled = false
-            if let activeViewController = presentedViewController,
-                type(of: activeViewController) != UIAlertController.self {
+
+            if presentedViewController != nil {
                 dismiss(animated: true, completion: nil)
             }
 
             if oldState != .points {
-                isAnimatingPointsStateChange = true
-                flashItems(items: [tableView], duration: 1.0) {
-                    self.isAnimatingPointsStateChange = false
-                    self.updateTableView()
-                }
+
+                let fadeAnimation = CATransition()
+                fadeAnimation.duration = WKRAnimationDurationConstants.resultsTableFlash / 4
+                fadeAnimation.type = .fade
+
+                let navLayer = navigationController?.navigationBar.layer
+                navLayer?.add(fadeAnimation, forKey: "fadeOut")
+                navigationItem.title = ""
+
+                isAnimatingToPointsStandings = true
+                UIView.animateFlash(withDuration: WKRAnimationDurationConstants.resultsTableFlash,
+                                    items: [tableView],
+                                    whenHidden: {
+                                        self.tableView.reloadData()
+                                        navLayer?.add(fadeAnimation, forKey: "fadeIn")
+                                        self.navigationItem.title = "STANDINGS"
+
+                }, completion: {
+                    self.isAnimatingToPointsStandings = false
+                    self.hasAnimatedToPointsStandings = true
+                })
+
                 if isPlayerHost, let results = resultsInfo {
                     DispatchQueue.global().async {
-                        PlayerAnalytics.record(results: results)
+                        PlayerMetrics.record(results: results)
                     }
                 }
-            } else {
-                self.updateTableView()
+            }
+
+            if !isAnimatingToPointsStandings && hasAnimatedToPointsStandings {
+                tableView.reloadSections(IndexSet(integer: 0), with: .fade)
             }
 
             UIView.animate(withDuration: 0.5, animations: {
@@ -150,10 +180,12 @@ internal class ResultsViewController: CenteredTableViewController {
     private func updatedTime(oldTime: Int) {
         tableView.isUserInteractionEnabled = true
         if oldTime == 100 {
-            flashItems(items: [guideLabel, descriptionLabel], duration: 0.75) {
+            UIView.animateFlash(withDuration: 0.75,
+                                items: [guideLabel, descriptionLabel],
+                                whenHidden: {
                 self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
-            }
+            }, completion: nil)
         } else {
             descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
         }
@@ -161,9 +193,71 @@ internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Helpers
 
-    private func updateTableView() {
-        guard !isAnimatingPointsStateChange else { return }
-        tableView.reloadData()
+    private func updateTableViewForNewReadyStates() {
+        guard !(state == .points && !hasAnimatedToPointsStandings) else {
+            return
+        }
+
+        guard !isAnimatingToPointsStandings,
+            let resultsInfo = resultsInfo,
+            let readyStates = readyStates else {
+                return
+        }
+
+        for index in 0..<resultsInfo.playerCount {
+            let raceResults = resultsInfo.raceResults(at: index)
+            guard let cell = tableView.cellForRow(at: IndexPath(row: index)) as? ResultsTableViewCell else {
+                tableView.reloadData()
+                return
+            }
+            cell.isShowingCheckmark = readyStates.playerReady(raceResults.player)
+        }
+    }
+
+    private func updateTableView(_ oldResultsInfo: WKRResultsInfo? = nil) {
+        guard !(state == .points && !hasAnimatedToPointsStandings) else {
+            return
+        }
+        guard !isAnimatingToPointsStandings else { return }
+        guard let oldInfo = oldResultsInfo,
+            let newInfo = resultsInfo,
+            oldInfo.playerCount == newInfo.playerCount else {
+            tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+            return
+        }
+
+        let previousPlayerOrder = oldInfo.raceResultsPlayerProfileOrder()
+        let newPlayerOrder = newInfo.raceResultsPlayerProfileOrder()
+
+        var newIndexes = (0..<oldInfo.playerCount).map { $0 }
+        for (index, player) in previousPlayerOrder.enumerated() {
+            guard let newIndex = newPlayerOrder.firstIndex(of: player) else { fatalError() }
+            newIndexes[index] = newIndex
+        }
+
+        var moves = [Int: Int]()
+        for (oldIndex, newIndex) in newIndexes.enumerated() {
+            moves[oldIndex] = newIndex
+        }
+
+        let keys = moves.sorted { (lhs, rhs) -> Bool in
+            return lhs.value > rhs.value
+        }
+
+        tableView.performBatchUpdates({
+            for (oldIndex, newIndex) in keys {
+                guard let cell = tableView.cellForRow(at: IndexPath(row: oldIndex)) as? ResultsTableViewCell else {
+                    tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                    return
+                }
+
+                cell.update(for: newInfo.raceResults(at: newIndex).player, animated: true)
+                if newIndex < oldIndex {
+                    tableView.moveRow(at: IndexPath(row: oldIndex),
+                                      to: IndexPath(row: newIndex))
+                }
+            }
+        }, completion: nil)
     }
 
     func updateHistoryController() {
@@ -177,13 +271,13 @@ internal class ResultsViewController: CenteredTableViewController {
     func showReadyUpButton(_ showReady: Bool) {
         navigationItem.leftBarButtonItem?.isEnabled = showReady
         isOverlayButtonHidden = !showReady
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {
             self.view.layoutIfNeeded()
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         guard let destinationNavigationController = segue.destination as? UINavigationController,
             let destination = destinationNavigationController.rootViewController as? HistoryViewController,
             let player = sender as? WKRPlayer else {

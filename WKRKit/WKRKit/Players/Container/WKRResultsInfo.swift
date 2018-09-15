@@ -10,6 +10,15 @@ import Foundation
 
 public struct WKRResultsInfo: Codable {
 
+    // MARK: - Types
+
+    public struct WKRProfileSessionResults {
+        public let profile: WKRPlayerProfile
+        public let points: Int
+        public let ranking: Int
+        public let isTied: Bool
+    }
+
     // MARK: - Properties
 
     public var playerCount: Int {
@@ -114,14 +123,34 @@ public struct WKRResultsInfo: Codable {
         return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func raceResults(at index: Int) ->(player: WKRPlayer, playerState: WKRPlayerState) {
+    public func raceResults(at index: Int) -> (player: WKRPlayer, playerState: WKRPlayerState) {
         let player = playersSortedByState[index]
         return (player, player.state)
     }
 
-    public func sessionResults(at index: Int) -> (profile: WKRPlayerProfile, points: Int) {
+    public func sessionResults(at index: Int) -> WKRProfileSessionResults {
         let player = playersSortedByPoints[index]
-        return (player.profile, sessionPoints[player.profile] ?? 0)
+        let points = sessionPoints[player.profile] ?? 0
+
+        var isTied = false
+        var ranking = 1
+        for otherPlayer in playersSortedByPoints.filter({ $0 != player }) {
+            let otherPlayerPoints = sessionPoints[otherPlayer.profile] ?? 0
+            if otherPlayerPoints > points {
+                ranking += 1
+            } else if otherPlayerPoints == points {
+                isTied = true
+            }
+        }
+
+        return WKRProfileSessionResults(profile: player.profile,
+                                        points: sessionPoints[player.profile] ?? 0,
+                                        ranking: ranking,
+                                        isTied: isTied)
+    }
+
+    public func raceResultsPlayerProfileOrder() -> [WKRPlayerProfile] {
+        return playersSortedByState.map { $0.profile }
     }
 
 }
