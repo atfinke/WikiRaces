@@ -91,15 +91,17 @@ internal struct WKRRace {
         return points
     }
 
-    /// Check if the race should end. The race should end when there is one or less than one players still racing
+    /// Check if the race should end. The race should end when there is one or less
+    /// than one player still racing or when >= 3 players have finished
     ///
     /// - Returns: If the race should end
     internal func shouldEnd() -> Bool {
         if isSolo {
             return players.first?.state != .racing
         } else {
-            return players.filter({ $0.state == .racing }).count <= 1
-                && players.filter({ $0.state != .connecting }).count > 1
+            return (players.filter({ $0.state == .racing }).count <= 1
+                && players.filter({ $0.state != .connecting }).count > 1)
+                || players.filter({ $0.state == .foundPage }).count >= WKRKitConstants.current.maxFoundPagePlayers
         }
     }
 
