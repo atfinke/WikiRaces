@@ -16,7 +16,7 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureConstants() {
         WKRKitConstants.updateConstants()
-        WKRUIConstants.updateConstants()
+        WKRUIKitConstants.updateConstants()
 
         // Don't be that app that prompts people when they first open it
         UserDefaults.standard.set(false, forKey: "ShouldPromptForRating")
@@ -24,12 +24,12 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.wkrTextColor
-        UINavigationBar.appearance().barTintColor = UIColor.white
+      //  UINavigationBar.appearance().barTintColor = UIColor.wkrBackgroundColor
 
         UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
+            .foregroundColor: UIColor.wkrTextColor
         ]
-        window?.backgroundColor = UIColor.white
+        window?.backgroundColor = UIColor.wkrBackgroundColor
     }
 
 }

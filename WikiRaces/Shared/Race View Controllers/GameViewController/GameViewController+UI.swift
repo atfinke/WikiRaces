@@ -13,6 +13,10 @@ extension GameViewController {
 
     // MARK: - Interface
 
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+
     func setupInterface() {
         guard let navigationController = navigationController,
             let navigationView = navigationController.view else {
@@ -20,8 +24,11 @@ extension GameViewController {
         }
 
         navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.navigationBar.barStyle = UIBarStyle.wkrStyle
 
-        flagBarButtonItem = navigationItem.leftBarButtonItem
+        view.backgroundColor = UIColor.wkrBackgroundColor
+
+        helpBarButtonItem = navigationItem.leftBarButtonItem
         quitBarButtonItem = navigationItem.rightBarButtonItem
 
         navigationItem.hidesBackButton = true
@@ -56,14 +63,15 @@ extension GameViewController {
         view.addSubview(webView)
         view.addSubview(progressView)
         webView.progressView = progressView
+        webView.backgroundColor = UIColor.wkrBackgroundColor
 
         let constraints: [NSLayoutConstraint] = [
-            webView.topAnchor.constraint(equalTo: topLayoutGuide.topAnchor),
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-            progressView.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor),
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
             progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
             progressView.heightAnchor.constraint(equalToConstant: 3)
@@ -76,35 +84,40 @@ extension GameViewController {
     // MARK: - Alerts
 
     func quitAlertController(raceStarted: Bool) -> UIAlertController {
-        var message = "Are you sure you want to quit? You will be disconnected from the match and returned to the menu."
+        var message = "Are you sure you want to quit? You will be disconnected and returned to the menu."
         if raceStarted {
-            message += " Press the forfeit button to give up on the race but stay in the match."
+            message += " Press the forfeit button to give up the race but stay in the match."
         }
 
-        let alertController = UIAlertController(title: "Leave The Match?", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
+        let alertController = UIAlertController(title: "Return to Menu?", message: message, preferredStyle: .alert)
+        alertController.addCancelAction(title: "Keep Playing")
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                PlayerAnalytics.log(event: .userAction("quitAlertController:forfeit"))
-                PlayerAnalytics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
+                PlayerMetrics.log(event: .userAction("quitAlertController:forfeit"))
+                PlayerMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
                 self?.manager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
         }
 
-        let quitAction = UIAlertAction(title: "Quit Match", style: .destructive) {  [weak self] _ in
-            PlayerAnalytics.log(event: .userAction("quitAlertController:quit"))
-            PlayerAnalytics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
-            self?.isPlayerQuitting = true
-            self?.resetActiveControllers()
-            self?.manager.player(.quit)
-            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+        let quitAction = UIAlertAction(title: "Return to Menu", style: .destructive) {  [weak self] _ in
+            PlayerMetrics.log(event: .userAction("quitAlertController:quit"))
+            PlayerMetrics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
+            self?.playerQuit()
         }
         alertController.addAction(quitAction)
 
         return alertController
+    }
+
+    func playerQuit() {
+        DispatchQueue.main.async {
+            self.isPlayerQuitting = true
+            self.resetActiveControllers()
+            self.manager.player(.quit)
+            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+        }
     }
 
 }
