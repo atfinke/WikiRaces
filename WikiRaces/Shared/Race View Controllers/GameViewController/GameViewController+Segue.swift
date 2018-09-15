@@ -49,13 +49,16 @@ extension GameViewController {
             prepare(helpViewController: destination)
         }
     }
+
     private func prepare(votingViewController: VotingViewController) {
         votingViewController.playerVoted = { [weak self] page in
             self?.manager.player(.voted(page))
-            PlayerAnalytics.log(event: .voted, attributes: ["Page": page.title as Any])
+            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
         }
 
         votingViewController.voteInfo = manager.voteInfo
+
+        votingViewController.backupQuit = playerQuit
         votingViewController.quitAlertController = quitAlertController(raceStarted: false)
 
         self.votingViewController = votingViewController
@@ -71,6 +74,8 @@ extension GameViewController {
         resultsViewController.state = manager.gameState
         resultsViewController.resultsInfo = manager.hostResultsInfo
         resultsViewController.isPlayerHost = config.isHost
+
+        resultsViewController.backupQuit = playerQuit
         resultsViewController.quitAlertController = quitAlertController(raceStarted: false)
 
         self.resultsViewController = resultsViewController

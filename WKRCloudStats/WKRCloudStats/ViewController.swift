@@ -23,15 +23,16 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
+
     @IBAction func downloadPlayerStats(_ sender: Any) {
+        playerRecords = []
         queryPlayerStats()
     }
+
     @IBAction func downloadRaceStats(_ sender: Any) {
+        raceRecords = []
         queryRaceStats()
     }
-    
-    
 
 }

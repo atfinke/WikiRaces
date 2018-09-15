@@ -68,10 +68,4 @@ public struct WKRPage: Codable, Hashable, Equatable {
         return url.hashValue
     }
 
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRPage, rhs: WKRPage) -> Bool {
-        return lhs.title == rhs.title && lhs.url == rhs.url
-    }
 }

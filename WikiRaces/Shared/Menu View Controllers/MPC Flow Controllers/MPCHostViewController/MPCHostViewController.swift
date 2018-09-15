@@ -9,11 +9,15 @@
 import MultipeerConnectivity
 import UIKit
 
+#if !MULTIWINDOWDEBUG
+import FirebasePerformance
+#endif
+
 internal class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
     // MARK: - Types
 
-    private enum PeerState: String {
+    enum PeerState: String {
         case found
         case invited
         case joining
@@ -23,17 +27,21 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
     // MARK: - Properties
 
-    private var peers = [MCPeerID: PeerState]()
-    private var sortedPeers: [MCPeerID] {
+    var peers = [MCPeerID: PeerState]()
+    var sortedPeers: [MCPeerID] {
         return peers.keys.sorted(by: { (lhs, rhs) -> Bool in
             lhs.displayName < rhs.displayName
         })
     }
 
+    #if !MULTIWINDOWDEBUG
+    var peersConnectTraces = [MCPeerID: Trace]()
+    #endif
+
     var peerID: MCPeerID?
     var session: MCSession?
     var serviceType: String?
-    private var browser: MCNearbyServiceBrowser?
+    var browser: MCNearbyServiceBrowser?
 
     /// Called when the start button is pressed
     var didStartMatch: ((_ isSolo: Bool) -> Void)?
@@ -50,7 +58,14 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         browser = MCNearbyServiceBrowser(peer: peerID, serviceType: serviceType)
         browser?.delegate = self
         session?.delegate = self
+
         navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
+
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(MPCHostPeerStateCell.self,
+                           forCellReuseIdentifier: MPCHostPeerStateCell.reuseIdentifier)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,19 +83,20 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
     // MARK: - Actions
 
     @IBAction func cancelMatch(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
-        PlayerAnalytics.log(event: .hostCancelledPreMatch)
+        PlayerMetrics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .hostCancelledPreMatch)
 
         session?.disconnect()
         didCancelMatch?()
     }
 
     @IBAction func startMatch(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
 
         tableView.isUserInteractionEnabled = false
 
-        let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityView = UIActivityIndicatorView(style: .gray)
+        activityView.color = UIColor.wkrActivityIndicatorColor
         activityView.sizeToFit()
         activityView.startAnimating()
 
@@ -90,9 +106,10 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         guard let session = session else { fatalError("Session is nil") }
         do {
             // Participants move to the game view and wait for "real" data when they receive first data chunk
-            try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
-            try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
-            try session.send(Data(bytes: [1]), toPeers: session.connectedPeers, with: .reliable)
+            let data = Data(bytes: [1])
+            let peers = session.connectedPeers
+            try session.send(data, toPeers: peers, with: .unreliable)
+            try session.send(data, toPeers: peers, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.didStartMatch?(false)
             }
@@ -107,7 +124,10 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
     /// - Parameters:
     ///   - peerID: Peer ID updated
     ///   - newState: The new state
-    private func update(peerID: MCPeerID, to newState: PeerState?) {
+    func update(peerID: MCPeerID, to newState: PeerState?) {
+        let newStateString = String(describing: newState?.rawValue)
+        PlayerMetrics.log(event: .gameState("Peer Update: \(peerID.displayName) \(newStateString)"))
+
         guard let newState = newState else {
             if let index = sortedPeers.index(of: peerID) {
                 peers[peerID] = nil
@@ -140,6 +160,34 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
             }
         }
         navigationItem.rightBarButtonItem?.isEnabled = !peers.values.filter({ $0 == .joined }).isEmpty
+
+        performaceTrace(peerID: peerID, newState: newState)
+    }
+
+    func performaceTrace(peerID: MCPeerID, newState: PeerState?) {
+        #if !MULTIWINDOWDEBUG
+
+        let hostInviteResponseTraceName = "Host Invite Response Trace"
+        let hostInviteJoingTraceName = "Host Invite Joining Trace"
+
+        if newState == .invited {
+            peersConnectTraces[peerID] = Performance.startTrace(name: hostInviteResponseTraceName)
+        } else if newState == .declined,
+            let trace = peersConnectTraces[peerID],
+            trace.name == hostInviteResponseTraceName {
+            trace.stop()
+        } else if newState == .joining,
+            let trace = peersConnectTraces[peerID],
+            trace.name == hostInviteResponseTraceName {
+            trace.stop()
+            peersConnectTraces[peerID] = Performance.startTrace(name: hostInviteJoingTraceName)
+        } else if newState == .joined,
+            let trace = peersConnectTraces[peerID],
+            trace.name == hostInviteJoingTraceName {
+            trace.stop()
+        }
+
+        #endif
     }
 
     // MARK: - MCNearbyServiceBrowserDelegate
@@ -159,95 +207,10 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
-                 withDiscoveryInfo info: [String : String]?) {
+                 withDiscoveryInfo info: [String: String]?) {
         DispatchQueue.main.async {
             self.update(peerID: peerID, to: .found)
         }
-    }
-
-    // MARK: - UITableViewDataSource
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            if peers.isEmpty {
-                return 1
-            } else {
-                return peers.count
-            }
-        } else {
-            return 1
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Choose 1 to 7 players"
-        } else {
-            return " "
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 {
-            return """
-            Make sure all players are on the same Wi-Fi network
-            and have Bluetooth enabled for the best results.
-            """
-        } else {
-            return "Practice your skills in solo races. Solo races will not count towards your stats."
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 1 {
-            return tableView.dequeueReusableCell(withIdentifier: "soloCell", for: indexPath)
-        } else if peers.isEmpty {
-            return tableView.dequeueReusableCell(withIdentifier: "searchingCell", for: indexPath)
-        }
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        let peerID = sortedPeers[indexPath.row]
-        guard let state = peers[peerID] else {
-            fatalError("No state for peerID: \(peerID)")
-        }
-
-        cell.textLabel?.text = peerID.displayName
-        if state == .found {
-            cell.detailTextLabel?.text = nil
-            cell.isUserInteractionEnabled = true
-        } else {
-            cell.detailTextLabel?.text = peers[peerID]?.rawValue.capitalized
-            cell.isUserInteractionEnabled = state == .found
-        }
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerAnalytics.log(event: .userAction(#function))
-
-        if indexPath.section == 1 {
-            PlayerAnalytics.log(event: .hostStartedSoloMatch)
-
-            session?.disconnect()
-            didStartMatch?(true)
-            return
-        }
-
-        // Hits this case when the "Searching..." placeholder cell is selected
-        guard !peers.isEmpty else { return }
-
-        let peerID = sortedPeers[indexPath.row]
-        guard let session = session else {
-            fatalError("Session is nil")
-        }
-        update(peerID: peerID, to: .invited)
-        browser?.invitePeer(peerID, to: session, withContext: nil, timeout: 15.0)
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     // MARK: - MCSessionDelegate

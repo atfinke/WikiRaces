@@ -14,27 +14,27 @@ internal class StateLogTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        PlayerAnalytics.log(state: .didLoad, for: self)
+        PlayerMetrics.log(state: .didLoad, for: self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        PlayerAnalytics.log(state: .willAppear, for: self)
+        PlayerMetrics.log(state: .willAppear, for: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        PlayerAnalytics.log(state: .didAppear, for: self)
+        PlayerMetrics.log(state: .didAppear, for: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        PlayerAnalytics.log(state: .willDisappear, for: self)
+        PlayerMetrics.log(state: .willDisappear, for: self)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        PlayerAnalytics.log(state: .didDisappear, for: self)
+        PlayerMetrics.log(state: .didDisappear, for: self)
     }
 
 }

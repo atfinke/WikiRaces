@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRVoteInfo: Codable {
+public struct WKRVoteInfo: Codable, Equatable {
 
     // MARK: - Properties
 
@@ -71,17 +71,6 @@ public struct WKRVoteInfo: Codable {
 
     public func index(of page: WKRPage) -> Int? {
         return pages.index(of: page)
-    }
-
-}
-
-extension WKRVoteInfo: Equatable {
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRVoteInfo, rhs: WKRVoteInfo) -> Bool {
-        return lhs.pages == rhs.pages && NSDictionary(dictionary: lhs.playerVotes).isEqual(to: lhs.playerVotes)
     }
 
 }

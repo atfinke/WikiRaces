@@ -67,7 +67,7 @@ public class WKRManager {
                   stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                   pointsUpdate: @escaping ((Int) -> Void),
                   linkCountUpdate: @escaping ((Int) -> Void),
-                  logEvent: @escaping ((String, [String: Any]?)) -> Void) {
+                  logEvent: @escaping (String, [String: Any]?) -> Void) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate

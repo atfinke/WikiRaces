@@ -9,6 +9,7 @@
 import CloudKit
 import GameKit
 
+//swiftlint:disable:next type_body_length
 internal class StatsHelper {
 
     // MARK: - Types
@@ -30,24 +31,21 @@ internal class StatsHelper {
 
         case soloPages
         case soloTotalTime
+        case soloRaces
+
+        static var numericHighStats: [Stat] = [
+            .points,
+            .races,
+            .average,
+            .totalTime,
+            .pages,
+            .soloPages,
+            .soloTotalTime,
+            .soloRaces
+        ]
 
         var key: String {
             return "WKRStat-" + self.rawValue
-        }
-
-        var sortHigh: Bool {
-            switch self {
-            case .points:        return true
-            case .races:         return true
-            case .average:       return true
-            case .totalTime:     return true
-            case .fastestTime:   return false
-            case .pages:         return true
-            case .totalPlayers:  return true
-            case .uniquePlayers: return true
-            case .soloPages:     return true
-            case .soloTotalTime: return true
-            }
         }
 
         var leaderboard: String {
@@ -58,10 +56,7 @@ internal class StatsHelper {
             case .totalTime:     return "com.andrewfinke.wikiraces.totaltime"
             case .fastestTime:   return "com.andrewfinke.wikiraces.fastesttime"
             case .pages:         return "com.andrewfinke.wikiraces.pages"
-            case .totalPlayers:  return "com.andrewfinke.wikiraces.totalPlayers"
-            case .uniquePlayers: return "com.andrewfinke.wikiraces.uniquePlayers"
-            case .soloPages:     fatalError()
-            case .soloTotalTime: fatalError()
+            case .totalPlayers, .uniquePlayers, .soloPages, .soloTotalTime, .soloRaces: fatalError()
             }
         }
     }
@@ -112,15 +107,17 @@ internal class StatsHelper {
 
         let soloTotalTime = statValue(for: .soloTotalTime)
         let soloPages = statValue(for: .soloPages)
+        let soloRaces = statValue(for: .soloRaces)
 
         keyStatsUpdated?(points, races, statValue(for: .average))
-        PlayerAnalytics.log(event: .updatedStats(points: Int(points),
+        PlayerMetrics.log(event: .updatedStats(points: Int(points),
                                                  races: Int(races),
                                                  totalTime: Int(totalTime),
                                                  fastestTime: Int(fastestTime),
                                                  pages: Int(pages),
                                                  soloTotalTime: Int(soloTotalTime),
-                                                 soloPages: Int(soloPages)))
+                                                 soloPages: Int(soloPages),
+                                                 soloRaces: Int(soloRaces)))
     }
 
     // MARK: - Set/Get Stats
@@ -144,20 +141,24 @@ internal class StatsHelper {
         var existingPlayers = defaults.array(forKey: "PlayersArray") as? [String] ?? []
         existingPlayers += players
         defaults.set(existingPlayers, forKey: "PlayersArray")
+        syncPlayerNamesStat()
 
         let uniquePlayers = Array(Set(existingPlayers)).count
         let totalPlayers = existingPlayers.count
+        PlayerMetrics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
 
         defaults.set(uniquePlayers, forKey: Stat.uniquePlayers.key)
         defaults.set(totalPlayers, forKey: Stat.totalPlayers.key)
 
-        PlayerAnalytics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
+        cloudSync()
     }
 
     func completedRace(points: Int, timeRaced: Int, isSolo: Bool) {
         if isSolo {
             let newSoloTotalTime = statValue(for: .soloTotalTime) + Double(timeRaced)
+            let newSoloRaces = statValue(for: .soloRaces) + 1
             defaults.set(newSoloTotalTime, forKey: Stat.soloTotalTime.key)
+            defaults.set(newSoloRaces, forKey: Stat.soloRaces.key)
             defaults.set(true, forKey: "ShouldPromptForRating")
         } else {
             let newPoints = statValue(for: .points) + Double(points)
@@ -220,12 +221,18 @@ internal class StatsHelper {
                 // Not currently syncing unique players array
                 guard let stat = Stat(rawValue: key) else { return }
 
-                let deviceValue = defaults.double(forKey: key)
-                let cloudValue = keyValueStore.double(forKey: key)
-                if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
-                    keyValueStore.set(deviceValue, forKey: key)
-                } else {
-                    defaults.set(deviceValue, forKey: key)
+                if Stat.numericHighStats.contains(stat) {
+                    let deviceValue = defaults.double(forKey: key)
+                    let cloudValue = keyValueStore.double(forKey: key)
+                    if deviceValue > cloudValue {
+                        keyValueStore.set(deviceValue, forKey: key)
+                    } else if cloudValue > deviceValue {
+                        defaults.set(cloudValue, forKey: key)
+                    }
+                } else if stat == .fastestTime {
+                    syncFastestTimeStat()
+                } else if stat == .totalPlayers {
+                    syncPlayerNamesStat()
                 }
             }
         }
@@ -235,19 +242,44 @@ internal class StatsHelper {
     }
 
     private func cloudSync() {
-        for stat in [Stat.points, Stat.races, Stat.totalTime, Stat.fastestTime] {
+        for stat in Stat.numericHighStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
-            if (stat.sortHigh && deviceValue > cloudValue) || (!stat.sortHigh && deviceValue < cloudValue) {
+            if deviceValue > cloudValue {
                 keyValueStore.set(deviceValue, forKey: stat.key)
-            } else {
+            } else if cloudValue > deviceValue {
                 defaults.set(cloudValue, forKey: stat.key)
             }
+        }
+
+        syncFastestTimeStat()
+        syncPlayerNamesStat()
+    }
+
+    private func syncFastestTimeStat() {
+        let stat = Stat.fastestTime
+        let deviceValue = defaults.double(forKey: stat.key)
+        let cloudValue = keyValueStore.double(forKey: stat.key)
+        if cloudValue < deviceValue && cloudValue != 0.0 {
+            defaults.set(cloudValue, forKey: stat.key)
+        } else if deviceValue != 0.0 {
+            keyValueStore.set(deviceValue, forKey: stat.key)
+        }
+    }
+
+    private func syncPlayerNamesStat() {
+        let stat = "PlayersArray"
+        let deviceValue = defaults.array(forKey: stat) ?? []
+        let cloudValue = keyValueStore.array(forKey: stat) ?? []
+        if deviceValue.count < cloudValue.count {
+            defaults.set(cloudValue, forKey: stat)
+        } else if cloudValue.count < deviceValue.count {
+            keyValueStore.set(deviceValue, forKey: stat)
         }
     }
 
     private func leaderboardSync() {
-        guard GKLocalPlayer.localPlayer().isAuthenticated else {
+        guard GKLocalPlayer.local.isAuthenticated else {
             return
         }
 

@@ -1,5 +1,5 @@
 //
-//  MPCSearchingCell.swift
+//  MPCHostSearchingCell.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 12/26/17.
@@ -8,12 +8,14 @@
 
 import UIKit
 
-internal class MPCSearchingCell: UITableViewCell {
+internal class MPCHostSearchingCell: UITableViewCell {
 
     // MARK: - Properties
 
     private var dots: Int = 3
     private var timer: Timer?
+
+    static let reuseIdentifier = "searchingCell"
 
     // MARK: - Initialization
 

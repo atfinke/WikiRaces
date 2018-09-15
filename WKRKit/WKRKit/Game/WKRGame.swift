@@ -53,9 +53,10 @@ public class WKRGame {
 
         if localPlayer.isHost && !isSolo {
             bonusTimer?.invalidate()
-            bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRRaceConstants.bonusPointInterval,
+            bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRKitConstants.current.bonusPointsInterval,
                                               repeats: true) { [weak self] _ in
-                                                self?.activeRace?.bonusPoints += WKRRaceConstants.bonusPointReward
+                                                //swiftlint:disable:next line_length
+                                                self?.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
                                                 if let points = self?.activeRace?.bonusPoints {
                                                     self?.bonusPointsUpdated?(points)
                                                 }

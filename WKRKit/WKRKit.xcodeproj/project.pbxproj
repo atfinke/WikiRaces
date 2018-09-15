@@ -19,7 +19,7 @@
 		142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CB29D202EC42000BC6A33 /* WKRPeerNetworkConfig.swift */; };
 		1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3711F36524400E81FD8 /* WKRPage.swift */; };
 		1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRKitConstants.swift */; };
-		1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */; };
+		1452B3761F3652E900E81FD8 /* WKRRaceDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */; };
 		1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */; };
 		148164AF1F5C94E800AC7178 /* WKRKitRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */; };
 		148164B11F5C94F200AC7178 /* WKRKitPageFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */; };
@@ -79,7 +79,7 @@
 		142CB29D202EC42000BC6A33 /* WKRPeerNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPeerNetworkConfig.swift; sourceTree = "<group>"; };
 		1452B3711F36524400E81FD8 /* WKRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPage.swift; sourceTree = "<group>"; };
 		1452B3731F36529300E81FD8 /* WKRKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitConstants.swift; sourceTree = "<group>"; };
-		1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceConstants.swift; sourceTree = "<group>"; };
+		1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceDurationConstants.swift; sourceTree = "<group>"; };
 		1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageFetcher.swift; sourceTree = "<group>"; };
 		148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitRaceTests.swift; sourceTree = "<group>"; };
 		148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitPageFetcherTests.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 				14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */,
 				1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */,
 				1452B3731F36529300E81FD8 /* WKRKitConstants.swift */,
-				1452B3751F3652E900E81FD8 /* WKRRaceConstants.swift */,
+				1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -341,7 +341,7 @@
 				149FF8041F362B3D000A5D96 /* Frameworks */,
 				149FF8051F362B3D000A5D96 /* Headers */,
 				149FF8061F362B3D000A5D96 /* Resources */,
-				149FDECD1F4F498B003A71D0 /* Swiftlint */,
+				14A4F9E42123CD0600EF5C67 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -377,16 +377,17 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
 					149FF8071F362B3D000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 					};
 					149FF8101F362B3D000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -430,20 +431,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		149FDECD1F4F498B003A71D0 /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
 		149FDECE1F4F4996003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,6 +444,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
+		};
+		14A4F9E42123CD0600EF5C67 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -481,7 +486,7 @@
 				14EB9F4C1F3682BE00FF1A9E /* WKRRaceConfig.swift in Sources */,
 				1497F31A1F588EBE001653DE /* WKRReadyStates.swift in Sources */,
 				14EB9F5E1F36830800FF1A9E /* WKRPeerNetwork.swift in Sources */,
-				1452B3761F3652E900E81FD8 /* WKRRaceConstants.swift in Sources */,
+				1452B3761F3652E900E81FD8 /* WKRRaceDurationConstants.swift in Sources */,
 				1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */,
 				14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */,
 				14E9E16D1F63462500D2CAB4 /* WKRFatalError.swift in Sources */,
@@ -541,6 +546,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -548,6 +554,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -601,6 +608,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -608,6 +616,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -644,17 +653,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 72S993BNAV;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
@@ -662,7 +671,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -671,24 +680,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 72S993BNAV;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -702,7 +711,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -716,7 +725,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

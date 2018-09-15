@@ -33,6 +33,7 @@ extension ViewController {
         DispatchQueue.main.async {
             if let error = error {
                 self.textView.textStorage?.append(NSAttributedString(string: "Error: \(error)\n"))
+                self.processRaceStats()
             } else if let cursor = cursor {
                 self.textView.textStorage?.append(NSAttributedString(string: "Querying w/ Cursor\n"))
                 self.queryRaceStats(cursor: cursor)
@@ -98,7 +99,5 @@ extension ViewController {
 
         }
 
-
     }
 }
-

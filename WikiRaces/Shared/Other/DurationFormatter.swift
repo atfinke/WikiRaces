@@ -9,7 +9,7 @@
 import Foundation
 
 internal struct DurationFormatter {
-    private static let maxSeconds: Int = 300
+    private static let maxSeconds: Int = 360
 
     static func string(for duration: Int?) -> String? {
         guard let duration = duration else { return nil }

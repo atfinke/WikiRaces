@@ -18,7 +18,7 @@ public struct WKRHistoryEntry: Codable, Equatable {
     /// If the link to the final page is on this page
     public let linkHere: Bool
     /// How long the player spent on the page (if not currently viewing)
-    public private(set) var duration: Int?
+    public internal(set) var duration: Int?
 
     // MARK: - Initialization
 
@@ -32,29 +32,6 @@ public struct WKRHistoryEntry: Codable, Equatable {
         self.page = page
         self.linkHere = linkHere
         self.duration = duration
-    }
-
-    // MARK: - Duration
-
-    /// Sets how long the player spent on the page
-    ///
-    /// - Parameter duration: The time the player spent on the page
-    mutating func set(duration: Int) {
-        self.duration = duration
-    }
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRHistoryEntry, rhs: WKRHistoryEntry) -> Bool {
-        guard lhs.page == rhs.page else {
-            return false
-        }
-        if let lhsDuration = lhs.duration, let rhsDuration = rhs.duration {
-            return lhsDuration == rhsDuration
-        } else {
-            return lhs.duration == nil && rhs.duration == nil
-        }
     }
 
 }

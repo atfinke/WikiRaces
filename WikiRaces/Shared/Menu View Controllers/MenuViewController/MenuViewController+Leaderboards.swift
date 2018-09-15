@@ -17,9 +17,9 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     /// - Parameter sender: The pressed tile
     @objc
     func menuTilePressed(sender: MenuTile) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
 
-        guard GKLocalPlayer.localPlayer().isAuthenticated else {
+        guard GKLocalPlayer.local.isAuthenticated else {
             attemptGCAuthentication()
             return
         }
@@ -34,11 +34,11 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             controller.viewState = .leaderboards
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
-            PlayerAnalytics.log(presentingOf: controller, on: self)
+            PlayerMetrics.log(presentingOf: controller, on: self)
         }
 
         if let leaderboard = sender.stat?.leaderboard {
-            PlayerAnalytics.log(event: .leaderboard, attributes: ["Leaderboard": leaderboard as Any])
+            PlayerMetrics.log(event: .leaderboard, attributes: ["Leaderboard": leaderboard as Any])
         }
     }
 
@@ -50,12 +50,14 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             return
         }
 
-        GKLocalPlayer.localPlayer().authenticateHandler = { viewController, error in
+        GKLocalPlayer.local.authenticateHandler = { viewController, error in
             DispatchQueue.main.async {
                 if let viewController = viewController, self.isMenuVisable {
-                    self.present(viewController, animated: true, completion: nil)
-                    PlayerAnalytics.log(presentingOf: viewController, on: self)
-                } else if !GKLocalPlayer.localPlayer().isAuthenticated {
+                    if self.presentedViewController == nil {
+                        self.present(viewController, animated: true, completion: nil)
+                        PlayerMetrics.log(presentingOf: viewController, on: self)
+                    }
+                } else if !GKLocalPlayer.local.isAuthenticated {
                     // "error._code" ?!?!
                     if let error = error, error._code == 2 {
                         return
@@ -64,19 +66,17 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                     let controller = UIAlertController(title: "Leaderboards Unavailable", message: "You must be logged into Game Center to access leaderboards", preferredStyle: .alert)
 
                     let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
-                        PlayerAnalytics.log(event: .userAction("attemptGCAuthentication:settings"))
-                        guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                        PlayerMetrics.log(event: .userAction("attemptGCAuthentication:settings"))
+                        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                             fatalError("Settings URL nil")
                         }
                         UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                     })
                     controller.addAction(settingsAction)
-
-                    let cancelAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-                    controller.addAction(cancelAction)
+                    controller.addCancelAction(title: "Ok")
 
                     self.present(controller, animated: true, completion: nil)
-                    PlayerAnalytics.log(presentingOf: controller, on: self)
+                    PlayerMetrics.log(presentingOf: controller, on: self)
                 }
             }
         }
@@ -85,7 +85,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     // MARK: - GKGameCenterControllerDelegate
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.animateMenuIn()
             self.isLeaderboardPresented = false

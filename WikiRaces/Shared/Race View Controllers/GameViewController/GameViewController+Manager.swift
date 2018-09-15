@@ -21,6 +21,7 @@ extension GameViewController {
                     self?.errorOccurred(error)
                 }
             } else {
+                PlayerMetrics.log(event: .gameState("Transition: \(state)."))
                 self?.transition(to: state)
             }
             }, pointsUpdate: { [weak self] points in
@@ -35,7 +36,7 @@ extension GameViewController {
                 self?.webView.text = linkCount.description
             }, logEvent: { [weak self] event, attributes in
                 #if !MULTIWINDOWDEBUG
-                    guard let eventType = PlayerAnalytics.Event(rawValue: event) else {
+                    guard let eventType = PlayerMetrics.Event(rawValue: event) else {
                         fatalError("Invalid event " + event)
                     }
                     if eventType == .pageView {
@@ -45,7 +46,7 @@ extension GameViewController {
                         }
                         StatsHelper.shared.viewedPage(isSolo: isSolo)
                     }
-                    PlayerAnalytics.log(event: eventType, attributes: attributes)
+                    PlayerMetrics.log(event: eventType, attributes: attributes)
                 #endif
         })
 
@@ -60,7 +61,7 @@ extension GameViewController {
                 for index in 0..<votingInfo.pageCount {
                     if let info = votingInfo.page(for: index) {
                         for _ in 0..<info.votes {
-                            PlayerAnalytics.log(event: .finalVotes, attributes: ["Page": info.page.title as Any])
+                            PlayerMetrics.log(event: .finalVotes, attributes: ["Page": info.page.title as Any])
                         }
                     }
                 }
@@ -70,7 +71,10 @@ extension GameViewController {
             }, finalPageUpdate: { [weak self] page in
                 self?.finalPage = page
                 self?.votingViewController?.finalPageSelected(page)
-                UIView.animate(withDuration: 0.5, delay: 0.75, animations: {
+
+                UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeIn,
+                               delay: WKRAnimationDurationConstants.gameFadeInDelay,
+                               animations: {
                     self?.webView.alpha = 1.0
                 }, completion: nil)
         })
@@ -100,21 +104,20 @@ extension GameViewController {
 
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
         let quitAction = UIAlertAction(title: "Menu", style: .default) { [weak self] _ in
-            self?.resetActiveControllers()
-            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+            self?.playerQuit()
         }
         alertController.addAction(quitAction)
         self.dismissActiveController(completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
-                PlayerAnalytics.log(presentingOf: alertController, on: self)
+                PlayerMetrics.log(presentingOf: alertController, on: self)
 
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
         })
 
-        PlayerAnalytics.log(event: .fatalError, attributes: ["Error": error.title as Any])
+        PlayerMetrics.log(event: .fatalError, attributes: ["Error": error.title as Any])
     }
 
     func resetActiveControllers() {
@@ -145,7 +148,7 @@ extension GameViewController {
     }
 
     private func transition(to state: WKRGameState) {
-        guard state != gameState else { return }
+        guard !isPlayerQuitting, state != gameState else { return }
         gameState = state
 
         switch state {
@@ -161,7 +164,10 @@ extension GameViewController {
             if activeViewController != resultsViewController || resultsViewController == nil {
                 dismissActiveController(completion: {
                     self.performSegue(.showResults)
-                    UIView.animate(withDuration: 0.5, delay: 2.5, options: .beginFromCurrentState, animations: {
+                    UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeOut,
+                                   delay: WKRAnimationDurationConstants.gameFadeOutDelay,
+                                   options: .beginFromCurrentState,
+                                   animations: {
                         self.webView.alpha = 0.0
                     }, completion: nil)
                 })
@@ -172,7 +178,7 @@ extension GameViewController {
             navigationItem.rightBarButtonItem = nil
 
             if state == .hostResults && config.isHost {
-                PlayerAnalytics.log(event: .hostEndedRace)
+                PlayerMetrics.log(event: .hostEndedRace)
             }
         case .race:
             timeRaced = 0
@@ -182,7 +188,7 @@ extension GameViewController {
 
             navigationController?.setNavigationBarHidden(false, animated: false)
 
-            navigationItem.leftBarButtonItem = flagBarButtonItem
+            navigationItem.leftBarButtonItem = helpBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
 
             connectingLabel.alpha = 0.0
@@ -191,7 +197,7 @@ extension GameViewController {
             dismissActiveController(completion: nil)
 
             if config.isHost {
-                PlayerAnalytics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
+                PlayerMetrics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
             }
         default: break
         }

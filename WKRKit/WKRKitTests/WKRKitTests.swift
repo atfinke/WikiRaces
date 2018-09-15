@@ -9,7 +9,7 @@
 import XCTest
 @testable import WKRKit
 
-//swiftlint:disable:next type_body_length
+//swiftlint:disable:next
 class WKRKitTests: WKRKitTestCase {
 
     // MARK: - WKRGameState

@@ -1,5 +1,5 @@
 //
-//  PlayerAnalytics.swift
+//  PlayerMetrics.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 9/25/17.
@@ -15,7 +15,7 @@ import Crashlytics
 import FirebaseCore
 #endif
 
-internal struct PlayerAnalytics {
+internal struct PlayerMetrics {
 
     // MARK: - Logging Event Types
 
@@ -30,15 +30,17 @@ internal struct PlayerAnalytics {
     enum CrashLogEvent {
         case userAction(String)
         case viewState(String)
+        case gameState(String)
     }
 
     // MARK: - Analytic Event Types
 
     enum StatEvent {
         case players(unique: Int, total: Int)
+        case hasGCAlias(String), hasDeviceName(String), hasCustomName(String)
         case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
         case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int,
-            soloTotalTime: Int, soloPages: Int)
+            soloTotalTime: Int, soloPages: Int, soloRaces: Int)
         case buildInfo(version: String, build: String)
     }
 
@@ -47,6 +49,7 @@ internal struct PlayerAnalytics {
         case leaderboard, versionInfo
         case pressedJoin, pressedHost
         case namePromptResult, nameType
+        case cloudStatus, interfaceMode
 
         // Game All Players
         case pageView, pageBlocked, pageError
@@ -92,6 +95,8 @@ internal struct PlayerAnalytics {
                 CLSNSLogv("UserAction: %@", getVaList([action]))
             case .viewState(let view):
                 CLSNSLogv("ViewState: %@", getVaList([view]))
+            case .gameState(let description):
+                CLSNSLogv("GameState: %@", getVaList([description]))
             }
         #endif
     }
@@ -99,9 +104,9 @@ internal struct PlayerAnalytics {
     // MARK: - Analytic Events
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !DEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
-            if !(attributes?.values.flatMap({ $0 }).isEmpty ?? true) {
+        if !(attributes?.values.compactMap { $0 }.isEmpty ?? true) {
                 Analytics.logEvent(event.rawValue, parameters: attributes)
             } else {
                 Analytics.logEvent(event.rawValue, parameters: nil)
@@ -123,7 +128,7 @@ internal struct PlayerAnalytics {
 
                     // Get user stats record, or create new one.
                     let statsRecordName = userRecord.object(forKey: "UserStatsName") as? NSString ?? " "
-                    let userStatsRecordID = CKRecordID(recordName: statsRecordName as String)
+                    let userStatsRecordID = CKRecord.ID(recordName: statsRecordName as String)
                     publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { (userStatsRecord, error) in
 
                         var userStatsRecord = userStatsRecord
@@ -143,8 +148,14 @@ internal struct PlayerAnalytics {
                         case .usingCustomName(let name):
                             record["CustomName"] = name as NSString
                             log(event: .nameType, attributes: ["Type": "CustomName"])
+                        case .hasGCAlias(let alias):
+                            record["GCAlias"] = alias as NSString
+                        case .hasDeviceName(let name):
+                            record["DeviceName"] = name as NSString
+                        case .hasCustomName(let name):
+                            record["CustomName"] = name as NSString
                         case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages,
-                                           let soloTotalTime, let soloPages):
+                                           let soloTotalTime, let soloPages, let soloRaces):
                             record["Points"] = NSNumber(value: points)
                             record["Races"] = NSNumber(value: races)
                             record["TotalTime"] = NSNumber(value: totalTime)
@@ -152,6 +163,7 @@ internal struct PlayerAnalytics {
                             record["Pages"] = NSNumber(value: pages)
                             record["SoloTotalTime"] = NSNumber(value: soloTotalTime)
                             record["SoloPages"] = NSNumber(value: soloPages)
+                            record["SoloRaces"] = NSNumber(value: soloRaces)
                         case .buildInfo(let version, let build):
                             record["BundleVersion"] = version as NSString
                             record["BundleBuild"] = build as NSString
@@ -177,7 +189,7 @@ internal struct PlayerAnalytics {
 
     public static func record(results: WKRResultsInfo) {
         #if MULTIWINDOWDEBUG
-            fatalError()
+            return
         #endif
 
         guard let processedResults = process(results: results) else { return }
@@ -227,8 +239,8 @@ internal struct PlayerAnalytics {
         var totalPlayerTime = 0
 
         var csvString = "Name,State,Duration,Pages\n"
-        for i in 0..<results.playerCount {
-            let raceResults = results.raceResults(at: i)
+        for index in 0..<results.playerCount {
+            let raceResults = results.raceResults(at: index)
 
             links += raceResults.player.raceHistory?.entries.count ?? 0
             totalPlayerTime += raceResults.player.raceHistory?.duration ?? 0
