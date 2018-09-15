@@ -38,7 +38,7 @@ internal class GameViewController: StateLogViewController {
     let progressView = WKRUIProgressView()
     let navigationBarBottomLine = UIView()
 
-    var flagBarButtonItem: UIBarButtonItem!
+    var helpBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 
     @IBOutlet weak var connectingLabel: UILabel!
@@ -89,7 +89,7 @@ internal class GameViewController: StateLogViewController {
         if manager.gameState == .preMatch && config.isHost {
             manager.player(.startedGame)
             if case let .mpc(_, session, _)? = config {
-                PlayerAnalytics.log(event: .hostStartedMatch,
+                PlayerMetrics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             }
         }
@@ -97,49 +97,30 @@ internal class GameViewController: StateLogViewController {
 
     // MARK: - User Actions
 
-    @IBAction func flagButtonPressed(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
-
-        //swiftlint:disable:next line_length
-        let alertController = UIAlertController(title: "Forfeit The Round?", message: "Are you sure you want to forfeit? Try tapping the help button for a peek at the final article before making up your mind.", preferredStyle: .alert)
-
-        let cancelAction = UIAlertAction(title: "Keep Playing", style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
-
-        let helpAction = UIAlertAction(title: "Help", style: .default) { _ in
-            PlayerAnalytics.log(event: .userAction("flagButtonPressed:help"))
-            self.manager.player(.neededHelp)
-            self.performSegue(.showHelp)
-            PlayerAnalytics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
-        }
-        alertController.addAction(helpAction)
-
-        let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
-            PlayerAnalytics.log(event: .userAction("flagButtonPressed:reload"))
-            self.webView.reload()
-        }
-        alertController.addAction(reloadAction)
-
-        let forfeitAction = UIAlertAction(title: "Forfeit Round", style: .destructive) { _ in
-            PlayerAnalytics.log(event: .userAction("flagButtonPressed:forfeit"))
-            self.manager.player(.forfeited)
-            PlayerAnalytics.log(event: .forfeited, attributes: ["Page": self.finalPage?.title as Any])
-        }
-        alertController.addAction(forfeitAction)
-
-        present(alertController, animated: true, completion: nil)
-        self.alertController = alertController
-
-       PlayerAnalytics.log(presentingOf: alertController, on: self)
+    @IBAction func helpButtonPressed(_ sender: Any) {
+        PlayerMetrics.log(event: .userAction(#function))
+        showHelp()
     }
 
     @IBAction func quitButtonPressed(_ sender: Any) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
-        PlayerAnalytics.log(presentingOf: alertController, on: self)
+        PlayerMetrics.log(presentingOf: alertController, on: self)
+    }
+
+    func showHelp() {
+        PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerMetrics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
+        manager.player(.neededHelp)
+        performSegue(.showHelp)
+    }
+
+    func reloadPage() {
+        PlayerMetrics.log(event: .userAction("flagButtonPressed:reload"))
+        self.webView.reload()
     }
 
 }
