@@ -13,20 +13,25 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
+#if !MULTIWINDOWDEBUG
+import FirebasePerformance
+#endif
+
 internal class MPCConnectViewController: StateLogViewController {
 
     // MARK: - Interafce Elements
 
-    /// View that contains accept/cancel buttons, sender label
-    @IBOutlet weak var inviteView: UIView!
-    /// Shows the sender of the invie
-    @IBOutlet weak var senderLabel: UILabel!
-    /// The button to cancel joining/creating a race
-    @IBOutlet weak var cancelButton: UIButton!
     /// General status label
     @IBOutlet weak var descriptionLabel: UILabel!
     /// Activity spinner
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    /// The button to cancel joining/creating a race
+    @IBOutlet weak var cancelButton: UIButton!
+
+    let inviteView = UIView()
+    let hostNameLabel = UILabel()
+    let acceptButton = UIButton()
+    let declineButton = UIButton()
 
     // MARK: - Properties
 
@@ -54,6 +59,10 @@ internal class MPCConnectViewController: StateLogViewController {
         return MCSession(peer: self.peerID)
     }()
 
+    #if !MULTIWINDOWDEBUG
+    var connectingTrace: Trace?
+    #endif
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -62,22 +71,17 @@ internal class MPCConnectViewController: StateLogViewController {
         // Gets either the player name specified in settings.app, then GK alias, the device name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
-            PlayerAnalytics.log(event: .usingCustomName(playerName))
-        } else if GKLocalPlayer.localPlayer().isAuthenticated, let alias = GKLocalPlayer.localPlayer().alias {
-            playerName = alias
-            PlayerAnalytics.log(event: .usingGCAlias(playerName))
+            PlayerMetrics.log(event: .usingCustomName(playerName))
+        } else if GKLocalPlayer.local.isAuthenticated {
+            playerName = GKLocalPlayer.local.alias
+            PlayerMetrics.log(event: .usingGCAlias(playerName))
         } else {
-            PlayerAnalytics.log(event: .usingDeviceName(playerName))
+            PlayerMetrics.log(event: .usingDeviceName(playerName))
         }
+
+        #if !MULTIWINDOWDEBUG
         Crashlytics.sharedInstance().setUserName(playerName)
-
-        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-        updateDescriptionLabel(to: "CHECKING CONNECTION")
-
-        cancelButton.alpha = 0.0
-        activityIndicatorView.alpha = 0.0
-        inviteView.alpha = 0.0
-        descriptionLabel.alpha = 0.0
+        #endif
 
         isValidPlayerName = [UInt8](playerName.utf8).count < 40
         guard isValidPlayerName else { return }
@@ -92,6 +96,8 @@ internal class MPCConnectViewController: StateLogViewController {
             let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
             UserDefaults.standard.set(data, forKey: "PeerID")
         }
+
+        setupInterface()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -113,6 +119,10 @@ internal class MPCConnectViewController: StateLogViewController {
         isFirstAppear = false
 
         // Test the connection to Wikipedia
+
+        #if !MULTIWINDOWDEBUG
+        let trace = Performance.startTrace(name: "Connection Test Trace")
+        #endif
         WKRConnectionTester.start { (success) in
             DispatchQueue.main.async {
                 if success && self.isValidPlayerName {
@@ -128,6 +138,9 @@ internal class MPCConnectViewController: StateLogViewController {
                     } else {
                         self.startAdvertising()
                     }
+                    #if !MULTIWINDOWDEBUG
+                    trace?.stop()
+                    #endif
                 } else if !success {
                     self.showError(title: "Slow Connection",
                                    message: "A fast internet connection is required to play WikiRaces.")
@@ -162,10 +175,9 @@ internal class MPCConnectViewController: StateLogViewController {
     ///   - title: The title of the error message
     ///   - message: The message body of the error
     func showError(title: String, message: String, showSettingsButton: Bool = false) {
-        if isValidPlayerName {
-            self.session.delegate = nil
-            self.session.disconnect()
-        }
+
+        session.delegate = nil
+        session.disconnect()
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "Menu", style: .default) { _ in
@@ -175,8 +187,8 @@ internal class MPCConnectViewController: StateLogViewController {
 
         if showSettingsButton {
             let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-                PlayerAnalytics.log(event: .userAction("showError:settings"))
-                guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
+                PlayerMetrics.log(event: .userAction("showError:settings"))
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     fatalError("Settings URL nil")
                 }
                 UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
@@ -186,7 +198,7 @@ internal class MPCConnectViewController: StateLogViewController {
         }
 
         present(alertController, animated: true, completion: nil)
-        PlayerAnalytics.log(presentingOf: alertController, on: self)
+        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     /// Prepares to start the match
@@ -214,7 +226,7 @@ internal class MPCConnectViewController: StateLogViewController {
 
     /// Cancels the join/create a race action and sends player back to main menu
     @IBAction func pressedCancelButton() {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         UIView.animate(withDuration: 0.25, animations: {
             self.descriptionLabel.alpha = 0.0
             self.inviteView.alpha = 0.0

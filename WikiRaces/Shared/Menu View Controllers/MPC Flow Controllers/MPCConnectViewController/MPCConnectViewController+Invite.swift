@@ -9,6 +9,10 @@
 import MultipeerConnectivity
 import UIKit
 
+#if !MULTIWINDOWDEBUG
+import FirebasePerformance
+#endif
+
 extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
 
     // MARK: - MCSessionDelegate
@@ -22,6 +26,10 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         DispatchQueue.main.async {
             if state == .connected && peerID == self.hostPeerID {
                 self.updateDescriptionLabel(to: "WAITING FOR HOST")
+                #if !MULTIWINDOWDEBUG
+                self.connectingTrace?.stop()
+                self.connectingTrace = nil
+                #endif
             } else if state == .notConnected && peerID == self.hostPeerID {
                 self.showError(title: "Connection Issue", message: "The connection to the host was lost.")
             }
@@ -79,7 +87,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         activeInvite = invite.handler
         hostPeerID = invite.host
 
-        senderLabel.text = "FROM " + invite.host.displayName.uppercased()
+        hostNameLabel.text = "FROM " + invite.host.displayName.uppercased()
         UIView.animate(withDuration: 0.25, animations: {
             self.inviteView.alpha = 1.0
         })
@@ -89,21 +97,29 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     // MARK: - User Actions
 
     /// Accepts the displayed invite
-    @IBAction func acceptedInvite() {
-        PlayerAnalytics.log(event: .userAction(#function))
+    @objc
+    func acceptInvite() {
+        PlayerMetrics.log(event: .userAction(#function))
 
         activeInvite?(true, session)
         advertiser?.stopAdvertisingPeer()
         updateDescriptionLabel(to: "CONNECTING TO HOST")
 
+        isShowingInvite = false
+
         UIView.animate(withDuration: 0.5) {
             self.inviteView.alpha = 0.0
         }
+
+        #if !MULTIWINDOWDEBUG
+        connectingTrace = Performance.startTrace(name: "Player Connecting Trace")
+        #endif
     }
 
     /// Declines the displayed invite
-    @IBAction func declinedInvite() {
-        PlayerAnalytics.log(event: .userAction(#function))
+    @objc
+    func declineInvite() {
+        PlayerMetrics.log(event: .userAction(#function))
 
         activeInvite?(false, session)
         updateDescriptionLabel(to: "WAITING FOR INVITE")
