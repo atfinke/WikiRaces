@@ -11,20 +11,28 @@ import WKRUIKit
 
 class ViewController: UIViewController {
 
-    override func viewDidLoad() {
+    var webView: WKRUIWebView!
 
-        WKRUIConstants.updateConstants()
+    override func viewDidLoad() {
+        WKRUIKitConstants.updateConstants()
 
         super.viewDidLoad()
-        let webView = WKRUIWebView()
-        view = webView
-        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!))
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        webView = WKRUIWebView()
+        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/apple")!))
+
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(webView)
+
+        let constraints: [NSLayoutConstraint] = [
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            webView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+
+        navigationController?.navigationBar.barStyle = .wkrStyle
     }
 
 }

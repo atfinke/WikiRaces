@@ -37,8 +37,8 @@ public class WKRUIProgressView: UIProgressView {
     }
 
     func hide() {
-        let delay    = WKRUIConstants.progessViewAnimateOutDelay
-        let duration = WKRUIConstants.progessViewAnimateOutDuration
+        let delay    = WKRUIKitConstants.progessViewAnimateOutDelay
+        let duration = WKRUIKitConstants.progessViewAnimateOutDuration
 
         UIView.animate(withDuration: duration, delay: delay, options: [], animations: {
             self.alpha = 0.0

@@ -34,7 +34,7 @@ extension NSAttributedString {
                             font: UIFont = UIFont.systemFont(ofSize: 16.0),
                             textColor: UIColor = UIColor.wkrTextColor) {
 
-        let attributes: [NSAttributedStringKey: Any] = [
+        let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
             .kern: spacing,
             .foregroundColor: textColor
