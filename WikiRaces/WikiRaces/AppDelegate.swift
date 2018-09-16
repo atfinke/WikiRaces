@@ -30,7 +30,7 @@ internal class AppDelegate: WKRAppDelegate {
         #endif
 
         FirebaseApp.configure()
-        
+
         StatsHelper.shared.start()
         configureConstants()
         configureAppearance()

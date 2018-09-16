@@ -46,7 +46,7 @@ extension MenuViewController {
             }
             #if MULTIWINDOWDEBUG
                 //swiftlint:disable:next force_cast
-                destination.config = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
+                destination.networkConfig = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
                                                   isHost: isPlayerHost)
             #else
                 fatalError()

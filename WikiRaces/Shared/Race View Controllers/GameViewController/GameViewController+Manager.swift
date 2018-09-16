@@ -12,10 +12,10 @@ import WKRKit
 
 extension GameViewController {
 
-    // MARK: - WKRManager
+    // MARK: - WKRGameManager
 
-    func setupManager() {
-        manager = WKRManager(networkConfig: config, stateUpdate: { [weak self] state, error in
+    func setupGameManager() {
+        gameManager = WKRGameManager(networkConfig: networkConfig, stateUpdate: { [weak self] state, error in
             if let error = error {
                 DispatchQueue.main.async {
                     self?.errorOccurred(error)
@@ -27,7 +27,7 @@ extension GameViewController {
             }, pointsUpdate: { [weak self] points in
                 if let timeRaced = self?.timeRaced {
                     var isSolo = false
-                    if case .solo? = self?.config {
+                    if case .solo? = self?.networkConfig {
                         isSolo = true
                     }
                     StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced, isSolo: isSolo)
@@ -41,7 +41,7 @@ extension GameViewController {
                     }
                     if eventType == .pageView {
                         var isSolo = false
-                        if case .solo? = self?.config {
+                        if case .solo? = self?.networkConfig {
                             isSolo = true
                         }
                         StatsHelper.shared.viewedPage(isSolo: isSolo)
@@ -54,10 +54,10 @@ extension GameViewController {
     }
 
     private func configureManagerControllerClosures() {
-        manager.voting(timeUpdate: { [weak self] time in
+        gameManager.voting(timeUpdate: { [weak self] time in
             self?.votingViewController?.voteTimeRemaing = time
 
-            if self?.config.isHost ?? false && time == 0, let votingInfo = self?.manager.voteInfo {
+            if self?.networkConfig.isHost ?? false && time == 0, let votingInfo = self?.gameManager.voteInfo {
                 for index in 0..<votingInfo.pageCount {
                     if let info = votingInfo.page(for: index) {
                         for _ in 0..<info.votes {
@@ -79,7 +79,7 @@ extension GameViewController {
                 }, completion: nil)
         })
 
-        manager.results(showReady: { [weak self] showReady in
+        gameManager.results(showReady: { [weak self] showReady in
             self?.resultsViewController?.showReadyUpButton(showReady)
             }, timeUpdate: { [weak self] time in
                 self?.resultsViewController?.timeRemaining = time
@@ -177,7 +177,7 @@ extension GameViewController {
             navigationItem.leftBarButtonItem = nil
             navigationItem.rightBarButtonItem = nil
 
-            if state == .hostResults && config.isHost {
+            if state == .hostResults && networkConfig.isHost {
                 PlayerMetrics.log(event: .hostEndedRace)
             }
         case .race:
@@ -196,7 +196,7 @@ extension GameViewController {
 
             dismissActiveController(completion: nil)
 
-            if config.isHost {
+            if networkConfig.isHost {
                 PlayerMetrics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
             }
         default: break

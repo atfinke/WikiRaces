@@ -167,7 +167,6 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertNotEqual(profileA, profileB)
         XCTAssertNotEqual(profileB, profileC)
         XCTAssertEqual(profileB, profileB)
-        XCTAssertEqual(profileA.hashValue, profileA.playerID.hashValue)
     }
 
     // MARK: - WKRPlayer
@@ -210,7 +209,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.updateConstants()
 
         let version = WKRKitConstants.current.version
-        XCTAssertEqual(WKRKitConstants.current.version, 5)
+        XCTAssertEqual(WKRKitConstants.current.version, 11)
 
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstants()
@@ -286,7 +285,7 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertTrue(decoded.linkHere)
 
         XCTAssertEqual(5, entryWithDuration.duration)
-        entryWithDuration.set(duration: 20)
+        entryWithDuration.duration = 20
         XCTAssertEqual(20, entryWithDuration.duration)
 
         let entryWithDifPage = WKRHistoryEntry(page: WKRPage.mockApple(withSuffix: "a"), linkHere: false)

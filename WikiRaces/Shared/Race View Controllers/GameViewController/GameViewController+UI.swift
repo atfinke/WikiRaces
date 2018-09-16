@@ -78,7 +78,7 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        manager.webView = webView
+        gameManager.webView = webView
     }
 
     // MARK: - Alerts
@@ -96,7 +96,7 @@ extension GameViewController {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
                 PlayerMetrics.log(event: .userAction("quitAlertController:forfeit"))
                 PlayerMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
-                self?.manager.player(.forfeited)
+                self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
         }
@@ -115,8 +115,8 @@ extension GameViewController {
         DispatchQueue.main.async {
             self.isPlayerQuitting = true
             self.resetActiveControllers()
-            self.manager.player(.quit)
-            NotificationCenter.default.post(name: NSNotification.Name("PlayerQuit"), object: nil)
+            self.gameManager.player(.quit)
+            NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit, object: nil)
         }
     }
 

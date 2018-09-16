@@ -1,5 +1,5 @@
 //
-//  WKRManager+PeerNetwork.swift
+//  WKRGameManager+PeerNetwork.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension WKRManager {
+extension WKRGameManager {
 
     // MARK: - WKRPeerNetwort
 

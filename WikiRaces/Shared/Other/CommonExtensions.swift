@@ -8,6 +8,10 @@
 
 import UIKit
 
+extension NSNotification.Name {
+    static let localPlayerQuit = NSNotification.Name(rawValue: "LocalPlayerQuit")
+}
+
 extension IndexPath {
     init(row: Int) {
         self.init(row: row, section: 0)

@@ -1,5 +1,5 @@
 //
-//  WKRManager+PageNavigation.swift
+//  WKRGameManager+PageNavigation.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension WKRManager {
+extension WKRGameManager {
 
     func newPageNavigation() -> WKRPageNavigation {
         return WKRPageNavigation(pageURLBlocked: { [weak self] url in

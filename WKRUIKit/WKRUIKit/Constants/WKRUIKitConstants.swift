@@ -65,11 +65,13 @@ public struct WKRUIKitConstants {
                     return
             }
 
-            copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                        newStyleScriptFileURL: recordStyleScriptAsset.fileURL,
-                        newStyleScriptDarkFileURL: recordStyleScriptDarkAsset.fileURL,
-                        newCleanScriptFileURL: recordCleanScriptAsset.fileURL,
-                        newContentBlockerFileURL: recordContentBlockerAsset.fileURL)
+            DispatchQueue.main.async {
+                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
+                            newStyleScriptFileURL: recordStyleScriptAsset.fileURL,
+                            newStyleScriptDarkFileURL: recordStyleScriptDarkAsset.fileURL,
+                            newCleanScriptFileURL: recordCleanScriptAsset.fileURL,
+                            newContentBlockerFileURL: recordContentBlockerAsset.fileURL)
+            }
         }
     }
 
@@ -133,14 +135,13 @@ public struct WKRUIKitConstants {
             }
         }
 
-        DispatchQueue.main.async {
-            let newConstants = WKRUIKitConstants()
-            WKRUIKitConstants.current = newConstants
-        }
+        let newCurrentConstants = WKRUIKitConstants()
+        WKRUIKitConstants.current = newCurrentConstants
     }
 
     static private func copyBundledResourcesToDocuments() {
-        guard let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit"),
+        guard Thread.isMainThread,
+            let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit"),
             let bundledPlistURL = bundle.url(forResource: "WKRUIConstants", withExtension: "plist"),
             let bundledStyleScriptURL = bundle.url(forResource: "WKRStyleScript", withExtension: "js"),
             let bundledStyleScriptDarkURL = bundle.url(forResource: "WKRStyleScript-Dark", withExtension: "js"),

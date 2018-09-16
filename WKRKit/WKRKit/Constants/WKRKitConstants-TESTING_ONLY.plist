@@ -27,5 +27,13 @@
 	<integer>10000</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
+	<key>MaxFoundPagePlayers</key>
+	<integer>3</integer>
+	<key>VotingArticlesCount</key>
+	<integer>8</integer>
+	<key>BonusPointReward</key>
+	<integer>2</integer>
+	<key>BonusPointsInterval</key>
+	<integer>120</integer>
 </dict>
 </plist>

@@ -16,7 +16,7 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
     var playerConnected: ((WKRPlayerProfile) -> Void)?
     var playerDisconnected: ((WKRPlayerProfile) -> Void)?
 
-    // MARK: Types
+    // MARK: - Types
 
     private class WKRSplitMessage: NSObject {
         let sender: String
@@ -95,17 +95,18 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
 // MARK: - WKRKit Extensions
 
-extension WKRManager {
+extension WKRGameManager {
 
-    internal convenience init(windowName: String,
+    internal convenience init(multiWindowName: String,
                               isPlayerHost: Bool,
                               stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                               pointsUpdate: @escaping ((Int) -> Void),
                               linkCountUpdate: @escaping ((Int) -> Void),
                               logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
-        let player = WKRPlayer(profile: WKRPlayerProfile(name: windowName, playerID: windowName), isHost: isPlayerHost)
-        let network = WKRSplitViewNetwork(playerName: windowName, isHost: isPlayerHost)
+        let profile = WKRPlayerProfile(name: multiWindowName, playerID: multiWindowName)
+        let player = WKRPlayer(profile: profile, isHost: isPlayerHost)
+        let network = WKRSplitViewNetwork(playerName: multiWindowName, isHost: isPlayerHost)
 
         self.init(player: player,
                   network: network,

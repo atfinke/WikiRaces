@@ -43,7 +43,7 @@ internal class WKRSoloNetwork: WKRPeerNetwork {
 
 // MARK: - WKRKit Extensions
 
-extension WKRManager {
+extension WKRGameManager {
 
     internal convenience init(soloPlayerName: String,
                               stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),

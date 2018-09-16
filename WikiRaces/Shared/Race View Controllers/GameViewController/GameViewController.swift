@@ -29,8 +29,8 @@ internal class GameViewController: StateLogViewController {
         }
     }
 
-    var manager: WKRManager!
-    var config: WKRPeerNetworkConfig!
+    var gameManager: WKRGameManager!
+    var networkConfig: WKRPeerNetworkConfig!
 
     // MARK: - User Interface
 
@@ -61,7 +61,7 @@ internal class GameViewController: StateLogViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupManager()
+        setupGameManager()
         setupInterface()
     }
 
@@ -69,14 +69,14 @@ internal class GameViewController: StateLogViewController {
         super.viewDidAppear(animated)
         if !isInterfaceConfigured {
             isInterfaceConfigured = true
-            if !config.isHost {
+            if !networkConfig.isHost {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.connectingLabel.alpha = 1.0
                     self.activityIndicatorView.alpha = 1.0
                 })
             }
 
-            if case let .mpc(_, session, _)? = config {
+            if case let .mpc(_, session, _)? = networkConfig {
                 // Due to low usage, not accounting for players joining mid session
                 let playerNames = session.connectedPeers.filter({ peerID -> Bool in
                     return peerID != session.myPeerID
@@ -86,9 +86,9 @@ internal class GameViewController: StateLogViewController {
                 StatsHelper.shared.connected(to: playerNames)
             }
         }
-        if manager.gameState == .preMatch && config.isHost {
-            manager.player(.startedGame)
-            if case let .mpc(_, session, _)? = config {
+        if gameManager.gameState == .preMatch && networkConfig.isHost {
+            gameManager.player(.startedGame)
+            if case let .mpc(_, session, _)? = networkConfig {
                 PlayerMetrics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             }
@@ -114,7 +114,7 @@ internal class GameViewController: StateLogViewController {
     func showHelp() {
         PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
         PlayerMetrics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
-        manager.player(.neededHelp)
+        gameManager.player(.neededHelp)
         performSegue(.showHelp)
     }
 

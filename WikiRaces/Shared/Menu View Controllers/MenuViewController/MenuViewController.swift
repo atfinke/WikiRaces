@@ -81,8 +81,10 @@ internal class MenuViewController: StateLogViewController {
         panelGesture.numberOfTouchesRequired = 2
         view.addGestureRecognizer(panelGesture)
 
-        //swiftlint:disable:next discarded_notification_center_observer line_length
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("PlayerQuit"), object: nil, queue: nil) { _ in
+        //swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
+                                               object: nil,
+                                               queue: nil) { _ in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: {
                     self.navigationController?.popToRootViewController(animated: false)
@@ -219,7 +221,7 @@ internal class MenuViewController: StateLogViewController {
         let shortVersionKey = "CFBundleShortVersionString"
 
         let appBundleInfo = Bundle.main.infoDictionary
-        let kitBundleInfo = Bundle(for: WKRManager.self).infoDictionary
+        let kitBundleInfo = Bundle(for: WKRGameManager.self).infoDictionary
         let interfaceBundleInfo = Bundle(for: WKRUIStyle.self).infoDictionary
 
         guard let appBundleVersion = appBundleInfo?[versionKey] as? String,

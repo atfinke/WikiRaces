@@ -149,9 +149,11 @@ public struct WKRKitConstants {
                     return
             }
 
-            copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                        newArticlesFileURL: recordArticlesAsset.fileURL,
-                        newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+            DispatchQueue.main.async {
+                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
+                            newArticlesFileURL: recordArticlesAsset.fileURL,
+                            newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+            }
         }
     }
 
@@ -200,14 +202,14 @@ public struct WKRKitConstants {
             }
         }
 
-        DispatchQueue.main.async {
-            let newConstants = WKRKitConstants()
-            WKRKitConstants.current = newConstants
-        }
+        let newCurrentConstants = WKRKitConstants()
+            WKRKitConstants.current = newCurrentConstants
+
     }
 
     static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
-        guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
+        guard Thread.isMainThread,
+            let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
             let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {

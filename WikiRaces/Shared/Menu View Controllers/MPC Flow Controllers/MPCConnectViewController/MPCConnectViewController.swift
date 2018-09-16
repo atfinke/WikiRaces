@@ -266,9 +266,9 @@ internal class MPCConnectViewController: StateLogViewController {
                     fatalError("Destination rootViewController is not a GameViewController")
             }
             if isSolo {
-                destination.config = .solo(name: playerName)
+                destination.networkConfig = .solo(name: playerName)
             } else {
-                destination.config = .mpc(serviceType: serviceType, session: session, isHost: isPlayerHost)
+                destination.networkConfig = .mpc(serviceType: serviceType, session: session, isHost: isPlayerHost)
             }
         }
     }
