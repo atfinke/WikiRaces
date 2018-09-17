@@ -31,7 +31,7 @@ public struct WKRResultsInfo: Codable {
     private let racePoints: [WKRPlayerProfile: Int]
     private let sessionPoints: [WKRPlayerProfile: Int]
 
-    // MARK: Initialization
+    // MARK: - Initialization
 
     init(players: [WKRPlayer],
          racePoints: [WKRPlayerProfile: Int],

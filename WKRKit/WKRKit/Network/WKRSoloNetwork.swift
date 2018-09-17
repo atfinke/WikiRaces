@@ -16,7 +16,7 @@ internal class WKRSoloNetwork: WKRPeerNetwork {
     var playerConnected: ((WKRPlayerProfile) -> Void)?
     var playerDisconnected: ((WKRPlayerProfile) -> Void)?
 
-    // MARK: Types
+    // MARK: - Types
 
     let playerProfile: WKRPlayerProfile
 

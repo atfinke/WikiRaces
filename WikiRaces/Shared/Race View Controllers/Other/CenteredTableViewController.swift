@@ -11,7 +11,7 @@ import WKRUIKit
 
 internal class CenteredTableViewController: StateLogViewController {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     var overlayButtonTitle: String? {
         set {

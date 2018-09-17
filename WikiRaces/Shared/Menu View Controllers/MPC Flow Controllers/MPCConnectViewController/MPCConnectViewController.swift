@@ -268,7 +268,9 @@ internal class MPCConnectViewController: StateLogViewController {
             if isSolo {
                 destination.networkConfig = .solo(name: playerName)
             } else {
-                destination.networkConfig = .mpc(serviceType: serviceType, session: session, isHost: isPlayerHost)
+                destination.networkConfig = .mpc(mpcServiceType: serviceType,
+                                                 session: session,
+                                                 isHost: isPlayerHost)
             }
         }
     }

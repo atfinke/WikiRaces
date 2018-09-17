@@ -11,7 +11,7 @@ import Foundation
 
 public struct WKRUIKitConstants {
 
-    // MARK: Not Updated OTA
+    // MARK: - Not Updated OTA
 
     static let webViewAnimateInDuration   = 0.25
     static let webViewAnimateOutDuration  = 0.25
@@ -24,7 +24,7 @@ public struct WKRUIKitConstants {
     static let alertAnimateOutDuration     = 0.25
     public static let alertDefaultDuration = 5.0
 
-    // MARK: Updated OTA
+    // MARK: - Updated OTA
 
     public let version: Int
     public static var current = WKRUIKitConstants()
@@ -50,7 +50,7 @@ public struct WKRUIKitConstants {
         }
 
         let publicDB = CKContainer.default().publicCloudDatabase
-        let recordID = CKRecord.ID(recordName: "WKRUIConstantsRecordv2")
+        let recordID = CKRecord.ID(recordName: "WKRUIKitConstantsv2")
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
