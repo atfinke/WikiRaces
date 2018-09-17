@@ -36,7 +36,7 @@ public struct WKRResultsInfo: Codable {
     init(players: [WKRPlayer],
          racePoints: [WKRPlayerProfile: Int],
          sessionPoints: [WKRPlayerProfile: Int]) {
-        
+
         self.racePoints = racePoints
 
         // remove players that weren't in race
