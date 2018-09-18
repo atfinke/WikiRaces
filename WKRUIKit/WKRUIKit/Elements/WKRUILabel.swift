@@ -10,7 +10,7 @@ import UIKit
 
 public class WKRUILabel: UILabel {
 
-    // MARK: Properties
+    // MARK: - Properties
 
     private let spacing: Double
     public override var text: String? {

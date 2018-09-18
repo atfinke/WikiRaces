@@ -14,7 +14,7 @@ class WKRKitTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         WKRKitConstants.updateConstants()
-        XCTAssertEqual(WKRKitConstants.current.version, 5, "Installed WKRKitConstants not version 5")
+        XCTAssertEqual(WKRKitConstants.current.version, 11, "Installed WKRKitConstants not version 11")
     }
 
     override func tearDown() {

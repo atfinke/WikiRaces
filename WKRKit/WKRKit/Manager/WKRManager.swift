@@ -1,5 +1,5 @@
 //
-//  WKRManager.swift
+//  WKRGameManager.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,7 +8,7 @@
 
 import WKRUIKit
 
-public class WKRManager {
+public class WKRGameManager {
 
     // MARK: - Public Getters
 
@@ -62,12 +62,44 @@ public class WKRManager {
 
     // MARK: - Initialization
 
+    public convenience init(networkConfig: WKRPeerNetworkConfig,
+                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
+                            pointsUpdate: @escaping ((Int) -> Void),
+                            linkCountUpdate: @escaping ((Int) -> Void),
+                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+
+        switch networkConfig {
+        case .solo(let name):
+            self.init(soloPlayerName: name,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        case .multiwindow(let multiWindowName, let isHost):
+            self.init(multiWindowName: multiWindowName,
+                      isPlayerHost: isHost,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        case .mpc(let mpcServiceType, let session, let isHost):
+            self.init(mpcServiceType: mpcServiceType,
+                      session: session,
+                      isPlayerHost: isHost,
+                      stateUpdate: stateUpdate,
+                      pointsUpdate: pointsUpdate,
+                      linkCountUpdate: linkCountUpdate,
+                      logEvent: logEvent)
+        }
+
+    }
+
     internal init(player: WKRPlayer,
                   network: WKRPeerNetwork,
                   stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                   pointsUpdate: @escaping ((Int) -> Void),
                   linkCountUpdate: @escaping ((Int) -> Void),
-                  logEvent: @escaping ((String, [String: Any]?)) -> Void) {
+                  logEvent: @escaping (String, [String: Any]?) -> Void) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
@@ -91,7 +123,7 @@ public class WKRManager {
         alertView.removeFromSuperview()
     }
 
-    // MARK: View Controller Closures
+    // MARK: - View Controller Closures
 
     public func voting(timeUpdate: @escaping ((Int) -> Void),
                        infoUpdate: @escaping ((WKRVoteInfo) -> Void),
@@ -119,7 +151,7 @@ public class WKRManager {
         }
     }
 
-    // MARK: User Interface
+    // MARK: - User Interface
 
     public func hostNetworkInterface() -> UIViewController? {
         return peerNetwork.hostNetworkInterface()
@@ -168,40 +200,4 @@ public class WKRManager {
         default: fatalError("\(action)")
         }
     }
-}
-
-extension WKRManager {
-
-    public convenience init(networkConfig: WKRPeerNetworkConfig,
-                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                            pointsUpdate: @escaping ((Int) -> Void),
-                            linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
-
-        switch networkConfig {
-        case .solo(let name):
-            self.init(soloPlayerName: name,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        case .multiwindow(let windowName, let isHost):
-            self.init(windowName: windowName,
-                      isPlayerHost: isHost,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        case .mpc(let serviceType, let session, let isHost):
-            self.init(serviceType: serviceType,
-                      session: session,
-                      isPlayerHost: isHost,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        }
-
-    }
-
 }

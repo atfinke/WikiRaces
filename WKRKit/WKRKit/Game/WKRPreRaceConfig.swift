@@ -51,7 +51,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
         // Get a few more than neccessary random paths in case some final articles are no longer valid
         var randomPaths = [String]()
-        while randomPaths.count < Int(Double(WKRRaceConstants.votingArticlesCount) * 1.5) {
+        while randomPaths.count < Int(Double(WKRKitConstants.current.votingArticlesCount) * 1.5) {
             if let randomPath = finalArticles.randomElement, !randomPaths.contains(randomPath) {
                 randomPaths.append(randomPath)
             }
@@ -66,14 +66,14 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
 
-                let endingURL = URL(string: "https://en.m.wikipedia.org/wiki/Multinational_corporation")!
-                let fakeEnd = WKRPage(title: "Multinational Corporation", url: endingURL)
+                let endingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Park")!
+                let fakeEnd = WKRPage(title: "Apple Park", url: endingURL)
 
                 pages.removeLast()
                 pages.insert(fakeEnd, at: 0)
             }
 
-            let finalPages = Array(pages.prefix(WKRRaceConstants.votingArticlesCount))
+            let finalPages = Array(pages.prefix(WKRKitConstants.current.votingArticlesCount))
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
                 completionHandler(config)
@@ -109,13 +109,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         }
         operationQueue.addOperations(operations, waitUntilFinished: false)
         operationQueue.addOperations([startingPageOperation, completedOperation], waitUntilFinished: false)
-    }
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRPreRaceConfig, rhs: WKRPreRaceConfig) -> Bool {
-        return lhs.voteInfo == rhs.voteInfo && lhs.startingPage == rhs.startingPage
     }
 
 }

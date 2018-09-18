@@ -7,19 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1410DB401F4F51AC00F5CAD7 /* WKRPreHideScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */; };
-		1410DB411F4F51AC00F5CAD7 /* WKRPostHideScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */; };
+		1410DB401F4F51AC00F5CAD7 /* WKRStyleScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */; };
+		1410DB411F4F51AC00F5CAD7 /* WKRCleanScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */; };
 		1413AB1E1F364F2400873ACA /* WKRUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413AB1D1F364F2000873ACA /* WKRUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1413AB201F364FBA00873ACA /* WKRUIThinLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */; };
 		1413AB211F364FBD00873ACA /* WKRUIBottomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */; };
 		1413AB221F364FC100873ACA /* WKRUIAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89C1F362C05000A5D96 /* WKRUIAlertView.swift */; };
-		1413AB231F364FD800873ACA /* WKRUIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */; };
+		1413AB231F364FD800873ACA /* WKRUIKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89D1F362C05000A5D96 /* WKRUIKitConstants.swift */; };
 		1413AB241F364FE400873ACA /* WKRUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8B31F362F21000A5D96 /* WKRUIButton.swift */; };
 		1413AB251F364FE400873ACA /* WKRUIButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8B11F362D7A000A5D96 /* WKRUIButtonStyle.swift */; };
 		1413AB261F364FE400873ACA /* WKRUICenteredTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89A1F362C05000A5D96 /* WKRUICenteredTableView.swift */; };
 		1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC668B1F3631F5001868C4 /* WKRUILabel.swift */; };
 		1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89B1F362C05000A5D96 /* WKRUIProgressView.swift */; };
 		1413AB2C1F36500400873ACA /* WKRUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413AB2B1F36500400873ACA /* WKRUIWebView.swift */; };
+		142F7168210D034300C66558 /* WKRContentBlocker.json in Resources */ = {isa = PBXBuildFile; fileRef = 142F7167210D034300C66558 /* WKRContentBlocker.json */; };
+		145D3D702109937200115B62 /* WKRStyleScript-Dark.js in Resources */ = {isa = PBXBuildFile; fileRef = 145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */; };
 		145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145E903C1F79F80A00D31554 /* WKRUIConstants.plist */; };
 		149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */; };
 		14A3D4A21F3634110038388F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3D4A11F3634110038388F /* AppDelegate.swift */; };
@@ -58,17 +60,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPreHideScript.js; sourceTree = "<group>"; };
-		1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRPostHideScript.js; sourceTree = "<group>"; };
+		1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRStyleScript.js; sourceTree = "<group>"; };
+		1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRCleanScript.js; sourceTree = "<group>"; };
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
 		1413AB2B1F36500400873ACA /* WKRUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWebView.swift; sourceTree = "<group>"; };
+		142F7167210D034300C66558 /* WKRContentBlocker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WKRContentBlocker.json; sourceTree = "<group>"; };
+		145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "WKRStyleScript-Dark.js"; sourceTree = "<group>"; };
 		145E903C1F79F80A00D31554 /* WKRUIConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRUIConstants.plist; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF7F71F362B0D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		149FF89A1F362C05000A5D96 /* WKRUICenteredTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUICenteredTableView.swift; sourceTree = "<group>"; };
 		149FF89B1F362C05000A5D96 /* WKRUIProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIProgressView.swift; sourceTree = "<group>"; };
 		149FF89C1F362C05000A5D96 /* WKRUIAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIAlertView.swift; sourceTree = "<group>"; };
-		149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIConstants.swift; sourceTree = "<group>"; };
+		149FF89D1F362C05000A5D96 /* WKRUIKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIKitConstants.swift; sourceTree = "<group>"; };
 		149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIBottomOverlayView.swift; sourceTree = "<group>"; };
 		149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Colors.swift"; sourceTree = "<group>"; };
 		149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIThinLineView.swift; sourceTree = "<group>"; };
@@ -109,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				145E903C1F79F80A00D31554 /* WKRUIConstants.plist */,
-				149FF89D1F362C05000A5D96 /* WKRUIConstants.swift */,
+				149FF89D1F362C05000A5D96 /* WKRUIKitConstants.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -118,8 +122,10 @@
 			isa = PBXGroup;
 			children = (
 				1413AB2B1F36500400873ACA /* WKRUIWebView.swift */,
-				1410DB3E1F4F51AC00F5CAD7 /* WKRPreHideScript.js */,
-				1410DB3F1F4F51AC00F5CAD7 /* WKRPostHideScript.js */,
+				1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */,
+				145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */,
+				1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */,
+				142F7167210D034300C66558 /* WKRContentBlocker.json */,
 			);
 			path = "Web View";
 			sourceTree = "<group>";
@@ -224,7 +230,6 @@
 				149FF7EF1F362B0D000A5D96 /* Frameworks */,
 				149FF7F01F362B0D000A5D96 /* Headers */,
 				149FF7F11F362B0D000A5D96 /* Resources */,
-				149FDED21F4F49AA003A71D0 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -244,7 +249,7 @@
 				14A3D49C1F3634110038388F /* Frameworks */,
 				14A3D49D1F3634110038388F /* Resources */,
 				14A3D4B51F36342A0038388F /* Embed Frameworks */,
-				149FDED01F4F49A0003A71D0 /* Swiftlint */,
+				14A4F9E52123CD1500EF5C67 /* Swiftlint */,
 			);
 			buildRules = (
 			);
@@ -262,13 +267,13 @@
 		149FF7EA1F362B0D000A5D96 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastSwiftUpdateCheck = 1000;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
 					149FF7F21F362B0D000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Manual;
 					};
 					14A3D49E1F3634110038388F = {
@@ -300,9 +305,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				145D3D702109937200115B62 /* WKRStyleScript-Dark.js in Resources */,
 				145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */,
-				1410DB411F4F51AC00F5CAD7 /* WKRPostHideScript.js in Resources */,
-				1410DB401F4F51AC00F5CAD7 /* WKRPreHideScript.js in Resources */,
+				1410DB411F4F51AC00F5CAD7 /* WKRCleanScript.js in Resources */,
+				1410DB401F4F51AC00F5CAD7 /* WKRStyleScript.js in Resources */,
+				142F7168210D034300C66558 /* WKRContentBlocker.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,20 +340,6 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
-		149FDED01F4F49A0003A71D0 /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
 		149FDED11F4F49A9003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -361,19 +354,23 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
-		149FDED21F4F49AA003A71D0 /* Swiftlint */ = {
+		14A4F9E52123CD1500EF5C67 /* Swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
 			);
 			name = Swiftlint;
+			outputFileListPaths = (
+			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -388,7 +385,7 @@
 				14FC66871F362FD4001868C4 /* WKRUIKit+Fonts.swift in Sources */,
 				1413AB211F364FBD00873ACA /* WKRUIBottomOverlayView.swift in Sources */,
 				1413AB2C1F36500400873ACA /* WKRUIWebView.swift in Sources */,
-				1413AB231F364FD800873ACA /* WKRUIConstants.swift in Sources */,
+				1413AB231F364FD800873ACA /* WKRUIKitConstants.swift in Sources */,
 				1413AB261F364FE400873ACA /* WKRUICenteredTableView.swift in Sources */,
 				1413AB241F364FE400873ACA /* WKRUIButton.swift in Sources */,
 				149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */,
@@ -451,6 +448,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -458,6 +456,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -511,6 +510,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -518,6 +518,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -558,20 +559,20 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 72S993BNAV;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -584,19 +585,19 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 72S993BNAV;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -608,11 +609,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -624,11 +625,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

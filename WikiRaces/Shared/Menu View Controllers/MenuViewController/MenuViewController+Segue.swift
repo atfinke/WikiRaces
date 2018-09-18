@@ -46,7 +46,7 @@ extension MenuViewController {
             }
             #if MULTIWINDOWDEBUG
                 //swiftlint:disable:next force_cast
-                destination.config = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
+            destination.networkConfig = .multiwindow(multiWindowName: (view.window as! DebugWindow).playerName,
                                                   isHost: isPlayerHost)
             #else
                 fatalError()
@@ -62,6 +62,17 @@ extension MenuViewController {
                 destination.isPlayerHost = isPlayerHost
             #endif
         }
+    }
+
+    // MARK: - Settings
+
+    @objc
+    func openSettings() {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+            fatalError("Settings URL nil")
+        }
+
+        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
     }
 
 }

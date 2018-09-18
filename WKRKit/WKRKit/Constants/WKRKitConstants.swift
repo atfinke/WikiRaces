@@ -1,5 +1,5 @@
 //
-//  WKRConstants.swift
+//  WKRKitConstants.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -9,7 +9,9 @@
 import CloudKit
 import Foundation
 
-public class WKRKitConstants {
+public struct WKRKitConstants {
+
+    // MARK: - Properties
 
     public let version: Int
     public static var current = WKRKitConstants()
@@ -24,12 +26,21 @@ public class WKRKitConstants {
     internal let randomURLString: String
     internal let whatLinksHereURLString: String
 
+    internal let bonusPointReward: Int
+    internal let bonusPointsInterval: Double
+
+    internal let maxFoundPagePlayers: Int
+    internal let votingArticlesCount: Int
+
     internal let bannedURLFragments: [String]
 
+    // MARK: - Initalization
+
+    //swiftlint:disable:next cyclomatic_complexity function_body_length
     init() {
         //swiftlint:disable:next line_length
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
-            let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String:Any] else {
+            let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String: Any] else {
                 fatalError("Failed to load constants")
         }
 
@@ -57,6 +68,18 @@ public class WKRKitConstants {
         guard let whatLinksHereURLString = documentsConstants["WhatLinksHereURLString"] as? String else {
             fatalError("WKRKitConstants: No WhatLinksHereURLString value")
         }
+        guard let bonusPointReward = documentsConstants["BonusPointReward"] as? Int else {
+            fatalError("WKRKitConstants: No BonusPointReward value")
+        }
+        guard let bonusPointsInterval = documentsConstants["BonusPointsInterval"] as? Double else {
+            fatalError("WKRKitConstants: No BonusPointsInterval value")
+        }
+        guard let maxFoundPagePlayers = documentsConstants["MaxFoundPagePlayers"] as? Int else {
+            fatalError("WKRKitConstants: No MaxFoundPagePlayers value")
+        }
+        guard let votingArticlesCount = documentsConstants["VotingArticlesCount"] as? Int else {
+            fatalError("WKRKitConstants: No VotingArticlesCount value")
+        }
         guard let bannedURLFragments = documentsConstants["BannedURLFragments"] as? [String] else {
             fatalError("WKRKitConstants: No BannedURLFragments value")
         }
@@ -72,14 +95,23 @@ public class WKRKitConstants {
         self.randomURLString = randomURLString
         self.whatLinksHereURLString = whatLinksHereURLString
 
+        self.bonusPointReward = bonusPointReward
+        self.bonusPointsInterval = bonusPointsInterval
+
+        self.maxFoundPagePlayers = maxFoundPagePlayers
+        self.votingArticlesCount = votingArticlesCount
+
         self.bannedURLFragments = bannedURLFragments
     }
+
+    // MARK: - Helpers
 
     @available(*, deprecated, message: "Only for debugging")
     static public func removeConstants() {
         let fileManager = FileManager.default
-        let folderPath = FileManager.default.documentsDirectory!.path
-        guard let filePaths = try? fileManager.contentsOfDirectory(atPath: folderPath) else {
+
+        guard let folderPath = fileManager.documentsDirectory?.path,
+             let filePaths = try? fileManager.contentsOfDirectory(atPath: folderPath) else {
             fatalError()
         }
         for filePath in filePaths {
@@ -104,7 +136,7 @@ public class WKRKitConstants {
         }
 
         let publicDB = CKContainer.default().publicCloudDatabase
-        let recordID = CKRecordID(recordName: "WKRKitConstantsRecord")
+        let recordID = CKRecord.ID(recordName: "WKRKitConstantsRecord")
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
@@ -117,9 +149,11 @@ public class WKRKitConstants {
                     return
             }
 
-            copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                        newArticlesFileURL: recordArticlesAsset.fileURL,
-                        newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+            DispatchQueue.main.async {
+                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
+                            newArticlesFileURL: recordArticlesAsset.fileURL,
+                            newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+            }
         }
     }
 
@@ -168,11 +202,14 @@ public class WKRKitConstants {
             }
         }
 
-        current = WKRKitConstants()
+        let newCurrentConstants = WKRKitConstants()
+            WKRKitConstants.current = newCurrentConstants
+
     }
 
     static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
-        guard let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
+        guard Thread.isMainThread,
+            let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
             let bundledArticlesURL = bundle.url(forResource: "WKRArticlesData", withExtension: "plist"),
             let bundledGetLinksScriptURL = bundle.url(forResource: "WKRGetLinks", withExtension: "js") else {

@@ -9,30 +9,6 @@
 import Foundation
 
 public struct WKRPlayerProfile: Codable, Hashable, Equatable {
-
-    // MARK: - Properties
-
     public let name: String
     public let playerID: String
-
-    // MARK: - Initialization
-
-    init(name: String, playerID: String) {
-        self.name = name
-        self.playerID = playerID
-    }
-
-    // MARK: - Hashable
-
-    public var hashValue: Int {
-        return playerID.hashValue
-    }
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRPlayerProfile, rhs: WKRPlayerProfile) -> Bool {
-        return lhs.playerID == rhs.playerID
-    }
-
 }

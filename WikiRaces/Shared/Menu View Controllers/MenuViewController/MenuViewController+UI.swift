@@ -75,12 +75,14 @@ extension MenuViewController {
 
     /// One-off setup
     func setupInterface() {
-        UIApplication.shared.keyWindow?.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.wkrBackgroundColor
+        UIApplication.shared.keyWindow?.backgroundColor = UIColor.wkrBackgroundColor
 
         topView.translatesAutoresizingMaskIntoConstraints = false
+        topView.backgroundColor = UIColor.wkrMenuTopViewColor
         view.addSubview(topView)
 
-        bottomView.backgroundColor = #colorLiteral(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+        bottomView.backgroundColor = UIColor.wkrMenuBottomViewColor
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(bottomView)
 
@@ -173,7 +175,7 @@ extension MenuViewController {
         topView.addSubview(titleLabel)
 
         #if DEBUG
-            titleLabel.textColor = UIColor.blue
+            titleLabel.textColor = UIColor(red: 51.0 / 255.0, green: 102.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
         #endif
 
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."
@@ -276,12 +278,12 @@ extension MenuViewController {
     private func setupPuzzleView() -> UIView {
         let puzzleBackgroundView = UIView()
 
-        let color = #colorLiteral(red: 218.0/255.0, green: 218.0/255.0, blue: 218.0/255.0, alpha: 1.0)
-        puzzleBackgroundView.backgroundColor = color
+        puzzleBackgroundView.isUserInteractionEnabled = false
+        puzzleBackgroundView.backgroundColor = UIColor.wkrMenuPuzzleViewColor
         puzzleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.addSubview(puzzleBackgroundView)
 
-        puzzleView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "puzzle"))
+        puzzleView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "MenuBackgroundPuzzle"))
         puzzleView.translatesAutoresizingMaskIntoConstraints = false
         puzzleBackgroundView.addSubview(puzzleView)
 
@@ -296,4 +298,7 @@ extension MenuViewController {
         return puzzleBackgroundView
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.wkrStatusBarStyle
+    }
 }

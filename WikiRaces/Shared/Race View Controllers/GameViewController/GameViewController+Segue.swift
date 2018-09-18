@@ -49,13 +49,16 @@ extension GameViewController {
             prepare(helpViewController: destination)
         }
     }
+
     private func prepare(votingViewController: VotingViewController) {
         votingViewController.playerVoted = { [weak self] page in
-            self?.manager.player(.voted(page))
-            PlayerAnalytics.log(event: .voted, attributes: ["Page": page.title as Any])
+            self?.gameManager.player(.voted(page))
+            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
         }
 
-        votingViewController.voteInfo = manager.voteInfo
+        votingViewController.voteInfo = gameManager.voteInfo
+
+        votingViewController.backupQuit = playerQuit
         votingViewController.quitAlertController = quitAlertController(raceStarted: false)
 
         self.votingViewController = votingViewController
@@ -63,14 +66,16 @@ extension GameViewController {
 
     private func prepare(resultsViewController: ResultsViewController) {
         resultsViewController.readyButtonPressed = { [weak self] in
-            self?.manager.player(.ready)
+            self?.gameManager.player(.ready)
         }
 
-        resultsViewController.addPlayersViewController = manager.hostNetworkInterface()
+        resultsViewController.addPlayersViewController = gameManager.hostNetworkInterface()
 
-        resultsViewController.state = manager.gameState
-        resultsViewController.resultsInfo = manager.hostResultsInfo
-        resultsViewController.isPlayerHost = config.isHost
+        resultsViewController.state = gameManager.gameState
+        resultsViewController.resultsInfo = gameManager.hostResultsInfo
+        resultsViewController.isPlayerHost = networkConfig.isHost
+
+        resultsViewController.backupQuit = playerQuit
         resultsViewController.quitAlertController = quitAlertController(raceStarted: false)
 
         self.resultsViewController = resultsViewController
@@ -78,10 +83,10 @@ extension GameViewController {
 
     private func prepare(helpViewController: HelpViewController) {
         helpViewController.linkTapped = { [weak self] in
-            self?.manager.enqueue(message: "Links disabled in help", duration: 2.0)
+            self?.gameManager.enqueue(message: "Links disabled in help", duration: 2.0)
         }
 
-        helpViewController.url = manager.finalPageURL
+        helpViewController.url = gameManager.finalPageURL
         self.activeViewController = helpViewController
     }
 

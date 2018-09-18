@@ -76,25 +76,21 @@ internal class MenuViewController: StateLogViewController {
         super.viewDidLoad()
         setupInterface()
 
-        let versionGesture = UITapGestureRecognizer(target: self, action: #selector(showVersionInfo))
-        versionGesture.numberOfTapsRequired = 2
-        versionGesture.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(versionGesture)
+        let panelGesture = UITapGestureRecognizer(target: self, action: #selector(showDebugPanel))
+        panelGesture.numberOfTapsRequired = 2
+        panelGesture.numberOfTouchesRequired = 2
+        view.addGestureRecognizer(panelGesture)
 
-        //swiftlint:disable:next discarded_notification_center_observer line_length
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("PlayerQuit"), object: nil, queue: nil) { _ in
+        //swiftlint:disable:next discarded_notification_center_observer
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
+                                               object: nil,
+                                               queue: nil) { _ in
             DispatchQueue.main.async {
                 self.dismiss(animated: true, completion: {
                     self.navigationController?.popToRootViewController(animated: false)
                 })
             }
         }
-
-        guard let bundleBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
-            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-        PlayerAnalytics.log(event: .buildInfo(version: bundleVersion, build: bundleBuild))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -105,32 +101,32 @@ internal class MenuViewController: StateLogViewController {
             performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
         #else
             attemptGCAuthentication()
+
+            if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
+                PlayerMetrics.log(event: .hasCustomName(name))
+            }
+            if GKLocalPlayer.local.isAuthenticated {
+                PlayerMetrics.log(event: .hasGCAlias(GKLocalPlayer.local.alias))
+            }
+            PlayerMetrics.log(event: .hasDeviceName(UIDevice.current.name))
         #endif
     }
 
     // MARK: - Actions
 
-    /// Changes title label to build info
-    @objc
-    func showVersionInfo() {
-        PlayerAnalytics.log(event: .versionInfo)
-        guard let bundleVersion = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
-            let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-        let appVersion = bundleShortVersion + " (\(bundleVersion)) / "
-        titleLabel.text = appVersion + "\(WKRKitConstants.current.version) / \(WKRUIConstants.current.version)"
-    }
-
     /// Join button pressed
     @objc
     func joinRace() {
-        PlayerAnalytics.log(event: .userAction(#function))
-        PlayerAnalytics.log(event: .pressedJoin)
+        guard isMenuVisable else { return }
+        PlayerMetrics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .pressedJoin)
+
+        UISelectionFeedbackGenerator().selectionChanged()
 
         guard !promptForCustomName(isHost: false) else {
             return
         }
+
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: false)
         }
@@ -139,12 +135,16 @@ internal class MenuViewController: StateLogViewController {
     /// Create button pressed
     @objc
     func createRace() {
-        PlayerAnalytics.log(event: .userAction(#function))
-        PlayerAnalytics.log(event: .pressedHost)
+        guard isMenuVisable else { return }
+        PlayerMetrics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .pressedHost)
+
+        UISelectionFeedbackGenerator().selectionChanged()
 
         guard !promptForCustomName(isHost: true) else {
             return
         }
+
         animateMenuOut {
             self.performSegue(.showConnecting, isHost: true)
         }
@@ -160,8 +160,8 @@ internal class MenuViewController: StateLogViewController {
         let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
 
         let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerAnalytics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
-            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
+            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
+            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
             if isHost {
                 self.createRace()
             } else {
@@ -171,19 +171,99 @@ internal class MenuViewController: StateLogViewController {
         alertController.addAction(laterAction)
 
         let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-            PlayerAnalytics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
-            PlayerAnalytics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
+            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
+            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
 
-            guard let settingsURL = URL(string: UIApplicationOpenSettingsURLString) else {
-                fatalError("Settings URL nil")
-            }
-            UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
+            self.openSettings()
         })
         alertController.addAction(settingsAction)
 
         present(alertController, animated: true, completion: nil)
-        PlayerAnalytics.log(presentingOf: alertController, on: self)
+        PlayerMetrics.log(presentingOf: alertController, on: self)
         return true
+    }
+
+    /// Changes title label to build info
+    @objc
+    func showDebugPanel() {
+        PlayerMetrics.log(event: .versionInfo)
+
+        let message = "If your name isn't Andrew, you probably shouldn’t be here."
+        let alertController = UIAlertController(title: "Debug Panel",
+                                                message: message,
+                                                preferredStyle: .alert)
+
+        let darkAction = UIAlertAction(title: "Toggle Dark UI", style: .default, handler: { _ in
+            WKRUIStyle.isDark = !WKRUIStyle.isDark
+            exit(1998)
+        })
+        alertController.addAction(darkAction)
+
+        let buildAction = UIAlertAction(title: "Show Build Info", style: .default, handler: { _ in
+            self.showDebugBuildInfo()
+        })
+        alertController.addAction(buildAction)
+
+        let defaultsAction = UIAlertAction(title: "Show Defaults", style: .default, handler: { _ in
+            self.showDebugDefaultsInfo()
+        })
+        alertController.addAction(defaultsAction)
+
+        alertController.addCancelAction(title: "Dismiss")
+
+        present(alertController, animated: true, completion: nil)
+
+        PlayerMetrics.log(presentingOf: alertController, on: self)
+    }
+
+    private func showDebugBuildInfo() {
+        let versionKey = "CFBundleVersion"
+        let shortVersionKey = "CFBundleShortVersionString"
+
+        let appBundleInfo = Bundle.main.infoDictionary
+        let kitBundleInfo = Bundle(for: WKRGameManager.self).infoDictionary
+        let interfaceBundleInfo = Bundle(for: WKRUIStyle.self).infoDictionary
+
+        guard let appBundleVersion = appBundleInfo?[versionKey] as? String,
+            let appBundleShortVersion = appBundleInfo?[shortVersionKey] as? String,
+            let kitBundleVersion = kitBundleInfo?[versionKey] as? String,
+            let kitBundleShortVersion = kitBundleInfo?[shortVersionKey] as? String,
+            let interfaceBundleVersion = interfaceBundleInfo?[versionKey] as? String,
+            let interfaceBundleShortVersion = interfaceBundleInfo?[shortVersionKey] as? String else {
+                fatalError("No bundle info dictionary")
+        }
+
+        let debugInfoController = DebugInfoTableViewController()
+        debugInfoController.title = "Build Info"
+        debugInfoController.info = [
+            ("WikiRaces Version", "\(appBundleShortVersion) (\(appBundleVersion))"),
+            ("WKRKit Version", "\(kitBundleShortVersion) (\(kitBundleVersion))"),
+            ("WKRUIKit Version", "\(interfaceBundleShortVersion) (\(interfaceBundleVersion))"),
+
+            ("WKRKit Constants Version", "\(WKRKitConstants.current.version)"),
+            ("WKRUIKit Constants Version", "\(WKRUIKitConstants.current.version)")
+        ]
+
+        let navController = UINavigationController(rootViewController: debugInfoController)
+        present(navController, animated: true, completion: nil)
+
+        PlayerMetrics.log(presentingOf: navController, on: self)
+    }
+
+    private func showDebugDefaultsInfo() {
+        let debugInfoController = DebugInfoTableViewController()
+        debugInfoController.title = "User Defaults"
+        debugInfoController.info = UserDefaults
+            .standard
+            .dictionaryRepresentation()
+            .sorted { (lhs, rhs) -> Bool in
+                return lhs.key.lowercased() < rhs.key.lowercased()
+        }
+
+        let navController = UINavigationController(rootViewController: debugInfoController)
+        present(navController, animated: true, completion: nil)
+
+        PlayerMetrics.log(presentingOf: navController, on: self)
     }
 
     // MARK: - Menu Animations
@@ -198,7 +278,7 @@ internal class MenuViewController: StateLogViewController {
         isMenuVisable = false
         view.setNeedsLayout()
 
-        UIView.animate(withDuration: 0.75, animations: {
+        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle, animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.puzzleTimer?.invalidate()
@@ -211,20 +291,38 @@ internal class MenuViewController: StateLogViewController {
         view.isUserInteractionEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
 
-        puzzleTimer?.invalidate()
-        puzzleTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { _ in
-            self.puzzleView.contentOffset = CGPoint(x: self.puzzleView.contentOffset.x + 0.5, y: 0)
+        let duration = TimeInterval(5)
+        let offset = CGFloat(40 * duration)
+
+        func animateScroll() {
+            let xOffset = self.puzzleView.contentOffset.x + offset
+            UIView.animate(withDuration: duration,
+                           delay: 0,
+                           options: .curveLinear,
+                           animations: {
+                            self.puzzleView.contentOffset = CGPoint(x: xOffset,
+                                                                    y: 0)
+            }, completion: nil)
         }
+
+        puzzleTimer?.invalidate()
+        puzzleTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: true) { _ in
+            animateScroll()
+        }
+        puzzleTimer?.fire()
 
         isMenuVisable = true
         view.setNeedsLayout()
 
-        UIView.animate(withDuration: 0.75, animations: {
+        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle,
+                       animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
-            if UserDefaults.standard.bool(forKey: "ShouldPromptForRating"), #available(iOS 10.3, *) {
+            if UserDefaults.standard.bool(forKey: "ShouldPromptForRating") {
+                #if !DEBUG
                 SKStoreReviewController.requestReview()
+                #endif
             }
         })
     }

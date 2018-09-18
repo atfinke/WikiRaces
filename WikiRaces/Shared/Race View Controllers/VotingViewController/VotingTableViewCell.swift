@@ -23,10 +23,10 @@ internal class VotingTableViewCell: UITableViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                countLabel.textColor = UIColor.darkGray
+                countLabel.textColor = UIColor.wkrVoteCountSelectedTextColor
                 countLabel.font = UIFont.systemFont(ofSize: 20)
             } else {
-                countLabel.textColor = UIColor.lightGray
+                countLabel.textColor = UIColor.wkrVoteCountTextColor
                 countLabel.font = UIFont.systemFont(ofSize: 17)
             }
         }
@@ -46,7 +46,7 @@ internal class VotingTableViewCell: UITableViewCell {
 
     // MARK: - Initialization
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         selectionStyle = .none
@@ -63,7 +63,7 @@ internal class VotingTableViewCell: UITableViewCell {
 
         countLabel.text = "0"
         countLabel.textAlignment = .right
-        countLabel.textColor = UIColor.lightGray
+        countLabel.textColor = UIColor.wkrVoteCountTextColor
         countLabel.font = UIFont.systemFont(ofSize: 20)
 
         stackView.addArrangedSubview(titleLabel)

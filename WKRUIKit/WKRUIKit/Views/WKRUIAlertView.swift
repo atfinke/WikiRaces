@@ -15,11 +15,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     private struct WKRAlertMessage: Equatable {
         let text: String
         let duration: Double
-
-        //swiftlint:disable:next operator_whitespace
-        static func ==(lhs: WKRAlertMessage, rhs: WKRAlertMessage) -> Bool {
-            return lhs.text == rhs.text
-        }
     }
 
     // MARK: - Properties
@@ -28,15 +23,9 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     private let label = UILabel()
     private let alertWindow: UIWindow
-    private var bottomConstraint: NSLayoutConstraint!
+    private var topConstraint: NSLayoutConstraint!
 
-    private var height: CGFloat {
-        if #available(iOS 11.0, *) {
-            return WKRUIConstants.alertHeight + (window?.safeAreaInsets.bottom ?? 0) / 2
-        } else {
-            return WKRUIConstants.alertHeight
-        }
-    }
+    private var isPresenting = false
 
     // MARK: - Initalization
 
@@ -44,7 +33,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         guard let window = UIApplication.shared.keyWindow else {
             fatalError("Couldn't get key window")
         }
-
         alertWindow = window
 
         super.init()
@@ -53,22 +41,26 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         label.textColor = UIColor.wkrTextColor
         label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(label)
 
-        bottomConstraint = bottomAnchor.constraint(equalTo: alertWindow.bottomAnchor, constant: height)
+        topConstraint = topAnchor.constraint(equalTo: alertWindow.bottomAnchor)
+
+        let inset: CGFloat = 10
         let constraints: [NSLayoutConstraint] = [
-            bottomConstraint,
-            heightAnchor.constraint(equalToConstant: height),
+            topConstraint,
             leftAnchor.constraint(equalTo: alertWindow.leftAnchor),
             rightAnchor.constraint(equalTo: alertWindow.rightAnchor),
 
-            label.topAnchor.constraint(equalTo: topAnchor),
-            label.heightAnchor.constraint(equalToConstant: WKRUIConstants.alertHeight),
-            label.leftAnchor.constraint(equalTo: leftAnchor, constant: 10.0),
-            label.rightAnchor.constraint(equalTo: rightAnchor, constant: -10.0)
+            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset - alertWindow.safeAreaInsets.bottom / 2),
+
+            label.leftAnchor.constraint(equalTo: leftAnchor, constant: inset),
+            label.rightAnchor.constraint(equalTo: rightAnchor, constant: -inset),
+
+            label.heightAnchor.constraint(greaterThanOrEqualToConstant: WKRUIKitConstants.alertLabelHeight)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -79,22 +71,18 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Enqueuing Messages
 
-    public func enqueue(text: String, duration: Double = WKRUIConstants.alertDefaultDuration) {
+    public func enqueue(text: String, duration: Double = WKRUIKitConstants.alertDefaultDuration) {
         let message = WKRAlertMessage(text: text, duration: duration)
 
         // Make sure message doesn't equal most recent in queue.
         // If queue empty, make sure message isn't the same as the one being displayed.
-        if let lastMessage = queue.last {
-            if lastMessage != message {
-                queue.append(message)
-                present()
-            }
-        } else if let currentMessageText = label.text {
-            if currentMessageText != text {
-                queue.append(message)
-                present()
-            }
-
+        if let lastMessage = queue.last,
+            lastMessage == message {
+            return
+        } else if queue.isEmpty,
+            let currentMessageText = label.text,
+            currentMessageText == text {
+            return
         } else {
             queue.append(message)
             present()
@@ -109,18 +97,21 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     // MARK: - State
 
     private func present() {
-        guard !queue.isEmpty, bottomConstraint.constant == height else { return }
+        guard !queue.isEmpty, !isPresenting else { return }
+        isPresenting = true
 
         let message = queue.removeFirst()
         label.text = message.text.uppercased()
+        setNeedsLayout()
+        layoutIfNeeded()
 
-        bottomConstraint.constant = 0
-        alertWindow.setNeedsUpdateConstraints()
-        alertWindow.bringSubview(toFront: self)
+        topConstraint.constant = -frame.height
+        alertWindow.setNeedsLayout()
+        alertWindow.bringSubviewToFront(self)
 
         UINotificationFeedbackGenerator().notificationOccurred(.warning)
 
-        UIView.animate(withDuration: WKRUIConstants.alertAnimateInDuration) {
+        UIView.animate(withDuration: WKRUIKitConstants.alertAnimateInDuration) {
             self.alertWindow.layoutIfNeeded()
         }
 
@@ -130,13 +121,14 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     }
 
     private func dismiss() {
-        bottomConstraint.constant = height
-        alertWindow.setNeedsUpdateConstraints()
+        topConstraint.constant = 0
+        alertWindow.setNeedsLayout()
 
-        UIView.animate(withDuration: WKRUIConstants.alertAnimateOutDuration, animations: {
+        UIView.animate(withDuration: WKRUIKitConstants.alertAnimateOutDuration, animations: {
             self.alertWindow.layoutIfNeeded()
         }, completion: { _ in
             self.label.text = nil
+            self.isPresenting = false
             self.present()
         })
     }

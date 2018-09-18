@@ -8,18 +8,18 @@
 
 import Foundation
 
-public struct WKRVoteInfo: Codable {
+public struct WKRVoteInfo: Codable, Equatable {
 
     // MARK: - Properties
 
-    fileprivate let pages: [WKRPage]
-    fileprivate var playerVotes = [WKRPlayerProfile: WKRPage]()
+    private let pages: [WKRPage]
+    private var playerVotes = [WKRPlayerProfile: WKRPage]()
 
     public var pageCount: Int {
         return pages.count
     }
 
-    // MARK: Initialization
+    // MARK: - Initialization
 
     internal init(pages: [WKRPage]) {
         let sortedPages = pages.sorted { (pageOne, pageTwo) -> Bool in
@@ -71,17 +71,6 @@ public struct WKRVoteInfo: Codable {
 
     public func index(of page: WKRPage) -> Int? {
         return pages.index(of: page)
-    }
-
-}
-
-extension WKRVoteInfo: Equatable {
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRVoteInfo, rhs: WKRVoteInfo) -> Bool {
-        return lhs.pages == rhs.pages && NSDictionary(dictionary: lhs.playerVotes).isEqual(to: lhs.playerVotes)
     }
 
 }

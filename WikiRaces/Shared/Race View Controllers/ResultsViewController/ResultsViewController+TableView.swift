@@ -31,27 +31,36 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         switch state {
         case .results, .hostResults:
             let raceResults = resultsInfo.raceResults(at: index)
-            cell.playerLabel.text = raceResults.player.name
-            cell.isShowingActivityIndicatorView = false
-            cell.accessoryType = (readyStates?.playerReady(raceResults.player) ?? false) ? .checkmark : .none
-
-            if raceResults.playerState == .racing {
-                cell.isShowingActivityIndicatorView = true
-            } else if raceResults.playerState == .foundPage {
-                cell.detailLabel.text = DurationFormatter.string(for: raceResults.player.raceHistory?.duration)
-            } else {
-                cell.detailLabel.text = raceResults.playerState.text
-            }
+            cell.isShowingCheckmark = readyStates?.playerReady(raceResults.player) ?? false
+            cell.update(for: raceResults.player, animated: true)
         case .points:
             let sessionResults = resultsInfo.sessionResults(at: index)
             cell.isShowingActivityIndicatorView = false
-            cell.playerLabel.text = (index + 1).description + ". " + sessionResults.profile.name
-            cell.accessoryType = .none
+            cell.isShowingCheckmark = false
+
+            let detailString: String
             if sessionResults.points == 1 {
-                cell.detailLabel.text = sessionResults.points.description + " PT"
+                detailString = sessionResults.points.description + " PT"
             } else {
-                cell.detailLabel.text = sessionResults.points.description + " PTS"
+                detailString = sessionResults.points.description + " PTS"
             }
+
+            var subtitleString: String
+            if sessionResults.ranking == 1 {
+                subtitleString = "1st Place"
+            } else if  sessionResults.ranking == 2 {
+                subtitleString = "2nd Place"
+            } else if  sessionResults.ranking == 3 {
+                subtitleString = "3rd Place"
+            } else {
+                subtitleString = "\(sessionResults.ranking)th Place"
+            }
+            subtitleString += sessionResults.isTied ? " (Tied)" : ""
+
+            cell.update(playerName: sessionResults.profile.name,
+                        detail: detailString,
+                        subtitle: NSAttributedString(string: subtitleString),
+                        animated: false)
         default:
             fatalError("Unexpected state \(state)")
         }
@@ -60,7 +69,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
 
         guard let resultsInfo = resultsInfo else {
             return
@@ -69,7 +78,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         let raceResults = resultsInfo.raceResults(at: indexPath.row)
         performSegue(withIdentifier: "showHistory", sender: raceResults.player)
 
-        PlayerAnalytics.log(event: .openedHistory, attributes: ["GameState": state.rawValue.description as Any])
+        PlayerMetrics.log(event: .openedHistory, attributes: ["GameState": state.rawValue.description as Any])
     }
 
 }

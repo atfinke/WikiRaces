@@ -22,8 +22,9 @@ internal class HelpViewController: StateLogViewController, WKNavigationDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.white
-        navigationController?.view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.wkrBackgroundColor
+        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
+        navigationController?.view.backgroundColor = UIColor.wkrBackgroundColor
 
         let webView = WKRUIWebView()
         webView.navigationDelegate = self
@@ -39,7 +40,7 @@ internal class HelpViewController: StateLogViewController, WKNavigationDelegate 
     // MARK: - Actions
 
     @IBAction func doneButtonPressed() {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

@@ -13,14 +13,4 @@
    <FileRef
       location = "group:WKRCloudStats/WKRCloudStats.xcodeproj">
    </FileRef>
-   <Group
-      location = "group:WKR Python"
-      name = "WKR Python">
-      <FileRef
-         location = "group:ArticleCompiler.py">
-      </FileRef>
-      <FileRef
-         location = "group:Plist.py">
-      </FileRef>
-   </Group>
 </Workspace>

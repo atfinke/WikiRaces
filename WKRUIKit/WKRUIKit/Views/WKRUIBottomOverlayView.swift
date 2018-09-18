@@ -13,7 +13,7 @@ public class WKRUIBottomOverlayView: UIVisualEffectView {
     // MARK: - Initialization
 
     public init() {
-        super.init(effect: UIBlurEffect(style: .extraLight))
+        super.init(effect: UIBlurEffect.wkrBlurEffect)
         translatesAutoresizingMaskIntoConstraints = false
 
         let thinLine = UIView()

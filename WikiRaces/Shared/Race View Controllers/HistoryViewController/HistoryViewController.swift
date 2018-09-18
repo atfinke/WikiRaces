@@ -8,6 +8,7 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 internal class HistoryViewController: StateLogTableViewController {
 
@@ -30,7 +31,7 @@ internal class HistoryViewController: StateLogTableViewController {
             guard player == oldValue else {
                 currentPlayerState = player.state
                 entries = player.raceHistory?.entries ?? []
-                tableView.reloadData()
+                tableView.reloadSections(IndexSet(integer: 0), with: .fade)
                 return
             }
 
@@ -47,7 +48,6 @@ internal class HistoryViewController: StateLogTableViewController {
                     if entry != entries[index] {
                         entries[index] = entry
                         rowsToReload.append(IndexPath(row: index))
-
                     }
                 } else {
                     entries.insert(entry, at: index)
@@ -59,17 +59,31 @@ internal class HistoryViewController: StateLogTableViewController {
                 return !rowsToInsert.contains(indexPath)
             }
 
-            tableView.beginUpdates()
-            tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
-            tableView.insertRows(at: rowsToInsert, with: .top)
-            tableView.endUpdates()
+            tableView.performBatchUpdates({
+                tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
+                tableView.insertRows(at: rowsToInsert, with: .fade)
+            }, completion: nil)
         }
+    }
+
+    // MARK: - View Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        navigationController?.navigationBar.barStyle = .wkrStyle
+
+        tableView.backgroundColor = UIColor.wkrBackgroundColor
+        tableView.estimatedRowHeight = 150
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.register(HistoryTableViewCell.self,
+                           forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
     }
 
     // MARK: - Actions
 
     @IBAction func doneButtonPressed() {
-        PlayerAnalytics.log(event: .userAction(#function))
+        PlayerMetrics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
@@ -80,45 +94,27 @@ internal class HistoryViewController: StateLogTableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let entry = entries[indexPath.row]
-        let cellIdentifier = (entry == entries.last && currentPlayerState != .racing) ?
-            HistoryTableViewCell.finalReuseIdentifier :
-            HistoryTableViewCell.reuseIdentifier
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier,
                                                        for: indexPath) as? HistoryTableViewCell else {
             fatalError("Unable to create cell")
         }
 
-        let pageTitle = entry.page.title ?? "Unknown Page"
-        var attributedText = NSMutableAttributedString(string: pageTitle, attributes: nil)
-        if entry.linkHere {
-            let detail = " Link Here"
-            attributedText = NSMutableAttributedString(string: pageTitle + detail, attributes: nil)
-
-            let range = NSRange(location: pageTitle.count, length: detail.count)
-            let attributes: [NSAttributedStringKey: Any] = [
-                .foregroundColor: UIColor.lightGray,
-                .font: UIFont.systemFont(ofSize: 15)
-            ]
-            attributedText.addAttributes(attributes, range: range)
-        }
-        cell.textLabel?.attributedText = attributedText
+        let entry = entries[indexPath.row]
+        cell.pageLabel.text = entry.page.title ?? "Unknown Page"
+        cell.isLinkHere = entry.linkHere
 
         cell.isShowingActivityIndicatorView = false
         if let duration = DurationFormatter.string(for: entry.duration) {
-            cell.detailTextLabel?.text = duration
+            cell.detailLabel.text = duration
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         } else if currentPlayerState == .racing {
             cell.isShowingActivityIndicatorView = true
         } else {
-            cell.detailTextLabel?.text = currentPlayerState.text
+            cell.detailLabel.text = currentPlayerState.text
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         }
 
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
     }
 
 }

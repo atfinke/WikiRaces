@@ -1,5 +1,5 @@
 //
-//  WKRManager+Codable.swift
+//  WKRGameManager+Codable.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension WKRManager {
+extension WKRGameManager {
 
     // MARK: - Object Handling
 

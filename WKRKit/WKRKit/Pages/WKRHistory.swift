@@ -16,13 +16,13 @@ public struct WKRHistory: Codable, Equatable {
     /// The time the player opened the last page
     private var lastPageOpenTime: Date
     /// The history entries
-    public fileprivate(set) var entries = [WKRHistoryEntry]()
+    public private(set) var entries = [WKRHistoryEntry]()
     /// The total time the player has been racing (not including page load times)
     public var duration: Int? {
         if entries.first?.duration == nil {
             return nil
         }
-        return entries.flatMap { $0.duration }.reduce(0, +)
+        return entries.compactMap { $0.duration }.reduce(0, +)
     }
 
     // MARK: - Initialization
@@ -47,18 +47,8 @@ public struct WKRHistory: Codable, Equatable {
 
     mutating func finishedViewingLastPage() {
         guard var entry = entries.last else { fatalError("Entries is empty") }
-        entry.set(duration: Int(-lastPageOpenTime.timeIntervalSinceNow))
+        entry.duration = Int(-lastPageOpenTime.timeIntervalSinceNow)
         entries[entries.count - 1] = entry
-    }
-
-    // MARK: - Equatable
-
-    //swiftlint:disable:next operator_whitespace
-    public static func ==(lhs: WKRHistory, rhs: WKRHistory) -> Bool {
-        guard lhs.entries == rhs.entries else {
-            return false
-        }
-        return lhs.lastPageOpenTime == rhs.lastPageOpenTime
     }
 
 }

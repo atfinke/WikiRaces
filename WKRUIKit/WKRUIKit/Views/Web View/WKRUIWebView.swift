@@ -37,7 +37,7 @@ public class WKRUIWebView: WKWebView {
         super.init(frame: .zero, configuration: config)
 
         isOpaque = false
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor.wkrBackgroundColor
         translatesAutoresizingMaskIntoConstraints = false
 
         allowsLinkPreview = false
@@ -63,11 +63,11 @@ public class WKRUIWebView: WKWebView {
         timeLabel.adjustsFontSizeToFitWidth = true
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+        timeLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2954569777)
 
         addSubview(timeLabel)
 
-        scrollView.decelerationRate = UIScrollViewDecelerationRateNormal
+        scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
 
         let constraints = [
             timeLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -80,7 +80,7 @@ public class WKRUIWebView: WKWebView {
         addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
-                                               name: .UIKeyboardWillShow,
+                                               name: UIResponder.keyboardWillShowNotification,
                                                object: nil)
     }
 
@@ -106,7 +106,7 @@ public class WKRUIWebView: WKWebView {
 
         isUserInteractionEnabled = false
 
-        let duration = WKRUIConstants.webViewAnimateOutDuration
+        let duration = WKRUIKitConstants.webViewAnimateOutDuration
         UIView.animate(withDuration: duration) {
             self.timeLabel.alpha = 1.0
         }
@@ -116,7 +116,7 @@ public class WKRUIWebView: WKWebView {
         progressView?.hide()
 
         isUserInteractionEnabled = true
-        let duration = WKRUIConstants.webViewAnimateInDuration
+        let duration = WKRUIKitConstants.webViewAnimateInDuration
 
         UIView.animate(withDuration: duration, delay: 0.0, options: .beginFromCurrentState, animations: {
             self.timeLabel.alpha = 0.0
@@ -131,15 +131,42 @@ public class WKRUIWebView: WKWebView {
         config.suppressesIncrementalRendering = true
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
-
-        let preHideScript = WKUserScript(source: WKRUIConstants.current.preHideScript(),
-                                         injectionTime: .atDocumentStart)
-        let postHideScript = WKUserScript(source: WKRUIConstants.current.postHideScript(),
-                                          injectionTime: .atDocumentEnd)
+        config.dataDetectorTypes = []
+        config.allowsInlineMediaPlayback = false
+        config.mediaTypesRequiringUserActionForPlayback = .all
 
         let userContentController = WKUserContentController()
-        userContentController.addUserScript(preHideScript)
-        userContentController.addUserScript(postHideScript)
+
+        WKContentRuleListStore.default()?
+            .compileContentRuleList(forIdentifier: "WKRContentBlocker",
+                                    encodedContentRuleList: WKRUIKitConstants.current.contentBlocker(),
+                                    completionHandler: { (list, _) in
+                                        guard let list = list else { return }
+                                        userContentController.add(list)
+
+            }
+        )
+
+        let startStyleScript = WKUserScript(source: WKRUIKitConstants.current.styleScript(),
+                                            injectionTime: .atDocumentStart)
+        let endStyleScript = WKUserScript(source: WKRUIKitConstants.current.styleScript(),
+                                            injectionTime: .atDocumentEnd)
+        let cleanScript = WKUserScript(source: WKRUIKitConstants.current.cleanScript(),
+                                          injectionTime: .atDocumentEnd)
+
+        userContentController.addUserScript(startStyleScript)
+        userContentController.addUserScript(endStyleScript)
+        userContentController.addUserScript(cleanScript)
+
+        if WKRUIStyle.isDark {
+            let startStyleScriptDark = WKUserScript(source: WKRUIKitConstants.current.styleScriptDark(),
+                                                injectionTime: .atDocumentStart)
+            let endStyleScriptDark = WKUserScript(source: WKRUIKitConstants.current.styleScriptDark(),
+                                              injectionTime: .atDocumentEnd)
+            userContentController.addUserScript(startStyleScriptDark)
+            userContentController.addUserScript(endStyleScriptDark)
+        }
+
         config.userContentController = userContentController
         return config
     }
@@ -148,7 +175,7 @@ public class WKRUIWebView: WKWebView {
 
     public override func observeValue(forKeyPath keyPath: String?,
                                       of object: Any?,
-                                      change: [NSKeyValueChangeKey : Any]?,
+                                      change: [NSKeyValueChangeKey: Any]?,
                                       context: UnsafeMutableRawPointer?) {
 
         guard keyPath == "estimatedProgress", let progress = change?[.newKey] as? Double  else {

@@ -115,9 +115,9 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
 
 // MARK: - WKRKit Extensions
 
-extension WKRManager {
+extension WKRGameManager {
 
-    internal convenience init(serviceType: String,
+    internal convenience init(mpcServiceType: String,
                               session: MCSession,
                               isPlayerHost: Bool,
                               stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
@@ -126,7 +126,7 @@ extension WKRManager {
                               logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
-        let network = WKRMultipeerNetwork(serviceType: serviceType, session: session)
+        let network = WKRMultipeerNetwork(serviceType: mpcServiceType, session: session)
 
         self.init(player: player,
                   network: network,

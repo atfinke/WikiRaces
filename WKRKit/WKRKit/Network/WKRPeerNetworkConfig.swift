@@ -12,8 +12,8 @@ import MultipeerConnectivity
 public enum WKRPeerNetworkConfig {
 
     case solo(name: String)
-    case multiwindow(windowName: String, isHost: Bool)
-    case mpc(serviceType: String, session: MCSession, isHost: Bool)
+    case multiwindow(multiWindowName: String, isHost: Bool)
+    case mpc(mpcServiceType: String, session: MCSession, isHost: Bool)
 
     public var isHost: Bool {
         switch self {

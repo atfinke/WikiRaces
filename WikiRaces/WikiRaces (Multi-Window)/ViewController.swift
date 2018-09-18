@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         let twoRows = false
-        let windows = CGFloat(2)
+        let windows = CGFloat(4)
 
         let windowWidth: CGFloat
         if twoRows {
@@ -36,18 +36,18 @@ class ViewController: UIViewController {
         ]
 
         if twoRows {
-            for x in 0..<Int(windows / 2) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2))
-                window.playerName = windowNames[x]
+            for xPos in 0..<Int(windows / 2) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2))
+                window.playerName = windowNames[xPos]
                 window.rootViewController = self.menuViewController()
                 window.makeKeyAndVisible()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     window.rootViewController?.viewDidAppear(false)
                 }
             }
-            for x in 0..<Int(windows / 2) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2))
-                window.playerName = windowNames[x + Int(windows / 2)]
+            for xPos in 0..<Int(windows / 2) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2))
+                window.playerName = windowNames[xPos + Int(windows / 2)]
                 window.rootViewController = self.menuViewController()
                 window.makeKeyAndVisible()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -55,9 +55,9 @@ class ViewController: UIViewController {
                 }
             }
         } else {
-            for x in 0..<Int(windows) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(x) * (windowWidth + 1.0), y: 0, width: windowWidth, height: view.frame.height))
-                window.playerName = windowNames[x]
+            for xPos in 0..<Int(windows) {
+                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: view.frame.height))
+                window.playerName = windowNames[xPos]
                 window.rootViewController = self.menuViewController()
                 window.makeKeyAndVisible()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

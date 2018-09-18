@@ -1,0 +1,157 @@
+[
+  {
+    "action" : {
+      "type" : "css-display-none",
+      "selector" : ".header"
+    },
+    "trigger" : {
+      "url-filter" : "wikipedia.org*"
+    }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".toc-mobile"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "footer"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".cleanup.mw-mf-cleanup"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".mediaContainer"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".message"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".metadata.plainlinks.stub"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "#page-actions"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "#mw-mf-cleanup"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "#mw-notification-content"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "#siteNotice"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : "#centralNotice"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".mw-notification"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".plainlinks"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".edit-page"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".reference"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  },
+  {
+      "action" : {
+          "type" : "css-display-none",
+          "selector" : ".noprint"
+      },
+      "trigger" : {
+          "url-filter" : "wikipedia.org*"
+      }
+  }
+
+
+]
