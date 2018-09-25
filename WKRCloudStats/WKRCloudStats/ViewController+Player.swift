@@ -70,6 +70,7 @@ extension ViewController {
             "UniquePlayers",
             "TotalPlayers",
             "SoloPages",
+            "SoloRaces",
             "SoloTotalTime",
             "BundleVersion",
             "BundleBuild",
