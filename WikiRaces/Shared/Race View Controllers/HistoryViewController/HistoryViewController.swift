@@ -47,7 +47,8 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
             var rowsToInsert = [IndexPath]()
 
             if player.state != currentPlayerState {
-                PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW PLAYER STATE \(player.state.text), OLD: \(currentPlayerState.text)"))
+                let log = "HVC DEBUG: NEW PLAYER STATE \(player.state.text), OLD: \(currentPlayerState.text)"
+                PlayerMetrics.log(event: .gameState(log))
 
                 currentPlayerState = player.state
                 rowsToReload.append(IndexPath(row: history.entries.count - 1))

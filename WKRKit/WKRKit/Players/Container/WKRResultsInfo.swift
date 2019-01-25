@@ -122,7 +122,7 @@ public struct WKRResultsInfo: Codable {
 
     // used to update history controller cells
     public func updatedPlayer(for player: WKRPlayer) -> WKRPlayer? {
-        guard let updatedPlayerIndex = playersSortedByState.index(of: player) else { return nil }
+        guard let updatedPlayerIndex = playersSortedByState.firstIndex(of: player) else { return nil }
         return playersSortedByState[updatedPlayerIndex]
     }
 

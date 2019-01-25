@@ -70,7 +70,7 @@ public struct WKRVoteInfo: Codable, Equatable {
     }
 
     public func index(of page: WKRPage) -> Int? {
-        return pages.index(of: page)
+        return pages.firstIndex(of: page)
     }
 
 }

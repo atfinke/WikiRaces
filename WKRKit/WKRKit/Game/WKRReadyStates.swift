@@ -15,7 +15,7 @@ public struct WKRReadyStates: Codable {
     }
 
     public func playerReady(_ player: WKRPlayer) -> Bool {
-        guard let index = players.index(of: player) else { return false }
+        guard let index = players.firstIndex(of: player) else { return false }
         return players[index].state == .readyForNextRound
     }
 

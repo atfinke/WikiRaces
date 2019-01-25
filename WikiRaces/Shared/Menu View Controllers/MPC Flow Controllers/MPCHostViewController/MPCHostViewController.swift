@@ -129,7 +129,7 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         PlayerMetrics.log(event: .gameState("Peer Update: \(peerID.displayName) \(newStateString)"))
 
         guard let newState = newState else {
-            if let index = sortedPeers.index(of: peerID) {
+            if let index = sortedPeers.firstIndex(of: peerID) {
                 peers[peerID] = nil
                 if peers.isEmpty {
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
@@ -142,14 +142,14 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
         if let state = peers[peerID], state != newState {
             peers[peerID] = newState
-            if let index = sortedPeers.index(of: peerID) {
+            if let index = sortedPeers.firstIndex(of: peerID) {
                 tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
             } else {
                 tableView.reloadData()
             }
         } else if peers[peerID] == nil {
             peers[peerID] = newState
-            if let index = sortedPeers.index(of: peerID) {
+            if let index = sortedPeers.firstIndex(of: peerID) {
                 if peers.count == 1 {
                     tableView.reloadRows(at: [IndexPath(row: index)], with: .fade)
                 } else {
@@ -226,6 +226,8 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
             case .connected:
                 self.update(peerID: peerID, to: .joined)
                 UINotificationFeedbackGenerator().notificationOccurred(.success)
+            @unknown default:
+                return
             }
         }
     }

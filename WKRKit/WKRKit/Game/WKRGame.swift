@@ -94,7 +94,7 @@ public class WKRGame {
     // MARK: - Player States
 
     internal func playerUpdated(_ player: WKRPlayer) {
-        if let index = players.index(of: player) {
+        if let index = players.firstIndex(of: player) {
             players[index] = player
         } else {
             players.append(player)

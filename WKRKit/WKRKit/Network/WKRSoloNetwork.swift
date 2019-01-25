@@ -49,7 +49,7 @@ extension WKRGameManager {
                               stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                               pointsUpdate: @escaping ((Int) -> Void),
                               linkCountUpdate: @escaping ((Int) -> Void),
-                              logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+                              logEvent: @escaping ((String, [String: Any]?) -> Void)) {
 
         let profile = WKRPlayerProfile(name: soloPlayerName, playerID: soloPlayerName)
         let player = WKRPlayer(profile: profile, isHost: true)

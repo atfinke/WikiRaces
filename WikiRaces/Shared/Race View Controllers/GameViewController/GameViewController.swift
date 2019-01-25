@@ -97,12 +97,12 @@ internal class GameViewController: StateLogViewController {
 
     // MARK: - User Actions
 
-    @IBAction func helpButtonPressed(_ sender: Any) {
+    @IBAction func helpButtonPressed() {
         PlayerMetrics.log(event: .userAction(#function))
         showHelp()
     }
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
+    @IBAction func quitButtonPressed() {
         PlayerMetrics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)

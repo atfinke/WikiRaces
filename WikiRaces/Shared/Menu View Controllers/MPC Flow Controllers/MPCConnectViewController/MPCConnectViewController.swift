@@ -93,8 +93,10 @@ internal class MPCConnectViewController: StateLogViewController {
             peerID = lastPeerID
         } else {
             peerID = MCPeerID(displayName: playerName)
-            let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
-            UserDefaults.standard.set(data, forKey: "PeerID")
+            if let peerID = peerID {
+                let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
+                UserDefaults.standard.set(data, forKey: "PeerID")
+            }
         }
 
         setupInterface()

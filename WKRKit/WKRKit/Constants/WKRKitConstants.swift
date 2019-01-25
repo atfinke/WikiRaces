@@ -143,16 +143,16 @@ public struct WKRKitConstants {
                 return
             }
 
-            guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
-                let recordArticlesAsset = record["ArticlesFile"] as? CKAsset,
-                let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
+            guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
+                let recordArticlesAssetURL = (record["ArticlesFile"] as? CKAsset)?.fileURL,
+                let recordGetLinksScriptAssetURL = (record["GetLinksScriptFile"] as? CKAsset)?.fileURL else {
                     return
             }
 
             DispatchQueue.main.async {
-                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                            newArticlesFileURL: recordArticlesAsset.fileURL,
-                            newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+                copyIfNewer(newConstantsFileURL: recordConstantsAssetURL,
+                            newArticlesFileURL: recordArticlesAssetURL,
+                            newGetLinksScriptFileURL: recordGetLinksScriptAssetURL)
             }
         }
     }

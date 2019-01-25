@@ -123,7 +123,7 @@ extension WKRGameManager {
                               stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                               pointsUpdate: @escaping ((Int) -> Void),
                               linkCountUpdate: @escaping ((Int) -> Void),
-                              logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+                              logEvent: @escaping ((String, [String: Any]?) -> Void)) {
 
         let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
         let network = WKRMultipeerNetwork(serviceType: mpcServiceType, session: session)

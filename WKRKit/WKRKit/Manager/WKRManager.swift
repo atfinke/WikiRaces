@@ -66,7 +66,7 @@ public class WKRGameManager {
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping (((String, [String: Any]?)) -> Void)) {
+                            logEvent: @escaping ((String, [String: Any]?) -> Void)) {
 
         switch networkConfig {
         case .solo(let name):

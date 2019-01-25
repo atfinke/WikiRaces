@@ -37,7 +37,7 @@ internal struct WKRRace {
     ///
     /// - Parameter player: The update player
     internal mutating func playerUpdated(_ player: WKRPlayer) {
-        if let index = players.index(of: player) {
+        if let index = players.firstIndex(of: player) {
             players[index] = player
         } else {
             players.append(player)

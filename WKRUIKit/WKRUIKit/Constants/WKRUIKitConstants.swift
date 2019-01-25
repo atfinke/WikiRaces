@@ -57,20 +57,20 @@ public struct WKRUIKitConstants {
                 return
             }
 
-            guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
-                let recordStyleScriptAsset = record["StyleScriptFile"] as? CKAsset,
-                let recordStyleScriptDarkAsset = record["StyleScriptDarkFile"] as? CKAsset,
-                let recordCleanScriptAsset = record["CleanScriptFile"] as? CKAsset,
-                let recordContentBlockerAsset = record["ContentBlockerFile"] as? CKAsset else {
+            guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
+                let recordStyleScriptAssetURL = (record["StyleScriptFile"] as? CKAsset)?.fileURL,
+                let recordStyleScriptDarkAssetURL = (record["StyleScriptDarkFile"] as? CKAsset)?.fileURL,
+                let recordCleanScriptAssetURL = (record["CleanScriptFile"] as? CKAsset)?.fileURL,
+                let recordContentBlockerAssetURL = (record["ContentBlockerFile"] as? CKAsset)?.fileURL else {
                     return
             }
 
             DispatchQueue.main.async {
-                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                            newStyleScriptFileURL: recordStyleScriptAsset.fileURL,
-                            newStyleScriptDarkFileURL: recordStyleScriptDarkAsset.fileURL,
-                            newCleanScriptFileURL: recordCleanScriptAsset.fileURL,
-                            newContentBlockerFileURL: recordContentBlockerAsset.fileURL)
+                copyIfNewer(newConstantsFileURL: recordConstantsAssetURL,
+                            newStyleScriptFileURL: recordStyleScriptAssetURL,
+                            newStyleScriptDarkFileURL: recordStyleScriptDarkAssetURL,
+                            newCleanScriptFileURL: recordCleanScriptAssetURL,
+                            newContentBlockerFileURL: recordContentBlockerAssetURL)
             }
         }
     }
