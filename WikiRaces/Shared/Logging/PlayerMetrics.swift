@@ -54,7 +54,7 @@ internal struct PlayerMetrics {
         // Game All Players
         case pageView, pageBlocked, pageError
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
-        case openedHistory, pressedReadyButton, voted
+        case openedHistory, openedHistorySF, pressedReadyButton, voted
         case finalVotes
 
         // Game Host

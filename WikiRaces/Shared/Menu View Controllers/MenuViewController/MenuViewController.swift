@@ -102,12 +102,13 @@ internal class MenuViewController: StateLogViewController {
         #else
             attemptGCAuthentication()
 
-            if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
-                PlayerMetrics.log(event: .hasCustomName(name))
-            }
-            if GKLocalPlayer.local.isAuthenticated {
-                PlayerMetrics.log(event: .hasGCAlias(GKLocalPlayer.local.alias))
-            }
+        // seeing a lot of duplicate entries, disabling for now
+//            if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
+//                PlayerMetrics.log(event: .hasCustomName(name))
+//            }
+//            if GKLocalPlayer.local.isAuthenticated {
+//                PlayerMetrics.log(event: .hasGCAlias(GKLocalPlayer.local.alias))
+//            }
             PlayerMetrics.log(event: .hasDeviceName(UIDevice.current.name))
         #endif
     }

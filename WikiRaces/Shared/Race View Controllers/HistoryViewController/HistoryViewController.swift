@@ -10,7 +10,9 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-internal class HistoryViewController: StateLogTableViewController {
+import SafariServices
+
+internal class HistoryViewController: StateLogTableViewController, SFSafariViewControllerDelegate {
 
     // MARK: - Properties
 
@@ -26,38 +28,55 @@ internal class HistoryViewController: StateLogTableViewController {
                 return
             }
 
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: START"))
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: PREV ENTRY COUNT \(entries.count)"))
+
             title = player.name
 
             guard player == oldValue else {
                 currentPlayerState = player.state
                 entries = player.raceHistory?.entries ?? []
                 tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                PlayerMetrics.log(event: .gameState("HVC DEBUG: RETURN EARLY"))
                 return
             }
+
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW ENTRY COUNT \(entries.count)"))
 
             var rowsToReload = [IndexPath]()
             var rowsToInsert = [IndexPath]()
 
             if player.state != currentPlayerState {
+                PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW PLAYER STATE \(player.state.text), OLD: \(currentPlayerState.text)"))
+
                 currentPlayerState = player.state
                 rowsToReload.append(IndexPath(row: history.entries.count - 1))
             }
 
             for (index, entry) in history.entries.enumerated() {
+                PlayerMetrics.log(event: .gameState("HVC DEBUG: CHECKING \(index)"))
                 if index < entries.count {
+                    PlayerMetrics.log(event: .gameState("HVC DEBUG: EXISTING"))
                     if entry != entries[index] {
+                        PlayerMetrics.log(event: .gameState("HVC DEBUG: NEEDS UPDATE"))
                         entries[index] = entry
                         rowsToReload.append(IndexPath(row: index))
                     }
                 } else {
+                    PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW"))
                     entries.insert(entry, at: index)
                     rowsToInsert.append(IndexPath(row: index))
                 }
             }
 
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: PRE ADJUST RELOADS \(rowsToReload)"))
+
             let adjustedRowsToReload = rowsToReload.filter { indexPath -> Bool in
                 return !rowsToInsert.contains(indexPath)
             }
+
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: POST ADJUST RELOADS \(adjustedRowsToReload)"))
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: INSERTS \(rowsToInsert)"))
 
             tableView.performBatchUpdates({
                 tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
@@ -115,6 +134,24 @@ internal class HistoryViewController: StateLogTableViewController {
         }
 
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row < entries.count else { return }
+        let entry = entries[indexPath.row]
+        
+        let controller = SFSafariViewController(url: entry.page.url)
+        controller.delegate = self
+        controller.preferredControlTintColor = UIColor.wkrTextColor
+        controller.modalPresentationStyle = .overFullScreen
+        present(controller, animated: true, completion: nil)
+
+        PlayerMetrics.log(event: .openedHistorySF)
+    }
+
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
 }

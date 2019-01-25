@@ -46,7 +46,6 @@ internal class HistoryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         tintColor = UIColor.wkrTextColor
-        selectionStyle = .none
         backgroundColor = UIColor.clear
 
         pageLabel.textColor = UIColor.wkrTextColor

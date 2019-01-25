@@ -16,7 +16,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
     // The title of the page
     public let title: String?
     // The url of the page
-    internal let url: URL
+    public let url: URL
 
     // MARK: - Initialization
 
