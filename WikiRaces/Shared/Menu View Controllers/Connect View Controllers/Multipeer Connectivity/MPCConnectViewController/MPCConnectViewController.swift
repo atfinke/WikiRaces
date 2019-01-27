@@ -74,7 +74,7 @@ internal class MPCConnectViewController: ConnectViewController {
         Crashlytics.sharedInstance().setUserName(playerName)
         #endif
 
-        isValidPlayerName = [UInt8](playerName.utf8).count < 40
+        isValidPlayerName = playerName.utf8.count < 40
         guard isValidPlayerName else { return }
 
         // Uses existing peer ID object if already created (recommended per Apple docs)
@@ -83,7 +83,9 @@ internal class MPCConnectViewController: ConnectViewController {
             lastPeerID.displayName == playerName {
             peerID = lastPeerID
         } else {
+            UserDefaults.standard.set(true, forKey: "AttemptingMCPeerIDCreation")
             peerID = MCPeerID(displayName: playerName)
+            UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
             if let peerID = peerID {
                 let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
                 UserDefaults.standard.set(data, forKey: "PeerID")

@@ -100,17 +100,10 @@ internal class MenuViewController: StateLogViewController {
         #if MULTIWINDOWDEBUG
             performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
         #else
-            attemptGCAuthentication()
-
-        // seeing a lot of duplicate entries, disabling for now
-//            if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
-//                PlayerMetrics.log(event: .hasCustomName(name))
-//            }
-//            if GKLocalPlayer.local.isAuthenticated {
-//                PlayerMetrics.log(event: .hasGCAlias(GKLocalPlayer.local.alias))
-//            }
-            PlayerMetrics.log(event: .hasDeviceName(UIDevice.current.name))
+            attemptGCAuthentication() 
         #endif
+
+        promptForInvalidName()
     }
 
     // MARK: - Actions
@@ -129,7 +122,9 @@ internal class MenuViewController: StateLogViewController {
         }
 
         animateMenuOut {
-            self.performSegue(.showGameKitConnecting, isHost: false)
+            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
+            let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
+            self.performSegue(segue, isHost: false)
         }
     }
 
@@ -147,124 +142,10 @@ internal class MenuViewController: StateLogViewController {
         }
 
         animateMenuOut {
-            self.performSegue(.showGameKitConnecting, isHost: true)
+            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
+            let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
+            self.performSegue(segue, isHost: true)
         }
-    }
-
-    func promptForCustomName(isHost: Bool) -> Bool {
-        guard !UserDefaults.standard.bool(forKey: "PromptedCustomName") else {
-            return false
-        }
-        UserDefaults.standard.set(true, forKey: "PromptedCustomName")
-
-        let message = "Would you like to set a custom player name before racing?"
-        let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
-
-        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
-            if isHost {
-                self.createRace()
-            } else {
-                self.joinRace()
-            }
-        })
-        alertController.addAction(laterAction)
-
-        let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
-
-            self.openSettings()
-        })
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
-        return true
-    }
-
-    /// Changes title label to build info
-    @objc
-    func showDebugPanel() {
-        PlayerMetrics.log(event: .versionInfo)
-
-        let message = "If your name isn't Andrew, you probably shouldn’t be here."
-        let alertController = UIAlertController(title: "Debug Panel",
-                                                message: message,
-                                                preferredStyle: .alert)
-
-        let darkAction = UIAlertAction(title: "Toggle Dark UI", style: .default, handler: { _ in
-            WKRUIStyle.isDark = !WKRUIStyle.isDark
-            exit(1998)
-        })
-        alertController.addAction(darkAction)
-
-        let buildAction = UIAlertAction(title: "Show Build Info", style: .default, handler: { _ in
-            self.showDebugBuildInfo()
-        })
-        alertController.addAction(buildAction)
-
-        let defaultsAction = UIAlertAction(title: "Show Defaults", style: .default, handler: { _ in
-            self.showDebugDefaultsInfo()
-        })
-        alertController.addAction(defaultsAction)
-
-        alertController.addCancelAction(title: "Dismiss")
-
-        present(alertController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: alertController, on: self)
-    }
-
-    private func showDebugBuildInfo() {
-        let versionKey = "CFBundleVersion"
-        let shortVersionKey = "CFBundleShortVersionString"
-
-        let appBundleInfo = Bundle.main.infoDictionary
-        let kitBundleInfo = Bundle(for: WKRGameManager.self).infoDictionary
-        let interfaceBundleInfo = Bundle(for: WKRUIStyle.self).infoDictionary
-
-        guard let appBundleVersion = appBundleInfo?[versionKey] as? String,
-            let appBundleShortVersion = appBundleInfo?[shortVersionKey] as? String,
-            let kitBundleVersion = kitBundleInfo?[versionKey] as? String,
-            let kitBundleShortVersion = kitBundleInfo?[shortVersionKey] as? String,
-            let interfaceBundleVersion = interfaceBundleInfo?[versionKey] as? String,
-            let interfaceBundleShortVersion = interfaceBundleInfo?[shortVersionKey] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-
-        let debugInfoController = DebugInfoTableViewController()
-        debugInfoController.title = "Build Info"
-        debugInfoController.info = [
-            ("WikiRaces Version", "\(appBundleShortVersion) (\(appBundleVersion))"),
-            ("WKRKit Version", "\(kitBundleShortVersion) (\(kitBundleVersion))"),
-            ("WKRUIKit Version", "\(interfaceBundleShortVersion) (\(interfaceBundleVersion))"),
-
-            ("WKRKit Constants Version", "\(WKRKitConstants.current.version)"),
-            ("WKRUIKit Constants Version", "\(WKRUIKitConstants.current.version)")
-        ]
-
-        let navController = UINavigationController(rootViewController: debugInfoController)
-        present(navController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: navController, on: self)
-    }
-
-    private func showDebugDefaultsInfo() {
-        let debugInfoController = DebugInfoTableViewController()
-        debugInfoController.title = "User Defaults"
-        debugInfoController.info = UserDefaults
-            .standard
-            .dictionaryRepresentation()
-            .sorted { (lhs, rhs) -> Bool in
-                return lhs.key.lowercased() < rhs.key.lowercased()
-        }
-
-        let navController = UINavigationController(rootViewController: debugInfoController)
-        present(navController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: navController, on: self)
     }
 
     // MARK: - Menu Animations
