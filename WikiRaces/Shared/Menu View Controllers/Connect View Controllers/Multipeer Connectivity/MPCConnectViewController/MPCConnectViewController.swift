@@ -83,6 +83,7 @@ internal class MPCConnectViewController: ConnectViewController {
             lastPeerID.displayName == playerName {
             peerID = lastPeerID
         } else {
+            // Attempting to prevent https://github.com/atfinke/WikiRaces/issues/43
             UserDefaults.standard.set(true, forKey: "AttemptingMCPeerIDCreation")
             peerID = MCPeerID(displayName: playerName)
             UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")

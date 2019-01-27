@@ -61,6 +61,9 @@ internal struct PlayerMetrics {
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
+
+        // Bugs
+        case githubIssue41Hit // https://github.com/atfinke/WikiRaces/issues/41
     }
 
     // MARK: - Results Collection Types

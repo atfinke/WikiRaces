@@ -64,6 +64,14 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
                         rowsToReload.append(IndexPath(row: index))
                     }
                 } else {
+                    if index < tableView.numberOfRows(inSection: 0) {
+                        entries = player.raceHistory?.entries ?? []
+                        tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                        PlayerMetrics.log(event: .gameState("HVC DEBUG: ABORT - UNEXPECTED CELL"))
+                        PlayerMetrics.log(event: .githubIssue41Hit)
+                        return
+                    }
+
                     PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW"))
                     entries.insert(entry, at: index)
                     rowsToInsert.append(IndexPath(row: index))
@@ -78,6 +86,9 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
 
             PlayerMetrics.log(event: .gameState("HVC DEBUG: POST ADJUST RELOADS \(adjustedRowsToReload)"))
             PlayerMetrics.log(event: .gameState("HVC DEBUG: INSERTS \(rowsToInsert)"))
+
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: ENTRIES \(entries.count)"))
+            PlayerMetrics.log(event: .gameState("HVC DEBUG: ROWS \(tableView.numberOfRows(inSection: 0))"))
 
             tableView.performBatchUpdates({
                 tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
@@ -126,12 +137,12 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
         cell.isShowingActivityIndicatorView = false
         if let duration = DurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
-            cell.detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         } else if currentPlayerState == .racing {
             cell.isShowingActivityIndicatorView = true
         } else {
             cell.detailLabel.text = currentPlayerState.text
-            cell.detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         }
 
         return cell
@@ -144,11 +155,19 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
         let controller = SFSafariViewController(url: entry.page.url)
         controller.delegate = self
         controller.preferredControlTintColor = UIColor.wkrTextColor
-        controller.modalPresentationStyle = .overFullScreen
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = .overFullScreen
+        }
         present(controller, animated: true, completion: nil)
 
         PlayerMetrics.log(event: .openedHistorySF)
     }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "Tap an article to read"
+    }
+
+    // MARK: - SFSafariViewControllerDelegate
 
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
