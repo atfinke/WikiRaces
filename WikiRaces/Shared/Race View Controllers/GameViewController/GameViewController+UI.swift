@@ -84,12 +84,9 @@ extension GameViewController {
     // MARK: - Alerts
 
     func quitAlertController(raceStarted: Bool) -> UIAlertController {
-        var message = "Are you sure you want to quit? You will be disconnected and returned to the menu."
-        if raceStarted {
-            message += " Press the forfeit button to give up the race but stay in the match."
-        }
+        let message = "Are you sure you want to quit?"
 
-        let alertController = UIAlertController(title: "Return to Menu?", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Quit the Race", message: message, preferredStyle: .alert)
         alertController.addCancelAction(title: "Keep Playing")
 
         if raceStarted {
@@ -101,7 +98,7 @@ extension GameViewController {
             alertController.addAction(forfeitAction)
         }
 
-        let quitAction = UIAlertAction(title: "Return to Menu", style: .destructive) {  [weak self] _ in
+        let quitAction = UIAlertAction(title: "Quit Race", style: .destructive) {  [weak self] _ in
             PlayerMetrics.log(event: .userAction("quitAlertController:quit"))
             PlayerMetrics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
             self?.playerQuit()

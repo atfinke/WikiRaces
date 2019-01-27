@@ -52,7 +52,8 @@ extension MenuViewController {
         }
         UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
 
-        let message = "There was an issue with your player name. Please set a new custom player name before racing."
+        //swiftlint:disable:next line_length
+        let message = "There was an unexpected issue starting a race with your player name. This can often occur your name has too many emojis or too many letters. Please set a new custom player name before racing."
         let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 
         let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
@@ -98,11 +99,17 @@ extension MenuViewController {
 
         let mpcAction = UIAlertAction(title: "Use MPC", style: .default, handler: { _ in
             UserDefaults.standard.set(false, forKey: "NetworkTypeGameKit")
+            #if DEBUG
+            self.titleLabel.text = "WikiRaces [MPC]"
+            #endif
         })
         alertController.addAction(mpcAction)
 
         let gkAction = UIAlertAction(title: "Use GameKit", style: .default, handler: { _ in
             UserDefaults.standard.set(true, forKey: "NetworkTypeGameKit")
+            #if DEBUG
+            self.titleLabel.text = "WikiRaces [GK]"
+            #endif
         })
         alertController.addAction(gkAction)
 
