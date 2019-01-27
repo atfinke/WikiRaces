@@ -62,10 +62,4 @@ public struct WKRPage: Codable, Hashable, Equatable {
         }
     }
 
-    // MARK: - Hashable
-
-    public var hashValue: Int {
-        return url.hashValue
-    }
-
 }

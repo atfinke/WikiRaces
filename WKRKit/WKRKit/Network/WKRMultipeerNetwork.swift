@@ -74,6 +74,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
             default: break
             }
 
+            // no players left
             if session.connectedPeers.isEmpty {
                 self.playerDisconnected?(session.myPeerID.wkrProfile())
             }

@@ -89,6 +89,10 @@
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
 		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
+		14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
+		14BA538D21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Alerts.swift */; };
+		14BA538E21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Alerts.swift */; };
+		14BA538F21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Alerts.swift */; };
 		14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */; };
 		14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FE11F6F025A00CD7373 /* ViewController.swift */; };
 		14C25FE51F6F025A00CD7373 /* Main-Catalog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C25FE31F6F025A00CD7373 /* Main-Catalog.storyboard */; };
@@ -185,13 +189,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		142B7A4B1F771278004A8AA1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 14C25FDC1F6F025A00CD7373;
-			remoteInfo = "WikiRaces (UI Catalog)";
-		};
 		149FF8931F362BF1000A5D96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
@@ -318,7 +315,6 @@
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
 		142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+KB.swift"; sourceTree = "<group>"; };
-		142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesCatalogScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		142F714E210C33FC00C66558 /* MenuViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7154210C35BC00C66558 /* VotingViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VotingViewController+KB.swift"; sourceTree = "<group>"; };
@@ -383,6 +379,7 @@
 		14A778281F61A9A100823DE8 /* Plans.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Plans.txt; sourceTree = "<group>"; };
 		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
+		14BA538C21FE3D9100A8CB01 /* MenuViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Alerts.swift"; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C25FE11F6F025A00CD7373 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -415,13 +412,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		142B7A431F771278004A8AA1 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		149FF8461F362B83000A5D96 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -573,7 +563,6 @@
 				149FF8781F362BE4000A5D96 /* WikiRaces (Multi-Window).app */,
 				149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */,
 				14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */,
-				142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -670,6 +659,7 @@
 			children = (
 				14C4AB381F3689A90086B77F /* MenuTile.swift */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
+				14BA538C21FE3D9100A8CB01 /* MenuViewController+Alerts.swift */,
 				14C4AB401F3689B50086B77F /* MenuViewController+UI.swift */,
 				141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */,
 				143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */,
@@ -811,24 +801,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		142B7A451F771278004A8AA1 /* WikiRacesCatalogScreenshots */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 142B7A511F771278004A8AA1 /* Build configuration list for PBXNativeTarget "WikiRacesCatalogScreenshots" */;
-			buildPhases = (
-				142B7A421F771278004A8AA1 /* Sources */,
-				142B7A431F771278004A8AA1 /* Frameworks */,
-				142B7A441F771278004A8AA1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				142B7A4C1F771278004A8AA1 /* PBXTargetDependency */,
-			);
-			name = WikiRacesCatalogScreenshots;
-			productName = WikiRacesCatalogScreenshots;
-			productReference = 142B7A461F771278004A8AA1 /* WikiRacesCatalogScreenshots.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		149FF8481F362B83000A5D96 /* WikiRaces */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 149FF85B1F362B83000A5D96 /* Build configuration list for PBXNativeTarget "WikiRaces" */;
@@ -924,11 +896,6 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
-					142B7A451F771278004A8AA1 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 14C25FDC1F6F025A00CD7373;
-					};
 					149FF8481F362B83000A5D96 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1020;
@@ -960,6 +927,7 @@
 					};
 					14C25FDC1F6F025A00CD7373 = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -991,7 +959,6 @@
 				149FF8771F362BE4000A5D96 /* WikiRaces (Multi-Window) */,
 				149FF88D1F362BF1000A5D96 /* WikiRacesScreenshots */,
 				14C25FDC1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
-				142B7A451F771278004A8AA1 /* WikiRacesCatalogScreenshots */,
 			);
 		};
 /* End PBXProject section */
@@ -1028,13 +995,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		142B7A441F771278004A8AA1 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		149FF8471F362B83000A5D96 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1146,13 +1106,6 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		142B7A421F771278004A8AA1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		149FF8451F362B83000A5D96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1203,6 +1156,7 @@
 				144A1029202FC79B003DB51A /* CenteredTableViewController.swift in Sources */,
 				149357DF210E934300F6453A /* MPCConnectViewController+UI.swift in Sources */,
 				143948C12144CC8C00992850 /* DebugInfoTableViewCell.swift in Sources */,
+				14BA538D21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */,
 				1497A8591FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C6B1F41FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
@@ -1236,6 +1190,7 @@
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
+				14BA538E21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
@@ -1286,6 +1241,7 @@
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
 				14C25FF31F6F028100CD7373 /* MenuViewController+UI.swift in Sources */,
 				14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */,
+				14BA538F21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
@@ -1310,6 +1266,7 @@
 				14DF31BB21169372005BA432 /* MPCConnectViewController+Invite.swift in Sources */,
 				14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */,
 				144A102D202FC7A2003DB51A /* CenteredTableViewController.swift in Sources */,
+				14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */,
 				1497A85B1FF478920013E9E3 /* StateLogTableViewController.swift in Sources */,
 				14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
 			);
@@ -1318,11 +1275,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		142B7A4C1F771278004A8AA1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 14C25FDC1F6F025A00CD7373 /* WikiRaces (UI Catalog) */;
-			targetProxy = 142B7A4B1F771278004A8AA1 /* PBXContainerItemProxy */;
-		};
 		149FF8941F362BF1000A5D96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
@@ -1412,36 +1364,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		142B7A4D1F771278004A8AA1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = WikiRacesCatalogScreenshots/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesCatalogScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WikiRaces (UI Catalog)";
-			};
-			name = Debug;
-		};
-		142B7A4E1F771278004A8AA1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = WikiRacesCatalogScreenshots/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesCatalogScreenshots;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "WikiRaces (UI Catalog)";
-			};
-			name = Release;
-		};
 		149FF8591F362B83000A5D96 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1683,7 +1605,7 @@
 				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1701,7 +1623,7 @@
 				OTHER_SWIFT_FLAGS = "-DMULTIWINDOWDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WikiRaces--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1709,15 +1631,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		142B7A511F771278004A8AA1 /* Build configuration list for PBXNativeTarget "WikiRacesCatalogScreenshots" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				142B7A4D1F771278004A8AA1 /* Debug */,
-				142B7A4E1F771278004A8AA1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		149FF8441F362B83000A5D96 /* Build configuration list for PBXProject "WikiRaces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

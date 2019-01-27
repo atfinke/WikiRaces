@@ -46,12 +46,7 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
     }
 
     internal func hostNetworkInterface() -> UIViewController? {
-//        guard let session = session else { fatalError("Session is nil") }
-//        let browserViewController = MCBrowserViewController(serviceType: serviceType, session: session)
-//        browserViewController.maximumNumberOfPeers = 8
-//        browserViewController.delegate = self
-//        return browserViewController
-        return UIViewController()
+        return nil
     }
 
     // MARK: - MCSessionDelegate
@@ -73,22 +68,12 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
             default: break
             }
 
-//            what is this??
-//            if session.connectedPeers.isEmpty {
-//                self.playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
-//            }
+            // no players left
+            if match.players.isEmpty {
+                self.playerDisconnected?(GKLocalPlayer.local.wkrProfile())
+            }
         }
     }
-
-    // MARK: - MCBrowserViewControllerDelegate
-
-//    public func browserViewControllerDidFinish(_ browserViewController: MCBrowserViewController) {
-//        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
-//    }
-//
-//    public func browserViewControllerWasCancelled(_ browserViewController: MCBrowserViewController) {
-//        browserViewController.presentingViewController?.dismiss(animated: true, completion: nil)
-//    }
 
 }
 

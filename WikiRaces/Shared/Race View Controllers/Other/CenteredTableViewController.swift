@@ -75,14 +75,14 @@ internal class CenteredTableViewController: StateLogViewController {
 
         guideLabel.textAlignment = .center
         guideLabel.textColor = UIColor.wkrLightTextColor
-        guideLabel.font = UIFont.systemFont(ofSize: 16.0, weight: .regular)
+        guideLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .medium)
         guideLabel.adjustsFontSizeToFitWidth = true
         guideLabel.translatesAutoresizingMaskIntoConstraints = false
         visualEffectView.contentView.addSubview(guideLabel)
 
         descriptionLabel.textAlignment = .center
         descriptionLabel.textColor = UIColor.wkrTextColor
-        descriptionLabel.font = UIFont(monospaceSize: 20.0)
+        descriptionLabel.font = UIFont(monospaceSize: 20, weight: .medium)
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         visualEffectView.contentView.addSubview(descriptionLabel)

@@ -58,7 +58,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         linkHereLabel.text = "Link Here"
         linkHereLabel.textColor = UIColor.lightGray
         linkHereLabel.textAlignment = .left
-        linkHereLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        linkHereLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         linkHereLabel.numberOfLines = 1
         linkHereLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(linkHereLabel)

@@ -20,6 +20,8 @@ public struct WKRHistoryEntry: Codable, Equatable {
     /// How long the player spent on the page (if not currently viewing)
     public internal(set) var duration: Int?
 
+    private let uuid: UUID
+
     // MARK: - Initialization
 
     /// Creates a WKRHistoryEntry object
@@ -32,6 +34,8 @@ public struct WKRHistoryEntry: Codable, Equatable {
         self.page = page
         self.linkHere = linkHere
         self.duration = duration
+
+        self.uuid = UUID()
     }
 
 }

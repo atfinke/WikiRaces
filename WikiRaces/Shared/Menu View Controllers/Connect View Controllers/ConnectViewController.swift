@@ -75,7 +75,7 @@ class ConnectViewController: StateLogViewController {
     func updateDescriptionLabel(to text: String) {
         descriptionLabel.attributedText = NSAttributedString(string: text.uppercased(),
                                                              spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 18.0, weight: .semibold))
+                                                             font: UIFont.systemFont(ofSize: 20.0, weight: .semibold))
     }
 
     /// Shows an error with a title

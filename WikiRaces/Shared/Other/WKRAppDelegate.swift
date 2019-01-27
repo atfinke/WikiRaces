@@ -24,12 +24,15 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
     func configureAppearance() {
         UINavigationBar.appearance().tintColor = UIColor.wkrTextColor
-      //  UINavigationBar.appearance().barTintColor = UIColor.wkrBackgroundColor
 
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: UIColor.wkrTextColor
         ]
         window?.backgroundColor = UIColor.wkrBackgroundColor
+
+        if WKRUIStyle.isDark {
+            UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = UIColor.white
+        }
     }
 
 }
