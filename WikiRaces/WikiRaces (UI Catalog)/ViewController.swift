@@ -73,7 +73,7 @@ internal class ViewController: UIViewController {
                 }
             }
 
-            let time: CGFloat = CGFloat(arc4random() % 40) / 10.0
+           // let time: CGFloat = CGFloat(arc4random() % 40) / 10.0
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                 if arc4random() % 3 == 0 {
                     //  controller.state = .points

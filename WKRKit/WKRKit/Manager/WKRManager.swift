@@ -62,55 +62,23 @@ public class WKRGameManager {
 
     // MARK: - Initialization
 
-    public convenience init(networkConfig: WKRPeerNetworkConfig,
+    public init(networkConfig: WKRPeerNetworkConfig,
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
                             logEvent: @escaping ((String, [String: Any]?) -> Void)) {
-
-        switch networkConfig {
-        case .solo(let name):
-            self.init(soloPlayerName: name,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        case .multiwindow(let multiWindowName, let isHost):
-            self.init(multiWindowName: multiWindowName,
-                      isPlayerHost: isHost,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        case .mpc(let mpcServiceType, let session, let isHost):
-            self.init(mpcServiceType: mpcServiceType,
-                      session: session,
-                      isPlayerHost: isHost,
-                      stateUpdate: stateUpdate,
-                      pointsUpdate: pointsUpdate,
-                      linkCountUpdate: linkCountUpdate,
-                      logEvent: logEvent)
-        }
-
-    }
-
-    internal init(player: WKRPlayer,
-                  network: WKRPeerNetwork,
-                  stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                  pointsUpdate: @escaping ((Int) -> Void),
-                  linkCountUpdate: @escaping ((Int) -> Void),
-                  logEvent: @escaping (String, [String: Any]?) -> Void) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
         self.linkCountUpdate = linkCountUpdate
         self.logEvent = logEvent
 
-        localPlayer = player
-        peerNetwork = network
+        let setup = networkConfig.create()
+        localPlayer = setup.player
+        peerNetwork = setup.network
 
-        game = WKRGame(localPlayer: localPlayer, isSolo: network is WKRSoloNetwork)
-        if player.isHost {
+        game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork)
+        if localPlayer.isHost {
             configure(game: game)
         }
 

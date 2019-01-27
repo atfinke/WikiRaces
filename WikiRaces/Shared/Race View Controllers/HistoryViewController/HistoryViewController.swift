@@ -140,7 +140,7 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.row < entries.count else { return }
         let entry = entries[indexPath.row]
-        
+
         let controller = SFSafariViewController(url: entry.page.url)
         controller.delegate = self
         controller.preferredControlTintColor = UIColor.wkrTextColor

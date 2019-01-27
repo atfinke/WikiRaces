@@ -40,27 +40,3 @@ internal class WKRSoloNetwork: WKRPeerNetwork {
     }
 
 }
-
-// MARK: - WKRKit Extensions
-
-extension WKRGameManager {
-
-    internal convenience init(soloPlayerName: String,
-                              stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                              pointsUpdate: @escaping ((Int) -> Void),
-                              linkCountUpdate: @escaping ((Int) -> Void),
-                              logEvent: @escaping ((String, [String: Any]?) -> Void)) {
-
-        let profile = WKRPlayerProfile(name: soloPlayerName, playerID: soloPlayerName)
-        let player = WKRPlayer(profile: profile, isHost: true)
-        let network = WKRSoloNetwork(profile: profile)
-
-        self.init(player: player,
-                  network: network,
-                  stateUpdate: stateUpdate,
-                  pointsUpdate: pointsUpdate,
-                  linkCountUpdate: linkCountUpdate,
-                  logEvent: logEvent)
-    }
-
-}

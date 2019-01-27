@@ -29,7 +29,7 @@ extension ViewController {
         publicDB.add(queryOperation)
     }
 
-    private func queryPlayerCompleted(cursor: CKQueryCursor?, error: Error?) {
+    private func queryPlayerCompleted(cursor: CKQueryOperation.Cursor?, error: Error?) {
         DispatchQueue.main.async {
             if let error = error {
                 self.textView.textStorage?.append(NSAttributedString(string: "Error: \(error)\n"))
@@ -44,7 +44,7 @@ extension ViewController {
         }
     }
 
-    private func queryPlayerStats(cursor: CKQueryCursor) {
+    private func queryPlayerStats(cursor: CKQueryOperation.Cursor) {
         let queryOperation = CKQueryOperation(cursor: cursor)
         queryOperation.qualityOfService = .userInitiated
         queryOperation.recordFetchedBlock = { record in

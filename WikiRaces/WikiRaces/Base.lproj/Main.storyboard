@@ -92,7 +92,8 @@
                     <navigationItem key="navigationItem" id="z3G-gq-PJH"/>
                     <connections>
                         <segue destination="9gq-MW-lkU" kind="presentation" identifier="debugBypass" modalTransitionStyle="crossDissolve" id="k21-21-dCC"/>
-                        <segue destination="Rm3-nl-L5i" kind="show" identifier="showConnecting" animates="NO" id="6EH-uo-IMt"/>
+                        <segue destination="Rm3-nl-L5i" kind="show" identifier="showMPCConnecting" animates="NO" id="6EH-uo-IMt"/>
+                        <segue destination="iII-9S-Bcg" kind="show" identifier="showGameKitConnecting" animates="NO" id="krG-SC-diD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h6-Ob-HSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -455,11 +456,67 @@
             </objects>
             <point key="canvasLocation" x="-2109" y="3022"/>
         </scene>
+        <!--Game Kit Connect View Controller-->
+        <scene sceneID="a9T-DP-SUC">
+            <objects>
+                <viewController id="iII-9S-Bcg" customClass="GameKitConnectViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jhD-ci-Fgz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LZZ-ru-92r">
+                                <rect key="frame" x="188.66666666666666" y="169" width="37" height="37"/>
+                                <color key="color" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D33-IW-0RX">
+                                <rect key="frame" x="177.66666666666666" y="656" width="59" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="CANCEL">
+                                    <color key="titleColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="pressedCancelButton" destination="iII-9S-Bcg" eventType="touchUpInside" id="1YD-ya-Ide"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WAITING FOR INVITE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFd-dG-L9z">
+                                <rect key="frame" x="20" y="118" width="374" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ZUR-dj-oKT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <color key="textColor" red="0.21176470589999999" green="0.21176470589999999" blue="0.21176470589999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="LZZ-ru-92r" firstAttribute="centerX" secondItem="zXq-Ky-CFR" secondAttribute="centerX" id="4Io-3k-cA3"/>
+                            <constraint firstItem="D33-IW-0RX" firstAttribute="centerX" secondItem="zXq-Ky-CFR" secondAttribute="centerX" id="di3-1T-lbG"/>
+                            <constraint firstItem="tFd-dG-L9z" firstAttribute="top" secondItem="zXq-Ky-CFR" secondAttribute="top" constant="98" id="hiZ-UY-qSP"/>
+                            <constraint firstItem="LZZ-ru-92r" firstAttribute="top" secondItem="tFd-dG-L9z" secondAttribute="bottom" constant="30" id="lQk-yh-Xre"/>
+                            <constraint firstAttribute="bottom" secondItem="D33-IW-0RX" secondAttribute="bottom" constant="50" id="r5c-Vz-zhg"/>
+                            <constraint firstItem="tFd-dG-L9z" firstAttribute="leading" secondItem="jhD-ci-Fgz" secondAttribute="leadingMargin" id="rTf-qW-CFU"/>
+                            <constraint firstItem="tFd-dG-L9z" firstAttribute="trailing" secondItem="jhD-ci-Fgz" secondAttribute="trailingMargin" id="tV8-iG-AfG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="zXq-Ky-CFR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="R41-bt-Xtw"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="LZZ-ru-92r" id="OsG-OL-wNa"/>
+                        <outlet property="cancelButton" destination="D33-IW-0RX" id="TBi-bu-kf9"/>
+                        <outlet property="descriptionLabel" destination="tFd-dG-L9z" id="V5n-3i-kgf"/>
+                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="showRace" modalTransitionStyle="crossDissolve" id="8vJ-gT-ptC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2aw-2g-bcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2110" y="3845"/>
+        </scene>
     </scenes>
     <resources>
         <image name="HelpFlag" width="33" height="57"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KE1-Om-bnI"/>
+        <segue reference="8vJ-gT-ptC"/>
     </inferredMetricsTieBreakers>
 </document>

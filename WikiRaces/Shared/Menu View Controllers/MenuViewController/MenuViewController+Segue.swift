@@ -15,7 +15,8 @@ extension MenuViewController {
 
     enum Segue: String {
         case debugBypass
-        case showConnecting
+        case showMPCConnecting
+        case showGameKitConnecting
     }
 
     // MARK: - Performing Segues
@@ -46,13 +47,13 @@ extension MenuViewController {
             }
             #if MULTIWINDOWDEBUG
                 //swiftlint:disable:next force_cast
-            destination.networkConfig = .multiwindow(multiWindowName: (view.window as! DebugWindow).playerName,
+            destination.networkConfig = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
                                                   isHost: isPlayerHost)
             #else
                 fatalError()
             #endif
 
-        case .showConnecting:
+        case .showMPCConnecting:
             #if MULTIWINDOWDEBUG
                 fatalError()
             #else
@@ -60,6 +61,10 @@ extension MenuViewController {
                     fatalError("Destination not a MPCConnectViewController nav")
                 }
                 destination.isPlayerHost = isPlayerHost
+            #endif
+        case .showGameKitConnecting:
+            #if MULTIWINDOWDEBUG
+                fatalError()
             #endif
         }
     }

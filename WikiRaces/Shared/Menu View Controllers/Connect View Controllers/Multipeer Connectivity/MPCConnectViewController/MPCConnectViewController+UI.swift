@@ -12,17 +12,7 @@ extension MPCConnectViewController {
 
     // MARK: - Interface
 
-    func setupInterface() {
-        cancelButton.alpha = 0.0
-        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
-
-        updateDescriptionLabel(to: "CHECKING CONNECTION")
-        descriptionLabel.alpha = 0.0
-
-        activityIndicatorView.alpha = 0.0
-        activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
-        view.backgroundColor = UIColor.wkrBackgroundColor
-
+    func setupInviteInterface() {
         inviteView.alpha = 0.0
         inviteView.backgroundColor = UIColor.wkrBackgroundColor
         inviteView.translatesAutoresizingMaskIntoConstraints = false

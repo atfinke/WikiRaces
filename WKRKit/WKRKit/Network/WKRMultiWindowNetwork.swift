@@ -92,28 +92,3 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
     }
 
 }
-
-// MARK: - WKRKit Extensions
-
-extension WKRGameManager {
-
-    internal convenience init(multiWindowName: String,
-                              isPlayerHost: Bool,
-                              stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                              pointsUpdate: @escaping ((Int) -> Void),
-                              linkCountUpdate: @escaping ((Int) -> Void),
-                              logEvent: @escaping ((String, [String: Any]?) -> Void)) {
-
-        let profile = WKRPlayerProfile(name: multiWindowName, playerID: multiWindowName)
-        let player = WKRPlayer(profile: profile, isHost: isPlayerHost)
-        let network = WKRSplitViewNetwork(playerName: multiWindowName, isHost: isPlayerHost)
-
-        self.init(player: player,
-                  network: network,
-                  stateUpdate: stateUpdate,
-                  pointsUpdate: pointsUpdate,
-                  linkCountUpdate: linkCountUpdate,
-                  logEvent: logEvent)
-    }
-
-}

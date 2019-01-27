@@ -129,7 +129,7 @@ internal class MenuViewController: StateLogViewController {
         }
 
         animateMenuOut {
-            self.performSegue(.showConnecting, isHost: false)
+            self.performSegue(.showGameKitConnecting, isHost: false)
         }
     }
 
@@ -147,7 +147,7 @@ internal class MenuViewController: StateLogViewController {
         }
 
         animateMenuOut {
-            self.performSegue(.showConnecting, isHost: true)
+            self.performSegue(.showGameKitConnecting, isHost: true)
         }
     }
 

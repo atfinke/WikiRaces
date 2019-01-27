@@ -41,7 +41,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
         guard let session = session, let data = try? WKRCodable.encoder.encode(object) else { return }
         do {
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
-            objectReceived?(object, WKRPlayerProfile(peerID: session.myPeerID))
+            objectReceived?(object, session.myPeerID.wkrProfile())
         } catch {
             print(error)
         }
@@ -60,7 +60,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
     open func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
-            objectReceived?(object, WKRPlayerProfile(peerID: peerID))
+            objectReceived?(object, peerID.wkrProfile())
         } catch {
             print(data.description)
         }
@@ -69,13 +69,13 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
     open func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DispatchQueue.main.async {
             switch state {
-            case .connected: self.playerConnected?(WKRPlayerProfile(peerID: peerID))
-            case .notConnected: self.playerDisconnected?(WKRPlayerProfile(peerID: peerID))
+            case .connected: self.playerConnected?(peerID.wkrProfile())
+            case .notConnected: self.playerDisconnected?(peerID.wkrProfile())
             default: break
             }
 
             if session.connectedPeers.isEmpty {
-                self.playerDisconnected?(WKRPlayerProfile(peerID: session.myPeerID))
+                self.playerDisconnected?(session.myPeerID.wkrProfile())
             }
         }
     }
@@ -115,32 +115,8 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
 
 // MARK: - WKRKit Extensions
 
-extension WKRGameManager {
-
-    internal convenience init(mpcServiceType: String,
-                              session: MCSession,
-                              isPlayerHost: Bool,
-                              stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                              pointsUpdate: @escaping ((Int) -> Void),
-                              linkCountUpdate: @escaping ((Int) -> Void),
-                              logEvent: @escaping ((String, [String: Any]?) -> Void)) {
-
-        let player = WKRPlayer(profile: WKRPlayerProfile(peerID: session.myPeerID), isHost: isPlayerHost)
-        let network = WKRMultipeerNetwork(serviceType: mpcServiceType, session: session)
-
-        self.init(player: player,
-                  network: network,
-                  stateUpdate: stateUpdate,
-                  pointsUpdate: pointsUpdate,
-                  linkCountUpdate: linkCountUpdate,
-                  logEvent: logEvent)
-    }
-
-}
-
-extension WKRPlayerProfile {
-    init(peerID: MCPeerID) {
-        name = peerID.displayName
-        playerID = peerID.hashValue.description
+extension MCPeerID {
+    func wkrProfile() -> WKRPlayerProfile {
+        return WKRPlayerProfile(name: displayName, playerID: hashValue.description)
     }
 }
