@@ -8,6 +8,7 @@
 
 import MultipeerConnectivity
 import UIKit
+import WKRUIKit
 
 #if !MULTIWINDOWDEBUG
 import FirebasePerformance
@@ -23,6 +24,11 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         case joining
         case joined
         case declined
+    }
+
+    struct WKRMPCHostContext: Codable {
+        let appBuild: Int
+        let appVersion: String
     }
 
     // MARK: - Properties
@@ -61,6 +67,8 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
 
         navigationItem.rightBarButtonItem?.isEnabled = false
         navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
+
+        tableView.backgroundColor = WKRUIStyle.isDark ? UIColor.wkrBackgroundColor : UIColor.groupTableViewBackground
 
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension

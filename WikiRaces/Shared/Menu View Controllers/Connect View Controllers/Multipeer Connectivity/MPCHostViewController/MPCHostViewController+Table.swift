@@ -49,7 +49,9 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            return tableView.dequeueReusableCell(withIdentifier: "soloCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "soloCell", for: indexPath)
+            cell.backgroundColor = UIColor.wkrBackgroundColor
+            return cell
         } else if peers.isEmpty {
             return tableView.dequeueReusableCell(withIdentifier: MPCHostSearchingCell.reuseIdentifier, for: indexPath)
         }
@@ -104,7 +106,18 @@ extension MPCHostViewController {
         }
 
         update(peerID: peerID, to: .invited)
-        browser?.invitePeer(peerID, to: session, withContext: nil, timeout: 15.0)
+
+        guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let bundleBuild = Int(bundleBuildString),
+            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+                fatalError("No bundle info dictionary")
+        }
+        let context = WKRMPCHostContext(appBuild: bundleBuild, appVersion: bundleVersion)
+        guard let data = try? JSONEncoder().encode(context) else {
+            fatalError("Couldn't encode context")
+        }
+
+        browser?.invitePeer(peerID, to: session, withContext: data, timeout: 15.0)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 

@@ -22,6 +22,8 @@ internal class MPCHostSearchingCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
+        backgroundColor = UIColor.wkrBackgroundColor
+
         updateText()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { _ in
             self.updateText()
