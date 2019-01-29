@@ -11,12 +11,21 @@ import Foundation
 internal struct DurationFormatter {
     private static let maxSeconds: Int = 360
 
-    static func string(for duration: Int?) -> String? {
+    static func string(for duration: Int?, extended: Bool = false) -> String? {
         guard let duration = duration else { return nil }
         if duration > maxSeconds {
-            return (duration / 60).description + " M"
+            var suffix = extended ? " Minute" : " M"
+            let time = duration / 60
+            if extended && time != 1 {
+                suffix += "s"
+            }
+            return time.description + suffix
         } else {
-            return duration.description + " S"
+            var suffix = extended ? " Second" : " S"
+            if extended && duration != 1 {
+                suffix += "s"
+            }
+            return duration.description + suffix
         }
     }
 }

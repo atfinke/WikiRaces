@@ -22,17 +22,27 @@ internal class ResultsViewController: CenteredTableViewController {
     var quitAlertController: UIAlertController?
     var addPlayersViewController: UIViewController?
 
+    var addPlayersBarButtonItem: UIBarButtonItem?
+    var shareResultsBarButtonItem: UIBarButtonItem?
+
     var isAnimatingToPointsStandings = false
     var hasAnimatedToPointsStandings = false
 
+    let resultRenderer = ResultRenderer()
+    var resultImage: UIImage?
+
     // MARK: - Game States
+
+    var localPlayer: WKRPlayer?
 
     var isPlayerHost = false {
         didSet {
             if isPlayerHost && addPlayersViewController != nil {
-                navigationItem.leftBarButtonItem?.isEnabled = false
+                addPlayersBarButtonItem?.isEnabled = false
+            } else if let button = shareResultsBarButtonItem {
+                navigationItem.leftBarButtonItems = [button]
             } else {
-                navigationItem.leftBarButtonItem = nil
+                navigationItem.leftBarButtonItems = nil
             }
         }
     }
@@ -81,54 +91,60 @@ internal class ResultsViewController: CenteredTableViewController {
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
+
+        let shareResultsBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                        target: self,
+                                                        action: #selector(shareResultsBarButtonItemPressed(_:)))
+        shareResultsBarButtonItem.isEnabled = false
+        let addPlayersBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+                                                  target: self,
+                                                  action: #selector(addPlayersBarButtonItemPressed))
+        addPlayersBarButtonItem.isEnabled = false
+
+        var items = [shareResultsBarButtonItem]
+        if isPlayerHost && addPlayersViewController != nil {
+            items.append(addPlayersBarButtonItem)
+        }
+        navigationItem.leftBarButtonItems = items
+
+        self.shareResultsBarButtonItem = shareResultsBarButtonItem
+        self.addPlayersBarButtonItem = addPlayersBarButtonItem
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return UIStatusBarStyle.wkrStatusBarStyle
     }
 
-    // MARK: - Actions
+    // MARK: - Game Updates
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
-        guard let alertController = quitAlertController else {
-            PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
-            self.backupQuit?()
+    private func attemptResultsRender() {
+        guard resultImage == nil,
+            isViewLoaded,
+            view.window != nil,
+            state == .hostResults,
+            let results = resultsInfo,
+            let player = localPlayer else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.attemptResultsRender()
+            }
             return
         }
-        present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
-    }
-
-    @IBAction func addPlayersBarButtonItemPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
-        guard let controller = addPlayersViewController else { return }
-        present(controller, animated: true, completion: nil)
-        PlayerMetrics.log(event: .hostStartMidMatchInviting)
-        PlayerMetrics.log(presentingOf: controller, on: self)
-    }
-
-    override func overlayButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
-
-        navigationItem.leftBarButtonItem?.isEnabled = false
-        readyButtonPressed?()
-        isOverlayButtonHidden = true
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {
-            self.view.layoutIfNeeded()
+        resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
+            self?.resultImage = image
         }
-
-        PlayerMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
-
-    // MARK: - Game Updates
 
     private func updatedState(oldState: WKRGameState) {
         if state == .results || state == .hostResults {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
             updateTableView()
+
+            attemptResultsRender()
+
+            if state == .hostResults && oldState != .hostResults {
+                shareResultsBarButtonItem?.isEnabled = true
+            }
         } else {
             tableView.isUserInteractionEnabled = false
 
@@ -205,12 +221,12 @@ internal class ResultsViewController: CenteredTableViewController {
         }
 
         for index in 0..<resultsInfo.playerCount {
-            let raceResults = resultsInfo.raceResults(at: index)
+            let player = resultsInfo.raceRankingsPlayer(at: index)
             guard let cell = tableView.cellForRow(at: IndexPath(row: index)) as? ResultsTableViewCell else {
                 tableView.reloadData()
                 return
             }
-            cell.isShowingCheckmark = readyStates.playerReady(raceResults.player)
+            cell.isShowingCheckmark = readyStates.playerReady(player)
         }
     }
 
@@ -251,7 +267,7 @@ internal class ResultsViewController: CenteredTableViewController {
                     return
                 }
 
-                cell.update(for: newInfo.raceResults(at: newIndex).player, animated: true)
+                cell.update(for: newInfo.raceRankingsPlayer(at: newIndex), animated: true)
                 if newIndex < oldIndex {
                     tableView.moveRow(at: IndexPath(row: oldIndex),
                                       to: IndexPath(row: newIndex))
@@ -269,11 +285,28 @@ internal class ResultsViewController: CenteredTableViewController {
     }
 
     func showReadyUpButton(_ showReady: Bool) {
-        navigationItem.leftBarButtonItem?.isEnabled = showReady
+        addPlayersBarButtonItem?.isEnabled = showReady
+
         isOverlayButtonHidden = !showReady
         UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {
             self.view.layoutIfNeeded()
         }
+    }
+
+    override func overlayButtonPressed() {
+        PlayerMetrics.log(event: .userAction(#function))
+
+        addPlayersBarButtonItem?.isEnabled = false
+        shareResultsBarButtonItem?.isEnabled = false
+
+        readyButtonPressed?()
+        isOverlayButtonHidden = true
+
+        UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {
+            self.view.layoutIfNeeded()
+        }
+
+        PlayerMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

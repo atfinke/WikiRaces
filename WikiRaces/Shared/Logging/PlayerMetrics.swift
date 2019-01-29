@@ -54,7 +54,7 @@ internal struct PlayerMetrics {
         // Game All Players
         case pageView, pageBlocked, pageError
         case quitRace, forfeited, usedHelp, fatalError, backupQuit
-        case openedHistory, openedHistorySF, pressedReadyButton, voted
+        case openedHistory, openedHistorySF, openedShare, pressedReadyButton, voted
         case finalVotes
 
         // Game Host
@@ -243,12 +243,12 @@ internal struct PlayerMetrics {
 
         var csvString = "Name,State,Duration,Pages\n"
         for index in 0..<results.playerCount {
-            let raceResults = results.raceResults(at: index)
+            let player = results.raceRankingsPlayer(at: index)
 
-            links += raceResults.player.raceHistory?.entries.count ?? 0
-            totalPlayerTime += raceResults.player.raceHistory?.duration ?? 0
+            links += player.raceHistory?.entries.count ?? 0
+            totalPlayerTime += player.raceHistory?.duration ?? 0
 
-            csvString += csvRow(for: raceResults.player, state: raceResults.playerState) + "\n"
+            csvString += csvRow(for: player, state: player.state) + "\n"
         }
 
         guard let filePath = FileManager

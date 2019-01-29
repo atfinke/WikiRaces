@@ -31,7 +31,7 @@ public class WKRGameManager {
     internal var isFailing = false
 
     internal let game: WKRGame
-    internal let localPlayer: WKRPlayer
+    public   let localPlayer: WKRPlayer
     internal let peerNetwork: WKRPeerNetwork
     internal var pageNavigation: WKRPageNavigation!
 

@@ -65,6 +65,7 @@ extension GameViewController {
     }
 
     private func prepare(resultsViewController: ResultsViewController) {
+        resultsViewController.localPlayer = gameManager.localPlayer
         resultsViewController.readyButtonPressed = { [weak self] in
             self?.gameManager.player(.ready)
         }

@@ -30,9 +30,9 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     private func configure(cell: ResultsTableViewCell, with resultsInfo: WKRResultsInfo, at index: Int) {
         switch state {
         case .results, .hostResults:
-            let raceResults = resultsInfo.raceResults(at: index)
-            cell.isShowingCheckmark = readyStates?.playerReady(raceResults.player) ?? false
-            cell.update(for: raceResults.player, animated: true)
+            let player = resultsInfo.raceRankingsPlayer(at: index)
+            cell.isShowingCheckmark = readyStates?.playerReady(player) ?? false
+            cell.update(for: player, animated: true)
         case .points:
             let sessionResults = resultsInfo.sessionResults(at: index)
             cell.isShowingActivityIndicatorView = false
@@ -75,8 +75,8 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        let raceResults = resultsInfo.raceResults(at: indexPath.row)
-        performSegue(withIdentifier: "showHistory", sender: raceResults.player)
+        let player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
+        performSegue(withIdentifier: "showHistory", sender: player)
 
         PlayerMetrics.log(event: .openedHistory, attributes: ["GameState": state.rawValue.description as Any])
     }

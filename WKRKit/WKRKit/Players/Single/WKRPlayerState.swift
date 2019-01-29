@@ -32,4 +32,14 @@ public enum WKRPlayerState: String, Codable {
         }
     }
 
+    public var extendedText: String {
+        switch self {
+        case .foundPage: return "Found Page"
+        case .forcedEnd: return "Didn't Finish"
+        case .forfeited: return "Forfeited"
+        case .quit: return "Quit Race"
+        default: return self.text
+        }
+    }
+
 }

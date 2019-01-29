@@ -285,11 +285,6 @@
                         <viewLayoutGuide key="safeArea" id="fqX-8Y-KqT"/>
                     </view>
                     <navigationItem key="navigationItem" id="P7i-8g-E6l">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="VEI-Pl-A1w">
-                            <connections>
-                                <action selector="addPlayersBarButtonItemPressed:" destination="s0x-IM-dO9" id="NVi-Rq-Xps"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="stop" id="6kY-QH-M2w">
                             <connections>
                                 <action selector="quitButtonPressed:" destination="s0x-IM-dO9" id="qrf-Ya-BvA"/>
