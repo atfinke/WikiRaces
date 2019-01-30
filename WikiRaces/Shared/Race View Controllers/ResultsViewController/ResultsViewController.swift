@@ -177,7 +177,7 @@ internal class ResultsViewController: CenteredTableViewController {
 
                 if isPlayerHost, let results = resultsInfo {
                     DispatchQueue.global().async {
-                        PlayerMetrics.record(results: results)
+                        PlayerDatabaseMetrics.shared.record(results: results)
                     }
                 }
             }

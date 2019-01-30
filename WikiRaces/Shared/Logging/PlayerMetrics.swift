@@ -6,7 +6,6 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import CloudKit
 import UIKit
 import WKRKit
 
@@ -35,15 +34,6 @@ internal struct PlayerMetrics {
 
     // MARK: - Analytic Event Types
 
-    enum StatEvent {
-        case players(unique: Int, total: Int)
-        case hasGCAlias(String), hasDeviceName(String), hasCustomName(String)
-        case usingGCAlias(String), usingDeviceName(String), usingCustomName(String)
-        case updatedStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int,
-            soloTotalTime: Int, soloPages: Int, soloRaces: Int)
-        case buildInfo(version: String, build: String)
-    }
-
     enum Event: String {
         // Non Game
         case leaderboard, versionInfo
@@ -64,15 +54,6 @@ internal struct PlayerMetrics {
 
         // Bugs
         case githubIssue41Hit // https://github.com/atfinke/WikiRaces/issues/41
-    }
-
-    // MARK: - Results Collection Types
-
-    struct ProcessedResults {
-        let csvURL: URL
-        let playerCount: Int
-        let totalPlayerTime: Int
-        let links: Int
     }
 
     // MARK: - Logging Events
@@ -116,158 +97,4 @@ internal struct PlayerMetrics {
             }
         #endif
     }
-
-    //swiftlint:disable:next cyclomatic_complexity function_body_length
-    public static func log(event: StatEvent) {
-        #if !MULTIWINDOWDEBUG
-            let container = CKContainer.default()
-            let publicDB = container.publicCloudDatabase
-
-            // Fetch user record ID, then user record.
-            container.fetchUserRecordID(completionHandler: { (userRecordID, _) in
-                guard let userRecordID = userRecordID else { return }
-                publicDB.fetch(withRecordID: userRecordID, completionHandler: { (userRecord, _) in
-                    guard let userRecord = userRecord else { return }
-
-                    // Get user stats record, or create new one.
-                    let statsRecordName = userRecord.object(forKey: "UserStatsName") as? NSString ?? " "
-                    let userStatsRecordID = CKRecord.ID(recordName: statsRecordName as String)
-                    publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { (userStatsRecord, error) in
-
-                        var userStatsRecord = userStatsRecord
-                        if let error = error as? CKError, error.code == CKError.unknownItem {
-                            userStatsRecord = CKRecord(recordType: "UserStats")
-                        }
-                        guard let record = userStatsRecord else { return }
-
-                        // Update user stats record.
-                        switch event {
-                        case .usingGCAlias(let alias):
-                            record["GCAlias"] = alias as NSString
-                            log(event: .nameType, attributes: ["Type": "GCAlias"])
-                        case .usingDeviceName(let name):
-                            record["DeviceName"] = name as NSString
-                            log(event: .nameType, attributes: ["Type": "DeviceName"])
-                        case .usingCustomName(let name):
-                            record["CustomName"] = name as NSString
-                            log(event: .nameType, attributes: ["Type": "CustomName"])
-                        case .hasGCAlias(let alias):
-                            record["GCAlias"] = alias as NSString
-                        case .hasDeviceName(let name):
-                            record["DeviceName"] = name as NSString
-                        case .hasCustomName(let name):
-                            record["CustomName"] = name as NSString
-                        case .updatedStats(let points, let races, let totalTime, let fastestTime, let pages,
-                                           let soloTotalTime, let soloPages, let soloRaces):
-                            record["Points"] = NSNumber(value: points)
-                            record["Races"] = NSNumber(value: races)
-                            record["TotalTime"] = NSNumber(value: totalTime)
-                            record["FastestTime"] = NSNumber(value: fastestTime)
-                            record["Pages"] = NSNumber(value: pages)
-                            record["SoloTotalTime"] = NSNumber(value: soloTotalTime)
-                            record["SoloPages"] = NSNumber(value: soloPages)
-                            record["SoloRaces"] = NSNumber(value: soloRaces)
-                        case .buildInfo(let version, let build):
-                            record["BundleVersion"] = version as NSString
-                            record["BundleBuild"] = build as NSString
-                        case .players(let unique, let total):
-                            record["TotalPlayers"] = NSNumber(value: total)
-                            record["UniquePlayers"] = NSNumber(value: unique)
-                        }
-
-                        // Save updated stats record and update user record with stats record ID.
-                        publicDB.save(record, completionHandler: { (savedUserStatsRecord, _) in
-                            guard let savedUserStatsRecord = savedUserStatsRecord else { return }
-                            userRecord["UserStatsName"] = savedUserStatsRecord.recordID.recordName as NSString
-                            publicDB.save(userRecord, completionHandler: { (_, _) in })
-                        })
-
-                    })
-                })
-            })
-        #endif
-    }
-
-    // MARK: - Results Collection
-
-    public static func record(results: WKRResultsInfo) {
-        #if MULTIWINDOWDEBUG
-            return
-        #endif
-
-        guard let processedResults = process(results: results) else { return }
-
-        let resultsRecord = CKRecord(recordType: "RaceResult")
-        resultsRecord["CSV"] = CKAsset(fileURL: processedResults.csvURL)
-        resultsRecord["Links"] = NSNumber(value: processedResults.links)
-        resultsRecord["PlayerCount"] = NSNumber(value: processedResults.playerCount)
-        resultsRecord["TotalPlayerTime"] = NSNumber(value: processedResults.totalPlayerTime)
-
-        CKContainer.default().publicCloudDatabase.save(resultsRecord) { (_, _) in
-            try? FileManager.default.removeItem(at: processedResults.csvURL)
-        }
-    }
-
-    private static func process(results: WKRResultsInfo) -> ProcessedResults? {
-
-        func csvRow(for player: WKRPlayer, state: WKRPlayerState) -> String {
-
-            func formatted(row: String?) -> String {
-                return row?.replacingOccurrences(of: ",", with: " ") ?? ""
-            }
-
-            var string = ""
-            string += formatted(row: player.name) + ","
-            string += formatted(row: state.text) + ","
-
-            if state == .foundPage {
-                let time = String(player.raceHistory?.duration ?? 0)
-                string += formatted(row: time) + ","
-            } else {
-                string += ","
-            }
-
-            for entry in player.raceHistory?.entries ?? [] {
-                let title = (entry.page.title ?? "")
-                let duration = String(entry.duration ?? 0)  + "|"
-                string += formatted(row: duration + title) + ","
-            }
-
-            string.removeLast()
-
-            return string
-        }
-
-        var links = 0
-        var totalPlayerTime = 0
-
-        var csvString = "Name,State,Duration,Pages\n"
-        for index in 0..<results.playerCount {
-            let player = results.raceRankingsPlayer(at: index)
-
-            links += player.raceHistory?.entries.count ?? 0
-            totalPlayerTime += player.raceHistory?.duration ?? 0
-
-            csvString += csvRow(for: player, state: player.state) + "\n"
-        }
-
-        guard let filePath = FileManager
-            .default
-            .urls(for: .documentDirectory, in: .userDomainMask)
-            .last?
-            .path
-            .appendingFormat("/\(Date()).csv") else {
-                return nil
-        }
-        do {
-            try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)
-            return ProcessedResults(csvURL: URL(fileURLWithPath: filePath),
-                                    playerCount: results.playerCount,
-                                    totalPlayerTime: totalPlayerTime,
-                                    links: links)
-        } catch {
-            return nil
-        }
-    }
-
 }

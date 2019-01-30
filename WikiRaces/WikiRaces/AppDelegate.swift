@@ -35,6 +35,8 @@ internal class AppDelegate: WKRAppDelegate {
         configureConstants()
         configureAppearance()
 
+        PlayerDatabaseMetrics.shared.connect()
+
         logCloudStatus()
         logInterfaceMode()
         logBuild()
@@ -61,7 +63,7 @@ internal class AppDelegate: WKRAppDelegate {
             let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
                 fatalError("No bundle info dictionary")
         }
-        PlayerMetrics.log(event: .buildInfo(version: bundleVersion, build: bundleBuild))
+        PlayerDatabaseMetrics.shared.log(event: .build(version: bundleVersion, build: bundleBuild))
     }
 
 }

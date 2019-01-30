@@ -57,6 +57,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                         self.present(viewController, animated: true, completion: nil)
                         PlayerMetrics.log(presentingOf: viewController, on: self)
                     }
+                } else if GKLocalPlayer.local.isAuthenticated {
+                    PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
                 } else if !GKLocalPlayer.local.isAuthenticated {
                     // "error._code" ?!?!
                     if let error = error, error._code == 2 {

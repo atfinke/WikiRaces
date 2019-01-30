@@ -110,7 +110,7 @@ internal class StatsHelper {
         let soloRaces = statValue(for: .soloRaces)
 
         keyStatsUpdated?(points, races, statValue(for: .average))
-        PlayerMetrics.log(event: .updatedStats(points: Int(points),
+        PlayerDatabaseMetrics.shared.log(event: .syncStats(points: Int(points),
                                                  races: Int(races),
                                                  totalTime: Int(totalTime),
                                                  fastestTime: Int(fastestTime),
@@ -145,7 +145,7 @@ internal class StatsHelper {
 
         let uniquePlayers = Array(Set(existingPlayers)).count
         let totalPlayers = existingPlayers.count
-        PlayerMetrics.log(event: .players(unique: uniquePlayers, total: totalPlayers))
+        PlayerDatabaseMetrics.shared.log(event: .players(unique: uniquePlayers, total: totalPlayers))
 
         defaults.set(uniquePlayers, forKey: Stat.uniquePlayers.key)
         defaults.set(totalPlayers, forKey: Stat.totalPlayers.key)

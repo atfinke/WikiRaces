@@ -100,8 +100,16 @@ internal class MenuViewController: StateLogViewController {
         #if MULTIWINDOWDEBUG
             performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
         #else
-            attemptGCAuthentication() 
+            attemptGCAuthentication()
         #endif
+
+        if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
+            PlayerDatabaseMetrics.shared.log(event: .customName(name))
+        }
+        if GKLocalPlayer.local.isAuthenticated {
+            PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
+        }
+        PlayerDatabaseMetrics.shared.log(event: .deviceName(UIDevice.current.name))
 
         promptForInvalidName()
     }

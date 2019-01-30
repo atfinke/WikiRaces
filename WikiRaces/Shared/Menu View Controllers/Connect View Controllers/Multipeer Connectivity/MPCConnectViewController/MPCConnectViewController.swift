@@ -62,12 +62,15 @@ internal class MPCConnectViewController: ConnectViewController {
         // Gets either the player name specified in settings.app, then GK alias, the device name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
-            PlayerMetrics.log(event: .usingCustomName(playerName))
+            PlayerDatabaseMetrics.shared.log(event: .customName(playerName))
+            PlayerMetrics.log(event: .nameType, attributes: ["Type": "CustomName"])
         } else if GKLocalPlayer.local.isAuthenticated {
             playerName = GKLocalPlayer.local.alias
-            PlayerMetrics.log(event: .usingGCAlias(playerName))
+            PlayerDatabaseMetrics.shared.log(event: .gcAlias(playerName))
+            PlayerMetrics.log(event: .nameType, attributes: ["Type": "GCAlias"])
         } else {
-            PlayerMetrics.log(event: .usingDeviceName(playerName))
+            PlayerDatabaseMetrics.shared.log(event: .deviceName(playerName))
+            PlayerMetrics.log(event: .nameType, attributes: ["Type": "DeviceName"])
         }
 
         #if !MULTIWINDOWDEBUG
