@@ -18,6 +18,9 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     /// The starting page
     internal let startingPage: WKRPage
 
+    /// User defaults page for used pages
+    private static let usedPagesKey = "WKRKit-UsedPages"
+
     // MARK: Initialization
 
     /// Creates a WKRPreRaceConfig object
@@ -28,6 +31,21 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     private init(startingPage: WKRPage, voteInfo: WKRVoteInfo) {
         self.voteInfo = voteInfo
         self.startingPage = startingPage
+    }
+
+    // MARK: - Reusing Pages
+
+    private static func loadUsedPages() -> [String] {
+        var usedPages =  UserDefaults.standard.array(forKey: usedPagesKey) as? [String] ?? []
+        let finalArticleCount = WKRKitConstants.current.finalArticles.count
+        if abs(finalArticleCount - usedPages.count) < 100 {
+            usedPages = []
+        }
+        return usedPages
+    }
+
+    private static func saveUsedPages(_ usedPages: [String]) {
+        UserDefaults.standard.set(usedPages, forKey: usedPagesKey)
     }
 
     // MARK: - Creation
@@ -46,14 +64,21 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     ///
     /// - Parameter completionHandler: The handler holding the new config object
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        let finalArticles = WKRKitConstants.current.finalArticles()
+        var usedPages = loadUsedPages()
+        var finalArticles = WKRKitConstants.current.finalArticles
+        finalArticles = Array(Set(finalArticles).subtracting(usedPages))
+
         let operationQueue = OperationQueue()
 
         // Get a few more than neccessary random paths in case some final articles are no longer valid
         var randomPaths = [String]()
-        while randomPaths.count < Int(Double(WKRKitConstants.current.votingArticlesCount) * 1.5) {
-            if let randomPath = finalArticles.randomElement, !randomPaths.contains(randomPath) {
-                randomPaths.append(randomPath)
+        let numberOfPagesToFetch = WKRKitConstants.current.votingArticlesCount + 2
+
+        for index in 0..<numberOfPagesToFetch {
+            while randomPaths.count != index + 1 {
+                if let randomPath = finalArticles.randomElement {
+                    randomPaths.append(randomPath)
+                }
             }
         }
 
@@ -62,7 +87,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
         let completedOperation = BlockOperation {
             // Used for quick debug to set first page to Apple and final page to first link on page.
-            if WKRKitConstants.current.quickRace {
+            if WKRKitConstants.current.isQuickRaceMode {
                 let startingURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!
                 startingPage = WKRPage(title: "Apple Inc.", url: startingURL)
 
@@ -77,6 +102,8 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
                 completionHandler(config)
+                usedPages.append(contentsOf: randomPaths)
+                saveUsedPages(usedPages)
             } else {
                 completionHandler(nil)
             }

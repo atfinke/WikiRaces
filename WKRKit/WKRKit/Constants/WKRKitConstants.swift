@@ -16,7 +16,7 @@ public struct WKRKitConstants {
     public let version: Int
     public static var current = WKRKitConstants()
 
-    internal let quickRace: Bool
+    internal let isQuickRaceMode: Bool
     public let connectionTestTimeout: Double
 
     internal let pageTitleStringToReplace: String
@@ -85,7 +85,7 @@ public struct WKRKitConstants {
         }
 
         self.version = version
-        self.quickRace = quickRace
+        self.isQuickRaceMode = quickRace
         self.connectionTestTimeout = connectionTestTimeout
 
         self.pageTitleStringToReplace = pageTitleStringToReplace
@@ -221,7 +221,7 @@ public struct WKRKitConstants {
                     newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
-    internal func finalArticles() -> [String] {
+    lazy private(set) var finalArticles: [String] = {
         //swiftlint:disable:next line_length
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
@@ -229,7 +229,7 @@ public struct WKRKitConstants {
                 fatalError("Failed to load articles plist")
         }
         return array
-    }
+    }()
 
     internal func getLinksScript() -> String {
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),
