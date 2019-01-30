@@ -168,7 +168,6 @@ internal class CenteredTableViewController: StateLogViewController {
         tableView.dataSource = controller
     }
 
-    @available(iOS 11.0, *)
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         descriptionLabelBottomConstraint.constant = -view.safeAreaInsets.bottom

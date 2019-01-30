@@ -14,17 +14,11 @@ internal struct DurationFormatter {
     static func string(for duration: Int?, extended: Bool = false) -> String? {
         guard let duration = duration else { return nil }
         if duration > maxSeconds {
-            var suffix = extended ? " Minute" : " M"
+            let suffix = extended ? " Min" : " M"
             let time = duration / 60
-            if extended && time != 1 {
-                suffix += "s"
-            }
             return time.description + suffix
         } else {
-            var suffix = extended ? " Second" : " S"
-            if extended && duration != 1 {
-                suffix += "s"
-            }
+            let suffix = extended ? " Sec" : " S"
             return duration.description + suffix
         }
     }

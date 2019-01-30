@@ -26,7 +26,7 @@ internal class AppDelegate: WKRAppDelegate {
                 fatalError("Failed to get API keys")
         }
 
-     //   Crashlytics.start(withAPIKey: key)
+        Crashlytics.start(withAPIKey: key)
         #endif
 
         FirebaseApp.configure()

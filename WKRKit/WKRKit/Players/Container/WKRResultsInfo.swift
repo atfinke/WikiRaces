@@ -126,9 +126,8 @@ public struct WKRResultsInfo: Codable {
         return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func raceResults(at index: Int) -> (player: WKRPlayer, playerState: WKRPlayerState) {
-        let player = playersSortedByState[index]
-        return (player, player.state)
+    public func raceRankingsPlayer(at index: Int) -> WKRPlayer {
+        return playersSortedByState[index]
     }
 
     public func sessionResults(at index: Int) -> WKRProfileSessionResults {

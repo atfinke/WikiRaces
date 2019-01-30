@@ -23,10 +23,9 @@ class ResultRenderer: NSObject {
                 for localPlayer: WKRPlayer,
                 on canvasView: UIView,
                 completion: @escaping (UIImage) -> Void) {
-        
+
         guard !isRendering else { return }
         isRendering = true
-
 
         let view = UIView()
         view.isHidden = true
@@ -116,7 +115,8 @@ class ResultRenderer: NSObject {
 //        let pngData = resizedRenderer.pngData { _ in
 //            fullImage.draw(in: CGRect(origin: .zero, size: size))
 //        }
-//        let url = URL(fileURLWithPath: NSTemporaryDirectory().appending(Date().timeIntervalSince1970.description + ".png"))
+//        let path = NSTemporaryDirectory().appending(Date().timeIntervalSince1970.description + ".png")
+//        let url = URL(fileURLWithPath: path)
 //        try? pngData.write(to: url)
 //        print(url)
 
@@ -288,7 +288,7 @@ class ResultRenderer: NSObject {
             let anchor = index == 0 ? anchorView.topAnchor : anchorView.bottomAnchor
             constraints.append(contentsOf: [
                 nameLabel.topAnchor.constraint(equalTo: anchor, constant: entrySpacing),
-                nameLabel.leftAnchor.constraint(equalTo: innerRankingsView.leftAnchor),
+                nameLabel.leftAnchor.constraint(equalTo: innerRankingsView.leftAnchor, constant: -10),
                 nameLabel.rightAnchor.constraint(equalTo: detailLabel.leftAnchor),
 
                 detailLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),

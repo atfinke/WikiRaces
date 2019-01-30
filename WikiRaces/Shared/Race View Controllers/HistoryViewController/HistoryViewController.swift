@@ -163,10 +163,6 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
         PlayerMetrics.log(event: .openedHistorySF)
     }
 
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Tap an article to read"
-    }
-
     // MARK: - SFSafariViewControllerDelegate
 
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {

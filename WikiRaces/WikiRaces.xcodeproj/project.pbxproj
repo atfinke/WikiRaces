@@ -15,12 +15,15 @@
 		1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
 		1414280721FC394600C48788 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
 		1414280B21FC437000C48788 /* GameKitConnectViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */; };
+		141598DF2201493E00DA955E /* FirebaseRemoteConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */; };
+		141598E12201495F00DA955E /* FirebaseABTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141598E02201495F00DA955E /* FirebaseABTesting.framework */; };
 		141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
 		141892F61F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
 		141892F71F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
 		141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
 		141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
 		141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
+		141E4CF122012B2F000A0A15 /* PlayerDatabaseMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */; };
 		142A09BE210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */; };
 		142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */; };
 		142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F714E210C33FC00C66558 /* MenuViewController+KB.swift */; };
@@ -318,9 +321,12 @@
 		1414280221FC18F600C48788 /* GameKitConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKitConnectViewController.swift; sourceTree = "<group>"; };
 		1414280621FC394600C48788 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameKitConnectViewController+Match.swift"; sourceTree = "<group>"; };
+		141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseRemoteConfig.framework; sourceTree = "<group>"; };
+		141598E02201495F00DA955E /* FirebaseABTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseABTesting.framework; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
 		141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+Actions.swift"; sourceTree = "<group>"; };
+		141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDatabaseMetrics.swift; sourceTree = "<group>"; };
 		142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+KB.swift"; sourceTree = "<group>"; };
 		142F714E210C33FC00C66558 /* MenuViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+KB.swift"; sourceTree = "<group>"; };
@@ -427,6 +433,7 @@
 				14E6D55D1F86A1CA005EB3B9 /* WKRKit.framework in Frameworks */,
 				14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */,
 				148487FC214F0F3B0098CBFA /* nanopb.framework in Frameworks */,
+				141598E12201495F00DA955E /* FirebaseABTesting.framework in Frameworks */,
 				148487FB214F0F3B0098CBFA /* FirebaseCore.framework in Frameworks */,
 				14848801214F0F3B0098CBFA /* GTMSessionFetcher.framework in Frameworks */,
 				148487FF214F0F3B0098CBFA /* GoogleAppMeasurement.framework in Frameworks */,
@@ -439,6 +446,7 @@
 				140564D62112D4BD001E36AB /* Fabric.framework in Frameworks */,
 				148487F9214F0F3B0098CBFA /* GoogleUtilities.framework in Frameworks */,
 				14848802214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				141598DF2201493E00DA955E /* FirebaseRemoteConfig.framework in Frameworks */,
 				148487FD214F0F3B0098CBFA /* FirebaseCrash.framework in Frameworks */,
 				148487FA214F0F3B0098CBFA /* Protobuf.framework in Frameworks */,
 			);
@@ -496,12 +504,14 @@
 				143054CF1F8959A900C0BC27 /* Firebase.h */,
 				140564D32112D4BC001E36AB /* Crashlytics.framework */,
 				140564D42112D4BC001E36AB /* Fabric.framework */,
+				141598E02201495F00DA955E /* FirebaseABTesting.framework */,
 				148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */,
 				148487EF214F0F3B0098CBFA /* FirebaseCore.framework */,
 				148487F6214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework */,
 				148487F1214F0F3B0098CBFA /* FirebaseCrash.framework */,
 				148487F2214F0F3B0098CBFA /* FirebaseInstanceID.framework */,
 				148487F4214F0F3B0098CBFA /* FirebasePerformance.framework */,
+				141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */,
 				148487F3214F0F3B0098CBFA /* GoogleAppMeasurement.framework */,
 				148487EC214F0F3A0098CBFA /* GoogleToolboxForMac.framework */,
 				148487ED214F0F3A0098CBFA /* GoogleUtilities.framework */,
@@ -752,6 +762,7 @@
 			isa = PBXGroup;
 			children = (
 				14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */,
+				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 				1497A8541FF476BC0013E9E3 /* StateLogViewController.swift */,
 				1497A8581FF478920013E9E3 /* StateLogTableViewController.swift */,
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
@@ -1155,6 +1166,7 @@
 				14DFBD1E210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */,
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
+				141E4CF122012B2F000A0A15 /* PlayerDatabaseMetrics.swift in Sources */,
 				1473E2A0210DAD7C00726377 /* HelpViewController+KB.swift in Sources */,
 				1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,

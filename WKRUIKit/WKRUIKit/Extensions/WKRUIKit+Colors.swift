@@ -44,7 +44,7 @@ extension UIColor {
     }
 
     public static var wkrLightTextColor: UIColor {
-        return WKRUIStyle.isDark ? .white : #colorLiteral(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0)
+        return WKRUIStyle.isDark ? #colorLiteral(red: 210.0/255.0, green: 210.0/255.0, blue: 210.0/255.0, alpha: 1.0)  : #colorLiteral(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0)
     }
 
     public static var wkrMenuTopViewColor: UIColor {

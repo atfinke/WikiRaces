@@ -117,9 +117,15 @@ class PlayerDatabaseMetrics: NSObject {
 
     func log(event: PlayerDatabaseEvent) {
         queuedEvents.append(event)
-        sync()
+
+        // Often, multiple logs are called at once resulting in mutltiple db syncs.
+        // This adds a bit of a delay so we can coalesce syncs more.
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+            self.sync()
+        }
     }
 
+    //swiftlint:disable:next function_body_length
     private func sync() {
         guard !queuedEvents.isEmpty,
                !isConnecting,
@@ -259,5 +265,3 @@ class PlayerDatabaseMetrics: NSObject {
     }
 
 }
-
-

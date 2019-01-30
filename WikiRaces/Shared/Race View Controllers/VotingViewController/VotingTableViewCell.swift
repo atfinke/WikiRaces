@@ -64,7 +64,7 @@ internal class VotingTableViewCell: UITableViewCell {
         countLabel.text = "0"
         countLabel.textAlignment = .right
         countLabel.textColor = UIColor.wkrVoteCountTextColor
-        
+
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(countLabel)
 

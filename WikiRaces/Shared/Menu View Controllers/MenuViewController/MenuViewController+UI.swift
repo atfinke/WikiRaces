@@ -108,7 +108,6 @@ extension MenuViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
-    @available(iOS 11.0, *)
     override func viewSafeAreaInsetsDidChange() {
         super.viewSafeAreaInsetsDidChange()
         puzzleViewHeightConstraint.constant = 75 + view.safeAreaInsets.bottom / 2
@@ -176,6 +175,9 @@ extension MenuViewController {
 
         #if DEBUG
             titleLabel.textColor = UIColor(red: 51.0 / 255.0, green: 102.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+
+            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
+            titleLabel.text = networkType ? "WikiRaces [GK]" : "WikiRaces [MPC]"
         #endif
 
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."

@@ -26,7 +26,8 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().tintColor = UIColor.wkrTextColor
 
         UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: UIColor.wkrTextColor
+            .foregroundColor: UIColor.wkrTextColor,
+            .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
         ]
         window?.backgroundColor = UIColor.wkrBackgroundColor
 
