@@ -20,7 +20,7 @@ class PlayerDatabaseMetrics: NSObject {
         case gcAlias(String), deviceName(String), customName(String)
         case syncStats(points: Int, races: Int, totalTime: Int, fastestTime: Int, pages: Int,
             soloTotalTime: Int, soloPages: Int, soloRaces: Int)
-        case build(version: String, build: String)
+        case app(version: String, build: String)
     }
 
     private struct ProcessedResults {
@@ -161,7 +161,7 @@ class PlayerDatabaseMetrics: NSObject {
                 record["SoloTotalTime"] = NSNumber(value: soloTotalTime)
                 record["SoloPages"] = NSNumber(value: soloPages)
                 record["SoloRaces"] = NSNumber(value: soloRaces)
-            case .build(let version, let build):
+            case .app(let version, let build):
                 record["BundleVersion"] = version as NSString
                 record["BundleBuild"] = build as NSString
             case .players(let unique, let total):

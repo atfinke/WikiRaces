@@ -61,7 +61,8 @@ extension GameViewController {
                 for index in 0..<votingInfo.pageCount {
                     if let info = votingInfo.page(for: index) {
                         for _ in 0..<info.votes {
-                            PlayerMetrics.log(event: .finalVotes, attributes: ["Page": info.page.title as Any])
+                            PlayerMetrics.log(event: .finalVotes,
+                                              attributes: ["Page": info.page.title as Any])
                         }
                     }
                 }
@@ -102,7 +103,9 @@ extension GameViewController {
         navigationItem.leftBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem?.isEnabled = false
 
-        let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: error.title,
+                                                message: error.message,
+                                                preferredStyle: .alert)
         let quitAction = UIAlertAction(title: "Menu", style: .default) { [weak self] _ in
             self?.playerQuit()
         }
@@ -117,8 +120,11 @@ extension GameViewController {
             })
         })
 
-        PlayerMetrics.log(event: .fatalError, attributes: ["Error": error.title as Any])
+        PlayerMetrics.log(event: .fatalError,
+                          attributes: ["Error": error.title as Any])
     }
+
+    // MARK: - Controllers
 
     func resetActiveControllers() {
         alertController = nil
@@ -147,59 +153,76 @@ extension GameViewController {
         }
     }
 
+    // MARK: - Transitions
+
     private func transition(to state: WKRGameState) {
         guard !isPlayerQuitting, state != gameState else { return }
         gameState = state
 
         switch state {
         case .voting:
-            self.title = ""
-            dismissActiveController(completion: {
-                self.performSegue(.showVoting)
-            })
-            navigationItem.leftBarButtonItem = nil
-            navigationItem.rightBarButtonItem = nil
+            transitionToVoting()
         case .results, .hostResults, .points:
-            raceTimer?.invalidate()
-            if activeViewController != resultsViewController || resultsViewController == nil {
-                dismissActiveController(completion: {
-                    self.performSegue(.showResults)
-                    UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeOut,
-                                   delay: WKRAnimationDurationConstants.gameFadeOutDelay,
-                                   options: .beginFromCurrentState,
-                                   animations: {
-                        self.webView.alpha = 0.0
-                    }, completion: nil)
-                })
-            } else {
-                resultsViewController?.state = state
-            }
-            navigationItem.leftBarButtonItem = nil
-            navigationItem.rightBarButtonItem = nil
-
-            if state == .hostResults && networkConfig.isHost {
-                PlayerMetrics.log(event: .hostEndedRace)
-            }
+            transitionToResults()
         case .race:
-            timeRaced = 0
-            raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
-                self?.timeRaced += 1
-            })
-
-            navigationController?.setNavigationBarHidden(false, animated: false)
-
-            navigationItem.leftBarButtonItem = helpBarButtonItem
-            navigationItem.rightBarButtonItem = quitBarButtonItem
-
-            connectingLabel.alpha = 0.0
-            activityIndicatorView.alpha = 0.0
-
-            dismissActiveController(completion: nil)
-
-            if networkConfig.isHost {
-                PlayerMetrics.log(event: .hostStartedRace, attributes: ["Page": self.finalPage?.title as Any])
-            }
+            transitionToRace()
         default: break
+        }
+    }
+
+    private func transitionToVoting() {
+        self.title = ""
+        navigationController?.navigationBar.isHidden = true
+        dismissActiveController(completion: {
+            self.performSegue(.showVoting)
+        })
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+    }
+
+    private func transitionToResults() {
+        raceTimer?.invalidate()
+        if activeViewController != resultsViewController || resultsViewController == nil {
+            dismissActiveController(completion: {
+                self.performSegue(.showResults)
+                UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeOut,
+                               delay: WKRAnimationDurationConstants.gameFadeOutDelay,
+                               options: .beginFromCurrentState,
+                               animations: {
+                                self.webView.alpha = 0.0
+                }, completion: nil)
+            })
+        } else {
+            resultsViewController?.state = gameState
+        }
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = nil
+
+        if gameState == .hostResults && networkConfig.isHost {
+            PlayerMetrics.log(event: .hostEndedRace)
+        }
+    }
+
+    private func transitionToRace() {
+        navigationController?.navigationBar.isHidden = false
+        timeRaced = 0
+        raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+            self?.timeRaced += 1
+        })
+
+        navigationController?.setNavigationBarHidden(false, animated: false)
+
+        navigationItem.leftBarButtonItem = helpBarButtonItem
+        navigationItem.rightBarButtonItem = quitBarButtonItem
+
+        connectingLabel.alpha = 0.0
+        activityIndicatorView.alpha = 0.0
+
+        dismissActiveController(completion: nil)
+
+        if networkConfig.isHost {
+            PlayerMetrics.log(event: .hostStartedRace,
+                              attributes: ["Page": finalPage?.title as Any])
         }
     }
 

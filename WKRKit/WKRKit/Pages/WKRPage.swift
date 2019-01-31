@@ -54,7 +54,6 @@ public struct WKRPage: Codable, Hashable, Equatable {
             // The expected path
             let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")
             return smartFormat(title)
-
         }
     }
 

@@ -147,10 +147,9 @@ internal class ViewController: UIViewController {
                         print("Updating------")
                         controller.showReadyUpButton(true)
 
-//
-//                        self.res.render(with: controller.resultsInfo!, for: player, on: controller.contentView, completion: { _ in
-//                            
-//                        })
+                        self.res.render(with: controller.resultsInfo!, for: player, on: controller.contentView, completion: { _ in
+
+                        })
                     }
 
                 }

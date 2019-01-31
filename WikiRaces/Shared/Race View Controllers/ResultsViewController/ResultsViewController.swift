@@ -95,7 +95,7 @@ internal class ResultsViewController: CenteredTableViewController {
         let shareResultsBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                         target: self,
                                                         action: #selector(shareResultsBarButtonItemPressed(_:)))
-        shareResultsBarButtonItem.isEnabled = false
+        shareResultsBarButtonItem.isEnabled = state == .hostResults
         let addPlayersBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                   target: self,
                                                   action: #selector(addPlayersBarButtonItemPressed))
@@ -124,7 +124,7 @@ internal class ResultsViewController: CenteredTableViewController {
             state == .hostResults,
             let results = resultsInfo,
             let player = localPlayer else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.attemptResultsRender()
             }
             return
@@ -286,6 +286,9 @@ internal class ResultsViewController: CenteredTableViewController {
 
     func showReadyUpButton(_ showReady: Bool) {
         addPlayersBarButtonItem?.isEnabled = showReady
+        if !showReady {
+            shareResultsBarButtonItem?.isEnabled = false
+        }
 
         isOverlayButtonHidden = !showReady
         UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {

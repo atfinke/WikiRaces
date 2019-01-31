@@ -227,6 +227,7 @@ class ResultRenderer: NSObject {
             innerRankingsView.widthAnchor.constraint(equalTo: rankingView.widthAnchor)
         ]
 
+        var lastDetailLabel: UILabel?
         for index in 0..<results.playerCount {
             let player = results.raceRankingsPlayer(at: index)
 
@@ -243,7 +244,7 @@ class ResultRenderer: NSObject {
                 placeString = "3rd"
             }
             placeString += ": "
-            let nameString = placeString + player.name
+            let nameString = placeString + player.name + (0..<19).map({ $0.description + " " }).joined()
 
             let weight: UIFont.Weight = player == localPlayer ? .bold : .medium
             let nameFont = UIFont.systemFont(ofSize: 18, weight: weight)
@@ -288,13 +289,18 @@ class ResultRenderer: NSObject {
             let anchor = index == 0 ? anchorView.topAnchor : anchorView.bottomAnchor
             constraints.append(contentsOf: [
                 nameLabel.topAnchor.constraint(equalTo: anchor, constant: entrySpacing),
-                nameLabel.leftAnchor.constraint(equalTo: innerRankingsView.leftAnchor, constant: -10),
-                nameLabel.rightAnchor.constraint(equalTo: detailLabel.leftAnchor),
+                nameLabel.leftAnchor.constraint(equalTo: innerRankingsView.leftAnchor),
+                nameLabel.rightAnchor.constraint(equalTo: detailLabel.leftAnchor, constant: -10),
 
                 detailLabel.topAnchor.constraint(equalTo: nameLabel.topAnchor),
                 detailLabel.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor),
                 detailLabel.rightAnchor.constraint(equalTo: innerRankingsView.rightAnchor)
                 ])
+
+            if let label = lastDetailLabel {
+                constraints.append(detailLabel.leftAnchor.constraint(equalTo: label.leftAnchor))
+            }
+            lastDetailLabel = detailLabel
             anchorView = nameLabel
         }
 
@@ -329,12 +335,12 @@ class ResultRenderer: NSObject {
             let indexString = num.description + ". "
             let fullString = indexString + (entry.page.title ?? "")
 
-            let shouldBold = index == entries.count - 1 && localPlayer.state == .foundPage
-            let weight: UIFont.Weight = shouldBold ? .semibold : .medium
-            let entryFont = UIFont.systemFont(ofSize: 18, weight: weight)
+            let entryFont = UIFont.systemFont(ofSize: 18, weight: .medium)
             let style = NSMutableParagraphStyle()
             style.headIndent = 18
-            if num >= 10 {
+            if num >= 100 {
+                style.headIndent = 34
+            } else if num >= 10 {
                 style.headIndent = 26
             }
 

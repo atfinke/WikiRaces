@@ -34,7 +34,10 @@ extension ResultsViewController {
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
         PlayerMetrics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
-        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: [
+            image,
+            "#WikiRaces3"
+            ], applicationActivities: nil)
         controller.popoverPresentationController?.barButtonItem = sender
         present(controller, animated: true, completion: nil)
         PlayerMetrics.log(event: .openedShare)

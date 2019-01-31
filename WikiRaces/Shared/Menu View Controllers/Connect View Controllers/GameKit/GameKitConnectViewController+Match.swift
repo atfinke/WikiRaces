@@ -7,6 +7,7 @@
 //
 
 import GameKit
+import WKRKit
 
 extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControllerDelegate {
 
@@ -35,7 +36,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                                andHide: [])
             }
         } catch {
-            self.showError(title: "Unable To Start Match",
+            showError(title: "Unable To Start Match",
                            message: "Please try again later.")
         }
     }
@@ -43,10 +44,13 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     // MARK: - GKMatchDelegate
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        guard !isPlayerHost else { return }
-        self.showMatch(isPlayerHost: false,
-                       generateFeedback: true,
-                       andHide: [])
+        if isPlayerHost {
+            WKRSeenFinalArticlesStore.addRemoteTransferData(data)
+        } else {
+            showMatch(isPlayerHost: false,
+                      generateFeedback: true,
+                      andHide: [])
+        }
     }
 
     // MARK: - GKMatchmakerViewControllerDelegate
@@ -78,13 +82,17 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         let trace = Performance.startTrace(name: "Choosing Best Host Trace")
         #endif
         match.chooseBestHostingPlayer { player in
-            if let player = player {
+            if let hostPlayer = player {
                 #if !MULTIWINDOWDEBUG
                 trace?.stop()
                 #endif
-                if player.playerID == GKLocalPlayer.local.playerID {
+                if hostPlayer.playerID == GKLocalPlayer.local.playerID {
                     self.isPlayerHost = true
                     self.sendStartMessageToPlayers()
+                } else if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
+                        try? match.send(data, to: [hostPlayer], dataMode: .reliable)
+                    })
                 }
             } else {
                 self.showError(title: "Unable To Find Best Host",
