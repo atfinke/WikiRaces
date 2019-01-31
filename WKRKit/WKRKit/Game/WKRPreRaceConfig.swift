@@ -18,9 +18,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     /// The starting page
     internal let startingPage: WKRPage
 
-    /// User defaults page for used pages
-    private static let usedPagesKey = "WKRKit-UsedPages"
-
     // MARK: Initialization
 
     /// Creates a WKRPreRaceConfig object
@@ -31,21 +28,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     private init(startingPage: WKRPage, voteInfo: WKRVoteInfo) {
         self.voteInfo = voteInfo
         self.startingPage = startingPage
-    }
-
-    // MARK: - Reusing Pages
-
-    private static func loadUsedPages() -> [String] {
-        var usedPages =  UserDefaults.standard.array(forKey: usedPagesKey) as? [String] ?? []
-        let finalArticleCount = WKRKitConstants.current.finalArticles.count
-        if abs(finalArticleCount - usedPages.count) < 100 {
-            usedPages = []
-        }
-        return usedPages
-    }
-
-    private static func saveUsedPages(_ usedPages: [String]) {
-        UserDefaults.standard.set(usedPages, forKey: usedPagesKey)
     }
 
     // MARK: - Creation
@@ -64,9 +46,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     ///
     /// - Parameter completionHandler: The handler holding the new config object
     static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        var usedPages = loadUsedPages()
-        var finalArticles = WKRKitConstants.current.finalArticles
-        finalArticles = Array(Set(finalArticles).subtracting(usedPages))
+        let finalArticles = WKRSeenFinalArticlesStore.unseenArticles()
 
         let operationQueue = OperationQueue()
 
@@ -102,8 +82,6 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
                 completionHandler(config)
-                usedPages.append(contentsOf: randomPaths)
-                saveUsedPages(usedPages)
             } else {
                 completionHandler(nil)
             }

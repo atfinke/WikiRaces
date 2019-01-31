@@ -59,11 +59,9 @@ internal class AppDelegate: WKRAppDelegate {
     }
 
     private func logBuild() {
-        guard let bundleBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
-            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-        PlayerDatabaseMetrics.shared.log(event: .build(version: bundleVersion, build: bundleBuild))
+        let appInfo = Bundle.main.appInfo
+        PlayerDatabaseMetrics.shared.log(event: .app(version: appInfo.version,
+                                                     build: appInfo.build.description))
     }
 
 }

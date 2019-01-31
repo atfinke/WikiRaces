@@ -22,6 +22,7 @@
 		1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRKitConstants.swift */; };
 		1452B3761F3652E900E81FD8 /* WKRRaceDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */; };
 		1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */; };
+		147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF6FD2202470700583D73 /* WKRSeenFinalArticlesStore.swift */; };
 		148164AF1F5C94E800AC7178 /* WKRKitRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */; };
 		148164B11F5C94F200AC7178 /* WKRKitPageFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */; };
 		148164B31F5C94FC00AC7178 /* WKRKitTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */; };
@@ -83,6 +84,7 @@
 		1452B3731F36529300E81FD8 /* WKRKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitConstants.swift; sourceTree = "<group>"; };
 		1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceDurationConstants.swift; sourceTree = "<group>"; };
 		1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageFetcher.swift; sourceTree = "<group>"; };
+		147EF6FD2202470700583D73 /* WKRSeenFinalArticlesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRSeenFinalArticlesStore.swift; sourceTree = "<group>"; };
 		148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitRaceTests.swift; sourceTree = "<group>"; };
 		148164B01F5C94F200AC7178 /* WKRKitPageFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitPageFetcherTests.swift; sourceTree = "<group>"; };
 		148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTestCase.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				1452B3771F3653AD00E81FD8 /* WKRPageFetcher.swift */,
 				140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */,
 				140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */,
+				147EF6FD2202470700583D73 /* WKRSeenFinalArticlesStore.swift */,
 			);
 			path = Pages;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */,
 				1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */,
 				142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */,
+				147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */,
 				140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */,
 				140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */,
 				141427FF21FBB84600C48788 /* WKRGameKitNetwork.swift in Sources */,

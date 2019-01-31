@@ -38,6 +38,7 @@ extension MenuViewController {
         }
 
         UIApplication.shared.isIdleTimerDisabled = true
+        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
 
         switch segueIdentifier {
         case .debugBypass:

@@ -12,7 +12,7 @@ public struct WKRVoteInfo: Codable, Equatable {
 
     // MARK: - Properties
 
-    private let pages: [WKRPage]
+    internal let pages: [WKRPage]
     private var playerVotes = [WKRPlayerProfile: WKRPage]()
 
     public var pageCount: Int {

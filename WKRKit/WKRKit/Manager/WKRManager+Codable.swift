@@ -20,6 +20,8 @@ extension WKRGameManager {
             if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
             }
+
+            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.voteInfo.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
             voteFinalPageUpdate?(raceConfig.endingPage)

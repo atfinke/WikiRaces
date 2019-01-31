@@ -53,6 +53,9 @@
 		145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
 		1473E2A0210DAD7C00726377 /* HelpViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473E29F210DAD7C00726377 /* HelpViewController+KB.swift */; };
 		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
+		147EF6F92202436600583D73 /* MPCHostContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF6F82202436600583D73 /* MPCHostContext.swift */; };
+		147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF6F82202436600583D73 /* MPCHostContext.swift */; };
+		147EF7122202D76000583D73 /* MPCHostContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF6F82202436600583D73 /* MPCHostContext.swift */; };
 		1480F6C321FB77D300081F58 /* DebugInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */; };
 		1480F6C621FB77DE00081F58 /* DebugInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */; };
 		148487F8214F0F3B0098CBFA /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487EC214F0F3A0098CBFA /* GoogleToolboxForMac.framework */; };
@@ -174,6 +177,9 @@
 		14DC66D41F9072180026C6ED /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14DC66D71F9072200026C6ED /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
 		14DC66D81F9072200026C6ED /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14DD97252202293900AAB389 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
+		14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */; };
+		14DD97292202295100AAB389 /* PlayerDatabaseMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */; };
 		14DF31A8211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */; };
 		14DF31A9211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */; };
 		14DF31AA211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */; };
@@ -356,6 +362,7 @@
 		147593CE1F609902005DFC90 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Fastfile; sourceTree = SOURCE_ROOT; };
 		147593CF1F609902005DFC90 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapfile; sourceTree = SOURCE_ROOT; };
 		147593D01F609911005DFC90 /* SnapshotHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
+		147EF6F82202436600583D73 /* MPCHostContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MPCHostContext.swift; path = "Shared/Menu View Controllers/Connect View Controllers/Multipeer Connectivity/MPCHostContext.swift"; sourceTree = SOURCE_ROOT; };
 		148487EC214F0F3A0098CBFA /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		148487ED214F0F3A0098CBFA /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
 		148487EE214F0F3A0098CBFA /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
@@ -491,6 +498,7 @@
 		1414280921FC3CA000C48788 /* Multipeer Connectivity */ = {
 			isa = PBXGroup;
 			children = (
+				147EF6F82202436600583D73 /* MPCHostContext.swift */,
 				14DFBD21210EFE8E00BD8DAF /* MPCConnectViewController */,
 				14DFBD22210EFE9900BD8DAF /* MPCHostViewController */,
 			);
@@ -1157,6 +1165,7 @@
 				14C4AB811F368A630086B77F /* CommonExtensions.swift in Sources */,
 				1414280B21FC437000C48788 /* GameKitConnectViewController+Match.swift in Sources */,
 				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
+				147EF6F92202436600583D73 /* MPCHostContext.swift in Sources */,
 				141892F61F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
 				14C6B1F61FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */,
@@ -1209,14 +1218,17 @@
 				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				14DF31B62116923C005BA432 /* MPCHostViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
+				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14DF31B421169236005BA432 /* MPCConnectViewController+UI.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
+				147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14BA538E21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */,
+				14DD97252202293900AAB389 /* ConnectViewController.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
@@ -1253,6 +1265,7 @@
 			files = (
 				14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */,
 				14C25FF41F6F028100CD7373 /* MenuViewController+Segue.swift in Sources */,
+				147EF7122202D76000583D73 /* MPCHostContext.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				14DF31AA211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				149357DB210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
@@ -1270,6 +1283,7 @@
 				14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */,
 				14BA538F21FE3D9100A8CB01 /* MenuViewController+Alerts.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
+				14DD97292202295100AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
 				14DFBD20210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */,
