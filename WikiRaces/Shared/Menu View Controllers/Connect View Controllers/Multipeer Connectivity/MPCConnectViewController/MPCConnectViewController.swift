@@ -40,7 +40,7 @@ internal class MPCConnectViewController: ConnectViewController {
 
     var advertiser: MCNearbyServiceAdvertiser?
     var activeInvite: ((Bool, MCSession) -> Void)?
-    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID)]()
+    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext?)]()
 
     var peerID: MCPeerID!
     var hostPeerID: MCPeerID?

@@ -8,6 +8,17 @@
 
 import UIKit
 
+extension Bundle {
+    var appInfo: (build: Int, version: String) {
+        guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let bundleBuild = Int(bundleBuildString),
+            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+                fatalError("No bundle info dictionary")
+        }
+        return (bundleBuild, bundleVersion)
+    }
+}
+
 extension NSNotification.Name {
     static let localPlayerQuit = NSNotification.Name(rawValue: "LocalPlayerQuit")
 }

@@ -9,6 +9,8 @@
 import MultipeerConnectivity
 import UIKit
 
+import WKRKit
+
 #if !MULTIWINDOWDEBUG
 import FirebasePerformance
 #endif
@@ -28,6 +30,13 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         DispatchQueue.main.async {
             if state == .connected && peerID == self.hostPeerID {
                 self.updateDescriptionLabel(to: "WAITING FOR HOST")
+
+                DispatchQueue.global().asyncAfter(deadline: .now() + 0.25, execute: {
+                    if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
+                        try? session.send(data, toPeers: [peerID], with: .reliable)
+                    }
+                })
+
                 #if !MULTIWINDOWDEBUG
                 self.connectingTrace?.stop()
                 self.connectingTrace = nil
@@ -71,7 +80,12 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 
-        invites.append((invitationHandler, peerID))
+        var hostContext: MPCHostContext?
+        if let data = context,
+            let object = try? JSONDecoder().decode(MPCHostContext.self, from: data) {
+            hostContext = object
+        }
+        invites.append((invitationHandler, peerID, hostContext))
         showNextInvite()
     }
 
@@ -94,6 +108,13 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
             self.inviteView.alpha = 1.0
         })
         updateDescriptionLabel(to: "INVITE RECEIVED")
+
+        guard let context = invite.context else { return }
+        if context.minPeerAppBuild > Bundle.main.appInfo.build {
+            //swiftlint:disable:next line_length
+            let message = "You received an invite to a race that requires the latest version of WikiRaces. Please download the update on the App Store."
+            showError(title: "Update Required", message: message)
+        }
     }
 
     // MARK: - User Actions

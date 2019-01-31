@@ -112,7 +112,10 @@ extension MPCHostViewController {
             let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
                 fatalError("No bundle info dictionary")
         }
-        let context = WKRMPCHostContext(appBuild: bundleBuild, appVersion: bundleVersion)
+        let context = MPCHostContext(appBuild: bundleBuild,
+                                     appVersion: bundleVersion,
+                                     name: session.myPeerID.displayName,
+                                     minPeerAppBuild: 3706)
         guard let data = try? JSONEncoder().encode(context) else {
             fatalError("Couldn't encode context")
         }

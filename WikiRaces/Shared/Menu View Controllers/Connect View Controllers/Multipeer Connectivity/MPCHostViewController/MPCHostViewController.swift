@@ -8,6 +8,8 @@
 
 import MultipeerConnectivity
 import UIKit
+
+import WKRKit
 import WKRUIKit
 
 #if !MULTIWINDOWDEBUG
@@ -24,11 +26,6 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         case joining
         case joined
         case declined
-    }
-
-    struct WKRMPCHostContext: Codable {
-        let appBuild: Int
-        let appVersion: String
     }
 
     // MARK: - Properties
@@ -240,11 +237,14 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         }
     }
 
-    // MARK: - Unused MCSessionDelegate
-
     func session(_ session: MCSession,
                  didReceive data: Data,
-                 fromPeer peerID: MCPeerID) {}
+                 fromPeer peerID: MCPeerID) {
+        WKRSeenFinalArticlesStore.addRemoteTransferData(data)
+    }
+
+    // MARK: - Unused MCSessionDelegate
+
     func session(_ session: MCSession,
                  didReceive stream: InputStream,
                  withName streamName: String,
