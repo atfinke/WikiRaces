@@ -34,6 +34,7 @@ extension ResultsViewController {
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
         PlayerMetrics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
+
         let controller = UIActivityViewController(activityItems: [
             image,
             "#WikiRaces3"

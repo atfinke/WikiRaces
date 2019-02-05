@@ -22,4 +22,12 @@ internal struct DurationFormatter {
             return duration.description + suffix
         }
     }
+
+    static func resultsString(for duration: Int?) -> String? {
+        guard let duration = duration else { return nil }
+        let minutes = duration / 60
+        let seconds = duration % 60
+        let secondsString = (seconds < 10 ? "0" : "") + seconds.description
+        return minutes.description + ":" + secondsString
+    }
 }

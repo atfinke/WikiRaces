@@ -93,7 +93,10 @@ internal class ViewController: UIViewController {
     // MARK: - ResultsViewController Testing
 
     var players = [WKRPlayer]()
- let res = ResultRenderer()
+    let res = ResultRenderer()
+
+    var rendered = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -104,6 +107,8 @@ internal class ViewController: UIViewController {
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
 
         let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
+        //let names = ["Andrew", "Carol", "Tom", "Lisa"]
+        
         for var index in 0..<names.count {
             let profile = WKRPlayerProfile(name: names[index], playerID: names[index])
             let player = WKRPlayer(profile: profile, isHost: false)
@@ -118,13 +123,6 @@ internal class ViewController: UIViewController {
         //
 
         func random() {
-
-            //            players[1].state = .forcedEnd
-            //
-            //            controller.resultsInfo = WKRResultsInfo(players: self.players,
-            //                                                    racePoints: [:],
-            //                                                    sessionPoints: [:])
-
             for player in players where player.state == .racing {
                 WKRPageFetcher.fetchRandom { (page) in
                     guard let page = page else { return }
@@ -132,24 +130,26 @@ internal class ViewController: UIViewController {
                     player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
                     DispatchQueue.main.async {
 
-                        if arc4random() % 20 == 0 {
-                            player.state = .foundPage
-                        } else if arc4random() % 25 == 0 {
-                            player.state = .forfeited
-                        } else if arc4random() % 30 == 0 {
-                            player.state = .quit
+                        if player.state == .racing {
+                            if arc4random() % 20 == 0 {
+                                player.state = .foundPage
+                            } else if arc4random() % 25 == 0 {
+                                player.state = .forcedEnd
+                            } else if arc4random() % 30 == 0 {
+                                player.state = .quit
+                            } else if arc4random() % 30 == 0 {
+                                player.state = .forfeited
+                            }
+
                         }
 
                         //                        controller.player = self.players[0]
                         controller.resultsInfo = WKRResultsInfo(players: self.players,
                                                                 racePoints: [:],
                                                                 sessionPoints: [:])
-                        print("Updating------")
+                        
                         controller.showReadyUpButton(true)
 
-                        self.res.render(with: controller.resultsInfo!, for: player, on: controller.contentView, completion: { _ in
-
-                        })
                     }
 
                 }
@@ -162,6 +162,13 @@ internal class ViewController: UIViewController {
                     random()
                 } else {
                     random()
+                }
+
+                if self.players.filter ({$0.state == .racing }).isEmpty && !self.rendered {
+                    self.rendered = true
+                    self.res.render(with: controller.resultsInfo!, for: self.players[0], on: controller.contentView, completion: { _ in
+
+                    })
                 }
             }
         }
@@ -178,11 +185,6 @@ internal class ViewController: UIViewController {
             //            playerTwo.state = .foundPage
             //
             //            controller.resultsInfo = WKRResultsInfo(players: [playerOne, playerTwo], racePoints: [:], sessionPoints: [:])
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                }
-            }
         }
 
     }

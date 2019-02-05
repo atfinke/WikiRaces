@@ -109,6 +109,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         })
         updateDescriptionLabel(to: "INVITE RECEIVED")
 
+        // Previous versions didn't send a host context object
         guard let context = invite.context else { return }
         if context.minPeerAppBuild > Bundle.main.appInfo.build {
             //swiftlint:disable:next line_length

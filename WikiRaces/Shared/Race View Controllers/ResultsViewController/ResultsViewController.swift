@@ -117,34 +117,11 @@ internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Game Updates
 
-    private func attemptResultsRender() {
-        guard resultImage == nil,
-            isViewLoaded,
-            view.window != nil,
-            state == .hostResults,
-            let results = resultsInfo,
-            let player = localPlayer else {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.attemptResultsRender()
-            }
-            return
-        }
-        resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
-            self?.resultImage = image
-        }
-    }
-
     private func updatedState(oldState: WKRGameState) {
         if state == .results || state == .hostResults {
             title = "RESULTS"
             tableView.isUserInteractionEnabled = true
             updateTableView()
-
-            attemptResultsRender()
-
-            if state == .hostResults && oldState != .hostResults {
-                shareResultsBarButtonItem?.isEnabled = true
-            }
         } else {
             tableView.isUserInteractionEnabled = false
 
@@ -202,6 +179,12 @@ internal class ResultsViewController: CenteredTableViewController {
                 self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
             }, completion: nil)
+
+            guard let player = localPlayer, let results = self.resultsInfo else { return }
+            resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
+                self?.resultImage = image
+                self?.shareResultsBarButtonItem?.isEnabled = true
+            }
         } else {
             descriptionLabel.text = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
         }
@@ -287,7 +270,7 @@ internal class ResultsViewController: CenteredTableViewController {
     func showReadyUpButton(_ showReady: Bool) {
         addPlayersBarButtonItem?.isEnabled = showReady
         if !showReady {
-            shareResultsBarButtonItem?.isEnabled = false
+            shareResultsBarButtonItem?.isEnabled = showReady
         }
 
         isOverlayButtonHidden = !showReady

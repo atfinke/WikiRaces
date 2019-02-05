@@ -173,6 +173,12 @@ public struct WKRKitConstants {
                 return
         }
 
+        if !FileManager.default.fileExists(atPath: documentsDirectory.path) {
+            try? FileManager.default.createDirectory(at: documentsDirectory,
+                                                withIntermediateDirectories: false,
+                                                attributes: nil)
+        }
+
         let documentsArticlesURL = documentsDirectory.appendingPathComponent("WKRArticlesData.plist")
         let documentsConstantsURL = documentsDirectory.appendingPathComponent("WKRKitConstants.plist")
         let documentsGetLinksScriptURL = documentsDirectory.appendingPathComponent("WKRGetLinks.js")
