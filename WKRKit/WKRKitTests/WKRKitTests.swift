@@ -101,16 +101,28 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertNil(points[playerThree.profile])
 
         // same page
-        XCTAssertTrue(race.attributesFor(ending).foundPage)
+        XCTAssertTrue(race.attributes(for: ending).foundPage)
 
         // dif title, same url
-        XCTAssertTrue(race.attributesFor(WKRPage(title: "DifTitle", url: ending.url)).foundPage)
+        XCTAssertTrue(race.attributes(for: WKRPage(title: "DifTitle", url: ending.url)).foundPage)
 
         // same title, dif url
-        XCTAssertTrue(race.attributesFor(WKRPage(title: "Apple", url: starting.url)).foundPage)
+        XCTAssertTrue(race.attributes(for: WKRPage(title: "Apple", url: starting.url)).foundPage)
+
+//        https://en.m.wikipedia.org/wiki/Forward_pass#American_and_Canadian_football
+
+        if let url = URL(string: ending.url.absoluteString + "#section") {
+            // same title, url w/ section
+            XCTAssertTrue(race.attributes(for: WKRPage(title: "Apple", url: url)).foundPage)
+
+            // dif title, url w/ section
+            XCTAssertTrue(race.attributes(for: WKRPage(title: "DifTitle", url: url)).foundPage)
+        } else {
+            XCTFail("url nil")
+        }
 
         // dif title, dif url
-        XCTAssertFalse(race.attributesFor(WKRPage(title: "Dif", url: URL(string: "http://a.com")!)).foundPage)
+        XCTAssertFalse(race.attributes(for: WKRPage(title: "Dif", url: URL(string: "http://a.com")!)).foundPage)
     }
 
     // MARK: - WKRInt
@@ -209,7 +221,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.updateConstants()
 
         let version = WKRKitConstants.current.version
-        XCTAssertEqual(WKRKitConstants.current.version, 11)
+        XCTAssertEqual(WKRKitConstants.current.version, 14)
 
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstants()
@@ -243,9 +255,9 @@ class WKRKitTests: WKRKitTestCase {
         var page = WKRPage(title: title, url: url)
         XCTAssertEqual(page.title, title)
 
-        title = "phone"
-        page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, title.capitalized)
+//        title = "phone"
+//        page = WKRPage(title: title, url: url)
+//        XCTAssertEqual(page.title, title.capitalized)
 
         title = "iPhone - Wikipedia"
         page = WKRPage(title: title, url: url)
@@ -257,13 +269,13 @@ class WKRKitTests: WKRKitTestCase {
         // Testing removing 10 characters
         WKRKitConstants.updateConstantsForTestingCharacterClipping()
 
-        title = "phone"
-        page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, title.capitalized)
+//        title = "phone"
+//        page = WKRPage(title: title, url: url)
+//        XCTAssertEqual(page.title, title.capitalized)
 
         title = "phone- Extra Characters"
         page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, "Phone- Extra ")
+        XCTAssertEqual(page.title, "phone- Extra ")
 
         title = "iPhone - Extra Characters"
         page = WKRPage(title: title, url: url)

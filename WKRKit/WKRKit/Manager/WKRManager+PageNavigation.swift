@@ -31,7 +31,7 @@ extension WKRGameManager {
             var foundPage = false
 
             let lastPageHadLink = self?.localPlayer.raceHistory?.entries.last?.linkHere ?? false
-            if let attributes = self?.game.activeRace?.attributesFor(page) {
+            if let attributes = self?.game.activeRace?.attributes(for: page) {
                 if attributes.foundPage {
                     foundPage = true
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
