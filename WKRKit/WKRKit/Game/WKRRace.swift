@@ -51,10 +51,20 @@ internal struct WKRRace {
     ///
     /// - Parameter page: The page to check againts
     /// - Returns: Tuple with found page and link on page values.
-    internal func attributesFor(_ page: WKRPage) -> (foundPage: Bool, linkOnPage: Bool) {
+    internal func attributes(for page: WKRPage) -> (foundPage: Bool, linkOnPage: Bool) {
+        var adjustedURL = page.url
+
+        // Adjust for links to sections
+        if adjustedURL.absoluteString.contains("#") {
+            var components = adjustedURL.absoluteString.components(separatedBy: "#")
+            if components.count == 2, let newURL = URL(string: components[0]) {
+                adjustedURL = newURL
+            }
+        }
+
         if page == finalPage {
             return (true, false)
-        } else if page.url == finalPage.url {
+        } else if adjustedURL == finalPage.url {
             return (true, false)
         } else if page.title == finalPage.title {
             return (true, false)
