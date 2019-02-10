@@ -175,7 +175,14 @@ internal class ResultsTableViewCell: UITableViewCell {
     }
 
     func update(for player: WKRPlayer, animated: Bool) {
-        guard let history = player.raceHistory, let entry = history.entries.last else {
+        guard let history = player.raceHistory else {
+            playerLabel.text = ""
+            subtitleLabel.text = ""
+            detailLabel.text = ""
+            return
+        }
+
+        guard let entry = history.entries.last else {
             subtitleLabel.text = "Unknown Page"
             return
         }
