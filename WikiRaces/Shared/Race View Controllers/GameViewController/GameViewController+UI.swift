@@ -96,6 +96,12 @@ extension GameViewController {
                 self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
+
+            let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
+                PlayerMetrics.log(event: .userAction("quitAlertController:reload"))
+                self.webView.reload()
+            }
+            alertController.addAction(reloadAction)
         }
 
         let quitAction = UIAlertAction(title: "Quit Race", style: .destructive) {  [weak self] _ in
