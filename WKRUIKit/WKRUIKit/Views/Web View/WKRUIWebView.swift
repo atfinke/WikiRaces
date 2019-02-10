@@ -128,7 +128,7 @@ public class WKRUIWebView: WKWebView {
     private static func raceConfig() -> WKWebViewConfiguration? {
         let config = WKWebViewConfiguration()
         config.selectionGranularity = .character
-        config.suppressesIncrementalRendering = true
+        config.suppressesIncrementalRendering = false
         config.allowsAirPlayForMediaPlayback = false
         config.allowsPictureInPictureMediaPlayback = false
         config.dataDetectorTypes = []

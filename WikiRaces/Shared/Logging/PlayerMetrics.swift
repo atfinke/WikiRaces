@@ -73,15 +73,24 @@ internal struct PlayerMetrics {
     }
 
     public static func log(event: CrashLogEvent) {
-        #if !MULTIWINDOWDEBUG
-            switch event {
-            case .userAction(let action):
-                CLSNSLogv("UserAction: %@", getVaList([action]))
-            case .viewState(let view):
-                CLSNSLogv("ViewState: %@", getVaList([view]))
-            case .gameState(let description):
-                CLSNSLogv("GameState: %@", getVaList([description]))
-            }
+        #if MULTIWINDOWDEBUG
+        switch event {
+        case .userAction(let action):
+            print("UserAction: ", action)
+        case .viewState(let view):
+            print("ViewState: ", view)
+        case .gameState(let description):
+            print("GameState: ", description)
+        }
+        #else
+        switch event {
+        case .userAction(let action):
+            CLSNSLogv("UserAction: %@", getVaList([action]))
+        case .viewState(let view):
+            CLSNSLogv("ViewState: %@", getVaList([view]))
+        case .gameState(let description):
+            CLSNSLogv("GameState: %@", getVaList([description]))
+}
         #endif
     }
 

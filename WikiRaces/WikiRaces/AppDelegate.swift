@@ -20,14 +20,12 @@ internal class AppDelegate: WKRAppDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        #if !DEBUG
         guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
             let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
                 fatalError("Failed to get API keys")
         }
 
         Crashlytics.start(withAPIKey: key)
-        #endif
 
         FirebaseApp.configure()
 

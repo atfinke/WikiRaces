@@ -64,6 +64,10 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
                         rowsToReload.append(IndexPath(row: index))
                     }
                 } else {
+                    /*
+                     //swiftlint:disable:next line_length
+                     Normally, entries.count should always equal the amount of table view cells. However, there appears to be an issue where the entries array has less objects than there are cells displayed. This checks if the index (which should be the index of a new cell), is actually already allocated. If so, force reload the whole section to avoid crashing later on.
+                     */
                     if index < tableView.numberOfRows(inSection: 0) {
                         entries = player.raceHistory?.entries ?? []
                         tableView.reloadSections(IndexSet(integer: 0), with: .fade)

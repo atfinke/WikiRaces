@@ -111,7 +111,7 @@ internal class MPCHostViewController: StateLogTableViewController, MCSessionDele
         guard let session = session else { fatalError("Session is nil") }
         do {
             // Participants move to the game view and wait for "real" data when they receive first data chunk
-            let data = Data(bytes: [1])
+            let data = Data([1])
             let peers = session.connectedPeers
             try session.send(data, toPeers: peers, with: .unreliable)
             try session.send(data, toPeers: peers, with: .reliable)

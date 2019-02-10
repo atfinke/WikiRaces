@@ -26,7 +26,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func sendStartMessageToPlayers() {
-        let data =  Data(bytes: [1])
+        let data =  Data([1])
         do {
             try match?.sendData(toAllPlayers: data, with: .unreliable)
             try match?.sendData(toAllPlayers: data, with: .reliable)

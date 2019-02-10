@@ -52,7 +52,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
         // Get a few more than neccessary random paths in case some final articles are no longer valid
         var randomPaths = [String]()
-        let numberOfPagesToFetch = WKRKitConstants.current.votingArticlesCount + 2
+        let numberOfPagesToFetch = WKRKitConstants.current.votingArticlesCount + 1
 
         for index in 0..<numberOfPagesToFetch {
             while randomPaths.count != index + 1 {

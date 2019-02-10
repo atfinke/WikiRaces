@@ -19,12 +19,13 @@ public struct WKRSeenFinalArticlesStore {
     // MARK: - Properties
 
     private static let defaults = UserDefaults.standard
+    private static let localPlayersSeenFinalArticlesKey = "WKRKit-LocalPlayerSeenFinalArticles"
     private static var localPlayersSeenFinalArticles: [String] {
         get {
-            return defaults.stringArray(forKey: "WKRKit-LocalPlayerSeenFinalArticles") ?? []
+            return defaults.stringArray(forKey: localPlayersSeenFinalArticlesKey) ?? []
         }
         set {
-            defaults.setValue(newValue, forKey: "WKRKit-LocalPlayerSeenFinalArticles")
+            defaults.setValue(newValue, forKey: localPlayersSeenFinalArticlesKey)
         }
     }
     private static var uniqueRemotePlayersSeenFinalArticles = Set<String>()

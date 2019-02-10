@@ -48,6 +48,10 @@
 		144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1028202FC79B003DB51A /* HelpViewController.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
+		14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
+		14584BC3220B6BE700D63428 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
+		14584BC8220B6BEE00D63428 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
 		145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
 		145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
@@ -207,6 +211,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		14584BC4220B6BE700D63428 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8071F362B3D000A5D96;
+			remoteInfo = WKRKit;
+		};
+		14584BC9220B6BEE00D63428 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
+			remoteInfo = WKRUIKit;
+		};
 		149FF8931F362BF1000A5D96 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
@@ -317,6 +335,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				14584BC8220B6BEE00D63428 /* WKRUIKit.framework in Embed Frameworks */,
+				14584BC3220B6BE700D63428 /* WKRKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +504,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */,
+				14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,6 +933,8 @@
 			dependencies = (
 				14DCC5671FF2E359003AEC95 /* PBXTargetDependency */,
 				14DCC5651FF2E355003AEC95 /* PBXTargetDependency */,
+				14584BC5220B6BE700D63428 /* PBXTargetDependency */,
+				14584BCA220B6BEE00D63428 /* PBXTargetDependency */,
 			);
 			name = "WikiRaces (UI Catalog)";
 			productName = "WikiRaces (UI Catalog)";
@@ -1325,6 +1349,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		14584BC5220B6BE700D63428 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRKit;
+			targetProxy = 14584BC4220B6BE700D63428 /* PBXContainerItemProxy */;
+		};
+		14584BCA220B6BEE00D63428 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = WKRUIKit;
+			targetProxy = 14584BC9220B6BEE00D63428 /* PBXContainerItemProxy */;
+		};
 		149FF8941F362BF1000A5D96 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
@@ -1447,7 +1481,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1648,6 +1682,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

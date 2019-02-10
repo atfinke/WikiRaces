@@ -106,9 +106,9 @@ internal class ViewController: UIViewController {
 
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
 
-        let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
-        //let names = ["Andrew", "Carol", "Tom", "Lisa"]
-        
+        //let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
+        let names = ["Andrew", "Carol", "Tom", "Lisa"]
+
         for var index in 0..<names.count {
             let profile = WKRPlayerProfile(name: names[index], playerID: names[index])
             let player = WKRPlayer(profile: profile, isHost: false)
@@ -131,15 +131,15 @@ internal class ViewController: UIViewController {
                     DispatchQueue.main.async {
 
                         if player.state == .racing {
-                            if arc4random() % 20 == 0 {
-                                player.state = .foundPage
-                            } else if arc4random() % 25 == 0 {
-                                player.state = .forcedEnd
-                            } else if arc4random() % 30 == 0 {
-                                player.state = .quit
-                            } else if arc4random() % 30 == 0 {
-                                player.state = .forfeited
-                            }
+//                            if arc4random() % 20 == 0 {
+//                                player.state = .foundPage
+//                            } else if arc4random() % 25 == 0 {
+//                                player.state = .forcedEnd
+//                            } else if arc4random() % 30 == 0 {
+//                                player.state = .quit
+//                            } else if arc4random() % 30 == 0 {
+//                                player.state = .forfeited
+//                            }
 
                         }
 
@@ -147,7 +147,7 @@ internal class ViewController: UIViewController {
                         controller.resultsInfo = WKRResultsInfo(players: self.players,
                                                                 racePoints: [:],
                                                                 sessionPoints: [:])
-                        
+
                         controller.showReadyUpButton(true)
 
                     }
@@ -166,9 +166,10 @@ internal class ViewController: UIViewController {
 
                 if self.players.filter ({$0.state == .racing }).isEmpty && !self.rendered {
                     self.rendered = true
-                    self.res.render(with: controller.resultsInfo!, for: self.players[0], on: controller.contentView, completion: { _ in
-
-                    })
+                    for player in self.players {
+                        ResultRenderer().render(with: controller.resultsInfo!, for: player, on: controller.contentView, completion: { _ in
+                        })
+                    }
                 }
             }
         }

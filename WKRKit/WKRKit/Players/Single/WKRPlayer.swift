@@ -47,8 +47,8 @@ public class WKRPlayer: Codable, Hashable {
 
     // MARK: - Hashable
 
-    public var hashValue: Int {
-        return profile.playerID.hashValue
+    public func hash(into hasher: inout Hasher) {
+        return profile.playerID.hash(into: &hasher)
     }
 
     //swiftlint:disable:next operator_whitespace
