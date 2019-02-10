@@ -88,7 +88,7 @@ extension WKRGameManager {
         self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
 
         if self.peerNetwork is WKRSoloNetwork {
-            self.alertView.enqueue(text: "No stats in solo races", duration: 5)
+            self.alertView.enqueue(text: "No stats in solo races", duration: 5, isRaceSpecific: false)
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsStandings) {

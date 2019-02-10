@@ -125,8 +125,8 @@ public class WKRGameManager {
         return peerNetwork.hostNetworkInterface()
     }
 
-    public func enqueue(message: String, duration: Double = 5.0) {
-        alertView.enqueue(text: message, duration: duration)
+    public func enqueue(message: String, duration: Double = 5.0, isRaceSpecific: Bool) {
+        alertView.enqueue(text: message, duration: duration, isRaceSpecific: isRaceSpecific)
     }
 
     // MARK: - Actions

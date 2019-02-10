@@ -84,7 +84,7 @@ extension GameViewController {
 
     private func prepare(helpViewController: HelpViewController) {
         helpViewController.linkTapped = { [weak self] in
-            self?.gameManager.enqueue(message: "Links disabled in help", duration: 2.0)
+            self?.gameManager.enqueue(message: "Links disabled in help", duration: 2.0, isRaceSpecific: true)
         }
 
         helpViewController.url = gameManager.finalPageURL

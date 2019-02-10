@@ -12,10 +12,10 @@ extension WKRGameManager {
 
     func newPageNavigation() -> WKRPageNavigation {
         return WKRPageNavigation(pageURLBlocked: { [weak self] url in
-            self?.enqueue(message: "Link not allowed", duration: 1.0)
+            self?.enqueue(message: "Link not allowed", duration: 1.0, isRaceSpecific: true)
             self?.logEvent("pageBlocked", ["PageURL": self?.truncated(url: url) as Any])
         }, pageLoadingError: { [weak self] in
-            self?.enqueue(message: "Error loading page", duration: 5.0)
+            self?.enqueue(message: "Error loading page", duration: 5.0, isRaceSpecific: true)
             self?.webView.completedPageLoad()
         }, pageStartedLoading: { [weak self] in
             self?.webView.startedPageLoad()

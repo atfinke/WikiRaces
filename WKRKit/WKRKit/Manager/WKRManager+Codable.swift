@@ -51,7 +51,11 @@ extension WKRGameManager {
         if let gameState = object.typeOfEnum(WKRGameState.self) {
             transitionGameState(to: gameState)
         } else if let message = object.typeOfEnum(WKRPlayerMessage.self), player != localPlayer.profile {
-            enqueue(message: message.text(for: player), duration: 5.0)
+            var isRaceSpecific = true
+            if message == .quit {
+                isRaceSpecific = false
+            }
+            enqueue(message: message.text(for: player), duration: 5.0, isRaceSpecific: isRaceSpecific)
         } else if let error = object.typeOfEnum(WKRFatalError.self), !isFailing {
             isFailing = true
             localPlayer.state = .quit
@@ -71,7 +75,7 @@ extension WKRGameManager {
         case .bonusPoints:
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Match Bonus Now \(int.value) " + string
-            enqueue(message: message)
+            enqueue(message: message, isRaceSpecific: true)
         case .showReady:
             resultsShowReady?(int.value == 1)
         }
@@ -80,6 +84,7 @@ extension WKRGameManager {
     // MARK: - Game Updates
 
     private func receivedFinalResults(_ resultsInfo: WKRResultsInfo) {
+        alertView.clearRaceSpecificMessages()
         game.finishedRace()
 
         if gameState != .hostResults {

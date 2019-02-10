@@ -15,6 +15,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     private struct WKRAlertMessage: Equatable {
         let text: String
         let duration: Double
+        let isRaceSpecific: Bool
     }
 
     // MARK: - Properties
@@ -71,8 +72,8 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Enqueuing Messages
 
-    public func enqueue(text: String, duration: Double = WKRUIKitConstants.alertDefaultDuration) {
-        let message = WKRAlertMessage(text: text, duration: duration)
+    public func enqueue(text: String, duration: Double = WKRUIKitConstants.alertDefaultDuration, isRaceSpecific: Bool) {
+        let message = WKRAlertMessage(text: text, duration: duration, isRaceSpecific: isRaceSpecific)
 
         // Make sure message doesn't equal most recent in queue.
         // If queue empty, make sure message isn't the same as the one being displayed.
@@ -92,6 +93,10 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
     public func forceDismiss() {
         queue = []
         self.dismiss()
+    }
+
+    public func clearRaceSpecificMessages() {
+        queue = queue.filter({ !$0.isRaceSpecific })
     }
 
     // MARK: - State
