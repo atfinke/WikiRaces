@@ -56,6 +56,18 @@ extension WKRGameManager {
                 self?.transitionGameState(to: .results)
             }
 
+            let stuckTime = 30.0
+            let entryCount = localPlayer.raceHistory?.entries.count ?? 0
+            Timer.scheduledTimer(withTimeInterval: stuckTime, repeats: false, block: { [weak self] _ in
+                guard let player = self?.localPlayer,
+                    player.state == .racing,
+                    let history = player.raceHistory,
+                    history.entries.count == entryCount,
+                    history.timeSinceLastPageOpenTime >= Int(stuckTime - 1)
+                else { return }
+                self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.stuck))
+            })
+
             self?.peerNetwork.send(object: WKRCodable(localPlayer))
             self?.logEvent("pageView", ["Page": page.title as Any])
         })

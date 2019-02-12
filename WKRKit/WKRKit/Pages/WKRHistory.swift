@@ -15,6 +15,11 @@ public struct WKRHistory: Codable, Equatable {
 
     /// The time the player opened the last page
     private var lastPageOpenTime: Date
+
+    var timeSinceLastPageOpenTime: Int {
+        return Int(-lastPageOpenTime.timeIntervalSinceNow)
+    }
+
     /// The history entries
     public private(set) var entries = [WKRHistoryEntry]()
     /// The total time the player has been racing (not including page load times)
@@ -47,7 +52,7 @@ public struct WKRHistory: Codable, Equatable {
 
     mutating func finishedViewingLastPage() {
         guard var entry = entries.last else { fatalError("Entries is empty") }
-        entry.duration = Int(-lastPageOpenTime.timeIntervalSinceNow)
+        entry.duration = timeSinceLastPageOpenTime
         entries[entries.count - 1] = entry
     }
 
