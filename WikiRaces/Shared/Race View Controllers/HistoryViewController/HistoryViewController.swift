@@ -12,92 +12,20 @@ import WKRUIKit
 
 import SafariServices
 
-internal class HistoryViewController: StateLogTableViewController, SFSafariViewControllerDelegate {
+internal class HistoryViewController: UITableViewController, SFSafariViewControllerDelegate {
 
     // MARK: - Properties
 
+    private var isUserScrolling = false
+    private var isTableViewAnimating = false
+
+    private var deferredUpdate = false
+
     private var entries = [WKRHistoryEntry]()
-    private var currentPlayerState = WKRPlayerState.connecting
 
     var player: WKRPlayer? {
         didSet {
-            guard let player = player, let history = player.raceHistory else {
-                entries = []
-                currentPlayerState = .connecting
-                tableView.reloadData()
-                return
-            }
-
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: START"))
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: PREV ENTRY COUNT \(entries.count)"))
-
-            title = player.name
-
-            guard player == oldValue else {
-                currentPlayerState = player.state
-                entries = player.raceHistory?.entries ?? []
-                tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-                PlayerMetrics.log(event: .gameState("HVC DEBUG: RETURN EARLY"))
-                return
-            }
-
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW ENTRY COUNT \(entries.count)"))
-
-            var rowsToReload = [IndexPath]()
-            var rowsToInsert = [IndexPath]()
-
-            if player.state != currentPlayerState {
-                let log = "HVC DEBUG: NEW PLAYER STATE \(player.state.text), OLD: \(currentPlayerState.text)"
-                PlayerMetrics.log(event: .gameState(log))
-
-                currentPlayerState = player.state
-                rowsToReload.append(IndexPath(row: history.entries.count - 1))
-            }
-
-            for (index, entry) in history.entries.enumerated() {
-                PlayerMetrics.log(event: .gameState("HVC DEBUG: CHECKING \(index)"))
-                if index < entries.count {
-                    PlayerMetrics.log(event: .gameState("HVC DEBUG: EXISTING"))
-                    if entry != entries[index] {
-                        PlayerMetrics.log(event: .gameState("HVC DEBUG: NEEDS UPDATE"))
-                        entries[index] = entry
-                        rowsToReload.append(IndexPath(row: index))
-                    }
-                } else {
-                    /*
-                     //swiftlint:disable:next line_length
-                     Normally, entries.count should always equal the amount of table view cells. However, there appears to be an issue where the entries array has less objects than there are cells displayed. This checks if the index (which should be the index of a new cell), is actually already allocated. If so, force reload the whole section to avoid crashing later on.
-                     */
-                    if index < tableView.numberOfRows(inSection: 0) {
-                        entries = player.raceHistory?.entries ?? []
-                        tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-                        PlayerMetrics.log(event: .gameState("HVC DEBUG: ABORT - UNEXPECTED CELL"))
-                        PlayerMetrics.log(event: .githubIssue41Hit)
-                        return
-                    }
-
-                    PlayerMetrics.log(event: .gameState("HVC DEBUG: NEW"))
-                    entries.insert(entry, at: index)
-                    rowsToInsert.append(IndexPath(row: index))
-                }
-            }
-
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: PRE ADJUST RELOADS \(rowsToReload)"))
-
-            let adjustedRowsToReload = rowsToReload.filter { indexPath -> Bool in
-                return !rowsToInsert.contains(indexPath)
-            }
-
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: POST ADJUST RELOADS \(adjustedRowsToReload)"))
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: INSERTS \(rowsToInsert)"))
-
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: ENTRIES \(entries.count)"))
-            PlayerMetrics.log(event: .gameState("HVC DEBUG: ROWS \(tableView.numberOfRows(inSection: 0))"))
-
-            tableView.performBatchUpdates({
-                tableView.reloadRows(at: adjustedRowsToReload, with: .fade)
-                tableView.insertRows(at: rowsToInsert, with: .fade)
-            }, completion: nil)
+            updateEntries()
         }
     }
 
@@ -122,6 +50,67 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
+    // MARK: - UIScrollViewDelegate
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isUserScrolling = true
+    }
+
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isUserScrolling = false
+        if deferredUpdate {
+            updateEntries()
+        }
+    }
+
+    // MARK: - Logic
+
+    private func updateEntries() {
+        guard let player = player, let history = player.raceHistory else {
+            entries = []
+            tableView.reloadData()
+            title = nil
+            return
+        }
+        title = player.name
+
+        if view.window == nil {
+            self.entries = history.entries
+            tableView.reloadData()
+            return
+        } else if isUserScrolling || isTableViewAnimating {
+            deferredUpdate = true
+            return
+        }
+        isTableViewAnimating = true
+        deferredUpdate = false
+
+        var rowsToReload = [IndexPath]()
+        var rowsToInsert = [IndexPath]()
+
+        if !entries.isEmpty {
+            rowsToReload.append(IndexPath(row: entries.count - 1))
+        }
+
+        let newEntryCount = history.entries.count - entries.count
+        let startIndex = entries.count
+        let endIndex = startIndex + newEntryCount
+        for index in startIndex..<endIndex {
+            rowsToInsert.append(IndexPath(row: index))
+        }
+
+        self.entries = history.entries
+        tableView.performBatchUpdates({
+            tableView.reloadRows(at: rowsToReload, with: .fade)
+            tableView.insertRows(at: rowsToInsert, with: .fade)
+        }, completion: { _ in
+            self.isTableViewAnimating = false
+            if self.deferredUpdate {
+                self.updateEntries()
+            }
+        })
+    }
+
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,6 +123,8 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
             fatalError("Unable to create cell")
         }
 
+        let playerState = player?.state ?? .connecting
+
         let entry = entries[indexPath.row]
         cell.pageLabel.text = entry.page.title ?? "Unknown Page"
         cell.isLinkHere = entry.linkHere
@@ -142,10 +133,11 @@ internal class HistoryViewController: StateLogTableViewController, SFSafariViewC
         if let duration = DurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
             cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        } else if currentPlayerState == .racing {
+        } else if playerState == .racing {
+            cell.detailLabel.text = ""
             cell.isShowingActivityIndicatorView = true
         } else {
-            cell.detailLabel.text = currentPlayerState.text
+            cell.detailLabel.text = playerState.text
             cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         }
 
