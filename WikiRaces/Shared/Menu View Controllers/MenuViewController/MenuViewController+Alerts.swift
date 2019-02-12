@@ -42,7 +42,6 @@ extension MenuViewController {
         alertController.addAction(settingsAction)
 
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
         return true
     }
 
@@ -53,7 +52,7 @@ extension MenuViewController {
         UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
 
         //swiftlint:disable:next line_length
-        let message = "There was an unexpected issue starting a race with your player name. This can often occur your name has too many emojis or too many letters. Please set a new custom player name before racing."
+        let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
         let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 
         let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
@@ -68,7 +67,6 @@ extension MenuViewController {
         alertController.addAction(settingsAction)
 
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     /// Changes title label to build info
@@ -116,8 +114,6 @@ extension MenuViewController {
         alertController.addCancelAction(title: "Dismiss")
 
         present(alertController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     private func showDebugBuildInfo() {
@@ -150,8 +146,6 @@ extension MenuViewController {
 
         let navController = UINavigationController(rootViewController: debugInfoController)
         present(navController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: navController, on: self)
     }
 
     private func showDebugDefaultsInfo() {
@@ -166,7 +160,5 @@ extension MenuViewController {
 
         let navController = UINavigationController(rootViewController: debugInfoController)
         present(navController, animated: true, completion: nil)
-
-        PlayerMetrics.log(presentingOf: navController, on: self)
     }
 }

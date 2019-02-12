@@ -101,7 +101,6 @@ internal class VotingViewController: CenteredTableViewController {
             return
         }
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     // MARK: - Helpers

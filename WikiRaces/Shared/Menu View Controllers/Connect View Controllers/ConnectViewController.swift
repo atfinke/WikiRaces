@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class ConnectViewController: StateLogViewController {
+class ConnectViewController: UIViewController {
 
     // MARK: - Interface Elements
 
@@ -106,7 +106,6 @@ class ConnectViewController: StateLogViewController {
         }
 
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     /// Cancels the join/create a race action and sends player back to main menu

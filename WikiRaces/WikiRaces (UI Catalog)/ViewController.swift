@@ -100,6 +100,8 @@ internal class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = GKSplashViewController()
+      //  return
         let nav = viewController() as! UINavigationController
 
         let controller = nav.rootViewController as! ResultsViewController
@@ -126,20 +128,21 @@ internal class ViewController: UIViewController {
             for player in players where player.state == .racing {
                 WKRPageFetcher.fetchRandom { (page) in
                     guard let page = page else { return }
-                    player.raceHistory?.finishedViewingLastPage()
-                    player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
                     DispatchQueue.main.async {
 
                         if player.state == .racing {
-//                            if arc4random() % 20 == 0 {
-//                                player.state = .foundPage
-//                            } else if arc4random() % 25 == 0 {
-//                                player.state = .forcedEnd
-//                            } else if arc4random() % 30 == 0 {
-//                                player.state = .quit
-//                            } else if arc4random() % 30 == 0 {
-//                                player.state = .forfeited
-//                            }
+                            if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 2 {
+                                player.state = .foundPage
+                            } else if arc4random() % 25 == 0 {
+                                player.state = .forcedEnd
+                            } else if arc4random() % 30 == 0 {
+                                player.state = .quit
+                            } else if arc4random() % 30 == 0 {
+                                player.state = .forfeited
+                            } else {
+                                player.raceHistory?.finishedViewingLastPage()
+                                player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
+                            }
 
                         }
 

@@ -34,11 +34,6 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             controller.viewState = .leaderboards
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
-            PlayerMetrics.log(presentingOf: controller, on: self)
-        }
-
-        if let leaderboard = sender.stat?.leaderboard {
-            PlayerMetrics.log(event: .leaderboard, attributes: ["Leaderboard": leaderboard as Any])
         }
     }
 
@@ -55,7 +50,6 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                 if let viewController = viewController, self.isMenuVisable {
                     if self.presentedViewController == nil {
                         self.present(viewController, animated: true, completion: nil)
-                        PlayerMetrics.log(presentingOf: viewController, on: self)
                     }
                 } else if GKLocalPlayer.local.isAuthenticated {
                     PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
@@ -78,7 +72,6 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                     controller.addCancelAction(title: "Ok")
 
                     self.present(controller, animated: true, completion: nil)
-                    PlayerMetrics.log(presentingOf: controller, on: self)
                 }
             }
         }

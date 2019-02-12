@@ -16,7 +16,7 @@ import WKRUIKit
 import FirebasePerformance
 #endif
 
-internal class MPCHostViewController: StateLogTableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
+internal class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
     // MARK: - Types
 

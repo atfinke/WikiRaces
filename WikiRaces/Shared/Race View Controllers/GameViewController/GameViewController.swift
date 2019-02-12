@@ -12,7 +12,7 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-internal class GameViewController: StateLogViewController {
+internal class GameViewController: UIViewController {
 
     // MARK: - Game Properties
 
@@ -83,7 +83,12 @@ internal class GameViewController: StateLogViewController {
                 }).map({ peerID -> String in
                     return peerID.displayName
                 })
-                StatsHelper.shared.connected(to: playerNames)
+                StatsHelper.shared.connected(to: playerNames, raceType: .mpc)
+            } else if case let .gameKit(match, _)? = networkConfig {
+                let playerNames = match.players.map({ player -> String in
+                    return player.alias
+                })
+                StatsHelper.shared.connected(to: playerNames, raceType: .gameKit)
             }
         }
         if gameManager.gameState == .preMatch && networkConfig.isHost {
@@ -108,7 +113,6 @@ internal class GameViewController: StateLogViewController {
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     func showHelp() {

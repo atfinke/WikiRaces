@@ -9,6 +9,7 @@
 import CloudKit
 import UIKit
 
+import WKRKit
 import WKRUIKit
 
 import Crashlytics
@@ -39,6 +40,8 @@ internal class AppDelegate: WKRAppDelegate {
         logInterfaceMode()
         logBuild()
 
+        cleanTempDirectory()
+
         return true
     }
 
@@ -58,8 +61,10 @@ internal class AppDelegate: WKRAppDelegate {
 
     private func logBuild() {
         let appInfo = Bundle.main.appInfo
-        PlayerDatabaseMetrics.shared.log(event: .app(version: appInfo.version,
-                                                     build: appInfo.build.description))
+        PlayerDatabaseMetrics.shared.log(event: .app(coreVersion: appInfo.version,
+                                                     coreBuild: appInfo.build,
+                                                     kitConstants: WKRKitConstants.current.version,
+                                                     uiKitConstants: WKRUIKitConstants.current.version))
     }
 
 }

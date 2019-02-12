@@ -14,7 +14,7 @@ import WKRKit
 import WKRUIKit
 
 /// The main menu view controller
-internal class MenuViewController: StateLogViewController {
+internal class MenuViewController: UIViewController {
 
     // MARK: - Properties
 
@@ -133,6 +133,12 @@ internal class MenuViewController: StateLogViewController {
             let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
             let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
             self.performSegue(segue, isHost: false)
+
+            if networkType {
+                StatsHelper.shared.increment(stat: .mpcPressedJoin)
+            } else {
+                StatsHelper.shared.increment(stat: .gkPressedJoin)
+            }
         }
     }
 
@@ -153,6 +159,12 @@ internal class MenuViewController: StateLogViewController {
             let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
             let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
             self.performSegue(segue, isHost: true)
+
+            if networkType {
+                StatsHelper.shared.increment(stat: .mpcPressedHost)
+            } else {
+                StatsHelper.shared.increment(stat: .gkPressedJoin)
+            }
         }
     }
 
@@ -209,7 +221,7 @@ internal class MenuViewController: StateLogViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.view.isUserInteractionEnabled = true
-            if UserDefaults.standard.bool(forKey: "ShouldPromptForRating") {
+            if SKStoreReviewController.shouldPromptForRating {
                 #if !DEBUG
                 SKStoreReviewController.requestReview()
                 #endif

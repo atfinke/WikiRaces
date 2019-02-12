@@ -20,7 +20,6 @@ extension ResultsViewController {
             return
         }
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     @objc func addPlayersBarButtonItemPressed() {
@@ -28,7 +27,6 @@ extension ResultsViewController {
         guard let controller = addPlayersViewController else { return }
         present(controller, animated: true, completion: nil)
         PlayerMetrics.log(event: .hostStartMidMatchInviting)
-        PlayerMetrics.log(presentingOf: controller, on: self)
     }
 
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
@@ -42,6 +40,5 @@ extension ResultsViewController {
         controller.popoverPresentationController?.barButtonItem = sender
         present(controller, animated: true, completion: nil)
         PlayerMetrics.log(event: .openedShare)
-        PlayerMetrics.log(presentingOf: controller, on: self)
     }
 }
