@@ -31,6 +31,14 @@ extension WKRGameManager {
             }
             game.playerUpdated(playerObject)
 
+            if playerObject != localPlayer && game.shouldShowSamePageMessage(for: playerObject) {
+                enqueue(message: "\(player.name) is on same page", isRaceSpecific: true)
+            } else if playerObject == localPlayer {
+                for player in game.players where game.shouldShowSamePageMessage(for: player) {
+                    enqueue(message: "\(player.name) is on same page", isRaceSpecific: true)
+                }
+            }
+
             // Player joined mid-session
             if playerObject.state == .connecting
                 && localPlayer.state != .connecting

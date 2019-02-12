@@ -117,6 +117,33 @@ public class WKRGame {
         }
     }
 
+    func shouldShowSamePageMessage(for player: WKRPlayer) -> Bool {
+        /*
+         Conditions:
+         - player can't be local player
+         - both players have to be racing
+         - both players need histories
+         - both players need at least three pages viewed (don't want to spam messages at start of race)
+         - last viewed page needs to be the same
+         - duration must be nil (must not be moving to new page)
+         - link can't be on the page (don't want players to know they are close)
+         */
+        guard localPlayer != player,
+            player.state == .racing,
+            localPlayer.state == .racing,
+            let playerEntries = player.raceHistory?.entries,
+            let localEntries = localPlayer.raceHistory?.entries,
+            playerEntries.count > 3 && localEntries.count > 3,
+            let localPage = localEntries.last?.page,
+            playerEntries.last?.page == localPage,
+            playerEntries.last?.duration == nil,
+            localEntries.last?.duration == nil,
+            let isLinkOnPage = activeRace?.attributes(for: localPage).linkOnPage,
+            !isLinkOnPage else { return false }
+
+        return true
+    }
+
     // MARK: - Race End
 
     func checkForRaceEnd() {
