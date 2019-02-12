@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 extension Bundle {
     var appInfo: (build: Int, version: String) {
@@ -69,5 +70,18 @@ extension UIView {
                 completion?()
             })
         })
+    }
+}
+
+extension SKStoreReviewController {
+    private static let shouldPromptForRatingKey = "ShouldPromptForRating"
+
+    static var shouldPromptForRating: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: shouldPromptForRatingKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: shouldPromptForRatingKey)
+        }
     }
 }
