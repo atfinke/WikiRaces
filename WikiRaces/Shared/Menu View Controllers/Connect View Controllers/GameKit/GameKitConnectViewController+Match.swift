@@ -94,6 +94,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                         try? match.send(data, to: [hostPlayer], dataMode: .reliable)
                     })
                 }
+                StatsHelper.shared.increment(stat: .gkConnectedToMatch)
             } else {
                 self.showError(title: "Unable To Find Best Host",
                                message: "Please try again later.")

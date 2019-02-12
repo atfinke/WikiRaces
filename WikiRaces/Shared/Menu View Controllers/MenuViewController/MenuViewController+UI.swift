@@ -219,19 +219,23 @@ extension MenuViewController {
         bottomView.addSubview(statsStackView)
 
         let leftMenuTile = MenuTile(title: "WIKI POINTS")
-        leftMenuTile.value = StatsHelper.shared.statValue(for: .points)
+        leftMenuTile.stat = .mpcPoints
+        leftMenuTile.value = StatsHelper.shared.points
         statsStackView.addArrangedSubview(leftMenuTile)
 
         let middleMenuTile = MenuTile(title: "AVG PER RACE")
+        middleMenuTile.stat = .average
         middleMenuTile.value = StatsHelper.shared.statValue(for: .average)
         statsStackView.addArrangedSubview(middleMenuTile)
+
         let leftThinLine = WKRUIThinLineView()
         middleMenuTile.addSubview(leftThinLine)
         let rightThinLine = WKRUIThinLineView()
         middleMenuTile.addSubview(rightThinLine)
 
         let rightMenuTile = MenuTile(title: "RACES PLAYED")
-        rightMenuTile.value = StatsHelper.shared.statValue(for: .races)
+        rightMenuTile.stat = .mpcRaces
+        rightMenuTile.value = StatsHelper.shared.races
         statsStackView.addArrangedSubview(rightMenuTile)
 
         let constraints = [
@@ -246,10 +250,6 @@ extension MenuViewController {
             rightThinLine.widthAnchor.constraint(equalToConstant: 2)
         ]
         NSLayoutConstraint.activate(constraints)
-
-        leftMenuTile.stat = .points
-        middleMenuTile.stat = .races
-        rightMenuTile.stat = .average
 
         leftMenuTile.addTarget(self, action: #selector(menuTilePressed(sender:)), for: .touchUpInside)
         middleMenuTile.addTarget(self, action: #selector(menuTilePressed(sender:)), for: .touchUpInside)

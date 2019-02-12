@@ -95,7 +95,7 @@ internal class ResultsViewController: CenteredTableViewController {
         let shareResultsBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                         target: self,
                                                         action: #selector(shareResultsBarButtonItemPressed(_:)))
-        shareResultsBarButtonItem.isEnabled = state == .hostResults
+        shareResultsBarButtonItem.isEnabled = false
         let addPlayersBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
                                                   target: self,
                                                   action: #selector(addPlayersBarButtonItemPressed))

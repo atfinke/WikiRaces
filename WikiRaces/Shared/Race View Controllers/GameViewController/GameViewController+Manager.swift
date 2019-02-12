@@ -25,12 +25,12 @@ extension GameViewController {
                 self?.transition(to: state)
             }
             }, pointsUpdate: { [weak self] points in
-                if let timeRaced = self?.timeRaced {
-                    var isSolo = false
-                    if case .solo? = self?.networkConfig {
-                        isSolo = true
-                    }
-                    StatsHelper.shared.completedRace(points: points, timeRaced: timeRaced, isSolo: isSolo)
+                if let timeRaced = self?.timeRaced,
+                    let config = self?.networkConfig,
+                    let raceType = StatsHelper.RaceType(config) {
+                    StatsHelper.shared.completedRace(type: raceType,
+                                                     points: points,
+                                                     timeRaced: timeRaced)
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
@@ -39,12 +39,10 @@ extension GameViewController {
                     guard let eventType = PlayerMetrics.Event(rawValue: event) else {
                         fatalError("Invalid event " + event)
                     }
-                    if eventType == .pageView {
-                        var isSolo = false
-                        if case .solo? = self?.networkConfig {
-                            isSolo = true
-                        }
-                        StatsHelper.shared.viewedPage(isSolo: isSolo)
+                    if eventType == .pageView,
+                        let config = self?.networkConfig,
+                        let raceType = StatsHelper.RaceType(config) {
+                        StatsHelper.shared.viewedPage(raceType: raceType)
                     }
                     PlayerMetrics.log(event: eventType, attributes: attributes)
                 #endif
@@ -114,8 +112,6 @@ extension GameViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
-                PlayerMetrics.log(presentingOf: alertController, on: self)
-
                 UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
         })

@@ -18,17 +18,8 @@ internal struct PlayerMetrics {
 
     // MARK: - Logging Event Types
 
-    enum ViewState: String {
-        case didLoad
-        case willAppear
-        case didAppear
-        case willDisappear
-        case didDisappear
-    }
-
     enum CrashLogEvent {
         case userAction(String)
-        case viewState(String)
         case gameState(String)
     }
 
@@ -51,34 +42,16 @@ internal struct PlayerMetrics {
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
-
-        // Bugs
-        case githubIssue41Hit // https://github.com/atfinke/WikiRaces/issues/41
+        
     }
 
     // MARK: - Logging Events
-
-    public static func log(state: ViewState, for object: UIViewController) {
-        log(event: .viewState("\(type(of: object)): " + state.rawValue))
-    }
-
-    public static func log(presentingOf modal: UIViewController, on object: UIViewController) {
-        var titleString = "Title: "
-        if let title = modal.title {
-            titleString += title
-        } else {
-            titleString += "nil"
-        }
-        log(event: .viewState("\(type(of: object)): Presenting: \(type(of: modal)) " + titleString))
-    }
 
     public static func log(event: CrashLogEvent) {
         #if MULTIWINDOWDEBUG
         switch event {
         case .userAction(let action):
             print("UserAction: ", action)
-        case .viewState(let view):
-            print("ViewState: ", view)
         case .gameState(let description):
             print("GameState: ", description)
         }
@@ -86,8 +59,6 @@ internal struct PlayerMetrics {
         switch event {
         case .userAction(let action):
             CLSNSLogv("UserAction: %@", getVaList([action]))
-        case .viewState(let view):
-            CLSNSLogv("ViewState: %@", getVaList([view]))
         case .gameState(let description):
             CLSNSLogv("GameState: %@", getVaList([description]))
 }

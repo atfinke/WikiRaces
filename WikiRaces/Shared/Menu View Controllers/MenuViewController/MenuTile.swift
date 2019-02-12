@@ -20,6 +20,14 @@ internal class MenuTile: UIControl {
         return formatter
     }()
 
+    static private let fractionalNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 1
+        return formatter
+    }()
+
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
 
@@ -42,12 +50,14 @@ internal class MenuTile: UIControl {
 
     var value: Double? {
         set {
-            guard let value = newValue,
-             let formattedValue = MenuTile.numberFormatter.string(from: NSNumber(value: value)) else {
+            guard let value = newValue  else {
                 valueLabel.text = nil
                 return
             }
-
+            var formattedValue = MenuTile.numberFormatter.string(from: NSNumber(value: value))
+            if let stat = stat, stat == .average {
+                formattedValue = MenuTile.fractionalNumberFormatter.string(from: NSNumber(value: value))
+            }
             valueLabel.text = formattedValue
         }
         get {
