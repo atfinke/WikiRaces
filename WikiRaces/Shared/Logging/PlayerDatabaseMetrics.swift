@@ -216,7 +216,9 @@ class PlayerDatabaseMetrics: NSObject {
             } else {
                 self.userStatsRecord = nil
                 self.userRecord = nil
-                self.queuedEvents = events + self.queuedEvents
+
+                let newEvents = events + self.queuedEvents
+                self.queuedEvents = newEvents
                 self.connect()
             }
             self.isSyncing = false

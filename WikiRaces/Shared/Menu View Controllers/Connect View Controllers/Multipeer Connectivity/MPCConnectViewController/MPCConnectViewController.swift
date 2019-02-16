@@ -62,14 +62,11 @@ internal class MPCConnectViewController: ConnectViewController {
         // Gets either the player name specified in settings.app, then GK alias, the device name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
-            PlayerDatabaseMetrics.shared.log(event: .customName(playerName))
             PlayerMetrics.log(event: .nameType, attributes: ["Type": "CustomName"])
         } else if GKLocalPlayer.local.isAuthenticated {
             playerName = GKLocalPlayer.local.alias
-            PlayerDatabaseMetrics.shared.log(event: .gcAlias(playerName))
             PlayerMetrics.log(event: .nameType, attributes: ["Type": "GCAlias"])
         } else {
-            PlayerDatabaseMetrics.shared.log(event: .deviceName(playerName))
             PlayerMetrics.log(event: .nameType, attributes: ["Type": "DeviceName"])
         }
 
@@ -87,6 +84,7 @@ internal class MPCConnectViewController: ConnectViewController {
             peerID = lastPeerID
         } else {
             // Attempting to prevent https://github.com/atfinke/WikiRaces/issues/43
+            // Also, see rdar://47570877
             UserDefaults.standard.set(true, forKey: "AttemptingMCPeerIDCreation")
             peerID = MCPeerID(displayName: playerName)
             UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
