@@ -112,7 +112,9 @@ public class WKRGame {
 
         let readyStates = WKRReadyStates(players: players)
         readyStatesUpdated?(readyStates)
-        if localPlayer.isHost && readyStates.isReadyForNextRound {
+        if localPlayer.isHost,
+            let racePlayers = completedRaces.last?.players,
+            readyStates.areAllRacePlayersReady(racePlayers: racePlayers) {
             allPlayersReadyForNextRound?()
         }
     }
@@ -133,7 +135,8 @@ public class WKRGame {
             localPlayer.state == .racing,
             let playerEntries = player.raceHistory?.entries,
             let localEntries = localPlayer.raceHistory?.entries,
-            playerEntries.count > 3 && localEntries.count > 3,
+            playerEntries.count > 2,
+            localEntries.count > 2,
             let localPage = localEntries.last?.page,
             playerEntries.last?.page == localPage,
             playerEntries.last?.duration == nil,

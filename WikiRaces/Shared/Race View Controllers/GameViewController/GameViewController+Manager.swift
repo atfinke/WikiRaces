@@ -197,6 +197,9 @@ extension GameViewController {
         if gameState == .hostResults && networkConfig.isHost {
             PlayerMetrics.log(event: .hostEndedRace)
         }
+
+        connectingLabel.alpha = 0.0
+        activityIndicatorView.alpha = 0.0
     }
 
     private func transitionToRace() {

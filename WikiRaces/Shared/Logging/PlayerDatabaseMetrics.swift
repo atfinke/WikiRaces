@@ -50,6 +50,7 @@ class PlayerDatabaseMetrics: NSObject {
     private var isSyncing = false
 
     private var queuedEvents = [Event]()
+    private var processingEvents = [Event]()
 
     // MARK: - Connecting
 
@@ -139,10 +140,10 @@ class PlayerDatabaseMetrics: NSObject {
                   let record = userStatsRecord else { return }
 
         isSyncing = true
-        let events = queuedEvents
+        processingEvents = Array(queuedEvents)
         queuedEvents = []
 
-        for event in events {
+        for event in processingEvents {
             switch event {
             case .gcAlias(let alias):
                 var names = [String]()
@@ -213,11 +214,12 @@ class PlayerDatabaseMetrics: NSObject {
         publicDB.save(record) { (savedUserStatsRecord, _) in
             if let savedUserStatsRecord = savedUserStatsRecord {
                 self.userStatsRecord = savedUserStatsRecord
+                self.processingEvents = []
             } else {
                 self.userStatsRecord = nil
                 self.userRecord = nil
 
-                let newEvents = events + self.queuedEvents
+                let newEvents = Array(self.processingEvents) + Array(self.queuedEvents)
                 self.queuedEvents = newEvents
                 self.connect()
             }

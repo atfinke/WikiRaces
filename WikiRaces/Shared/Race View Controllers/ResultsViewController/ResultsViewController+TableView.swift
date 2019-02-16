@@ -31,7 +31,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         switch state {
         case .results, .hostResults:
             let player = resultsInfo.raceRankingsPlayer(at: index)
-            cell.isShowingCheckmark = readyStates?.playerReady(player) ?? false
+            cell.isShowingCheckmark = readyStates?.isPlayerReady(player) ?? false
             cell.update(for: player, animated: true)
         case .points:
             let sessionResults = resultsInfo.sessionResults(at: index)

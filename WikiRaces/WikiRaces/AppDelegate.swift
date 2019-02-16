@@ -41,7 +41,6 @@ internal class AppDelegate: WKRAppDelegate {
         logBuild()
 
         cleanTempDirectory()
-
         return true
     }
 

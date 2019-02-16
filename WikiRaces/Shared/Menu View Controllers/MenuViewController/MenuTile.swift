@@ -17,6 +17,7 @@ internal class MenuTile: UIControl {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
+        formatter.groupingSeparator = "" // 1,000 -> 1000
         return formatter
     }()
 

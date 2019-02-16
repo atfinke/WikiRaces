@@ -43,26 +43,6 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
                            forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
     }
 
-    // MARK: - Actions
-
-    @IBAction func doneButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
-        presentingViewController?.dismiss(animated: true, completion: nil)
-    }
-
-    // MARK: - UIScrollViewDelegate
-
-    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        isUserScrolling = true
-    }
-
-    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        isUserScrolling = false
-        if deferredUpdate {
-            updateEntries()
-        }
-    }
-
     // MARK: - Logic
 
     private func updateEntries() {
@@ -109,6 +89,26 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
                 self.updateEntries()
             }
         })
+    }
+
+    // MARK: - Actions
+
+    @IBAction func doneButtonPressed() {
+        PlayerMetrics.log(event: .userAction(#function))
+        presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    // MARK: - UIScrollViewDelegate
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        isUserScrolling = true
+    }
+
+    override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        isUserScrolling = false
+        if deferredUpdate {
+            updateEntries()
+        }
     }
 
     // MARK: - Table view data source

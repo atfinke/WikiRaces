@@ -38,10 +38,15 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
-            return """
-            Make sure all players are on the same Wi-Fi network
-            and have Bluetooth enabled for the best results.
-            """
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                return """
+                Make sure all players are on the same Wi-Fi network
+                and have Bluetooth enabled for the best results.
+                """
+            } else {
+                //swiftlint:disable:next line_length
+                return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
+            }
         } else {
             return "Practice your skills in solo races. Solo races will not count towards your stats."
         }

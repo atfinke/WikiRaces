@@ -54,8 +54,9 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         var randomPaths = [String]()
         let numberOfPagesToFetch = WKRKitConstants.current.votingArticlesCount + 1
 
+        // pages are suffled so we can just take index 0-n from the shuffled array
         for index in 0..<numberOfPagesToFetch {
-            while randomPaths.count != index + 1 {
+            while randomPaths.count <= index + 1 {
                 if let randomPath = finalArticles.randomElement {
                     randomPaths.append(randomPath)
                 }

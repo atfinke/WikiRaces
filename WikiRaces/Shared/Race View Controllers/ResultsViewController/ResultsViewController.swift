@@ -180,7 +180,11 @@ internal class ResultsViewController: CenteredTableViewController {
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
             }, completion: nil)
 
-            guard let player = localPlayer, let results = self.resultsInfo else { return }
+            guard view.window != nil,
+                let player = localPlayer,
+                let entriesCount = player.raceHistory?.entries.count,
+                entriesCount > 1,
+                let results = self.resultsInfo else { return }
             resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
                 self?.resultImage = image
                 self?.shareResultsBarButtonItem?.isEnabled = true
@@ -209,7 +213,7 @@ internal class ResultsViewController: CenteredTableViewController {
                 tableView.reloadData()
                 return
             }
-            cell.isShowingCheckmark = readyStates.playerReady(player)
+            cell.isShowingCheckmark = readyStates.isPlayerReady(player)
         }
     }
 
