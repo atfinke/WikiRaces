@@ -14,14 +14,21 @@ public struct WKRReadyStates: Codable {
         self.players = players
     }
 
-    public func playerReady(_ player: WKRPlayer) -> Bool {
+    public func isPlayerReady(_ player: WKRPlayer) -> Bool {
         guard let index = players.firstIndex(of: player) else { return false }
         return players[index].state == .readyForNextRound
     }
 
     var isReadyForNextRound: Bool {
         for player in players where player.state != .readyForNextRound {
-                return false
+            return false
+        }
+        return true
+    }
+    func areAllRacePlayersReady(racePlayers: [WKRPlayer]) -> Bool {
+        let relevantPlayers = players.filter({ racePlayers.contains($0) })
+        for player in relevantPlayers where player.state != .readyForNextRound {
+            return false
         }
         return true
     }
