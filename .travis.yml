@@ -5,7 +5,7 @@ matrix:
   include:
     - env: SCHEME="WKRKit" TYPE="build"
     - env: SCHEME="WKRUIKit" TYPE="build"
-    - env: SCHEME="WikiRaces-MW" TYPE="build"
+    - env: SCHEME="WikiRaces (Multi-Window)" TYPE="build"
 
 before_install:
   - chmod +x install_swiftlint.sh
@@ -13,4 +13,4 @@ install:
   - ./install_swiftlint.sh
 
 script:
-  - "xcodebuild clean $TYPE -workspace WikiRaces.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch),OS=11.2'"
+  - "xcodebuild clean $TYPE -workspace WikiRaces.xcworkspace -scheme $SCHEME -destination 'platform=iOS Simulator,name=iPad Pro (12.9-inch),OS=12.2'"
