@@ -478,4 +478,5 @@ internal class StatsHelper {
         }
         GKScore.report(scores, withCompletionHandler: nil)
     }
+    //swiftlint:disable:next file_length
 }

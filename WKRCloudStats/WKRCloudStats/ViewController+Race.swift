@@ -71,7 +71,7 @@ extension ViewController {
         panel.beginSheetModal(for: self.view.window!) { _ in
             guard let url = panel.url else { return }
 
-            try! FileManager.default.createDirectory(at: url,
+            try? FileManager.default.createDirectory(at: url,
                                                 withIntermediateDirectories: false,
                                                 attributes: nil)
 

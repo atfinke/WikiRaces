@@ -101,7 +101,7 @@ extension ViewController {
         panel.nameFieldStringValue = "WKRCloudStats.csv"
         panel.beginSheetModal(for: self.view.window!) { _ in
             guard let url = panel.url else { return }
-            try! csvString.write(to: url, atomically: true, encoding: .utf8)
+            try? csvString.write(to: url, atomically: true, encoding: .utf8)
         }
     }
 }

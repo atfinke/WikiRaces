@@ -42,7 +42,6 @@ internal struct PlayerMetrics {
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
-        
     }
 
     // MARK: - Logging Events
