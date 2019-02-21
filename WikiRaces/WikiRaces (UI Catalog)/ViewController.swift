@@ -100,13 +100,26 @@ internal class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = GKSplashViewController()
-      //  return
+        let ccc = GKSplashViewController()
+        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = ccc
+   //     ccc.view.frame = CGRect(x: 10, y: 10, width: 300, height: 550)
+
+//        ccc.view.backgroundColor = .lightGray
+ //       ccc.view.center = (UIApplication.shared.delegate as? AppDelegate)?.window?.center ?? .zero
+
+       return
         let nav = viewController() as! UINavigationController
 
         let controller = nav.rootViewController as! ResultsViewController
 
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let aaaa = GKSplashViewController()
+            controller.present(aaaa, animated: true, completion: nil)
+
+            aaaa.view.superview?.backgroundColor = .clear
+        }
 
         //let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
         let names = ["Andrew", "Carol", "Tom", "Lisa"]

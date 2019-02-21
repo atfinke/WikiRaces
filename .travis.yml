@@ -4,8 +4,9 @@ osx_image: xcode10.2
 matrix:
   include:
     - env: SCHEME="WKRKit" TYPE="build"
+    - env: SCHEME="WKRKitOfflineTests" TYPE="test"
     - env: SCHEME="WKRUIKit" TYPE="build"
-    - env: SCHEME="WikiRaces (Multi-Window)" TYPE="build"
+    - env: SCHEME="WikiRaces" TYPE="build"
 
 before_install:
   - chmod +x install_swiftlint.sh

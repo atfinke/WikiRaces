@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1020"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES"
+            testExecutionOrdering = "random"
+            useTestSelectionWhitelist = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "149FF8101F362B3D000A5D96"
+               BuildableName = "WKRKitTests.xctest"
+               BlueprintName = "WKRKitTests"
+               ReferencedContainer = "container:WKRKit.xcodeproj">
+            </BuildableReference>
+            <SelectedTests>
+               <Test
+                  Identifier = "WKRKitTests/testConstantsBundleUpdate()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testHistory()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testHistoryEntry()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testInt()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPageEncoding()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPageTitle()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPlayer()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPlayerHistory()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPlayerProfile()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testPlayerState()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testRace()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testRaceConfig()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testState()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testVotingObject()">
+               </Test>
+            </SelectedTests>
+         </TestableReference>
+      </Testables>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "Cloud_Disabled"
+            value = "true"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
