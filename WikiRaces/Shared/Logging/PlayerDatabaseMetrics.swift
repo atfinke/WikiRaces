@@ -25,7 +25,7 @@ class PlayerDatabaseMetrics: NSObject {
         case mpcStatsUpdate(mpcPoints: Int, mpcRaces: Int, mpcFastestTime: Int, mpcTotalTime: Int, mpcPages: Int, mpcPressedJoin: Int, mpcPressedHost: Int)
         //swiftlint:disable:next line_length
         case gkStatsUpdate(gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
-        case soloStatsUpdate(soloRaces: Int, soloTotalTime: Int, soloPages: Int)
+        case soloStatsUpdate(soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
     }
 
     private struct ProcessedResults {
@@ -194,10 +194,11 @@ class PlayerDatabaseMetrics: NSObject {
                 record["gkTotalTime"] = NSNumber(value: gkTotalTime)
                 record["gkPressedJoin"] = NSNumber(value: gkPressedJoin)
                 record["gkConnectedToMatch"] = NSNumber(value: gkConnectedToMatch)
-            case .soloStatsUpdate(let soloRaces, let soloTotalTime, let soloPages):
+            case .soloStatsUpdate(let soloRaces, let soloTotalTime, let soloPages, let soloPressedHost):
                 record["soloRaces"] = NSNumber(value: soloRaces)
                 record["soloTotalTime"] = NSNumber(value: soloTotalTime)
                 record["soloPages"] = NSNumber(value: soloPages)
+                record["soloPressedHost"] = NSNumber(value: soloPressedHost)
             case .app(let coreVersion, let coreBuild, let kitConstants, let uiKitConstants):
                 record["coreVersion"] = coreVersion as NSString
                 record["coreBuild"] = coreBuild.description as NSString

@@ -45,6 +45,7 @@ internal class StatsHelper {
         case soloPages
         case soloTotalTime
         case soloRaces
+        case soloPressedHost
 
         static var numericHighStats: [Stat] = [
             .average,
@@ -65,7 +66,8 @@ internal class StatsHelper {
 
             .soloPages,
             .soloTotalTime,
-            .soloRaces
+            .soloRaces,
+            .soloPressedHost
         ]
 
         static var numericLowStats: [Stat] = [
@@ -187,6 +189,7 @@ internal class StatsHelper {
         let soloTotalTime = statValue(for: .soloTotalTime)
         let soloPages = statValue(for: .soloPages)
         let soloRaces = statValue(for: .soloRaces)
+        let soloPressedHost = statValue(for: .soloPressedHost)
 
         keyStatsUpdated?(mpcPoints, mpcRaces, statValue(for: .average))
 
@@ -210,7 +213,8 @@ internal class StatsHelper {
 
         let soloStats = PlayerDatabaseMetrics.Event.soloStatsUpdate(soloRaces: Int(soloRaces),
                                                             soloTotalTime: Int(soloTotalTime),
-                                                            soloPages: Int(soloPages))
+                                                            soloPages: Int(soloPages),
+                                                            soloPressedHost: Int(soloPressedHost))
         PlayerDatabaseMetrics.shared.log(event: soloStats)
     }
 
