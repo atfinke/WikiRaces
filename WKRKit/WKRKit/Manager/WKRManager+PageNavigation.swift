@@ -30,6 +30,10 @@ extension WKRGameManager {
             var linkHere = false
             var foundPage = false
 
+            if page.title == "United States" {
+                self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.onUSA))
+            }
+
             let lastPageHadLink = self?.localPlayer.raceHistory?.entries.last?.linkHere ?? false
             if let attributes = self?.game.activeRace?.attributes(for: page) {
                 if attributes.foundPage {
