@@ -82,8 +82,6 @@
 		14848803214F0F3B0098CBFA /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */; };
 		14891AA6214F6BDB001BDEB8 /* DebugInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */; };
 		14891AA9214F6BDE001BDEB8 /* DebugInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */; };
-		148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
-		148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357D8210E801A00F6453A /* HistoryViewController+KB.swift */; };
 		149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357D8210E801A00F6453A /* HistoryViewController+KB.swift */; };
 		149357DB210E801A00F6453A /* HistoryViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357D8210E801A00F6453A /* HistoryViewController+KB.swift */; };
@@ -121,7 +119,6 @@
 		14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+Leaderboards.swift */; };
 		14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
 		14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
-		14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */; };
 		14C25FFE1F6F02A500CD7373 /* GameViewController+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB601F368A170086B77F /* GameViewController+Manager.swift */; };
 		14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
 		14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB301F36899B0086B77F /* ResultsViewController+TableView.swift */; };
@@ -397,7 +394,6 @@
 		148487F5214F0F3B0098CBFA /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = "<group>"; };
 		148487F6214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Segue.swift"; sourceTree = "<group>"; };
 		149357D8210E801A00F6453A /* HistoryViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryViewController+KB.swift"; sourceTree = "<group>"; };
 		149357DE210E934300F6453A /* MPCConnectViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+UI.swift"; sourceTree = "<group>"; };
 		149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostPeerStateCell.swift; sourceTree = "<group>"; };
@@ -746,7 +742,6 @@
 			children = (
 				14C4AB5C1F368A0C0086B77F /* GameViewController.swift */,
 				14C4AB641F368A210086B77F /* GameViewController+UI.swift */,
-				148B4B2D1F57519F007B70B5 /* GameViewController+Segue.swift */,
 				14C4AB601F368A170086B77F /* GameViewController+Manager.swift */,
 				142F7156210C375F00C66558 /* GameViewController+KB.swift */,
 			);
@@ -1180,7 +1175,6 @@
 				142F7157210C375F00C66558 /* GameViewController+KB.swift in Sources */,
 				1414280721FC394600C48788 /* ConnectViewController.swift in Sources */,
 				1478B1B122095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
-				148B4B2E1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				143BB7351F60DF4A00D00541 /* MPCConnectViewController.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
@@ -1237,7 +1231,6 @@
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
-				148B4B2F1F57519F007B70B5 /* GameViewController+Segue.swift in Sources */,
 				14DF31B62116923C005BA432 /* MPCHostViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
@@ -1330,7 +1323,6 @@
 				14C25FF51F6F028100CD7373 /* MenuViewController+Leaderboards.swift in Sources */,
 				14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */,
 				14DF31BB21169372005BA432 /* MPCConnectViewController+Invite.swift in Sources */,
-				14C25FFD1F6F02A500CD7373 /* GameViewController+Segue.swift in Sources */,
 				144A102D202FC7A2003DB51A /* CenteredTableViewController.swift in Sources */,
 				14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */,
 				142EE38B221212CC00F34124 /* GKSplashViewController.swift in Sources */,

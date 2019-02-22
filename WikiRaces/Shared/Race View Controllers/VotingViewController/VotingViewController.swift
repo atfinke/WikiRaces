@@ -79,7 +79,12 @@ internal class VotingViewController: CenteredTableViewController {
         guideLabel.text = "TAP ARTICLE TO VOTE"
         descriptionLabel.text = "VOTING STARTS SOON"
 
-        tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(VotingTableViewCell.self,
+                           forCellReuseIdentifier: reuseIdentifier)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                            target: self,
+                                                            action: #selector(doneButtonPressed))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,7 +98,7 @@ internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Actions
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
+    @objc func doneButtonPressed(_ sender: Any) {
         PlayerMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])

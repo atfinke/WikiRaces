@@ -14,7 +14,7 @@ internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Properties
 
-    private var historyViewController: HistoryViewController?
+    var historyViewController: HistoryViewController?
 
     var readyButtonPressed: (() -> Void)?
 
@@ -109,6 +109,10 @@ internal class ResultsViewController: CenteredTableViewController {
 
         self.shareResultsBarButtonItem = shareResultsBarButtonItem
         self.addPlayersBarButtonItem = addPlayersBarButtonItem
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                            target: self,
+                                                            action: #selector(doneButtonPressed))
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -297,18 +301,6 @@ internal class ResultsViewController: CenteredTableViewController {
         }
 
         PlayerMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        PlayerMetrics.log(event: .userAction(#function))
-        guard let destinationNavigationController = segue.destination as? UINavigationController,
-            let destination = destinationNavigationController.rootViewController as? HistoryViewController,
-            let player = sender as? WKRPlayer else {
-                fatalError("Destination rootViewController not a HistoryViewController")
-        }
-
-        destination.player = player
-        historyViewController = destination
     }
 
 }

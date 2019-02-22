@@ -12,10 +12,11 @@ extension ResultsViewController {
 
     // MARK: - Actions
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
+    @objc func doneButtonPressed(_ sender: Any) {
         PlayerMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": state.rawValue.description as Any])
+            PlayerMetrics.log(event: .backupQuit,
+                              attributes: ["GameState": state.rawValue.description as Any])
             self.backupQuit?()
             return
         }

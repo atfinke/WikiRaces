@@ -120,7 +120,8 @@ extension GameViewController {
             self.isPlayerQuitting = true
             self.resetActiveControllers()
             self.gameManager.player(.quit)
-            NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit, object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit,
+                                            object: nil)
         }
     }
 

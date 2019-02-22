@@ -167,23 +167,52 @@ extension GameViewController {
     private func transitionToVoting() {
         self.title = ""
         navigationController?.navigationBar.isHidden = true
-        dismissActiveController(completion: {
-            self.performSegue(.showVoting)
+        dismissActiveController(completion: { [weak self] in
+            self?.showVotingController()
         })
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
     }
 
+    private func showVotingController() {
+        let controller = VotingViewController()
+        controller.playerVoted = { [weak self] page in
+            self?.gameManager.player(.voted(page))
+            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
+
+            if let raceType = self?.statRaceType {
+                var stat = StatsHelper.Stat.mpcVotes
+                switch raceType {
+                case .mpc: stat = StatsHelper.Stat.mpcVotes
+                case .gameKit: stat = StatsHelper.Stat.gkVotes
+                case .solo: stat = StatsHelper.Stat.soloVotes
+                default: break
+                }
+                StatsHelper.shared.increment(stat: stat)
+            }
+        }
+        controller.voteInfo = gameManager.voteInfo
+        controller.backupQuit = playerQuit
+        controller.quitAlertController = quitAlertController(raceStarted: false)
+
+        self.votingViewController = controller
+
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalTransitionStyle = .crossDissolve
+        navController.modalPresentationStyle = .overCurrentContext
+        present(navController, animated: true, completion: nil)
+    }
+
     private func transitionToResults() {
         raceTimer?.invalidate()
         if activeViewController != resultsViewController || resultsViewController == nil {
-            dismissActiveController(completion: {
-                self.performSegue(.showResults)
+            dismissActiveController(completion: { [weak self] in
+                self?.showResultsController()
                 UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeOut,
                                delay: WKRAnimationDurationConstants.gameFadeOutDelay,
                                options: .beginFromCurrentState,
                                animations: {
-                                self.webView.alpha = 0.0
+                                self?.webView.alpha = 0.0
                 }, completion: nil)
             })
         } else {
@@ -198,6 +227,28 @@ extension GameViewController {
 
         connectingLabel.alpha = 0.0
         activityIndicatorView.alpha = 0.0
+    }
+
+    private func showResultsController() {
+        let controller = ResultsViewController()
+        controller.localPlayer = gameManager.localPlayer
+        controller.readyButtonPressed = { [weak self] in
+            self?.gameManager.player(.ready)
+        }
+
+        controller.addPlayersViewController = gameManager.hostNetworkInterface()
+        controller.state = gameManager.gameState
+        controller.resultsInfo = gameManager.hostResultsInfo
+        controller.isPlayerHost = networkConfig.isHost
+        controller.backupQuit = playerQuit
+        controller.quitAlertController = quitAlertController(raceStarted: false)
+
+        self.resultsViewController = controller
+
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalTransitionStyle = .crossDissolve
+        navController.modalPresentationStyle = .overCurrentContext
+        present(navController, animated: true, completion: nil)
     }
 
     private func transitionToRace() {

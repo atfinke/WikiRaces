@@ -22,6 +22,7 @@ internal class HelpViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "HELP"
         view.backgroundColor = UIColor.wkrBackgroundColor
         navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
         navigationController?.view.backgroundColor = UIColor.wkrBackgroundColor
@@ -35,6 +36,10 @@ internal class HelpViewController: UIViewController, WKNavigationDelegate {
         }
 
         webView.load(URLRequest(url: url))
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                            target: self,
+                                                            action: #selector(doneButtonPressed))
     }
 
     // MARK: - Actions

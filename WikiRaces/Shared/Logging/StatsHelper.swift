@@ -182,6 +182,7 @@ internal class StatsHelper {
         keyValueStore.synchronize()
     }
 
+    //swiftlint:disable:next function_body_length
     private func updateStatsClosure() {
         let mpcVotes = statValue(for: .mpcVotes)
         let mpcHelp = statValue(for: .mpcHelp)
@@ -505,4 +506,3 @@ internal class StatsHelper {
     }
     //swiftlint:disable:next file_length
 }
-

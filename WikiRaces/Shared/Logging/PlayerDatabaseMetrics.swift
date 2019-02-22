@@ -25,6 +25,7 @@ class PlayerDatabaseMetrics: NSObject {
         case mpcStatsUpdate(mpcVotes: Int, mpcHelp: Int, mpcPoints: Int, mpcRaces: Int, mpcFastestTime: Int, mpcTotalTime: Int, mpcPages: Int, mpcPressedJoin: Int, mpcPressedHost: Int)
         //swiftlint:disable:next line_length
         case gkStatsUpdate(gkVotes: Int, gkHelp: Int, gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
+        //swiftlint:disable:next line_length
         case soloStatsUpdate(soloVotes: Int, soloHelp: Int, soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
     }
 

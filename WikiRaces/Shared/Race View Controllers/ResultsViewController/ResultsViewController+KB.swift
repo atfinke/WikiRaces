@@ -40,7 +40,7 @@ extension ResultsViewController {
     @objc
     private func keyboardAttemptQuit(_ keyCommand: UIKeyCommand) {
         guard presentedViewController == nil, navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
-        quitButtonPressed(keyCommand)
+        doneButtonPressed(keyCommand)
     }
 
 }

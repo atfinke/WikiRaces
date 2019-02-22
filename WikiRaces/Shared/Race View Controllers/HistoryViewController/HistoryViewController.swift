@@ -41,6 +41,10 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HistoryTableViewCell.self,
                            forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                            target: self,
+                                                            action: #selector(doneButtonPressed))
     }
 
     // MARK: - Logic

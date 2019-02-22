@@ -60,7 +60,7 @@ extension VotingViewController {
         guard presentedViewController == nil,
             navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
 
-        quitButtonPressed(keyCommand)
+        doneButtonPressed(keyCommand)
     }
 
 }

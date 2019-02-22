@@ -120,10 +120,33 @@ internal class GameViewController: UIViewController {
     }
 
     func showHelp() {
-        PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
-        PlayerMetrics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
         gameManager.player(.neededHelp)
-        performSegue(.showHelp)
+
+        let controller = HelpViewController()
+        controller.url = gameManager.finalPageURL
+        controller.linkTapped = { [weak self] in
+            self?.gameManager.enqueue(message: "Links disabled in help",
+                                      duration: 2.0, isRaceSpecific: true)
+        }
+        self.activeViewController = controller
+
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerMetrics.log(event: .usedHelp,
+                          attributes: ["Page": self.finalPage?.title as Any])
+        if let raceType = statRaceType {
+            var stat = StatsHelper.Stat.mpcHelp
+            switch raceType {
+            case .mpc: stat = StatsHelper.Stat.mpcHelp
+            case .gameKit: stat = StatsHelper.Stat.gkHelp
+            case .solo: stat = StatsHelper.Stat.soloHelp
+            default: break
+            }
+            StatsHelper.shared.increment(stat: stat)
+        }
     }
 
     func reloadPage() {

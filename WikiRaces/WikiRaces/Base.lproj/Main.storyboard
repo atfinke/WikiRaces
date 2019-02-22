@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FsY-bJ-C6c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.59" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FsY-bJ-C6c">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.43"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.45"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,10 +69,6 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="Sor-Ib-bWA" id="dNz-4C-6MH"/>
                         <outlet property="connectingLabel" destination="DMS-89-AKO" id="xYM-bh-ixM"/>
-                        <segue destination="32h-KD-ArS" kind="presentation" identifier="showPlayers" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="f9Z-YG-5fp"/>
-                        <segue destination="VBE-nT-qAo" kind="presentation" identifier="showVoting" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="t2P-SY-QpF"/>
-                        <segue destination="uXR-dP-Jlf" kind="presentation" identifier="showResults" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="a2n-af-vvD"/>
-                        <segue destination="t4g-rL-EB2" kind="presentation" identifier="showHelp" modalPresentationStyle="formSheet" id="kTX-dD-3f0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNu-P3-to5" sceneMemberID="firstResponder"/>
@@ -197,202 +193,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryR-sG-Xcn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1336" y="2724"/>
-        </scene>
-        <!--Lobby View Controller-->
-        <scene sceneID="sPw-ab-gIu">
-            <objects>
-                <viewController id="VyK-N1-Rm3" customClass="LobbyViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8ad-Go-pQ7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="UJa-Na-cXC"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="M6O-wg-txp">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="GqT-4H-giZ">
-                            <connections>
-                                <action selector="quitButtonPressed:" destination="VyK-N1-Rm3" id="479-PR-0xv"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ysB-70-ouw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="896" y="2070"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6aV-xn-DBq">
-            <objects>
-                <navigationController id="32h-KD-ArS" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nnv-Wb-8Fq">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="VyK-N1-Rm3" kind="relationship" relationship="rootViewController" id="dRE-sm-59M"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="quF-g9-K2i" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="177" y="2070"/>
-        </scene>
-        <!--Voting View Controller-->
-        <scene sceneID="seQ-yu-Unu">
-            <objects>
-                <viewController id="55U-JC-03Q" customClass="VotingViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="aW5-9d-e8q">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="c9N-PQ-9bw"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="jFv-d4-tHl">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="CRx-lN-0I0">
-                            <connections>
-                                <action selector="quitButtonPressed:" destination="55U-JC-03Q" id="HnS-z7-lvi"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TNs-6h-fHO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="896" y="1335"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="7Hh-s0-aO9">
-            <objects>
-                <navigationController storyboardIdentifier="VotingNav" id="VBE-nT-qAo" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pHY-Li-zah">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="55U-JC-03Q" kind="relationship" relationship="rootViewController" id="FfR-uP-P9k"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Sc-wg-g1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="177" y="1335"/>
-        </scene>
-        <!--Results View Controller-->
-        <scene sceneID="qiC-d1-oui">
-            <objects>
-                <viewController id="s0x-IM-dO9" customClass="ResultsViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="70C-ii-sTc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="fqX-8Y-KqT"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="P7i-8g-E6l">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="6kY-QH-M2w">
-                            <connections>
-                                <action selector="quitButtonPressed:" destination="s0x-IM-dO9" id="qrf-Ya-BvA"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <segue destination="Jyb-XV-U6B" kind="presentation" identifier="showHistory" modalPresentationStyle="formSheet" id="msj-C0-M1Y"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lJ2-u5-QBh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="896" y="2767"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="snY-MY-nQV">
-            <objects>
-                <navigationController storyboardIdentifier="ResultsNav" id="uXR-dP-Jlf" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Me0-hM-Yd3">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="s0x-IM-dO9" kind="relationship" relationship="rootViewController" id="xac-6z-24z"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ThV-A9-UHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="177" y="2768"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="2qe-S9-Amh">
-            <objects>
-                <navigationController storyboardIdentifier="HistoryNav" id="Jyb-XV-U6B" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jKq-5o-4Wg">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Xme-IG-ql6" kind="relationship" relationship="rootViewController" id="GEQ-cq-adn"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pyf-e1-ssX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1677" y="2767"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="CM8-5Z-ke9">
-            <objects>
-                <navigationController id="t4g-rL-EB2" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Htc-B1-Zts">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="NWZ-lf-LI4" kind="relationship" relationship="rootViewController" id="2FZ-2w-9nj"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dNz-X3-heT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="177" y="3446"/>
-        </scene>
-        <!--HELP-->
-        <scene sceneID="lgT-cv-lgr">
-            <objects>
-                <viewController id="NWZ-lf-LI4" customClass="HelpViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4bw-bX-PNC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <viewLayoutGuide key="safeArea" id="Z4v-3b-wG9"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="HELP" id="9ja-K1-9hf">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="fJ7-XL-awe">
-                            <connections>
-                                <action selector="doneButtonPressed" destination="NWZ-lf-LI4" id="hrd-04-dYW"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Old-h4-V8y" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="896" y="3444"/>
-        </scene>
-        <!--History View Controller-->
-        <scene sceneID="i6i-qc-Zih">
-            <objects>
-                <tableViewController id="Xme-IG-ql6" customClass="HistoryViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="v6X-kD-Egf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="Xme-IG-ql6" id="GEX-rG-h8m"/>
-                            <outlet property="delegate" destination="Xme-IG-ql6" id="u3A-Ki-8Uv"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="6Y7-Pg-Fmk">
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="1EK-N8-vwD">
-                            <connections>
-                                <action selector="doneButtonPressed" destination="Xme-IG-ql6" id="g1X-sf-hsf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F9W-aF-8NV" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2437.68115942029" y="2766.847826086957"/>
         </scene>
         <!--Connect View Controller-->
         <scene sceneID="DlZ-aT-q9j">

@@ -75,10 +75,16 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        let player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
-        performSegue(withIdentifier: "showHistory", sender: player)
+        let controller = HistoryViewController()
+        historyViewController = controller
+        controller.player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
 
-        PlayerMetrics.log(event: .openedHistory, attributes: ["GameState": state.rawValue.description as Any])
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerMetrics.log(event: .openedHistory,
+                          attributes: ["GameState": state.rawValue.description as Any])
     }
 
 }
