@@ -25,8 +25,7 @@ extension GameViewController {
             }
             }, pointsUpdate: { [weak self] points in
                 if let timeRaced = self?.timeRaced,
-                    let config = self?.networkConfig,
-                    let raceType = StatsHelper.RaceType(config) {
+                    let raceType = self?.statRaceType {
                     StatsHelper.shared.completedRace(type: raceType,
                                                      points: points,
                                                      timeRaced: timeRaced)
@@ -206,6 +205,17 @@ extension GameViewController {
         timeRaced = 0
         raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
             self?.timeRaced += 1
+
+            if let raceType = self?.statRaceType {
+                var typeString = -1
+                switch raceType {
+                case .mpc: typeString = 1
+                case .gameKit: typeString = 2
+                case .solo: typeString = 3
+                default: break
+                }
+                PlayerMetrics.log(event: .timeSpent, attributes: ["RaceType": typeString])
+            }
         })
 
         navigationController?.setNavigationBarHidden(false, animated: false)

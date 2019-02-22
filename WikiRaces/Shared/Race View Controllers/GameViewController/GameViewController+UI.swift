@@ -99,6 +99,7 @@ extension GameViewController {
 
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
                 PlayerMetrics.log(event: .userAction("quitAlertController:reload"))
+                PlayerMetrics.log(event: .usedReload)
                 self.webView.reload()
             }
             alertController.addAction(reloadAction)

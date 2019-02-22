@@ -34,7 +34,7 @@ internal struct PlayerMetrics {
 
         // Game All Players
         case pageView, pageBlocked, pageError
-        case quitRace, forfeited, usedHelp, fatalError, backupQuit
+        case quitRace, forfeited, usedHelp, usedReload, fatalError, backupQuit
         case openedHistory, openedHistorySF, openedShare, pressedReadyButton, voted
         case finalVotes
 
@@ -42,7 +42,12 @@ internal struct PlayerMetrics {
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
+
+        case timeSpent
+        case banHammer
     }
+
+    #warning("investigate other GK events that should be added")
 
     // MARK: - Logging Events
 

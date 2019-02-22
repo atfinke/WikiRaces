@@ -32,6 +32,12 @@ class GameKitConnectViewController: ConnectViewController {
             self?.match?.delegate = nil
             self?.match?.disconnect()
         }
+
+        #if !MULTIWINDOWDEBUG
+        let playerName = GKLocalPlayer.local.alias
+        Crashlytics.sharedInstance().setUserName(playerName)
+        Analytics.setUserProperty(playerName, forName: "playerName")
+        #endif
     }
 
     override func viewDidAppear(_ animated: Bool) {

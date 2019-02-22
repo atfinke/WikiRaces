@@ -106,9 +106,6 @@ internal class MenuViewController: UIViewController {
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             PlayerDatabaseMetrics.shared.log(event: .customName(name))
         }
-        if GKLocalPlayer.local.isAuthenticated {
-            PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
-        }
         PlayerDatabaseMetrics.shared.log(event: .deviceName(UIDevice.current.name))
 
         promptForInvalidName()
@@ -130,14 +127,14 @@ internal class MenuViewController: UIViewController {
         }
 
         animateMenuOut {
-            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
-            let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
+            let isNetworkTypeGameKit = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
+            let segue = isNetworkTypeGameKit ? Segue.showGameKitConnecting : Segue.showMPCConnecting
             self.performSegue(segue, isHost: false)
 
-            if networkType {
-                StatsHelper.shared.increment(stat: .mpcPressedJoin)
-            } else {
+            if isNetworkTypeGameKit {
                 StatsHelper.shared.increment(stat: .gkPressedJoin)
+            } else {
+                StatsHelper.shared.increment(stat: .mpcPressedJoin)
             }
         }
     }
@@ -156,14 +153,14 @@ internal class MenuViewController: UIViewController {
         }
 
         animateMenuOut {
-            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
-            let segue = networkType ? Segue.showGameKitConnecting : Segue.showMPCConnecting
+            let isNetworkTypeGameKit = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
+            let segue = isNetworkTypeGameKit ? Segue.showGameKitConnecting : Segue.showMPCConnecting
             self.performSegue(segue, isHost: true)
 
-            if networkType {
-                StatsHelper.shared.increment(stat: .mpcPressedHost)
-            } else {
+            if isNetworkTypeGameKit {
                 StatsHelper.shared.increment(stat: .gkPressedJoin)
+            } else {
+                StatsHelper.shared.increment(stat: .mpcPressedHost)
             }
         }
     }

@@ -34,6 +34,11 @@ internal class AppDelegate: WKRAppDelegate {
         configureConstants()
         configureAppearance()
 
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showBanHammer),
+                                               name: PlayerDatabaseMetrics.banHammerNotification,
+                                               object: nil)
+
         PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()
@@ -64,6 +69,19 @@ internal class AppDelegate: WKRAppDelegate {
                                                      coreBuild: appInfo.build,
                                                      kitConstants: WKRKitConstants.current.version,
                                                      uiKitConstants: WKRUIKitConstants.current.version))
+    }
+
+    @objc
+    func showBanHammer() {
+        let controller = UIAlertController(title: "You have been banned from WikiRaces.",
+                                           message: nil,
+                                           preferredStyle: .alert)
+
+        window?.rootViewController?.present(controller,
+                                            animated: true,
+                                            completion: nil)
+
+        PlayerMetrics.log(event: .banHammer)
     }
 
 }

@@ -54,6 +54,17 @@ extension GameViewController {
         votingViewController.playerVoted = { [weak self] page in
             self?.gameManager.player(.voted(page))
             PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
+
+            if let raceType = self?.statRaceType {
+                var stat = StatsHelper.Stat.mpcVotes
+                switch raceType {
+                case .mpc: stat = StatsHelper.Stat.mpcVotes
+                case .gameKit: stat = StatsHelper.Stat.gkVotes
+                case .solo: stat = StatsHelper.Stat.soloVotes
+                default: break
+                }
+                StatsHelper.shared.increment(stat: stat)
+            }
         }
 
         votingViewController.voteInfo = gameManager.voteInfo
@@ -89,6 +100,17 @@ extension GameViewController {
 
         helpViewController.url = gameManager.finalPageURL
         self.activeViewController = helpViewController
+
+        if let raceType = statRaceType {
+            var stat = StatsHelper.Stat.mpcHelp
+            switch raceType {
+            case .mpc: stat = StatsHelper.Stat.mpcHelp
+            case .gameKit: stat = StatsHelper.Stat.gkHelp
+            case .solo: stat = StatsHelper.Stat.soloHelp
+            default: break
+            }
+            StatsHelper.shared.increment(stat: stat)
+        }
     }
 
 }

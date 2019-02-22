@@ -22,10 +22,10 @@ class PlayerDatabaseMetrics: NSObject {
         case app(coreVersion: String, coreBuild: Int, kitConstants: Int, uiKitConstants: Int)
 
         //swiftlint:disable:next line_length
-        case mpcStatsUpdate(mpcPoints: Int, mpcRaces: Int, mpcFastestTime: Int, mpcTotalTime: Int, mpcPages: Int, mpcPressedJoin: Int, mpcPressedHost: Int)
+        case mpcStatsUpdate(mpcVotes: Int, mpcHelp: Int, mpcPoints: Int, mpcRaces: Int, mpcFastestTime: Int, mpcTotalTime: Int, mpcPages: Int, mpcPressedJoin: Int, mpcPressedHost: Int)
         //swiftlint:disable:next line_length
-        case gkStatsUpdate(gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
-        case soloStatsUpdate(soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
+        case gkStatsUpdate(gkVotes: Int, gkHelp: Int, gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
+        case soloStatsUpdate(soloVotes: Int, soloHelp: Int, soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
     }
 
     private struct ProcessedResults {
@@ -34,6 +34,8 @@ class PlayerDatabaseMetrics: NSObject {
         let totalPlayerTime: Int
         let links: Int
     }
+
+    static let banHammerNotification = Notification.Name("banHammerNotification")
 
     // MARK: - Properties
 
@@ -71,6 +73,14 @@ class PlayerDatabaseMetrics: NSObject {
                 self.userRecord = userRecord
                 guard let userRecord = userRecord else {
                     self.isConnecting = false
+                    return
+                }
+
+                if let raceCount = userRecord["Races"] as? NSNumber, raceCount.intValue == -1 {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        let name = PlayerDatabaseMetrics.banHammerNotification
+                        NotificationCenter.default.post(name: name, object: nil)
+                    })
                     return
                 }
 
@@ -166,13 +176,17 @@ class PlayerDatabaseMetrics: NSObject {
                 }
                 names.append(name)
                 record["CustomNames"] = Array(Set(names)) as NSArray
-            case .mpcStatsUpdate(let mpcPoints,
+            case .mpcStatsUpdate(let mpcVotes,
+                                 let mpcHelp,
+                                 let mpcPoints,
                                  let mpcRaces,
                                  let mpcFastestTime,
                                  let mpcTotalTime,
                                  let mpcPages,
                                  let mpcPressedJoin,
                                  let mpcPressedHost):
+                record["mpcVotes"] = NSNumber(value: mpcVotes)
+                record["mpcHelp"] = NSNumber(value: mpcHelp)
                 record["mpcPoints"] = NSNumber(value: mpcPoints)
                 record["mpcRaces"] = NSNumber(value: mpcRaces)
                 record["mpcPages"] = NSNumber(value: mpcPages)
@@ -180,13 +194,17 @@ class PlayerDatabaseMetrics: NSObject {
                 record["mpcTotalTime"] = NSNumber(value: mpcTotalTime)
                 record["mpcPressedJoin"] = NSNumber(value: mpcPressedJoin)
                 record["mpcPressedHost"] = NSNumber(value: mpcPressedHost)
-            case .gkStatsUpdate(let gkPoints,
+            case .gkStatsUpdate(let gkVotes,
+                                let gkHelp,
+                                let gkPoints,
                                 let gkRaces,
                                 let gkFastestTime,
                                 let gkTotalTime,
                                 let gkPages,
                                 let gkPressedJoin,
                                 let gkConnectedToMatch):
+                record["gkVotes"] = NSNumber(value: gkVotes)
+                record["gkHelp"] = NSNumber(value: gkHelp)
                 record["gkPoints"] = NSNumber(value: gkPoints)
                 record["gkRaces"] = NSNumber(value: gkRaces)
                 record["gkPages"] = NSNumber(value: gkPages)
@@ -194,7 +212,14 @@ class PlayerDatabaseMetrics: NSObject {
                 record["gkTotalTime"] = NSNumber(value: gkTotalTime)
                 record["gkPressedJoin"] = NSNumber(value: gkPressedJoin)
                 record["gkConnectedToMatch"] = NSNumber(value: gkConnectedToMatch)
-            case .soloStatsUpdate(let soloRaces, let soloTotalTime, let soloPages, let soloPressedHost):
+            case .soloStatsUpdate(let soloVotes,
+                                  let soloHelp,
+                                  let soloRaces,
+                                  let soloTotalTime,
+                                  let soloPages,
+                                  let soloPressedHost):
+                record["soloVotes"] = NSNumber(value: soloVotes)
+                record["soloHelp"] = NSNumber(value: soloHelp)
                 record["soloRaces"] = NSNumber(value: soloRaces)
                 record["soloTotalTime"] = NSNumber(value: soloTotalTime)
                 record["soloPages"] = NSNumber(value: soloPages)
@@ -221,6 +246,7 @@ class PlayerDatabaseMetrics: NSObject {
                 self.userRecord = nil
 
                 let newEvents = Array(self.processingEvents) + Array(self.queuedEvents)
+                self.queuedEvents = []
                 self.queuedEvents = newEvents
                 self.connect()
             }

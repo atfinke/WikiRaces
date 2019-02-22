@@ -72,6 +72,7 @@ internal class MPCConnectViewController: ConnectViewController {
 
         #if !MULTIWINDOWDEBUG
         Crashlytics.sharedInstance().setUserName(playerName)
+        Analytics.setUserProperty(playerName, forName: "playerName")
         #endif
 
         isValidPlayerName = playerName.utf8.count < 40

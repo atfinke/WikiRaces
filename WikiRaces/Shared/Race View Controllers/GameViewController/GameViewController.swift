@@ -32,6 +32,10 @@ internal class GameViewController: UIViewController {
     var gameManager: WKRGameManager!
     var networkConfig: WKRPeerNetworkConfig!
 
+    var statRaceType: StatsHelper.RaceType? {
+        return StatsHelper.RaceType(networkConfig)
+    }
+
     // MARK: - User Interface
 
     let webView = WKRUIWebView()
