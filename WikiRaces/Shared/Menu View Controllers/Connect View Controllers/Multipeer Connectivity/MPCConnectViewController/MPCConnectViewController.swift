@@ -123,7 +123,8 @@ internal class MPCConnectViewController: ConnectViewController {
         isFirstAppear = false
 
         // Test the connection to Wikipedia
-        runConnectionTest { success in
+        runConnectionTest { [weak self] success in
+            guard let self = self else { return }
             if success && self.isValidPlayerName {
                 if self.isPlayerHost {
                     self.toggleCoreInterface(isHidden: true,

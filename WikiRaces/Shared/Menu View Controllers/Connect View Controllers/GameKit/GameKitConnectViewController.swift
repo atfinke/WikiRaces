@@ -48,7 +48,8 @@ class GameKitConnectViewController: ConnectViewController {
         }
         isFirstAppear = false
 
-        runConnectionTest { success in
+        runConnectionTest { [weak self] success in
+            guard let self = self else { return }
             if success {
                 self.toggleCoreInterface(isHidden: true, duration: 0.25)
                 self.findMatch()

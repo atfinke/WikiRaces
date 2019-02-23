@@ -30,7 +30,7 @@ class ConnectViewController: UIViewController {
         #if !MULTIWINDOWDEBUG
         let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
-        WKRConnectionTester.start { (success) in
+        WKRConnectionTester.start { success in
             DispatchQueue.main.async {
                 if success {
                     #if !MULTIWINDOWDEBUG
