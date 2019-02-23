@@ -52,7 +52,7 @@ class ResultRenderer {
         let rankingHeaderView = createHeaderView(title: "rankings")
         let rankingView = createRankingView(for: results, localPlayer: localPlayer)
         let historyHeaderView = createHeaderView(title: localPlayer.name + "'s path")
-        let historyView = createHistoryView(for: results, localPlayer: localPlayer)
+        let historyView = createHistoryView(for: localPlayer)
 
         innerView.addSubview(bannerView)
         innerView.addSubview(rankingHeaderView)

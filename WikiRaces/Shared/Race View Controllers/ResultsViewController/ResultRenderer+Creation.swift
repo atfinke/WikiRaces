@@ -213,19 +213,11 @@ extension ResultRenderer {
         return rankingView
     }
 
-    func createHistoryView(for results: WKRResultsInfo, localPlayer: WKRPlayer) -> UIView {
+    func createHistoryView(for localPlayer: WKRPlayer) -> UIView {
         let historyView = UIView()
         historyView.translatesAutoresizingMaskIntoConstraints = false
 
-        var localPlayerHistory: [WKRHistoryEntry]?
-        for index in 0..<results.playerCount {
-            let player = results.raceRankingsPlayer(at: index)
-            if player == localPlayer, let entries = player.raceHistory?.entries {
-                localPlayerHistory = entries
-            }
-        }
-
-        guard let entries = localPlayerHistory else { return historyView }
+        guard let entries = localPlayer.raceHistory?.entries else { return historyView }
         var constraints = [NSLayoutConstraint]()
         let entrySpacing = CGFloat(15)
         var anchorView: UIView = historyView

@@ -184,11 +184,22 @@ internal class ResultsViewController: CenteredTableViewController {
                 self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
             }, completion: nil)
 
+            guard let localPlayer = localPlayer else { return }
+            var resultsPlayer: WKRPlayer?
+
+            for index in 0..<(resultsInfo?.playerCount ?? 0) {
+                let player = resultsInfo?.raceRankingsPlayer(at: index)
+                if localPlayer == player {
+                    resultsPlayer = player
+                }
+            }
+
             guard view.window != nil,
-                let player = localPlayer,
+                let player = resultsPlayer,
                 let entriesCount = player.raceHistory?.entries.count,
                 entriesCount > 1,
                 let results = self.resultsInfo else { return }
+
             resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
                 self?.resultImage = image
                 self?.shareResultsBarButtonItem?.isEnabled = true
