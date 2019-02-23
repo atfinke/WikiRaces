@@ -16,70 +16,21 @@ import WKRUIKit
 /// The main menu view controller
 internal class MenuViewController: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - View
 
-    /// Used to track if the menu should be animating
-    var isMenuVisable = false
+    override func loadView() {
+        view = MenuView()
+    }
 
-    var isLeaderboardPresented = false
-
-    // MARK: - Interface Elements
-
-    /// The top of the menu (everything on white). Animates out of the left side.
-    let topView = UIView()
-    /// The bottom of the menu (everything not white). Animates out of the bottom.
-    let bottomView = UIView()
-
-    /// The "WikiRaces" label
-    let titleLabel = UILabel()
-    /// The "Conquer..." label
-    let subtitleLabel = UILabel()
-
-    let joinButton = WKRUIButton()
-    let createButton = WKRUIButton()
-
-    /// The Wiki Points tile
-    var leftMenuTile: MenuTile?
-    /// The average points tile
-    var middleMenuTile: MenuTile?
-    /// The races tile
-    var rightMenuTile: MenuTile?
-
-    /// Timer for moving the puzzle pieces
-    var puzzleTimer: Timer?
-    /// The puzzle piece view
-    let puzzleView = UIScrollView()
-
-    // MARK: - Constraints
-
-    /// Used to animate the top view in and out
-    var topViewLeftConstraint: NSLayoutConstraint!
-    /// Used to animate the bottom view in and out
-    var bottomViewAnchorConstraint: NSLayoutConstraint!
-
-    /// Used for safe area layout adjustments
-    var bottomViewHeightConstraint: NSLayoutConstraint!
-    var puzzleViewHeightConstraint: NSLayoutConstraint!
-
-    /// Used for adjusting y coord of title label based on screen height
-    var titleLabelConstraint: NSLayoutConstraint!
-
-    /// Used for adjusting button widths and heights based on screen width
-    var joinButtonWidthConstraint: NSLayoutConstraint!
-    var joinButtonHeightConstraint: NSLayoutConstraint!
-    var createButtonWidthConstraint: NSLayoutConstraint!
-    var createButtonHeightConstraint: NSLayoutConstraint!
+    var menuView: MenuView {
+        guard let view = view as? MenuView else { fatalError() }
+        return view
+    }
 
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupInterface()
-
-        let panelGesture = UITapGestureRecognizer(target: self, action: #selector(showDebugPanel))
-        panelGesture.numberOfTapsRequired = 2
-        panelGesture.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(panelGesture)
 
         //swiftlint:disable:next discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
@@ -91,11 +42,51 @@ internal class MenuViewController: UIViewController {
                 })
             }
         }
+
+        menuView.presentDebugController = showDebugController
+        menuView.presentMPCConnectController = { isHost in
+            self.performSegue(.showMPCConnecting, isHost: isHost)
+        }
+        menuView.presentGlobalConnectController = {
+            let message = """
+            Welcome to the Global Races Beta. At this time, Global Races require a Game Center account to play.
+            """
+            let controller = UIAlertController(title: "Global Races Beta",
+                                               message: message,
+                                               preferredStyle: .alert)
+
+            let action = UIAlertAction(title: "Start Racing",
+                                       style: .default,
+                                       handler: { _ in
+                                        self.performSegue(.showGameKitConnecting, isHost: false)
+            })
+            controller.addAction(action)
+            controller.addCancelAction(title: "Cancel")
+            self.present(controller, animated: true, completion: nil)
+        }
+        menuView.presentLeaderboardController = {
+            let controller = GKGameCenterViewController()
+            controller.gameCenterDelegate = self
+            controller.viewState = .leaderboards
+            controller.leaderboardTimeScope = .allTime
+            self.present(controller, animated: true, completion: nil)
+        }
+        menuView.presentGCAuthController = {
+            self.attemptGCAuthentication()
+        }
+        menuView.presentAlertController = { alertController in
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        animateMenuIn()
+
+        // adjusts views before animation if rotation occured
+        menuView.setNeedsLayout()
+        menuView.layoutIfNeeded()
+
+        menuView.animateMenuIn()
 
         #if MULTIWINDOWDEBUG
             performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
@@ -111,119 +102,34 @@ internal class MenuViewController: UIViewController {
         promptForInvalidName()
     }
 
-    // MARK: - Actions
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.wkrStatusBarStyle
+    }
 
-    /// Join button pressed
-    @objc
-    func joinRace() {
-        guard isMenuVisable else { return }
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedJoin)
+    // MARK: - Name Checking
 
-        UISelectionFeedbackGenerator().selectionChanged()
-
-        guard !promptForCustomName(isHost: false) else {
+    func promptForInvalidName() {
+        guard UserDefaults.standard.bool(forKey: "AttemptingMCPeerIDCreation") else {
             return
         }
+        UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
 
-        animateMenuOut {
-            let isNetworkTypeGameKit = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
-            let segue = isNetworkTypeGameKit ? Segue.showGameKitConnecting : Segue.showMPCConnecting
-            self.performSegue(segue, isHost: false)
+        //swiftlint:disable:next line_length
+        let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
+        let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 
-            if isNetworkTypeGameKit {
-                StatsHelper.shared.increment(stat: .gkPressedJoin)
-            } else {
-                StatsHelper.shared.increment(stat: .mpcPressedJoin)
-            }
-        }
-    }
-
-    /// Create button pressed
-    @objc
-    func createRace() {
-        guard isMenuVisable else { return }
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedHost)
-
-        UISelectionFeedbackGenerator().selectionChanged()
-
-        guard !promptForCustomName(isHost: true) else {
-            return
-        }
-
-        animateMenuOut {
-            let isNetworkTypeGameKit = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
-            let segue = isNetworkTypeGameKit ? Segue.showGameKitConnecting : Segue.showMPCConnecting
-            self.performSegue(segue, isHost: true)
-
-            if isNetworkTypeGameKit {
-                StatsHelper.shared.increment(stat: .gkPressedJoin)
-            } else {
-                StatsHelper.shared.increment(stat: .mpcPressedHost)
-            }
-        }
-    }
-
-    // MARK: - Menu Animations
-
-    /// Animates the views off screen
-    ///
-    /// - Parameter completion: The completion handler
-    func animateMenuOut(completion: (() -> Void)?) {
-        view.isUserInteractionEnabled = false
-        bottomViewAnchorConstraint.constant = bottomView.frame.height
-
-        isMenuVisable = false
-        view.setNeedsLayout()
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle, animations: {
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.puzzleTimer?.invalidate()
-            completion?()
+        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
+            PlayerMetrics.log(event: .userAction("promptForInvalidName:rejected"))
         })
-    }
+        alertController.addAction(laterAction)
 
-    /// Animates the views on screen
-    func animateMenuIn() {
-        view.isUserInteractionEnabled = false
-        UIApplication.shared.isIdleTimerDisabled = false
-
-        let duration = TimeInterval(5)
-        let offset = CGFloat(40 * duration)
-
-        func animateScroll() {
-            let xOffset = self.puzzleView.contentOffset.x + offset
-            UIView.animate(withDuration: duration,
-                           delay: 0,
-                           options: .curveLinear,
-                           animations: {
-                            self.puzzleView.contentOffset = CGPoint(x: xOffset,
-                                                                    y: 0)
-            }, completion: nil)
-        }
-
-        puzzleTimer?.invalidate()
-        puzzleTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: true) { _ in
-            animateScroll()
-        }
-        puzzleTimer?.fire()
-
-        isMenuVisable = true
-        view.setNeedsLayout()
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle,
-                       animations: {
-            self.view.layoutIfNeeded()
-        }, completion: { _ in
-            self.view.isUserInteractionEnabled = true
-            if SKStoreReviewController.shouldPromptForRating {
-                #if !DEBUG
-                SKStoreReviewController.requestReview()
-                #endif
-            }
+        let settingsAction = UIAlertAction(title: "Change Name", style: .default, handler: { _ in
+            PlayerMetrics.log(event: .userAction("promptForInvalidName:accepted"))
+            UIApplication.shared.openSettings()
         })
+        alertController.addAction(settingsAction)
+
+        present(alertController, animated: true, completion: nil)
     }
 
 }

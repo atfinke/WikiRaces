@@ -16,16 +16,34 @@ extension MenuViewController {
         return [
             UIKeyCommand(input: "n",
                          modifierFlags: .command,
-                         action: #selector(createRace),
-                         discoverabilityTitle: "Create Race"),
+                         action: #selector(keyboardCreateLocalRace),
+                         discoverabilityTitle: "Create Local Race"),
             UIKeyCommand(input: "j",
                          modifierFlags: .command,
-                         action: #selector(joinRace),
-                         discoverabilityTitle: "Join Race"),
-            UIKeyCommand(input: "s",
+                         action: #selector(keyboardJoinLocalRace),
+                         discoverabilityTitle: "Join Local Race"),
+            UIKeyCommand(input: "g",
                          modifierFlags: .command,
-                         action: #selector(openSettings),
-                         discoverabilityTitle: "Open Settings")
+                         action: #selector(keyboardJoinGlobalRace),
+                         discoverabilityTitle: "Join Global Race")
         ]
+    }
+
+    @objc private func keyboardJoinLocalRace() {
+        PlayerMetrics.log(event: .pressedJoin)
+        StatsHelper.shared.increment(stat: .mpcPressedJoin)
+        performSegue(.showMPCConnecting, isHost: false)
+    }
+
+    @objc private func keyboardCreateLocalRace() {
+        PlayerMetrics.log(event: .pressedHost)
+        StatsHelper.shared.increment(stat: .mpcPressedHost)
+        performSegue(.showMPCConnecting, isHost: true)
+    }
+
+    @objc private func keyboardJoinGlobalRace() {
+        PlayerMetrics.log(event: .pressedGlobalJoin)
+        StatsHelper.shared.increment(stat: .gkPressedJoin)
+        performSegue(.showGameKitConnecting, isHost: false)
     }
 }

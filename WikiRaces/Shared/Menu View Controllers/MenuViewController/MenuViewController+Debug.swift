@@ -1,5 +1,5 @@
 //
-//  MenuViewController+Alerts.swift
+//  MenuViewController+Debug.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 1/27/19.
@@ -13,65 +13,8 @@ import WKRUIKit
 
 extension MenuViewController {
 
-    func promptForCustomName(isHost: Bool) -> Bool {
-        guard !UserDefaults.standard.bool(forKey: "PromptedCustomName") else {
-            return false
-        }
-        UserDefaults.standard.set(true, forKey: "PromptedCustomName")
-
-        let message = "Would you like to set a custom player name before racing?"
-        let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
-
-        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
-            if isHost {
-                self.createRace()
-            } else {
-                self.joinRace()
-            }
-        })
-        alertController.addAction(laterAction)
-
-        let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
-
-            self.openSettings()
-        })
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-        return true
-    }
-
-    func promptForInvalidName() {
-        guard UserDefaults.standard.bool(forKey: "AttemptingMCPeerIDCreation") else {
-            return
-        }
-        UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
-
-        //swiftlint:disable:next line_length
-        let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
-        let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
-
-        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForInvalidName:rejected"))
-        })
-        alertController.addAction(laterAction)
-
-        let settingsAction = UIAlertAction(title: "Change Name", style: .default, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForInvalidName:accepted"))
-            self.openSettings()
-        })
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
-    /// Changes title label to build info
     @objc
-    func showDebugPanel() {
+    func showDebugController() {
         PlayerMetrics.log(event: .versionInfo)
 
         let message = "If your name isn't Andrew, you probably shouldn’t be here."
@@ -94,22 +37,6 @@ extension MenuViewController {
             self.showDebugDefaultsInfo()
         })
         alertController.addAction(defaultsAction)
-
-        let mpcAction = UIAlertAction(title: "Use MPC", style: .default, handler: { _ in
-            UserDefaults.standard.set(false, forKey: "NetworkTypeGameKit")
-            #if DEBUG
-            self.titleLabel.text = "WikiRaces [MPC]"
-            #endif
-        })
-        alertController.addAction(mpcAction)
-
-        let gkAction = UIAlertAction(title: "Use GameKit", style: .default, handler: { _ in
-            UserDefaults.standard.set(true, forKey: "NetworkTypeGameKit")
-            #if DEBUG
-            self.titleLabel.text = "WikiRaces [GK]"
-            #endif
-        })
-        alertController.addAction(gkAction)
 
         alertController.addCancelAction(title: "Dismiss")
 

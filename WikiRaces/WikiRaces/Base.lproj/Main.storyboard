@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.59" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FsY-bJ-C6c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FsY-bJ-C6c">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.45"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.47"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,7 +73,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNu-P3-to5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594.20289855072474" y="3445.9239130434785"/>
+            <point key="canvasLocation" x="-594" y="3460"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="Kzk-I2-guM">
@@ -110,7 +110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9iR-UB-PNh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1336" y="3446"/>
+            <point key="canvasLocation" x="-1336" y="3460"/>
         </scene>
         <!--INVITE PLAYERS-->
         <scene sceneID="156-cC-x0n">
@@ -176,7 +176,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0b-il-em8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-594" y="2724"/>
+            <point key="canvasLocation" x="-594" y="2771"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BkX-51-d6t">
@@ -192,7 +192,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryR-sG-Xcn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1336" y="2724"/>
+            <point key="canvasLocation" x="-1336" y="2771"/>
         </scene>
         <!--Connect View Controller-->
         <scene sceneID="DlZ-aT-q9j">
@@ -249,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ynY-1P-Axz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2109" y="3022"/>
+            <point key="canvasLocation" x="-2110" y="3016"/>
         </scene>
         <!--Game Kit Connect View Controller-->
         <scene sceneID="a9T-DP-SUC">
@@ -312,6 +312,6 @@
         <image name="HelpFlag" width="33" height="57"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8vJ-gT-ptC"/>
+        <segue reference="KE1-Om-bnI"/>
     </inferredMetricsTieBreakers>
 </document>

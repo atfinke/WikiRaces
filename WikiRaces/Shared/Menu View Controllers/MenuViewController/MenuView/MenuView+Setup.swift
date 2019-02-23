@@ -1,141 +1,39 @@
 //
-//  MenuViewController+UI.swift
+//  MenuView+Setup.swift
 //  WikiRaces
 //
-//  Created by Andrew Finke on 8/5/17.
-//  Copyright © 2017 Andrew Finke. All rights reserved.
+//  Created by Andrew Finke on 2/23/19.
+//  Copyright © 2019 Andrew Finke. All rights reserved.
 //
 
 import UIKit
 import WKRUIKit
 
-extension MenuViewController {
-
-    // MARK: - Interface
-
-    /// By WikiRaces 4 I hope there is a better way to do this
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-
-        // Button Styles
-
-        let buttonStyle: WKRUIButtonStyle
-        let buttonWidth: CGFloat
-        let buttonHeight: CGFloat
-        if view.frame.size.width > 420 {
-            buttonStyle = .large
-            buttonWidth = 195
-            buttonHeight = 50
-        } else {
-            buttonStyle = .normal
-            buttonWidth = 175
-            buttonHeight = 40
-        }
-
-        if view.frame.size.width < UIScreen.main.bounds.width / 1.8 {
-            leftMenuTile?.title = "WIKI\nPOINTS"
-            middleMenuTile?.title = "AVG PER\nRACE"
-            rightMenuTile?.title = "RACES\nPLAYED"
-        } else {
-            leftMenuTile?.title = "WIKI POINTS"
-            middleMenuTile?.title = "AVG PER RACE"
-            rightMenuTile?.title = "RACES PLAYED"
-        }
-
-        createButton.style = buttonStyle
-        joinButton.style = buttonStyle
-
-        // Label Fonts
-
-        titleLabel.font = UIFont.boldSystemFont(ofSize: min(view.frame.size.width / 10.0, 55))
-        subtitleLabel.font = UIFont.systemFont(ofSize: min(view.frame.size.width / 18.0, 30), weight: .medium)
-
-        // Constraints
-
-        titleLabelConstraint.constant = view.frame.size.height / 7
-
-        if isMenuVisable {
-            topViewLeftConstraint.constant = 0
-            bottomViewAnchorConstraint.constant = 0
-
-            if view.frame.size.height < 650 {
-                bottomViewAnchorConstraint.constant = 75
-            }
-        } else {
-            topViewLeftConstraint.constant = -topView.frame.width
-            bottomViewAnchorConstraint.constant = bottomView.frame.height
-        }
-
-        createButtonWidthConstraint.constant = buttonWidth + 30
-        createButtonHeightConstraint.constant = buttonHeight
-
-        joinButtonWidthConstraint.constant = buttonWidth
-        joinButtonHeightConstraint.constant = buttonHeight
-    }
-
-    /// One-off setup
-    func setupInterface() {
-        view.backgroundColor = UIColor.wkrBackgroundColor
-        UIApplication.shared.keyWindow?.backgroundColor = UIColor.wkrBackgroundColor
-
-        topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.backgroundColor = UIColor.wkrMenuTopViewColor
-        view.addSubview(topView)
-
-        bottomView.backgroundColor = UIColor.wkrMenuBottomViewColor
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomView)
-
-        topViewLeftConstraint = topView.leftAnchor.constraint(equalTo: view.leftAnchor)
-        bottomViewAnchorConstraint = bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 250)
-        bottomViewHeightConstraint = bottomView.heightAnchor.constraint(equalToConstant: 250)
-
-        setupTopView()
-        setupBottomView()
-
-        let constraints = [
-            topView.topAnchor.constraint(equalTo: view.topAnchor),
-            topView.bottomAnchor.constraint(equalTo: bottomView.topAnchor),
-            topView.widthAnchor.constraint(equalTo: view.widthAnchor),
-
-            bottomView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            bottomView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            bottomViewHeightConstraint!,
-
-            topViewLeftConstraint!,
-            bottomViewAnchorConstraint!
-        ]
-        NSLayoutConstraint.activate(constraints)
-    }
-
-    override func viewSafeAreaInsetsDidChange() {
-        super.viewSafeAreaInsetsDidChange()
-        puzzleViewHeightConstraint.constant = 75 + view.safeAreaInsets.bottom / 2
-        bottomViewHeightConstraint.constant = 250 + view.safeAreaInsets.bottom / 2
-    }
+extension MenuView {
 
     // MARK: - Top View
 
     /// Sets up the top view of the menu
-    private func setupTopView() {
+    //swiftlint:disable:next function_body_length
+    func setupTopView() {
         setupLabels()
         setupButtons()
 
         titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: 200)
 
-        createButtonWidthConstraint = createButton.widthAnchor.constraint(equalToConstant: 215)
-        createButtonHeightConstraint = createButton.heightAnchor.constraint(equalToConstant: 45)
-        joinButtonWidthConstraint = joinButton.widthAnchor.constraint(equalToConstant: 185)
-        joinButtonHeightConstraint = joinButton.heightAnchor.constraint(equalToConstant: 45)
+        localRaceTypeButtonWidthConstraint = localRaceTypeButton.widthAnchor.constraint(equalToConstant: 0)
+        localRaceTypeButtonHeightConstraint = localRaceTypeButton.heightAnchor.constraint(equalToConstant: 0)
+        localRaceTypeButtonLeftConstraint = localRaceTypeButton.leftAnchor.constraint(equalTo: topView.leftAnchor,
+                                                                                      constant: 0)
+        globalRaceTypeButtonWidthConstraint = globalRaceTypeButton.widthAnchor.constraint(equalToConstant: 0)
+
+        joinLocalRaceButtonWidthConstraint = joinLocalRaceButton.widthAnchor.constraint(equalToConstant: 0)
+        joinLocalRaceButtonLeftConstraint = joinLocalRaceButton.leftAnchor.constraint(equalTo: topView.leftAnchor,
+                                                                                      constant: 0)
+        createLocalRaceButtonWidthConstraint = createLocalRaceButton.widthAnchor.constraint(equalToConstant: 0)
 
         let constraints = [
             titleLabelConstraint!,
-
-            joinButtonWidthConstraint!,
-            joinButtonHeightConstraint!,
-
-            createButtonWidthConstraint!,
-            createButtonHeightConstraint!,
 
             titleLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
             titleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
@@ -144,26 +42,71 @@ extension MenuViewController {
             subtitleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
 
-            joinButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40.0),
-            joinButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
+            localRaceTypeButtonWidthConstraint!,
+            localRaceTypeButtonHeightConstraint!,
+            localRaceTypeButtonLeftConstraint!,
+            globalRaceTypeButtonWidthConstraint!,
 
-            createButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
-            createButton.topAnchor.constraint(equalTo: joinButton.bottomAnchor, constant: 20.0)
+            joinLocalRaceButtonWidthConstraint!,
+            joinLocalRaceButtonLeftConstraint!,
+            createLocalRaceButtonWidthConstraint!,
+
+            localRaceTypeButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
+                                                     constant: 40.0),
+            joinLocalRaceButton.topAnchor.constraint(equalTo: localRaceTypeButton.topAnchor),
+
+            globalRaceTypeButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
+            joinLocalRaceButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
+            createLocalRaceButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
+
+            globalRaceTypeButton.leftAnchor.constraint(equalTo: localRaceTypeButton.leftAnchor),
+            createLocalRaceButton.leftAnchor.constraint(equalTo: joinLocalRaceButton.leftAnchor),
+
+            globalRaceTypeButton.topAnchor.constraint(equalTo: localRaceTypeButton.bottomAnchor,
+                                                      constant: 20.0),
+            createLocalRaceButton.topAnchor.constraint(equalTo: globalRaceTypeButton.topAnchor),
+
+            localOptionsBackButton.leftAnchor.constraint(equalTo: joinLocalRaceButton.leftAnchor),
+            localOptionsBackButton.topAnchor.constraint(equalTo: createLocalRaceButton.bottomAnchor,
+                                                        constant: 20.0),
+            localOptionsBackButton.widthAnchor.constraint(equalToConstant: 30),
+            localOptionsBackButton.heightAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor,
+                                                           multiplier: 1)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
     /// Sets up the buttons
     private func setupButtons() {
-        joinButton.title = "Join race"
-        joinButton.translatesAutoresizingMaskIntoConstraints = false
-        joinButton.addTarget(self, action: #selector(joinRace), for: .touchUpInside)
-        topView.addSubview(joinButton)
+        localRaceTypeButton.title = "local race"
+        localRaceTypeButton.translatesAutoresizingMaskIntoConstraints = false
+        localRaceTypeButton.addTarget(self, action: #selector(showLocalRaceOptions), for: .touchUpInside)
+        topView.addSubview(localRaceTypeButton)
 
-        createButton.title = "Create race"
-        createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.addTarget(self, action: #selector(createRace), for: .touchUpInside)
-        topView.addSubview(createButton)
+        globalRaceTypeButton.title = "global race"
+        globalRaceTypeButton.translatesAutoresizingMaskIntoConstraints = false
+        globalRaceTypeButton.addTarget(self, action: #selector(joinGlobalRace), for: .touchUpInside)
+        topView.addSubview(globalRaceTypeButton)
+
+        joinLocalRaceButton.title = "join race"
+        joinLocalRaceButton.translatesAutoresizingMaskIntoConstraints = false
+        joinLocalRaceButton.addTarget(self, action: #selector(joinLocalRace), for: .touchUpInside)
+        topView.addSubview(joinLocalRaceButton)
+
+        createLocalRaceButton.title = "create race"
+        createLocalRaceButton.translatesAutoresizingMaskIntoConstraints = false
+        createLocalRaceButton.addTarget(self, action: #selector(createLocalRace), for: .touchUpInside)
+        topView.addSubview(createLocalRaceButton)
+
+        localOptionsBackButton.setImage(UIImage(named: "Back")!, for: .normal)
+        localOptionsBackButton.tintColor = .wkrTextColor
+        localOptionsBackButton.translatesAutoresizingMaskIntoConstraints = false
+        localOptionsBackButton.addTarget(self, action: #selector(localOptionsBackButtonPressed), for: .touchUpInside)
+        topView.addSubview(localOptionsBackButton)
+
+        localOptionsBackButton.layer.cornerRadius = 15
+        localOptionsBackButton.layer.borderWidth = 1.7
+        localOptionsBackButton.layer.borderColor = UIColor.wkrTextColor.cgColor
     }
 
     /// Sets up the labels
@@ -174,10 +117,7 @@ extension MenuViewController {
         topView.addSubview(titleLabel)
 
         #if DEBUG
-            titleLabel.textColor = UIColor(red: 51.0 / 255.0, green: 102.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
-
-            let networkType = UserDefaults.standard.bool(forKey: "NetworkTypeGameKit")
-            titleLabel.text = networkType ? "WikiRaces [GK]" : "WikiRaces [MPC]"
+        titleLabel.textColor = UIColor(red: 51.0 / 255.0, green: 102.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
         #endif
 
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."
@@ -191,7 +131,7 @@ extension MenuViewController {
     // MARK: - Bottom View
 
     /// Sets up the bottom views
-    private func setupBottomView() {
+    func setupBottomView() {
         let stackView = setupStatsStackView()
         let puzzleView = setupPuzzleView()
         puzzleViewHeightConstraint = puzzleView.heightAnchor.constraint(equalToConstant: 75)
@@ -300,7 +240,4 @@ extension MenuViewController {
         return puzzleBackgroundView
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.wkrStatusBarStyle
-    }
 }

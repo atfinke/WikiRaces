@@ -10,33 +10,6 @@ import GameKit
 
 extension MenuViewController: GKGameCenterControllerDelegate {
 
-    // MARK: - Interface
-
-    /// Called when a tile is pressed
-    ///
-    /// - Parameter sender: The pressed tile
-    @objc
-    func menuTilePressed(sender: MenuTile) {
-        PlayerMetrics.log(event: .userAction(#function))
-
-        guard GKLocalPlayer.local.isAuthenticated else {
-            attemptGCAuthentication()
-            return
-        }
-        guard !isLeaderboardPresented else {
-            return
-        }
-
-        isLeaderboardPresented = true
-        animateMenuOut {
-            let controller = GKGameCenterViewController()
-            controller.gameCenterDelegate = self
-            controller.viewState = .leaderboards
-            controller.leaderboardTimeScope = .allTime
-            self.present(controller, animated: true, completion: nil)
-        }
-    }
-
     // MARK: - Game Center
 
     /// Attempts Game Center login
@@ -47,7 +20,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
         GKLocalPlayer.local.authenticateHandler = { viewController, error in
             DispatchQueue.main.async {
-                if let viewController = viewController, self.isMenuVisable {
+                if let viewController = viewController, self.menuView.state != .noInterface {
                     if self.presentedViewController == nil {
                         self.present(viewController, animated: true, completion: nil)
                     }
@@ -82,8 +55,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         PlayerMetrics.log(event: .userAction(#function))
         dismiss(animated: true) {
-            self.animateMenuIn()
-            self.isLeaderboardPresented = false
+            self.menuView.animateMenuIn()
         }
     }
 

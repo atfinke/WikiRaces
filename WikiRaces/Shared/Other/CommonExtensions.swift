@@ -85,3 +85,12 @@ extension SKStoreReviewController {
         }
     }
 }
+
+extension UIApplication {
+    func openSettings() {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+            fatalError("Settings URL nil")
+        }
+        open(settingsURL, options: [:], completionHandler: nil)
+    }
+}

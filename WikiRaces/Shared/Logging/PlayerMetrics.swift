@@ -28,7 +28,7 @@ internal struct PlayerMetrics {
     enum Event: String {
         // Non Game
         case leaderboard, versionInfo
-        case pressedJoin, pressedHost
+        case pressedJoin, pressedHost, pressedGlobalJoin, pressedLocalOptions
         case namePromptResult, nameType
         case cloudStatus, interfaceMode
 

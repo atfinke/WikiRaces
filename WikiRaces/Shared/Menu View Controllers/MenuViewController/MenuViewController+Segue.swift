@@ -70,15 +70,4 @@ extension MenuViewController {
         }
     }
 
-    // MARK: - Settings
-
-    @objc
-    func openSettings() {
-        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
-            fatalError("Settings URL nil")
-        }
-
-        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-    }
-
 }
