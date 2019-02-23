@@ -109,6 +109,14 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         })
         updateDescriptionLabel(to: "INVITE RECEIVED")
 
+        activeInviteTimeoutTimer?.invalidate()
+        let timeout: TimeInterval = invite.context?.inviteTimeout ?? 10.0
+        activeInviteTimeoutTimer = Timer.scheduledTimer(withTimeInterval: timeout,
+                                                        repeats: false,
+                                                        block: { [weak self] _ in
+                                                            self?.declineInvite()
+        })
+
         // Previous versions didn't send a host context object
         guard let context = invite.context else { return }
         if context.minPeerAppBuild > Bundle.main.appInfo.build {

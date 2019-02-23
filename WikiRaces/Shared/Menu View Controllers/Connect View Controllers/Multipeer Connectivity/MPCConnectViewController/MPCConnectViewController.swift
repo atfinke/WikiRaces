@@ -30,16 +30,16 @@ internal class MPCConnectViewController: ConnectViewController {
 
     var playerName = UIDevice.current.name
     var isValidPlayerName = false
-
     var isSolo = false
     var isPlayerHost = false
-
     var isShowingInvite = false
 
     // MARK: - MPC Properties
 
     var advertiser: MCNearbyServiceAdvertiser?
     var activeInvite: ((Bool, MCSession) -> Void)?
+    var activeInviteTimeoutTimer: Timer?
+
     var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext?)]()
 
     var peerID: MCPeerID!

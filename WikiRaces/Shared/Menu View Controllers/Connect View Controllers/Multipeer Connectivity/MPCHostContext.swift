@@ -13,5 +13,6 @@ struct MPCHostContext: Codable {
     let appVersion: String
     let name: String
 
+    let inviteTimeout: TimeInterval
     let minPeerAppBuild: Int
 }

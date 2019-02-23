@@ -113,20 +113,20 @@ extension MPCHostViewController {
 
         update(peerID: peerID, to: .invited)
 
-        guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
-            let bundleBuild = Int(bundleBuildString),
-            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-        let context = MPCHostContext(appBuild: bundleBuild,
-                                     appVersion: bundleVersion,
+        let appInfo = Bundle.main.appInfo
+        let context = MPCHostContext(appBuild: appInfo.build,
+                                     appVersion: appInfo.version,
                                      name: session.myPeerID.displayName,
+                                     inviteTimeout: 45.0,
                                      minPeerAppBuild: 3706)
         guard let data = try? JSONEncoder().encode(context) else {
             fatalError("Couldn't encode context")
         }
 
-        browser?.invitePeer(peerID, to: session, withContext: data, timeout: 15.0)
+        browser?.invitePeer(peerID,
+                            to: session,
+                            withContext: data,
+                            timeout: context.inviteTimeout)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
