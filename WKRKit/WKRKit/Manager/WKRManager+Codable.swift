@@ -63,6 +63,13 @@ extension WKRGameManager {
             if message == .quit {
                 isRaceSpecific = false
             }
+
+            // Don't show "on USA" message if expected to show "is on same page" message
+            let lastPageTitle = localPlayer.raceHistory?.entries.last?.page.title ?? ""
+            if message == .onUSA && lastPageTitle == "United States" {
+                return
+            }
+
             enqueue(message: message.text(for: player), duration: 5.0, isRaceSpecific: isRaceSpecific)
         } else if let error = object.typeOfEnum(WKRFatalError.self), !isFailing {
             isFailing = true
@@ -82,7 +89,7 @@ extension WKRGameManager {
             resultsTimeUpdate?(int.value)
         case .bonusPoints:
             let string = int.value == 1 ? "Point" : "Points"
-            let message = "Match Bonus Now \(int.value) " + string
+            let message = "Race Bonus Now \(int.value) " + string
             enqueue(message: message, isRaceSpecific: true)
         case .showReady:
             resultsShowReady?(int.value == 1)
