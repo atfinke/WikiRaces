@@ -17,6 +17,11 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer)
+        if let invite = GlobalRaceHelper.shared.lastInvite,
+            let controller = GKMatchmakerViewController(invite: invite) {
+            controller.matchmakerDelegate = self
+            present(controller, animated: true, completion: nil)
+        }
         if let controller = GKMatchmakerViewController(matchRequest: request) {
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
@@ -100,5 +105,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                                message: "Please try again later.")
             }
         }
+
+        GlobalRaceHelper.shared.lastInvite = nil
     }
 }
