@@ -48,9 +48,14 @@ class GameKitConnectViewController: ConnectViewController {
         }
         isFirstAppear = false
 
-        runConnectionTest { _ in
-            self.toggleCoreInterface(isHidden: true, duration: 0.25)
-            self.findMatch()
+        runConnectionTest { success in
+            if success {
+                self.toggleCoreInterface(isHidden: true, duration: 0.25)
+                self.findMatch()
+            } else if !success {
+                self.showError(title: "Slow Connection",
+                               message: "A fast internet connection is required to play WikiRaces.")
+            }
         }
 
         toggleCoreInterface(isHidden: false, duration: 0.5)
@@ -62,10 +67,11 @@ class GameKitConnectViewController: ConnectViewController {
         }
 
         guard let destination = navigationController.rootViewController as? GameViewController,
-            let isPlayerHost = sender as? Bool else {
+            let isPlayerHost = sender as? Bool,
+            let match = match else {
                 fatalError("Destination rootViewController is not a GameViewController")
         }
-        destination.networkConfig = .gameKit(match: match!, isHost: isPlayerHost)
+        destination.networkConfig = .gameKit(match: match, isHost: isPlayerHost)
     }
 
 }
