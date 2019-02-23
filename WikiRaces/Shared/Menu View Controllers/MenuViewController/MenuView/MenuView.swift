@@ -24,7 +24,7 @@ class MenuView: UIView {
     var presentMPCConnectController: ((_ isHost: Bool) -> Void)?
     var presentGlobalConnectController: (() -> Void)?
     var presentLeaderboardController: (() -> Void)?
-    var presentGCAuthController: (() -> Void)?
+    var presentGlobalAuthController: (() -> Void)?
     var presentAlertController: ((UIAlertController) -> Void)?
 
     // MARK: - Properties

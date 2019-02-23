@@ -53,7 +53,8 @@ extension GameViewController {
         gameManager.voting(timeUpdate: { [weak self] time in
             self?.votingViewController?.voteTimeRemaing = time
 
-            if self?.networkConfig.isHost ?? false && time == 0, let votingInfo = self?.gameManager.voteInfo {
+            if self?.networkConfig.isHost ?? false && time == 0,
+                let votingInfo = self?.gameManager.voteInfo {
                 for index in 0..<votingInfo.pageCount {
                     if let info = votingInfo.page(for: index) {
                         for _ in 0..<info.votes {

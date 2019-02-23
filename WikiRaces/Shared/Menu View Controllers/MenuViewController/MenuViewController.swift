@@ -71,8 +71,8 @@ internal class MenuViewController: UIViewController {
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
         }
-        menuView.presentGCAuthController = {
-            self.attemptGCAuthentication()
+        menuView.presentGlobalAuthController = {
+            self.attemptGlobalAuthentication()
         }
         menuView.presentAlertController = { alertController in
             self.present(alertController, animated: true, completion: nil)
@@ -91,7 +91,7 @@ internal class MenuViewController: UIViewController {
         #if MULTIWINDOWDEBUG
             performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
         #else
-            attemptGCAuthentication()
+            attemptGlobalAuthentication()
         #endif
 
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {

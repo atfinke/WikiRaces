@@ -130,7 +130,7 @@ extension MenuView {
         PlayerMetrics.log(event: .userAction(#function))
 
         guard GKLocalPlayer.local.isAuthenticated else {
-            self.presentGCAuthController?()
+            self.presentGlobalAuthController?()
             return
         }
 
