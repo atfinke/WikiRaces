@@ -17,7 +17,7 @@ import FirebasePerformance
 
 class GameKitConnectViewController: ConnectViewController {
 
-   // MARK: - Properties
+    // MARK: - Properties
 
     var isPlayerHost = false
     var match: GKMatch?
@@ -60,19 +60,6 @@ class GameKitConnectViewController: ConnectViewController {
         }
 
         toggleCoreInterface(isHidden: false, duration: 0.5)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationController = segue.destination as? UINavigationController else {
-            fatalError("Destination is not a UINavigationController")
-        }
-
-        guard let destination = navigationController.rootViewController as? GameViewController,
-            let isPlayerHost = sender as? Bool,
-            let match = match else {
-                fatalError("Destination rootViewController is not a GameViewController")
-        }
-        destination.networkConfig = .gameKit(match: match, isHost: isPlayerHost)
     }
 
 }

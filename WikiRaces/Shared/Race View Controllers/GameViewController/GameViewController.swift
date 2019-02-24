@@ -45,8 +45,8 @@ internal class GameViewController: UIViewController {
     var helpBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 
-    @IBOutlet weak var connectingLabel: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    let connectingLabel = UILabel()
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
 
     // MARK: - View Controllers
 
@@ -65,12 +65,22 @@ internal class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGameManager()
+
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            setupGameManager()
+        }
+
         setupInterface()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            webView.alpha = 1.0
+            return
+        }
+
         if !isInterfaceConfigured {
             isInterfaceConfigured = true
             if !networkConfig.isHost {
@@ -106,12 +116,14 @@ internal class GameViewController: UIViewController {
 
     // MARK: - User Actions
 
-    @IBAction func helpButtonPressed() {
+    @objc
+    func helpButtonPressed() {
         PlayerMetrics.log(event: .userAction(#function))
         showHelp()
     }
 
-    @IBAction func quitButtonPressed() {
+    @objc
+    func quitButtonPressed() {
         PlayerMetrics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
@@ -152,6 +164,12 @@ internal class GameViewController: UIViewController {
     func reloadPage() {
         PlayerMetrics.log(event: .userAction("flagButtonPressed:reload"))
         self.webView.reload()
+    }
+
+    // Used for screenshots / fastlane
+    func prepareForScreenshots(for url: URL) {
+        webView.load(URLRequest(url: url))
+        title = "Star Wars: Galaxy's Edge".uppercased()
     }
 
 }

@@ -14,7 +14,6 @@ extension MenuViewController {
     // MARK: - Types
 
     enum Segue: String {
-        case debugBypass
         case showMPCConnecting
         case showGameKitConnecting
     }
@@ -41,19 +40,6 @@ extension MenuViewController {
         WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
 
         switch segueIdentifier {
-        case .debugBypass:
-            guard let destination = (segue.destination as? UINavigationController)?
-                .rootViewController as? GameViewController else {
-                    fatalError("Destination not a GameViewController nav")
-            }
-            #if MULTIWINDOWDEBUG
-                //swiftlint:disable:next force_cast
-            destination.networkConfig = .multiwindow(windowName: (view.window as! DebugWindow).playerName,
-                                                  isHost: isPlayerHost)
-            #else
-                fatalError()
-            #endif
-
         case .showMPCConnecting:
             #if MULTIWINDOWDEBUG
                 fatalError()

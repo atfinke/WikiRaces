@@ -31,18 +31,19 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func sendStartMessageToPlayers() {
-        let data =  Data([1])
+        guard let match = match else { return }
+        let data = Data([1])
         do {
-            try match?.sendData(toAllPlayers: data, with: .unreliable)
-            try match?.sendData(toAllPlayers: data, with: .reliable)
+            try match.sendData(toAllPlayers: data, with: .unreliable)
+            try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.showMatch(isPlayerHost: true,
+                self.showMatch(for: .gameKit(match: match, isHost: true),
                                generateFeedback: true,
                                andHide: [])
             }
         } catch {
             showError(title: "Unable To Start Match",
-                           message: "Please try again later.")
+                      message: "Please try again later.")
         }
     }
 
@@ -52,7 +53,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         if isPlayerHost {
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else {
-            showMatch(isPlayerHost: false,
+            showMatch(for: .gameKit(match: match, isHost: isPlayerHost),
                       generateFeedback: true,
                       andHide: [])
         }

@@ -23,39 +23,72 @@ extension GameViewController {
                 fatalError("No navigation controller view")
         }
 
-        navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.navigationBar.barStyle = UIBarStyle.wkrStyle
-
         view.backgroundColor = UIColor.wkrBackgroundColor
 
-        helpBarButtonItem = navigationItem.leftBarButtonItem
-        quitBarButtonItem = navigationItem.rightBarButtonItem
+        helpBarButtonItem = UIBarButtonItem(image: UIImage(named: "HelpFlag")!,
+                                            style: .plain,
+                                            target: self,
+                                            action: #selector(helpButtonPressed))
+
+        quitBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                            target: self,
+                                            action: #selector(quitButtonPressed))
 
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
-        navigationBarBottomLine.alpha = 0
-        navigationBarBottomLine.backgroundColor = UIColor.wkrTextColor
-        navigationBarBottomLine.translatesAutoresizingMaskIntoConstraints = false
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            navigationItem.leftBarButtonItem = helpBarButtonItem
+            navigationItem.rightBarButtonItem = quitBarButtonItem
+        } else {
+            navigationController.setNavigationBarHidden(true, animated: false)
+        }
+        navigationController.navigationBar.barStyle = UIBarStyle.wkrStyle
         navigationView.addSubview(navigationBarBottomLine)
 
+        setupElements()
         setupWebView()
 
         let constraints: [NSLayoutConstraint] = [
             navigationBarBottomLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
             navigationBarBottomLine.leftAnchor.constraint(equalTo: navigationView.leftAnchor),
             navigationBarBottomLine.rightAnchor.constraint(equalTo: navigationView.rightAnchor),
-            navigationBarBottomLine.heightAnchor.constraint(equalToConstant: 1)
+            navigationBarBottomLine.heightAnchor.constraint(equalToConstant: 1),
+
+            connectingLabel.widthAnchor.constraint(equalTo: view.widthAnchor),
+            connectingLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            connectingLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 185),
+
+            activityIndicatorView.topAnchor.constraint(equalTo: connectingLabel.bottomAnchor, constant: 25),
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
     // MARK: - Elements
 
-    private func setupWebView() {
-        webView.alpha = 0.0
+    private func setupElements() {
+        navigationBarBottomLine.alpha = 0
+        navigationBarBottomLine.backgroundColor = UIColor.wkrTextColor
+        navigationBarBottomLine.translatesAutoresizingMaskIntoConstraints = false
 
+        connectingLabel.translatesAutoresizingMaskIntoConstraints = false
+        connectingLabel.alpha = 0.0
+        connectingLabel.text = "CONNECTING"
+        connectingLabel.textAlignment = .center
+        connectingLabel.textColor = .wkrTextColor
+        connectingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        view.addSubview(connectingLabel)
+
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicatorView.alpha = 0.0
+        activityIndicatorView.color = .darkText
+        activityIndicatorView.startAnimating()
+        view.addSubview(activityIndicatorView)
+    }
+
+    private func setupWebView() {
         var contentInset = webView.scrollView.contentInset
         contentInset.bottom = -20
         webView.scrollView.contentInset = contentInset
@@ -78,7 +111,10 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        gameManager.webView = webView
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            webView.alpha = 0.0
+            gameManager.webView = webView
+        }
     }
 
     // MARK: - Alerts

@@ -169,27 +169,19 @@ internal class MPCConnectViewController: ConnectViewController {
                 guard let self = self else { return }
                 self.isSolo = isSolo
                 self.dismiss(animated: true, completion: {
-                    self.showMatch(isPlayerHost: true,
-                                  generateFeedback: false,
-                                  andHide: [self.inviteView])
+                    var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
+                    if !isSolo {
+                        networkConfig = .mpc(serviceType: self.serviceType,
+                                             session: self.session,
+                                             isHost: self.isPlayerHost)
+                    }
+                    self.showMatch(for: networkConfig, generateFeedback: true, andHide: [])
                 })
             }
             destination.didCancelMatch = { [weak self] in
                 self?.dismiss(animated: true, completion: {
                     self?.navigationController?.popToRootViewController(animated: false)
                 })
-            }
-        } else {
-            guard let destination = navigationController.rootViewController as? GameViewController,
-                let isPlayerHost = sender as? Bool else {
-                    fatalError("Destination rootViewController is not a GameViewController")
-            }
-            if isSolo {
-                destination.networkConfig = .solo(name: playerName)
-            } else {
-                destination.networkConfig = .mpc(serviceType: serviceType,
-                                                 session: session,
-                                                 isHost: isPlayerHost)
             }
         }
     }

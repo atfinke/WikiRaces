@@ -21,7 +21,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         session.delegate = nil
-        showMatch(isPlayerHost: false,
+        showMatch(for: .mpc(serviceType: self.serviceType,
+                            session: self.session,
+                            isHost: self.isPlayerHost),
                   generateFeedback: false,
                   andHide: [self.inviteView])
     }

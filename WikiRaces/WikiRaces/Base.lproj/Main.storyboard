@@ -25,56 +25,6 @@
             </objects>
             <point key="canvasLocation" x="-3600" y="3460"/>
         </scene>
-        <!--Game View Controller-->
-        <scene sceneID="Hht-95-HbY">
-            <objects>
-                <viewController id="5bp-E7-KCj" customClass="GameViewController" customModule="WikiRaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1yT-zP-iSc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Sor-Ib-bWA">
-                                <rect key="frame" x="188.66666666666666" y="303" width="37" height="37"/>
-                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
-                            </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CONNECTING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMS-89-AKO">
-                                <rect key="frame" x="0.0" y="249" width="414" height="29"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Sor-Ib-bWA" firstAttribute="centerX" secondItem="eaI-0W-2Kf" secondAttribute="centerX" id="8Hg-cE-x0f"/>
-                            <constraint firstItem="DMS-89-AKO" firstAttribute="leading" secondItem="eaI-0W-2Kf" secondAttribute="leading" id="QFH-Ot-YF9"/>
-                            <constraint firstItem="eaI-0W-2Kf" firstAttribute="trailing" secondItem="DMS-89-AKO" secondAttribute="trailing" id="V9G-3I-7ea"/>
-                            <constraint firstItem="DMS-89-AKO" firstAttribute="top" secondItem="eaI-0W-2Kf" secondAttribute="top" constant="185" id="ZyW-9s-uYt"/>
-                            <constraint firstItem="Sor-Ib-bWA" firstAttribute="top" secondItem="DMS-89-AKO" secondAttribute="bottom" constant="25" id="x3G-2n-8vj"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="eaI-0W-2Kf"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="iZu-q5-XhP">
-                        <barButtonItem key="leftBarButtonItem" image="HelpFlag" id="VpH-Y3-50E">
-                            <connections>
-                                <action selector="helpButtonPressed" destination="5bp-E7-KCj" id="GhG-4c-MwI"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="9HA-5I-myt">
-                            <connections>
-                                <action selector="quitButtonPressed" destination="5bp-E7-KCj" id="1Vv-lE-ZIx"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="activityIndicatorView" destination="Sor-Ib-bWA" id="dNz-4C-6MH"/>
-                        <outlet property="connectingLabel" destination="DMS-89-AKO" id="xYM-bh-ixM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cNu-P3-to5" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-594" y="3460"/>
-        </scene>
         <!--Menu View Controller-->
         <scene sceneID="Kzk-I2-guM">
             <objects>
@@ -87,7 +37,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="z3G-gq-PJH"/>
                     <connections>
-                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="debugBypass" modalTransitionStyle="crossDissolve" id="k21-21-dCC"/>
                         <segue destination="Rm3-nl-L5i" kind="show" identifier="showMPCConnecting" animates="NO" id="6EH-uo-IMt"/>
                         <segue destination="iII-9S-Bcg" kind="show" identifier="showGameKitConnecting" animates="NO" id="krG-SC-diD"/>
                     </connections>
@@ -95,22 +44,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5h6-Ob-HSg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2880" y="3460"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="6H5-H1-hFz">
-            <objects>
-                <navigationController storyboardIdentifier="GameNav" id="9gq-MW-lkU" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="53w-lp-ral">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="5bp-E7-KCj" kind="relationship" relationship="rootViewController" id="94m-Mn-NMo"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9iR-UB-PNh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1336" y="3460"/>
         </scene>
         <!--INVITE PLAYERS-->
         <scene sceneID="156-cC-x0n">
@@ -243,7 +176,6 @@
                         <outlet property="activityIndicatorView" destination="PUN-Mp-tEZ" id="wP9-fD-hdF"/>
                         <outlet property="cancelButton" destination="gkC-03-qgZ" id="FbE-fm-IQs"/>
                         <outlet property="descriptionLabel" destination="oGO-Gp-Gig" id="AqL-H2-U2t"/>
-                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="showRace" modalTransitionStyle="crossDissolve" id="KE1-Om-bnI"/>
                         <segue destination="fUW-ZG-kKS" kind="presentation" identifier="showHost" modalPresentationStyle="formSheet" id="ZZa-6E-Edx"/>
                     </connections>
                 </viewController>
@@ -300,7 +232,6 @@
                         <outlet property="activityIndicatorView" destination="LZZ-ru-92r" id="OsG-OL-wNa"/>
                         <outlet property="cancelButton" destination="D33-IW-0RX" id="TBi-bu-kf9"/>
                         <outlet property="descriptionLabel" destination="tFd-dG-L9z" id="V5n-3i-kgf"/>
-                        <segue destination="9gq-MW-lkU" kind="presentation" identifier="showRace" modalTransitionStyle="crossDissolve" id="8vJ-gT-ptC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2aw-2g-bcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -308,10 +239,4 @@
             <point key="canvasLocation" x="-2110" y="3845"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="HelpFlag" width="33" height="57"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="KE1-Om-bnI"/>
-    </inferredMetricsTieBreakers>
 </document>

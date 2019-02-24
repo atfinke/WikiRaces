@@ -120,7 +120,7 @@ class ConnectViewController: UIViewController {
         })
     }
 
-    func showMatch(isPlayerHost: Bool,
+    func showMatch(for networkConfig: WKRPeerNetworkConfig,
                    generateFeedback: Bool,
                    andHide views: [UIView]) {
 
@@ -132,7 +132,11 @@ class ConnectViewController: UIViewController {
                                      duration: 0.25,
                                      and: views,
                                      completion: {
-                                        self.performSegue(withIdentifier: "showRace", sender: isPlayerHost)
+                                        let controller = GameViewController()
+                                        controller.networkConfig = networkConfig
+                                        let nav = UINavigationController(rootViewController: controller)
+                                        nav.modalTransitionStyle = .crossDissolve
+                                        self.present(nav, animated: true, completion: nil)
             })
 
             if generateFeedback {

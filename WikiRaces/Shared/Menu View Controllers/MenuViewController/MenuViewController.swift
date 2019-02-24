@@ -48,21 +48,7 @@ internal class MenuViewController: UIViewController {
             self.performSegue(.showMPCConnecting, isHost: isHost)
         }
         menuView.presentGlobalConnectController = {
-            let message = """
-            Welcome to the Global Races Beta. At this time, Global Races require a Game Center account to play.
-            """
-            let controller = UIAlertController(title: "Global Races Beta",
-                                               message: message,
-                                               preferredStyle: .alert)
-
-            let action = UIAlertAction(title: "Start Racing",
-                                       style: .default,
-                                       handler: { _ in
-                                        self.performSegue(.showGameKitConnecting, isHost: false)
-            })
-            controller.addAction(action)
-            controller.addCancelAction(title: "Cancel")
-            self.present(controller, animated: true, completion: nil)
+            self.pressedGlobalRace()
         }
         menuView.presentLeaderboardController = {
             let controller = GKGameCenterViewController()
@@ -86,10 +72,21 @@ internal class MenuViewController: UIViewController {
         menuView.setNeedsLayout()
         menuView.layoutIfNeeded()
 
-        menuView.animateMenuIn()
+        menuView.animateMenuIn(completion: {
+            if SKStoreReviewController.shouldPromptForRating {
+                #if !DEBUG
+                SKStoreReviewController.requestReview()
+                #endif
+            }
+        })
 
         #if MULTIWINDOWDEBUG
-            performSegue(.debugBypass, isHost: view.window!.frame.origin == .zero)
+        let controller = GameViewController()
+        let nav = UINavigationController(rootViewController: controller)
+        let name = (view.window as? DebugWindow)?.playerName ?? ""
+        controller.networkConfig = .multiwindow(windowName: name,
+                                                isHost: view.window!.frame.origin == .zero)
+        present(nav, animated: false, completion: nil)
         #else
             attemptGlobalAuthentication()
         #endif
@@ -130,6 +127,35 @@ internal class MenuViewController: UIViewController {
         alertController.addAction(settingsAction)
 
         present(alertController, animated: true, completion: nil)
+    }
+
+    // MARK: - Other
+
+    func pressedGlobalRace() {
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            let controller = GameViewController()
+            let nav = UINavigationController(rootViewController: controller)
+            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!
+            controller.prepareForScreenshots(for: url)
+            present(nav, animated: true, completion: nil)
+        } else {
+            let message = """
+            Welcome to the Global Races Beta. Global Races require a Game Center account to play.
+            """
+            let controller = UIAlertController(title: "Global Races Beta",
+                                               message: message,
+                                               preferredStyle: .alert)
+
+            let action = UIAlertAction(title: "Start Racing",
+                                       style: .default,
+                                       handler: { _ in
+                                        self.performSegue(.showGameKitConnecting, isHost: false)
+            })
+            controller.addAction(action)
+            controller.addCancelAction(title: "Cancel")
+            //            self.present(controller, animated: true, completion: nil)
+            self.performSegue(.showGameKitConnecting, isHost: false)
+        }
     }
 
 }
