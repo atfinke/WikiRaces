@@ -31,6 +31,7 @@ extension MenuView {
         joinLocalRaceButtonLeftConstraint = joinLocalRaceButton.leftAnchor.constraint(equalTo: topView.leftAnchor,
                                                                                       constant: 0)
         createLocalRaceButtonWidthConstraint = createLocalRaceButton.widthAnchor.constraint(equalToConstant: 0)
+        localOptionsBackButtonWidth = localOptionsBackButton.widthAnchor.constraint(equalToConstant: 30)
 
         let constraints = [
             titleLabelConstraint!,
@@ -50,6 +51,7 @@ extension MenuView {
             joinLocalRaceButtonWidthConstraint!,
             joinLocalRaceButtonLeftConstraint!,
             createLocalRaceButtonWidthConstraint!,
+            localOptionsBackButtonWidth!,
 
             localRaceTypeButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
                                                      constant: 40.0),
@@ -69,7 +71,7 @@ extension MenuView {
             localOptionsBackButton.leftAnchor.constraint(equalTo: joinLocalRaceButton.leftAnchor),
             localOptionsBackButton.topAnchor.constraint(equalTo: createLocalRaceButton.bottomAnchor,
                                                         constant: 20.0),
-            localOptionsBackButton.widthAnchor.constraint(equalToConstant: 30),
+
             localOptionsBackButton.heightAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor,
                                                            multiplier: 1)
         ]
@@ -104,7 +106,6 @@ extension MenuView {
         localOptionsBackButton.addTarget(self, action: #selector(localOptionsBackButtonPressed), for: .touchUpInside)
         topView.addSubview(localOptionsBackButton)
 
-        localOptionsBackButton.layer.cornerRadius = 15
         localOptionsBackButton.layer.borderWidth = 1.7
         localOptionsBackButton.layer.borderColor = UIColor.wkrTextColor.cgColor
     }
@@ -117,7 +118,12 @@ extension MenuView {
         topView.addSubview(titleLabel)
 
         #if DEBUG
-        titleLabel.textColor = UIColor(red: 51.0 / 255.0, green: 102.0 / 255.0, blue: 204.0 / 255.0, alpha: 1.0)
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            titleLabel.textColor = UIColor(red: 51.0 / 255.0,
+                                           green: 102.0 / 255.0,
+                                           blue: 204.0 / 255.0,
+                                           alpha: 1.0)
+        }
         #endif
 
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."

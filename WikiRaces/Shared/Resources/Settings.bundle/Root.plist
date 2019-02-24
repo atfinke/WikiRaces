@@ -10,7 +10,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>SET LOCAL RACE NAME</string>
+			<string>LOCAL RACE NAME</string>
 		</dict>
 		<dict>
 			<key>Type</key>

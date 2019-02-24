@@ -13,6 +13,8 @@ public class WKRPlayer: Codable, Hashable {
     // MARK: - Properties
 
     internal let isHost: Bool
+
+    // poorly named (needs to stay backwards compatible), indicating if time spent + points awarded for race
     internal var shouldGetPoints = false
 
     public var raceHistory: WKRHistory?

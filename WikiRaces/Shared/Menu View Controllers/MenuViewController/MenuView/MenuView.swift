@@ -86,6 +86,7 @@ class MenuView: UIView {
     var joinLocalRaceButtonLeftConstraint: NSLayoutConstraint!
     var joinLocalRaceButtonWidthConstraint: NSLayoutConstraint!
     var createLocalRaceButtonWidthConstraint: NSLayoutConstraint!
+    var localOptionsBackButtonWidth: NSLayoutConstraint!
 
     // MARK: - View Life Cycle
 
@@ -155,7 +156,7 @@ class MenuView: UIView {
         let buttonHeight: CGFloat
         if frame.size.width > 420 {
             buttonStyle = .large
-            buttonWidth = 195
+            buttonWidth = 210
             buttonHeight = 50
         } else {
             buttonStyle = .normal
@@ -188,7 +189,7 @@ class MenuView: UIView {
         switch state {
         case .raceTypeOptions:
             localRaceTypeButtonLeftConstraint.constant = 30
-            joinLocalRaceButtonLeftConstraint.constant = -topView.frame.width
+            joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
 
             topViewLeftConstraint.constant = 0
             bottomViewAnchorConstraint.constant = 0
@@ -197,10 +198,10 @@ class MenuView: UIView {
                 bottomViewAnchorConstraint.constant = 75
             }
         case .noOptions:
-            localRaceTypeButtonLeftConstraint.constant = -topView.frame.width
-            joinLocalRaceButtonLeftConstraint.constant = -topView.frame.width
+            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
+            joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
         case .localOptions:
-            localRaceTypeButtonLeftConstraint.constant = -topView.frame.width
+            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
             joinLocalRaceButtonLeftConstraint.constant = 30
         case .noInterface:
             topViewLeftConstraint.constant = -topView.frame.width
@@ -210,11 +211,14 @@ class MenuView: UIView {
         }
 
         localRaceTypeButtonHeightConstraint.constant = buttonHeight
-        localRaceTypeButtonWidthConstraint.constant = buttonWidth + 20
-        globalRaceTypeButtonWidthConstraint.constant = buttonWidth + 30
+        localRaceTypeButtonWidthConstraint.constant = buttonWidth + 18
+        globalRaceTypeButtonWidthConstraint.constant = buttonWidth + 32
 
         joinLocalRaceButtonWidthConstraint.constant = buttonWidth
         createLocalRaceButtonWidthConstraint.constant = buttonWidth + 30
+        localOptionsBackButtonWidth.constant = buttonHeight - 10
+
+        localOptionsBackButton.layer.cornerRadius = localOptionsBackButtonWidth.constant / 2
     }
 
     func promptForCustomName(isHost: Bool) -> Bool {
@@ -246,47 +250,6 @@ class MenuView: UIView {
 
         presentAlertController?(alertController)
         return true
-    }
-
-    /// Animates the views on screen
-    func animateMenuIn() {
-        isUserInteractionEnabled = false
-        UIApplication.shared.isIdleTimerDisabled = false
-
-        let duration = TimeInterval(5)
-        let offset = CGFloat(40 * duration)
-
-        func animateScroll() {
-            let xOffset = puzzleView.contentOffset.x + offset
-            UIView.animate(withDuration: duration,
-                           delay: 0,
-                           options: .curveLinear,
-                           animations: {
-                            self.puzzleView.contentOffset = CGPoint(x: xOffset,
-                                                                    y: 0)
-            }, completion: nil)
-        }
-
-        puzzleTimer?.invalidate()
-        puzzleTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: true) { _ in
-            animateScroll()
-        }
-        puzzleTimer?.fire()
-
-        state = .raceTypeOptions
-        setNeedsLayout()
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle,
-                       animations: {
-                        self.layoutIfNeeded()
-        }, completion: { _ in
-            self.isUserInteractionEnabled = true
-            if SKStoreReviewController.shouldPromptForRating {
-                #if !DEBUG
-                SKStoreReviewController.requestReview()
-                #endif
-            }
-        })
     }
 
 }

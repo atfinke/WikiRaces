@@ -10,6 +10,7 @@ import UIKit
 import GameKit.GKLocalPlayer
 
 extension MenuView {
+
     // MARK: - Actions
 
     /// Join button pressed
@@ -20,18 +21,7 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        state = .noOptions
-        setNeedsLayout()
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2, animations: {
-            self.layoutIfNeeded()
-        }, completion: { _ in
-            self.state = .localOptions
-            self.setNeedsLayout()
-            UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2, animations: {
-                self.layoutIfNeeded()
-            })
-        })
+        animateOptionsOutAndTransition(to: .localOptions)
     }
 
     @objc
@@ -89,21 +79,64 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        state = .noOptions
-        setNeedsLayout()
+        animateOptionsOutAndTransition(to: .raceTypeOptions)
+    }
 
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2, animations: {
-            self.layoutIfNeeded()
-        }, completion: { _ in
-            self.state = .raceTypeOptions
-            self.setNeedsLayout()
-            UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2, animations: {
-                self.layoutIfNeeded()
-            })
-        })
+    /// Called when a tile is pressed
+    ///
+    /// - Parameter sender: The pressed tile
+    @objc
+    func menuTilePressed(sender: MenuTile) {
+        PlayerMetrics.log(event: .userAction(#function))
+
+        guard GKLocalPlayer.local.isAuthenticated else {
+            self.presentGlobalAuthController?()
+            return
+        }
+
+        animateMenuOut {
+            self.presentLeaderboardController?()
+        }
     }
 
     // MARK: - Menu Animations
+
+    /// Animates the views on screen
+    func animateMenuIn(completion: (() -> Void)? = nil) {
+        isUserInteractionEnabled = false
+        UIApplication.shared.isIdleTimerDisabled = false
+
+        let duration = TimeInterval(5)
+        let offset = CGFloat(40 * duration)
+
+        func animateScroll() {
+            let xOffset = puzzleView.contentOffset.x + offset
+            UIView.animate(withDuration: duration,
+                           delay: 0,
+                           options: .curveLinear,
+                           animations: {
+                            self.puzzleView.contentOffset = CGPoint(x: xOffset,
+                                                                    y: 0)
+            }, completion: nil)
+        }
+
+        puzzleTimer?.invalidate()
+        puzzleTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: true) { _ in
+            animateScroll()
+        }
+        puzzleTimer?.fire()
+
+        state = .raceTypeOptions
+        setNeedsLayout()
+
+        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle,
+                       animations: {
+                        self.layoutIfNeeded()
+        }, completion: { _ in
+            self.isUserInteractionEnabled = true
+            completion?()
+        })
+    }
 
     /// Animates the views off screen
     ///
@@ -122,21 +155,23 @@ extension MenuView {
         })
     }
 
-    /// Called when a tile is pressed
-    ///
-    /// - Parameter sender: The pressed tile
-    @objc
-    func menuTilePressed(sender: MenuTile) {
-        PlayerMetrics.log(event: .userAction(#function))
+    func animateOptionsOutAndTransition(to state: InterfaceState) {
+        self.state = .noOptions
+        setNeedsLayout()
 
-        guard GKLocalPlayer.local.isAuthenticated else {
-            self.presentGlobalAuthController?()
-            return
-        }
+        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2,
+                       animations: {
+                        self.layoutIfNeeded()
+        }, completion: { _ in
+            self.state = state
+            self.setNeedsLayout()
 
-        animateMenuOut {
-            self.presentLeaderboardController?()
-        }
+            UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2,
+                           delay: WKRAnimationDurationConstants.menuToggle /  4,
+                           animations: {
+                            self.layoutIfNeeded()
+            })
+        })
     }
 
 }

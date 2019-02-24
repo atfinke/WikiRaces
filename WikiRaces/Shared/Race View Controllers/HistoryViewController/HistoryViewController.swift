@@ -85,7 +85,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
         self.entries = history.entries
         tableView.performBatchUpdates({
-            tableView.reloadRows(at: rowsToReload, with: .fade)
+            tableView.reloadRows(at: rowsToReload, with: .none)
             tableView.insertRows(at: rowsToInsert, with: .fade)
         }, completion: { _ in
             self.isTableViewAnimating = false
@@ -133,16 +133,17 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         cell.pageLabel.text = entry.page.title ?? "Unknown Page"
         cell.isLinkHere = entry.linkHere
 
-        cell.isShowingActivityIndicatorView = false
         if let duration = DurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
             cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+            cell.isShowingActivityIndicatorView = false
         } else if playerState == .racing {
             cell.detailLabel.text = ""
             cell.isShowingActivityIndicatorView = true
         } else {
             cell.detailLabel.text = playerState.text
             cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+            cell.isShowingActivityIndicatorView = false
         }
 
         return cell
