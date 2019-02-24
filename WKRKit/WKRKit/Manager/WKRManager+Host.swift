@@ -45,7 +45,11 @@ extension WKRGameManager {
     func prepareResultsCountdown() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsPreCountdown) {
+        var delay = WKRRaceDurationConstants.resultsPreCountdown
+        if peerNetwork is WKRSoloNetwork {
+            delay = 1
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.startResultsCountdown()
         }
     }
@@ -56,7 +60,7 @@ extension WKRGameManager {
         var timeLeft = WKRRaceDurationConstants.resultsState
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
 
-            if self?.gameState == .points {
+            if self?.gameState != .hostResults {
                 timer.invalidate()
                 return
             }
@@ -85,12 +89,12 @@ extension WKRGameManager {
         guard localPlayer.isHost && gameState != .points else { return }
 
         self.game.players = []
-        self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
-
-        if self.peerNetwork is WKRSoloNetwork {
-            self.alertView.enqueue(text: "No stats in solo races", duration: 5, isRaceSpecific: false)
+        if peerNetwork is WKRSoloNetwork {
+            peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
+            return
         }
 
+        self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsStandings) {
             self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
         }
