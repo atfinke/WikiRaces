@@ -55,12 +55,8 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         let numberOfPagesToFetch = WKRKitConstants.current.votingArticlesCount + 1
 
         // pages are suffled so we can just take index 0-n from the shuffled array
-        for index in 0..<numberOfPagesToFetch {
-            while randomPaths.count <= index + 1 {
-                if let randomPath = finalArticles.randomElement {
-                    randomPaths.append(randomPath)
-                }
-            }
+        for index in 0..<numberOfPagesToFetch where index < finalArticles.count {
+            randomPaths.append(finalArticles[index])
         }
 
         var pages = [WKRPage]()
@@ -79,7 +75,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 pages.insert(fakeEnd, at: 0)
             }
 
-            let finalPages = Array(pages.prefix(WKRKitConstants.current.votingArticlesCount))
+            let finalPages = Array(Set(pages.prefix(WKRKitConstants.current.votingArticlesCount)))
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
                 completionHandler(config)
@@ -104,7 +100,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
                 WKRPageFetcher.fetch(path: path) { (page) in
-                    if let page = page {
+                    if let page = page, page.title != "Wikipedia, the free encyclopedia" {
                         pages.append(page)
                     }
                     operation.state = .isFinished
