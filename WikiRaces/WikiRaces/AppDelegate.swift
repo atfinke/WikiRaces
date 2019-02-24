@@ -46,6 +46,11 @@ internal class AppDelegate: WKRAppDelegate {
         logBuild()
 
         cleanTempDirectory()
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            UIView.setAnimationsEnabled(false)
+        }
+
         return true
     }
 

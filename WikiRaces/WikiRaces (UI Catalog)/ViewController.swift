@@ -13,83 +13,6 @@ import UIKit
 
 internal class ViewController: UIViewController {
 
-    //swiftlint:disable line_length force_cast
-
-    // MARK: - History
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        let nav = viewController() as! UINavigationController
-//
-//        let controller = nav.rootViewController as! HistoryViewController
-//
-//        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
-//
-//
-//        let player = WKRPlayer(profile: WKRPlayerProfile(name: "andrew",
-//                                                         playerID: "andrew"),
-//                               isHost: true)
-//
-//        let page = WKRPage(title: "Apple Inc.", url: URL(string: "apple.com")!)
-//                    player.raceHistory = WKRHistory(firstPage: page)
-//
-//        func random() {
-//            WKRPageFetcher.fetchRandom { (page) in
-//                guard let page = page else { return }
-//                player.raceHistory?.finishedViewingLastPage()
-//                player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
-//                DispatchQueue.main.async {
-//
-//                    if arc4random() % 20 == 0 {
-//                        player.state = .foundPage
-//                    } else if arc4random() % 25 == 0 {
-//                        player.state = .forfeited
-//                    } else if arc4random() % 30 == 0 {
-//                        player.state = .quit
-//                    }
-//
-//                    print("Updating------")
-//                    controller.player = player
-//                }
-//            }
-//
-//           // let time: CGFloat = CGFloat(arc4random() % 40) / 10.0
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//                if arc4random() % 3 == 0 {
-//                    //  controller.state = .points
-//                    random()
-//                } else {
-//                    random()
-//                }
-//            }
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-//            random()
-//            //            playerOneHistory.finishedViewingLastPage()
-//            //            playerOneHistory.append(playerOnePageTwo, linkHere: false)
-//            //            playerOne.raceHistory = playerOneHistory
-//            //
-//            //            playerTwoHistory.finishedViewingLastPage()
-//            //            playerTwoHistory.append(playerOnePageOne, linkHere: true)
-//            //            playerTwo.raceHistory = playerTwoHistory
-//            //            playerTwo.state = .foundPage
-//            //
-//            //            controller.resultsInfo = WKRResultsInfo(players: [playerOne, playerTwo], racePoints: [:], sessionPoints: [:])
-//
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                }
-//            }
-//        }
-//
-//    }
-//
-//    func viewController() -> UIViewController {
-//        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "HistoryNav")
-//    }
-
     // MARK: - ResultsViewController Testing
 
     var players = [WKRPlayer]()
@@ -97,30 +20,13 @@ internal class ViewController: UIViewController {
 
     var rendered = false
 
-    //swiftlint:disable:next function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let ccc = GKSplashViewController()
-        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = ccc
-   //     ccc.view.frame = CGRect(x: 10, y: 10, width: 300, height: 550)
-
-//        ccc.view.backgroundColor = .lightGray
- //       ccc.view.center = (UIApplication.shared.delegate as? AppDelegate)?.window?.center ?? .zero
-
-       return
-        let nav = viewController() as! UINavigationController
-
-        let controller = nav.rootViewController as! ResultsViewController
+        let controller = ResultsViewController()
+        let nav = UINavigationController(rootViewController: controller)
 
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            let aaaa = GKSplashViewController()
-            controller.present(aaaa, animated: true, completion: nil)
-
-            aaaa.view.superview?.backgroundColor = .clear
-        }
 
         //let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
         let names = ["Andrew", "Carol", "Tom", "Lisa"]
@@ -145,18 +51,18 @@ internal class ViewController: UIViewController {
                     DispatchQueue.main.async {
 
                         if player.state == .racing {
-                            if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 2 {
-                                player.state = .foundPage
-                            } else if arc4random() % 25 == 0 {
-                                player.state = .forcedEnd
-                            } else if arc4random() % 30 == 0 {
-                                player.state = .quit
-                            } else if arc4random() % 30 == 0 {
-                                player.state = .forfeited
-                            } else {
+//                            if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 2 {
+//                                player.state = .foundPage
+//                            } else if arc4random() % 25 == 0 {
+//                                player.state = .forcedEnd
+//                            } else if arc4random() % 30 == 0 {
+//                                player.state = .quit
+//                            } else if arc4random() % 30 == 0 {
+//                                player.state = .forfeited
+//                            } else {
                                 player.raceHistory?.finishedViewingLastPage()
                                 player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
-                            }
+//                            }
 
                         }
 
@@ -184,7 +90,10 @@ internal class ViewController: UIViewController {
                 if self.players.filter ({$0.state == .racing }).isEmpty && !self.rendered {
                     self.rendered = true
                     for player in self.players {
-                        ResultRenderer().render(with: controller.resultsInfo!, for: player, on: controller.contentView, completion: { _ in
+                        ResultRenderer().render(with: controller.resultsInfo!,
+                                                for: player,
+                                                on: controller.contentView,
+                                                completion: { _ in
                         })
                     }
                 }
@@ -193,22 +102,8 @@ internal class ViewController: UIViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             random()
-            //            playerOneHistory.finishedViewingLastPage()
-            //            playerOneHistory.append(playerOnePageTwo, linkHere: false)
-            //            playerOne.raceHistory = playerOneHistory
-            //
-            //            playerTwoHistory.finishedViewingLastPage()
-            //            playerTwoHistory.append(playerOnePageOne, linkHere: true)
-            //            playerTwo.raceHistory = playerTwoHistory
-            //            playerTwo.state = .foundPage
-            //
-            //            controller.resultsInfo = WKRResultsInfo(players: [playerOne, playerTwo], racePoints: [:], sessionPoints: [:])
         }
 
-    }
-
-    func viewController() -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ResultsNav")
     }
 
 }
