@@ -52,23 +52,6 @@ def articles_properties(article):
     return is_person_article, is_disambiguation_article
 
 
-def case_insensitive_contains(article, articles):
-    for existing_article in articles:
-        if existing_article.lower() == article.lower():
-            return True
-    return False
-
-
-def remove_case_insensitive_duplicates(articles):
-    unique_articles_array = []
-    for article in articles:
-        if case_insensitive_contains(article, unique_articles_array):
-            print("DUP: " + article)
-        else:
-            unique_articles_array.append(article)
-    return unique_articles_array
-
-
 def remove_articles_with_year(articles):
     years = [str(i) for i in range(1000, 2100)]
     clean_articles = []
@@ -199,7 +182,7 @@ def fetch_links_to_article(article):
 
 
 def run_pages_that_link_to_articles_test(articles):
-    _articles_50 = {}
+    articles_50 = {}
     articles_100 = {}
     articles_150 = {}
     articles_250 = {}
@@ -238,15 +221,6 @@ def run_pages_that_link_to_articles_test(articles):
     save(articles_500, "500.plist")
     save(articles_all, "All.plist")
 
-# def remove_articles(articlesToRemove, articles):
-#     for article, value in articlesToRemove.iteritems():
-#         if value < 100:
-#             if article in articles:
-#                 articles.remove(article)
-#         else:
-#             print(article)
-#     return articles
-
 
 def grab_random_articles(articles, count):
     results = random.sample(articles, count)
@@ -255,97 +229,30 @@ def grab_random_articles(articles, count):
         print(article[1:].replace("_", " "))
 
 
+def remove_articles_from_articles(articles_to_remove, articles):
+    cleaned = []
+    for article in articles:
+        if article not in articles_to_remove:
+            cleaned.append(article)
+    return cleaned
+
+
 def save_string_to_path(string, path):
     text_file = open(path, "w")
     text_file.write(string)
     text_file.close()
 
 
+def load_articles_at_path(path):
+    return plistlib.readPlist(path)
+
+
+def save_articles_to_path(articles, path):
+    plistlib.writePlist(sorted(list(set(articles)), key=lambda s: s.lower(
+    )), path)
+
+
 if __name__ == "__main__":
-
-    path = "/Users/andrewfinke/Desktop/new500.plist"
-    articles = plistlib.readPlist(path)
-    # fullPageLinkTests(clean_articles)
-
-    run_networking_test(articles)
-    # return
-    #
-    # clean_articles = []
-    # bad = []
-    # progress = 0
-    # for article in articles:
-    #     progress += 1
-    #     print("progress: " + str(progress) + " / " + str(len(articles)))
-    #     is_person_article, is_disambiguation_article = articles_properties(
-    #         article)
-    #     if is_person_article or is_disambiguation_article:
-    #         print(article)
-    #         print("p: " + str(is_person_article) +
-    #               ", d: " + str(is_disambiguation_article))
-    #         bad.append(article)
-    #     else:
-    #         clean_articles.append(article)
-
-    # existing_articles = removeArticlesWithYear(existing_articles)
-    #
-    # title = "Portal:Internet"
-    # new_articles = fetchPageLinks(title)
-    #
-    # # print(new_articles)
-    #
-    # plistlib.writePlist(sorted(list(set(clean_articles)), key=lambda s: s.lower(
-    # )), "/Users/andrewfinke/Desktop/new.plist")
-    # plistlib.writePlist(sorted(list(set(bad)), key=lambda s: s.lower(
-    # )), "/Users/andrewfinke/Desktop/bad.plist")
-    #
-    # print(len(sorted(list(set(existing_articles + new_articles)))))
-
-    # path = "/Users/andrewfinke/Desktop/NewMasterA.plist"
-    # new_articles = plistlib.readPlist(
-    #     path) + plistlib.readPlist("/Users/andrewfinke/Desktop/WKRArticlesDataoo.plist")
-    #
-    # fullNetworkingTest(old_articles)
-
-    # tpath = "/Users/andrewfinke/Desktop/NewMaster2.txt"
-    # text_file = open(tpath, "w")
-    # text_file.write(commonTitleWordsAsString(old_articles))
-    # text_file.close()
-
-    # paths = [
-    #     "/Users/andrewfinke/Desktop/FullTest/AValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/ARedirect.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/BValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/BRedirect.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/CValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/CRedirect.plist",
-    # ]
-    #
-    # old_articles = []
-    # for path in paths:
-    #     old_articles += plistlib.readPlist(path)
-    #
-    # new_articles = []
-    # for article in old_articles:
-    #     if isValidLink("/wiki" + article):
-    #         new_articles.append(article)
-    #
-
-    # new_articles = preciseRemoveAllDups(new_articles)
-
-    # # fullPageLinkTests(old_articles)
-    # # new_articles = []
-    # #
-    # # for article in old_articles:
-    # #     if "_in_" not in article and "_of_" not in article:
-    # #         new_articles.append(article)
-    # #     # if isPersonArticle(article):
-    # #     #     print("Person: " + article)
-    # #     # else:
-    # #     #     new_articles.append(article)
-    # #
-    # # # updated_articles = removeArticles(old_articles, new_articles)
-    # #
-    # # # fullPageLinkTests(newArticles[5000:15000])
-    # # # # print(articles)
-    # plistlib.writePlist(sorted(new_articles, key=lambda s: s.lower(
-    # )), "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
+    articles = load_articles_at_path("/Users/andrewfinke/Desktop/final.plist")
+    save_articles_to_path(articles, "/Users/andrewfinke/Desktop/New.plist")
+    # articles = fetch_links_on_article("/List_of_Disney_theme_park_attractions")

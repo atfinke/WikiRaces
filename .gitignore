@@ -72,3 +72,5 @@ WikiRaces/fabric.buildsecret
 WikiRaces/WikiRaces/GoogleService-Info.plist
 
 WKRPython/env
+
+WKRPython/geckodriver.log
