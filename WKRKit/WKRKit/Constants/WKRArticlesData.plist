@@ -2582,7 +2582,6 @@
 	<string>/Cooperation</string>
 	<string>/Cooperative</string>
 	<string>/Cooperative_gameplay</string>
-	<string>/Coordinated_Universal_Time</string>
 	<string>/Coordination_number</string>
 	<string>/Copenhagen</string>
 	<string>/Copper</string>
@@ -2720,7 +2719,6 @@
 	<string>/Croquette</string>
 	<string>/Cross-cultural</string>
 	<string>/Crossbow</string>
-	<string>/Crossover_(fiction)</string>
 	<string>/Crosswalk</string>
 	<string>/Crossword</string>
 	<string>/Crow</string>
@@ -3920,8 +3918,8 @@
 	<string>/Fern</string>
 	<string>/Ferrari</string>
 	<string>/Ferret</string>
-	<string>/Ferris_Wheel</string>
 	<string>/Ferris_wheel</string>
+	<string>/Ferris_Wheel</string>
 	<string>/Ferry</string>
 	<string>/Fertilisation</string>
 	<string>/Fertility</string>
@@ -4188,7 +4186,6 @@
 	<string>/Fortune_cookie</string>
 	<string>/Forward_pass</string>
 	<string>/Fossil</string>
-	<string>/Fossil#Fossil_record</string>
 	<string>/Fossil_fuel</string>
 	<string>/Foster_and_Partners</string>
 	<string>/Foster_the_People</string>
@@ -4547,7 +4544,6 @@
 	<string>/Global_city</string>
 	<string>/Global_illumination</string>
 	<string>/Global_politics</string>
-	<string>/Global_Positioning_System</string>
 	<string>/Global_recession</string>
 	<string>/Global_surveillance</string>
 	<string>/Global_warming</string>
@@ -5478,7 +5474,6 @@
 	<string>/Interactive_media</string>
 	<string>/Interactivity</string>
 	<string>/Intercom</string>
-	<string>/Intercontinental_ballistic_missile</string>
 	<string>/Intercropping</string>
 	<string>/Interdisciplinarity</string>
 	<string>/Interest</string>
@@ -5493,7 +5488,6 @@
 	<string>/International_law</string>
 	<string>/International_relations</string>
 	<string>/International_Sign</string>
-	<string>/International_System_of_Units</string>
 	<string>/International_trade</string>
 	<string>/International_unit</string>
 	<string>/Internet</string>
@@ -6336,7 +6330,6 @@
 	<string>/Macintosh</string>
 	<string>/Macintosh_128K</string>
 	<string>/Macintosh_Classic</string>
-	<string>/Macintosh_operating_systems</string>
 	<string>/Mackerel</string>
 	<string>/MacOS</string>
 	<string>/MacOS_High_Sierra</string>
@@ -10956,9 +10949,7 @@
 	<string>/United_Parcel_Service</string>
 	<string>/United_States</string>
 	<string>/United_States_Army</string>
-	<string>/United_States_Department_of_State</string>
 	<string>/United_States_dollar</string>
-	<string>/United_States_Forest_Service</string>
 	<string>/United_States_Navy</string>
 	<string>/United_States_passport</string>
 	<string>/United_States_patent_law</string>
@@ -11503,7 +11494,6 @@
 	<string>/World_cinema</string>
 	<string>/World_economy</string>
 	<string>/World_government</string>
-	<string>/World_Health_Organization</string>
 	<string>/World_Heritage_site</string>
 	<string>/World_history</string>
 	<string>/World_literature</string>

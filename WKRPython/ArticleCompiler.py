@@ -222,8 +222,8 @@ def run_pages_that_link_to_articles_test(articles):
     save(articles_all, "All.plist")
 
 
-def grab_random_articles(articles, count):
-    results = random.sample(articles, count)
+def print_random_articles(articles, count):
+    results = sorted(random.sample(articles, count))
     print("\n=========\n")
     for article in results:
         print(article[1:].replace("_", " "))
@@ -253,6 +253,13 @@ def save_articles_to_path(articles, path):
 
 
 if __name__ == "__main__":
-    articles = load_articles_at_path("/Users/andrewfinke/Desktop/final.plist")
-    save_articles_to_path(articles, "/Users/andrewfinke/Desktop/New.plist")
+    articles = load_articles_at_path(
+        "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
+    for i in range(0, 10):
+        print_random_articles(articles, 8)
+
+    for article in articles:
+        if not is_valid_link(article):
+            print("!!")
+            print(article)
     # articles = fetch_links_on_article("/List_of_Disney_theme_park_attractions")

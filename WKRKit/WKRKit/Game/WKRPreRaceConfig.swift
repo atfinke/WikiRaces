@@ -75,6 +75,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 pages.insert(fakeEnd, at: 0)
             }
 
+            // Uses a set to remove any duplicates. This could happen if two final articles end up redirecting to the same page.
             let finalPages = Array(Set(pages.prefix(WKRKitConstants.current.votingArticlesCount)))
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
@@ -100,7 +101,10 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
                 WKRPageFetcher.fetch(path: path) { (page) in
-                    if let page = page, page.title != "Wikipedia, the free encyclopedia" {
+                    // Sometimes removed pages redirect to the Wikipedia homepage.
+                    if let page = page,
+                        !page.url.absoluteString.contains("#"),
+                        page.title != "Wikipedia, the free encyclopedia" {
                         pages.append(page)
                     }
                     operation.state = .isFinished

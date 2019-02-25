@@ -89,7 +89,9 @@ extension WKRGameManager {
         guard localPlayer.isHost && gameState != .points else { return }
 
         self.game.players = []
+
         if peerNetwork is WKRSoloNetwork {
+            // skip points and go straight to voting if solo
             peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
             return
         }
