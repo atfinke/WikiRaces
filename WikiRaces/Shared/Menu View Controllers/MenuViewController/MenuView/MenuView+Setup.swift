@@ -139,19 +139,19 @@ extension MenuView {
     /// Sets up the bottom views
     func setupBottomView() {
         let stackView = setupStatsStackView()
-        let puzzleView = setupPuzzleView()
-        puzzleViewHeightConstraint = puzzleView.heightAnchor.constraint(equalToConstant: 75)
+        bottomView.addSubview(movingPuzzleView)
+        puzzleViewHeightConstraint = movingPuzzleView.heightAnchor.constraint(equalToConstant: 75)
 
         let constraints = [
             puzzleViewHeightConstraint!,
-            puzzleView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
-            puzzleView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
-            puzzleView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            movingPuzzleView.leftAnchor.constraint(equalTo: bottomView.leftAnchor),
+            movingPuzzleView.rightAnchor.constraint(equalTo: bottomView.rightAnchor),
+            movingPuzzleView.bottomAnchor.constraint(equalTo: bottomView.bottomAnchor),
 
             stackView.leftAnchor.constraint(equalTo: bottomView.leftAnchor, constant: 15),
             stackView.rightAnchor.constraint(equalTo: bottomView.rightAnchor, constant: -15),
             stackView.topAnchor.constraint(equalTo: bottomView.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: puzzleView.topAnchor)
+            stackView.bottomAnchor.constraint(equalTo: movingPuzzleView.topAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -220,30 +220,6 @@ extension MenuView {
         }
 
         return statsStackView
-    }
-
-    /// Sets up the view that animates the puzzzle pieces
-    private func setupPuzzleView() -> UIView {
-        let puzzleBackgroundView = UIView()
-
-        puzzleBackgroundView.isUserInteractionEnabled = false
-        puzzleBackgroundView.backgroundColor = UIColor.wkrMenuPuzzleViewColor
-        puzzleBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.addSubview(puzzleBackgroundView)
-
-        puzzleView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "MenuBackgroundPuzzle"))
-        puzzleView.translatesAutoresizingMaskIntoConstraints = false
-        puzzleBackgroundView.addSubview(puzzleView)
-
-        let constraints = [
-            puzzleView.leftAnchor.constraint(equalTo: puzzleBackgroundView.leftAnchor),
-            puzzleView.rightAnchor.constraint(equalTo: puzzleBackgroundView.rightAnchor),
-            puzzleView.topAnchor.constraint(equalTo: puzzleBackgroundView.topAnchor, constant: 22.5),
-            puzzleView.heightAnchor.constraint(equalToConstant: 30)
-        ]
-        NSLayoutConstraint.activate(constraints)
-
-        return puzzleBackgroundView
     }
 
 }

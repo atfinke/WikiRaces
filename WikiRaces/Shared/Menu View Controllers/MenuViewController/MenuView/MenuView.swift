@@ -57,10 +57,8 @@ class MenuView: UIView {
     /// The races tile
     var rightMenuTile: MenuTile?
 
-    /// Timer for moving the puzzle pieces
-    var puzzleTimer: Timer?
     /// The puzzle piece view
-    let puzzleView = UIScrollView()
+    let movingPuzzleView = MovingPuzzleView()
 
     // MARK: - Constraints
 

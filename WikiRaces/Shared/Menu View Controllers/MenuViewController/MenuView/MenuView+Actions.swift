@@ -106,25 +106,7 @@ extension MenuView {
         isUserInteractionEnabled = false
         UIApplication.shared.isIdleTimerDisabled = false
 
-        let duration = TimeInterval(5)
-        let offset = CGFloat(40 * duration)
-
-        func animateScroll() {
-            let xOffset = puzzleView.contentOffset.x + offset
-            UIView.animate(withDuration: duration,
-                           delay: 0,
-                           options: .curveLinear,
-                           animations: {
-                            self.puzzleView.contentOffset = CGPoint(x: xOffset,
-                                                                    y: 0)
-            }, completion: nil)
-        }
-
-        puzzleTimer?.invalidate()
-        puzzleTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: true) { _ in
-            animateScroll()
-        }
-        puzzleTimer?.fire()
+        movingPuzzleView.start()
 
         state = .raceTypeOptions
         setNeedsLayout()
@@ -150,7 +132,7 @@ extension MenuView {
         UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle, animations: {
             self.layoutIfNeeded()
         }, completion: { _ in
-            self.puzzleTimer?.invalidate()
+            self.movingPuzzleView.stop()
             completion?()
         })
     }
