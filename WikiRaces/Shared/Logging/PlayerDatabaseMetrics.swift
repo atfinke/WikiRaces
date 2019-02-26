@@ -53,7 +53,6 @@ class PlayerDatabaseMetrics: NSObject {
     private var isSyncing = false
 
     private var queuedEvents = [Event]()
-    private var processingEvents = [Event]()
 
     // MARK: - Connecting
 
@@ -151,104 +150,96 @@ class PlayerDatabaseMetrics: NSObject {
                   let record = userStatsRecord else { return }
 
         isSyncing = true
-        processingEvents = Array(queuedEvents)
-        queuedEvents = []
+        let event = queuedEvents.removeFirst()
 
-        for event in processingEvents {
-            switch event {
-            case .gcAlias(let alias):
-                var names = [String]()
-                if let existingNames = record["GCAliases"] as? NSArray as? [String] {
-                    names.append(contentsOf: existingNames)
-                }
-                names.append(alias)
-                record["GCAliases"] = Array(Set(names)) as NSArray
-            case .deviceName(let name):
-                var names = [String]()
-                if let existingNames = record["DeviceNames"] as? NSArray as? [String] {
-                    names.append(contentsOf: existingNames)
-                }
-                names.append(name)
-                record["DeviceNames"] = Array(Set(names)) as NSArray
-            case .customName(let name):
-                var names = [String]()
-                if let existingNames = record["CustomNames"] as? NSArray as? [String] {
-                    names.append(contentsOf: existingNames)
-                }
-                names.append(name)
-                record["CustomNames"] = Array(Set(names)) as NSArray
-            case .mpcStatsUpdate(let mpcVotes,
-                                 let mpcHelp,
-                                 let mpcPoints,
-                                 let mpcRaces,
-                                 let mpcFastestTime,
-                                 let mpcTotalTime,
-                                 let mpcPages,
-                                 let mpcPressedJoin,
-                                 let mpcPressedHost):
-                record["mpcVotes"] = NSNumber(value: mpcVotes)
-                record["mpcHelp"] = NSNumber(value: mpcHelp)
-                record["mpcPoints"] = NSNumber(value: mpcPoints)
-                record["mpcRaces"] = NSNumber(value: mpcRaces)
-                record["mpcPages"] = NSNumber(value: mpcPages)
-                record["mpcFastestTime"] = NSNumber(value: mpcFastestTime)
-                record["mpcTotalTime"] = NSNumber(value: mpcTotalTime)
-                record["mpcPressedJoin"] = NSNumber(value: mpcPressedJoin)
-                record["mpcPressedHost"] = NSNumber(value: mpcPressedHost)
-            case .gkStatsUpdate(let gkVotes,
-                                let gkHelp,
-                                let gkPoints,
-                                let gkRaces,
-                                let gkFastestTime,
-                                let gkTotalTime,
-                                let gkPages,
-                                let gkPressedJoin,
-                                let gkConnectedToMatch):
-                record["gkVotes"] = NSNumber(value: gkVotes)
-                record["gkHelp"] = NSNumber(value: gkHelp)
-                record["gkPoints"] = NSNumber(value: gkPoints)
-                record["gkRaces"] = NSNumber(value: gkRaces)
-                record["gkPages"] = NSNumber(value: gkPages)
-                record["gkFastestTime"] = NSNumber(value: gkFastestTime)
-                record["gkTotalTime"] = NSNumber(value: gkTotalTime)
-                record["gkPressedJoin"] = NSNumber(value: gkPressedJoin)
-                record["gkConnectedToMatch"] = NSNumber(value: gkConnectedToMatch)
-            case .soloStatsUpdate(let soloVotes,
-                                  let soloHelp,
-                                  let soloRaces,
-                                  let soloTotalTime,
-                                  let soloPages,
-                                  let soloPressedHost):
-                record["soloVotes"] = NSNumber(value: soloVotes)
-                record["soloHelp"] = NSNumber(value: soloHelp)
-                record["soloRaces"] = NSNumber(value: soloRaces)
-                record["soloTotalTime"] = NSNumber(value: soloTotalTime)
-                record["soloPages"] = NSNumber(value: soloPages)
-                record["soloPressedHost"] = NSNumber(value: soloPressedHost)
-            case .app(let coreVersion, let coreBuild, let kitConstants, let uiKitConstants):
-                record["coreVersion"] = coreVersion as NSString
-                record["coreBuild"] = coreBuild.description as NSString
-                record["WKRKitConstantsVersion"] = kitConstants.description as NSString
-                record["WKRUIKitConstantsVersion"] = uiKitConstants.description as NSString
-            case .players(let mpcUnique, let mpcTotal, let gkUnique, let gkTotal):
-                record["mpcUnique"] = NSNumber(value: mpcUnique)
-                record["mpcTotal"] = NSNumber(value: mpcTotal)
-                record["gkUnique"] = NSNumber(value: gkUnique)
-                record["gkTotal"] = NSNumber(value: gkTotal)
+        switch event {
+        case .gcAlias(let alias):
+            var names = [String]()
+            if let existingNames = record["GCAliases"] as? NSArray as? [String] {
+                names.append(contentsOf: existingNames)
             }
+            names.append(alias)
+            record["GCAliases"] = Array(Set(names)) as NSArray
+        case .deviceName(let name):
+            var names = [String]()
+            if let existingNames = record["DeviceNames"] as? NSArray as? [String] {
+                names.append(contentsOf: existingNames)
+            }
+            names.append(name)
+            record["DeviceNames"] = Array(Set(names)) as NSArray
+        case .customName(let name):
+            var names = [String]()
+            if let existingNames = record["CustomNames"] as? NSArray as? [String] {
+                names.append(contentsOf: existingNames)
+            }
+            names.append(name)
+            record["CustomNames"] = Array(Set(names)) as NSArray
+        case .mpcStatsUpdate(let mpcVotes,
+                             let mpcHelp,
+                             let mpcPoints,
+                             let mpcRaces,
+                             let mpcFastestTime,
+                             let mpcTotalTime,
+                             let mpcPages,
+                             let mpcPressedJoin,
+                             let mpcPressedHost):
+            record["mpcVotes"] = NSNumber(value: mpcVotes)
+            record["mpcHelp"] = NSNumber(value: mpcHelp)
+            record["mpcPoints"] = NSNumber(value: mpcPoints)
+            record["mpcRaces"] = NSNumber(value: mpcRaces)
+            record["mpcPages"] = NSNumber(value: mpcPages)
+            record["mpcFastestTime"] = NSNumber(value: mpcFastestTime)
+            record["mpcTotalTime"] = NSNumber(value: mpcTotalTime)
+            record["mpcPressedJoin"] = NSNumber(value: mpcPressedJoin)
+            record["mpcPressedHost"] = NSNumber(value: mpcPressedHost)
+        case .gkStatsUpdate(let gkVotes,
+                            let gkHelp,
+                            let gkPoints,
+                            let gkRaces,
+                            let gkFastestTime,
+                            let gkTotalTime,
+                            let gkPages,
+                            let gkPressedJoin,
+                            let gkConnectedToMatch):
+            record["gkVotes"] = NSNumber(value: gkVotes)
+            record["gkHelp"] = NSNumber(value: gkHelp)
+            record["gkPoints"] = NSNumber(value: gkPoints)
+            record["gkRaces"] = NSNumber(value: gkRaces)
+            record["gkPages"] = NSNumber(value: gkPages)
+            record["gkFastestTime"] = NSNumber(value: gkFastestTime)
+            record["gkTotalTime"] = NSNumber(value: gkTotalTime)
+            record["gkPressedJoin"] = NSNumber(value: gkPressedJoin)
+            record["gkConnectedToMatch"] = NSNumber(value: gkConnectedToMatch)
+        case .soloStatsUpdate(let soloVotes,
+                              let soloHelp,
+                              let soloRaces,
+                              let soloTotalTime,
+                              let soloPages,
+                              let soloPressedHost):
+            record["soloVotes"] = NSNumber(value: soloVotes)
+            record["soloHelp"] = NSNumber(value: soloHelp)
+            record["soloRaces"] = NSNumber(value: soloRaces)
+            record["soloTotalTime"] = NSNumber(value: soloTotalTime)
+            record["soloPages"] = NSNumber(value: soloPages)
+            record["soloPressedHost"] = NSNumber(value: soloPressedHost)
+        case .app(let coreVersion, let coreBuild, let kitConstants, let uiKitConstants):
+            record["coreVersion"] = coreVersion as NSString
+            record["coreBuild"] = coreBuild.description as NSString
+            record["WKRKitConstantsVersion"] = kitConstants.description as NSString
+            record["WKRUIKitConstantsVersion"] = uiKitConstants.description as NSString
+        case .players(let mpcUnique, let mpcTotal, let gkUnique, let gkTotal):
+            record["mpcUniquePlayers"] = NSNumber(value: mpcUnique)
+            record["mpcTotalPlayers"] = NSNumber(value: mpcTotal)
+            record["gkUniquePlayers"] = NSNumber(value: gkUnique)
+            record["gkTotalPlayers"] = NSNumber(value: gkTotal)
         }
 
         publicDB.save(record) { (savedUserStatsRecord, _) in
             if let savedUserStatsRecord = savedUserStatsRecord {
                 self.userStatsRecord = savedUserStatsRecord
-                self.processingEvents = []
             } else {
                 self.userStatsRecord = nil
                 self.userRecord = nil
-
-                let newEvents = Array(self.processingEvents) + Array(self.queuedEvents)
-                self.queuedEvents = []
-                self.queuedEvents = newEvents
                 self.connect()
             }
             self.isSyncing = false
