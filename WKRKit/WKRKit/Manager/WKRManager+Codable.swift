@@ -31,18 +31,26 @@ extension WKRGameManager {
             }
             game.playerUpdated(playerObject)
 
+            var samePagePlayers = [WKRPlayerProfile]()
             if playerObject != localPlayer && game.shouldShowSamePageMessage(for: playerObject) {
-                enqueue(message: "\(player.name) is on same page",
-                        duration: 2.0,
-                        isRaceSpecific: true,
-                        playHaptic: false)
+                samePagePlayers.append(playerObject.profile)
             } else if playerObject == localPlayer {
                 for player in game.players where game.shouldShowSamePageMessage(for: player) {
-                    enqueue(message: "\(player.name) is on same page",
+                    samePagePlayers.append(player.profile)
+                }
+            }
+
+            var samePageMessage: String?
+            if samePagePlayers.count == 1 {
+                samePageMessage = "\(samePagePlayers[0].name) is on same page"
+            } else if samePagePlayers.count > 1 {
+                samePageMessage = "\(samePagePlayers.count) players are on same page"
+            }
+            if let message = samePageMessage {
+                enqueue(message: message,
                         duration: 2.0,
                         isRaceSpecific: true,
                         playHaptic: false)
-                }
             }
 
             // Player joined mid-session
