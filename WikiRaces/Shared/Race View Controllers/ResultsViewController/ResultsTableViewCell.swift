@@ -175,19 +175,19 @@ internal class ResultsTableViewCell: UITableViewCell {
     }
 
     func update(for player: WKRPlayer, animated: Bool) {
-        guard let history = player.raceHistory else {
-            playerLabel.text = ""
-            subtitleLabel.text = ""
-            detailLabel.text = ""
+        guard let history = player.raceHistory, let entry = history.entries.last else {
+            playerLabel.text = player.name
+            subtitleLabel.text = "-"
+            detailLabel.text = "-"
+            if player.state == .forcedEnd {
+                detailLabel.text = "DNF"
+            } else if player.state == .quit {
+                detailLabel.text = "Quit"
+            }
             return
         }
 
-        guard let entry = history.entries.last else {
-            subtitleLabel.text = "Unknown Page"
-            return
-        }
-
-        let pageTitle = entry.page.title ?? "Unknown Page"
+        let pageTitle = entry.page.title ?? "-"
         var pageTitleAttributedString = NSMutableAttributedString(string: pageTitle, attributes: nil)
         if entry.linkHere {
             let detail = " Link Here"
@@ -215,7 +215,6 @@ internal class ResultsTableViewCell: UITableViewCell {
                detail: detailString,
                subtitle: pageTitleAttributedString,
                animated: animated)
-
     }
 
 }
