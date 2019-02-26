@@ -29,6 +29,12 @@ extension GameViewController {
                     StatsHelper.shared.completedRace(type: raceType,
                                                      points: points,
                                                      timeRaced: timeRaced)
+                    PlayerMetrics.log(event: .raceCompleted,
+                                      attributes: [
+                                        "RaceType": raceType.rawValue,
+                                        "Time": timeRaced,
+                                        "Points": points
+                        ])
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
@@ -111,7 +117,6 @@ extension GameViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
-                UINotificationFeedbackGenerator().notificationOccurred(.error)
             })
         })
 
@@ -257,17 +262,6 @@ extension GameViewController {
         timeRaced = 0
         raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
             self?.timeRaced += 1
-
-            if let raceType = self?.statRaceType {
-                var typeString = -1
-                switch raceType {
-                case .mpc: typeString = 1
-                case .gameKit: typeString = 2
-                case .solo: typeString = 3
-                default: break
-                }
-                PlayerMetrics.log(event: .timeSpent, attributes: ["RaceType": typeString])
-            }
         })
 
         navigationController?.setNavigationBarHidden(false, animated: false)
