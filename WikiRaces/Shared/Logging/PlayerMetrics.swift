@@ -43,7 +43,7 @@ internal struct PlayerMetrics {
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
 
-        case timeSpent
+        case raceCompleted
         case banHammer
     }
 

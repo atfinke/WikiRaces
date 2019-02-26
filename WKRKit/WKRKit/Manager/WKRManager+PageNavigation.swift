@@ -47,13 +47,18 @@ extension WKRGameManager {
                 if attributes.foundPage {
                     foundPage = true
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
+                    if let time = self?.localPlayer.raceHistory?.duration {
+                        self?.logEvent("foundPage", ["Time": time])
+                    }
                 } else if attributes.linkOnPage {
                     linkHere = true
                     if !lastPageHadLink {
                         self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+                        self?.logEvent("linkOnPage", nil)
                     }
                 } else if lastPageHadLink {
                     self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
+                    self?.logEvent("missedLink", nil)
                 }
             }
 

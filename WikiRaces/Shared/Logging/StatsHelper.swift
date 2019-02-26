@@ -102,8 +102,8 @@ internal class StatsHelper {
         }
     }
 
-    enum RaceType {
-        case mpc, gameKit, solo, other
+    enum RaceType: Int {
+        case mpc = 1, gameKit = 2, solo = 3, other = 10
 
         init?(_ config: WKRPeerNetworkConfig) {
             switch config {
@@ -180,6 +180,7 @@ internal class StatsHelper {
                                                object: keyValueStore)
 
         keyValueStore.synchronize()
+        updateStatsClosure()
     }
 
     //swiftlint:disable:next function_body_length
