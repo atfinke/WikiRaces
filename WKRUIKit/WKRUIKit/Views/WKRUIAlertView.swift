@@ -72,7 +72,10 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Enqueuing Messages
 
-    public func enqueue(text: String, duration: Double = WKRUIKitConstants.alertDefaultDuration, isRaceSpecific: Bool) {
+    public func enqueue(text: String,
+                        duration: Double = WKRUIKitConstants.alertDefaultDuration,
+                        isRaceSpecific: Bool) {
+        
         let message = WKRAlertMessage(text: text, duration: duration, isRaceSpecific: isRaceSpecific)
 
         // Make sure message doesn't equal most recent in queue.

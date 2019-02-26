@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		140564D52112D4BD001E36AB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140564D32112D4BC001E36AB /* Crashlytics.framework */; };
 		140564D62112D4BD001E36AB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140564D42112D4BC001E36AB /* Fabric.framework */; };
-		1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
 		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
@@ -18,8 +17,6 @@
 		141598DF2201493E00DA955E /* FirebaseRemoteConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */; };
 		141598E12201495F00DA955E /* FirebaseABTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 141598E02201495F00DA955E /* FirebaseABTesting.framework */; };
 		141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
-		141892F61F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
-		141892F71F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
 		141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
 		141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
 		141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
@@ -88,7 +85,6 @@
 		149357E4210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */; };
 		149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */; };
 		149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF84C1F362B83000A5D96 /* AppDelegate.swift */; };
-		149FF8521F362B83000A5D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
 		149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8531F362B83000A5D96 /* Assets.xcassets */; };
 		149FF8571F362B83000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */; };
 		149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF87A1F362BE4000A5D96 /* AppDelegate.swift */; };
@@ -111,6 +107,16 @@
 		14B2DD4C22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */; };
 		14B2DD4D22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */; };
 		14B2DD4E22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */; };
+		14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
+		14B4DB622224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
+		14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
+		14B4DB662224F1B9007D4B54 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
+		14B4DB672224F1BA007D4B54 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
+		14B4DB682224F1BC007D4B54 /* GameKitConnectViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */; };
+		14B4DB692224F1BD007D4B54 /* GameKitConnectViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */; };
+		14B4DB6B2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
+		14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
+		14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
 		14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
@@ -123,7 +129,6 @@
 		14C25FEA1F6F025A00CD7373 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14C25FE81F6F025A00CD7373 /* LaunchScreen.storyboard */; };
 		14C25FF11F6F028100CD7373 /* MenuTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB381F3689A90086B77F /* MenuTile.swift */; };
 		14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */; };
-		14C25FF41F6F028100CD7373 /* MenuViewController+Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */; };
 		14C25FF51F6F028100CD7373 /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
 		14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB5C1F368A0C0086B77F /* GameViewController.swift */; };
 		14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
@@ -140,7 +145,6 @@
 		14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
 		14C260091F6F02A500CD7373 /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
-		14C2600B1F6F032200CD7373 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8501F362B83000A5D96 /* Main.storyboard */; };
 		14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
 		14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB2C1F3689900086B77F /* ResultsViewController.swift */; };
@@ -353,7 +357,6 @@
 		141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseRemoteConfig.framework; sourceTree = "<group>"; };
 		141598E02201495F00DA955E /* FirebaseABTesting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseABTesting.framework; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
-		141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Segue.swift"; sourceTree = "<group>"; };
 		141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+Actions.swift"; sourceTree = "<group>"; };
 		141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDatabaseMetrics.swift; sourceTree = "<group>"; };
 		142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+KB.swift"; sourceTree = "<group>"; };
@@ -404,7 +407,6 @@
 		149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostPeerStateCell.swift; sourceTree = "<group>"; };
 		149FF8491F362B83000A5D96 /* WikiRaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiRaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF84C1F362B83000A5D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		149FF8511F362B83000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		149FF8531F362B83000A5D96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		149FF8561F362B83000A5D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		149FF8581F362B83000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -424,6 +426,8 @@
 		14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Actions.swift"; sourceTree = "<group>"; };
 		14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Setup.swift"; sourceTree = "<group>"; };
 		14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalRacesHelper.swift; sourceTree = "<group>"; };
+		14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingPuzzleView.swift; sourceTree = "<group>"; };
+		14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostSoloCell.swift; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Debug.swift"; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -628,7 +632,6 @@
 				143054BD1F89581100C0BC27 /* GoogleService-Info.plist */,
 				14A778281F61A9A100823DE8 /* Plans.txt */,
 				149FF84C1F362B83000A5D96 /* AppDelegate.swift */,
-				149FF8501F362B83000A5D96 /* Main.storyboard */,
 				149FF8531F362B83000A5D96 /* Assets.xcassets */,
 				149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */,
 				149FF8581F362B83000A5D96 /* Info.plist */,
@@ -702,8 +705,19 @@
 				14B2DD3A22212298009B8AB3 /* MenuView.swift */,
 				14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */,
 				14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */,
+				14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */,
 			);
 			path = MenuView;
+			sourceTree = "<group>";
+		};
+		14B4DB6E2224FB96007D4B54 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */,
+				14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */,
+				14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		14B55C8F1F3A495C0090E092 /* ResultsViewController */ = {
@@ -726,7 +740,6 @@
 				14B2DD4822212C25009B8AB3 /* MenuView */,
 				14C4AB3C1F3689AE0086B77F /* MenuViewController.swift */,
 				14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */,
-				141892F51F60ECD2006748F0 /* MenuViewController+Segue.swift */,
 				143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */,
 				142F714E210C33FC00C66558 /* MenuViewController+KB.swift */,
 			);
@@ -830,8 +843,7 @@
 				14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */,
 				14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */,
 				142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */,
-				149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */,
-				14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */,
+				14B4DB6E2224FB96007D4B54 /* Cells */,
 			);
 			path = MPCHostViewController;
 			sourceTree = "<group>";
@@ -1070,7 +1082,6 @@
 				1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */,
 				14DC66D11F90700A0026C6ED /* fabric.apikey in Resources */,
 				14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */,
-				149FF8521F362B83000A5D96 /* Main.storyboard in Resources */,
 				14DC66D21F90700D0026C6ED /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1082,7 +1093,6 @@
 				149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */,
 				149FF8801F362BE4000A5D96 /* Main-MultiWindow.storyboard in Resources */,
-				1410DB371F4F504F00F5CAD7 /* Main.storyboard in Resources */,
 				1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1101,7 +1111,6 @@
 				14C25FEA1F6F025A00CD7373 /* LaunchScreen.storyboard in Resources */,
 				14C25FE71F6F025A00CD7373 /* Assets.xcassets in Resources */,
 				14C25FE51F6F025A00CD7373 /* Main-Catalog.storyboard in Resources */,
-				14C2600B1F6F032200CD7373 /* Main.storyboard in Resources */,
 				14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1185,6 +1194,7 @@
 				14E1B19A1F7981C70082F4FA /* PlayerMetrics.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14B2DD3B22212298009B8AB3 /* MenuView.swift in Sources */,
+				14B4DB6B2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				142F7155210C35BC00C66558 /* VotingViewController+KB.swift in Sources */,
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -1196,6 +1206,7 @@
 				1478B1B122095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
 				145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				143BB7351F60DF4A00D00541 /* MPCConnectViewController.swift in Sources */,
+				14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14B2DD4C22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
@@ -1205,7 +1216,6 @@
 				1414280B21FC437000C48788 /* GameKitConnectViewController+Match.swift in Sources */,
 				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				147EF6F92202436600583D73 /* MPCHostContext.swift in Sources */,
-				141892F61F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
 				14C6B1F61FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */,
 				144A102A202FC79B003DB51A /* HelpViewController.swift in Sources */,
@@ -1253,11 +1263,13 @@
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				14DF31B62116923C005BA432 /* MPCHostViewController.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
+				14B4DB662224F1B9007D4B54 /* GameKitConnectViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14B2DD422221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
+				14B4DB682224F1BC007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,
 				14DF31B421169236005BA432 /* MPCConnectViewController+UI.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
@@ -1266,6 +1278,7 @@
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */,
 				1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
+				14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				14DD97252202293900AAB389 /* ConnectViewController.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
@@ -1273,10 +1286,10 @@
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				149357E4210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
-				141892F71F60ECD2006748F0 /* MenuViewController+Segue.swift in Sources */,
 				14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */,
 				144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
 				144A102B202FC7A1003DB51A /* CenteredTableViewController.swift in Sources */,
+				14B4DB622224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */,
 				14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14DF31B521169239005BA432 /* MPCHostViewController+Table.swift in Sources */,
@@ -1303,7 +1316,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */,
-				14C25FF41F6F028100CD7373 /* MenuViewController+Segue.swift in Sources */,
 				147EF7122202D76000583D73 /* MPCHostContext.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				14DF31AA211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
@@ -1319,11 +1331,13 @@
 				14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */,
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
+				14B4DB672224F1BA007D4B54 /* GameKitConnectViewController.swift in Sources */,
 				14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */,
 				14B2DD432221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				14BA538F21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				14DD97292202295100AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
+				14B4DB692224F1BD007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,
 				142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
 				14DFBD20210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */,
@@ -1332,6 +1346,7 @@
 				1480F6C621FB77DE00081F58 /* DebugInfoTableViewCell.swift in Sources */,
 				1480F6C321FB77D300081F58 /* DebugInfoTableViewController.swift in Sources */,
 				14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */,
+				14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				1478B1B322095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
 				14C260031F6F02A500CD7373 /* HistoryViewController.swift in Sources */,
 				141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
@@ -1342,6 +1357,7 @@
 				14D8AD471F81828D00914E5A /* PlayerMetrics.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
+				14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
 				14C260051F6F02A500CD7373 /* VotingViewController+TableView.swift in Sources */,
 				14C25FF51F6F028100CD7373 /* MenuViewController+GameKit.swift in Sources */,
@@ -1405,14 +1421,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		149FF8501F362B83000A5D96 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				149FF8511F362B83000A5D96 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
