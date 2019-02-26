@@ -75,7 +75,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        let controller = HistoryViewController()
+        let controller = historyViewController ?? HistoryViewController(style: .grouped)
         historyViewController = controller
         controller.player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
 

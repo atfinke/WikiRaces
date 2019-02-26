@@ -25,7 +25,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     var player: WKRPlayer? {
         didSet {
-            updateEntries()
+            updateEntries(oldPlayer: oldValue)
         }
     }
 
@@ -33,6 +33,10 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
 
         navigationController?.navigationBar.barStyle = .wkrStyle
 
@@ -49,14 +53,21 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     // MARK: - Logic
 
-    private func updateEntries() {
+    private func updateEntries(oldPlayer: WKRPlayer?) {
+        title = player?.name
+
+        // New Player
+        if let oldPlayer = oldPlayer, oldPlayer != player {
+            entries = player?.raceHistory?.entries ?? []
+            tableView.reloadData()
+            return
+        }
+
         guard let player = player, let history = player.raceHistory else {
             entries = []
             tableView.reloadData()
-            title = nil
             return
         }
-        title = player.name
 
         if view.window == nil {
             self.entries = history.entries
@@ -90,7 +101,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         }, completion: { _ in
             self.isTableViewAnimating = false
             if self.deferredUpdate {
-                self.updateEntries()
+                self.updateEntries(oldPlayer: nil)
             }
         })
     }
@@ -111,11 +122,15 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         isUserScrolling = false
         if deferredUpdate {
-            updateEntries()
+            updateEntries(oldPlayer: nil)
         }
     }
 
     // MARK: - Table view data source
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return "Tap any article to view on Wikipedia"
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return entries.count
