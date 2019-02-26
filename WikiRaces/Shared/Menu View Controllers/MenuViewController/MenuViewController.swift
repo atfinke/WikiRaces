@@ -44,12 +44,8 @@ internal class MenuViewController: UIViewController {
         }
 
         menuView.presentDebugController = showDebugController
-        menuView.presentMPCConnectController = { isHost in
-            self.performSegue(.showMPCConnecting, isHost: isHost)
-        }
-        menuView.presentGlobalConnectController = {
-            self.pressedGlobalRace()
-        }
+        menuView.presentMPCConnectController = presentMPCConnect
+        menuView.presentGlobalConnectController = presentGlobalConnect
         menuView.presentLeaderboardController = {
             let controller = GKGameCenterViewController()
             controller.gameCenterDelegate = self
@@ -57,9 +53,7 @@ internal class MenuViewController: UIViewController {
             controller.leaderboardTimeScope = .allTime
             self.present(controller, animated: true, completion: nil)
         }
-        menuView.presentGlobalAuthController = {
-            self.attemptGlobalAuthentication()
-        }
+        menuView.presentGlobalAuthController = attemptGlobalAuthentication
         menuView.presentAlertController = { alertController in
             self.present(alertController, animated: true, completion: nil)
         }
@@ -67,6 +61,7 @@ internal class MenuViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = false
 
         // adjusts views before animation if rotation occured
         menuView.setNeedsLayout()
@@ -131,7 +126,16 @@ internal class MenuViewController: UIViewController {
 
     // MARK: - Other
 
-    func pressedGlobalRace() {
+    func presentMPCConnect(isHost: Bool) {
+        UIApplication.shared.isIdleTimerDisabled = true
+        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
+
+        let controller = MPCConnectViewController()
+        controller.isPlayerHost = isHost
+        self.navigationController?.pushViewController(controller, animated: false)
+    }
+
+    func presentGlobalConnect() {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             let controller = GameViewController()
             let nav = UINavigationController(rootViewController: controller)
@@ -139,22 +143,27 @@ internal class MenuViewController: UIViewController {
             controller.prepareForScreenshots(for: url)
             present(nav, animated: true, completion: nil)
         } else {
-            let message = """
-            Welcome to the Global Races Beta. Global Races require a Game Center account to play.
-            """
-            let controller = UIAlertController(title: "Global Races Beta",
-                                               message: message,
-                                               preferredStyle: .alert)
+            UIApplication.shared.isIdleTimerDisabled = true
+            WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
 
-            let action = UIAlertAction(title: "Start Racing",
-                                       style: .default,
-                                       handler: { _ in
-                                        self.performSegue(.showGameKitConnecting, isHost: false)
-            })
-            controller.addAction(action)
-            controller.addCancelAction(title: "Cancel")
-            //            self.present(controller, animated: true, completion: nil)
-            self.performSegue(.showGameKitConnecting, isHost: false)
+            let controller = GameKitConnectViewController()
+            navigationController?.pushViewController(controller, animated: false)
+//            let message = """
+//            Welcome to the Global Races Beta. Global Races require a Game Center account to play.
+//            """
+//            let controller = UIAlertController(title: "Global Races Beta",
+//                                               message: message,
+//                                               preferredStyle: .alert)
+//
+//            let action = UIAlertAction(title: "Start Racing",
+//                                       style: .default,
+//                                       handler: { _ in
+//                                        self.performSegue(.showGameKitConnecting, isHost: false)
+//            })
+//            controller.addAction(action)
+//            controller.addCancelAction(title: "Cancel")
+//            //            self.present(controller, animated: true, completion: nil)
+//            performSegue(.showGameKitConnecting, isHost: false)
         }
     }
 

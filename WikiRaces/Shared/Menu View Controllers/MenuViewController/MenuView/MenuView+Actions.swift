@@ -104,7 +104,6 @@ extension MenuView {
     /// Animates the views on screen
     func animateMenuIn(completion: (() -> Void)? = nil) {
         isUserInteractionEnabled = false
-        UIApplication.shared.isIdleTimerDisabled = false
 
         movingPuzzleView.start()
 

@@ -106,12 +106,7 @@ internal class MPCConnectViewController: ConnectViewController {
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        advertiser?.stopAdvertisingPeer()
-
-        // Reject all the pending invites
-        for invite in invites {
-            invite.handler?(false, session)
-        }
+        stopAdvertising()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -131,7 +126,7 @@ internal class MPCConnectViewController: ConnectViewController {
                                         duration: 0.25,
                                         and: [self.inviteView],
                                         completion: {
-                                            self.performSegue(withIdentifier: "showHost", sender: nil)
+                                            self.presentHostInterface()
                     })
                 } else {
                     self.startAdvertising()
@@ -153,37 +148,41 @@ internal class MPCConnectViewController: ConnectViewController {
 
     // MARK: - State Changes
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let navigationController = segue.destination as? UINavigationController else {
-            fatalError("Destination is not a UINavigationController")
+    func stopAdvertising() {
+        advertiser?.stopAdvertisingPeer()
+
+        // Reject all the pending invites
+        for invite in invites {
+            invite.handler?(false, session)
+        }
+    }
+
+    func presentHostInterface() {
+        let controller = MPCHostViewController(style: .grouped)
+        controller.peerID = peerID
+        controller.session = session
+        controller.serviceType = serviceType
+        controller.didStartMatch = { [weak self] isSolo in
+            guard let self = self else { return }
+            self.isSolo = isSolo
+            self.dismiss(animated: true, completion: {
+                var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
+                if !isSolo {
+                    networkConfig = .mpc(serviceType: self.serviceType,
+                                         session: self.session,
+                                         isHost: self.isPlayerHost)
+                }
+                self.showMatch(for: networkConfig, generateFeedback: true, andHide: [])
+            })
+        }
+        controller.didCancelMatch = { [weak self] in
+            self?.dismiss(animated: true, completion: {
+                self?.navigationController?.popToRootViewController(animated: false)
+            })
         }
 
-        if segue.identifier == "showHost" {
-            guard let destination = navigationController.rootViewController as? MPCHostViewController else {
-                fatalError("Destination rootViewController is not a MPCHostViewController")
-            }
-            destination.peerID = peerID
-            destination.session = session
-            destination.serviceType = serviceType
-            destination.didStartMatch = { [weak self] isSolo in
-                guard let self = self else { return }
-                self.isSolo = isSolo
-                self.dismiss(animated: true, completion: {
-                    var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
-                    if !isSolo {
-                        networkConfig = .mpc(serviceType: self.serviceType,
-                                             session: self.session,
-                                             isHost: self.isPlayerHost)
-                    }
-                    self.showMatch(for: networkConfig, generateFeedback: true, andHide: [])
-                })
-            }
-            destination.didCancelMatch = { [weak self] in
-                self?.dismiss(animated: true, completion: {
-                    self?.navigationController?.popToRootViewController(animated: false)
-                })
-            }
-        }
+        let nav = UINavigationController(rootViewController: controller)
+        present(nav, animated: true, completion: nil)
     }
 
 }

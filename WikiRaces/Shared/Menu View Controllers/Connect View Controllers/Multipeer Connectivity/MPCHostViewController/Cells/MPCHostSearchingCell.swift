@@ -19,15 +19,22 @@ internal class MPCHostSearchingCell: UITableViewCell {
 
     // MARK: - Initialization
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         backgroundColor = UIColor.wkrBackgroundColor
+        textLabel?.textColor = UIColor(red: 184.0 / 255.0,
+                                       green: 184.0 / 255.0,
+                                       blue: 184.0 / 255.0,
+                                       alpha: 1.0)
 
         updateText()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { _ in
             self.updateText()
         })
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     // MARK: - Helpers

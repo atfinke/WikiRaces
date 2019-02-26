@@ -54,11 +54,11 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "soloCell", for: indexPath)
-            cell.backgroundColor = UIColor.wkrBackgroundColor
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: MPCHostSoloCell.reuseIdentifier,
+                                                 for: indexPath)
         } else if peers.isEmpty {
-            return tableView.dequeueReusableCell(withIdentifier: MPCHostSearchingCell.reuseIdentifier, for: indexPath)
+            return tableView.dequeueReusableCell(withIdentifier: MPCHostSearchingCell.reuseIdentifier,
+                                                 for: indexPath)
         }
 
         //swiftlint:disable:next line_length

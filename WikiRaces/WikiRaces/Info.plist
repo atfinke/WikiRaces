@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>3.6.4</string>
 	<key>CFBundleVersion</key>
-	<string>4425</string>
+	<string>4524</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -26,8 +26,6 @@
 	<string>WikiRaces needs your permission to save the race result image to your photo library.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

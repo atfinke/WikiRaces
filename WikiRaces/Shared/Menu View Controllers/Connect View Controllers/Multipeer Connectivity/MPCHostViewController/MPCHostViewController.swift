@@ -55,6 +55,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "INVITE NEARBY PLAYERS"
+        
         guard let peerID = peerID, let serviceType = serviceType else {
             fatalError("Required properties peerID or serviceType not set")
         }
@@ -62,7 +64,15 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         browser?.delegate = self
         session?.delegate = self
 
-        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                           target: self,
+                                                           action: #selector(cancelMatch(_:)))
+
+        let startButton = UIBarButtonItem(barButtonSystemItem: .play,
+                                          target: self,
+                                          action: #selector(startMatch(_:)))
+        startButton.isEnabled = false
+        navigationItem.rightBarButtonItem = startButton
         navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
 
         tableView.backgroundColor = WKRUIStyle.isDark ? UIColor.wkrBackgroundColor : UIColor.groupTableViewBackground
@@ -71,6 +81,10 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(MPCHostPeerStateCell.self,
                            forCellReuseIdentifier: MPCHostPeerStateCell.reuseIdentifier)
+        tableView.register(MPCHostSearchingCell.self,
+                           forCellReuseIdentifier: MPCHostSearchingCell.reuseIdentifier)
+        tableView.register(MPCHostSoloCell.self,
+                           forCellReuseIdentifier: MPCHostSoloCell.reuseIdentifier)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +101,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     // MARK: - Actions
 
-    @IBAction func cancelMatch(_ sender: Any) {
+    @objc
+    func cancelMatch(_ sender: Any) {
         PlayerMetrics.log(event: .userAction(#function))
         PlayerMetrics.log(event: .hostCancelledPreMatch)
 
@@ -95,7 +110,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         didCancelMatch?()
     }
 
-    @IBAction func startMatch(_ sender: Any) {
+    @objc
+    func startMatch(_ sender: Any) {
         PlayerMetrics.log(event: .userAction(#function))
 
         tableView.isUserInteractionEnabled = false

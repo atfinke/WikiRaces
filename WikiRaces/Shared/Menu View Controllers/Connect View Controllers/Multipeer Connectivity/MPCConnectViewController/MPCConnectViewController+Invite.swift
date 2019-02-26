@@ -107,6 +107,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         hostNameLabel.text = "FROM " + invite.host.displayName.uppercased()
         UIView.animate(withDuration: 0.25, animations: {
+            self.activityIndicatorView.alpha = 0.0
             self.inviteView.alpha = 1.0
         })
         updateDescriptionLabel(to: "INVITE RECEIVED")
@@ -136,14 +137,16 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         PlayerMetrics.log(event: .userAction(#function))
 
         activeInvite?(true, session)
-        advertiser?.stopAdvertisingPeer()
         updateDescriptionLabel(to: "CONNECTING TO HOST")
 
         isShowingInvite = false
 
         UIView.animate(withDuration: 0.5) {
+            self.activityIndicatorView.alpha = 1.0
             self.inviteView.alpha = 0.0
         }
+
+        stopAdvertising()
 
         #if !MULTIWINDOWDEBUG
         connectingTrace = Performance.startTrace(name: "Player Connecting Trace")

@@ -14,11 +14,11 @@ class ConnectViewController: UIViewController {
     // MARK: - Interface Elements
 
     /// General status label
-    @IBOutlet weak var descriptionLabel: UILabel!
+    let descriptionLabel = UILabel()
     /// Activity spinner
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     /// The button to cancel joining/creating a race
-    @IBOutlet weak var cancelButton: UIButton!
+    let cancelButton = UIButton()
 
     var isFirstAppear = true
     var isShowingMatch = false
@@ -45,14 +45,37 @@ class ConnectViewController: UIViewController {
     // MARK: - Core Interface
 
     func setupCoreInterface() {
+        cancelButton.translatesAutoresizingMaskIntoConstraints = false
+        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        cancelButton.setTitleColor(.wkrTextColor, for: .normal)
         cancelButton.alpha = 0.0
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
+        view.addSubview(cancelButton)
 
-        updateDescriptionLabel(to: "CHECKING CONNECTION")
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.alpha = 0.0
+        descriptionLabel.textColor = .wkrTextColor
+        descriptionLabel.textAlignment = .center
+        descriptionLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        view.addSubview(descriptionLabel)
+        updateDescriptionLabel(to: "CHECKING CONNECTION")
 
+        activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.alpha = 0.0
         activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
+        activityIndicatorView.startAnimating()
+        view.addSubview(activityIndicatorView)
+
+        let constraints = [
+            descriptionLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 100),
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ]
+        NSLayoutConstraint.activate(constraints)
+
         view.backgroundColor = UIColor.wkrBackgroundColor
     }
 
@@ -60,11 +83,10 @@ class ConnectViewController: UIViewController {
                              duration: TimeInterval,
                              and items: [UIView] = [],
                              completion: (() -> Void)? = nil) {
-        let core = [descriptionLabel, activityIndicatorView, cancelButton]
+        let views = [descriptionLabel, activityIndicatorView, cancelButton] + items
         UIView.animate(withDuration: duration,
                        animations: {
-                        let views = items + core
-                        views.forEach({ $0?.alpha = isHidden ? 0 : 1})
+                        views.forEach({ $0.alpha = isHidden ? 0 : 1})
         }, completion: { _ in
             completion?()
         })
@@ -109,7 +131,7 @@ class ConnectViewController: UIViewController {
     }
 
     /// Cancels the join/create a race action and sends player back to main menu
-    @IBAction func pressedCancelButton() {
+    @objc func pressedCancelButton() {
         PlayerMetrics.log(event: .userAction(#function))
         onQuit?()
 
