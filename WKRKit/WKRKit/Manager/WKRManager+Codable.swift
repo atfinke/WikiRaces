@@ -32,10 +32,16 @@ extension WKRGameManager {
             game.playerUpdated(playerObject)
 
             if playerObject != localPlayer && game.shouldShowSamePageMessage(for: playerObject) {
-                enqueue(message: "\(player.name) is on same page", isRaceSpecific: true)
+                enqueue(message: "\(player.name) is on same page",
+                        duration: 2.0,
+                        isRaceSpecific: true,
+                        playHaptic: false)
             } else if playerObject == localPlayer {
                 for player in game.players where game.shouldShowSamePageMessage(for: player) {
-                    enqueue(message: "\(player.name) is on same page", isRaceSpecific: true)
+                    enqueue(message: "\(player.name) is on same page",
+                        duration: 2.0,
+                        isRaceSpecific: true,
+                        playHaptic: false)
                 }
             }
 
@@ -60,8 +66,11 @@ extension WKRGameManager {
             transitionGameState(to: gameState)
         } else if let message = object.typeOfEnum(WKRPlayerMessage.self), player != localPlayer.profile {
             var isRaceSpecific = true
+            var playHaptic = false
             if message == .quit {
                 isRaceSpecific = false
+            } else if message == .foundPage {
+                playHaptic = true
             }
 
             // Don't show "on USA" message if expected to show "is on same page" message
@@ -70,7 +79,10 @@ extension WKRGameManager {
                 return
             }
 
-            enqueue(message: message.text(for: player), duration: 5.0, isRaceSpecific: isRaceSpecific)
+            enqueue(message: message.text(for: player),
+                    duration: 3.0,
+                    isRaceSpecific: isRaceSpecific,
+                    playHaptic: playHaptic)
         } else if let error = object.typeOfEnum(WKRFatalError.self), !isFailing {
             isFailing = true
             localPlayer.state = .quit
@@ -90,7 +102,10 @@ extension WKRGameManager {
         case .bonusPoints:
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Race Bonus Now \(int.value) " + string
-            enqueue(message: message, isRaceSpecific: true)
+            enqueue(message: message,
+                    duration: 1.0,
+                    isRaceSpecific: true,
+                    playHaptic: false)
         case .showReady:
             resultsShowReady?(int.value == 1)
         }

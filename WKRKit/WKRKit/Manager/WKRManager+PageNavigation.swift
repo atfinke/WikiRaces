@@ -12,10 +12,18 @@ extension WKRGameManager {
 
     func newPageNavigation() -> WKRPageNavigation {
         return WKRPageNavigation(pageURLBlocked: { [weak self] url in
-            self?.enqueue(message: "Link not allowed", duration: 1.0, isRaceSpecific: true)
+            self?.enqueue(message: "Link not allowed",
+                          duration: 2.0,
+                          isRaceSpecific: true,
+                          playHaptic: true)
+
             self?.logEvent("pageBlocked", ["PageURL": self?.truncated(url: url) as Any])
         }, pageLoadingError: { [weak self] in
-            self?.enqueue(message: "Error loading page", duration: 5.0, isRaceSpecific: true)
+            self?.enqueue(message: "Error loading page",
+                duration: 3.0,
+                isRaceSpecific: true,
+                playHaptic: true)
+
             self?.webView.completedPageLoad()
         }, pageStartedLoading: { [weak self] in
             self?.webView.startedPageLoad()
@@ -59,18 +67,6 @@ extension WKRGameManager {
                 localPlayer.state = .foundPage
                 self?.transitionGameState(to: .results)
             }
-
-            let stuckTime = 30.0
-            let entryCount = localPlayer.raceHistory?.entries.count ?? 0
-            Timer.scheduledTimer(withTimeInterval: stuckTime, repeats: false, block: { [weak self] _ in
-                guard let player = self?.localPlayer,
-                    player.state == .racing,
-                    let history = player.raceHistory,
-                    history.entries.count == entryCount,
-                    history.timeSinceLastPageOpenTime >= Int(stuckTime - 1)
-                else { return }
-                self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.stuck))
-            })
 
             self?.peerNetwork.send(object: WKRCodable(localPlayer))
             self?.logEvent("pageView", ["Page": page.title as Any])

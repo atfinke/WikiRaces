@@ -16,6 +16,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         let text: String
         let duration: Double
         let isRaceSpecific: Bool
+        let playHaptic: Bool
     }
 
     // MARK: - Properties
@@ -74,9 +75,13 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     public func enqueue(text: String,
                         duration: Double = WKRUIKitConstants.alertDefaultDuration,
-                        isRaceSpecific: Bool) {
+                        isRaceSpecific: Bool,
+                        playHaptic: Bool) {
         
-        let message = WKRAlertMessage(text: text, duration: duration, isRaceSpecific: isRaceSpecific)
+        let message = WKRAlertMessage(text: text,
+                                      duration: duration,
+                                      isRaceSpecific: isRaceSpecific,
+                                      playHaptic: playHaptic)
 
         // Make sure message doesn't equal most recent in queue.
         // If queue empty, make sure message isn't the same as the one being displayed.
@@ -117,7 +122,9 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         alertWindow.setNeedsLayout()
         alertWindow.bringSubviewToFront(self)
 
-        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        if message.playHaptic {
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        }
 
         UIView.animate(withDuration: WKRUIKitConstants.alertAnimateInDuration) {
             self.alertWindow.layoutIfNeeded()
