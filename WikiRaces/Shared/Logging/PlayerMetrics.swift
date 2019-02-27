@@ -37,6 +37,7 @@ internal struct PlayerMetrics {
         case quitRace, forfeited, usedHelp, usedReload, fatalError, backupQuit
         case openedHistory, openedHistorySF, openedShare, pressedReadyButton, voted
         case finalVotes
+        case linkOnPage, missedLink, foundPage, pageLoadingError
 
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
@@ -45,6 +46,17 @@ internal struct PlayerMetrics {
 
         case raceCompleted
         case banHammer
+
+        init(event: WKRLogEvent) {
+            switch event.type {
+            case .linkOnPage:       self = .linkOnPage
+            case .foundPage:        self = .foundPage
+            case .pageBlocked:      self = .pageBlocked
+            case .pageLoadingError: self = .pageLoadingError
+            case .pageView:         self = .pageView
+            case .missedLink:       self = .missedLink
+            }
+        }
     }
 
     #warning("investigate other GK events that should be added")

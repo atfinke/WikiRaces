@@ -40,7 +40,7 @@ public class WKRGameManager {
     internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
     internal let pointsUpdate: ((Int) -> Void)
     internal let linkCountUpdate: ((Int) -> Void)
-    internal let logEvent: ((String, [String: Any]?) -> Void)
+    internal let logEvent: ((WKRLogEvent) -> Void)
 
     internal var resultsShowReady: ((Bool) -> Void)?
     internal var resultsTimeUpdate: ((Int) -> Void)?
@@ -66,7 +66,7 @@ public class WKRGameManager {
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping ((String, [String: Any]?) -> Void)) {
+                            logEvent: @escaping ((WKRLogEvent) -> Void)) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate

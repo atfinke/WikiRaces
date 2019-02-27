@@ -38,17 +38,15 @@ extension GameViewController {
                 }
             }, linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
-            }, logEvent: { [weak self] event, attributes in
+            }, logEvent: { [weak self] event in
                 #if !MULTIWINDOWDEBUG
-                    guard let eventType = PlayerMetrics.Event(rawValue: event) else {
-                        fatalError("Invalid event " + event)
-                    }
-                    if eventType == .pageView,
+                    let metric = PlayerMetrics.Event(event: event)
+                    if metric == .pageView,
                         let config = self?.networkConfig,
                         let raceType = StatsHelper.RaceType(config) {
                         StatsHelper.shared.viewedPage(raceType: raceType)
                     }
-                    PlayerMetrics.log(event: eventType, attributes: attributes)
+                    PlayerMetrics.log(event: metric, attributes: event.attributes)
                 #endif
         })
 
@@ -135,21 +133,20 @@ extension GameViewController {
     }
 
     private func dismissActiveController(completion: (() -> Void)?) {
-        if let activeViewController = activeViewController, activeViewController.view.window != nil {
-            let controller: UIViewController?
-            if activeViewController.presentingViewController == self {
-                controller = activeViewController
-            } else {
-                controller = activeViewController.presentingViewController
-            }
-            controller?.dismiss(animated: true, completion: {
-                self.resetActiveControllers()
-                completion?()
-                return
-            })
-        } else {
+        func done() {
             resetActiveControllers()
             completion?()
+        }
+        if let activeViewController = activeViewController {
+            if activeViewController.view.window != nil || activeViewController.presentedViewController?.view.window != nil{
+                dismiss(animated: true, completion: {
+                    done()
+                })
+            } else {
+                done()
+            }
+        } else {
+            done()
         }
     }
 
@@ -189,9 +186,9 @@ extension GameViewController {
             if let raceType = self?.statRaceType {
                 var stat = StatsHelper.Stat.mpcVotes
                 switch raceType {
-                case .mpc: stat = StatsHelper.Stat.mpcVotes
-                case .gameKit: stat = StatsHelper.Stat.gkVotes
-                case .solo: stat = StatsHelper.Stat.soloVotes
+                case .mpc: stat = .mpcVotes
+                case .gameKit: stat = .gkVotes
+                case .solo: stat = .soloVotes
                 default: break
                 }
                 StatsHelper.shared.increment(stat: stat)
