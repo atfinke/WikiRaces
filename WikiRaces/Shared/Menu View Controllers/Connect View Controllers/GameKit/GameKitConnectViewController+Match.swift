@@ -38,7 +38,6 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.showMatch(for: .gameKit(match: match, isHost: true),
-                               generateFeedback: true,
                                andHide: [])
             }
         } catch {
@@ -54,7 +53,6 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else {
             showMatch(for: .gameKit(match: match, isHost: isPlayerHost),
-                      generateFeedback: true,
                       andHide: [])
         }
     }

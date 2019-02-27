@@ -72,7 +72,7 @@ class ConnectViewController: UIViewController {
             activityIndicatorView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 30),
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cancelButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 
@@ -143,7 +143,6 @@ class ConnectViewController: UIViewController {
     }
 
     func showMatch(for networkConfig: WKRPeerNetworkConfig,
-                   generateFeedback: Bool,
                    andHide views: [UIView]) {
 
         guard !isShowingMatch else { return }
@@ -160,10 +159,6 @@ class ConnectViewController: UIViewController {
                                         nav.modalTransitionStyle = .crossDissolve
                                         self.present(nav, animated: true, completion: nil)
             })
-
-            if generateFeedback {
-                UINotificationFeedbackGenerator().notificationOccurred(.success)
-            }
         }
     }
 

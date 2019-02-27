@@ -172,7 +172,7 @@ internal class MPCConnectViewController: ConnectViewController {
                                          session: self.session,
                                          isHost: self.isPlayerHost)
                 }
-                self.showMatch(for: networkConfig, generateFeedback: true, andHide: [])
+                self.showMatch(for: networkConfig, andHide: [])
             })
         }
         controller.didCancelMatch = { [weak self] in

@@ -24,7 +24,6 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         showMatch(for: .mpc(serviceType: self.serviceType,
                             session: self.session,
                             isHost: self.isPlayerHost),
-                  generateFeedback: false,
                   andHide: [self.inviteView])
     }
 

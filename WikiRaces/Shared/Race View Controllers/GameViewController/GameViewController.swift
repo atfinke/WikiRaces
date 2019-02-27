@@ -138,7 +138,9 @@ internal class GameViewController: UIViewController {
         controller.url = gameManager.finalPageURL
         controller.linkTapped = { [weak self] in
             self?.gameManager.enqueue(message: "Links disabled in help",
-                                      duration: 2.0, isRaceSpecific: true)
+                                      duration: 2.0,
+                                      isRaceSpecific: true,
+                                      playHaptic: true)
         }
         self.activeViewController = controller
 
