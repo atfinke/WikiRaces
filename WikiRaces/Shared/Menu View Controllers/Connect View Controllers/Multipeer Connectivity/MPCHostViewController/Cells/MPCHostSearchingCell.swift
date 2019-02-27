@@ -21,6 +21,7 @@ internal class MPCHostSearchingCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        isUserInteractionEnabled = false
         backgroundColor = UIColor.wkrBackgroundColor
         textLabel?.textColor = UIColor(red: 184.0 / 255.0,
                                        green: 184.0 / 255.0,
