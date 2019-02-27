@@ -14,15 +14,15 @@ public struct WKRUIKitConstants {
     // MARK: - Not Updated OTA
 
     static let webViewAnimateInDuration   = 0.25
-    static let webViewAnimateOutDuration  = 0.25
+    static let webViewAnimateOutDuration  = 0.15
 
     static let progessViewAnimateOutDelay     = 0.85
     static let progessViewAnimateOutDuration  = 0.4
 
     static let alertLabelHeight: CGFloat   = 30.0
-    static let alertAnimateInDuration      = 0.25
-    static let alertAnimateOutDuration     = 0.25
-    public static let alertDefaultDuration = 5.0
+    static let alertAnimateInDuration      = 0.2
+    static let alertAnimateOutDuration     = 0.15
+    public static let alertDefaultDuration = 3.0
 
     // MARK: - Updated OTA
 
