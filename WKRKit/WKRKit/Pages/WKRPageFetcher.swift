@@ -16,8 +16,8 @@ internal struct WKRPageFetcher {
     /// The standard URLSession
     static private let session: URLSession = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5.0
-        config.timeoutIntervalForResource = 5.0
+        config.timeoutIntervalForRequest = 7.5
+        config.timeoutIntervalForResource = 7.5
         return URLSession(configuration: config)
     }()
 

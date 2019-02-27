@@ -99,6 +99,8 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
                 DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
+                    } else {
+                        self.pageLoadingError()
                     }
                 }
             }
