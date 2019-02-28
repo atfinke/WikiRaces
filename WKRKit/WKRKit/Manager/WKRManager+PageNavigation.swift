@@ -30,55 +30,51 @@ extension WKRGameManager {
             self?.webView.completedPageLoad()
             self?.logEvent(WKRLogEvent(type: .pageLoadingError, attributes: nil))
         }, pageStartedLoading: { [weak self] in
-            self?.webView.startedPageLoad()
-            if let player = self?.localPlayer {
-                player.finishedViewingLastPage()
-                self?.peerNetwork.send(object: WKRCodable(player))
-            }
-            self?.linkCountUpdate(self?.localPlayer.raceHistory?.entries.count ?? 0)
+            guard let self = self else { return }
+            self.webView.startedPageLoad()
+            self.localPlayer.finishedViewingLastPage(pointsScrolled: self.webView.pointsScrolled)
+            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+            self.linkCountUpdate(self.localPlayer.raceHistory?.entries.count ?? 0)
         }, pageLoaded: { [weak self] page in
-            self?.webView.completedPageLoad()
+            guard let self = self else { return }
+            self.webView.completedPageLoad()
 
             var linkHere = false
             var foundPage = false
 
             if page.title == "United States" {
-                self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.onUSA))
+                self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.onUSA))
             }
 
-            let lastPageHadLink = self?.localPlayer.raceHistory?.entries.last?.linkHere ?? false
-            if let attributes = self?.game.activeRace?.attributes(for: page) {
+            let lastPageHadLink = self.localPlayer.raceHistory?.entries.last?.linkHere ?? false
+            if let attributes = self.game.activeRace?.attributes(for: page) {
                 if attributes.foundPage {
                     foundPage = true
-                    self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
-                    if let time = self?.localPlayer.raceHistory?.duration {
-                        self?.logEvent(WKRLogEvent(type: .foundPage, attributes: ["Time": time]))
+                    self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
+                    if let time = self.localPlayer.raceHistory?.duration {
+                        self.logEvent(WKRLogEvent(type: .foundPage, attributes: ["Time": time]))
                     }
                 } else if attributes.linkOnPage {
                     linkHere = true
                     if !lastPageHadLink {
-                        self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
-                        self?.logEvent(WKRLogEvent(type: .linkOnPage, attributes: nil))
+                        self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
+                        self.logEvent(WKRLogEvent(type: .linkOnPage, attributes: nil))
                     }
                 } else if lastPageHadLink {
-                    self?.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
-                    self?.logEvent(WKRLogEvent(type: .missedLink, attributes: nil))
+                    self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
+                    self.logEvent(WKRLogEvent(type: .missedLink, attributes: nil))
                 }
             }
 
-            guard let localPlayer = self?.localPlayer else {
-                return
-            }
-
-            localPlayer.nowViewing(page: page, linkHere: linkHere)
+            self.localPlayer.nowViewing(page: page, linkHere: linkHere)
 
             if foundPage {
-                localPlayer.state = .foundPage
-                self?.transitionGameState(to: .results)
+                self.localPlayer.state = .foundPage
+                self.transitionGameState(to: .results)
             }
 
-            self?.peerNetwork.send(object: WKRCodable(localPlayer))
-            self?.logEvent(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any]))
+            self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+            self.logEvent(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any]))
         })
     }
 

@@ -31,6 +31,8 @@ extension WKRGameManager {
             }
             game.playerUpdated(playerObject)
 
+            // if: other player just got to the same page
+            // else if: local player just got to a new page
             var samePagePlayers = [WKRPlayerProfile]()
             if playerObject != localPlayer && game.shouldShowSamePageMessage(for: playerObject) {
                 samePagePlayers.append(playerObject.profile)
@@ -166,8 +168,10 @@ extension WKRGameManager {
                 errorOccurred(.configCreationFailed)
                 return
             }
+            webView.resetPixelCount()
             localPlayer.startedNewRace(on: raceConfig.startingPage)
         case .hostResults:
+            pointsScrolledUpdate(webView.pointsScrolled)
             localPlayer.raceHistory = nil
         default:
             break

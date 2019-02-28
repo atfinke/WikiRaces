@@ -27,6 +27,8 @@ class PlayerDatabaseMetrics: NSObject {
         case gkStatsUpdate(gkVotes: Int, gkHelp: Int, gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
         //swiftlint:disable:next line_length
         case soloStatsUpdate(soloVotes: Int, soloHelp: Int, soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
+
+        case pointsScrolled(Int)
     }
 
     private struct ProcessedResults {
@@ -232,6 +234,8 @@ class PlayerDatabaseMetrics: NSObject {
             record["mpcTotalPlayers"] = NSNumber(value: mpcTotal)
             record["gkUniquePlayers"] = NSNumber(value: gkUnique)
             record["gkTotalPlayers"] = NSNumber(value: gkTotal)
+        case .pointsScrolled(let pointsScrolled):
+            record["pointsScrolled"] = NSNumber(value: pointsScrolled)
         }
 
         publicDB.save(record) { (savedUserStatsRecord, _) in

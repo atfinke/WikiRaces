@@ -53,6 +53,8 @@ internal class StatsHelper {
         case soloRaces
         case soloPressedHost
 
+        case pointsScrolled
+
         static var numericHighStats: [Stat] = [
             .average,
 
@@ -79,7 +81,9 @@ internal class StatsHelper {
             .soloPages,
             .soloTotalTime,
             .soloRaces,
-            .soloPressedHost
+            .soloPressedHost,
+
+            .pointsScrolled
         ]
 
         static var numericLowStats: [Stat] = [
@@ -171,7 +175,7 @@ internal class StatsHelper {
     // MARK: - Helpers
 
     func start() {
-        cloudSync()
+        ubiquitousStoreSync()
         leaderboardSync()
 
         NotificationCenter.default.addObserver(self,
@@ -180,69 +184,7 @@ internal class StatsHelper {
                                                object: keyValueStore)
 
         keyValueStore.synchronize()
-        updateStatsClosure()
-    }
-
-    //swiftlint:disable:next function_body_length
-    private func updateStatsClosure() {
-        let mpcVotes = statValue(for: .mpcVotes)
-        let mpcHelp = statValue(for: .mpcHelp)
-        let mpcPoints = statValue(for: .mpcPoints)
-        let mpcFastestTime = statValue(for: .mpcFastestTime)
-        let mpcTotalTime = statValue(for: .mpcTotalTime)
-        let mpcPages = statValue(for: .mpcPages)
-        let mpcRaces = statValue(for: .mpcRaces)
-        let mpcPressedJoin = statValue(for: .mpcPressedJoin)
-        let mpcPressedHost = statValue(for: .mpcPressedHost)
-
-        let gkVotes = statValue(for: .gkVotes)
-        let gkHelp = statValue(for: .gkHelp)
-        let gkPoints = statValue(for: .gkPoints)
-        let gkFastestTime = statValue(for: .gkFastestTime)
-        let gkTotalTime = statValue(for: .gkTotalTime)
-        let gkPages = statValue(for: .gkPages)
-        let gkRaces = statValue(for: .gkRaces)
-        let gkPressedJoin = statValue(for: .gkPressedJoin)
-        let gkConnectedToMatch = statValue(for: .gkConnectedToMatch)
-
-        let soloVotes = statValue(for: .soloVotes)
-        let soloHelp = statValue(for: .soloHelp)
-        let soloTotalTime = statValue(for: .soloTotalTime)
-        let soloPages = statValue(for: .soloPages)
-        let soloRaces = statValue(for: .soloRaces)
-        let soloPressedHost = statValue(for: .soloPressedHost)
-
-        keyStatsUpdated?(mpcPoints, mpcRaces, statValue(for: .average))
-
-        let mpcStats = PlayerDatabaseMetrics.Event.mpcStatsUpdate(mpcVotes: Int(mpcVotes),
-                                                                  mpcHelp: Int(mpcHelp),
-                                                                  mpcPoints: Int(mpcPoints),
-                                                                  mpcRaces: Int(mpcRaces),
-                                                                  mpcFastestTime: Int(mpcFastestTime),
-                                                                  mpcTotalTime: Int(mpcTotalTime),
-                                                                  mpcPages: Int(mpcPages),
-                                                                  mpcPressedJoin: Int(mpcPressedJoin),
-                                                                  mpcPressedHost: Int(mpcPressedHost))
-        PlayerDatabaseMetrics.shared.log(event: mpcStats)
-
-        let gkStats = PlayerDatabaseMetrics.Event.gkStatsUpdate(gkVotes: Int(gkVotes),
-                                                                gkHelp: Int(gkHelp),
-                                                                gkPoints: Int(gkPoints),
-                                                                gkRaces: Int(gkRaces),
-                                                                gkFastestTime: Int(gkFastestTime),
-                                                                gkTotalTime: Int(gkTotalTime),
-                                                                gkPages: Int(gkPages),
-                                                                gkPressedJoin: Int(gkPressedJoin),
-                                                                gkConnectedToMatch: Int(gkConnectedToMatch))
-        PlayerDatabaseMetrics.shared.log(event: gkStats)
-
-        let soloStats = PlayerDatabaseMetrics.Event.soloStatsUpdate(soloVotes: Int(soloVotes),
-                                                                    soloHelp: Int(soloHelp),
-                                                                    soloRaces: Int(soloRaces),
-                                                                    soloTotalTime: Int(soloTotalTime),
-                                                                    soloPages: Int(soloPages),
-                                                                    soloPressedHost: Int(soloPressedHost))
-        PlayerDatabaseMetrics.shared.log(event: soloStats)
+        playerDatabaseSync()
     }
 
     // MARK: - Set/Get Stats
@@ -256,8 +198,8 @@ internal class StatsHelper {
         }
     }
 
-    func increment(stat: Stat) {
-        let newValue = statValue(for: stat) + 1
+    func increment(stat: Stat, by value: Double = 1) {
+        let newValue = statValue(for: stat) + value
         defaults.set(newValue, forKey: stat.key)
     }
 
@@ -314,7 +256,7 @@ internal class StatsHelper {
                                                          gkUnique: gkUniquePlayers,
                                                          gkTotal: gkTotalPlayers))
 
-        cloudSync()
+        ubiquitousStoreSync()
     }
 
     //swiftlint:disable:next function_body_length
@@ -372,10 +314,10 @@ internal class StatsHelper {
         case .other:
             break
         }
-
-        cloudSync()
+        
+        ubiquitousStoreSync()
         leaderboardSync()
-        updateStatsClosure()
+        playerDatabaseSync()
     }
 
     // MARK: - Syncing
@@ -397,7 +339,7 @@ internal class StatsHelper {
         }
 
         leaderboardSync()
-        updateStatsClosure()
+        playerDatabaseSync()
     }
 
     private func sync(_ stat: Stat, key: String) {
@@ -424,7 +366,7 @@ internal class StatsHelper {
         }
     }
 
-    private func cloudSync() {
+    private func ubiquitousStoreSync() {
         for stat in Stat.numericHighStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
@@ -466,6 +408,73 @@ internal class StatsHelper {
             keyValueStore.set(deviceValue, forKey: stat)
         }
     }
+
+    //swiftlint:disable:next function_body_length
+    private func playerDatabaseSync() {
+        let mpcVotes = statValue(for: .mpcVotes)
+        let mpcHelp = statValue(for: .mpcHelp)
+        let mpcPoints = statValue(for: .mpcPoints)
+        let mpcFastestTime = statValue(for: .mpcFastestTime)
+        let mpcTotalTime = statValue(for: .mpcTotalTime)
+        let mpcPages = statValue(for: .mpcPages)
+        let mpcRaces = statValue(for: .mpcRaces)
+        let mpcPressedJoin = statValue(for: .mpcPressedJoin)
+        let mpcPressedHost = statValue(for: .mpcPressedHost)
+
+        let gkVotes = statValue(for: .gkVotes)
+        let gkHelp = statValue(for: .gkHelp)
+        let gkPoints = statValue(for: .gkPoints)
+        let gkFastestTime = statValue(for: .gkFastestTime)
+        let gkTotalTime = statValue(for: .gkTotalTime)
+        let gkPages = statValue(for: .gkPages)
+        let gkRaces = statValue(for: .gkRaces)
+        let gkPressedJoin = statValue(for: .gkPressedJoin)
+        let gkConnectedToMatch = statValue(for: .gkConnectedToMatch)
+
+        let soloVotes = statValue(for: .soloVotes)
+        let soloHelp = statValue(for: .soloHelp)
+        let soloTotalTime = statValue(for: .soloTotalTime)
+        let soloPages = statValue(for: .soloPages)
+        let soloRaces = statValue(for: .soloRaces)
+        let soloPressedHost = statValue(for: .soloPressedHost)
+
+        let pointsScrolled = statValue(for: .pointsScrolled)
+
+        keyStatsUpdated?(mpcPoints, mpcRaces, statValue(for: .average))
+
+        let mpcStats = PlayerDatabaseMetrics.Event.mpcStatsUpdate(mpcVotes: Int(mpcVotes),
+                                                                  mpcHelp: Int(mpcHelp),
+                                                                  mpcPoints: Int(mpcPoints),
+                                                                  mpcRaces: Int(mpcRaces),
+                                                                  mpcFastestTime: Int(mpcFastestTime),
+                                                                  mpcTotalTime: Int(mpcTotalTime),
+                                                                  mpcPages: Int(mpcPages),
+                                                                  mpcPressedJoin: Int(mpcPressedJoin),
+                                                                  mpcPressedHost: Int(mpcPressedHost))
+        PlayerDatabaseMetrics.shared.log(event: mpcStats)
+
+        let gkStats = PlayerDatabaseMetrics.Event.gkStatsUpdate(gkVotes: Int(gkVotes),
+                                                                gkHelp: Int(gkHelp),
+                                                                gkPoints: Int(gkPoints),
+                                                                gkRaces: Int(gkRaces),
+                                                                gkFastestTime: Int(gkFastestTime),
+                                                                gkTotalTime: Int(gkTotalTime),
+                                                                gkPages: Int(gkPages),
+                                                                gkPressedJoin: Int(gkPressedJoin),
+                                                                gkConnectedToMatch: Int(gkConnectedToMatch))
+        PlayerDatabaseMetrics.shared.log(event: gkStats)
+
+        let soloStats = PlayerDatabaseMetrics.Event.soloStatsUpdate(soloVotes: Int(soloVotes),
+                                                                    soloHelp: Int(soloHelp),
+                                                                    soloRaces: Int(soloRaces),
+                                                                    soloTotalTime: Int(soloTotalTime),
+                                                                    soloPages: Int(soloPages),
+                                                                    soloPressedHost: Int(soloPressedHost))
+        PlayerDatabaseMetrics.shared.log(event: soloStats)
+
+        PlayerDatabaseMetrics.shared.log(event: .pointsScrolled(Int(pointsScrolled)))
+    }
+
 
     private func leaderboardSync() {
         guard GKLocalPlayer.local.isAuthenticated else {

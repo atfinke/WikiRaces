@@ -8,25 +8,59 @@
 
 import WebKit
 
-public class WKRUIWebView: WKWebView {
+public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
+
+    // MARK: - Type
+
+    // WKScriptMessageHandler leaks due to a retain cycle
+    private class ScriptMessageDelegate: NSObject, WKScriptMessageHandler {
+
+        // MARK: - Properties
+
+        weak var delegate: WKScriptMessageHandler?
+
+        // MARK: - Initalization
+
+        init(delegate: WKScriptMessageHandler) {
+            self.delegate = delegate
+            super.init()
+        }
+
+        // MARK: - WKScriptMessageHandler
+
+        func userContentController(_ userContentController: WKUserContentController,
+                                   didReceive message: WKScriptMessage) {
+            delegate?.userContentController(userContentController, didReceive: message)
+        }
+    }
 
     // MARK: - Properties
 
     public var text: String? {
         set {
-            timeLabel.text = newValue
+            linkCountLabel.text = newValue
         }
         get {
-            return timeLabel.text
+            return linkCountLabel.text
         }
     }
 
-    private let timeLabel = UILabel()
+    private let linkCountLabel = UILabel()
+    private let loadingView = UIView()
+    private let slowConnectionLabel = UILabel()
+    private let reloadButton = UIButton()
+
     public var progressView: WKRUIProgressView? {
         didSet {
             progressView?.isHidden = true
         }
     }
+
+    public var pointsScrolled: Int {
+        return Int(CGFloat(pixelsScrolled) / UIScreen.main.scale)
+    }
+    private var pixelsScrolled = 0
+    private var lastPixelOffset = 0
 
     // MARK: - Initialization
 
@@ -35,6 +69,9 @@ public class WKRUIWebView: WKWebView {
             fatalError("WKRWebView couldn't load raceConfig")
         }
         super.init(frame: .zero, configuration: config)
+
+        let messageDelegate = ScriptMessageDelegate(delegate: self)
+        config.userContentController.add(messageDelegate, name: "scrollY")
 
         isOpaque = false
         backgroundColor = UIColor.wkrBackgroundColor
@@ -53,27 +90,47 @@ public class WKRUIWebView: WKWebView {
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
 
-        timeLabel.text = "0"
-        timeLabel.textColor = UIColor.white
-        timeLabel.textAlignment = .center
+        loadingView.alpha = 0.0
+        loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2954569777)
+        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(loadingView)
 
-        timeLabel.alpha = 0.0
-        timeLabel.numberOfLines = 0
+        linkCountLabel.text = "0"
+        linkCountLabel.textColor = UIColor.white
+        linkCountLabel.textAlignment = .center
+        linkCountLabel.numberOfLines = 0
 
-        timeLabel.adjustsFontSizeToFitWidth = true
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        timeLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
-        timeLabel.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2954569777)
+        linkCountLabel.adjustsFontSizeToFitWidth = true
+        linkCountLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
+        linkCountLabel.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.addSubview(linkCountLabel)
 
-        addSubview(timeLabel)
+        slowConnectionLabel.text = "IF YOU SEE THIS FOR > 10 SECONDS, PLEASE LMK."
+        slowConnectionLabel.textColor = UIColor.white
+        slowConnectionLabel.textAlignment = .center
+        slowConnectionLabel.numberOfLines = 0
+
+        slowConnectionLabel.adjustsFontSizeToFitWidth = true
+        slowConnectionLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        slowConnectionLabel.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.addSubview(slowConnectionLabel)
 
         scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
 
         let constraints = [
-            timeLabel.topAnchor.constraint(equalTo: topAnchor),
-            timeLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            timeLabel.leftAnchor.constraint(equalTo: leftAnchor),
-            timeLabel.rightAnchor.constraint(equalTo: rightAnchor)
+            loadingView.topAnchor.constraint(equalTo: topAnchor),
+            loadingView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            loadingView.leftAnchor.constraint(equalTo: leftAnchor),
+            loadingView.rightAnchor.constraint(equalTo: rightAnchor),
+
+            linkCountLabel.topAnchor.constraint(equalTo: loadingView.topAnchor),
+            linkCountLabel.bottomAnchor.constraint(equalTo: loadingView.bottomAnchor),
+            linkCountLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
+            linkCountLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor),
+
+            slowConnectionLabel.bottomAnchor.constraint(equalTo: loadingView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            slowConnectionLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
+            slowConnectionLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 
@@ -91,6 +148,7 @@ public class WKRUIWebView: WKWebView {
     deinit {
         removeObserver(self, forKeyPath: "estimatedProgress")
         NotificationCenter.default.removeObserver(self)
+        configuration.userContentController.removeScriptMessageHandler(forName: "scrollY")
     }
 
     // MARK: - State Updates
@@ -104,11 +162,12 @@ public class WKRUIWebView: WKWebView {
     public func startedPageLoad() {
         progressView?.show()
 
+        lastPixelOffset = 0
         isUserInteractionEnabled = false
 
         let duration = WKRUIKitConstants.webViewAnimateOutDuration
         UIView.animate(withDuration: duration) {
-            self.timeLabel.alpha = 1.0
+            self.loadingView.alpha = 1.0
         }
     }
 
@@ -119,7 +178,7 @@ public class WKRUIWebView: WKWebView {
         let duration = WKRUIKitConstants.webViewAnimateInDuration
 
         UIView.animate(withDuration: duration, delay: 0.0, options: .beginFromCurrentState, animations: {
-            self.timeLabel.alpha = 0.0
+            self.loadingView.alpha = 0.0
         }, completion: nil)
     }
 
@@ -184,6 +243,26 @@ public class WKRUIWebView: WKWebView {
         }
 
         progressView?.setProgress(Float(progress), animated: true)
+    }
+
+    // MARK: - WKScriptMessageHandler
+
+    public func userContentController(_ userContentController: WKUserContentController,
+                                      didReceive message: WKScriptMessage) {
+        guard let messageBody = message.body as? Int else { return }
+        switch message.name {
+        case "scrollY":
+            pixelsScrolled += abs(messageBody - lastPixelOffset)
+            lastPixelOffset = messageBody
+        default: return
+        }
+    }
+
+    // MARK: - Other
+
+    public func resetPixelCount() {
+        pixelsScrolled = 0
+        lastPixelOffset = 0
     }
 
 }

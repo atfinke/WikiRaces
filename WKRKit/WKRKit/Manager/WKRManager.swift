@@ -39,6 +39,7 @@ public class WKRGameManager {
 
     internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
     internal let pointsUpdate: ((Int) -> Void)
+    internal let pointsScrolledUpdate: ((Int) -> Void)
     internal let linkCountUpdate: ((Int) -> Void)
     internal let logEvent: ((WKRLogEvent) -> Void)
 
@@ -65,16 +66,19 @@ public class WKRGameManager {
     public init(networkConfig: WKRPeerNetworkConfig,
                             stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
                             pointsUpdate: @escaping ((Int) -> Void),
+                            pointsScrolledUpdate: @escaping ((Int) -> Void),
                             linkCountUpdate: @escaping ((Int) -> Void),
                             logEvent: @escaping ((WKRLogEvent) -> Void)) {
 
         self.stateUpdate = stateUpdate
         self.pointsUpdate = pointsUpdate
+        self.pointsScrolledUpdate = pointsScrolledUpdate
         self.linkCountUpdate = linkCountUpdate
         self.logEvent = logEvent
 
         let setup = networkConfig.create()
         localPlayer = setup.player
+        localPlayer.isCreator = WKRPlayer.isLocalPlayerCreator
         peerNetwork = setup.network
 
         game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork)
@@ -158,6 +162,7 @@ public class WKRGameManager {
         case .voted(let page):
             peerNetwork.send(object: WKRCodable(page))
         case .neededHelp:
+            localPlayer.neededHelp()
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.neededHelp))
         case .forfeited:
             localPlayer.state = .forfeited
