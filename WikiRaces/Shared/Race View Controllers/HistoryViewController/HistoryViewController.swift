@@ -22,6 +22,9 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     private var deferredUpdate = false
 
     private var entries = [WKRHistoryEntry]()
+    private var stats: WKRPlayerRaceStats? {
+        didSet { tableView.reloadSections(IndexSet(integer: 1), with: .none) }
+    }
 
     var player: WKRPlayer? {
         didSet {
@@ -40,7 +43,6 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
         navigationController?.navigationBar.barStyle = .wkrStyle
 
-        tableView.backgroundColor = UIColor.wkrBackgroundColor
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HistoryTableViewCell.self,
@@ -55,6 +57,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     private func updateEntries(oldPlayer: WKRPlayer?) {
         title = player?.name
+        stats = player?.stats
 
         // New Player
         if let oldPlayer = oldPlayer, oldPlayer != player {
@@ -128,15 +131,38 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     // MARK: - Table view data source
 
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        if player?.stats == nil {
+            return 1
+        }
+        return 2
+    }
+
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "Tap any article to view on Wikipedia"
+        return section == 0 ? "Tap an article to view on Wikipedia" : nil
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return entries.count
+        return section == 0 ? entries.count : (stats?.raw.count ?? 0)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? super.tableView(tableView, heightForRowAt: indexPath) : 40
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.textColor = .wkrTextColor
+            cell.detailTextLabel?.textColor = .wkrTextColor
+            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+            cell.isUserInteractionEnabled = false
+
+            guard let stat = stats?.raw[indexPath.row] else { return cell }
+            cell.textLabel?.text = stat.key
+            cell.detailTextLabel?.text = stat.value
+            return cell
+        }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier,
                                                        for: indexPath) as? HistoryTableViewCell else {
             fatalError("Unable to create cell")
@@ -148,7 +174,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         cell.pageLabel.text = entry.page.title ?? "Unknown Page"
         cell.isLinkHere = entry.linkHere
 
-        if let duration = DurationFormatter.string(for: entry.duration) {
+        if let duration = WKRDurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
             cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             cell.isShowingActivityIndicatorView = false

@@ -1,5 +1,5 @@
 //
-//  DurationFormatter.swift
+//  WKRDurationFormatter.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-internal struct DurationFormatter {
+public struct WKRDurationFormatter {
     private static let maxSeconds: Int = 360
 
-    static func string(for duration: Int?, extended: Bool = false) -> String? {
+    public static func string(for duration: Int?, extended: Bool = false) -> String? {
         guard let duration = duration else { return nil }
         if duration > maxSeconds {
             let suffix = extended ? " Min" : " M"
@@ -23,7 +23,7 @@ internal struct DurationFormatter {
         }
     }
 
-    static func resultsString(for duration: Int?) -> String? {
+    public static func resultsString(for duration: Int?) -> String? {
         guard let duration = duration else { return nil }
         let minutes = duration / 60
         let seconds = duration % 60
