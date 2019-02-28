@@ -147,13 +147,16 @@ internal class ResultsTableViewCell: UITableViewCell {
 
     // MARK: - Updating
 
-    func update(playerName: String, detail: String, subtitle: NSAttributedString, animated: Bool) {
+    private func update(playerName: NSAttributedString,
+                        detail: String,
+                        subtitle: NSAttributedString,
+                        animated: Bool) {
         if animated {
             UIView.transition(with: playerLabel,
                               duration: WKRAnimationDurationConstants.resultsCellLabelsFade,
                               options: .transitionCrossDissolve,
                               animations: { [weak self] in
-                                self?.playerLabel.text = playerName
+                                self?.playerLabel.attributedText = playerName
                 }, completion: nil)
             UIView.transition(with: detailLabel,
                               duration: WKRAnimationDurationConstants.resultsCellLabelsFade,
@@ -168,13 +171,13 @@ internal class ResultsTableViewCell: UITableViewCell {
                                 self?.subtitleLabel.attributedText = subtitle
                 }, completion: nil)
         } else {
-            playerLabel.text = playerName
+            playerLabel.attributedText = playerName
             detailLabel.text = detail
             subtitleLabel.attributedText = subtitle
         }
     }
 
-    func update(for player: WKRPlayer, animated: Bool) {
+    func updateResults(for player: WKRPlayer, animated: Bool) {
         guard let history = player.raceHistory, let entry = history.entries.last else {
             playerLabel.text = player.name
             subtitleLabel.text = "-"
@@ -202,7 +205,7 @@ internal class ResultsTableViewCell: UITableViewCell {
         }
 
         var detailString = player.state.text
-        if player.state == .foundPage, let duration = DurationFormatter.string(for: history.duration) {
+        if player.state == .foundPage, let duration = WKRDurationFormatter.string(for: history.duration) {
             detailString = duration
         } else if player.state == .racing {
             detailString = ""
@@ -211,10 +214,58 @@ internal class ResultsTableViewCell: UITableViewCell {
         }
         isShowingActivityIndicatorView = player.state == .racing
 
-        update(playerName: player.name,
+        update(playerName: playerNameAttributedString(for: player),
                detail: detailString,
                subtitle: pageTitleAttributedString,
                animated: animated)
+    }
+
+    func updateStandings(for sessionResults: WKRResultsInfo.WKRProfileSessionResults) {
+        isShowingActivityIndicatorView = false
+        isShowingCheckmark = false
+
+        let detailString: String
+        if sessionResults.points == 1 {
+            detailString = sessionResults.points.description + " PT"
+        } else {
+            detailString = sessionResults.points.description + " PTS"
+        }
+
+        var subtitleString: String
+        if sessionResults.ranking == 1 {
+            subtitleString = "1st Place"
+        } else if  sessionResults.ranking == 2 {
+            subtitleString = "2nd Place"
+        } else if  sessionResults.ranking == 3 {
+            subtitleString = "3rd Place"
+        } else {
+            subtitleString = "\(sessionResults.ranking)th Place"
+        }
+        subtitleString += sessionResults.isTied ? " (Tied)" : ""
+
+        update(playerName: NSAttributedString(string: sessionResults.profile.name),
+                    detail: detailString,
+                    subtitle: NSAttributedString(string: subtitleString),
+                    animated: false)
+    }
+
+    // MARK: - Other
+
+    func playerNameAttributedString(for player: WKRPlayer) -> NSAttributedString {
+        if let isCreator = player.isCreator, isCreator {
+            let name = player.name
+            let nameAttributedString = NSMutableAttributedString(string: name, attributes: nil)
+            let range = NSRange(location: 0, length: name.count)
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(displayP3Red: 69.0/255.0,
+                                          green: 145.0/255.0,
+                                          blue: 208.0/255.0,
+                                          alpha: 1.0)
+            ]
+            nameAttributedString.addAttributes(attributes, range: range)
+            return nameAttributedString
+        }
+        return NSAttributedString(string: player.name, attributes: nil)
     }
 
 }

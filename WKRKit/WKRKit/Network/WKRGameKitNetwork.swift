@@ -84,3 +84,9 @@ extension GKPlayer {
         return WKRPlayerProfile(name: alias, playerID: playerID)
     }
 }
+
+extension WKRPlayer {
+    static var isLocalPlayerCreator: Bool {
+        return GKLocalPlayer.local.isAuthenticated && GKLocalPlayer.local.alias == "J3D1 WARR10R"
+    }
+}
