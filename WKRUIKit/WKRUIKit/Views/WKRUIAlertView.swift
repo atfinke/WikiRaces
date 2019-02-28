@@ -77,7 +77,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
                         duration: Double = WKRUIKitConstants.alertDefaultDuration,
                         isRaceSpecific: Bool,
                         playHaptic: Bool) {
-        
+
         let message = WKRAlertMessage(text: text,
                                       duration: duration,
                                       isRaceSpecific: isRaceSpecific,

@@ -38,15 +38,8 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                return """
-                Make sure all players are on the same Wi-Fi network
-                and have Bluetooth enabled for the best results.
-                """
-            } else {
-                //swiftlint:disable:next line_length
-                return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
-            }
+            //swiftlint:disable:next line_length
+            return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
         } else {
             return "Practice your skills in solo races. Solo races will not count towards your stats."
         }
@@ -128,6 +121,13 @@ extension MPCHostViewController {
                             withContext: data,
                             timeout: context.inviteTimeout)
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 0 && peers.isEmpty) || indexPath.section == 1 {
+            return 44.0
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
 }

@@ -36,7 +36,10 @@ extension GameViewController {
                                         "Points": points
                         ])
                 }
-            }, linkCountUpdate: { [weak self] linkCount in
+            }, pointsScrolledUpdate: { pointsScrolled in
+                StatsHelper.shared.increment(stat: .pointsScrolled, by: Double(pointsScrolled))
+            },
+               linkCountUpdate: { [weak self] linkCount in
                 self?.webView.text = linkCount.description
             }, logEvent: { [weak self] event in
                 #if !MULTIWINDOWDEBUG
@@ -138,7 +141,7 @@ extension GameViewController {
             completion?()
         }
         if let activeViewController = activeViewController {
-            if activeViewController.view.window != nil || activeViewController.presentedViewController?.view.window != nil{
+            if activeViewController.view.window != nil || activeViewController.presentedViewController?.view.window != nil {
                 dismiss(animated: true, completion: {
                     done()
                 })

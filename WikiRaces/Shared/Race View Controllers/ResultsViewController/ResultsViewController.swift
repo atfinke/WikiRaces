@@ -269,7 +269,7 @@ internal class ResultsViewController: CenteredTableViewController {
                     return
                 }
 
-                cell.update(for: newInfo.raceRankingsPlayer(at: newIndex), animated: true)
+                cell.updateResults(for: newInfo.raceRankingsPlayer(at: newIndex), animated: true)
                 if newIndex < oldIndex {
                     tableView.moveRow(at: IndexPath(row: oldIndex),
                                       to: IndexPath(row: newIndex))

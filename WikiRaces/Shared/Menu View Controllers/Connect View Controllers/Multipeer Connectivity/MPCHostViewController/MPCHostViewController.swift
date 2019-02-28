@@ -56,7 +56,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "INVITE NEARBY PLAYERS"
-        
+
         guard let peerID = peerID, let serviceType = serviceType else {
             fatalError("Required properties peerID or serviceType not set")
         }

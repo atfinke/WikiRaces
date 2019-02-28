@@ -23,7 +23,7 @@ class MovingPuzzleView: UIView, UIScrollViewDelegate {
         innerPuzzleView.delegate = self
         innerPuzzleView.decelerationRate = .fast
         innerPuzzleView.showsHorizontalScrollIndicator = false
-        innerPuzzleView.contentSize = CGSize(width: 12000, height: 30)
+        innerPuzzleView.contentSize = CGSize(width: 20000, height: 30)
         innerPuzzleView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "MenuBackgroundPuzzle"))
         innerPuzzleView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(innerPuzzleView)

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         webView = WKRUIWebView()
-        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/apple")!))
+        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/apple_inc")!))
 
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)

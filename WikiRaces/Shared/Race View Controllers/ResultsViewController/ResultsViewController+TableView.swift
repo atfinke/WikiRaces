@@ -32,35 +32,10 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         case .results, .hostResults:
             let player = resultsInfo.raceRankingsPlayer(at: index)
             cell.isShowingCheckmark = readyStates?.isPlayerReady(player) ?? false
-            cell.update(for: player, animated: true)
+            cell.updateResults(for: player, animated: true)
         case .points:
             let sessionResults = resultsInfo.sessionResults(at: index)
-            cell.isShowingActivityIndicatorView = false
-            cell.isShowingCheckmark = false
-
-            let detailString: String
-            if sessionResults.points == 1 {
-                detailString = sessionResults.points.description + " PT"
-            } else {
-                detailString = sessionResults.points.description + " PTS"
-            }
-
-            var subtitleString: String
-            if sessionResults.ranking == 1 {
-                subtitleString = "1st Place"
-            } else if  sessionResults.ranking == 2 {
-                subtitleString = "2nd Place"
-            } else if  sessionResults.ranking == 3 {
-                subtitleString = "3rd Place"
-            } else {
-                subtitleString = "\(sessionResults.ranking)th Place"
-            }
-            subtitleString += sessionResults.isTied ? " (Tied)" : ""
-
-            cell.update(playerName: sessionResults.profile.name,
-                        detail: detailString,
-                        subtitle: NSAttributedString(string: subtitleString),
-                        animated: false)
+            cell.updateStandings(for: sessionResults)
         default:
             fatalError("Unexpected state \(state)")
         }
@@ -75,7 +50,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        let controller = historyViewController ?? HistoryViewController(style: .grouped)
+        let controller = HistoryViewController(style: .grouped)
         historyViewController = controller
         controller.player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
 

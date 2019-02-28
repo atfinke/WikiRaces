@@ -128,7 +128,6 @@ internal class MenuViewController: UIViewController {
 
     func presentMPCConnect(isHost: Bool) {
         UIApplication.shared.isIdleTimerDisabled = true
-        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
 
         let controller = MPCConnectViewController()
         controller.isPlayerHost = isHost
@@ -144,7 +143,6 @@ internal class MenuViewController: UIViewController {
             present(nav, animated: true, completion: nil)
         } else {
             UIApplication.shared.isIdleTimerDisabled = true
-            WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
 
             let controller = GameKitConnectViewController()
             navigationController?.pushViewController(controller, animated: false)

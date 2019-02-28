@@ -142,7 +142,6 @@
 		14C260051F6F02A500CD7373 /* VotingViewController+TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB501F3689E20086B77F /* VotingViewController+TableView.swift */; };
 		14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
 		14C260071F6F02A500CD7373 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
-		14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
 		14C260091F6F02A500CD7373 /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
@@ -170,8 +169,6 @@
 		14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB601F368A170086B77F /* GameViewController+Manager.swift */; };
 		14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
 		14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB641F368A210086B77F /* GameViewController+UI.swift */; };
-		14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
-		14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */; };
 		14C4AB811F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB801F368A630086B77F /* CommonExtensions.swift */; };
 		14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */; };
@@ -449,7 +446,6 @@
 		14C4AB5C1F368A0C0086B77F /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		14C4AB601F368A170086B77F /* GameViewController+Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+Manager.swift"; sourceTree = "<group>"; };
 		14C4AB641F368A210086B77F /* GameViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+UI.swift"; sourceTree = "<group>"; };
-		14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationFormatter.swift; sourceTree = "<group>"; };
 		14C4AB801F368A630086B77F /* CommonExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonExtensions.swift; sourceTree = "<group>"; };
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
 		14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostViewController.swift; sourceTree = "<group>"; };
@@ -782,7 +778,6 @@
 			isa = PBXGroup;
 			children = (
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
-				14C4AB7C1F368A5A0086B77F /* DurationFormatter.swift */,
 				14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */,
 				14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
@@ -1209,7 +1204,6 @@
 				14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14B2DD4C22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
-				14C4AB7D1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				142F7153210C34A300C66558 /* MPCHostViewController+KB.swift in Sources */,
 				14C4AB811F368A630086B77F /* CommonExtensions.swift in Sources */,
@@ -1268,7 +1262,6 @@
 				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14B2DD422221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
-				14C4AB7F1F368A5A0086B77F /* DurationFormatter.swift in Sources */,
 				14B4DB682224F1BC007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,
 				14DF31B421169236005BA432 /* MPCConnectViewController+UI.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
@@ -1332,7 +1325,6 @@
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
 				14B4DB672224F1BA007D4B54 /* GameKitConnectViewController.swift in Sources */,
-				14C260081F6F02A500CD7373 /* DurationFormatter.swift in Sources */,
 				14B2DD432221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				14BA538F21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,

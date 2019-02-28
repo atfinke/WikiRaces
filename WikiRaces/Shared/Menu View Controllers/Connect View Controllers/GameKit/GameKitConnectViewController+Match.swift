@@ -82,14 +82,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         match.delegate = self
         self.match = match
 
-        #if !MULTIWINDOWDEBUG
-        let trace = Performance.startTrace(name: "Choosing Best Host Trace")
-        #endif
-        match.chooseBestHostingPlayer { player in
-            if let hostPlayer = player {
-                #if !MULTIWINDOWDEBUG
-                trace?.stop()
-                #endif
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            if let hostPlayer = match.players.sorted(by: { $0.playerID < $1.playerID }).first {
                 if hostPlayer.playerID == GKLocalPlayer.local.playerID {
                     self.isPlayerHost = true
                     self.sendStartMessageToPlayers()

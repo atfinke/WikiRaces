@@ -28,10 +28,13 @@
 		148164B31F5C94FC00AC7178 /* WKRKitTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */; };
 		1497A8511FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */; };
 		1497F31A1F588EBE001653DE /* WKRReadyStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1497F3191F588EBE001653DE /* WKRReadyStates.swift */; };
+		1499606C2226FA7A00259B68 /* WKRPlayerRaceStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1499606B2226FA7A00259B68 /* WKRPlayerRaceStats.swift */; };
+		149960702226FCBF00259B68 /* WKRDurationFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1499606D2226FCBF00259B68 /* WKRDurationFormatter.swift */; };
 		149FF8121F362B3D000A5D96 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF8081F362B3D000A5D96 /* WKRKit.framework */; };
 		149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8161F362B3D000A5D96 /* WKRKitTests.swift */; };
 		149FF8191F362B3D000A5D96 /* WKRKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 149FF80B1F362B3D000A5D96 /* WKRKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		14AF1CB81F57C52E000EFC2B /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */; };
+		14B4DB87222674E2007D4B54 /* WKRLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */; };
 		14BA31021FF60E7B00B10C70 /* WKRPlayerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */; };
 		14E1B1981F7954A00082F4FA /* WKRKitConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */; };
 		14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */; };
@@ -90,6 +93,8 @@
 		148164B21F5C94FC00AC7178 /* WKRKitTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTestCase.swift; sourceTree = "<group>"; };
 		1497A8501FF42BCC0013E9E3 /* WKRKitConstants-TESTING_ONLY.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "WKRKitConstants-TESTING_ONLY.plist"; sourceTree = "<group>"; };
 		1497F3191F588EBE001653DE /* WKRReadyStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRReadyStates.swift; sourceTree = "<group>"; };
+		1499606B2226FA7A00259B68 /* WKRPlayerRaceStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerRaceStats.swift; sourceTree = "<group>"; };
+		1499606D2226FCBF00259B68 /* WKRDurationFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRDurationFormatter.swift; sourceTree = "<group>"; };
 		149FF8081F362B3D000A5D96 /* WKRKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF80B1F362B3D000A5D96 /* WKRKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRKit.h; sourceTree = "<group>"; };
 		149FF80C1F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,6 +102,7 @@
 		149FF8161F362B3D000A5D96 /* WKRKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitTests.swift; sourceTree = "<group>"; };
 		149FF8181F362B3D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRLogEvent.swift; sourceTree = "<group>"; };
 		14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerAction.swift; sourceTree = "<group>"; };
 		14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRKitConstants.plist; sourceTree = "<group>"; };
 		14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPreRaceConfig.swift; sourceTree = "<group>"; };
@@ -256,6 +262,8 @@
 				14E9E16C1F63462500D2CAB4 /* WKRFatalError.swift */,
 				14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */,
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
+				14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */,
+				1499606D2226FCBF00259B68 /* WKRDurationFormatter.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -298,6 +306,7 @@
 				14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */,
 				140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */,
 				140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */,
+				1499606B2226FA7A00259B68 /* WKRPlayerRaceStats.swift */,
 			);
 			path = Single;
 			sourceTree = "<group>";
@@ -480,18 +489,21 @@
 				14E9E16D1F63462500D2CAB4 /* WKRFatalError.swift in Sources */,
 				14EB9F731F36854700FF1A9E /* WKRVoteInfo.swift in Sources */,
 				14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */,
+				1499606C2226FA7A00259B68 /* WKRPlayerRaceStats.swift in Sources */,
 				140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */,
 				14EB9F601F36831A00FF1A9E /* WKRMultipeerNetwork.swift in Sources */,
 				14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */,
 				14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */,
 				1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */,
 				14EB9F711F36850800FF1A9E /* WKRInt.swift in Sources */,
+				14B4DB87222674E2007D4B54 /* WKRLogEvent.swift in Sources */,
 				14EB9F561F3682E500FF1A9E /* WKRManager+PeerNetwork.swift in Sources */,
 				14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */,
 				142CB29A202EAC6B00BC6A33 /* WKRSoloNetwork.swift in Sources */,
 				14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */,
 				1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */,
 				142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */,
+				149960702226FCBF00259B68 /* WKRDurationFormatter.swift in Sources */,
 				147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */,
 				140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */,
 				140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */,

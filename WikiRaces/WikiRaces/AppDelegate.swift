@@ -30,7 +30,6 @@ internal class AppDelegate: WKRAppDelegate {
 
         FirebaseApp.configure()
 
-        StatsHelper.shared.start()
         configureConstants()
         configureAppearance()
 
@@ -39,6 +38,7 @@ internal class AppDelegate: WKRAppDelegate {
                                                name: PlayerDatabaseMetrics.banHammerNotification,
                                                object: nil)
 
+        StatsHelper.shared.start()
         PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()
@@ -52,7 +52,6 @@ internal class AppDelegate: WKRAppDelegate {
         }
 
         window = UIWindow(frame: UIScreen.main.bounds)
-
         let controller = MenuViewController()
         let nav = UINavigationController(rootViewController: controller)
         nav.setNavigationBarHidden(true, animated: false)
@@ -86,7 +85,7 @@ internal class AppDelegate: WKRAppDelegate {
 
     @objc
     func showBanHammer() {
-        let controller = UIAlertController(title: "You have been banned from WikiRaces.",
+        let controller = UIAlertController(title: "You have been banned from WikiRaces",
                                            message: nil,
                                            preferredStyle: .alert)
 

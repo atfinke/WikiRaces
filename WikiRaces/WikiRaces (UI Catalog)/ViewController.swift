@@ -34,11 +34,9 @@ internal class ViewController: UIViewController {
         for var index in 0..<names.count {
             let profile = WKRPlayerProfile(name: names[index], playerID: names[index])
             let player = WKRPlayer(profile: profile, isHost: false)
-            player.state = .racing
-
             let page = WKRPage(title: "Apple Inc.", url: URL(string: "apple.com")!)
-            player.raceHistory = WKRHistory(firstPage: page)
-
+            player.startedNewRace(on: page)
+            
             players.append(player)
         }
 
@@ -51,18 +49,18 @@ internal class ViewController: UIViewController {
                     DispatchQueue.main.async {
 
                         if player.state == .racing {
-//                            if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 2 {
-//                                player.state = .foundPage
+                            if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 4 {
+                                player.state = .foundPage
 //                            } else if arc4random() % 25 == 0 {
 //                                player.state = .forcedEnd
 //                            } else if arc4random() % 30 == 0 {
 //                                player.state = .quit
 //                            } else if arc4random() % 30 == 0 {
 //                                player.state = .forfeited
-//                            } else {
-                                player.raceHistory?.finishedViewingLastPage()
+                            } else {
+                                player.finishedViewingLastPage(pointsScrolled: 5)
                                 player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
-//                            }
+                            }
 
                         }
 
@@ -78,8 +76,8 @@ internal class ViewController: UIViewController {
                 }
             }
 
-            // let time: CGFloat = CGFloat(arc4random() % 40) / 10.0
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            let time: DispatchTimeInterval = .seconds(Int.random(in: 1...5))
+            DispatchQueue.main.asyncAfter(deadline: .now() + time) {
                 if arc4random() % 3 == 0 {
                     //  controller.state = .points
                     random()

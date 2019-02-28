@@ -173,7 +173,7 @@ extension ResultRenderer {
             switch player.state {
             case .foundPage:
                 if let history = player.raceHistory,
-                    let duration = DurationFormatter.resultsString(for: history.duration) {
+                    let duration = WKRDurationFormatter.resultsString(for: history.duration) {
                     detailString = duration
                 }
             case .forcedEnd:
