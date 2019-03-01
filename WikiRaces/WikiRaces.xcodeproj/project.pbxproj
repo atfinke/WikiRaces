@@ -70,7 +70,6 @@
 		148487FA214F0F3B0098CBFA /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487EE214F0F3A0098CBFA /* Protobuf.framework */; };
 		148487FB214F0F3B0098CBFA /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487EF214F0F3B0098CBFA /* FirebaseCore.framework */; };
 		148487FC214F0F3B0098CBFA /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F0214F0F3B0098CBFA /* nanopb.framework */; };
-		148487FD214F0F3B0098CBFA /* FirebaseCrash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F1214F0F3B0098CBFA /* FirebaseCrash.framework */; };
 		148487FE214F0F3B0098CBFA /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F2214F0F3B0098CBFA /* FirebaseInstanceID.framework */; };
 		148487FF214F0F3B0098CBFA /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F3214F0F3B0098CBFA /* GoogleAppMeasurement.framework */; };
 		14848800214F0F3B0098CBFA /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F4214F0F3B0098CBFA /* FirebasePerformance.framework */; };
@@ -365,7 +364,6 @@
 		142F7154210C35BC00C66558 /* VotingViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VotingViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7156210C375F00C66558 /* GameViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+KB.swift"; sourceTree = "<group>"; };
 		143054BD1F89581100C0BC27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		143054CF1F8959A900C0BC27 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		143054D01F8959DA00C0BC27 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewStatsCell.swift; sourceTree = "<group>"; };
 		143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoTableViewController.swift; sourceTree = "<group>"; };
@@ -396,7 +394,6 @@
 		148487EE214F0F3A0098CBFA /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Protobuf.framework; sourceTree = "<group>"; };
 		148487EF214F0F3B0098CBFA /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
 		148487F0214F0F3B0098CBFA /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
-		148487F1214F0F3B0098CBFA /* FirebaseCrash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCrash.framework; sourceTree = "<group>"; };
 		148487F2214F0F3B0098CBFA /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		148487F3214F0F3B0098CBFA /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		148487F4214F0F3B0098CBFA /* FirebasePerformance.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebasePerformance.framework; sourceTree = "<group>"; };
@@ -431,6 +428,7 @@
 		14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostSoloCell.swift; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
 		14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Debug.swift"; sourceTree = "<group>"; };
+		14BAB5332229DC6200C5AE27 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		14C25FE11F6F025A00CD7373 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -482,7 +480,6 @@
 				148487F9214F0F3B0098CBFA /* GoogleUtilities.framework in Frameworks */,
 				14848802214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				141598DF2201493E00DA955E /* FirebaseRemoteConfig.framework in Frameworks */,
-				148487FD214F0F3B0098CBFA /* FirebaseCrash.framework in Frameworks */,
 				148487FA214F0F3B0098CBFA /* Protobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -538,15 +535,14 @@
 		143054C01F8958DC00C0BC27 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				14BAB5332229DC6200C5AE27 /* Firebase.h */,
 				143054D01F8959DA00C0BC27 /* BridgingHeader.h */,
-				143054CF1F8959A900C0BC27 /* Firebase.h */,
 				140564D32112D4BC001E36AB /* Crashlytics.framework */,
 				140564D42112D4BC001E36AB /* Fabric.framework */,
 				141598E02201495F00DA955E /* FirebaseABTesting.framework */,
 				148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */,
 				148487EF214F0F3B0098CBFA /* FirebaseCore.framework */,
 				148487F6214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework */,
-				148487F1214F0F3B0098CBFA /* FirebaseCrash.framework */,
 				148487F2214F0F3B0098CBFA /* FirebaseInstanceID.framework */,
 				148487F4214F0F3B0098CBFA /* FirebasePerformance.framework */,
 				141598DC2201493D00DA955E /* FirebaseRemoteConfig.framework */,
