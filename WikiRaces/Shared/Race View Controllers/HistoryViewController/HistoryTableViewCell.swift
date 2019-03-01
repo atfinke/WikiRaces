@@ -76,7 +76,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activityIndicatorView)
 
-       setupContraints()
+       setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -85,7 +85,7 @@ internal class HistoryTableViewCell: UITableViewCell {
 
     // MARK: - Constraints
 
-    private func setupContraints() {
+    private func setupConstraints() {
         let leftMarginConstraint = NSLayoutConstraint(item: pageLabel,
                                                       attribute: .left,
                                                       relatedBy: .equal,

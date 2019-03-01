@@ -47,6 +47,8 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HistoryTableViewCell.self,
                            forCellReuseIdentifier: HistoryTableViewCell.reuseIdentifier)
+        tableView.register(HistoryTableViewStatsCell.self,
+                           forCellReuseIdentifier: HistoryTableViewStatsCell.reuseIdentifier)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
                                                             target: self,
@@ -91,6 +93,13 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         }
 
         let newEntryCount = history.entries.count - entries.count
+        // got an older history object, reset table
+        if newEntryCount < 0 {
+            self.entries = history.entries
+            tableView.reloadData()
+            return
+        }
+
         let startIndex = entries.count
         let endIndex = startIndex + newEntryCount
         for index in startIndex..<endIndex {
@@ -152,21 +161,19 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-            cell.textLabel?.textColor = .wkrTextColor
-            cell.detailTextLabel?.textColor = .wkrTextColor
-            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-            cell.isUserInteractionEnabled = false
+                        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewStatsCell.reuseIdentifier,
+                                                                       for: indexPath) as? HistoryTableViewStatsCell else {
+                                                                        fatalError("Unable to create cell")
+                        }
 
-            guard let stat = stats?.raw[indexPath.row] else { return cell }
-            cell.textLabel?.text = stat.key
-            cell.detailTextLabel?.text = stat.value
+            cell.stat = stats?.raw[indexPath.row]
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier,
                                                        for: indexPath) as? HistoryTableViewCell else {
             fatalError("Unable to create cell")
         }
+
 
         let playerState = player?.state ?? .connecting
 
