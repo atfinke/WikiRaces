@@ -20,6 +20,7 @@ internal class ViewController: UIViewController {
 
     var rendered = false
 
+    //swiftlint:disable:next function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,7 +37,7 @@ internal class ViewController: UIViewController {
             let player = WKRPlayer(profile: profile, isHost: false)
             let page = WKRPage(title: "Apple Inc.", url: URL(string: "apple.com")!)
             player.startedNewRace(on: page)
-            
+
             players.append(player)
         }
 

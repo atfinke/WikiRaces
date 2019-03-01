@@ -161,19 +161,18 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-                        guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewStatsCell.reuseIdentifier,
-                                                                       for: indexPath) as? HistoryTableViewStatsCell else {
-                                                                        fatalError("Unable to create cell")
-                        }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewStatsCell.reuseIdentifier,
+                                                           for: indexPath) as? HistoryTableViewStatsCell else {
+                                                            fatalError("Unable to create cell")
+            }
 
             cell.stat = stats?.raw[indexPath.row]
             return cell
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier,
                                                        for: indexPath) as? HistoryTableViewCell else {
-            fatalError("Unable to create cell")
+                                                        fatalError("Unable to create cell")
         }
-
 
         let playerState = player?.state ?? .connecting
 

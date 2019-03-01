@@ -314,7 +314,7 @@ internal class StatsHelper {
         case .other:
             break
         }
-        
+
         ubiquitousStoreSync()
         leaderboardSync()
         playerDatabaseSync()
@@ -474,7 +474,6 @@ internal class StatsHelper {
 
         PlayerDatabaseMetrics.shared.log(event: .pointsScrolled(Int(pointsScrolled)))
     }
-
 
     private func leaderboardSync() {
         guard GKLocalPlayer.local.isAuthenticated else {

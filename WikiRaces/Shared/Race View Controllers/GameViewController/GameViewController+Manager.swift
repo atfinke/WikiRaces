@@ -141,7 +141,9 @@ extension GameViewController {
             completion?()
         }
         if let activeViewController = activeViewController {
-            if activeViewController.view.window != nil || activeViewController.presentedViewController?.view.window != nil {
+            let viewWindow = activeViewController.view.window
+            let presentedViewWindow = activeViewController.presentedViewController?.view.window
+            if viewWindow != nil || presentedViewWindow != nil {
                 dismiss(animated: true, completion: {
                     done()
                 })
