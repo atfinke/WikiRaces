@@ -27,6 +27,9 @@
 		142F7153210C34A300C66558 /* MPCHostViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */; };
 		142F7155210C35BC00C66558 /* VotingViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7154210C35BC00C66558 /* VotingViewController+KB.swift */; };
 		142F7157210C375F00C66558 /* GameViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7156210C375F00C66558 /* GameViewController+KB.swift */; };
+		1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */; };
+		1437C52022285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */; };
+		1437C52122285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */; };
 		143948BD2144CC0F00992850 /* DebugInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */; };
 		143948C12144CC8C00992850 /* DebugInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */; };
 		143A8BBC1F58746800580AA2 /* StatsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* StatsHelper.swift */; };
@@ -364,6 +367,7 @@
 		143054BD1F89581100C0BC27 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		143054CF1F8959A900C0BC27 /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		143054D01F8959DA00C0BC27 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
+		1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewStatsCell.swift; sourceTree = "<group>"; };
 		143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoTableViewController.swift; sourceTree = "<group>"; };
 		143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoTableViewCell.swift; sourceTree = "<group>"; };
 		143A8BBB1F58746800580AA2 /* StatsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsHelper.swift; sourceTree = "<group>"; };
@@ -748,6 +752,7 @@
 				14C4AB581F368A050086B77F /* HistoryViewController.swift */,
 				149357D8210E801A00F6453A /* HistoryViewController+KB.swift */,
 				14C4AB541F3689FE0086B77F /* HistoryTableViewCell.swift */,
+				1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */,
 			);
 			path = HistoryViewController;
 			sourceTree = "<group>";
@@ -1227,6 +1232,7 @@
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
+				1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				149357E3210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				142A09BE210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				144A1029202FC79B003DB51A /* CenteredTableViewController.swift in Sources */,
@@ -1271,6 +1277,7 @@
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */,
 				1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
+				1437C52022285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				14DD97252202293900AAB389 /* ConnectViewController.swift in Sources */,
@@ -1338,6 +1345,7 @@
 				1480F6C621FB77DE00081F58 /* DebugInfoTableViewCell.swift in Sources */,
 				1480F6C321FB77D300081F58 /* DebugInfoTableViewController.swift in Sources */,
 				14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */,
+				1437C52122285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				1478B1B322095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
 				14C260031F6F02A500CD7373 /* HistoryViewController.swift in Sources */,
