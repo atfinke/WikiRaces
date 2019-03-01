@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>classNames</key>
+	<dict>
+		<key>WKRKitPageFetcherTests</key>
+		<dict>
+			<key>testConnectionTester()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.19795</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:05:47 AM</string>
+				</dict>
+			</dict>
+			<key>testError()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.00041919</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:40:20 AM</string>
+				</dict>
+			</dict>
+			<key>testLinkedPageFetcher()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>4.0901</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:05:47 AM</string>
+				</dict>
+			</dict>
+			<key>testPage()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.12706</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:40:20 AM</string>
+				</dict>
+			</dict>
+			<key>testRandom()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.456</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Local Baseline</string>
+					<key>maxPercentRelativeStandardDeviation</key>
+					<real>200</real>
+				</dict>
+			</dict>
+			<key>testSource()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.18445</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:40:20 AM</string>
+				</dict>
+			</dict>
+			<key>testURL()</key>
+			<dict>
+				<key>com.apple.XCTPerformanceMetric_WallClockTime</key>
+				<dict>
+					<key>baselineAverage</key>
+					<real>0.1892</real>
+					<key>baselineIntegrationDisplayName</key>
+					<string>Mar 1, 2019 at 1:40:20 AM</string>
+				</dict>
+			</dict>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -97,24 +97,31 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         completedOperation.addDependency(startingPageOperation)
 
         // All the operations for get WKRPage objects to vote on
-        let operations = randomPaths.map { path -> WKROperation in
+        let endingPageOperations = randomPaths.map { path -> WKROperation in
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
                 WKRPageFetcher.fetch(path: path) { (page) in
-                    // Sometimes removed pages redirect to the Wikipedia homepage.
+                    // 1. Make sure page not nil
+                    // 2. Make sure page is not a link to a section "/USA#History"
+                    // 3. Sometimes removed pages redirect to the Wikipedia homepage.
+                    // 4/5. Make sure link not equal to starting page
                     if let page = page,
                         !page.url.absoluteString.contains("#"),
-                        page.title != "Wikipedia, the free encyclopedia" {
+                         page.title != "Wikipedia, the free encyclopedia",
+                        let startingPage = startingPage,
+                        startingPage.url != page.url {
                         pages.append(page)
                     }
                     operation.state = .isFinished
                 }
             }
+            operation.addDependency(startingPageOperation)
             completedOperation.addDependency(operation)
             return operation
         }
-        operationQueue.addOperations(operations, waitUntilFinished: false)
+
         operationQueue.addOperations([startingPageOperation, completedOperation], waitUntilFinished: false)
+        operationQueue.addOperations(endingPageOperations, waitUntilFinished: false)
     }
 
 }

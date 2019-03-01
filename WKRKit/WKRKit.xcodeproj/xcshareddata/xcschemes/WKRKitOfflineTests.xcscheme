@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
@@ -69,6 +70,9 @@
                   Identifier = "WKRKitTests/testPlayerProfile()">
                </Test>
                <Test
+                  Identifier = "WKRKitTests/testPlayerRaceStats()">
+               </Test>
+               <Test
                   Identifier = "WKRKitTests/testPlayerState()">
                </Test>
                <Test
@@ -76,6 +80,9 @@
                </Test>
                <Test
                   Identifier = "WKRKitTests/testRaceConfig()">
+               </Test>
+               <Test
+                  Identifier = "WKRKitTests/testReadyStates()">
                </Test>
                <Test
                   Identifier = "WKRKitTests/testState()">
