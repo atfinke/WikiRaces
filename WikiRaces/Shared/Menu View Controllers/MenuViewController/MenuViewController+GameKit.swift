@@ -41,9 +41,9 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     // MARK: - Other
 
     func presentGameKitAuthAlert() {
-        let title = "Game Center Unavailable"
+        let title = "Global Races Unavailable"
         let message = """
-        Game Center is disabled. Please try logging into Game Center in the Settings app to join a Global Race.
+        Please try logging into Game Center in the Settings app to join a Global Race.
         """
 
         let controller = UIAlertController(title: title,

@@ -48,7 +48,6 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
     private let linkCountLabel = UILabel()
     private let loadingView = UIView()
     private let slowConnectionLabel = UILabel()
-    private let reloadButton = UIButton()
 
     public var progressView: WKRUIProgressView? {
         didSet {
@@ -114,6 +113,8 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         slowConnectionLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         slowConnectionLabel.translatesAutoresizingMaskIntoConstraints = false
         loadingView.addSubview(slowConnectionLabel)
+
+        slowConnectionLabel.isHidden = true // only show during development
 
         scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
 
