@@ -29,8 +29,8 @@ internal class MPCHostSearchingCell: UITableViewCell {
                                        alpha: 1.0)
 
         updateText()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { _ in
-            self.updateText()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true, block: { [weak self] _ in
+            self?.updateText()
         })
     }
 

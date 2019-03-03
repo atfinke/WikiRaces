@@ -88,8 +88,8 @@ class ResultRenderer {
             historyView.widthAnchor.constraint(equalTo: innerView.widthAnchor)
         ]
 
-        view.onLayout = {
-            self.render(view: view, completion: completion)
+        view.onLayout = { [weak self] in
+            self?.render(view: view, completion: completion)
         }
         NSLayoutConstraint.activate(constraints)
     }

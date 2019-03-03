@@ -208,7 +208,10 @@ extension GameViewController {
         let navController = UINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
-        present(navController, animated: true, completion: nil)
+        present(navController, animated: true) { [weak self] in
+            self?.connectingLabel.alpha = 0.0
+            self?.activityIndicatorView.alpha = 0.0
+        }
     }
 
     private func transitionToResults() {
@@ -221,7 +224,10 @@ extension GameViewController {
                                options: .beginFromCurrentState,
                                animations: {
                                 self?.webView.alpha = 0.0
-                }, completion: nil)
+                }, completion: { [weak self] _ in
+                    self?.title = nil
+                    self?.navigationController?.setNavigationBarHidden(true, animated: false)
+                })
             })
         } else {
             resultsViewController?.state = gameState
@@ -232,9 +238,6 @@ extension GameViewController {
         if gameState == .hostResults && networkConfig.isHost {
             PlayerMetrics.log(event: .hostEndedRace)
         }
-
-        connectingLabel.alpha = 0.0
-        activityIndicatorView.alpha = 0.0
     }
 
     private func showResultsController() {
