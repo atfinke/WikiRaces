@@ -30,6 +30,8 @@ class ConnectViewController: UIViewController {
         #if !MULTIWINDOWDEBUG
         let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
+
+        let startDate = Date()
         WKRConnectionTester.start { success in
             DispatchQueue.main.async {
                 if success {
@@ -37,6 +39,11 @@ class ConnectViewController: UIViewController {
                     trace?.stop()
                     #endif
                 }
+                PlayerMetrics.log(event: .connectionTestResult,
+                                  attributes: [
+                                    "Result": NSNumber(value: success).intValue,
+                                    "Duration": -startDate.timeIntervalSinceNow
+                    ])
                 completion(success)
             }
         }

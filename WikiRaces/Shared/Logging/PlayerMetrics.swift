@@ -46,6 +46,7 @@ internal struct PlayerMetrics {
 
         case raceCompleted
         case banHammer
+        case connectionTestResult
 
         init(event: WKRLogEvent) {
             switch event.type {
