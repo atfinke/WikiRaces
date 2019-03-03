@@ -84,6 +84,11 @@ public struct WKRSeenFinalArticlesStore {
             .subtracting(localPlayersSeenFinalArticles)
     }
 
+    public static func isRemoteTransferData(_ data: Data) -> Bool {
+        guard let tranfer = try? JSONDecoder().decode(RemoteTransfer.self, from: data) else { return false }
+        return true
+    }
+
     public static func resetRemotePlayersSeenFinalArticles() {
         uniqueRemotePlayersSeenFinalArticles = []
     }
