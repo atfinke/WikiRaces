@@ -44,6 +44,7 @@ internal class StatsHelper {
         case gkTotalPlayers
         case gkUniquePlayers
         case gkPressedJoin
+        case gkInvitedToMatch
         case gkConnectedToMatch
 
         case soloVotes
@@ -74,6 +75,7 @@ internal class StatsHelper {
             .gkTotalTime,
             .gkRaces,
             .gkPressedJoin,
+            .gkInvitedToMatch,
             .gkConnectedToMatch,
 
             .soloVotes,
@@ -429,6 +431,7 @@ internal class StatsHelper {
         let gkPages = statValue(for: .gkPages)
         let gkRaces = statValue(for: .gkRaces)
         let gkPressedJoin = statValue(for: .gkPressedJoin)
+        let gkInvitedToMatch = statValue(for: .gkInvitedToMatch)
         let gkConnectedToMatch = statValue(for: .gkConnectedToMatch)
 
         let soloVotes = statValue(for: .soloVotes)
@@ -461,6 +464,7 @@ internal class StatsHelper {
                                                                 gkTotalTime: Int(gkTotalTime),
                                                                 gkPages: Int(gkPages),
                                                                 gkPressedJoin: Int(gkPressedJoin),
+                                                                gkInvitedToMatch: Int(gkInvitedToMatch),
                                                                 gkConnectedToMatch: Int(gkConnectedToMatch))
         PlayerDatabaseMetrics.shared.log(event: gkStats)
 

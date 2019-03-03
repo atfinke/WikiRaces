@@ -24,7 +24,7 @@ class PlayerDatabaseMetrics: NSObject {
         //swiftlint:disable:next line_length
         case mpcStatsUpdate(mpcVotes: Int, mpcHelp: Int, mpcPoints: Int, mpcRaces: Int, mpcFastestTime: Int, mpcTotalTime: Int, mpcPages: Int, mpcPressedJoin: Int, mpcPressedHost: Int)
         //swiftlint:disable:next line_length
-        case gkStatsUpdate(gkVotes: Int, gkHelp: Int, gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkConnectedToMatch: Int)
+        case gkStatsUpdate(gkVotes: Int, gkHelp: Int, gkPoints: Int, gkRaces: Int, gkFastestTime: Int, gkTotalTime: Int, gkPages: Int, gkPressedJoin: Int, gkInvitedToMatch: Int, gkConnectedToMatch: Int)
         //swiftlint:disable:next line_length
         case soloStatsUpdate(soloVotes: Int, soloHelp: Int, soloRaces: Int, soloTotalTime: Int, soloPages: Int, soloPressedHost: Int)
 
@@ -103,7 +103,9 @@ class PlayerDatabaseMetrics: NSObject {
                     guard let userStatsRecord = userStatsRecord else { return }
                     self.userStatsRecord = userStatsRecord
                     self.isConnecting = false
-                    self.sync()
+                    DispatchQueue.main.async {
+                        self.sync()
+                    }
                 })
             })
         })
@@ -126,7 +128,9 @@ class PlayerDatabaseMetrics: NSObject {
                 self.userRecord = savedUserRecord
                 self.userStatsRecord = savedUserStatsRecord
                 self.isCreatingStatsRecord = false
-                self.sync()
+                DispatchQueue.main.async {
+                    self.sync()
+                }
             })
         })
     }
@@ -135,10 +139,7 @@ class PlayerDatabaseMetrics: NSObject {
 
     func log(event: Event) {
         queuedEvents.append(event)
-
-        // Often, multiple logs are called at once resulting in multiple db syncs.
-        // This adds a bit of a delay so we can coalesce syncs more often.
-        DispatchQueue.global().asyncAfter(deadline: .now() + 0.25) {
+        DispatchQueue.main.async {
             self.sync()
         }
     }
@@ -202,6 +203,7 @@ class PlayerDatabaseMetrics: NSObject {
                             let gkTotalTime,
                             let gkPages,
                             let gkPressedJoin,
+                            let gkInvitedToMatch,
                             let gkConnectedToMatch):
             record["gkVotes"] = NSNumber(value: gkVotes)
             record["gkHelp"] = NSNumber(value: gkHelp)
@@ -211,6 +213,7 @@ class PlayerDatabaseMetrics: NSObject {
             record["gkFastestTime"] = NSNumber(value: gkFastestTime)
             record["gkTotalTime"] = NSNumber(value: gkTotalTime)
             record["gkPressedJoin"] = NSNumber(value: gkPressedJoin)
+            record["gkInvitedToMatch"] = NSNumber(value: gkInvitedToMatch)
             record["gkConnectedToMatch"] = NSNumber(value: gkConnectedToMatch)
         case .soloStatsUpdate(let soloVotes,
                               let soloHelp,
@@ -247,7 +250,9 @@ class PlayerDatabaseMetrics: NSObject {
                 self.connect()
             }
             self.isSyncing = false
-            self.sync()
+            DispatchQueue.main.async {
+                self.sync()
+            }
         }
     }
 

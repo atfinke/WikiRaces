@@ -14,17 +14,25 @@ class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
 
     static let shared = GlobalRaceHelper()
     var lastInvite: GKInvite?
+    var isHandlerSetup = false
+    var didReceiveInvite: (() -> Void)?
 
     // MARK: - Helpers
 
-    func authenticate(completion: ((UIViewController?, Error?) -> Void)?) {
+    func authenticate(completion: ((UIViewController?, Error?, _ forceShowErrorMessage: Bool) -> Void)?) {
         guard !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
             return
         }
 
+        guard !isHandlerSetup else {
+            completion?(nil, nil, true)
+            return
+        }
+        isHandlerSetup = true
+
         GKLocalPlayer.local.authenticateHandler = { controller, error in
             DispatchQueue.main.async {
-                completion?(controller, error)
+                completion?(controller, error, false)
                 if GKLocalPlayer.local.isAuthenticated {
                     GKLocalPlayer.local.register(self)
                 }
@@ -35,6 +43,8 @@ class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
     // MARK: - GKLocalPlayerListener
 
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
+        StatsHelper.shared.increment(stat: .gkInvitedToMatch)
         lastInvite = invite
+        didReceiveInvite?()
     }
 }
