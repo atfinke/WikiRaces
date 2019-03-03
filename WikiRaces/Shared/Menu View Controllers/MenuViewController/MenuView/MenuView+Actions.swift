@@ -31,6 +31,11 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
+        guard GKLocalPlayer.local.isAuthenticated else {
+            self.presentGlobalAuthController?()
+            return
+        }
+
         animateMenuOut {
             self.presentGlobalConnectController?()
             StatsHelper.shared.increment(stat: .gkPressedJoin)

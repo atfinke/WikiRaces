@@ -14,7 +14,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
     /// Attempts Game Center login
     func attemptGlobalAuthentication() {
-        GlobalRaceHelper.shared.authenticate { controller, error in
+        GlobalRaceHelper.shared.authenticate { controller, error, forceShowError in
             if let controller = controller, self.menuView.state != .noInterface {
                 if self.presentedViewController == nil {
                     self.present(controller, animated: true, completion: nil)
@@ -22,24 +22,9 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             } else if GKLocalPlayer.local.isAuthenticated {
                 PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
             } else if !GKLocalPlayer.local.isAuthenticated {
-                // "error._code" ?!?!
-                if let error = error, error._code == 2 {
-                    return
+                if error != nil || forceShowError {
+                    self.presentGameKitAuthAlert()
                 }
-                //swiftlint:disable:next line_length
-                let controller = UIAlertController(title: "Leaderboards Unavailable", message: "You must be logged into Game Center to access leaderboards", preferredStyle: .alert)
-
-                let settingsAction = UIAlertAction(title: "Settings", style: .default, handler: { _ in
-                    PlayerMetrics.log(event: .userAction("attemptGCAuthentication:settings"))
-                    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
-                        fatalError("Settings URL nil")
-                    }
-                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-                })
-                controller.addAction(settingsAction)
-                controller.addCancelAction(title: "Ok")
-
-                self.present(controller, animated: true, completion: nil)
             }
         }
     }
@@ -50,6 +35,24 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         PlayerMetrics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.menuView.animateMenuIn()
+        }
+    }
+
+    // MARK: - Other
+
+    func presentGameKitAuthAlert() {
+        let title = "Game Center Unavailable"
+        let message = """
+        Game Center is disabled. Please try logging into Game Center in the Settings app to join a Global Race.
+        """
+
+        let controller = UIAlertController(title: title,
+                                           message: message,
+                                           preferredStyle: .alert)
+        controller.addCancelAction(title: "Ok")
+
+        if presentedViewController == nil {
+            present(controller, animated: true, completion: nil)
         }
     }
 

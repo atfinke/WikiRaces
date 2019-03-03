@@ -27,6 +27,8 @@ internal class MenuViewController: UIViewController {
         return view
     }
 
+    private var isFirstAppearence = true
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -57,6 +59,13 @@ internal class MenuViewController: UIViewController {
         menuView.presentAlertController = { alertController in
             self.present(alertController, animated: true, completion: nil)
         }
+
+        GlobalRaceHelper.shared.didReceiveInvite = {
+            DispatchQueue.main.async {
+                guard self.presentedViewController == nil else { return }
+                self.menuView.joinGlobalRace()
+            }
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -83,7 +92,10 @@ internal class MenuViewController: UIViewController {
                                                 isHost: view.window!.frame.origin == .zero)
         present(nav, animated: false, completion: nil)
         #else
+        if isFirstAppearence {
+            isFirstAppearence = false
             attemptGlobalAuthentication()
+        }
         #endif
 
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
@@ -141,27 +153,12 @@ internal class MenuViewController: UIViewController {
             let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!
             controller.prepareForScreenshots(for: url)
             present(nav, animated: true, completion: nil)
-        } else {
+        } else if GKLocalPlayer.local.isAuthenticated {
             UIApplication.shared.isIdleTimerDisabled = true
-
             let controller = GameKitConnectViewController()
             navigationController?.pushViewController(controller, animated: false)
-//            let message = """
-//            Welcome to the Global Races Beta. Global Races require a Game Center account to play.
-//            """
-//            let controller = UIAlertController(title: "Global Races Beta",
-//                                               message: message,
-//                                               preferredStyle: .alert)
-//
-//            let action = UIAlertAction(title: "Start Racing",
-//                                       style: .default,
-//                                       handler: { _ in
-//                                        self.performSegue(.showGameKitConnecting, isHost: false)
-//            })
-//            controller.addAction(action)
-//            controller.addCancelAction(title: "Cancel")
-//            //            self.present(controller, animated: true, completion: nil)
-//            performSegue(.showGameKitConnecting, isHost: false)
+        } else {
+            presentGameKitAuthAlert()
         }
     }
 

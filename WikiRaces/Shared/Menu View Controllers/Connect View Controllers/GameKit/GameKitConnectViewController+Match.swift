@@ -21,6 +21,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             let controller = GKMatchmakerViewController(invite: invite) {
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
+            GlobalRaceHelper.shared.lastInvite = nil
         }
         if let controller = GKMatchmakerViewController(matchRequest: request) {
             controller.matchmakerDelegate = self
@@ -31,28 +32,45 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func sendStartMessageToPlayers() {
-        guard let match = match else { return }
-        let data = Data([1])
+        func fail() {
+            showError(title: "Unable To Start Match",
+                      message: "Please try again later.")
+        }
+        guard let match = match else {
+            fail()
+            return
+        }
+
+        let message = StartMessage(hostName: GKLocalPlayer.local.alias)
         do {
-            try match.sendData(toAllPlayers: data, with: .unreliable)
+            let data = try JSONEncoder().encode(message)
             try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.showMatch(for: .gameKit(match: match, isHost: true),
+                self.showMatch(for: .gameKit(match: match,
+                                             isHost: true),
                                andHide: [])
             }
         } catch {
-            showError(title: "Unable To Start Match",
-                      message: "Please try again later.")
+            fail()
         }
     }
 
     // MARK: - GKMatchDelegate
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        if isPlayerHost {
+        if isPlayerHost, WKRSeenFinalArticlesStore.isRemoteTransferData(data) {
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
-        } else {
-            showMatch(for: .gameKit(match: match, isHost: isPlayerHost),
+        } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
+            guard let hostAlias = self.hostPlayerAlias, object.hostName == hostAlias else {
+                self.showError(title: "Unable To Find Best Host",
+                               message: "Please try again later.")
+                return
+            }
+            if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
+                try? match.send(data, to: [player], dataMode: .reliable)
+            }
+            showMatch(for: .gameKit(match: match,
+                                    isHost: isPlayerHost),
                       andHide: [])
         }
     }
@@ -82,15 +100,14 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         match.delegate = self
         self.match = match
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            if let hostPlayer = match.players.sorted(by: { $0.playerID < $1.playerID }).first {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            var players = match.players
+            players.append(GKLocalPlayer.local)
+            if let hostPlayer = players.sorted(by: { $0.playerID > $1.playerID }).first {
+                self.hostPlayerAlias = hostPlayer.alias
                 if hostPlayer.playerID == GKLocalPlayer.local.playerID {
                     self.isPlayerHost = true
                     self.sendStartMessageToPlayers()
-                } else if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
-                    DispatchQueue.global().asyncAfter(deadline: .now() + 0.5, execute: {
-                        try? match.send(data, to: [hostPlayer], dataMode: .reliable)
-                    })
                 }
                 StatsHelper.shared.increment(stat: .gkConnectedToMatch)
             } else {

@@ -17,9 +17,16 @@ import FirebasePerformance
 
 class GameKitConnectViewController: ConnectViewController {
 
+    // MARK: - Types
+
+    struct StartMessage: Codable {
+        let hostName: String
+    }
+
     // MARK: - Properties
 
     var isPlayerHost = false
+    var hostPlayerAlias: String?
     var match: GKMatch?
 
     // MARK: - View Life Cycle

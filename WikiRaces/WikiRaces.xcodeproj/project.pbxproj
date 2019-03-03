@@ -120,6 +120,8 @@
 		14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
 		14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
+		14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B8F80C222C456B006C7A06 /* GameKit.framework */; };
+		14B8F811222C47FA006C7A06 /* GKMessageImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B8F810222C47FA006C7A06 /* GKMessageImage.png */; };
 		14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
 		14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
 		14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
@@ -427,6 +429,8 @@
 		14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingPuzzleView.swift; sourceTree = "<group>"; };
 		14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostSoloCell.swift; sourceTree = "<group>"; };
 		14B55C981F3A49D20090E092 /* DebugWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugWindow.swift; sourceTree = "<group>"; };
+		14B8F80C222C456B006C7A06 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		14B8F810222C47FA006C7A06 /* GKMessageImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GKMessageImage.png; sourceTree = "<group>"; };
 		14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+Debug.swift"; sourceTree = "<group>"; };
 		14BAB5332229DC6200C5AE27 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WikiRaces (UI Catalog).app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -476,6 +480,7 @@
 				148487F8214F0F3B0098CBFA /* GoogleToolboxForMac.framework in Frameworks */,
 				14E6D5611F86A1CF005EB3B9 /* WKRUIKit.framework in Frameworks */,
 				148487FE214F0F3B0098CBFA /* FirebaseInstanceID.framework in Frameworks */,
+				14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */,
 				140564D62112D4BD001E36AB /* Fabric.framework in Frameworks */,
 				148487F9214F0F3B0098CBFA /* GoogleUtilities.framework in Frameworks */,
 				14848802214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework in Frameworks */,
@@ -631,6 +636,7 @@
 				149FF8531F362B83000A5D96 /* Assets.xcassets */,
 				149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */,
 				149FF8581F362B83000A5D96 /* Info.plist */,
+				14B8F810222C47FA006C7A06 /* GKMessageImage.png */,
 			);
 			path = WikiRaces;
 			sourceTree = "<group>";
@@ -847,6 +853,7 @@
 		14E1B19F1F798A520082F4FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				14B8F80C222C456B006C7A06 /* GameKit.framework */,
 				14E1B1A01F798A520082F4FA /* CloudKit.framework */,
 			);
 			name = Frameworks;
@@ -974,6 +981,9 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 1020;
 						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1076,6 +1086,7 @@
 				149FF8571F362B83000A5D96 /* LaunchScreen.storyboard in Resources */,
 				149FF8541F362B83000A5D96 /* Assets.xcassets in Resources */,
 				1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */,
+				14B8F811222C47FA006C7A06 /* GKMessageImage.png in Resources */,
 				14DC66D11F90700A0026C6ED /* fabric.apikey in Resources */,
 				14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */,
 				14DC66D21F90700D0026C6ED /* GoogleService-Info.plist in Resources */,
