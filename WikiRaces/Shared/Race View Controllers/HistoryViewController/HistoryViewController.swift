@@ -23,7 +23,11 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     private var entries = [WKRHistoryEntry]()
     private var stats: WKRPlayerRaceStats? {
-        didSet { tableView.reloadSections(IndexSet(integer: 1), with: .none) }
+        didSet {
+            if stats != oldValue {
+                tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
+        }
     }
 
     var player: WKRPlayer? {
@@ -71,6 +75,11 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         guard let player = player, let history = player.raceHistory else {
             entries = []
             tableView.reloadData()
+            return
+        }
+
+        // A different player was updated in the results info object, nothing has changed
+        if history.entries == entries && oldPlayer?.state == player.state {
             return
         }
 
