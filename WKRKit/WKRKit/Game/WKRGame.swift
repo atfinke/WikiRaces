@@ -170,17 +170,23 @@ public class WKRGame {
             }
         }
 
-        let currentResults = WKRResultsInfo(players: players, racePoints: racePoints, sessionPoints: sessionPoints)
+        let currentResults = WKRResultsInfo(racePlayers: activeRace?.players ?? players,
+                                            racePoints: racePoints,
+                                            sessionPoints: sessionPoints)
+
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
             localResultsUpdated?(currentResults)
             return
         }
 
-        let adjustedPlayers = players
+        let adjustedPlayers = activeRace?.players ?? players
         for player in adjustedPlayers where player.state == .racing {
             player.state = .forcedEnd
         }
-        let results = WKRResultsInfo(players: adjustedPlayers, racePoints: racePoints, sessionPoints: sessionPoints)
+        let results = WKRResultsInfo(racePlayers: adjustedPlayers,
+                                     racePoints: racePoints,
+                                     sessionPoints: sessionPoints)
+
         finishedRace()
         hostResultsCreated?(results)
     }

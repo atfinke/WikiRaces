@@ -33,18 +33,18 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Initialization
 
-    init(players: [WKRPlayer],
+    init(racePlayers: [WKRPlayer],
          racePoints: [WKRPlayerProfile: Int],
          sessionPoints: [WKRPlayerProfile: Int]) {
 
         self.racePoints = racePoints
+        let players = racePlayers.sorted(by: { (lhs, rhs) -> Bool in
+            return lhs.profile.name.lowercased() < rhs.profile.name.lowercased()
+        })
 
-        // remove players that weren't in race
-        let playerProfiles = players.map { $0.profile }
+        let playerProfiles = racePlayers.map { $0.profile }
         self.sessionPoints = sessionPoints.filter { playerProfiles.contains($0.key) }
         self.playersSortedByPoints = players.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.profile.name < rhs.profile.name
-        }).sorted(by: { (lhs, rhs) -> Bool in
             return sessionPoints[lhs.profile] ?? 0 > sessionPoints[rhs.profile] ?? 0
         })
 
