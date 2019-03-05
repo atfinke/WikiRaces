@@ -20,7 +20,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                     self.present(controller, animated: true, completion: nil)
                 }
             } else if GKLocalPlayer.local.isAuthenticated {
-                PlayerDatabaseMetrics.shared.log(event: .gcAlias(GKLocalPlayer.local.alias))
+                let metrics = PlayerDatabaseMetrics.shared
+                metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
             } else if !GKLocalPlayer.local.isAuthenticated {
                 if error != nil || forceShowError {
                     self.presentGameKitAuthAlert()

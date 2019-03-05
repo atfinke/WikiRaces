@@ -77,10 +77,13 @@ internal class AppDelegate: WKRAppDelegate {
 
     private func logBuild() {
         let appInfo = Bundle.main.appInfo
-        PlayerDatabaseMetrics.shared.log(event: .app(coreVersion: appInfo.version,
-                                                     coreBuild: appInfo.build,
-                                                     kitConstants: WKRKitConstants.current.version,
-                                                     uiKitConstants: WKRUIKitConstants.current.version))
+        let metrics = PlayerDatabaseMetrics.shared
+        metrics.log(value: appInfo.version, for: "coreVersion")
+        metrics.log(value: appInfo.build.description, for: "coreBuild")
+        metrics.log(value: WKRKitConstants.current.version.description,
+                    for: "WKRKitConstantsVersion")
+        metrics.log(value: WKRUIKitConstants.current.version.description,
+                    for: "WKRUIKitConstantsVersion")
     }
 
     @objc

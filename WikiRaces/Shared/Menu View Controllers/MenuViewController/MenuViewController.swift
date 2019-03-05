@@ -98,10 +98,11 @@ internal class MenuViewController: UIViewController {
         }
         #endif
 
+        let metrics = PlayerDatabaseMetrics.shared
+        metrics.log(value: UIDevice.current.name, for: "DeviceNames")
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
-            PlayerDatabaseMetrics.shared.log(event: .customName(name))
+            metrics.log(value: name, for: "CustomNames")
         }
-        PlayerDatabaseMetrics.shared.log(event: .deviceName(UIDevice.current.name))
 
         promptForInvalidName()
     }
