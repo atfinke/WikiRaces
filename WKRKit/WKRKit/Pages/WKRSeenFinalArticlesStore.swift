@@ -85,7 +85,7 @@ public struct WKRSeenFinalArticlesStore {
     }
 
     public static func isRemoteTransferData(_ data: Data) -> Bool {
-        guard let tranfer = try? JSONDecoder().decode(RemoteTransfer.self, from: data) else { return false }
+        guard let _ = try? JSONDecoder().decode(RemoteTransfer.self, from: data) else { return false }
         return true
     }
 

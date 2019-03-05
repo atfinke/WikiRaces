@@ -82,9 +82,9 @@ extension ViewController {
             csvString += "\n"
             for (index, record) in self.raceRecords.enumerated() {
                 for key in keys {
-                    if key == "URL", let asset = record.object(forKey: "CSV") as? CKAsset {
+                    if key == "URL", let assetURL = (record.object(forKey: "CSV") as? CKAsset)?.fileURL {
                         let fileURL = url.appendingPathComponent("\(index).csv")
-                        try? FileManager.default.copyItem(at: asset.fileURL, to: fileURL)
+                        try? FileManager.default.copyItem(at: assetURL, to: fileURL)
                         csvString += "\(fileURL)"
                     } else if let object = record.object(forKey: key) {
                         csvString += "\(object)"

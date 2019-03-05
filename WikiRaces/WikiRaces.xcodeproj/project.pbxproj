@@ -420,7 +420,6 @@
 		149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesScreenshots.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14A778281F61A9A100823DE8 /* Plans.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Plans.txt; sourceTree = "<group>"; };
 		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
 		14B2DD3A22212298009B8AB3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Actions.swift"; sourceTree = "<group>"; };
@@ -631,7 +630,6 @@
 				143BB72F1F60D84100D00541 /* fabric.apikey */,
 				143BB72E1F60D84100D00541 /* fabric.buildsecret */,
 				143054BD1F89581100C0BC27 /* GoogleService-Info.plist */,
-				14A778281F61A9A100823DE8 /* Plans.txt */,
 				149FF84C1F362B83000A5D96 /* AppDelegate.swift */,
 				149FF8531F362B83000A5D96 /* Assets.xcassets */,
 				149FF8551F362B83000A5D96 /* LaunchScreen.storyboard */,

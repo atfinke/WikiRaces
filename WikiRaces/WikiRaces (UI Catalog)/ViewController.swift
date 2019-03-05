@@ -66,7 +66,7 @@ internal class ViewController: UIViewController {
                         }
 
                         //                        controller.player = self.players[0]
-                        controller.resultsInfo = WKRResultsInfo(players: self.players,
+                        controller.resultsInfo = WKRResultsInfo(racePlayers: self.players,
                                                                 racePoints: [:],
                                                                 sessionPoints: [:])
 
