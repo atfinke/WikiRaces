@@ -51,7 +51,13 @@ class ResultRenderer {
         let bannerView = createBannerView()
         let rankingHeaderView = createHeaderView(title: "rankings")
         let rankingView = createRankingView(for: results, localPlayer: localPlayer)
-        let historyHeaderView = createHeaderView(title: localPlayer.name + "'s path")
+
+        let historyHeaderView: UIView
+        if localPlayer.raceHistory?.entries == nil {
+            historyHeaderView = UIView()
+        } else {
+            historyHeaderView = createHeaderView(title: localPlayer.name + "'s path")
+        }
         let historyView = createHistoryView(for: localPlayer)
 
         innerView.addSubview(bannerView)

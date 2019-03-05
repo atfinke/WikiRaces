@@ -195,10 +195,9 @@ internal class ResultsViewController: CenteredTableViewController {
             }
 
             guard view.window != nil,
+                let results = self.resultsInfo,
                 let player = resultsPlayer,
-                let entriesCount = player.raceHistory?.entries.count,
-                entriesCount > 1,
-                let results = self.resultsInfo else { return }
+                player.raceHistory != nil else { return }
 
             resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
                 self?.resultImage = image
