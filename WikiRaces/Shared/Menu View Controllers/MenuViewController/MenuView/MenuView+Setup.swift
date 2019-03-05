@@ -19,7 +19,7 @@ extension MenuView {
         setupLabels()
         setupButtons()
 
-        titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.topAnchor, constant: 200)
+        titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor)
 
         localRaceTypeButtonWidthConstraint = localRaceTypeButton.widthAnchor.constraint(equalToConstant: 0)
         localRaceTypeButtonHeightConstraint = localRaceTypeButton.heightAnchor.constraint(equalToConstant: 0)

@@ -182,7 +182,11 @@ class MenuView: UIView {
         subtitleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 18.0, 30), weight: .medium)
 
         // Constraints
-        titleLabelConstraint.constant = frame.size.height / 7
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            titleLabelConstraint.constant = frame.size.height / 8
+        } else {
+            titleLabelConstraint.constant = frame.size.height / 12
+        }
 
         switch state {
         case .raceTypeOptions:
