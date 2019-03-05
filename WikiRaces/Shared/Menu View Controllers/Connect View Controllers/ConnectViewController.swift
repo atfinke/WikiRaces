@@ -56,6 +56,13 @@ class ConnectViewController: UIViewController {
         WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        descriptionLabel.alpha = 0.0
+        activityIndicatorView.alpha = 0.0
+        cancelButton.alpha = 0.0
+    }
+
     // MARK: - Core Interface
 
     func setupCoreInterface() {
@@ -64,6 +71,7 @@ class ConnectViewController: UIViewController {
         cancelButton.setTitleColor(.wkrTextColor, for: .normal)
         cancelButton.alpha = 0.0
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
+        cancelButton.addTarget(self, action: #selector(pressedCancelButton), for: .touchUpInside)
         view.addSubview(cancelButton)
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
