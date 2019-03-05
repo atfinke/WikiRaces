@@ -134,6 +134,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     @objc
     func acceptInvite() {
         PlayerMetrics.log(event: .userAction(#function))
+        activeInviteTimeoutTimer?.invalidate()
 
         activeInvite?(true, session)
         updateDescriptionLabel(to: "CONNECTING TO HOST")
@@ -158,6 +159,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         PlayerMetrics.log(event: .userAction(#function))
 
         activeInvite?(false, session)
+
         updateDescriptionLabel(to: "WAITING FOR INVITE")
 
         UIView.animate(withDuration: 0.25, animations: {
