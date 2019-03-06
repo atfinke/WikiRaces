@@ -115,6 +115,13 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
             rowsToInsert.append(IndexPath(row: index))
         }
 
+        // make sure the new history count = old + cell insert count
+        guard history.entries.count == entries.count + rowsToInsert.count else {
+            self.entries = history.entries
+            tableView.reloadData()
+            return
+        }
+
         self.entries = history.entries
         tableView.performBatchUpdates({
             tableView.reloadRows(at: rowsToReload, with: .none)
