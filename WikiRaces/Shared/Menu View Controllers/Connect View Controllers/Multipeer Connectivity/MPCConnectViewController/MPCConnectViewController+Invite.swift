@@ -20,11 +20,26 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     // MARK: - MCSessionDelegate
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        session.delegate = nil
-        showMatch(for: .mpc(serviceType: self.serviceType,
-                            session: self.session,
-                            isHost: self.isPlayerHost),
-                  andHide: [self.inviteView])
+        func start() {
+            session.delegate = nil
+            showMatch(for: .mpc(serviceType: serviceType,
+                                session: session,
+                                isHost: isPlayerHost),
+                      andHide: [inviteView])
+        }
+
+        // 1. host context is nil when the invite was from a legacy app version (<= 3.6.2)
+        // 2. Otherwise, make sure that the host sent the start message
+        if hostContext == nil {
+            start()
+        } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
+            guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
+                showError(title: "Connection Issue",
+                          message: "The connection to the host was lost.")
+                return
+            }
+            start()
+        }
     }
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -102,6 +117,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         let invite = invites.removeFirst()
         activeInvite = invite.handler
+        hostContext = invite.context
         hostPeerID = invite.host
 
         hostNameLabel.text = "FROM " + invite.host.displayName.uppercased()

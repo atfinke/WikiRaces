@@ -11,6 +11,12 @@ import WKRKit
 
 class ConnectViewController: UIViewController {
 
+    // MARK: - Types
+
+    struct StartMessage: Codable {
+        let hostName: String
+    }
+    
     // MARK: - Interface Elements
 
     /// General status label

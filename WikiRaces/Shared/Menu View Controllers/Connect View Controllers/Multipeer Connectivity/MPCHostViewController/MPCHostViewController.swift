@@ -126,11 +126,10 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
         guard let session = session else { fatalError("Session is nil") }
         do {
-            // Participants move to the game view and wait for "real" data when they receive first data chunk
-            let data = Data([1])
-            let peers = session.connectedPeers
-            try session.send(data, toPeers: peers, with: .unreliable)
-            try session.send(data, toPeers: peers, with: .reliable)
+            let message = ConnectViewController.StartMessage(hostName: session.myPeerID.displayName)
+            let data = try JSONEncoder().encode(message)
+            try session.send(data, toPeers: session.connectedPeers, with: .reliable)
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.didStartMatch?(false)
             }
@@ -139,6 +138,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
             didCancelMatch?()
         }
     }
+
 
     /// Updates the peerID to a new state and updates the table view
     ///

@@ -44,6 +44,7 @@ internal class MPCConnectViewController: ConnectViewController {
 
     var peerID: MCPeerID!
     var hostPeerID: MCPeerID?
+    var hostContext: MPCHostContext?
 
     let serviceType = "WKRPeer30"
     lazy var session: MCSession = {
