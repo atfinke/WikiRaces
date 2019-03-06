@@ -209,6 +209,7 @@
 		14E0F19F22303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
 		14E0F1A022303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
 		14E0F1A122303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
+		14E0F1AB22303FD100BFF1E9 /* WikiRacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F1AA22303FD100BFF1E9 /* WikiRacesTests.swift */; };
 		14E1B19A1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
 		14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
 		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
@@ -267,6 +268,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 149FF7F21F362B0D000A5D96;
 			remoteInfo = WKRUIKit;
+		};
+		14E0F1AD22303FD100BFF1E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 149FF8411F362B83000A5D96 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 149FF8481F362B83000A5D96;
+			remoteInfo = WikiRaces;
 		};
 		14E6D5511F86A1B0005EB3B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -461,6 +469,9 @@
 		14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAnimationDurationConstants.swift; sourceTree = "<group>"; };
 		14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+Table.swift"; sourceTree = "<group>"; };
 		14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStat.swift; sourceTree = "<group>"; };
+		14E0F1A822303FD100BFF1E9 /* WikiRacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		14E0F1AA22303FD100BFF1E9 /* WikiRacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesTests.swift; sourceTree = "<group>"; };
+		14E0F1AC22303FD100BFF1E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMetrics.swift; sourceTree = "<group>"; };
 		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -515,6 +526,13 @@
 			files = (
 				14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */,
 				14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14E0F1A522303FD100BFF1E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +629,7 @@
 				149FF8791F362BE4000A5D96 /* WikiRaces (Multi-Window) */,
 				14C25FDE1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
 				149FF88F1F362BF1000A5D96 /* WikiRacesScreenshots */,
+				14E0F1A922303FD100BFF1E9 /* WikiRacesTests */,
 				149FF84A1F362B83000A5D96 /* Products */,
 				14E1B19F1F798A520082F4FA /* Frameworks */,
 			);
@@ -623,6 +642,7 @@
 				149FF8781F362BE4000A5D96 /* WikiRaces (Multi-Window).app */,
 				149FF88E1F362BF1000A5D96 /* WikiRacesScreenshots.xctest */,
 				14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */,
+				14E0F1A822303FD100BFF1E9 /* WikiRacesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -853,6 +873,15 @@
 			path = MPCHostViewController;
 			sourceTree = "<group>";
 		};
+		14E0F1A922303FD100BFF1E9 /* WikiRacesTests */ = {
+			isa = PBXGroup;
+			children = (
+				14E0F1AA22303FD100BFF1E9 /* WikiRacesTests.swift */,
+				14E0F1AC22303FD100BFF1E9 /* Info.plist */,
+			);
+			path = WikiRacesTests;
+			sourceTree = "<group>";
+		};
 		14E1B19F1F798A520082F4FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -967,6 +996,24 @@
 			productReference = 14C25FDD1F6F025A00CD7373 /* WikiRaces (UI Catalog).app */;
 			productType = "com.apple.product-type.application";
 		};
+		14E0F1A722303FD100BFF1E9 /* WikiRacesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14E0F1AF22303FD100BFF1E9 /* Build configuration list for PBXNativeTarget "WikiRacesTests" */;
+			buildPhases = (
+				14E0F1A422303FD100BFF1E9 /* Sources */,
+				14E0F1A522303FD100BFF1E9 /* Frameworks */,
+				14E0F1A622303FD100BFF1E9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14E0F1AE22303FD100BFF1E9 /* PBXTargetDependency */,
+			);
+			name = WikiRacesTests;
+			productName = WikiRacesTests;
+			productReference = 14E0F1A822303FD100BFF1E9 /* WikiRacesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1017,6 +1064,11 @@
 						LastSwiftMigration = 1020;
 						ProvisioningStyle = Automatic;
 					};
+					14E0F1A722303FD100BFF1E9 = {
+						CreatedOnToolsVersion = 10.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 149FF8481F362B83000A5D96;
+					};
 				};
 			};
 			buildConfigurationList = 149FF8441F362B83000A5D96 /* Build configuration list for PBXProject "WikiRaces" */;
@@ -1046,6 +1098,7 @@
 				149FF8771F362BE4000A5D96 /* WikiRaces (Multi-Window) */,
 				149FF88D1F362BF1000A5D96 /* WikiRacesScreenshots */,
 				14C25FDC1F6F025A00CD7373 /* WikiRaces (UI Catalog) */,
+				14E0F1A722303FD100BFF1E9 /* WikiRacesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1122,6 +1175,13 @@
 				14C25FE71F6F025A00CD7373 /* Assets.xcassets in Resources */,
 				14C25FE51F6F025A00CD7373 /* Main-Catalog.storyboard in Resources */,
 				14C2600D1F6F04A200CD7373 /* SharedAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14E0F1A622303FD100BFF1E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1383,6 +1443,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14E0F1A422303FD100BFF1E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14E0F1AB22303FD100BFF1E9 /* WikiRacesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1420,6 +1488,11 @@
 			isa = PBXTargetDependency;
 			name = WKRUIKit;
 			targetProxy = 14DCC5661FF2E359003AEC95 /* PBXContainerItemProxy */;
+		};
+		14E0F1AE22303FD100BFF1E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 149FF8481F362B83000A5D96 /* WikiRaces */;
+			targetProxy = 14E0F1AD22303FD100BFF1E9 /* PBXContainerItemProxy */;
 		};
 		14E6D5601F86A1CA005EB3B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1598,6 +1671,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1623,6 +1697,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1742,6 +1817,46 @@
 			};
 			name = Release;
 		};
+		14E0F1B022303FD100BFF1E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = WikiRacesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WikiRaces.app/WikiRaces";
+			};
+			name = Debug;
+		};
+		14E0F1B122303FD100BFF1E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = WikiRacesTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WikiRacesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WikiRaces.app/WikiRaces";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1786,6 +1901,15 @@
 			buildConfigurations = (
 				14C25FEC1F6F025A00CD7373 /* Debug */,
 				14C25FED1F6F025A00CD7373 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14E0F1AF22303FD100BFF1E9 /* Build configuration list for PBXNativeTarget "WikiRacesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14E0F1B022303FD100BFF1E9 /* Debug */,
+				14E0F1B122303FD100BFF1E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

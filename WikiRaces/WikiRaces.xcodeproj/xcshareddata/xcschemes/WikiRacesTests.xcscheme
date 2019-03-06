@@ -16,10 +16,10 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "149FF8071F362B3D000A5D96"
-            BuildableName = "WKRKit.framework"
-            BlueprintName = "WKRKit"
-            ReferencedContainer = "container:WKRKit.xcodeproj">
+            BlueprintIdentifier = "149FF8481F362B83000A5D96"
+            BuildableName = "WikiRaces.app"
+            BlueprintName = "WikiRaces"
+            ReferencedContainer = "container:WikiRaces.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -29,10 +29,10 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "149FF8101F362B3D000A5D96"
-               BuildableName = "WKRKitTests.xctest"
-               BlueprintName = "WKRKitTests"
-               ReferencedContainer = "container:WKRKit.xcodeproj">
+               BlueprintIdentifier = "14E0F1A722303FD100BFF1E9"
+               BuildableName = "WikiRacesTests.xctest"
+               BlueprintName = "WikiRacesTests"
+               ReferencedContainer = "container:WikiRaces.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -49,13 +49,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "Cloud_Disabled"
-            value = "true"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

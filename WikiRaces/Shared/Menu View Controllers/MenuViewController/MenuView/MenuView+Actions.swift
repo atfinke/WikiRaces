@@ -28,6 +28,7 @@ extension MenuView {
     func joinGlobalRace() {
         PlayerMetrics.log(event: .userAction(#function))
         PlayerMetrics.log(event: .pressedGlobalJoin)
+        PlayerStat.gkPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -38,7 +39,6 @@ extension MenuView {
 
         animateMenuOut {
             self.presentGlobalConnectController?()
-            PlayerStat.gkPressedJoin.increment()
         }
     }
 
@@ -47,6 +47,7 @@ extension MenuView {
     func joinLocalRace() {
         PlayerMetrics.log(event: .userAction(#function))
         PlayerMetrics.log(event: .pressedJoin)
+        PlayerStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -56,7 +57,6 @@ extension MenuView {
 
         animateMenuOut {
             self.presentMPCConnectController?(false)
-            PlayerStat.mpcPressedJoin.increment()
         }
     }
 
@@ -65,6 +65,7 @@ extension MenuView {
     func createLocalRace() {
         PlayerMetrics.log(event: .userAction(#function))
         PlayerMetrics.log(event: .pressedHost)
+        PlayerStat.mpcPressedHost.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -74,7 +75,6 @@ extension MenuView {
 
         animateMenuOut {
             self.presentMPCConnectController?(true)
-            PlayerStat.mpcPressedHost.increment()
         }
     }
 

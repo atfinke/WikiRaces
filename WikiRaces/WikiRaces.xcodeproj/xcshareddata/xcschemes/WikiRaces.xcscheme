@@ -39,6 +39,16 @@
                ReferencedContainer = "container:WikiRaces.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14E0F1A722303FD100BFF1E9"
+               BuildableName = "WikiRacesTests.xctest"
+               BlueprintName = "WikiRacesTests"
+               ReferencedContainer = "container:WikiRaces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

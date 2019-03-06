@@ -6,6 +6,7 @@ matrix:
     - env: SCHEME="WKRKit" TYPE="build"
     - env: SCHEME="WKRKitOfflineTests" TYPE="test"
     - env: SCHEME="WKRUIKit" TYPE="build"
+    - env: SCHEME="WikiRacesTests" TYPE="test"
     - env: SCHEME="WikiRaces" TYPE="build"
 
 before_install:

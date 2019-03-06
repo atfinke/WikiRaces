@@ -47,6 +47,7 @@ enum PlayerStat: String, CaseIterable {
     case soloVotes
     case soloHelp
     case soloPages
+    case soloFastestTime
     case soloTotalTime
     case soloRaces
     case soloPressedHost
@@ -103,7 +104,8 @@ enum PlayerStat: String, CaseIterable {
 
     static var numericLowStats: [PlayerStat] = [
         .mpcFastestTime,
-        .gkFastestTime
+        .gkFastestTime,
+        .soloFastestTime
     ]
 
     var key: String {

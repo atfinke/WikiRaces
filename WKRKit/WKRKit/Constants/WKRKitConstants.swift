@@ -106,7 +106,7 @@ public struct WKRKitConstants {
 
     // MARK: - Helpers
 
-    @available(*, deprecated, message: "Only for debugging")
+    @available(*, deprecated, message: "Only for testing")
     static public func removeConstants() {
         let fileManager = FileManager.default
 
@@ -123,7 +123,7 @@ public struct WKRKitConstants {
         }
     }
 
-    @available(*, deprecated, message: "Only for debugging")
+    @available(*, deprecated, message: "Only for testing")
     static public func updateConstantsForTestingCharacterClipping() {
         copyBundledResourcesToDocuments(constantsFileName: "WKRKitConstants-TESTING_ONLY")
     }

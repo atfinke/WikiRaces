@@ -149,7 +149,7 @@ internal class StatsHelper {
         ubiquitousStoreSync()
     }
 
-    //swiftlint:disable:next function_body_length
+    //swiftlint:disable:next function_body_length cyclomatic_complexity
     func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int) {
         switch type {
         case .mpc:
@@ -210,6 +210,14 @@ internal class StatsHelper {
         case .solo:
             PlayerStat.soloRaces.increment()
             PlayerStat.soloTotalTime.increment(by: Double(timeRaced))
+
+            let currentFastestTime = PlayerStat.soloFastestTime.value()
+            if currentFastestTime == 0 {
+                defaults.set(timeRaced, forKey: PlayerStat.soloFastestTime.key)
+            } else if timeRaced < Int(currentFastestTime) {
+                defaults.set(timeRaced, forKey: PlayerStat.soloFastestTime.key)
+            }
+
             SKStoreReviewController.shouldPromptForRating = true
         }
 
@@ -372,5 +380,4 @@ internal class StatsHelper {
         }
         GKScore.report(scores, withCompletionHandler: nil)
     }
-    //swiftlint:disable:next file_length
 }
