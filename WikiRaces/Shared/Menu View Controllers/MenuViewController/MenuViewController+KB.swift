@@ -31,19 +31,19 @@ extension MenuViewController {
 
     @objc private func keyboardJoinLocalRace() {
         PlayerMetrics.log(event: .pressedJoin)
-        StatsHelper.shared.increment(stat: .mpcPressedJoin)
+        PlayerStat.mpcPressedJoin.increment()
         presentMPCConnect(isHost: false)
     }
 
     @objc private func keyboardCreateLocalRace() {
         PlayerMetrics.log(event: .pressedHost)
-        StatsHelper.shared.increment(stat: .mpcPressedHost)
+        PlayerStat.mpcPressedHost.increment()
         presentMPCConnect(isHost: true)
     }
 
     @objc private func keyboardJoinGlobalRace() {
         PlayerMetrics.log(event: .pressedGlobalJoin)
-        StatsHelper.shared.increment(stat: .gkPressedJoin)
+        PlayerStat.gkPressedJoin.increment()
         presentGlobalConnect()
     }
 }

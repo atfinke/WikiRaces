@@ -16,7 +16,7 @@ class ConnectViewController: UIViewController {
     struct StartMessage: Codable {
         let hostName: String
     }
-    
+
     // MARK: - Interface Elements
 
     /// General status label

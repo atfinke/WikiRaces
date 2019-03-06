@@ -22,7 +22,7 @@ class GameKitConnectViewController: ConnectViewController {
     var isPlayerHost = false
     var hostPlayerAlias: String?
     var match: GKMatch?
-    
+
     #if !MULTIWINDOWDEBUG
     var findTrace: Trace?
     #endif

@@ -139,7 +139,6 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         }
     }
 
-
     /// Updates the peerID to a new state and updates the table view
     ///
     /// - Parameters:

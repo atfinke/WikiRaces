@@ -47,9 +47,7 @@ extension GameViewController {
             webView.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
             guard let raceType = statRaceType else { return }
-            print("WKRVoteInfo: place \(place)")
-            StatsHelper.shared.increment(stat: .pointsScrolled,
-                                         by: Double(webViewPointsScrolled))
+            PlayerStat.pointsScrolled.increment(by: Double(webViewPointsScrolled))
             StatsHelper.shared.completedRace(type: raceType,
                                              points: points,
                                              place: place,
@@ -192,14 +190,13 @@ extension GameViewController {
             PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
 
             if let raceType = self?.statRaceType {
-                var stat = StatsHelper.Stat.mpcVotes
+                var stat = PlayerStat.mpcVotes
                 switch raceType {
                 case .mpc: stat = .mpcVotes
                 case .gameKit: stat = .gkVotes
                 case .solo: stat = .soloVotes
-                default: break
                 }
-                StatsHelper.shared.increment(stat: stat)
+                stat.increment()
             }
         }
         controller.voteInfo = gameManager.voteInfo

@@ -152,14 +152,13 @@ internal class GameViewController: UIViewController {
         PlayerMetrics.log(event: .usedHelp,
                           attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
-            var stat = StatsHelper.Stat.mpcHelp
+            let stat: PlayerStat
             switch raceType {
-            case .mpc: stat = StatsHelper.Stat.mpcHelp
-            case .gameKit: stat = StatsHelper.Stat.gkHelp
-            case .solo: stat = StatsHelper.Stat.soloHelp
-            default: break
+            case .mpc: stat = .mpcHelp
+            case .gameKit: stat = .gkHelp
+            case .solo: stat = .soloHelp
             }
-            StatsHelper.shared.increment(stat: stat)
+            stat.increment()
         }
     }
 

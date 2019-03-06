@@ -43,7 +43,7 @@ class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
     // MARK: - GKLocalPlayerListener
 
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
-        StatsHelper.shared.increment(stat: .gkInvitedToMatch)
+        PlayerStat.gkInvitedToMatch.increment()
         lastInvite = invite
         didReceiveInvite?()
     }

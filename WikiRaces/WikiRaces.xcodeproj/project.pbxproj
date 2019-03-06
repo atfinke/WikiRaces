@@ -206,6 +206,9 @@
 		14DF31BB21169372005BA432 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
 		14DFBD1E210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */; };
 		14DFBD20210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */; };
+		14E0F19F22303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
+		14E0F1A022303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
+		14E0F1A122303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
 		14E1B19A1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
 		14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
 		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
@@ -457,6 +460,7 @@
 		14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostSearchingCell.swift; sourceTree = "<group>"; };
 		14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAnimationDurationConstants.swift; sourceTree = "<group>"; };
 		14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+Table.swift"; sourceTree = "<group>"; };
+		14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStat.swift; sourceTree = "<group>"; };
 		14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMetrics.swift; sourceTree = "<group>"; };
 		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -822,6 +826,7 @@
 				14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */,
 				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
+				14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";
@@ -1234,6 +1239,7 @@
 				14B2DD412221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,
 				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
+				14E0F19F22303A8F00BFF1E9 /* PlayerStat.swift in Sources */,
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
@@ -1256,6 +1262,7 @@
 				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14891AA6214F6BDB001BDEB8 /* DebugInfoTableViewCell.swift in Sources */,
+				14E0F1A022303A8F00BFF1E9 /* PlayerStat.swift in Sources */,
 				14C4AB531F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				14DF31B321169232005BA432 /* MPCConnectViewController+KB.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -1324,6 +1331,7 @@
 				147EF7122202D76000583D73 /* MPCHostContext.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				14DF31AA211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
+				14E0F1A122303A8F00BFF1E9 /* PlayerStat.swift in Sources */,
 				149357DB210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */,
 				14DF31B821169291005BA432 /* MPCConnectViewController.swift in Sources */,

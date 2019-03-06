@@ -69,26 +69,31 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         if let oldPlayer = oldPlayer, oldPlayer != player {
             entries = player?.raceHistory?.entries ?? []
             tableView.reloadData()
+            PlayerStat.bugHitCase1.increment()
             return
         }
 
         guard let player = player, let history = player.raceHistory else {
             entries = []
             tableView.reloadData()
+            PlayerStat.bugHitCase2.increment()
             return
         }
 
         // A different player was updated in the results info object, nothing has changed
         if history.entries == entries && oldPlayer?.state == player.state {
+            PlayerStat.bugHitCase3.increment()
             return
         }
 
         if view.window == nil {
             self.entries = history.entries
             tableView.reloadData()
+            PlayerStat.bugHitCase4.increment()
             return
         } else if isUserScrolling || isTableViewAnimating {
             deferredUpdate = true
+            PlayerStat.bugHitCase5.increment()
             return
         }
         isTableViewAnimating = true
@@ -106,6 +111,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         if newEntryCount < 0 {
             self.entries = history.entries
             tableView.reloadData()
+            PlayerStat.bugHitCase6.increment()
             return
         }
 
@@ -119,6 +125,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         guard history.entries.count == entries.count + rowsToInsert.count else {
             self.entries = history.entries
             tableView.reloadData()
+            PlayerStat.bugHitCase7.increment()
             return
         }
 
@@ -130,6 +137,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
             self.isTableViewAnimating = false
             if self.deferredUpdate {
                 self.updateEntries(oldPlayer: nil)
+                PlayerStat.bugHitCase8.increment()
             }
         })
     }

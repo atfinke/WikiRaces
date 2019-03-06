@@ -144,7 +144,7 @@ internal class MenuViewController: UIViewController {
 
         let controller = MPCConnectViewController()
         controller.isPlayerHost = isHost
-        self.navigationController?.pushViewController(controller, animated: false)
+        navigationController?.pushViewController(controller, animated: false)
     }
 
     func presentGlobalConnect() {

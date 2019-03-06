@@ -17,121 +17,8 @@ internal class StatsHelper {
 
     // MARK: - Types
 
-    enum Stat: String {
-        case average
-
-        case mpcVotes
-        case mpcHelp
-        case mpcPoints
-        case mpcPages
-        // seconds
-        case mpcFastestTime
-        // minutes
-        case mpcTotalTime
-        case mpcRaces
-        case mpcTotalPlayers
-        case mpcUniquePlayers
-        case mpcPressedJoin
-        case mpcPressedHost
-        case mpcRaceFinishFirst
-        case mpcRaceFinishSecond
-        case mpcRaceFinishThird
-
-        case gkVotes
-        case gkHelp
-        case gkPoints
-        case gkPages
-        case gkFastestTime
-        case gkTotalTime
-        case gkRaces
-        case gkTotalPlayers
-        case gkUniquePlayers
-        case gkPressedJoin
-        case gkInvitedToMatch
-        case gkConnectedToMatch
-        case gkRaceFinishFirst
-        case gkRaceFinishSecond
-        case gkRaceFinishThird
-
-        case soloVotes
-        case soloHelp
-        case soloPages
-        case soloTotalTime
-        case soloRaces
-        case soloPressedHost
-
-        case pointsScrolled
-
-        #warning("remove for release")
-        case bugHitCase1
-        case bugHitCase2
-        case bugHitCase3
-        case bugHitCase4
-        case bugHitCase5
-        case bugHitCase6
-        case bugHitCase7
-        case bugHitCase8
-
-        static var numericHighStats: [Stat] = [
-            .average,
-
-            .mpcVotes,
-            .mpcHelp,
-            .mpcPoints,
-            .mpcPages,
-            .mpcTotalTime,
-            .mpcRaces,
-            .mpcPressedJoin,
-            .mpcPressedHost,
-            .mpcRaceFinishFirst,
-            .mpcRaceFinishSecond,
-            .mpcRaceFinishThird,
-
-            .gkVotes,
-            .gkHelp,
-            .gkPoints,
-            .gkPages,
-            .gkTotalTime,
-            .gkRaces,
-            .gkPressedJoin,
-            .gkInvitedToMatch,
-            .gkConnectedToMatch,
-            .gkRaceFinishFirst,
-            .gkRaceFinishSecond,
-            .gkRaceFinishThird,
-
-            .soloVotes,
-            .soloHelp,
-            .soloPages,
-            .soloTotalTime,
-            .soloRaces,
-            .soloPressedHost,
-
-            .pointsScrolled
-        ]
-
-        static var numericLowStats: [Stat] = [
-            .mpcFastestTime,
-            .gkFastestTime
-        ]
-
-        var key: String {
-            // legacy keys
-            switch self {
-            case .mpcTotalPlayers:  return "WKRStat-totalPlayers"
-            case .mpcUniquePlayers: return "WKRStat-uniquePlayers"
-            case .mpcPoints:        return "WKRStat-points"
-            case .mpcPages:         return "WKRStat-pages"
-            case .mpcFastestTime:   return "WKRStat-fastestTime"
-            case .mpcTotalTime:     return "WKRStat-totalTime"
-            case .mpcRaces:         return "WKRStat-races"
-            default:                return "WKRStat-" + self.rawValue
-            }
-        }
-    }
-
     enum RaceType: Int {
-        case mpc = 1, gameKit = 2, solo = 3, other = 10
+        case mpc = 1, gameKit = 2, solo = 3
 
         init?(_ config: WKRPeerNetworkConfig) {
             switch config {
@@ -158,28 +45,28 @@ internal class StatsHelper {
 
     // MARK: - Computed Properties
 
-    var points: Double {
-        return statValue(for: .mpcPoints) + statValue(for: .gkPoints)
+    var combinedPoints: Double {
+        return PlayerStat.mpcPoints.value() + PlayerStat.gkPoints.value()
     }
 
-    var races: Double {
-        return statValue(for: .mpcRaces) + statValue(for: .gkRaces)
+    var combinedRaces: Double {
+        return PlayerStat.mpcRaces.value() + PlayerStat.gkRaces.value()
     }
 
-    var pages: Double {
-        return statValue(for: .mpcPages) + statValue(for: .gkPages)
+    var combinedPages: Double {
+        return PlayerStat.mpcPages.value() + PlayerStat.gkPages.value()
     }
 
-    var totalTime: Double {
-        return statValue(for: .mpcTotalTime) + statValue(for: .gkTotalTime)
+    var combinedTotalTime: Double {
+        return PlayerStat.mpcTotalTime.value() + PlayerStat.gkTotalTime.value()
     }
 
-    var fastestTime: Double {
-        let mpcTime = statValue(for: .mpcFastestTime)
+    var combinedFastestTime: Double {
+        let mpcTime = PlayerStat .mpcFastestTime.value()
         if mpcTime == 0 {
-            return statValue(for: .gkFastestTime)
+            return PlayerStat.gkFastestTime.value()
         } else {
-            let gkTime = statValue(for: .gkFastestTime)
+            let gkTime = PlayerStat.gkFastestTime.value()
             if gkTime == 0 {
                 return mpcTime
             } else if gkTime < mpcTime {
@@ -213,48 +100,32 @@ internal class StatsHelper {
 
     // MARK: - Set/Get Stats
 
-    func statValue(for stat: Stat) -> Double {
-        if stat == .average {
-            let value = self.points / self.races
-            return value.isNaN ? 0.0 : value
-        } else {
-            return defaults.double(forKey: stat.key)
-        }
-    }
-
-    func increment(stat: Stat, by value: Double = 1) {
-        let newValue = statValue(for: stat) + value
-        defaults.set(newValue, forKey: stat.key)
-    }
-
     func viewedPage(raceType: RaceType) {
-        var stat: Stat
+        var stat: PlayerStat
         switch raceType {
         case .mpc:
-            stat = Stat.mpcPages
+            stat = PlayerStat.mpcPages
         case .gameKit:
-            stat = Stat.gkPages
+            stat = PlayerStat.gkPages
         case .solo:
-            stat = Stat.soloPages
-        case .other:
-            return
+            stat = PlayerStat.soloPages
         }
-        increment(stat: stat)
+        stat.increment()
     }
 
     func connected(to players: [String], raceType: RaceType) {
         var playersKey = ""
-        var uniqueStat = Stat.mpcUniquePlayers
-        var totalStat = Stat.mpcTotalPlayers
+        var uniqueStat = PlayerStat.mpcUniquePlayers
+        var totalStat = PlayerStat.mpcTotalPlayers
         switch raceType {
         case .mpc:
             playersKey = "PlayersArray"
-            uniqueStat = Stat.mpcUniquePlayers
-            totalStat = Stat.mpcTotalPlayers
+            uniqueStat = PlayerStat.mpcUniquePlayers
+            totalStat = PlayerStat.mpcTotalPlayers
         case .gameKit:
             playersKey = "GKPlayersArray"
-            uniqueStat = Stat.gkUniquePlayers
-            totalStat = Stat.gkTotalPlayers
+            uniqueStat = PlayerStat.gkUniquePlayers
+            totalStat = PlayerStat.gkTotalPlayers
         default:
             return
         }
@@ -270,11 +141,10 @@ internal class StatsHelper {
         defaults.set(uniquePlayers, forKey: uniqueStat.key)
         defaults.set(totalPlayers, forKey: totalStat.key)
 
-        let metrics = PlayerDatabaseMetrics.shared
-        metrics.log(value: Int(statValue(for: .mpcUniquePlayers)), for: "mpcUniquePlayers")
-        metrics.log(value: Int(statValue(for: .mpcTotalPlayers)), for: "mpcTotalPlayers")
-        metrics.log(value: Int(statValue(for: .gkUniquePlayers)), for: "gkUniquePlayers")
-        metrics.log(value: Int(statValue(for: .gkTotalPlayers)), for: "gkTotalPlayers")
+        logStatToMetric(.mpcUniquePlayers)
+        logStatToMetric(.mpcTotalPlayers)
+        logStatToMetric(.gkUniquePlayers)
+        logStatToMetric(.gkTotalPlayers)
 
         ubiquitousStoreSync()
     }
@@ -283,31 +153,27 @@ internal class StatsHelper {
     func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int) {
         switch type {
         case .mpc:
-            let newPoints = statValue(for: .mpcPoints) + Double(points)
-            let newRaces = statValue(for: .mpcRaces) + 1
-            let newTotalTime = statValue(for: .mpcTotalTime) + Double(timeRaced)
-
-            defaults.set(newPoints, forKey: Stat.mpcPoints.key)
-            defaults.set(newRaces, forKey: Stat.mpcRaces.key)
-            defaults.set(newTotalTime, forKey: Stat.mpcTotalTime.key)
+            PlayerStat.mpcPoints.increment(by: Double(points))
+            PlayerStat.mpcRaces.increment()
+            PlayerStat.mpcTotalTime.increment(by: Double(timeRaced))
 
             if let place = place {
                 if place == 1 {
-                    increment(stat: .mpcRaceFinishFirst)
+                    PlayerStat.mpcRaceFinishFirst.increment()
                 } else if place == 2 {
-                    increment(stat: .mpcRaceFinishSecond)
+                    PlayerStat.mpcRaceFinishSecond.increment()
                 } else if place == 3 {
-                    increment(stat: .mpcRaceFinishThird)
+                    PlayerStat.mpcRaceFinishThird.increment()
                 }
             }
 
             // If found page, check for fastest completion time
             if points > 0 {
-                let currentFastestTime = statValue(for: .mpcFastestTime)
+                let currentFastestTime = PlayerStat.mpcFastestTime.value()
                 if currentFastestTime == 0 {
-                    defaults.set(timeRaced, forKey: Stat.mpcFastestTime.key)
+                    defaults.set(timeRaced, forKey: PlayerStat.mpcFastestTime.key)
                 } else if timeRaced < Int(currentFastestTime) {
-                    defaults.set(timeRaced, forKey: Stat.mpcFastestTime.key)
+                    defaults.set(timeRaced, forKey: PlayerStat.mpcFastestTime.key)
                 }
 
                 SKStoreReviewController.shouldPromptForRating = true
@@ -315,44 +181,36 @@ internal class StatsHelper {
                 SKStoreReviewController.shouldPromptForRating = false
             }
         case .gameKit:
-            let newPoints = statValue(for: .gkPoints) + Double(points)
-            let newRaces = statValue(for: .gkRaces) + 1
-            let newTotalTime = statValue(for: .gkTotalTime) + Double(timeRaced)
-
-            defaults.set(newPoints, forKey: Stat.gkPoints.key)
-            defaults.set(newRaces, forKey: Stat.gkRaces.key)
-            defaults.set(newTotalTime, forKey: Stat.gkTotalTime.key)
+            PlayerStat.gkPoints.increment(by: Double(points))
+            PlayerStat.gkRaces.increment()
+            PlayerStat.gkTotalTime.increment(by: Double(timeRaced))
 
             if let place = place {
                 if place == 1 {
-                    increment(stat: .gkRaceFinishFirst)
+                    PlayerStat.gkRaceFinishFirst.increment()
                 } else if place == 2 {
-                    increment(stat: .gkRaceFinishSecond)
+                    PlayerStat.gkRaceFinishSecond.increment()
                 } else if place == 3 {
-                    increment(stat: .gkRaceFinishThird)
+                    PlayerStat.gkRaceFinishThird.increment()
                 }
             }
 
             // If found page, check for fastest completion time
             if points > 0 {
-                let currentFastestTime = statValue(for: .gkFastestTime)
+                let currentFastestTime = PlayerStat.gkFastestTime.value()
                 if currentFastestTime == 0 {
-                    defaults.set(timeRaced, forKey: Stat.gkFastestTime.key)
+                    defaults.set(timeRaced, forKey: PlayerStat.gkFastestTime.key)
                 } else if timeRaced < Int(currentFastestTime) {
-                    defaults.set(timeRaced, forKey: Stat.gkFastestTime.key)
+                    defaults.set(timeRaced, forKey: PlayerStat.gkFastestTime.key)
                 }
                 SKStoreReviewController.shouldPromptForRating = true
             } else {
                 SKStoreReviewController.shouldPromptForRating = false
             }
         case .solo:
-            let newSoloTotalTime = statValue(for: .soloTotalTime) + Double(timeRaced)
-            let newSoloRaces = statValue(for: .soloRaces) + 1
-            defaults.set(newSoloTotalTime, forKey: Stat.soloTotalTime.key)
-            defaults.set(newSoloRaces, forKey: Stat.soloRaces.key)
+            PlayerStat.soloRaces.increment()
+            PlayerStat.soloTotalTime.increment(by: Double(timeRaced))
             SKStoreReviewController.shouldPromptForRating = true
-        case .other:
-            break
         }
 
         ubiquitousStoreSync()
@@ -373,7 +231,7 @@ internal class StatsHelper {
         let reason = reasonForChange.intValue
         if reason == NSUbiquitousKeyValueStoreServerChange || reason == NSUbiquitousKeyValueStoreInitialSyncChange {
             for key in changedKeys {
-                guard let stat = Stat(rawValue: key) else { return }
+                guard let stat = PlayerStat(rawValue: key) else { return }
                 self.sync(stat, key: key)
             }
         }
@@ -382,8 +240,8 @@ internal class StatsHelper {
         playerDatabaseSync()
     }
 
-    private func sync(_ stat: Stat, key: String) {
-        if Stat.numericHighStats.contains(stat) {
+    private func sync(_ stat: PlayerStat, key: String) {
+        if PlayerStat.numericHighStats.contains(stat) {
             let deviceValue = defaults.double(forKey: key)
             let cloudValue = keyValueStore.double(forKey: key)
             if deviceValue > cloudValue {
@@ -391,7 +249,7 @@ internal class StatsHelper {
             } else if cloudValue > deviceValue {
                 defaults.set(cloudValue, forKey: key)
             }
-        } else if Stat.numericLowStats.contains(stat) {
+        } else if PlayerStat.numericLowStats.contains(stat) {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if cloudValue < deviceValue && cloudValue != 0.0 {
@@ -407,7 +265,7 @@ internal class StatsHelper {
     }
 
     private func ubiquitousStoreSync() {
-        for stat in Stat.numericHighStats {
+        for stat in PlayerStat.numericHighStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if deviceValue > cloudValue {
@@ -417,7 +275,7 @@ internal class StatsHelper {
             }
         }
 
-        for stat in Stat.numericLowStats {
+        for stat in PlayerStat.numericLowStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if cloudValue < deviceValue && cloudValue != 0.0 {
@@ -449,48 +307,31 @@ internal class StatsHelper {
         }
     }
 
-    private func playerDatabaseSync() {
+    private func logStatToMetric(_ stat: PlayerStat) {
         let metrics = PlayerDatabaseMetrics.shared
+        metrics.log(value: stat.value(), for: stat.key)
+    }
 
-        metrics.log(value: statValue(for: .mpcVotes), for: "mpcVotes")
-        metrics.log(value: statValue(for: .mpcHelp), for: "mpcHelp")
-        metrics.log(value: statValue(for: .mpcPoints), for: "mpcPoints")
-        metrics.log(value: statValue(for: .mpcFastestTime), for: "mpcFastestTime")
-        metrics.log(value: statValue(for: .mpcTotalTime), for: "mpcTotalTime")
-        metrics.log(value: statValue(for: .mpcPages), for: "mpcPages")
-        metrics.log(value: statValue(for: .mpcRaces), for: "mpcRaces")
-        metrics.log(value: statValue(for: .mpcPressedJoin), for: "mpcPressedJoin")
-        metrics.log(value: statValue(for: .mpcPressedHost), for: "mpcPressedHost")
-        metrics.log(value: statValue(for: .mpcRaceFinishFirst), for: "mpcRaceFinishFirst")
-        metrics.log(value: statValue(for: .mpcRaceFinishSecond), for: "mpcRaceFinishSecond")
-        metrics.log(value: statValue(for: .mpcRaceFinishThird), for: "mpcRaceFinishThird")
+    private func logAllStatsToMetric() {
+        Set(PlayerStat.allCases)
+            .subtracting([
+                .bugHitCase1,
+                .bugHitCase2,
+                .bugHitCase3,
+                .bugHitCase4,
+                .bugHitCase5,
+                .bugHitCase6,
+                .bugHitCase7,
+                .bugHitCase8
+                ])
+            .forEach { logStatToMetric($0) }
+    }
 
-        metrics.log(value: statValue(for: .gkVotes), for: "gkVotes")
-        metrics.log(value: statValue(for: .gkHelp), for: "gkHelp")
-        metrics.log(value: statValue(for: .gkPoints), for: "gkPoints")
-        metrics.log(value: statValue(for: .gkFastestTime), for: "gkFastestTime")
-        metrics.log(value: statValue(for: .gkTotalTime), for: "gkTotalTime")
-        metrics.log(value: statValue(for: .gkPages), for: "gkPages")
-        metrics.log(value: statValue(for: .gkRaces), for: "gkRaces")
-        metrics.log(value: statValue(for: .gkPressedJoin), for: "gkPressedJoin")
-        metrics.log(value: statValue(for: .gkInvitedToMatch), for: "gkInvitedToMatch")
-        metrics.log(value: statValue(for: .gkConnectedToMatch), for: "gkConnectedToMatch")
-        metrics.log(value: statValue(for: .gkRaceFinishFirst), for: "gkRaceFinishFirst")
-        metrics.log(value: statValue(for: .gkRaceFinishSecond), for: "gkRaceFinishSecond")
-        metrics.log(value: statValue(for: .gkRaceFinishThird), for: "gkRaceFinishThird")
-
-        metrics.log(value: statValue(for: .soloVotes), for: "soloVotes")
-        metrics.log(value: statValue(for: .soloHelp), for: "soloHelp")
-        metrics.log(value: statValue(for: .soloTotalTime), for: "soloTotalTime")
-        metrics.log(value: statValue(for: .soloPages), for: "soloPages")
-        metrics.log(value: statValue(for: .soloRaces), for: "soloRaces")
-        metrics.log(value: statValue(for: .soloPressedHost), for: "soloPressedHost")
-
-        metrics.log(value: statValue(for: .pointsScrolled), for: "pointsScrolled")
-
-        keyStatsUpdated?(points,
-                         races,
-                         statValue(for: .average))
+    private func playerDatabaseSync() {
+        logAllStatsToMetric()
+        keyStatsUpdated?(combinedPoints,
+                         combinedRaces,
+                         PlayerStat.average.value())
     }
 
     private func leaderboardSync() {
@@ -498,13 +339,13 @@ internal class StatsHelper {
             return
         }
 
-        let points = self.points
-        let races = self.races
-        let average = statValue(for: .average)
+        let points = combinedPoints
+        let races = combinedRaces
+        let average = PlayerStat.average.value()
 
-        let totalTime = self.totalTime
-        let fastestTime = self.fastestTime
-        let pagesViewed = self.pages
+        let totalTime = combinedTotalTime
+        let fastestTime = combinedFastestTime
+        let pagesViewed = combinedPages
 
         let pointsScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.points")
         pointsScore.value = Int64(points)

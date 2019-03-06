@@ -38,7 +38,7 @@ extension MenuView {
 
         animateMenuOut {
             self.presentGlobalConnectController?()
-            StatsHelper.shared.increment(stat: .gkPressedJoin)
+            PlayerStat.gkPressedJoin.increment()
         }
     }
 
@@ -56,7 +56,7 @@ extension MenuView {
 
         animateMenuOut {
             self.presentMPCConnectController?(false)
-            StatsHelper.shared.increment(stat: .mpcPressedJoin)
+            PlayerStat.mpcPressedJoin.increment()
         }
     }
 
@@ -74,7 +74,7 @@ extension MenuView {
 
         animateMenuOut {
             self.presentMPCConnectController?(true)
-            StatsHelper.shared.increment(stat: .mpcPressedHost)
+            PlayerStat.mpcPressedHost.increment()
         }
     }
 

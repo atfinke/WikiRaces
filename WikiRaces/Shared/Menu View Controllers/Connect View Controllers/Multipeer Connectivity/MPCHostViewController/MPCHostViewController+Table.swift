@@ -80,7 +80,7 @@ extension MPCHostViewController {
 
         if indexPath.section == 1 {
             PlayerMetrics.log(event: .hostStartedSoloMatch)
-            StatsHelper.shared.increment(stat: .soloPressedHost)
+            PlayerStat.soloPressedHost.increment()
 
             session?.disconnect()
             didStartMatch?(true)

@@ -55,7 +55,7 @@ public struct WKRVoteInfo: Codable, Equatable {
             }
         }
 
-        let totalPoints = Double(max(weights.values.reduce(0, +), 0))
+        let totalPoints = Double(weights.values.reduce(0, +))
         let playerWithLowestScore = weights
             .sorted(by: { $0.value < $1.value })
             .first
@@ -71,17 +71,17 @@ public struct WKRVoteInfo: Codable, Equatable {
 
             /*
              Example Scenarios:
-             player w/ least votes (plv) = 5
+             player w/ least points (plp) = 5
              total points = 25
-             => if rand (0..<1) > 10/25 (0.2) => use the player's vote to break the tie (80% chance)
+             => if rand (0..<1) > 5/25 (0.2) => use the player's vote to break the tie (80% chance)
 
-             plv = 10, total points = 25
-             => if ... > 10/25 (0.4) => (60% chance)
+             plp = 10, total points = 25
+             => ... 10/25 (0.4) => (60% chance)
 
-             plv = 15, total points = 30
-             => if ... > 15/30 (0.5) => (50% chance)
+             plp = 15, total points = 30
+             => ... 15/30 (0.5) => (50% chance)
 
-             + ensures never > 90% chance
+             + never > 90% chance
             */
             let inversePercentChance = max(Double(player.value) / totalPoints, 0.1)
             if Double.random(in: 0..<1) > inversePercentChance {

@@ -165,13 +165,12 @@ extension MenuView {
         bottomView.addSubview(statsStackView)
 
         let leftMenuTile = MenuTile(title: "WIKI POINTS")
-        leftMenuTile.stat = .mpcPoints
-        leftMenuTile.value = StatsHelper.shared.points
+        leftMenuTile.value = StatsHelper.shared.combinedPoints
         statsStackView.addArrangedSubview(leftMenuTile)
 
         let middleMenuTile = MenuTile(title: "AVG PER RACE")
-        middleMenuTile.stat = .average
-        middleMenuTile.value = StatsHelper.shared.statValue(for: .average)
+        middleMenuTile.isAverage = true
+        middleMenuTile.value = PlayerStat.average.value()
         statsStackView.addArrangedSubview(middleMenuTile)
 
         let leftThinLine = WKRUIThinLineView()
@@ -180,8 +179,7 @@ extension MenuView {
         middleMenuTile.addSubview(rightThinLine)
 
         let rightMenuTile = MenuTile(title: "RACES PLAYED")
-        rightMenuTile.stat = .mpcRaces
-        rightMenuTile.value = StatsHelper.shared.races
+        rightMenuTile.value = StatsHelper.shared.combinedRaces
         statsStackView.addArrangedSubview(rightMenuTile)
 
         let constraints = [
