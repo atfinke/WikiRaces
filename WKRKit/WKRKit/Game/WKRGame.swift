@@ -67,7 +67,17 @@ public class WKRGame {
 
     func createRaceConfig() -> WKRRaceConfig? {
         guard localPlayer.isHost else { fatalError("Local player not host") }
-        return preRaceConfig?.raceConfig()
+
+        var sessionPoints = calculateSessionPoints()
+
+        // include players that have no points yet
+        let votingPlayers = players
+            .filter { $0.state == .voting }
+            .map { $0.profile }
+        for player in votingPlayers where sessionPoints[player] == nil {
+            sessionPoints[player] = 0
+        }
+        return preRaceConfig?.raceConfig(with: sessionPoints)
     }
 
     func finishedRace() {
@@ -149,7 +159,7 @@ public class WKRGame {
 
     // MARK: - Race End
 
-    func checkForRaceEnd() {
+    func calculateSessionPoints() -> [WKRPlayerProfile: Int] {
         var sessionPoints = [WKRPlayerProfile: Int]()
         for race in completedRaces {
             for (player, points) in race.calculatePoints() {
@@ -160,6 +170,11 @@ public class WKRGame {
                 }
             }
         }
+        return sessionPoints
+    }
+
+    func checkForRaceEnd() {
+        var sessionPoints = calculateSessionPoints()
 
         let racePoints = activeRace?.calculatePoints() ?? [:]
         for (player, points) in racePoints {

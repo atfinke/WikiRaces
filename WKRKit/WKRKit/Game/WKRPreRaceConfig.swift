@@ -35,8 +35,8 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     /// Creates a race config object based on starting page and voting data
     ///
     /// - Returns: The new race config
-    internal func raceConfig() -> WKRRaceConfig? {
-        guard let finalPage = voteInfo.selectFinalPage() else {
+    internal func raceConfig(with weights: [WKRPlayerProfile: Int]) -> WKRRaceConfig? {
+        guard let finalPage = voteInfo.selectFinalPage(with: weights) else {
             return nil
         }
         return WKRRaceConfig(starting: startingPage, ending: finalPage)

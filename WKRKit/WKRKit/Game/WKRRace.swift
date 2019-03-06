@@ -77,7 +77,7 @@ internal struct WKRRace {
     // MARK: - End Race Helpers
 
     /// Calculates how my points each place should receive for the race. Every player that found the article
-    /// gets points for how many players they did better then. The first player also gets the race bonus points
+    /// gets points for how many players they did better then. All players also get the race bonus points
     /// if there are any.
     ///
     /// - Returns: Each player's points in a dictionary
@@ -92,11 +92,7 @@ internal struct WKRRace {
             return times[lhs] ?? 0 < times[rhs] ?? 0
         }
         for (index, player) in positions.enumerated() {
-            if index == 0 {
-                points[player.profile] = players.count - 1 + bonusPoints
-            } else {
-                points[player.profile] = players.count - index - 1 + bonusPoints
-            }
+            points[player.profile] = players.count - index - 1 + bonusPoints
         }
         return points
     }
