@@ -317,7 +317,7 @@ internal class StatsHelper {
 
     private func logStatToMetric(_ stat: PlayerStat) {
         let metrics = PlayerDatabaseMetrics.shared
-        metrics.log(value: stat.value(), for: stat.key)
+        metrics.log(value: stat.value(), for: stat.rawValue)
     }
 
     private func logAllStatsToMetric() {

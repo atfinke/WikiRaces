@@ -53,6 +53,7 @@ enum PlayerStat: String, CaseIterable {
     case soloPressedHost
 
     case pointsScrolled
+    case displayedMedals
 
     #warning("remove for release")
     case bugHitCase1
@@ -99,7 +100,8 @@ enum PlayerStat: String, CaseIterable {
         .soloRaces,
         .soloPressedHost,
 
-        .pointsScrolled
+        .pointsScrolled,
+        .displayedMedals
     ]
 
     static var numericLowStats: [PlayerStat] = [

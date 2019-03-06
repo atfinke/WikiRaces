@@ -18,6 +18,8 @@ extension MenuView {
     func setupTopView() {
         setupLabels()
         setupButtons()
+        medalView.translatesAutoresizingMaskIntoConstraints = false
+        topView.addSubview(medalView)
 
         titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor)
 
@@ -35,6 +37,11 @@ extension MenuView {
 
         let constraints = [
             titleLabelConstraint!,
+
+            medalView.topAnchor.constraint(equalTo: topView.topAnchor),
+            medalView.bottomAnchor.constraint(equalTo: topView.bottomAnchor),
+            medalView.leftAnchor.constraint(equalTo: topView.leftAnchor),
+            medalView.rightAnchor.constraint(equalTo: topView.rightAnchor),
 
             titleLabel.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 30),
             titleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),

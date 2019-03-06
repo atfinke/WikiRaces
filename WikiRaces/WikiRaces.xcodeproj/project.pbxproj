@@ -76,6 +76,12 @@
 		14848801214F0F3B0098CBFA /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F5214F0F3B0098CBFA /* GTMSessionFetcher.framework */; };
 		14848802214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F6214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework */; };
 		14848803214F0F3B0098CBFA /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */; };
+		1485B6772230724A00D6800B /* MedalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B6762230724A00D6800B /* MedalScene.swift */; };
+		1485B6782230724A00D6800B /* MedalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B6762230724A00D6800B /* MedalScene.swift */; };
+		1485B6792230724A00D6800B /* MedalScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B6762230724A00D6800B /* MedalScene.swift */; };
+		1485B67D223072AB00D6800B /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B67C223072AB00D6800B /* MedalView.swift */; };
+		1485B67E223072AB00D6800B /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B67C223072AB00D6800B /* MedalView.swift */; };
+		1485B67F223072AB00D6800B /* MedalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1485B67C223072AB00D6800B /* MedalView.swift */; };
 		14891AA6214F6BDB001BDEB8 /* DebugInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */; };
 		14891AA9214F6BDE001BDEB8 /* DebugInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */; };
 		149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149357D8210E801A00F6453A /* HistoryViewController+KB.swift */; };
@@ -413,6 +419,8 @@
 		148487F5214F0F3B0098CBFA /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = "<group>"; };
 		148487F6214F0F3B0098CBFA /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
 		148487F7214F0F3B0098CBFA /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		1485B6762230724A00D6800B /* MedalScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalScene.swift; sourceTree = "<group>"; };
+		1485B67C223072AB00D6800B /* MedalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedalView.swift; sourceTree = "<group>"; };
 		149357D8210E801A00F6453A /* HistoryViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HistoryViewController+KB.swift"; sourceTree = "<group>"; };
 		149357DE210E934300F6453A /* MPCConnectViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+UI.swift"; sourceTree = "<group>"; };
 		149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostPeerStateCell.swift; sourceTree = "<group>"; };
@@ -729,6 +737,8 @@
 				14B2DD3A22212298009B8AB3 /* MenuView.swift */,
 				14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */,
 				14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */,
+				1485B6762230724A00D6800B /* MedalScene.swift */,
+				1485B67C223072AB00D6800B /* MedalView.swift */,
 				14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */,
 			);
 			path = MenuView;
@@ -1299,9 +1309,11 @@
 				14B2DD412221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,
 				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
+				1485B67D223072AB00D6800B /* MedalView.swift in Sources */,
 				14E0F19F22303A8F00BFF1E9 /* PlayerStat.swift in Sources */,
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
+				1485B6772230724A00D6800B /* MedalScene.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
 				1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				149357E3210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
@@ -1332,6 +1344,7 @@
 				14DF31A9211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
+				1485B6782230724A00D6800B /* MedalScene.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				14DF31B62116923C005BA432 /* MPCHostViewController.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
@@ -1356,6 +1369,7 @@
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
+				1485B67E223072AB00D6800B /* MedalView.swift in Sources */,
 				149357E4210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */,
@@ -1401,6 +1415,7 @@
 				14C260071F6F02A500CD7373 /* StatsHelper.swift in Sources */,
 				14C260091F6F02A500CD7373 /* CommonExtensions.swift in Sources */,
 				14C260011F6F02A500CD7373 /* ResultsTableViewCell.swift in Sources */,
+				1485B6792230724A00D6800B /* MedalScene.swift in Sources */,
 				14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */,
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
@@ -1425,6 +1440,7 @@
 				141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				14C6B1F71FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */,
 				14C260021F6F02A500CD7373 /* HistoryTableViewCell.swift in Sources */,
+				1485B67F223072AB00D6800B /* MedalView.swift in Sources */,
 				149357E1210E934300F6453A /* MPCConnectViewController+UI.swift in Sources */,
 				144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */,
 				14D8AD471F81828D00914E5A /* PlayerMetrics.swift in Sources */,

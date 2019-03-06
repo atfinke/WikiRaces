@@ -19,7 +19,6 @@ class WikiRacesTests: XCTestCase {
             }
         }
 
-        continueAfterFailure = false
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
@@ -136,10 +135,11 @@ class WikiRacesTests: XCTestCase {
         }
     }
 
+    //swiftlint:disable:next cyclomatic_complexity function_body_length
     func testRaceCompletionStats() {
         var testedStats = Set<PlayerStat>()
-        for _ in 0..<500 {
-            guard let raceType = StatsHelper.RaceType(rawValue: Int.random(in: 1...3)) else {
+        for raceIndex in 0..<600 {
+            guard let raceType = StatsHelper.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
                 return
             }
@@ -208,6 +208,5 @@ class WikiRacesTests: XCTestCase {
         }
         print("Tested: " + testedStats.map({ $0.rawValue }).sorted().description)
     }
-
-
+    
 }

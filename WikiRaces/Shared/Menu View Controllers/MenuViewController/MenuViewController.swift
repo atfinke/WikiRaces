@@ -29,6 +29,9 @@ internal class MenuViewController: UIViewController {
 
     private var isFirstAppearence = true
 
+    override var canBecomeFirstResponder: Bool { return true }
+    override var preferredStatusBarStyle: UIStatusBarStyle { return .wkrStatusBarStyle }
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -105,10 +108,14 @@ internal class MenuViewController: UIViewController {
         }
 
         promptForInvalidName()
+        becomeFirstResponder()
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.wkrStatusBarStyle
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            menuView.triggeredEasterEgg()
+            UIImpactFeedbackGenerator().impactOccurred()
+        }
     }
 
     // MARK: - Name Checking

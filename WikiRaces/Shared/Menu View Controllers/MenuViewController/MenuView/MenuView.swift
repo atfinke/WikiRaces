@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import WKRUIKit
 import StoreKit
+import WKRUIKit
 
 class MenuView: UIView {
 
@@ -59,6 +59,9 @@ class MenuView: UIView {
 
     /// The puzzle piece view
     let movingPuzzleView = MovingPuzzleView()
+
+    /// The easter egg medal view
+    let medalView = MedalView()
 
     // MARK: - Constraints
 

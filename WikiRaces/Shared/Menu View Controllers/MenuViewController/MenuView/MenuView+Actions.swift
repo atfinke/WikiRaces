@@ -104,6 +104,11 @@ extension MenuView {
         }
     }
 
+    func triggeredEasterEgg() {
+        PlayerMetrics.log(event: .userAction(#function))
+        medalView.showMedals()
+    }
+
     // MARK: - Menu Animations
 
     /// Animates the views on screen
