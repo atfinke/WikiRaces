@@ -22,10 +22,10 @@ extension WKRGameManager {
                              playHaptic: true)
             }
 
-            self.logEvent(WKRLogEvent(type: .pageBlocked,
-                                      attributes: [
-                                        "PageURL": self.truncated(url: url) as Any
-                ]))
+            self.gameUpdate(.log(WKRLogEvent(type: .pageBlocked,
+                                             attributes: [
+                                                "PageURL": self.truncated(url: url) as Any
+                ])))
             }, pageLoadingError: { [weak self] in
                 guard let self = self else { return }
                 if self.gameState != .results ||
@@ -38,13 +38,15 @@ extension WKRGameManager {
                 }
 
                 self.webView.completedPageLoad()
-                self.logEvent(WKRLogEvent(type: .pageLoadingError, attributes: nil))
+                self.gameUpdate(.log(WKRLogEvent(type: .pageLoadingError, attributes: nil)))
             }, pageStartedLoading: { [weak self] in
                 guard let self = self else { return }
                 self.webView.startedPageLoad()
                 self.localPlayer.finishedViewingLastPage(pointsScrolled: self.webView.pointsScrolled)
                 self.peerNetwork.send(object: WKRCodable(self.localPlayer))
-                self.linkCountUpdate(self.localPlayer.raceHistory?.entries.count ?? 0)
+
+                let linkCount = self.localPlayer.raceHistory?.entries.count ?? 0
+                self.gameUpdate(.playerRaceLinkCountForCurrentRace(linkCount))
             }, pageLoaded: { [weak self] page in
                 guard let self = self else { return }
                 self.webView.completedPageLoad()
@@ -62,17 +64,17 @@ extension WKRGameManager {
                         foundPage = true
                         self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.foundPage))
                         if let time = self.localPlayer.raceHistory?.duration {
-                            self.logEvent(WKRLogEvent(type: .foundPage, attributes: ["Time": time]))
+                            self.gameUpdate(.log(WKRLogEvent(type: .foundPage, attributes: ["Time": time])))
                         }
                     } else if attributes.linkOnPage {
                         linkHere = true
                         if !lastPageHadLink {
                             self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.linkOnPage))
-                            self.logEvent(WKRLogEvent(type: .linkOnPage, attributes: nil))
+                            self.gameUpdate(.log(WKRLogEvent(type: .linkOnPage, attributes: nil)))
                         }
                     } else if lastPageHadLink {
                         self.peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.missedLink))
-                        self.logEvent(WKRLogEvent(type: .missedLink, attributes: nil))
+                        self.gameUpdate(.log(WKRLogEvent(type: .missedLink, attributes: nil)))
                     }
                 }
 
@@ -84,7 +86,7 @@ extension WKRGameManager {
                 }
 
                 self.peerNetwork.send(object: WKRCodable(self.localPlayer))
-                self.logEvent(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any]))
+                self.gameUpdate(.log(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any])))
         })
     }
 

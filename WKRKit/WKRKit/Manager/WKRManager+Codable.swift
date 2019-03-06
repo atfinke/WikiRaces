@@ -15,7 +15,7 @@ extension WKRGameManager {
     internal func receivedRaw(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
             game.preRaceConfig = preRaceConfig
-            voteInfoUpdate?(preRaceConfig.voteInfo)
+            votingUpdate(.voteInfo(preRaceConfig.voteInfo))
 
             if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
@@ -24,7 +24,7 @@ extension WKRGameManager {
             WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.voteInfo.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
-            voteFinalPageUpdate?(raceConfig.endingPage)
+            votingUpdate(.finalPage(raceConfig.endingPage))
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
                 peerNetwork.send(object: WKRCodable(localPlayer))
@@ -98,7 +98,7 @@ extension WKRGameManager {
             localPlayer.state = .quit
             peerNetwork.send(object: WKRCodable(localPlayer))
             peerNetwork.disconnect()
-            stateUpdate(gameState, error)
+            gameUpdate(.error(error))
         }
     }
 
@@ -106,9 +106,9 @@ extension WKRGameManager {
         guard let int = object.typeOf(WKRInt.self) else { fatalError("Object not a WKRInt type") }
         switch int.type {
         case .votingTime, .votingPreRaceTime:
-            voteTimeUpdate?(int.value)
+            votingUpdate(.remainingTime(int.value))
         case .resultsTime:
-            resultsTimeUpdate?(int.value)
+            resultsUpdate(.remainingTime(int.value))
         case .bonusPoints:
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Race Bonus Now \(int.value) " + string
@@ -117,7 +117,7 @@ extension WKRGameManager {
                     isRaceSpecific: true,
                     playHaptic: false)
         case .showReady:
-            resultsShowReady?(int.value == 1)
+            resultsUpdate(.isReadyUpEnabled(int.value == 1))
         }
     }
 
@@ -138,14 +138,26 @@ extension WKRGameManager {
         }
 
         hostResultsInfo = resultsInfo
-        resultsInfoHostUpdate?(resultsInfo)
+        resultsUpdate(.hostResultsInfo(resultsInfo))
 
         if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
         if localPlayer.shouldGetPoints {
             localPlayer.shouldGetPoints = false
-            pointsUpdate(resultsInfo.raceRewardPoints(for: localPlayer))
+
+            let points = resultsInfo.raceRewardPoints(for: localPlayer)
+            var place: Int?
+            for playerIndex in 0..<resultsInfo.playerCount {
+                let player = resultsInfo.raceRankingsPlayer(at: playerIndex)
+                if player == localPlayer && player.state == .foundPage {
+                    place = playerIndex + 1
+                }
+            }
+            let webViewPointsScrolled = webView.pointsScrolled
+            gameUpdate(.playerStatsForLastRace(points: points,
+                                               place: place,
+                                               webViewPointsScrolled: webViewPointsScrolled))
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
@@ -171,14 +183,13 @@ extension WKRGameManager {
             webView.resetPixelCount()
             localPlayer.startedNewRace(on: raceConfig.startingPage)
         case .hostResults:
-            pointsScrolledUpdate(webView.pointsScrolled)
             localPlayer.raceHistory = nil
         default:
             break
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
-        stateUpdate(state, nil)
+        gameUpdate(.state(state))
     }
 
 }

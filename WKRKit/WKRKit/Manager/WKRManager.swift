@@ -10,6 +10,31 @@ import WKRUIKit
 
 public class WKRGameManager {
 
+    // MARK: Types
+
+    public enum GameUpdate {
+        case state(WKRGameState)
+        case error(WKRFatalError)
+        case log(WKRLogEvent)
+
+        case playerRaceLinkCountForCurrentRace(Int)
+        case playerStatsForLastRace(points: Int, place: Int?, webViewPointsScrolled: Int)
+    }
+
+    public enum VotingUpdate {
+        case remainingTime(Int)
+        case voteInfo(WKRVoteInfo)
+        case finalPage(WKRPage)
+    }
+
+    public enum ResultsUpdate {
+        case isReadyUpEnabled(Bool)
+        case remainingTime(Int)
+        case resultsInfo(WKRResultsInfo)
+        case hostResultsInfo(WKRResultsInfo)
+        case readyStates(WKRReadyStates)
+    }
+
     // MARK: - Public Getters
 
     public var finalPageURL: URL? {
@@ -37,19 +62,9 @@ public class WKRGameManager {
 
     // MARK: - Closures
 
-    internal let stateUpdate: ((WKRGameState, WKRFatalError?) -> Void)
-    internal let pointsUpdate: ((Int) -> Void)
-    internal let pointsScrolledUpdate: ((Int) -> Void)
-    internal let linkCountUpdate: ((Int) -> Void)
-    internal let logEvent: ((WKRLogEvent) -> Void)
-
-    internal var resultsShowReady: ((Bool) -> Void)?
-    internal var resultsTimeUpdate: ((Int) -> Void)?
-    internal var resultsInfoHostUpdate: ((WKRResultsInfo) -> Void)?
-
-    internal var voteTimeUpdate: ((Int) -> Void)?
-    internal var voteInfoUpdate: ((WKRVoteInfo) -> Void)?
-    internal var voteFinalPageUpdate: ((WKRPage) -> Void)?
+    internal let gameUpdate: ((GameUpdate) -> Void)
+    internal let votingUpdate: ((VotingUpdate) -> Void)
+    internal let resultsUpdate: ((ResultsUpdate) -> Void)
 
     // MARK: - User Interface
 
@@ -64,17 +79,12 @@ public class WKRGameManager {
     // MARK: - Initialization
 
     public init(networkConfig: WKRPeerNetworkConfig,
-                            stateUpdate: @escaping ((WKRGameState, WKRFatalError?) -> Void),
-                            pointsUpdate: @escaping ((Int) -> Void),
-                            pointsScrolledUpdate: @escaping ((Int) -> Void),
-                            linkCountUpdate: @escaping ((Int) -> Void),
-                            logEvent: @escaping ((WKRLogEvent) -> Void)) {
-
-        self.stateUpdate = stateUpdate
-        self.pointsUpdate = pointsUpdate
-        self.pointsScrolledUpdate = pointsScrolledUpdate
-        self.linkCountUpdate = linkCountUpdate
-        self.logEvent = logEvent
+                gameUpdate: @escaping ((GameUpdate) -> Void),
+                votingUpdate: @escaping ((VotingUpdate) -> Void),
+                resultsUpdate: @escaping ((ResultsUpdate) -> Void)) {
+        self.gameUpdate = gameUpdate
+        self.votingUpdate = votingUpdate
+        self.resultsUpdate = resultsUpdate
 
         let setup = networkConfig.create()
         localPlayer = setup.player
@@ -86,6 +96,15 @@ public class WKRGameManager {
             configure(game: game)
         }
 
+        game.readyStatesUpdated = { readyStates in
+            resultsUpdate(.readyStates(readyStates))
+        }
+        game.localResultsUpdated = { [weak self] results in
+            if self?.gameState == .results || self?.gameState == .race {
+                resultsUpdate(.resultsInfo(results))
+            }
+        }
+
         configure(network: peerNetwork)
 
         peerNetwork.send(object: WKRCodable(self.localPlayer))
@@ -93,34 +112,6 @@ public class WKRGameManager {
 
     deinit {
         alertView.removeFromSuperview()
-    }
-
-    // MARK: - View Controller Closures
-
-    public func voting(timeUpdate: @escaping ((Int) -> Void),
-                       infoUpdate: @escaping ((WKRVoteInfo) -> Void),
-                       finalPageUpdate: @escaping ((WKRPage) -> Void)) {
-        voteTimeUpdate = timeUpdate
-        voteInfoUpdate = infoUpdate
-        voteFinalPageUpdate = finalPageUpdate
-    }
-
-    public func results(showReady: @escaping ((Bool) -> Void),
-                        timeUpdate: @escaping ((Int) -> Void),
-                        infoUpdate: @escaping ((WKRResultsInfo) -> Void),
-                        hostInfoUpdate: @escaping ((WKRResultsInfo) -> Void),
-                        readyStatesUpdate: @escaping ((WKRReadyStates) -> Void)) {
-
-        resultsShowReady = showReady
-        resultsTimeUpdate = timeUpdate
-        resultsInfoHostUpdate = hostInfoUpdate
-
-        game.readyStatesUpdated = readyStatesUpdate
-        game.localResultsUpdated = { [weak self] results in
-            if self?.gameState == .results || self?.gameState == .race {
-                infoUpdate(results)
-            }
-        }
     }
 
     // MARK: - User Interface
@@ -147,7 +138,7 @@ public class WKRGameManager {
         }
         localPlayer.state = .quit
         peerNetwork.send(object: WKRCodable(localPlayer))
-        stateUpdate(gameState, error)
+        gameUpdate(.error(error))
         peerNetwork.disconnect()
     }
 

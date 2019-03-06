@@ -83,12 +83,6 @@ public struct WKRResultsInfo: Codable {
                 return lhs.profile.name < rhs.profile.name
             })
 
-        // The players that quit
-        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
-            .sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.profile.name < rhs.profile.name
-            })
-
         // The players still racing
         let racingPlayers: [WKRPlayer] = players.filter({ $0.state == .racing })
             .sorted(by: { (lhs, rhs) -> Bool in
@@ -101,14 +95,18 @@ public struct WKRResultsInfo: Codable {
                 return lhs.profile.name < rhs.profile.name
             })
 
-        // Figure out what the difference between disconnected and quit should be
+        // The players that quit
+        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
+            .sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.profile.name < rhs.profile.name
+            })
 
         let sortedPlayers: [WKRPlayer] = foundPagePlayers
             + forcedFinishPlayers
             + forfeitedPlayers
-            + quitPlayers
             + racingPlayers
             + connectingPlayers
+            + quitPlayers
 
         let otherPlayers: [WKRPlayer] = players.filter { !sortedPlayers.contains($0) }
         return sortedPlayers + otherPlayers

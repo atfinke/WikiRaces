@@ -14,89 +14,92 @@ extension GameViewController {
     // MARK: - WKRGameManager
 
     func setupGameManager() {
-        gameManager = WKRGameManager(networkConfig: networkConfig, stateUpdate: { [weak self] state, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    self?.errorOccurred(error)
-                }
-            } else {
-                PlayerMetrics.log(event: .gameState("Transition: \(state)."))
-                self?.transition(to: state)
-            }
-            }, pointsUpdate: { [weak self] points in
-                if let timeRaced = self?.timeRaced,
-                    let raceType = self?.statRaceType {
-                    StatsHelper.shared.completedRace(type: raceType,
-                                                     points: points,
-                                                     timeRaced: timeRaced)
-                    PlayerMetrics.log(event: .raceCompleted,
-                                      attributes: [
-                                        "RaceType": raceType.rawValue,
-                                        "Time": timeRaced,
-                                        "Points": points
-                        ])
-                }
-            }, pointsScrolledUpdate: { pointsScrolled in
-                StatsHelper.shared.increment(stat: .pointsScrolled, by: Double(pointsScrolled))
-            },
-               linkCountUpdate: { [weak self] linkCount in
-                self?.webView.text = linkCount.description
-            }, logEvent: { [weak self] event in
-                #if !MULTIWINDOWDEBUG
-                    let metric = PlayerMetrics.Event(event: event)
-                    if metric == .pageView,
-                        let config = self?.networkConfig,
-                        let raceType = StatsHelper.RaceType(config) {
-                        StatsHelper.shared.viewedPage(raceType: raceType)
-                    }
-                    PlayerMetrics.log(event: metric, attributes: event.attributes)
-                #endif
+        gameManager = WKRGameManager(networkConfig: networkConfig,
+                                     gameUpdate: { [weak self] gameUpdate in
+                                        self?.gameUpdate(gameUpdate)
+            }, votingUpdate: { [weak self] votingUpdate in
+                self?.votingUpdate(votingUpdate)
+            }, resultsUpdate: { [weak self] resultsUpdate in
+                self?.resultsUpdate(resultsUpdate)
         })
-
-        configureManagerControllerClosures()
     }
 
-    private func configureManagerControllerClosures() {
-        gameManager.voting(timeUpdate: { [weak self] time in
-            self?.votingViewController?.voteTimeRemaing = time
-
-            if self?.networkConfig.isHost ?? false && time == 0,
-                let votingInfo = self?.gameManager.voteInfo {
-                for index in 0..<votingInfo.pageCount {
-                    if let info = votingInfo.page(for: index) {
-                        for _ in 0..<info.votes {
-                            PlayerMetrics.log(event: .finalVotes,
-                                              attributes: ["Page": info.page.title as Any])
-                        }
-                    }
-                }
+    private func gameUpdate(_ gameUpdate: WKRGameManager.GameUpdate) {
+        switch gameUpdate {
+        case .state(let state):
+            PlayerMetrics.log(event: .gameState("Transition: \(state)."))
+            transition(to: state)
+        case .error(let error):
+            DispatchQueue.main.async {
+                self.errorOccurred(error)
             }
-            }, infoUpdate: { [weak self] voteInfo in
-                self?.votingViewController?.voteInfo = voteInfo
-            }, finalPageUpdate: { [weak self] page in
-                self?.finalPage = page
-                self?.votingViewController?.finalPageSelected(page)
+        case .log(let event):
+            #if !MULTIWINDOWDEBUG
+            let metric = PlayerMetrics.Event(event: event)
+            if metric == .pageView,
+                let config = networkConfig,
+                let raceType = StatsHelper.RaceType(config) {
+                StatsHelper.shared.viewedPage(raceType: raceType)
+            }
+            PlayerMetrics.log(event: metric, attributes: event.attributes)
+            #endif
+        case .playerRaceLinkCountForCurrentRace(let linkCount):
+            webView.text = linkCount.description
+        case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
+            guard let raceType = statRaceType else { return }
+            print("WKRVoteInfo: place \(place)")
+            StatsHelper.shared.increment(stat: .pointsScrolled,
+                                         by: Double(webViewPointsScrolled))
+            StatsHelper.shared.completedRace(type: raceType,
+                                             points: points,
+                                             place: place,
+                                             timeRaced: timeRaced)
+            PlayerMetrics.log(event: .raceCompleted,
+                              attributes: [
+                                "RaceType": raceType.rawValue,
+                                "Time": timeRaced,
+                                "Points": points,
+                                "WebViewScrolled": webViewPointsScrolled
+                ])
+        }
+    }
 
-                UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeIn,
-                               delay: WKRAnimationDurationConstants.gameFadeInDelay,
-                               animations: {
-                    self?.webView.alpha = 1.0
-                }, completion: nil)
-        })
+    private func votingUpdate(_ votingUpdate: WKRGameManager.VotingUpdate) {
+        switch votingUpdate {
+        case .remainingTime(let time):
+            votingViewController?.voteTimeRemaing = time
+            if time == 0 {
+                logFinalVotes()
+            }
+        case .voteInfo(let voteInfo):
+            votingViewController?.voteInfo = voteInfo
+        case .finalPage(let page):
+            finalPage = page
+            votingViewController?.finalPageSelected(page)
 
-        gameManager.results(showReady: { [weak self] showReady in
-            self?.resultsViewController?.showReadyUpButton(showReady)
-            }, timeUpdate: { [weak self] time in
-                self?.resultsViewController?.timeRemaining = time
-            }, infoUpdate: { [weak self] resultsInfo in
-                if self?.resultsViewController?.state != .hostResults {
-                    self?.resultsViewController?.resultsInfo = resultsInfo
-                }
-            }, hostInfoUpdate: { [weak self] resultsInfo in
-                self?.resultsViewController?.resultsInfo = resultsInfo
-            }, readyStatesUpdate: { [weak self] readyStates in
-                self?.resultsViewController?.readyStates = readyStates
-        })
+            UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeIn,
+                           delay: WKRAnimationDurationConstants.gameFadeInDelay,
+                           animations: {
+                            self.webView.alpha = 1.0
+            }, completion: nil)
+        }
+    }
+
+    private func resultsUpdate(_ resultsUpdate: WKRGameManager.ResultsUpdate) {
+        switch resultsUpdate {
+        case .isReadyUpEnabled(let showReady):
+            resultsViewController?.showReadyUpButton(showReady)
+        case .remainingTime(let time):
+            resultsViewController?.timeRemaining = time
+        case .resultsInfo(let resultsInfo):
+            if resultsViewController?.state != .hostResults {
+                resultsViewController?.resultsInfo = resultsInfo
+            }
+        case .hostResultsInfo(let resultsInfo):
+            resultsViewController?.resultsInfo = resultsInfo
+        case .readyStates(let readyStates):
+            resultsViewController?.readyStates = readyStates
+        }
     }
 
     private func errorOccurred(_ error: WKRFatalError) {
@@ -259,7 +262,10 @@ extension GameViewController {
         let navController = UINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
-        present(navController, animated: true, completion: nil)
+        present(navController, animated: true) { [weak self] in
+            self?.connectingLabel.alpha = 0.0
+            self?.activityIndicatorView.alpha = 0.0
+        }
     }
 
     private func transitionToRace() {
@@ -285,4 +291,17 @@ extension GameViewController {
         }
     }
 
+    // MARK: - Log Final Votes
+
+    private func logFinalVotes() {
+        guard networkConfig.isHost, let votingInfo = gameManager.voteInfo else { return }
+        for index in 0..<votingInfo.pageCount {
+            if let info = votingInfo.page(for: index) {
+                for _ in 0..<info.votes {
+                    PlayerMetrics.log(event: .finalVotes,
+                                      attributes: ["Page": info.page.title as Any])
+                }
+            }
+        }
+    }
 }
