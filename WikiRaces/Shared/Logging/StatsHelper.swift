@@ -33,6 +33,9 @@ internal class StatsHelper {
         case mpcUniquePlayers
         case mpcPressedJoin
         case mpcPressedHost
+        case mpcRaceFinishFirst
+        case mpcRaceFinishSecond
+        case mpcRaceFinishThird
 
         case gkVotes
         case gkHelp
@@ -46,6 +49,9 @@ internal class StatsHelper {
         case gkPressedJoin
         case gkInvitedToMatch
         case gkConnectedToMatch
+        case gkRaceFinishFirst
+        case gkRaceFinishSecond
+        case gkRaceFinishThird
 
         case soloVotes
         case soloHelp
@@ -55,6 +61,16 @@ internal class StatsHelper {
         case soloPressedHost
 
         case pointsScrolled
+
+        #warning("remove for release")
+        case bugHitCase1
+        case bugHitCase2
+        case bugHitCase3
+        case bugHitCase4
+        case bugHitCase5
+        case bugHitCase6
+        case bugHitCase7
+        case bugHitCase8
 
         static var numericHighStats: [Stat] = [
             .average,
@@ -67,6 +83,9 @@ internal class StatsHelper {
             .mpcRaces,
             .mpcPressedJoin,
             .mpcPressedHost,
+            .mpcRaceFinishFirst,
+            .mpcRaceFinishSecond,
+            .mpcRaceFinishThird,
 
             .gkVotes,
             .gkHelp,
@@ -77,6 +96,9 @@ internal class StatsHelper {
             .gkPressedJoin,
             .gkInvitedToMatch,
             .gkConnectedToMatch,
+            .gkRaceFinishFirst,
+            .gkRaceFinishSecond,
+            .gkRaceFinishThird,
 
             .soloVotes,
             .soloHelp,
@@ -258,7 +280,7 @@ internal class StatsHelper {
     }
 
     //swiftlint:disable:next function_body_length
-    func completedRace(type: RaceType, points: Int, timeRaced: Int) {
+    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int) {
         switch type {
         case .mpc:
             let newPoints = statValue(for: .mpcPoints) + Double(points)
@@ -268,6 +290,16 @@ internal class StatsHelper {
             defaults.set(newPoints, forKey: Stat.mpcPoints.key)
             defaults.set(newRaces, forKey: Stat.mpcRaces.key)
             defaults.set(newTotalTime, forKey: Stat.mpcTotalTime.key)
+
+            if let place = place {
+                if place == 1 {
+                    increment(stat: .mpcRaceFinishFirst)
+                } else if place == 2 {
+                    increment(stat: .mpcRaceFinishSecond)
+                } else if place == 3 {
+                    increment(stat: .mpcRaceFinishThird)
+                }
+            }
 
             // If found page, check for fastest completion time
             if points > 0 {
@@ -290,6 +322,16 @@ internal class StatsHelper {
             defaults.set(newPoints, forKey: Stat.gkPoints.key)
             defaults.set(newRaces, forKey: Stat.gkRaces.key)
             defaults.set(newTotalTime, forKey: Stat.gkTotalTime.key)
+
+            if let place = place {
+                if place == 1 {
+                    increment(stat: .gkRaceFinishFirst)
+                } else if place == 2 {
+                    increment(stat: .gkRaceFinishSecond)
+                } else if place == 3 {
+                    increment(stat: .gkRaceFinishThird)
+                }
+            }
 
             // If found page, check for fastest completion time
             if points > 0 {
@@ -419,6 +461,9 @@ internal class StatsHelper {
         metrics.log(value: statValue(for: .mpcRaces), for: "mpcRaces")
         metrics.log(value: statValue(for: .mpcPressedJoin), for: "mpcPressedJoin")
         metrics.log(value: statValue(for: .mpcPressedHost), for: "mpcPressedHost")
+        metrics.log(value: statValue(for: .mpcRaceFinishFirst), for: "mpcRaceFinishFirst")
+        metrics.log(value: statValue(for: .mpcRaceFinishSecond), for: "mpcRaceFinishSecond")
+        metrics.log(value: statValue(for: .mpcRaceFinishThird), for: "mpcRaceFinishThird")
 
         metrics.log(value: statValue(for: .gkVotes), for: "gkVotes")
         metrics.log(value: statValue(for: .gkHelp), for: "gkHelp")
@@ -430,6 +475,9 @@ internal class StatsHelper {
         metrics.log(value: statValue(for: .gkPressedJoin), for: "gkPressedJoin")
         metrics.log(value: statValue(for: .gkInvitedToMatch), for: "gkInvitedToMatch")
         metrics.log(value: statValue(for: .gkConnectedToMatch), for: "gkConnectedToMatch")
+        metrics.log(value: statValue(for: .gkRaceFinishFirst), for: "gkRaceFinishFirst")
+        metrics.log(value: statValue(for: .gkRaceFinishSecond), for: "gkRaceFinishSecond")
+        metrics.log(value: statValue(for: .gkRaceFinishThird), for: "gkRaceFinishThird")
 
         metrics.log(value: statValue(for: .soloVotes), for: "soloVotes")
         metrics.log(value: statValue(for: .soloHelp), for: "soloHelp")
