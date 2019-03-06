@@ -142,7 +142,7 @@ class PlayerDatabaseMetrics: NSObject {
 
         for (key, value) in keyValues {
             if key == "GCAliases" || key == "DeviceNames" || key == "CustomNames" {
-                guard let name = value as? String else { fatalError() }
+                guard let name = value as? String else { return }
                 var names = [String]()
                 if let existingNames = record[key] as? [String] {
                     names.append(contentsOf: existingNames)
