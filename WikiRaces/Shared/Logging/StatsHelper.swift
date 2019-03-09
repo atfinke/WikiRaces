@@ -45,24 +45,24 @@ internal class StatsHelper {
 
     // MARK: - Computed Properties
 
-    var combinedPoints: Double {
+    var multiplayerPoints: Double {
         return PlayerStat.mpcPoints.value() + PlayerStat.gkPoints.value()
     }
 
-    var combinedRaces: Double {
+    var multiplayerRaces: Double {
         return PlayerStat.mpcRaces.value() + PlayerStat.gkRaces.value()
     }
 
-    var combinedPages: Double {
+    var multiplayerPages: Double {
         return PlayerStat.mpcPages.value() + PlayerStat.gkPages.value()
     }
 
-    var combinedTotalTime: Double {
+    var multiplayerTotalTime: Double {
         return PlayerStat.mpcTotalTime.value() + PlayerStat.gkTotalTime.value()
     }
 
-    var combinedFastestTime: Double {
-        let mpcTime = PlayerStat .mpcFastestTime.value()
+    var multiplayerFastestTime: Double {
+        let mpcTime = PlayerStat.mpcFastestTime.value()
         if mpcTime == 0 {
             return PlayerStat.gkFastestTime.value()
         } else {
@@ -221,6 +221,12 @@ internal class StatsHelper {
             SKStoreReviewController.shouldPromptForRating = true
         }
 
+        var average = multiplayerPoints / multiplayerRaces
+        if average.isNaN {
+            average = 0
+        }
+        defaults.set(average, forKey: PlayerStat.average.key)
+
         ubiquitousStoreSync()
         leaderboardSync()
         playerDatabaseSync()
@@ -337,8 +343,8 @@ internal class StatsHelper {
 
     private func playerDatabaseSync() {
         logAllStatsToMetric()
-        keyStatsUpdated?(combinedPoints,
-                         combinedRaces,
+        keyStatsUpdated?(multiplayerPoints,
+                         multiplayerRaces,
                          PlayerStat.average.value())
     }
 
@@ -347,13 +353,13 @@ internal class StatsHelper {
             return
         }
 
-        let points = combinedPoints
-        let races = combinedRaces
+        let points = multiplayerPoints
+        let races = multiplayerRaces
         let average = PlayerStat.average.value()
 
-        let totalTime = combinedTotalTime
-        let fastestTime = combinedFastestTime
-        let pagesViewed = combinedPages
+        let totalTime = multiplayerTotalTime
+        let fastestTime = multiplayerFastestTime
+        let pagesViewed = multiplayerPages
 
         let pointsScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.points")
         pointsScore.value = Int64(points)
