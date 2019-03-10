@@ -129,12 +129,6 @@ extension WKRGameManager {
 
         if gameState != .hostResults {
             transitionGameState(to: .hostResults)
-
-            WKRConnectionTester.start(timeout: 15.0, completionHandler: { success in
-                if !success {
-                    self.errorOccurred(.internetSpeed)
-                }
-            })
         }
 
         hostResultsInfo = resultsInfo
@@ -177,7 +171,7 @@ extension WKRGameManager {
             }
         case .race:
             guard let raceConfig = game.raceConfig else {
-                errorOccurred(.configCreationFailed)
+                localErrorOccurred(.configCreationFailed)
                 return
             }
             webView.resetPixelCount()

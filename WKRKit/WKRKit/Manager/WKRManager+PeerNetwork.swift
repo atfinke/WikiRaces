@@ -28,14 +28,14 @@ extension WKRGameManager {
         network.playerDisconnected = { [weak self] profile in
             if profile == self?.localPlayer.profile {
                 if self?.gameState != .preMatch {
-                    self?.errorOccurred(.noPeers)
+                    self?.localErrorOccurred(.noPeers)
                 }
             } else {
                 let disconnectedPlayerIsHost = self?.game.players.first(where: { player -> Bool in
                     return player.profile == profile
                 })?.isHost ?? false
                 if disconnectedPlayerIsHost {
-                    self?.errorOccurred(.disconnected)
+                    self?.localErrorOccurred(.disconnected)
                 }
                 self?.game.playerDisconnected(profile)
             }

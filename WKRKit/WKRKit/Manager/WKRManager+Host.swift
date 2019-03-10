@@ -130,7 +130,7 @@ extension WKRGameManager {
 
     private func prepareRaceConfig() {
         guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
-            errorOccurred(.configCreationFailed)
+            localErrorOccurred(.configCreationFailed)
             return
         }
 
@@ -159,7 +159,7 @@ extension WKRGameManager {
                 self.sendPreRaceConfig()
                 self.prepareVotingCountdown()
             } else {
-                self.errorOccurred(.configCreationFailed)
+                self.localErrorOccurred(.configCreationFailed)
             }
         }
     }
@@ -173,7 +173,7 @@ extension WKRGameManager {
         }
 
         guard let unwrappedObject = game.preRaceConfig else {
-            errorOccurred(.configCreationFailed)
+            localErrorOccurred(.configCreationFailed)
             return
         }
 
