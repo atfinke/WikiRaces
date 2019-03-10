@@ -37,6 +37,14 @@ extension WKRGameManager {
 
                 self.webView.completedPageLoad()
                 self.gameUpdate(.log(WKRLogEvent(type: .pageLoadingError, attributes: nil)))
+
+                // use a bit of an extra timeout to give player chance to reconnect
+                WKRConnectionTester.start(timeout: WKRKitConstants.current.connectionTestTimeout * 3,
+                                          completionHandler: { success in
+                    if !success {
+                        self.localErrorOccurred(.internetSpeed)
+                    }
+                })
             case .startedLoading:
                 self.webView.startedPageLoad()
                 self.localPlayer.finishedViewingLastPage(pointsScrolled: self.webView.pointsScrolled)
