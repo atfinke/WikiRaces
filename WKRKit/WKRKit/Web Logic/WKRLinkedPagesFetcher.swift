@@ -92,12 +92,6 @@ internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         webView?.stopLoading()
     }
 
-    func getHintPage(completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard hintIndex < foundURLs.count else { return }
-        WKRPageFetcher.fetch(url: foundURLs[hintIndex], completionHandler: completionHandler)
-        hintIndex += 1
-    }
-
     // MARK: - Message Actions
 
     private func found(linkedPage: String) {
