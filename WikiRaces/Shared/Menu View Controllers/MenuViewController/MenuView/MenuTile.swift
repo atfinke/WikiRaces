@@ -29,6 +29,13 @@ internal class MenuTile: UIControl {
         return formatter
     }()
 
+    static private let fractionalLargeNumberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
+
     private let titleLabel = UILabel()
     private let valueLabel = UILabel()
 
@@ -58,9 +65,9 @@ internal class MenuTile: UIControl {
             var formattedValue = MenuTile.numberFormatter.string(from: NSNumber(value: value))
             if isAverage {
                 formattedValue = MenuTile.fractionalNumberFormatter.string(from: NSNumber(value: value))
-            } else if value >= 10000 {
+            } else if value >= 1000 {
                 let adjusted = NSNumber(value: value / 1000)
-                let formatterValue = (MenuTile.fractionalNumberFormatter.string(from: adjusted) ?? "0")
+                let formatterValue = (MenuTile.fractionalLargeNumberFormatter.string(from: adjusted) ?? "0")
                 formattedValue = formatterValue + "K"
             }
             valueLabel.text = formattedValue
