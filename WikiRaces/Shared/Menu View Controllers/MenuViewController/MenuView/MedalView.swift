@@ -46,19 +46,15 @@ class MedalView: SKView {
         let thirdMedals = PlayerStat.mpcRaceFinishThird.value() +
             PlayerStat.gkRaceFinishThird.value()
 
-        var metalCount = Int(firstMedals + secondMedals + thirdMedals)
+        let metalCount = Int(firstMedals + secondMedals + thirdMedals)
         PlayerMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
         PlayerStat.displayedMedals.increment()
 
-        metalCount = 10
         guard metalCount > 0 else { return }
-//
-//        medalScene.showMedals(gold: Int(firstMedals),
-//                              silver: Int(secondMedals),
-//                              bronze: Int(thirdMedals))
-        medalScene.showMedals(gold: Int(10),
-                              silver: Int(10),
-                              bronze: Int(10))
+        medalScene.showMedals(gold: Int(firstMedals),
+                              silver: Int(secondMedals),
+                              bronze: Int(thirdMedals))
         medalScene.isPaused = false
+        UIImpactFeedbackGenerator().impactOccurred()
     }
 }

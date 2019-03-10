@@ -18,12 +18,15 @@ class WikiRacesTests: XCTestCase {
                 NSUbiquitousKeyValueStore.default.removeObject(forKey: key)
             }
         }
-
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+            for key in NSUbiquitousKeyValueStore.default.dictionaryRepresentation.keys {
+                NSUbiquitousKeyValueStore.default.removeObject(forKey: key)
+            }
+        }
     }
 
     func testMenuStats() {
@@ -208,5 +211,4 @@ class WikiRacesTests: XCTestCase {
         }
         print("Tested: " + testedStats.map({ $0.rawValue }).sorted().description)
     }
-    
 }

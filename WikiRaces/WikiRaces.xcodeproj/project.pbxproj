@@ -737,8 +737,8 @@
 				14B2DD3A22212298009B8AB3 /* MenuView.swift */,
 				14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */,
 				14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */,
-				1485B6762230724A00D6800B /* MedalScene.swift */,
 				1485B67C223072AB00D6800B /* MedalView.swift */,
+				1485B6762230724A00D6800B /* MedalScene.swift */,
 				14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */,
 			);
 			path = MenuView;

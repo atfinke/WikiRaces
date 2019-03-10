@@ -43,6 +43,7 @@ internal struct PlayerMetrics {
         case hostStartedMatch, hostStartedRace, hostEndedRace
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
+        case globalFailedToFindHost
 
         case raceCompleted
         case banHammer
@@ -60,8 +61,6 @@ internal struct PlayerMetrics {
             }
         }
     }
-
-    #warning("investigate other GK events that should be added")
 
     // MARK: - Logging Events
 

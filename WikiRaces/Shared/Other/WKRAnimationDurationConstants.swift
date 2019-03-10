@@ -23,6 +23,6 @@ internal struct WKRAnimationDurationConstants {
     static let votingFinalPageStateTransition    = 1.5
 
     static let resultsOverlayButtonToggle  = 0.5
-    static let resultsTableFlash = 1.0
+    static let resultsTableFlash = 2.0
     static let resultsCellLabelsFade = 0.25
 }

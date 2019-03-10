@@ -56,34 +56,40 @@ public struct WKRVoteInfo: Codable, Equatable {
         }
 
         let totalPoints = Double(weights.values.reduce(0, +))
-        let playerWithLowestScore = weights
-            .sorted(by: { $0.value < $1.value })
-            .first
+        let lowestScoringPlayers = weights.sorted(by: { $0.value < $1.value })
 
         // 1. Make sure a few points have been given
         // 2. Make sure we have a lowest player
         // 3. Make sure player voted
         // 4. Make sure player voted for article with most/tied amount of votes
         if totalPoints > 4,
-            let player = playerWithLowestScore,
+            lowestScoringPlayers.count > 1,
+            let player = lowestScoringPlayers.first,
             let page = playerVotes[player.key],
             pagesWithMostVotes.contains(page) {
 
             /*
              Example Scenarios:
              player w/ least points (plp) = 5
-             total points = 25
+             player w/ 2nd least points (p2lp) = 25
              => if rand (0..<1) > 5/25 (0.2) => use the player's vote to break the tie (80% chance)
 
-             plp = 10, total points = 25
-             => ... 10/25 (0.4) => (60% chance)
+             plp = 1, p2lp = 5
+             => ... 1/5 (0.2) => (80% chance)
 
-             plp = 15, total points = 30
-             => ... 15/30 (0.5) => (50% chance)
+             plp = 2, p2lp = 5
+             => ... 2/5 (0.4) => (60% chance)
+
+             plp = 3, p2lp = 5
+             => ... 3/5 (0.6) => (40% chance)
+
+             plp = 4, p2lp = 5
+             => ... 4/5 (0.8) => (20% chance)
 
              + never > 90% chance
             */
-            let inversePercentChance = max(Double(player.value) / totalPoints, 0.1)
+            let nextLowestPoints = Double(lowestScoringPlayers[1].value)
+            let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.2)
             if Double.random(in: 0..<1) > inversePercentChance {
                 return page
             }

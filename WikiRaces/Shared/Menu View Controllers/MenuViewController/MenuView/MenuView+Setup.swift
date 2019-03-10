@@ -172,7 +172,7 @@ extension MenuView {
         bottomView.addSubview(statsStackView)
 
         let leftMenuTile = MenuTile(title: "WIKI POINTS")
-        leftMenuTile.value = StatsHelper.shared.combinedPoints
+        leftMenuTile.value = StatsHelper.shared.multiplayerPoints
         statsStackView.addArrangedSubview(leftMenuTile)
 
         let middleMenuTile = MenuTile(title: "AVG PER RACE")
@@ -186,7 +186,7 @@ extension MenuView {
         middleMenuTile.addSubview(rightThinLine)
 
         let rightMenuTile = MenuTile(title: "RACES PLAYED")
-        rightMenuTile.value = StatsHelper.shared.combinedRaces
+        rightMenuTile.value = StatsHelper.shared.multiplayerRaces
         statsStackView.addArrangedSubview(rightMenuTile)
 
         let constraints = [

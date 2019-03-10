@@ -63,8 +63,10 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
             guard let hostAlias = self.hostPlayerAlias, object.hostName == hostAlias else {
-                self.showError(title: "Unable To Find Best Host",
-                               message: "Please try again later.")
+                let names = match.players.map({ $0.alias })
+                PlayerMetrics.log(event: .globalFailedToFindHost)
+                let message = "Please try again later. Please tell andrew e-\(hostPlayerAlias), a-\(object.hostName), n-\(names)"
+                showError(title: "Unable To Find Best Host", message: message)
                 return
             }
             if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
@@ -102,19 +104,23 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         match.delegate = self
         self.match = match
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)
             if let hostPlayer = players.sorted(by: { $0.playerID > $1.playerID }).first {
                 self.hostPlayerAlias = hostPlayer.alias
                 if hostPlayer.playerID == GKLocalPlayer.local.playerID {
                     self.isPlayerHost = true
-                    self.sendStartMessageToPlayers()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                        self.sendStartMessageToPlayers()
+                    })
                 }
                 PlayerStat.gkConnectedToMatch.increment()
             } else {
+                let names = players.map({ $0.alias })
+                PlayerMetrics.log(event: .globalFailedToFindHost)
                 self.showError(title: "Unable To Find Best Host",
-                               message: "Please try again later.")
+                               message: "Please try again later. Please tell andrew p-\(names)")
             }
         }
 

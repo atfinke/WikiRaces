@@ -113,7 +113,7 @@ extension WKRGameManager {
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Race Bonus Now \(int.value) " + string
             enqueue(message: message,
-                    duration: 1.0,
+                    duration: 2.0,
                     isRaceSpecific: true,
                     playHaptic: false)
         case .showReady:
