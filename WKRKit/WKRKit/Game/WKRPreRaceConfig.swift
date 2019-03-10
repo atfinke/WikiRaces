@@ -100,7 +100,8 @@ public struct WKRPreRaceConfig: Codable, Equatable {
         let endingPageOperations = randomPaths.map { path -> WKROperation in
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
-                WKRPageFetcher.fetch(path: path) { (page) in
+                // don't use cache to make sure to get most recent page
+                WKRPageFetcher.fetch(path: path, useCache: false) { page in
                     // 1. Make sure page not nil
                     // 2. Make sure page is not a link to a section "/USA#History"
                     // 3. Sometimes removed pages redirect to the Wikipedia homepage.

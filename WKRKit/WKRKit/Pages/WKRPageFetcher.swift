@@ -21,6 +21,15 @@ internal struct WKRPageFetcher {
         return URLSession(configuration: config)
     }()
 
+    static private let noCacheSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 7.5
+        config.timeoutIntervalForResource = 7.5
+        config.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        config.urlCache = nil
+        return URLSession(configuration: config)
+    }()
+
     // MARK: - Helpers
 
     /// Returns the title from the raw HTML
@@ -36,12 +45,12 @@ internal struct WKRPageFetcher {
     // MARK: - Fetching
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
-    static func fetch(path: String, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
+    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
         guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
             completionHandler(nil)
             return
         }
-        fetch(url: url, completionHandler: completionHandler)
+        fetch(url: url, useCache: useCache, completionHandler: completionHandler)
     }
 
     /// Fetches a random Wikipedia page
@@ -50,12 +59,18 @@ internal struct WKRPageFetcher {
             completionHandler(nil)
             return
         }
-        fetch(url: url, completionHandler: completionHandler)
+        fetch(url: url, useCache: true, completionHandler: completionHandler)
     }
 
     /// Fetches a Wikipedia page at a given url
-    static func fetch(url: URL, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        let task = WKRPageFetcher.session.dataTask(with: url) { (data, response, _) in
+    static func fetch(url: URL, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
+        let session: URLSession
+        if useCache {
+            session = WKRPageFetcher.session
+        } else {
+            session = WKRPageFetcher.noCacheSession
+        }
+        let task = session.dataTask(with: url) { (data, response, _) in
             if let data = data, let string = String(data: data, encoding: .utf8), let responseUrl = response?.url {
                 completionHandler(WKRPage(title: title(from: string), url: responseUrl))
             } else {
@@ -66,8 +81,14 @@ internal struct WKRPageFetcher {
     }
 
     /// Fetches a Wikipedia page source.
-    static func fetchSource(url: URL, completionHandler: @escaping (_ source: String?) -> Void) {
-        let task = WKRPageFetcher.session.dataTask(with: url) { (data, _, _) in
+    static func fetchSource(url: URL, useCache: Bool, completionHandler: @escaping (_ source: String?) -> Void) {
+        let session: URLSession
+        if useCache {
+            session = WKRPageFetcher.session
+        } else {
+            session = WKRPageFetcher.noCacheSession
+        }
+        let task = session.dataTask(with: url) { (data, _, _) in
             if let data = data, let string = String(data: data, encoding: .utf8) {
                 completionHandler(string)
             } else {

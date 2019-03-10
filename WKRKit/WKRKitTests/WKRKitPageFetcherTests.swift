@@ -27,7 +27,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testError() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testError")
-            WKRPageFetcher.fetch(path: "") { page in
+            WKRPageFetcher.fetch(path: "", useCache: false) { page in
                 XCTAssertNil(page)
                 testExpectation.fulfill()
             }
@@ -65,7 +65,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testPage() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testPage")
-            WKRPageFetcher.fetch(path: "/Apple_Inc.") { page in
+            WKRPageFetcher.fetch(path: "/Apple_Inc.", useCache: false) { page in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
                     XCTFail("Page nil")
@@ -89,7 +89,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testURL() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testURL")
-            WKRPageFetcher.fetch(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!) { page in
+            WKRPageFetcher.fetch(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { page in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
                     XCTFail("Page nil")
@@ -113,7 +113,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testSource() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testSource")
-            WKRPageFetcher.fetchSource(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!) { source in
+            WKRPageFetcher.fetchSource(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { source in
                 XCTAssertNotNil(source)
                 testExpectation.fulfill()
             }

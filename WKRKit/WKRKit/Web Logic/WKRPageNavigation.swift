@@ -95,7 +95,7 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         } else {
             pageUpdate(.startedLoading)
 
-            WKRPageFetcher.fetchSource(url: requestURL) { (source) in
+            WKRPageFetcher.fetchSource(url: requestURL, useCache: true) { source in
                 DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
