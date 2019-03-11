@@ -166,8 +166,10 @@ class WikiRacesTests: XCTestCase {
                     racePlaceStat = .mpcRaceFinishFirst
                 } else if newPlace == 2 {
                     racePlaceStat = .mpcRaceFinishSecond
-                } else {
+                } else if newPlace == 3 {
                     racePlaceStat = .mpcRaceFinishThird
+                } else {
+                    racePlaceStat = .mpcRaceDNF
                 }
             case .gameKit:
                 raceCountStat = .gkRaces
@@ -177,8 +179,10 @@ class WikiRacesTests: XCTestCase {
                     racePlaceStat = .gkRaceFinishFirst
                 } else if newPlace == 2 {
                     racePlaceStat = .gkRaceFinishSecond
-                } else {
+                } else if newPlace == 3 {
                     racePlaceStat = .gkRaceFinishThird
+                } else {
+                    racePlaceStat = .gkRaceDNF
                 }
             case .solo:
                 raceCountStat = .soloRaces

@@ -113,7 +113,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testSource() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testSource")
-            WKRPageFetcher.fetchSource(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { source in
+            WKRPageFetcher.fetchSource(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { source, _  in
                 XCTAssertNotNil(source)
                 testExpectation.fulfill()
             }
