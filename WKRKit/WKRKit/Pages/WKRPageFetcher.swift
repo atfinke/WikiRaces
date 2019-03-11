@@ -81,18 +81,18 @@ internal struct WKRPageFetcher {
     }
 
     /// Fetches a Wikipedia page source.
-    static func fetchSource(url: URL, useCache: Bool, completionHandler: @escaping (_ source: String?) -> Void) {
+    static func fetchSource(url: URL, useCache: Bool, completionHandler: @escaping (_ source: String?, _ error: Error?) -> Void) {
         let session: URLSession
         if useCache {
             session = WKRPageFetcher.session
         } else {
             session = WKRPageFetcher.noCacheSession
         }
-        let task = session.dataTask(with: url) { (data, _, _) in
+        let task = session.dataTask(with: url) { (data, _, error) in
             if let data = data, let string = String(data: data, encoding: .utf8) {
-                completionHandler(string)
+                completionHandler(string, nil)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, error)
             }
         }
         task.resume()

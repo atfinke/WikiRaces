@@ -32,12 +32,6 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
     // MARK: - Initialization
 
     /// Creates a new WKRPageNavigation object
-    ///
-    /// - Parameters:
-    ///   - pageURLBlocked: Called when the user taps a banned link (i.e. an image)
-    ///   - pageLoadingError: Called when there is an issue loading the page
-    ///   - pageStartedLoading: Called when the page starts to load
-    ///   - pageLoaded: Called when the page has completed loading
     init(pageUpdate: @escaping ((PageUpdate) -> Void)) {
         self.pageUpdate = pageUpdate
     }
@@ -95,12 +89,12 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         } else {
             pageUpdate(.startedLoading)
 
-            WKRPageFetcher.fetchSource(url: requestURL, useCache: true) { source in
+            WKRPageFetcher.fetchSource(url: requestURL, useCache: true) { source, error in
                 DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
                     } else {
-                        self.pageUpdate(.loadingError(nil))
+                        self.pageUpdate(.loadingError(error))
                     }
                 }
             }
