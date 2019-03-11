@@ -15,6 +15,13 @@ class MedalScene: SKScene {
     private let goldNode: SKNode
     private let silverNode: SKNode
     private let bronzeNode: SKNode
+    private let dnfNode: SKNode
+
+    public var isActive = false {
+        didSet {
+            isPaused = !isActive
+        }
+    }
 
     // MARK: - Initalization
 
@@ -24,17 +31,16 @@ class MedalScene: SKScene {
         physicsBody.linearDamping = 1.75
         physicsBody.angularDamping = 0.75
 
-        let emojiSize = CGSize(width: 50, height: 50)
-        let emojiRect = CGRect(origin: .zero, size: emojiSize)
-        let emojiRenderer = UIGraphicsImageRenderer(size: emojiSize)
-
-        func texture(for text: String) -> SKTexture {
+        func texture(for text: String, width: CGFloat = 50) -> SKTexture {
+            let size = CGSize(width: width, height: width)
+            let emojiRect = CGRect(origin: .zero, size: size)
+            let emojiRenderer = UIGraphicsImageRenderer(size: size)
             return SKTexture(image: emojiRenderer.image { context in
                 UIColor.clear.setFill()
                 context.fill(emojiRect)
                 let text = text
                 let attributes = [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 45)
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: width - 5)
                 ]
                 text.draw(in: emojiRect, withAttributes: attributes)
             })
@@ -49,6 +55,9 @@ class MedalScene: SKScene {
         let bronzeNode = SKSpriteNode(texture: texture(for: "🥉"))
         bronzeNode.physicsBody = physicsBody
         self.bronzeNode = bronzeNode
+        let dnfNode = SKSpriteNode(texture: texture(for: "❌", width: 20))
+        dnfNode.physicsBody = physicsBody
+        self.dnfNode = dnfNode
 
         super.init(size: size)
         anchorPoint = CGPoint(x: 0, y: 0)
@@ -63,16 +72,17 @@ class MedalScene: SKScene {
     // MARK: - Update
 
     override func update(_ currentTime: TimeInterval) {
-        guard !children.isEmpty else { return }
-        for node in children where node.position.y < 0 {
+        for node in children where node.position.y < -50 {
             node.removeFromParent()
         }
-        isPaused = children.isEmpty
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.isActive = !self.children.isEmpty
+        }
     }
 
     // MARK: - Other
 
-    func showMedals(gold: Int, silver: Int, bronze: Int) {
+    func showMedals(gold: Int, silver: Int, bronze: Int, dnf: Int) {
         func createMedal(place: Int) {
             let node: SKNode
             if place == 1, let copy = goldNode.copy() as? SKNode {
@@ -80,6 +90,8 @@ class MedalScene: SKScene {
             } else if place == 2, let copy = silverNode.copy() as? SKNode {
                 node = copy
             } else if place == 3, let copy = bronzeNode.copy() as? SKNode {
+                node = copy
+            } else if place == 4, let copy = dnfNode.copy() as? SKNode {
                 node = copy
             } else {
                 return
@@ -104,6 +116,7 @@ class MedalScene: SKScene {
         (0..<gold).forEach { _ in places.append(1) }
         (0..<silver).forEach {_ in  places.append(2)}
         (0..<bronze).forEach { _ in places.append(3)}
+        (0..<dnf).forEach { _ in places.append(4)}
 
         for (index, place) in places.shuffled().enumerated() {
             scene?.run(.sequence([

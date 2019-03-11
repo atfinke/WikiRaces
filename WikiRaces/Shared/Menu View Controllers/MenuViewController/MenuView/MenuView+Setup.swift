@@ -210,7 +210,7 @@ extension MenuView {
         self.middleMenuTile = middleMenuTile
         self.rightMenuTile = rightMenuTile
 
-        StatsHelper.shared.keyStatsUpdated = { points, races, average in
+        StatsHelper.shared.menuStatsUpdated = { points, races, average in
             DispatchQueue.main.async {
                 self.leftMenuTile?.value = points
                 self.middleMenuTile?.value = average

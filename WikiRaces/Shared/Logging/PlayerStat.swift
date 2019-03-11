@@ -27,6 +27,7 @@ enum PlayerStat: String, CaseIterable {
     case mpcRaceFinishFirst
     case mpcRaceFinishSecond
     case mpcRaceFinishThird
+    case mpcRaceDNF
 
     case gkVotes
     case gkHelp
@@ -43,6 +44,7 @@ enum PlayerStat: String, CaseIterable {
     case gkRaceFinishFirst
     case gkRaceFinishSecond
     case gkRaceFinishThird
+    case gkRaceDNF
 
     case soloVotes
     case soloHelp
@@ -77,6 +79,7 @@ enum PlayerStat: String, CaseIterable {
         .mpcRaceFinishFirst,
         .mpcRaceFinishSecond,
         .mpcRaceFinishThird,
+        .mpcRaceDNF,
 
         .gkVotes,
         .gkHelp,
@@ -90,6 +93,7 @@ enum PlayerStat: String, CaseIterable {
         .gkRaceFinishFirst,
         .gkRaceFinishSecond,
         .gkRaceFinishThird,
+        .gkRaceDNF,
 
         .soloVotes,
         .soloHelp,

@@ -38,13 +38,15 @@ class MedalView: SKView {
     }
 
     func showMedals() {
-        guard medalScene.isPaused else { return }
+        guard !medalScene.isActive else { return }
         let firstMedals = PlayerStat.mpcRaceFinishFirst.value() +
             PlayerStat.gkRaceFinishFirst.value()
         let secondMedals = PlayerStat.mpcRaceFinishSecond.value() +
             PlayerStat.gkRaceFinishSecond.value()
         let thirdMedals = PlayerStat.mpcRaceFinishThird.value() +
             PlayerStat.gkRaceFinishThird.value()
+        let dnfCount = PlayerStat.mpcRaceDNF.value() +
+            PlayerStat.gkRaceDNF.value()
 
         let metalCount = Int(firstMedals + secondMedals + thirdMedals)
         PlayerMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
@@ -53,8 +55,10 @@ class MedalView: SKView {
         guard metalCount > 0 else { return }
         medalScene.showMedals(gold: Int(firstMedals),
                               silver: Int(secondMedals),
-                              bronze: Int(thirdMedals))
-        medalScene.isPaused = false
+                              bronze: Int(thirdMedals),
+                              dnf: Int(dnfCount))
+
+        medalScene.isActive = true
         UIImpactFeedbackGenerator().impactOccurred()
     }
 }

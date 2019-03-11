@@ -38,7 +38,7 @@ internal class StatsHelper {
 
     static let shared = StatsHelper()
 
-    var keyStatsUpdated: ((_ points: Double, _ races: Double, _ average: Double) -> Void)?
+    var menuStatsUpdated: ((_ points: Double, _ races: Double, _ average: Double) -> Void)?
 
     private let defaults = UserDefaults.standard
     private let keyValueStore = NSUbiquitousKeyValueStore.default
@@ -164,6 +164,8 @@ internal class StatsHelper {
                     PlayerStat.mpcRaceFinishSecond.increment()
                 } else if place == 3 {
                     PlayerStat.mpcRaceFinishThird.increment()
+                } else {
+                    PlayerStat.mpcRaceDNF.increment()
                 }
             }
 
@@ -192,6 +194,8 @@ internal class StatsHelper {
                     PlayerStat.gkRaceFinishSecond.increment()
                 } else if place == 3 {
                     PlayerStat.gkRaceFinishThird.increment()
+                } else {
+                    PlayerStat.gkRaceDNF.increment()
                 }
             }
 
@@ -337,7 +341,7 @@ internal class StatsHelper {
 
     private func playerDatabaseSync() {
         logAllStatsToMetric()
-        keyStatsUpdated?(multiplayerPoints,
+        menuStatsUpdated?(multiplayerPoints,
                          multiplayerRaces,
                          PlayerStat.average.value())
     }
