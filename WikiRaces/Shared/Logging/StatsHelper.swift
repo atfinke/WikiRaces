@@ -221,12 +221,6 @@ internal class StatsHelper {
             SKStoreReviewController.shouldPromptForRating = true
         }
 
-        var average = multiplayerPoints / multiplayerRaces
-        if average.isNaN {
-            average = 0
-        }
-        defaults.set(average, forKey: PlayerStat.average.key)
-
         ubiquitousStoreSync()
         leaderboardSync()
         playerDatabaseSync()

@@ -66,8 +66,6 @@ enum PlayerStat: String, CaseIterable {
     case bugHitCase8
 
     static var numericHighStats: [PlayerStat] = [
-        .average,
-
         .mpcVotes,
         .mpcHelp,
         .mpcPoints,
@@ -126,9 +124,9 @@ enum PlayerStat: String, CaseIterable {
 
     func value() -> Double {
         if self == .average {
-            let points = PlayerStat.mpcRaces.value() + PlayerStat.gkRaces.value()
             let races = PlayerStat.mpcPoints.value() + PlayerStat.gkPoints.value()
-            let value = points / races
+            let points = PlayerStat.mpcRaces.value() + PlayerStat.gkRaces.value()
+            let value = races / points
             return value.isNaN ? 0.0 : value
         } else {
             return UserDefaults.standard.double(forKey: key)
