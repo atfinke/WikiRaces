@@ -17,8 +17,8 @@ extension WKRGameManager {
                 gameState != .points else  {
                     return
             }
-            enqueue(message: "Link not allowed",
-                    duration: 2.0,
+            enqueue(message: title,
+                    duration: duration,
                     isRaceSpecific: true,
                     playHaptic: true)
         }
