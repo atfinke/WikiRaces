@@ -76,7 +76,8 @@ internal class MPCConnectViewController: ConnectViewController {
         Analytics.setUserProperty(playerName, forName: "playerName")
         #endif
 
-        isValidPlayerName = playerName.utf8.count < 40
+        PlayerMetrics.log(event: .userAction("Using player name \(playerName)"))
+        isValidPlayerName = playerName.utf8.count > 0 && playerName.utf8.count < 40
         guard isValidPlayerName else { return }
 
         // Uses existing peer ID object if already created (recommended per Apple docs)
@@ -141,8 +142,9 @@ internal class MPCConnectViewController: ConnectViewController {
         toggleCoreInterface(isHidden: false, duration: 0.5)
 
         if !isValidPlayerName {
-            showError(title: "Player Name Too Long",
-                      message: "Your player name is too long. Would you like to open settings to adjust it?",
+            let length = playerName.count == 0 ? "Short" : "Long"
+            showError(title: "Player Name Too \(length)",
+                      message: "Your player name is too \(length.lowercased()). Would you like to open settings to adjust it?",
                       showSettingsButton: true)
         }
     }
