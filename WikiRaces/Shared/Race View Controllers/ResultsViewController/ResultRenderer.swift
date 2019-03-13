@@ -96,6 +96,8 @@ class ResultRenderer {
 
         view.onLayout = { [weak self] in
             self?.render(view: view, completion: completion)
+            view.onLayout = nil
+            view.removeFromSuperview()
         }
         NSLayoutConstraint.activate(constraints)
     }
