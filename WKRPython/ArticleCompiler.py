@@ -5,8 +5,8 @@ import urllib.request
 
 import plistlib
 
-from os import listdir
-from os.path import join
+from os import listdir, makedirs
+from os.path import join, exists
 
 from time import sleep
 from selenium import webdriver
@@ -24,12 +24,26 @@ ILLEGAL_PAGE_TITLE_ITEMS = [
 ]
 
 
-def is_valid_link(link):
-    if len(link) > MAX_PAGE_TITLE_LENGTH:
+def create_folders():
+    directory = "/Users/andrewfinke/Desktop/WKRPython/"
+    if not exists(directory):
+        makedirs(directory)
+
+    directory = "/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/"
+    if not exists(directory):
+        makedirs(directory)
+
+    directory = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/"
+    if not exists(directory):
+        makedirs(directory)
+
+
+def is_valid_article(article):
+    if len(article) > MAX_PAGE_TITLE_LENGTH:
         return False
 
     for illegal_item in ILLEGAL_PAGE_TITLE_ITEMS:
-        if illegal_item in link:
+        if illegal_item in article:
             return False
 
     return True
@@ -115,6 +129,7 @@ def fetch_redirect(driver, article):
 
 
 def run_networking_test(articles):
+    create_folders()
     driver = webdriver.Firefox()
 
     normal_articles = []
@@ -163,7 +178,7 @@ def fetch_links_on_article(article):
     for link in soup.findAll('a', attrs={'href': re.compile("/wiki/")}):
         href = link.get('href')
         prefix_removed = href[5:]
-        if is_valid_link(prefix_removed):
+        if is_valid_article(prefix_removed):
             page_links.append(prefix_removed)
         else:
             print("NOT VALID: " + href)
@@ -182,6 +197,8 @@ def fetch_links_to_article(article):
 
 
 def run_pages_that_link_to_articles_test(articles):
+    create_folders()
+
     articles_50 = {}
     articles_100 = {}
     articles_150 = {}
@@ -248,7 +265,11 @@ def load_articles_at_path(path):
 
 
 def save_articles_to_path(articles, path):
-    plistlib.writePlist(sorted(list(set(articles)), key=lambda s: s.lower(
+    valid = []
+    for article in articles:
+        if is_valid_article(article):
+            valid.append(article)
+    plistlib.writePlist(sorted(list(set(valid)), key=lambda s: s.lower(
     )), path)
 
 
