@@ -182,7 +182,7 @@ public struct WKRUIKitConstants {
 
     internal func contentBlocker() -> String {
         guard let source = try? String(contentsOf: WKRUIKitConstants.documentsPath(for: "WKRContentBlocker.json")) else {
-            fatalError("Failed to load style script")
+            fatalError("Failed to load blocker script")
         }
         return source
     }
