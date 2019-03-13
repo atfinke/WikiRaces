@@ -69,27 +69,26 @@ public struct WKRVoteInfo: Codable, Equatable {
             pagesWithMostVotes.contains(page) {
 
             /*
-             Example Scenarios:
-             player w/ least points (plp) = 5
-             player w/ 2nd least points (p2lp) = 25
-             => if rand (0..<1) > 5/25 (0.2) => use the player's vote to break the tie (80% chance)
+             P1 Points = player with lowest points
+             P2 Points = player with next lowest points
+             Break Tie Chance = chance that p1 will break the tie
+             Total Chance = Probability p1 article choosen (break tie chance + random chance)
+             - x way = x number of articles tied with most votes
 
-             plp = 1, p2lp = 5
-             => ... 1/5 (0.2) => (80% chance)
-
-             plp = 2, p2lp = 5
-             => ... 2/5 (0.4) => (60% chance)
-
-             plp = 3, p2lp = 5
-             => ... 3/5 (0.6) => (40% chance)
-
-             plp = 4, p2lp = 5
-             => ... 4/5 (0.8) => (20% chance)
-
-             + never > 90% chance
+             +-----------+-----------+------------------+----------------------+----------------------+
+             | P1 Points | P2 Points | Break Tie Chance | Total Chance (2 way) | Total Chance (3 way) |
+             +-----------+-----------+------------------+----------------------+----------------------+
+             |     0...4 |        10 | 60%              | 80%                  | 73.2%                |
+             |         5 |        10 | 50%              | 75%                  | 66.5%                |
+             |         6 |        10 | 40%              | 70%                  | 59.8%                |
+             |         7 |        10 | 30%              | 65%                  | 53.1%                |
+             |         8 |        10 | 20%              | 60%                  | 46.4%                |
+             |         9 |        10 | 10%              | 55%                  | 39.7%                |
+             |        10 |        10 | 0%               | 50%                  | 33%                  |
+             +-----------+-----------+------------------+----------------------+----------------------+
             */
             let nextLowestPoints = Double(lowestScoringPlayers[1].value)
-            let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.2)
+            let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.4)
             if Double.random(in: 0..<1) > inversePercentChance {
                 return page
             }
