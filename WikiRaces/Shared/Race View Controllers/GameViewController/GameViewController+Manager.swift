@@ -181,6 +181,7 @@ extension GameViewController {
         })
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
+        setupNewWebView()
     }
 
     private func showVotingController() {

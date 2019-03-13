@@ -38,7 +38,7 @@ internal class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
-    let webView = WKRUIWebView()
+    var webView = WKRUIWebView()
     let progressView = WKRUIProgressView()
     let navigationBarBottomLine = UIView()
 

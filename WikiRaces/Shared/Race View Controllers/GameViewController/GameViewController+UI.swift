@@ -48,7 +48,8 @@ extension GameViewController {
         navigationView.addSubview(navigationBarBottomLine)
 
         setupElements()
-        setupWebView()
+        setupProgressView()
+        setupNewWebView()
 
         let constraints: [NSLayoutConstraint] = [
             navigationBarBottomLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
@@ -88,13 +89,26 @@ extension GameViewController {
         view.addSubview(activityIndicatorView)
     }
 
-    private func setupWebView() {
+    private func setupProgressView() {
+        view.addSubview(progressView)
+        let constraints: [NSLayoutConstraint] = [
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            progressView.heightAnchor.constraint(equalToConstant: 3)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+
+    func setupNewWebView() {
+        webView.removeFromSuperview()
+
+        let webView = WKRUIWebView()
         var contentInset = webView.scrollView.contentInset
         contentInset.bottom = -20
         webView.scrollView.contentInset = contentInset
 
         view.addSubview(webView)
-        view.addSubview(progressView)
         webView.progressView = progressView
         webView.backgroundColor = UIColor.wkrBackgroundColor
 
@@ -102,12 +116,7 @@ extension GameViewController {
             webView.topAnchor.constraint(equalTo: view.topAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 3)
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 
@@ -115,6 +124,7 @@ extension GameViewController {
             webView.alpha = 0.0
             gameManager.webView = webView
         }
+        self.webView = webView
     }
 
     // MARK: - Alerts
