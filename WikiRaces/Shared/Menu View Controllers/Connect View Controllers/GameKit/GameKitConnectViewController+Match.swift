@@ -26,7 +26,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         if let controller = GKMatchmakerViewController(matchRequest: request) {
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
+            #if !MULTIWINDOWDEBUG
             findTrace = Performance.startTrace(name: "Global Race Find Trace")
+            #endif
         } else {
             showError(title: "Unable To Find Match", message: "Please try again later.")
         }
@@ -94,7 +96,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+        #if !MULTIWINDOWDEBUG
         findTrace?.stop()
+        #endif
         updateDescriptionLabel(to: "Finding best host")
 
         dismiss(animated: true) {
