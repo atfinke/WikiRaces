@@ -13,9 +13,7 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
 
     // MARK: - Closures
 
-    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
-    var playerConnected: ((WKRPlayerProfile) -> Void)?
-    var playerDisconnected: ((WKRPlayerProfile) -> Void)?
+    var networkUpdate: ((WKRPeerNetworkUpdate) -> Void)?
 
     // MARK: - Properties
 
@@ -39,7 +37,7 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
         guard let match = match, let data = try? WKRCodable.encoder.encode(object) else { return }
         do {
             try match.sendData(toAllPlayers: data, with: .reliable)
-            objectReceived?(object, GKLocalPlayer.local.wkrProfile())
+            networkUpdate?(.object(object, profile: GKLocalPlayer.local.wkrProfile()))
         } catch {
             print(error)
         }
@@ -54,7 +52,7 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         do {
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
-            objectReceived?(object, player.wkrProfile())
+            networkUpdate?(.object(object, profile: player.wkrProfile()))
         } catch {
             print(data.description)
         }
@@ -63,14 +61,14 @@ internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         DispatchQueue.main.async {
             switch state {
-            case .connected: self.playerConnected?(player.wkrProfile())
-            case .disconnected: self.playerDisconnected?(player.wkrProfile())
+            case .connected: self.networkUpdate?(.playerConnected(profile: player.wkrProfile()))
+            case .disconnected: self.networkUpdate?(.playerDisconnected(profile: player.wkrProfile()))
             default: break
             }
 
             // no players left
             if match.players.isEmpty {
-                self.playerDisconnected?(GKLocalPlayer.local.wkrProfile())
+                self.networkUpdate?(.playerDisconnected(profile: GKLocalPlayer.local.wkrProfile()))
             }
         }
     }

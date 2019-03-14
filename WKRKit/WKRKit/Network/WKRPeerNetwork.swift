@@ -9,11 +9,15 @@
 import Foundation
 
 internal protocol WKRPeerNetwork: class {
-    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)? { get set }
-    var playerConnected: ((WKRPlayerProfile) -> Void)? { get set }
-    var playerDisconnected: ((WKRPlayerProfile) -> Void)? { get set }
+    var networkUpdate: ((WKRPeerNetworkUpdate) -> Void)? { get set }
 
     func disconnect()
     func send(object: WKRCodable)
     func hostNetworkInterface() -> UIViewController?
+}
+
+enum WKRPeerNetworkUpdate {
+    case object(_ object: WKRCodable, profile: WKRPlayerProfile)
+    case playerConnected(profile: WKRPlayerProfile)
+    case playerDisconnected(profile: WKRPlayerProfile)
 }

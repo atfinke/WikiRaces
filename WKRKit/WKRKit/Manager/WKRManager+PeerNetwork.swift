@@ -13,31 +13,32 @@ extension WKRGameManager {
     // MARK: - WKRPeerNetwort
 
     func configure(network: WKRPeerNetwork) {
-        network.objectReceived = { [weak self] object, profile in
-            DispatchQueue.main.async {
-                if !(self?.isFailing ?? false) {
-                    self?.receivedCodable(object, from: profile)
+        network.networkUpdate = { [weak self] networkUpdate in
+            guard let self = self else { return }
+
+            switch networkUpdate {
+            case .object(let object, let profile):
+                DispatchQueue.main.async {
+                    if !self.isFailing {
+                        self.receivedCodable(object, from: profile)
+                    }
                 }
-            }
-        }
-        network.playerConnected = { [weak self] profile in
-            if let player = self?.localPlayer {
-                self?.peerNetwork.send(object: WKRCodable(player))
-            }
-        }
-        network.playerDisconnected = { [weak self] profile in
-            if profile == self?.localPlayer.profile {
-                if self?.gameState != .preMatch {
-                    self?.localErrorOccurred(.noPeers)
+            case .playerConnected:
+                self.peerNetwork.send(object: WKRCodable(self.localPlayer))
+            case .playerDisconnected(let profile):
+                if profile == self.localPlayer.profile {
+                    if self.gameState != .preMatch {
+                        self.localErrorOccurred(.noPeers)
+                    }
+                } else {
+                    let disconnectedPlayerIsHost = self.game.players.first(where: { player -> Bool in
+                        return player.profile == profile
+                    })?.isHost ?? false
+                    if disconnectedPlayerIsHost {
+                        self.localErrorOccurred(.disconnected)
+                    }
+                    self.game.playerDisconnected(profile)
                 }
-            } else {
-                let disconnectedPlayerIsHost = self?.game.players.first(where: { player -> Bool in
-                    return player.profile == profile
-                })?.isHost ?? false
-                if disconnectedPlayerIsHost {
-                    self?.localErrorOccurred(.disconnected)
-                }
-                self?.game.playerDisconnected(profile)
             }
         }
     }

@@ -12,9 +12,7 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
      // MARK: - Closures
 
-    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
-    var playerConnected: ((WKRPlayerProfile) -> Void)?
-    var playerDisconnected: ((WKRPlayerProfile) -> Void)?
+    var networkUpdate: ((WKRPeerNetworkUpdate) -> Void)?
 
     // MARK: - Types
 
@@ -54,18 +52,18 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
                 if splitMessage.sender != playerName {
                     if !self.players.contains(messageSender) {
                         self.players.append(messageSender)
-                        self.playerConnected?(messageSender)
+                        self.networkUpdate?(.playerConnected(profile: messageSender))
                     }
                     do {
                         let object = try WKRCodable.decoder.decode(WKRCodable.self, from: splitMessage.data)
-                        self.objectReceived?(object, messageSender)
+                        self.networkUpdate?(.object(object, profile: messageSender))
                     } catch {
                         fatalError(splitMessage.description)
                     }
                 }
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.playerConnected?(localPlayer)
+            self.networkUpdate?(.playerConnected(profile: localPlayer))
         }
     }
 
@@ -78,9 +76,11 @@ internal class WKRSplitViewNetwork: WKRPeerNetwork {
         let messageSender = WKRPlayerProfile(name: splitMessage.sender, playerID: splitMessage.sender)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + (1.5 / Double(arc4random() % 100))) {
-            NotificationCenter.default.post(name: Notification.Name("Object"), object: splitMessage, userInfo: nil)
+            NotificationCenter.default.post(name: Notification.Name("Object"),
+                                            object: splitMessage,
+                                            userInfo: nil)
         }
-        objectReceived?(object, messageSender)
+        networkUpdate?(.object(object, profile: messageSender))
     }
 
     func disconnect() {

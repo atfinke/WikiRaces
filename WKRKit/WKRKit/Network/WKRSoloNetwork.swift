@@ -12,9 +12,7 @@ internal class WKRSoloNetwork: WKRPeerNetwork {
 
     // MARK: - Closures
 
-    var objectReceived: ((WKRCodable, WKRPlayerProfile) -> Void)?
-    var playerConnected: ((WKRPlayerProfile) -> Void)?
-    var playerDisconnected: ((WKRPlayerProfile) -> Void)?
+    var networkUpdate: ((WKRPeerNetworkUpdate) -> Void)?
 
     // MARK: - Types
 
@@ -29,7 +27,7 @@ internal class WKRSoloNetwork: WKRPeerNetwork {
     // MARK: - WKRNetwork
 
     func send(object: WKRCodable) {
-        objectReceived?(object, playerProfile)
+        networkUpdate?(.object(object, profile: playerProfile))
     }
 
     func disconnect() {
