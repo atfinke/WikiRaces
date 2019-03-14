@@ -228,15 +228,26 @@ extension ResultRenderer {
 
             let num = index + 1
             let indexString = num.description + ". "
-            let fullString = indexString + (entry.page.title ?? "")
+            let linkHereString = "Link Here"
+            var fullString = indexString + (entry.page.title ?? "")
 
             let entryFont = UIFont.systemFont(ofSize: 18, weight: .medium)
             let style = NSMutableParagraphStyle()
             style.headIndent = 18
             if num >= 100 {
                 style.headIndent = 34
+                if entry.linkHere {
+                    fullString += "\n        " + linkHereString
+                }
             } else if num >= 10 {
                 style.headIndent = 26
+                if entry.linkHere {
+                    fullString += "\n      " + linkHereString
+                }
+            } else {
+                if entry.linkHere {
+                    fullString += "\n    " + linkHereString
+                }
             }
 
             let attributes: [NSAttributedString.Key: Any] = [
@@ -250,12 +261,26 @@ extension ResultRenderer {
                                                           attributes: attributes)
             mutableString.addAttribute(.font,
                                        value: indexFont,
-                                       range: NSRange(location: 0, length: indexString.count - 2))
+                                       range: NSRange(location: 0,
+                                                      length: indexString.count - 2))
             mutableString.addAttribute(.foregroundColor,
                                        value: UIColor.darkGray,
-                                       range: NSRange(location: 0, length: indexString.count))
-            label.attributedText = mutableString
+                                       range: NSRange(location: 0,
+                                                      length: indexString.count))
 
+            if entry.linkHere {
+                let linkFont = UIFont.systemFont(ofSize: 14, weight: .medium)
+
+                mutableString.addAttribute(.font,
+                                           value: linkFont,
+                                           range: NSRange(location: fullString.count - linkHereString.count,
+                                                          length: linkHereString.count))
+                mutableString.addAttribute(.foregroundColor,
+                                           value: UIColor.darkGray,
+                                           range: NSRange(location: fullString.count - linkHereString.count,
+                                                          length: linkHereString.count))
+            }
+            label.attributedText = mutableString
             historyView.addSubview(label)
 
             let anchor = index == 0 ? anchorView.topAnchor : anchorView.bottomAnchor
