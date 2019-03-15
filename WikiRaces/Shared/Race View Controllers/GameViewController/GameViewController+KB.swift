@@ -80,7 +80,7 @@ extension GameViewController {
         }
 
         let script = "document.getElementsByClassName('section-heading')[\(index - 1)].click()"
-        webView.evaluateJavaScript(script, completionHandler: nil)
+        webView?.evaluateJavaScript(script, completionHandler: nil)
     }
 
 }

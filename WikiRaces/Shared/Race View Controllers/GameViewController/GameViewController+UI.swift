@@ -95,13 +95,13 @@ extension GameViewController {
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
             progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 3)
+            progressView.heightAnchor.constraint(equalToConstant: 6)
         ]
         NSLayoutConstraint.activate(constraints)
     }
 
     func setupNewWebView() {
-        webView.removeFromSuperview()
+        webView?.removeFromSuperview()
 
         let webView = WKRUIWebView()
         var contentInset = webView.scrollView.contentInset
@@ -109,6 +109,7 @@ extension GameViewController {
         webView.scrollView.contentInset = contentInset
 
         view.addSubview(webView)
+        view.bringSubviewToFront(progressView)
         webView.progressView = progressView
         webView.backgroundColor = UIColor.wkrBackgroundColor
 
@@ -146,7 +147,7 @@ extension GameViewController {
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
                 PlayerMetrics.log(event: .userAction("quitAlertController:reload"))
                 PlayerMetrics.log(event: .usedReload)
-                self.webView.reload()
+                self.webView?.reload()
             }
             alertController.addAction(reloadAction)
         }

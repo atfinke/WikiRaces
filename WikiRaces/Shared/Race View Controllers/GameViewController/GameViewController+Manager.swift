@@ -44,7 +44,7 @@ extension GameViewController {
             PlayerMetrics.log(event: metric, attributes: event.attributes)
             #endif
         case .playerRaceLinkCountForCurrentRace(let linkCount):
-            webView.text = linkCount.description
+            webView?.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
             guard let raceType = statRaceType else { return }
             PlayerStat.pointsScrolled.increment(by: Double(webViewPointsScrolled))
@@ -78,7 +78,7 @@ extension GameViewController {
             UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeIn,
                            delay: WKRAnimationDurationConstants.gameFadeInDelay,
                            animations: {
-                            self.webView.alpha = 1.0
+                            self.webView?.alpha = 1.0
             }, completion: nil)
         }
     }
@@ -104,7 +104,7 @@ extension GameViewController {
         guard self.view.window != nil  && !isPlayerQuitting else { return }
         isPlayerQuitting = true
 
-        webView.isUserInteractionEnabled = false
+        webView?.isUserInteractionEnabled = false
         navigationItem.leftBarButtonItem?.isEnabled = false
         navigationItem.rightBarButtonItem?.isEnabled = false
 
@@ -224,7 +224,7 @@ extension GameViewController {
                                delay: WKRAnimationDurationConstants.gameFadeOutDelay,
                                options: .beginFromCurrentState,
                                animations: {
-                                self?.webView.alpha = 0.0
+                                self?.webView?.alpha = 0.0
                 }, completion: { [weak self] _ in
                     self?.title = nil
                     self?.navigationController?.setNavigationBarHidden(true, animated: false)

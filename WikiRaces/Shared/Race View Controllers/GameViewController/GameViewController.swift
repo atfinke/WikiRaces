@@ -38,7 +38,7 @@ internal class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
-    var webView = WKRUIWebView()
+    var webView: WKRUIWebView?
     let progressView = WKRUIProgressView()
     let navigationBarBottomLine = UIView()
 
@@ -77,7 +77,7 @@ internal class GameViewController: UIViewController {
         super.viewDidAppear(animated)
 
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            webView.alpha = 1.0
+            webView?.alpha = 1.0
             return
         }
 
@@ -164,12 +164,12 @@ internal class GameViewController: UIViewController {
 
     func reloadPage() {
         PlayerMetrics.log(event: .userAction("flagButtonPressed:reload"))
-        self.webView.reload()
+        self.webView?.reload()
     }
 
     // Used for screenshots / fastlane
     func prepareForScreenshots(for url: URL) {
-        webView.load(URLRequest(url: url))
+        webView?.load(URLRequest(url: url))
         title = "Star Wars: Galaxy's Edge".uppercased()
     }
 
