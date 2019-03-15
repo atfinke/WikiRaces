@@ -325,18 +325,7 @@ internal class StatsHelper {
     }
 
     private func logAllStatsToMetric() {
-        Set(PlayerStat.allCases)
-            .subtracting([
-                .bugHitCase1,
-                .bugHitCase2,
-                .bugHitCase3,
-                .bugHitCase4,
-                .bugHitCase5,
-                .bugHitCase6,
-                .bugHitCase7,
-                .bugHitCase8
-                ])
-            .forEach { logStatToMetric($0) }
+        Set(PlayerStat.allCases).forEach { logStatToMetric($0) }
     }
 
     private func playerDatabaseSync() {

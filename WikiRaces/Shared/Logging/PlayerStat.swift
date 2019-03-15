@@ -57,16 +57,6 @@ enum PlayerStat: String, CaseIterable {
     case pointsScrolled
     case displayedMedals
 
-    #warning("remove for release")
-    case bugHitCase1
-    case bugHitCase2
-    case bugHitCase3
-    case bugHitCase4
-    case bugHitCase5
-    case bugHitCase6
-    case bugHitCase7
-    case bugHitCase8
-
     static var numericHighStats: [PlayerStat] = [
         .mpcVotes,
         .mpcHelp,
