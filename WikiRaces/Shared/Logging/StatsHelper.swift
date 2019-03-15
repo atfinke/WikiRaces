@@ -164,9 +164,9 @@ internal class StatsHelper {
                     PlayerStat.mpcRaceFinishSecond.increment()
                 } else if place == 3 {
                     PlayerStat.mpcRaceFinishThird.increment()
-                } else {
-                    PlayerStat.mpcRaceDNF.increment()
                 }
+            } else {
+                PlayerStat.mpcRaceDNF.increment()
             }
 
             // If found page, check for fastest completion time
@@ -194,9 +194,9 @@ internal class StatsHelper {
                     PlayerStat.gkRaceFinishSecond.increment()
                 } else if place == 3 {
                     PlayerStat.gkRaceFinishThird.increment()
-                } else {
-                    PlayerStat.gkRaceDNF.increment()
                 }
+            } else {
+                PlayerStat.gkRaceDNF.increment()
             }
 
             // If found page, check for fastest completion time
