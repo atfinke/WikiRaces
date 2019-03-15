@@ -23,7 +23,7 @@ public struct WKRVoteInfo: Codable, Equatable {
 
     internal init(pages: [WKRPage]) {
         let sortedPages = pages.sorted { (pageOne, pageTwo) -> Bool in
-            return pageOne.title ?? "" < pageTwo.title ?? ""
+            return pageOne.title?.lowercased() ?? "" < pageTwo.title?.lowercased() ?? ""
         }
         self.pages = sortedPages
     }
