@@ -10,32 +10,33 @@ import Foundation
 
 extension WKRGameManager {
 
-    func newPageNavigation() -> WKRPageNavigation {
-        func displayNetworkAlert(title: String, duration: Double) {
-            guard gameState != .results ||
-                gameState != .hostResults ||
-                gameState != .points else  {
-                    return
-            }
-            enqueue(message: title,
-                    duration: duration,
-                    isRaceSpecific: true,
-                    playHaptic: true)
-        }
-
-        return WKRPageNavigation(pageUpdate: { [weak self] pageUpdate in
+    func createPageNavigation() {
+        let pageNavigation = WKRPageNavigation(pageUpdate: { [weak self] pageUpdate in
             guard let self = self else { return }
+
             switch pageUpdate {
             case .urlBlocked(let url):
-                displayNetworkAlert(title: "Link not allowed", duration: 2)
+                self.displayNetworkAlert(title: "Link not allowed", duration: 2)
                 self.gameUpdate(.log(WKRLogEvent(type: .pageBlocked,
                                                  attributes: [
                                                     "PageURL": self.truncated(url: url) as Any
                     ])))
-            case .loadingError(_):
-                displayNetworkAlert(title: "Error loading page", duration: 3)
+            case .loadingError(let error):
+//                displayNetworkAlert(title: "Error loading page", duration: 3)
 
-                self.webView.completedPageLoad()
+                #warning("tweak for release")
+                let info: String
+                if let error = error {
+                    let bridged = error as NSError
+                    info = "\(bridged.domain): \(bridged.code)\n\n\(bridged.userInfo)"
+                } else {
+                    info = "nil error"
+                }
+                let message = "PLEASE SEND SCREENSHOT OF THIS TO ANDREW (WILL DISMISS IN 10):\n\n" + info
+                self.displayNetworkAlert(title: message,
+                                    duration: 10)
+
+                self.webView?.completedPageLoad()
                 self.gameUpdate(.log(WKRLogEvent(type: .pageLoadingError, attributes: nil)))
 
                 // use a bit of an extra timeout to give player chance to reconnect
@@ -46,8 +47,9 @@ extension WKRGameManager {
                     }
                 })
             case .startedLoading:
-                self.webView.startedPageLoad()
-                self.localPlayer.finishedViewingLastPage(pointsScrolled: self.webView.pointsScrolled)
+                self.webView?.startedPageLoad()
+                let pointsScrolled = self.webView?.pointsScrolled ?? 0
+                self.localPlayer.finishedViewingLastPage(pointsScrolled: pointsScrolled)
                 self.peerNetwork.send(object: WKRCodable(self.localPlayer))
 
                 let linkCount = self.localPlayer.raceHistory?.entries.count ?? 0
@@ -56,10 +58,12 @@ extension WKRGameManager {
                 self.pageLoaded(page)
             }
         })
+        webView?.navigationDelegate = pageNavigation
+        self.pageNavigation = pageNavigation
     }
 
     private func pageLoaded(_ page: WKRPage) {
-        webView.completedPageLoad()
+        webView?.completedPageLoad()
 
         var linkHere = false
         var foundPage = false
@@ -97,6 +101,18 @@ extension WKRGameManager {
 
         peerNetwork.send(object: WKRCodable(localPlayer))
         gameUpdate(.log(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any])))
+    }
+
+    private func displayNetworkAlert(title: String, duration: Double) {
+        guard gameState != .results ||
+            gameState != .hostResults ||
+            gameState != .points else {
+                return
+        }
+        enqueue(message: title,
+                duration: duration,
+                isRaceSpecific: true,
+                playHaptic: true)
     }
 
     private func truncated(url: URL) -> String {

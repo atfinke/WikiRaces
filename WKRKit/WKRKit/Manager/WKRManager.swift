@@ -58,7 +58,7 @@ public class WKRGameManager {
     internal let game: WKRGame
     public   let localPlayer: WKRPlayer
     internal let peerNetwork: WKRPeerNetwork
-    internal var pageNavigation: WKRPageNavigation!
+    internal var pageNavigation: WKRPageNavigation?
 
     // MARK: - Closures
 
@@ -68,10 +68,9 @@ public class WKRGameManager {
 
     // MARK: - User Interface
 
-    public weak var webView: WKRUIWebView! {
+    public weak var webView: WKRUIWebView? {
         didSet {
-            pageNavigation = newPageNavigation()
-            webView.navigationDelegate = pageNavigation
+            createPageNavigation()
         }
     }
     internal let alertView = WKRUIAlertView()

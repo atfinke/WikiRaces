@@ -148,7 +148,7 @@ extension WKRGameManager {
                     place = playerIndex + 1
                 }
             }
-            let webViewPointsScrolled = webView.pointsScrolled
+            let webViewPointsScrolled = webView?.pointsScrolled ?? 0
             gameUpdate(.playerStatsForLastRace(points: points,
                                                place: place,
                                                webViewPointsScrolled: webViewPointsScrolled))
@@ -174,7 +174,7 @@ extension WKRGameManager {
                 localErrorOccurred(.configCreationFailed)
                 return
             }
-            webView.resetPixelCount()
+            webView?.resetPixelCount()
             localPlayer.startedNewRace(on: raceConfig.startingPage)
         case .hostResults:
             localPlayer.raceHistory = nil
