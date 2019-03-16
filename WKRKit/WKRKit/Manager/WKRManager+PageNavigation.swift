@@ -100,7 +100,8 @@ extension WKRGameManager {
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
-        gameUpdate(.log(WKRLogEvent(type: .pageView, attributes: ["Page": page.title as Any])))
+        // capitalized to keep consistent with past analytics
+        gameUpdate(.log(WKRLogEvent(type: .pageView, attributes: ["Page": page.title?.capitalized as Any])))
     }
 
     private func displayNetworkAlert(title: String, duration: Double) {

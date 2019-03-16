@@ -188,7 +188,8 @@ extension GameViewController {
         let controller = VotingViewController()
         controller.playerVoted = { [weak self] page in
             self?.gameManager.player(.voted(page))
-            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title as Any])
+            // capitalized to keep consistent with past analytics
+            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title?.capitalized as Any])
 
             if let raceType = self?.statRaceType {
                 var stat = PlayerStat.mpcVotes
@@ -296,8 +297,9 @@ extension GameViewController {
         for index in 0..<votingInfo.pageCount {
             if let info = votingInfo.page(for: index) {
                 for _ in 0..<info.votes {
+                    // capitalized to keep consistent with past analytics
                     PlayerMetrics.log(event: .finalVotes,
-                                      attributes: ["Page": info.page.title as Any])
+                                      attributes: ["Page": info.page.title?.capitalized as Any])
                 }
             }
         }
