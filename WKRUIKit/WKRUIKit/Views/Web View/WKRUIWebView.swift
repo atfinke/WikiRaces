@@ -61,6 +61,18 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
     private var pixelsScrolled = 0
     private var lastPixelOffset = 0
 
+    // network progress (fetch raw html) vs render progress (load html + images)
+    private static let networkProgressWeight: Float = 0.7
+    private var progressObservation: NSKeyValueObservation?
+    public var networkProgress: Float = 0.0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.progressView?.setProgress(self.networkProgress * WKRUIWebView.networkProgressWeight,
+                                               animated: true)
+            }
+        }
+    }
+
     // MARK: - Initialization
 
     public init() {
@@ -129,13 +141,22 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
             linkCountLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
             linkCountLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor),
 
-            slowConnectionLabel.bottomAnchor.constraint(equalTo: loadingView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            slowConnectionLabel.bottomAnchor.constraint(equalTo: loadingView.safeAreaLayoutGuide.bottomAnchor,
+                                                        constant: -20),
             slowConnectionLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
             slowConnectionLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 
-        addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        progressObservation = observe(\.estimatedProgress) { [weak self] webView, _ in
+            DispatchQueue.main.async {
+                let weight = WKRUIWebView.networkProgressWeight
+                // network progress (would be weight * 1.0 since must be complete) + weighted webview progress
+                let progress = weight + Float(webView.estimatedProgress) * (1 - weight)
+                self?.progressView?.setProgress(progress, animated: true)
+            }
+        }
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -147,7 +168,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
     }
 
     deinit {
-        removeObserver(self, forKeyPath: "estimatedProgress")
+        progressObservation = nil
         NotificationCenter.default.removeObserver(self)
         configuration.userContentController.removeScriptMessageHandler(forName: "scrollY")
     }
@@ -229,21 +250,6 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
         config.userContentController = userContentController
         return config
-    }
-
-    // MARK: - Progress View
-
-    public override func observeValue(forKeyPath keyPath: String?,
-                                      of object: Any?,
-                                      change: [NSKeyValueChangeKey: Any]?,
-                                      context: UnsafeMutableRawPointer?) {
-
-        guard keyPath == "estimatedProgress", let progress = change?[.newKey] as? Double  else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-
-        progressView?.setProgress(Float(progress), animated: true)
     }
 
     // MARK: - WKScriptMessageHandler
