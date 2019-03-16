@@ -221,6 +221,8 @@ extension ResultRenderer {
         var constraints = [NSLayoutConstraint]()
         let entrySpacing = CGFloat(15)
         var anchorView: UIView = historyView
+
+        var isLinkHereShown = false
         for (index, entry) in entries.enumerated() {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
@@ -228,26 +230,22 @@ extension ResultRenderer {
 
             let num = index + 1
             let indexString = num.description + ". "
-            let linkHereString = "Link Here"
             var fullString = indexString + (entry.page.title ?? "")
+            var linkHereString = ""
 
             let entryFont = UIFont.systemFont(ofSize: 18, weight: .medium)
             let style = NSMutableParagraphStyle()
             style.headIndent = 18
             if num >= 100 {
                 style.headIndent = 34
-                if entry.linkHere {
-                    fullString += "\n        " + linkHereString
-                }
             } else if num >= 10 {
                 style.headIndent = 26
-                if entry.linkHere {
-                    fullString += "\n      " + linkHereString
-                }
-            } else {
-                if entry.linkHere {
-                    fullString += "\n    " + linkHereString
-                }
+            }
+
+            if entry.linkHere {
+                linkHereString = "*"
+                fullString += linkHereString
+                isLinkHereShown = true
             }
 
             let attributes: [NSAttributedString.Key: Any] = [
@@ -269,16 +267,11 @@ extension ResultRenderer {
                                                       length: indexString.count))
 
             if entry.linkHere {
-                let linkFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-
-                mutableString.addAttribute(.font,
-                                           value: linkFont,
-                                           range: NSRange(location: fullString.count - linkHereString.count,
-                                                          length: linkHereString.count))
+                let range = NSRange(location: fullString.count - linkHereString.count,
+                                    length: linkHereString.count)
                 mutableString.addAttribute(.foregroundColor,
                                            value: UIColor.darkGray,
-                                           range: NSRange(location: fullString.count - linkHereString.count,
-                                                          length: linkHereString.count))
+                                           range: range)
             }
             label.attributedText = mutableString
             historyView.addSubview(label)
@@ -291,6 +284,24 @@ extension ResultRenderer {
                 ])
             anchorView = label
         }
+
+        if isLinkHereShown {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.numberOfLines = 0
+            label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+            label.textColor = .darkGray
+            label.text = "* Link Here"
+            historyView.addSubview(label)
+
+            constraints.append(contentsOf: [
+                label.topAnchor.constraint(equalTo: anchorView.bottomAnchor, constant: entrySpacing),
+                label.leftAnchor.constraint(equalTo: historyView.leftAnchor),
+                label.rightAnchor.constraint(equalTo: historyView.rightAnchor)
+                ])
+            anchorView = label
+        }
+
         constraints.append(historyView.bottomAnchor.constraint(equalTo: anchorView.bottomAnchor))
         NSLayoutConstraint.activate(constraints)
 
