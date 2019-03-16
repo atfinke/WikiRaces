@@ -194,12 +194,12 @@ internal class ResultsViewController: CenteredTableViewController {
                 }
             }
 
-            guard view.window != nil,
+            guard let window = UIApplication.shared.keyWindow,
                 let results = self.resultsInfo,
                 let player = resultsPlayer,
                 player.raceHistory != nil else { return }
 
-            resultRenderer.render(with: results, for: player, on: contentView) { [weak self] image in
+            resultRenderer.render(with: results, for: player, on: window) { [weak self] image in
                 self?.resultImage = image
                 self?.shareResultsBarButtonItem?.isEnabled = true
             }
