@@ -23,6 +23,9 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         case startedLoading
         /// Called when the page has completed loading
         case loaded(WKRPage)
+
+        /// Called when the page is being loaded
+        case loadingProgess(Float)
     }
 
     // MARK: - Properties
@@ -89,7 +92,11 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         } else {
             pageUpdate(.startedLoading)
 
-            WKRPageFetcher.fetchSource(url: requestURL, useCache: true) { source, error in
+            WKRPageFetcher.fetchSource(url: requestURL,
+                                       useCache: true,
+                                       progressHandler: { progress in
+                                        self.pageUpdate(.loadingProgess(progress))
+                }, completionHandler: { source, error in
                 DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
@@ -97,7 +104,7 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
                         self.pageUpdate(.loadingError(error))
                     }
                 }
-            }
+            })
 
             decisionHandler(.cancel)
         }

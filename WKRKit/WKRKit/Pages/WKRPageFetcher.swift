@@ -30,6 +30,8 @@ internal struct WKRPageFetcher {
         return URLSession(configuration: config)
     }()
 
+    static private var observations = [UUID: NSKeyValueObservation]()
+
     // MARK: - Helpers
 
     /// Returns the title from the raw HTML
@@ -81,20 +83,30 @@ internal struct WKRPageFetcher {
     }
 
     /// Fetches a Wikipedia page source.
-    static func fetchSource(url: URL, useCache: Bool, completionHandler: @escaping (_ source: String?, _ error: Error?) -> Void) {
+    static func fetchSource(url: URL,
+                            useCache: Bool,
+                            progressHandler: @escaping (_ progress: Float) -> Void,
+                            completionHandler: @escaping (_ source: String?, _ error: Error?) -> Void) {
         let session: URLSession
         if useCache {
             session = WKRPageFetcher.session
         } else {
             session = WKRPageFetcher.noCacheSession
         }
+
+        let taskUUID = UUID()
         let task = session.dataTask(with: url) { (data, _, error) in
+            observations[taskUUID] = nil
             if let data = data, let string = String(data: data, encoding: .utf8) {
                 completionHandler(string, nil)
             } else {
                 completionHandler(nil, error)
             }
         }
+        observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
+            progressHandler(Float(progress.fractionCompleted))
+        }
+
         task.resume()
     }
 

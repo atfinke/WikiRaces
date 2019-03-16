@@ -35,6 +35,8 @@ extension WKRGameManager {
                 let message = "PLEASE SEND SCREENSHOT OF THIS TO ANDREW (WILL DISMISS IN 10):\n\n" + info
                 self.displayNetworkAlert(title: message,
                                     duration: 10)
+            case .loadingError(_):
+                self.displayNetworkAlert(title: "Error loading page", duration: 3)
 
                 self.webView?.completedPageLoad()
                 self.gameUpdate(.log(WKRLogEvent(type: .pageLoadingError, attributes: nil)))
@@ -56,6 +58,10 @@ extension WKRGameManager {
                 self.gameUpdate(.playerRaceLinkCountForCurrentRace(linkCount))
             case .loaded(let page):
                 self.pageLoaded(page)
+            case .loadingProgess(let progress):
+                DispatchQueue.main.async {
+                    self.webView?.networkProgress = progress
+                }
             }
         })
         webView?.navigationDelegate = pageNavigation
