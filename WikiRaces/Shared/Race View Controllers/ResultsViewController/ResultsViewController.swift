@@ -298,7 +298,7 @@ internal class ResultsViewController: CenteredTableViewController {
     }
 
     override func overlayButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         addPlayersBarButtonItem?.isEnabled = false
         shareResultsBarButtonItem?.isEnabled = false
@@ -310,7 +310,7 @@ internal class ResultsViewController: CenteredTableViewController {
             self.view.layoutIfNeeded()
         }
 
-        PlayerMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
+        PlayerAnonymousMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
 }

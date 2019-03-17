@@ -236,8 +236,8 @@ class MenuView: UIView {
         let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
 
         let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
+            PlayerAnonymousMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
+            PlayerAnonymousMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
             if isHost {
                 self.createLocalRace()
             } else {
@@ -247,8 +247,8 @@ class MenuView: UIView {
         alertController.addAction(laterAction)
 
         let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
-            PlayerMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
+            PlayerAnonymousMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
+            PlayerAnonymousMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
             UIApplication.shared.openSettings()
         })
         alertController.addAction(settingsAction)

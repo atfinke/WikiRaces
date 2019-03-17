@@ -33,7 +33,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     // MARK: - GKGameCenterControllerDelegate
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.menuView.animateMenuIn()
         }

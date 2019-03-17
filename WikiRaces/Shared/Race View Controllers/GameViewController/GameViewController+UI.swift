@@ -139,23 +139,23 @@ extension GameViewController {
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                PlayerMetrics.log(event: .userAction("quitAlertController:forfeit"))
-                PlayerMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
+                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:forfeit"))
+                PlayerAnonymousMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
                 self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
 
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
-                PlayerMetrics.log(event: .userAction("quitAlertController:reload"))
-                PlayerMetrics.log(event: .usedReload)
+                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:reload"))
+                PlayerAnonymousMetrics.log(event: .usedReload)
                 self.webView?.reload()
             }
             alertController.addAction(reloadAction)
         }
 
         let quitAction = UIAlertAction(title: "Quit Race", style: .destructive) {  [weak self] _ in
-            PlayerMetrics.log(event: .userAction("quitAlertController:quit"))
-            PlayerMetrics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
+            PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
+            PlayerAnonymousMetrics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
             self?.playerQuit()
         }
         alertController.addAction(quitAction)

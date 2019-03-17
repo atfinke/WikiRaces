@@ -63,12 +63,12 @@ internal class MPCConnectViewController: ConnectViewController {
         // Gets either the player name specified in settings.app, then GK alias, the device name
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             playerName = name
-            PlayerMetrics.log(event: .nameType, attributes: ["Type": "CustomName"])
+            PlayerAnonymousMetrics.log(event: .nameType, attributes: ["Type": "CustomName"])
         } else if GKLocalPlayer.local.isAuthenticated {
             playerName = GKLocalPlayer.local.alias
-            PlayerMetrics.log(event: .nameType, attributes: ["Type": "GCAlias"])
+            PlayerAnonymousMetrics.log(event: .nameType, attributes: ["Type": "GCAlias"])
         } else {
-            PlayerMetrics.log(event: .nameType, attributes: ["Type": "DeviceName"])
+            PlayerAnonymousMetrics.log(event: .nameType, attributes: ["Type": "DeviceName"])
         }
 
         #if !MULTIWINDOWDEBUG
@@ -76,7 +76,7 @@ internal class MPCConnectViewController: ConnectViewController {
         Analytics.setUserProperty(playerName, forName: "playerName")
         #endif
 
-        PlayerMetrics.log(event: .userAction("Using player name \(playerName)"))
+        PlayerAnonymousMetrics.log(event: .userAction("Using player name \(playerName)"))
         isValidPlayerName = playerName.utf8.count > 0 && playerName.utf8.count < 40
         guard isValidPlayerName else { return }
 

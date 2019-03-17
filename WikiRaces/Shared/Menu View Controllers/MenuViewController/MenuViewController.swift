@@ -130,12 +130,12 @@ internal class MenuViewController: UIViewController {
         let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 
         let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForInvalidName:rejected"))
+            PlayerAnonymousMetrics.log(event: .userAction("promptForInvalidName:rejected"))
         })
         alertController.addAction(laterAction)
 
         let settingsAction = UIAlertAction(title: "Change Name", style: .default, handler: { _ in
-            PlayerMetrics.log(event: .userAction("promptForInvalidName:accepted"))
+            PlayerAnonymousMetrics.log(event: .userAction("promptForInvalidName:accepted"))
             UIApplication.shared.openSettings()
         })
         alertController.addAction(settingsAction)

@@ -14,7 +14,7 @@ import Crashlytics
 import FirebaseCore
 #endif
 
-internal struct PlayerMetrics {
+internal struct PlayerAnonymousMetrics {
 
     // MARK: - Logging Event Types
 
@@ -51,8 +51,9 @@ internal struct PlayerMetrics {
         case displayedMedals
 
         case collectiveVotingArticlesSeen, localVotingArticlesSeen, localVotingArticlesReset
-        case votingArticleValidationFailure
+        case votingArticleValidationFailure, votingArticlesWeightedTiebreak
 
+        //swiftlint:disable:next cyclomatic_complexity
         init(event: WKRLogEvent) {
             switch event.type {
             case .linkOnPage:       self = .linkOnPage
@@ -66,6 +67,7 @@ internal struct PlayerMetrics {
             case .localVotingArticlesSeen:          self = .localVotingArticlesSeen
             case .localVotingArticlesReset:         self = .localVotingArticlesReset
             case .votingArticleValidationFailure:   self = .votingArticleValidationFailure
+            case .votingArticlesWeightedTiebreak:   self = .votingArticlesWeightedTiebreak
             }
         }
     }

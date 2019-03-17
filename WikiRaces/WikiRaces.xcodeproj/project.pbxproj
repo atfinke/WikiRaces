@@ -187,7 +187,7 @@
 		14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */; };
 		14C6B1F61FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
 		14C6B1F71FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
-		14D8AD471F81828D00914E5A /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
+		14D8AD471F81828D00914E5A /* PlayerAnonymousMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */; };
 		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14DC66D11F90700A0026C6ED /* fabric.apikey in Resources */ = {isa = PBXBuildFile; fileRef = 143BB72F1F60D84100D00541 /* fabric.apikey */; };
 		14DC66D21F90700D0026C6ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 143054BD1F89581100C0BC27 /* GoogleService-Info.plist */; };
@@ -216,8 +216,8 @@
 		14E0F1A022303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
 		14E0F1A122303A8F00BFF1E9 /* PlayerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */; };
 		14E0F1AB22303FD100BFF1E9 /* WikiRacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F1AA22303FD100BFF1E9 /* WikiRacesTests.swift */; };
-		14E1B19A1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
-		14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */; };
+		14E1B19A1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */; };
+		14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */; };
 		14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 		14E6D55D1F86A1CA005EB3B9 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
 		14E6D55E1F86A1CA005EB3B9 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -480,7 +480,7 @@
 		14E0F1A822303FD100BFF1E9 /* WikiRacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiRacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14E0F1AA22303FD100BFF1E9 /* WikiRacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesTests.swift; sourceTree = "<group>"; };
 		14E0F1AC22303FD100BFF1E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMetrics.swift; sourceTree = "<group>"; };
+		14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnonymousMetrics.swift; sourceTree = "<group>"; };
 		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -853,7 +853,7 @@
 		14DF31B121163ABA005BA432 /* Logging */ = {
 			isa = PBXGroup;
 			children = (
-				14E1B1991F7981C70082F4FA /* PlayerMetrics.swift */,
+				14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */,
 				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 				143A8BBB1F58746800580AA2 /* StatsHelper.swift */,
 				14E0F19E22303A8F00BFF1E9 /* PlayerStat.swift */,
@@ -1271,7 +1271,7 @@
 				143948BD2144CC0F00992850 /* DebugInfoTableViewController.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
-				14E1B19A1F7981C70082F4FA /* PlayerMetrics.swift in Sources */,
+				14E1B19A1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
 				14C4AB551F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14B2DD3B22212298009B8AB3 /* MenuView.swift in Sources */,
 				14B4DB6B2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
@@ -1358,7 +1358,7 @@
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
 				147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */,
-				14E1B19B1F7981C70082F4FA /* PlayerMetrics.swift in Sources */,
+				14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */,
 				1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
@@ -1443,7 +1443,7 @@
 				1485B67F223072AB00D6800B /* MedalView.swift in Sources */,
 				149357E1210E934300F6453A /* MPCConnectViewController+UI.swift in Sources */,
 				144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */,
-				14D8AD471F81828D00914E5A /* PlayerMetrics.swift in Sources */,
+				14D8AD471F81828D00914E5A /* PlayerAnonymousMetrics.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
 				14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */,

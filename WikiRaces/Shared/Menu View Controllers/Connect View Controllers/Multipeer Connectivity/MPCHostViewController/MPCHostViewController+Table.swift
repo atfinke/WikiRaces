@@ -76,10 +76,10 @@ extension MPCHostViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         if indexPath.section == 1 {
-            PlayerMetrics.log(event: .hostStartedSoloMatch)
+            PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
             PlayerStat.soloPressedHost.increment()
 
             session?.disconnect()

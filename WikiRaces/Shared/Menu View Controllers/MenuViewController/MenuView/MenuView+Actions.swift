@@ -16,8 +16,8 @@ extension MenuView {
     /// Join button pressed
     @objc
     func showLocalRaceOptions() {
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedLocalOptions)
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .pressedLocalOptions)
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -26,8 +26,8 @@ extension MenuView {
 
     @objc
     func joinGlobalRace() {
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedGlobalJoin)
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .pressedGlobalJoin)
         PlayerStat.gkPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
@@ -45,8 +45,8 @@ extension MenuView {
     /// Join button pressed
     @objc
     func joinLocalRace() {
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedJoin)
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .pressedJoin)
         PlayerStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
@@ -63,8 +63,8 @@ extension MenuView {
     /// Create button pressed
     @objc
     func createLocalRace() {
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .pressedHost)
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .pressedHost)
         PlayerStat.mpcPressedHost.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
@@ -80,7 +80,7 @@ extension MenuView {
 
     @objc
     func localOptionsBackButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -92,7 +92,7 @@ extension MenuView {
     /// - Parameter sender: The pressed tile
     @objc
     func menuTilePressed(sender: MenuTile) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         guard GKLocalPlayer.local.isAuthenticated else {
             self.presentGlobalAuthController?()
@@ -105,7 +105,7 @@ extension MenuView {
     }
 
     func triggeredEasterEgg() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         medalView.showMedals()
     }
 

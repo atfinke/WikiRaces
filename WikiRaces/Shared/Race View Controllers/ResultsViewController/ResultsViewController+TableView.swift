@@ -44,7 +44,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         guard let resultsInfo = resultsInfo else {
             return
@@ -58,7 +58,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerMetrics.log(event: .openedHistory,
+        PlayerAnonymousMetrics.log(event: .openedHistory,
                           attributes: ["GameState": state.rawValue.description as Any])
     }
 

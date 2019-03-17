@@ -13,9 +13,9 @@ extension ResultsViewController {
     // MARK: - Actions
 
     @objc func doneButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerMetrics.log(event: .backupQuit,
+            PlayerAnonymousMetrics.log(event: .backupQuit,
                               attributes: ["GameState": state.rawValue.description as Any])
             self.backupQuit?()
             return
@@ -24,14 +24,14 @@ extension ResultsViewController {
     }
 
     @objc func addPlayersBarButtonItemPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let controller = addPlayersViewController else { return }
         present(controller, animated: true, completion: nil)
-        PlayerMetrics.log(event: .hostStartMidMatchInviting)
+        PlayerAnonymousMetrics.log(event: .hostStartMidMatchInviting)
     }
 
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
 
         let controller = UIActivityViewController(activityItems: [
@@ -40,6 +40,6 @@ extension ResultsViewController {
             ], applicationActivities: nil)
         controller.popoverPresentationController?.barButtonItem = sender
         present(controller, animated: true, completion: nil)
-        PlayerMetrics.log(event: .openedShare)
+        PlayerAnonymousMetrics.log(event: .openedShare)
     }
 }

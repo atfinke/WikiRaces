@@ -49,7 +49,7 @@ class MedalView: SKView {
             PlayerStat.gkRaceDNF.value()
 
         let metalCount = Int(firstMedals + secondMedals + thirdMedals)
-        PlayerMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
+        PlayerAnonymousMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
         PlayerStat.displayedMedals.increment()
 
         guard metalCount > 0 else { return }

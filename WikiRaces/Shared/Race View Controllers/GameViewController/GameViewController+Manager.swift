@@ -27,7 +27,7 @@ extension GameViewController {
     private func gameUpdate(_ gameUpdate: WKRGameManager.GameUpdate) {
         switch gameUpdate {
         case .state(let state):
-            PlayerMetrics.log(event: .gameState("Transition: \(state)."))
+            PlayerAnonymousMetrics.log(event: .gameState("Transition: \(state)."))
             transition(to: state)
         case .error(let error):
             DispatchQueue.main.async {
@@ -44,7 +44,7 @@ extension GameViewController {
                                              place: place,
                                              timeRaced: timeRaced,
                                              pointsScrolled: webViewPointsScrolled)
-            PlayerMetrics.log(event: .raceCompleted,
+            PlayerAnonymousMetrics.log(event: .raceCompleted,
                               attributes: [
                                 "RaceType": raceType.rawValue,
                                 "Time": timeRaced,
@@ -114,19 +114,19 @@ extension GameViewController {
             })
         })
 
-        PlayerMetrics.log(event: .fatalError,
+        PlayerAnonymousMetrics.log(event: .fatalError,
                           attributes: ["Error": error.title as Any])
     }
 
     func logEvent(_ logEvent: WKRLogEvent) {
         #if !MULTIWINDOWDEBUG
-        let metric = PlayerMetrics.Event(event: logEvent)
+        let metric = PlayerAnonymousMetrics.Event(event: logEvent)
         if metric == .pageView,
             let config = networkConfig,
             let raceType = StatsHelper.RaceType(config) {
             StatsHelper.shared.viewedPage(raceType: raceType)
         }
-        PlayerMetrics.log(event: metric, attributes: logEvent.attributes)
+        PlayerAnonymousMetrics.log(event: metric, attributes: logEvent.attributes)
         #endif
     }
 
@@ -193,7 +193,7 @@ extension GameViewController {
         controller.playerVoted = { [weak self] page in
             self?.gameManager.player(.voted(page))
             // capitalized to keep consistent with past analytics
-            PlayerMetrics.log(event: .voted, attributes: ["Page": page.title?.capitalized as Any])
+            PlayerAnonymousMetrics.log(event: .voted, attributes: ["Page": page.title?.capitalized as Any])
 
             if let raceType = self?.statRaceType {
                 var stat = PlayerStat.mpcVotes
@@ -242,7 +242,7 @@ extension GameViewController {
         navigationItem.rightBarButtonItem = nil
 
         if gameState == .hostResults && networkConfig.isHost {
-            PlayerMetrics.log(event: .hostEndedRace)
+            PlayerAnonymousMetrics.log(event: .hostEndedRace)
         }
     }
 
@@ -289,7 +289,7 @@ extension GameViewController {
         dismissActiveController(completion: nil)
 
         if networkConfig.isHost {
-            PlayerMetrics.log(event: .hostStartedRace,
+            PlayerAnonymousMetrics.log(event: .hostStartedRace,
                               attributes: ["Page": finalPage?.title as Any])
         }
     }
@@ -302,7 +302,7 @@ extension GameViewController {
             if let info = votingInfo.page(for: index) {
                 for _ in 0..<info.votes {
                     // capitalized to keep consistent with past analytics
-                    PlayerMetrics.log(event: .finalVotes,
+                    PlayerAnonymousMetrics.log(event: .finalVotes,
                                       attributes: ["Page": info.page.title?.capitalized as Any])
                 }
             }

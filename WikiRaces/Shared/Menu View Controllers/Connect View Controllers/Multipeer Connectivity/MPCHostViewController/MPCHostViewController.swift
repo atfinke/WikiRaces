@@ -103,8 +103,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     @objc
     func cancelMatch(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
-        PlayerMetrics.log(event: .hostCancelledPreMatch)
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
 
         session?.disconnect()
         didCancelMatch?()
@@ -112,7 +112,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     @objc
     func startMatch(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         tableView.isUserInteractionEnabled = false
 
@@ -146,7 +146,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     ///   - newState: The new state
     func update(peerID: MCPeerID, to newState: PeerState?) {
         let newStateString = String(describing: newState?.rawValue)
-        PlayerMetrics.log(event: .gameState("Peer Update: \(peerID.displayName) \(newStateString)"))
+        PlayerAnonymousMetrics.log(event: .gameState("Peer Update: \(peerID.displayName) \(newStateString)"))
 
         guard let newState = newState else {
             if let index = sortedPeers.firstIndex(of: peerID) {

@@ -119,7 +119,7 @@ internal class GameViewController: UIViewController {
         if gameManager.gameState == .preMatch && networkConfig.isHost {
             gameManager.player(.startedGame)
             if case let .mpc(_, session, _)? = networkConfig {
-                PlayerMetrics.log(event: .hostStartedMatch,
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             }
         }
@@ -129,13 +129,13 @@ internal class GameViewController: UIViewController {
 
     @objc
     func helpButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         showHelp()
     }
 
     @objc
     func quitButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
@@ -159,8 +159,8 @@ internal class GameViewController: UIViewController {
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
-        PlayerMetrics.log(event: .usedHelp,
+        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerAnonymousMetrics.log(event: .usedHelp,
                           attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
             let stat: PlayerStat
@@ -174,7 +174,7 @@ internal class GameViewController: UIViewController {
     }
 
     func reloadPage() {
-        PlayerMetrics.log(event: .userAction("flagButtonPressed:reload"))
+        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:reload"))
         self.webView?.reload()
     }
 

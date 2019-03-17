@@ -99,9 +99,9 @@ internal class VotingViewController: CenteredTableViewController {
     // MARK: - Actions
 
     @objc func doneButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])
+            PlayerAnonymousMetrics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])
             self.backupQuit?()
             return
         }

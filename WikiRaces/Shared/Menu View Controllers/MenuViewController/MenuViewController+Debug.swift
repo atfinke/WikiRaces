@@ -15,7 +15,7 @@ extension MenuViewController {
 
     @objc
     func showDebugController() {
-        PlayerMetrics.log(event: .versionInfo)
+        PlayerAnonymousMetrics.log(event: .versionInfo)
 
         let message = "If your name isn't Andrew, you probably shouldn’t be here."
         let alertController = UIAlertController(title: "Debug Panel",

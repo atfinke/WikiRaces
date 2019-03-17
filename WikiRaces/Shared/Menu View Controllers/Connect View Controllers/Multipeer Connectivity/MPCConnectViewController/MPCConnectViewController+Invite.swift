@@ -149,7 +149,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     /// Accepts the displayed invite
     @objc
     func acceptInvite() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         activeInviteTimeoutTimer?.invalidate()
 
         activeInvite?(true, session)
@@ -172,7 +172,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     /// Declines the displayed invite
     @objc
     func declineInvite() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         activeInvite?(false, session)
 

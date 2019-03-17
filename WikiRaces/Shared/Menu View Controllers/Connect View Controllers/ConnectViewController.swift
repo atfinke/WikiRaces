@@ -45,7 +45,7 @@ class ConnectViewController: UIViewController {
                     trace?.stop()
                     #endif
                 }
-                PlayerMetrics.log(event: .connectionTestResult,
+                PlayerAnonymousMetrics.log(event: .connectionTestResult,
                                   attributes: [
                                     "Result": NSNumber(value: success).intValue,
                                     "Duration": -startDate.timeIntervalSinceNow
@@ -145,7 +145,7 @@ class ConnectViewController: UIViewController {
 
         if showSettingsButton {
             let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-                PlayerMetrics.log(event: .userAction("showError:settings"))
+                PlayerAnonymousMetrics.log(event: .userAction("showError:settings"))
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     fatalError("Settings URL nil")
                 }
@@ -160,7 +160,7 @@ class ConnectViewController: UIViewController {
 
     /// Cancels the join/create a race action and sends player back to main menu
     @objc func pressedCancelButton() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         onQuit?()
 
         UIView.animate(withDuration: 0.25, animations: {
