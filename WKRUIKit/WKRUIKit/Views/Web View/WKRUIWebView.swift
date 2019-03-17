@@ -55,10 +55,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         }
     }
 
-    public var pointsScrolled: Int {
-        return Int(CGFloat(pixelsScrolled) / UIScreen.main.scale)
-    }
-    private var pixelsScrolled = 0
+    public private(set) var pixelsScrolled = 0
     private var lastPixelOffset = 0
 
     // network progress (fetch raw html) vs render progress (load html + images)
@@ -263,13 +260,6 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
             lastPixelOffset = messageBody
         default: return
         }
-    }
-
-    // MARK: - Other
-
-    public func resetPixelCount() {
-        pixelsScrolled = 0
-        lastPixelOffset = 0
     }
 
 }

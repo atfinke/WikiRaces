@@ -29,7 +29,7 @@ public class WKRPlayer: Codable, Hashable {
 
     public private(set) var stats: WKRPlayerRaceStats?
     internal private(set) var neededHelpCount: Int?
-    internal private(set) var pointsScrolled: Int?
+    internal private(set) var pixelsScrolled: Int?
     public var isCreator: Bool?
 
     // MARK: - Initialization
@@ -45,7 +45,7 @@ public class WKRPlayer: Codable, Hashable {
         state = .racing
         raceHistory = WKRHistory(firstPage: page)
         neededHelpCount = 0
-        pointsScrolled = 0
+        pixelsScrolled = 0
         stats = WKRPlayerRaceStats(player: self)
     }
 
@@ -54,9 +54,9 @@ public class WKRPlayer: Codable, Hashable {
         stats = WKRPlayerRaceStats(player: self)
     }
 
-    func finishedViewingLastPage(pointsScrolled: Int) {
+    func finishedViewingLastPage(pixelsScrolled: Int) {
         raceHistory?.finishedViewingLastPage()
-        self.pointsScrolled = pointsScrolled
+        self.pixelsScrolled = pixelsScrolled
     }
 
     func neededHelp() {

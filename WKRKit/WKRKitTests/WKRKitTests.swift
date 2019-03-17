@@ -68,14 +68,14 @@ class WKRKitTests: WKRKitTestCase {
 
         let playerOne = WKRPlayer.mock(named: "Andrew")
         playerOne.startedNewRace(on: starting)
-        playerOne.finishedViewingLastPage(pointsScrolled: 0)
+        playerOne.finishedViewingLastPage(pixelsScrolled: 0)
         race.playerUpdated(playerOne)
         XCTAssertEqual(race.players.count, 1)
 
         let playerTwo = WKRPlayer.mock(named: "Midnight")
         playerTwo.startedNewRace(on: starting)
         sleep(1)
-        playerTwo.finishedViewingLastPage(pointsScrolled: 0)
+        playerTwo.finishedViewingLastPage(pixelsScrolled: 0)
         race.playerUpdated(playerTwo)
         XCTAssertEqual(race.players.count, 2)
 
@@ -203,7 +203,7 @@ class WKRKitTests: WKRKitTestCase {
 
         let page =  WKRPage.mockApple()
         player.startedNewRace(on: page)
-        player.finishedViewingLastPage(pointsScrolled: 0)
+        player.finishedViewingLastPage(pixelsScrolled: 0)
 
         do {
             let data = try JSONEncoder().encode(player)
@@ -435,7 +435,7 @@ class WKRKitTests: WKRKitTestCase {
 
         sleep(1)
 
-        playerOne.finishedViewingLastPage(pointsScrolled: 5)
+        playerOne.finishedViewingLastPage(pixelsScrolled: 5)
         stats = WKRPlayerRaceStats(player: playerOne)
         XCTAssertEqual(stats.raw[0].value, "1 S")
         XCTAssertEqual(stats.raw[1].value, "5 Pixels")

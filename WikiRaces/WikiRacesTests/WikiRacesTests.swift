@@ -129,7 +129,7 @@ class WikiRacesTests: XCTestCase {
                                              points: 10,
                                              place: 1,
                                              timeRaced: timeRaced,
-                                             pointsScrolled: 0)
+                                             pixelsScrolled: 0)
 
             var newTime = timeRaced
             if fastest != 0 {
@@ -151,13 +151,13 @@ class WikiRacesTests: XCTestCase {
             let newPlace = Double(Int.random(in: 1..<5))
             let newPoints = Double(Int.random(in: 0...10))
             let newTimeRaced = Double(Int.random(in: 0...100))
-            let newPointsScrolled = Double(Int.random(in: 0...100000))
+            let newPixelsScrolled = Double(Int.random(in: 0...100000))
 
             let raceCountStat: PlayerStat
             let racePointsStat: PlayerStat
             let racePlaceStat: PlayerStat
             let raceTimeStat: PlayerStat
-            let racePointsScrolledStat: PlayerStat
+            let racePixelsScrolledStat: PlayerStat
 
             switch raceType {
 
@@ -165,7 +165,7 @@ class WikiRacesTests: XCTestCase {
                 raceCountStat = .mpcRaces
                 racePointsStat = .mpcPoints
                 raceTimeStat = .mpcTotalTime
-                racePointsScrolledStat = .mpcPointsScrolled
+                racePixelsScrolledStat = .mpcPixelsScrolled
                 if newPlace == 1 {
                     racePlaceStat = .mpcRaceFinishFirst
                 } else if newPlace == 2 {
@@ -179,7 +179,7 @@ class WikiRacesTests: XCTestCase {
                 raceCountStat = .gkRaces
                 racePointsStat = .gkPoints
                 raceTimeStat = .gkTotalTime
-                racePointsScrolledStat = .gkPointsScrolled
+                racePixelsScrolledStat = .gkPixelsScrolled
                 if newPlace == 1 {
                     racePlaceStat = .gkRaceFinishFirst
                 } else if newPlace == 2 {
@@ -192,7 +192,7 @@ class WikiRacesTests: XCTestCase {
             case .solo:
                 raceCountStat = .soloRaces
                 raceTimeStat = .soloTotalTime
-                racePointsScrolledStat = .soloPointsScrolled
+                racePixelsScrolledStat = .soloPixelsScrolled
 
                 // N/A for solo
                 racePointsStat = .soloHelp
@@ -203,13 +203,13 @@ class WikiRacesTests: XCTestCase {
             let points = racePointsStat.value()
             let place = racePlaceStat.value()
             let timeRaced = raceTimeStat.value()
-            let racePointsScrolled = racePointsScrolledStat.value()
+            let racePixelsScrolled = racePixelsScrolledStat.value()
 
             StatsHelper.shared.completedRace(type: raceType,
                                              points: Int(newPoints),
                                              place: Int(newPlace),
                                              timeRaced: Int(newTimeRaced),
-                                             pointsScrolled: Int(newPointsScrolled))
+                                             pixelsScrolled: Int(newPixelsScrolled))
 
             if raceType != .solo {
                 XCTAssertEqual(points + newPoints, racePointsStat.value())
@@ -218,14 +218,14 @@ class WikiRacesTests: XCTestCase {
                 }
             }
             XCTAssertEqual(races + 1, raceCountStat.value())
-            XCTAssertEqual(racePointsScrolled + newPointsScrolled, racePointsScrolledStat.value())
+            XCTAssertEqual(racePixelsScrolled + newPixelsScrolled, racePixelsScrolledStat.value())
             XCTAssertEqual(timeRaced + newTimeRaced, raceTimeStat.value())
             testedStats = testedStats.union([
                 raceCountStat,
                 racePointsStat,
                 racePlaceStat,
                 raceTimeStat,
-                racePointsScrolledStat
+                racePixelsScrolledStat
                 ])
         }
         print("Tested: " + testedStats.map({ $0.rawValue }).sorted().description)

@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
 
         navigationController?.navigationBar.barStyle = .wkrStyle
+
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (_) in
+            DispatchQueue.main.async {
+                self.title = self.webView.pixelsScrolled.description
+            }
+        }
     }
 
 }

@@ -36,8 +36,8 @@ extension WKRGameManager {
                 })
             case .startedLoading:
                 self.webView?.startedPageLoad()
-                let pointsScrolled = self.webView?.pointsScrolled ?? 0
-                self.localPlayer.finishedViewingLastPage(pointsScrolled: pointsScrolled)
+                let pixelsScrolled = self.webView?.pixelsScrolled ?? 0
+                self.localPlayer.finishedViewingLastPage(pixelsScrolled: pixelsScrolled)
                 self.peerNetwork.send(object: WKRCodable(self.localPlayer))
 
                 let linkCount = self.localPlayer.raceHistory?.entries.count ?? 0

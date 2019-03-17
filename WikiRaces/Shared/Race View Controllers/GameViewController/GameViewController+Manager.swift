@@ -37,19 +37,19 @@ extension GameViewController {
             logEvent(event)
         case .playerRaceLinkCountForCurrentRace(let linkCount):
             webView?.text = linkCount.description
-        case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
+        case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled):
             guard let raceType = statRaceType else { return }
             StatsHelper.shared.completedRace(type: raceType,
                                              points: points,
                                              place: place,
                                              timeRaced: timeRaced,
-                                             pointsScrolled: webViewPointsScrolled)
+                                             pixelsScrolled: webViewPixelsScrolled)
             PlayerAnonymousMetrics.log(event: .raceCompleted,
                               attributes: [
                                 "RaceType": raceType.rawValue,
                                 "Time": timeRaced,
                                 "Points": points,
-                                "WebViewScrolled": webViewPointsScrolled
+                                "WebViewScrolled": webViewPixelsScrolled
                 ])
         }
     }
