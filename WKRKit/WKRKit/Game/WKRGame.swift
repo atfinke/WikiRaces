@@ -65,7 +65,7 @@ public class WKRGame {
 
     }
 
-    func createRaceConfig() -> WKRRaceConfig? {
+    func createRaceConfig() -> (config: WKRRaceConfig?, logEvent: WKRLogEvent?)? {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
         var sessionPoints = calculateSessionPoints()

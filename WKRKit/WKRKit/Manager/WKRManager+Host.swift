@@ -129,12 +129,16 @@ extension WKRGameManager {
     }
 
     private func prepareRaceConfig() {
-        guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
+        guard localPlayer.isHost, let raceConfigCreation = game.createRaceConfig(), let config = raceConfigCreation.config else {
             localErrorOccurred(.configCreationFailed)
             return
         }
 
-        peerNetwork.send(object: WKRCodable(raceConfig))
+        if let logEvent = raceConfigCreation.logEvent {
+            gameUpdate(.log(logEvent))
+        }
+
+        peerNetwork.send(object: WKRCodable(config))
         var timeLeft = WKRRaceDurationConstants.votingPreRace
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             timeLeft -= 1

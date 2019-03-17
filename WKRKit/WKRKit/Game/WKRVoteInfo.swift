@@ -34,7 +34,7 @@ public struct WKRVoteInfo: Codable, Equatable {
         playerVotes[profile] = page
     }
 
-    internal func selectFinalPage(with weights: [WKRPlayerProfile: Int]) -> WKRPage? {
+    internal func selectFinalPage(with weights: [WKRPlayerProfile: Int]) -> (WKRPage?, WKRLogEvent?) {
         var votes = [WKRPage: Int]()
         pages.forEach { votes[$0] = 0 }
 
@@ -55,6 +55,7 @@ public struct WKRVoteInfo: Codable, Equatable {
             }
         }
 
+        var logEvent: WKRLogEvent?
         let totalPoints = Double(weights.values.reduce(0, +))
         let lowestScoringPlayers = weights.sorted(by: { $0.value < $1.value })
 
@@ -89,12 +90,25 @@ public struct WKRVoteInfo: Codable, Equatable {
             */
             let nextLowestPoints = Double(lowestScoringPlayers[1].value)
             let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.4)
+
+            var attributes: [String: Any] = [
+                "TiedCount": pagesWithMostVotes.count,
+                "Chance": 1.0 - inversePercentChance,
+                "RawPointDiff": Int(nextLowestPoints) - player.value
+            ]
+
             if Double.random(in: 0..<1) > inversePercentChance {
-                return page
+                attributes["BrokeTie"] = 1
+                return (page, WKRLogEvent(type: .votingArticlesWeightedTiebreak,
+                                          attributes: attributes))
+            } else {
+                attributes["BrokeTie"] = 0
+                logEvent = WKRLogEvent(type: .votingArticlesWeightedTiebreak,
+                                       attributes: attributes)
             }
         }
 
-        return pagesWithMostVotes.randomElement
+        return (pagesWithMostVotes.randomElement, logEvent)
     }
 
     // MARK: - Public Accessors
