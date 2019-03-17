@@ -128,7 +128,8 @@ class WikiRacesTests: XCTestCase {
             StatsHelper.shared.completedRace(type: raceType,
                                              points: 10,
                                              place: 1,
-                                             timeRaced: timeRaced)
+                                             timeRaced: timeRaced,
+                                             pointsScrolled: 0)
 
             var newTime = timeRaced
             if fastest != 0 {
@@ -150,11 +151,13 @@ class WikiRacesTests: XCTestCase {
             let newPlace = Double(Int.random(in: 1..<5))
             let newPoints = Double(Int.random(in: 0...10))
             let newTimeRaced = Double(Int.random(in: 0...100))
+            let newPointsScrolled = Double(Int.random(in: 0...100000))
 
             let raceCountStat: PlayerStat
             let racePointsStat: PlayerStat
             let racePlaceStat: PlayerStat
             let raceTimeStat: PlayerStat
+            let racePointsScrolledStat: PlayerStat
 
             switch raceType {
 
@@ -162,6 +165,7 @@ class WikiRacesTests: XCTestCase {
                 raceCountStat = .mpcRaces
                 racePointsStat = .mpcPoints
                 raceTimeStat = .mpcTotalTime
+                racePointsScrolledStat = .mpcPointsScrolled
                 if newPlace == 1 {
                     racePlaceStat = .mpcRaceFinishFirst
                 } else if newPlace == 2 {
@@ -175,6 +179,7 @@ class WikiRacesTests: XCTestCase {
                 raceCountStat = .gkRaces
                 racePointsStat = .gkPoints
                 raceTimeStat = .gkTotalTime
+                racePointsScrolledStat = .gkPointsScrolled
                 if newPlace == 1 {
                     racePlaceStat = .gkRaceFinishFirst
                 } else if newPlace == 2 {
@@ -187,6 +192,7 @@ class WikiRacesTests: XCTestCase {
             case .solo:
                 raceCountStat = .soloRaces
                 raceTimeStat = .soloTotalTime
+                racePointsScrolledStat = .soloPointsScrolled
 
                 // N/A for solo
                 racePointsStat = .soloHelp
@@ -197,11 +203,13 @@ class WikiRacesTests: XCTestCase {
             let points = racePointsStat.value()
             let place = racePlaceStat.value()
             let timeRaced = raceTimeStat.value()
+            let racePointsScrolled = racePointsScrolledStat.value()
 
             StatsHelper.shared.completedRace(type: raceType,
                                              points: Int(newPoints),
                                              place: Int(newPlace),
-                                             timeRaced: Int(newTimeRaced))
+                                             timeRaced: Int(newTimeRaced),
+                                             pointsScrolled: Int(newPointsScrolled))
 
             if raceType != .solo {
                 XCTAssertEqual(points + newPoints, racePointsStat.value())
@@ -210,8 +218,15 @@ class WikiRacesTests: XCTestCase {
                 }
             }
             XCTAssertEqual(races + 1, raceCountStat.value())
+            XCTAssertEqual(racePointsScrolled + newPointsScrolled, racePointsScrolledStat.value())
             XCTAssertEqual(timeRaced + newTimeRaced, raceTimeStat.value())
-            testedStats = testedStats.union([raceCountStat, racePointsStat, racePlaceStat, raceTimeStat])
+            testedStats = testedStats.union([
+                raceCountStat,
+                racePointsStat,
+                racePlaceStat,
+                raceTimeStat,
+                racePointsScrolledStat
+                ])
         }
         print("Tested: " + testedStats.map({ $0.rawValue }).sorted().description)
     }
