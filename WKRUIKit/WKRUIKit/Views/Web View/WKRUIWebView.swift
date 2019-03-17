@@ -102,7 +102,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         )
 
         loadingView.alpha = 0.0
-        loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.2954569777)
+        loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(loadingView)
 
