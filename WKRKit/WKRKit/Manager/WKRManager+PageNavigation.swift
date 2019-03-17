@@ -21,20 +21,6 @@ extension WKRGameManager {
                                                  attributes: [
                                                     "PageURL": self.truncated(url: url) as Any
                     ])))
-            case .loadingError(let error):
-//                displayNetworkAlert(title: "Error loading page", duration: 3)
-
-                #warning("tweak for release")
-                let info: String
-                if let error = error {
-                    let bridged = error as NSError
-                    info = "\(bridged.domain): \(bridged.code)\n\n\(bridged.userInfo)"
-                } else {
-                    info = "nil error"
-                }
-                let message = "PLEASE SEND SCREENSHOT OF THIS TO ANDREW (WILL DISMISS IN 10):\n\n" + info
-                self.displayNetworkAlert(title: message,
-                                    duration: 10)
             case .loadingError(_):
                 self.displayNetworkAlert(title: "Error loading page", duration: 3)
 

@@ -61,6 +61,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     // MARK: - Logic
 
+    //swiftlint:disable:next function_body_length
     private func updateEntries(oldPlayer: WKRPlayer?) {
         title = player?.name
         stats = player?.stats

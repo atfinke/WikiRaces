@@ -143,8 +143,9 @@ internal class MPCConnectViewController: ConnectViewController {
 
         if !isValidPlayerName {
             let length = playerName.count == 0 ? "Short" : "Long"
+            let message = "Your player name is too \(length.lowercased()). "
             showError(title: "Player Name Too \(length)",
-                      message: "Your player name is too \(length.lowercased()). Would you like to open settings to adjust it?",
+                      message: message +  "Would you like to open settings to adjust it?",
                       showSettingsButton: true)
         }
     }

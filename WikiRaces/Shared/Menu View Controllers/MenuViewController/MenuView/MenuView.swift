@@ -188,7 +188,7 @@ class MenuView: UIView {
         if UIDevice.current.userInterfaceIdiom == .pad {
             titleLabelConstraint.constant = frame.size.height / 8
         } else {
-            titleLabelConstraint.constant = frame.size.height / 12
+            titleLabelConstraint.constant = frame.size.height / 11
         }
 
         switch state {

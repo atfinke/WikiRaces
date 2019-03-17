@@ -65,9 +65,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
             guard let hostAlias = self.hostPlayerAlias, object.hostName == hostAlias else {
-                let names = match.players.map({ $0.alias })
                 PlayerMetrics.log(event: .globalFailedToFindHost)
-                let message = "Please try again later. Please tell andrew e-\(hostPlayerAlias), a-\(object.hostName), n-\(names)"
+                let message = "Please try again later."
                 showError(title: "Unable To Find Best Host", message: message)
                 return
             }
@@ -121,10 +120,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                 }
                 PlayerStat.gkConnectedToMatch.increment()
             } else {
-                let names = players.map({ $0.alias })
                 PlayerMetrics.log(event: .globalFailedToFindHost)
                 self.showError(title: "Unable To Find Best Host",
-                               message: "Please try again later. Please tell andrew p-\(names)")
+                               message: "Please try again later.")
             }
         }
 

@@ -90,6 +90,7 @@ extension GameViewController {
     }
 
     private func setupProgressView() {
+        progressView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(progressView)
         let constraints: [NSLayoutConstraint] = [
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
