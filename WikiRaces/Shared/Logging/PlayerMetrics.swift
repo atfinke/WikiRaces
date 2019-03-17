@@ -50,6 +50,9 @@ internal struct PlayerMetrics {
         case connectionTestResult
         case displayedMedals
 
+        case collectiveVotingArticlesSeen, localVotingArticlesSeen, localVotingArticlesReset
+        case votingArticleValidationFailure
+
         init(event: WKRLogEvent) {
             switch event.type {
             case .linkOnPage:       self = .linkOnPage
@@ -58,6 +61,11 @@ internal struct PlayerMetrics {
             case .pageLoadingError: self = .pageLoadingError
             case .pageView:         self = .pageView
             case .missedLink:       self = .missedLink
+
+            case .collectiveVotingArticlesSeen:     self = .collectiveVotingArticlesSeen
+            case .localVotingArticlesSeen:          self = .localVotingArticlesSeen
+            case .localVotingArticlesReset:         self = .localVotingArticlesReset
+            case .votingArticleValidationFailure:   self = .votingArticleValidationFailure
             }
         }
     }

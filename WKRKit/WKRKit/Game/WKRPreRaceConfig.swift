@@ -45,9 +45,10 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     /// Creates a WKRPreRaceConfig object
     ///
     /// - Parameter completionHandler: The handler holding the new config object
-    static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?) -> Void)) {
-        let finalArticles = WKRSeenFinalArticlesStore.unseenArticles()
+    static func new(completionHandler: @escaping ((_ config: WKRPreRaceConfig?, _ logEvents: [WKRLogEvent]) -> Void)) {
 
+        let (finalArticles, resetLogEvent) = WKRSeenFinalArticlesStore.unseenArticles()
+        var logEvents = [resetLogEvent]
         let operationQueue = OperationQueue()
 
         // Get a few more than neccessary random paths in case some final articles are no longer valid
@@ -77,11 +78,13 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
             // Uses a set to remove any duplicates. This could happen if two final articles end up redirecting to the same page.
             let finalPages = Array(Set(pages.prefix(WKRKitConstants.current.votingArticlesCount)))
+
+            let events = logEvents.compactMap { $0 }
             if !finalPages.isEmpty, let page = startingPage {
                 let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
-                completionHandler(config)
+                completionHandler(config, events)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, events)
             }
 
         }
@@ -112,6 +115,9 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                         let startingPage = startingPage,
                         startingPage.url != page.url {
                         pages.append(page)
+                    } else {
+                        logEvents.append(WKRLogEvent(type: .votingArticleValidationFailure,
+                                                     attributes: nil))
                     }
                     operation.state = .isFinished
                 }

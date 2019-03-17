@@ -34,15 +34,7 @@ extension GameViewController {
                 self.errorOccurred(error)
             }
         case .log(let event):
-            #if !MULTIWINDOWDEBUG
-            let metric = PlayerMetrics.Event(event: event)
-            if metric == .pageView,
-                let config = networkConfig,
-                let raceType = StatsHelper.RaceType(config) {
-                StatsHelper.shared.viewedPage(raceType: raceType)
-            }
-            PlayerMetrics.log(event: metric, attributes: event.attributes)
-            #endif
+            logEvent(event)
         case .playerRaceLinkCountForCurrentRace(let linkCount):
             webView?.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
@@ -124,6 +116,18 @@ extension GameViewController {
 
         PlayerMetrics.log(event: .fatalError,
                           attributes: ["Error": error.title as Any])
+    }
+
+    func logEvent(_ logEvent: WKRLogEvent) {
+        #if !MULTIWINDOWDEBUG
+        let metric = PlayerMetrics.Event(event: logEvent)
+        if metric == .pageView,
+            let config = networkConfig,
+            let raceType = StatsHelper.RaceType(config) {
+            StatsHelper.shared.viewedPage(raceType: raceType)
+        }
+        PlayerMetrics.log(event: metric, attributes: logEvent.attributes)
+        #endif
     }
 
     // MARK: - Controllers

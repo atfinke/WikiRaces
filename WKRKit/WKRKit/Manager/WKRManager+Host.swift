@@ -153,7 +153,7 @@ extension WKRGameManager {
     internal func fetchPreRaceConfig() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        WKRPreRaceConfig.new { preRaceConfig in
+        WKRPreRaceConfig.new { preRaceConfig, logEvents in
             if let config = preRaceConfig {
                 self.game.preRaceConfig = config
                 self.sendPreRaceConfig()
@@ -161,6 +161,7 @@ extension WKRGameManager {
             } else {
                 self.localErrorOccurred(.configCreationFailed)
             }
+            logEvents.forEach { self.gameUpdate(.log($0)) }
         }
     }
 

@@ -83,11 +83,20 @@ internal class GameViewController: UIViewController {
 
         if !isInterfaceConfigured {
             isInterfaceConfigured = true
-            if !networkConfig.isHost {
+
+            let logEvents: [WKRLogEvent]
+            if networkConfig.isHost {
+                if case .solo? = networkConfig {
+                    logEvents = WKRSeenFinalArticlesStore.localLogEvents()
+                } else {
+                    logEvents = WKRSeenFinalArticlesStore.hostLogEvents()
+                }
+            } else {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.connectingLabel.alpha = 1.0
                     self.activityIndicatorView.alpha = 1.0
                 })
+                logEvents = WKRSeenFinalArticlesStore.localLogEvents()
             }
 
             if case let .mpc(_, session, _)? = networkConfig {
@@ -104,6 +113,8 @@ internal class GameViewController: UIViewController {
                 })
                 StatsHelper.shared.connected(to: playerNames, raceType: .gameKit)
             }
+
+            logEvents.forEach { logEvent($0) }
         }
         if gameManager.gameState == .preMatch && networkConfig.isHost {
             gameManager.player(.startedGame)

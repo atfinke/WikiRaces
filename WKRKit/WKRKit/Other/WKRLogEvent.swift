@@ -12,6 +12,8 @@ public struct WKRLogEvent {
 
     public enum EventType: String {
         case linkOnPage, missedLink, foundPage, pageBlocked, pageLoadingError, pageView
+        case collectiveVotingArticlesSeen, localVotingArticlesSeen, localVotingArticlesReset
+        case votingArticleValidationFailure
     }
 
     public let type: EventType

@@ -32,10 +32,11 @@ public struct WKRSeenFinalArticlesStore {
 
     // MARK: - Helpers
 
-    internal static func unseenArticles() -> [String] {
+    internal static func unseenArticles() -> (articles: [String], log: WKRLogEvent?) {
         var finalArticles = Set(WKRKitConstants.current.finalArticles)
 
         let minCount = 50
+        var resetLog: WKRLogEvent?
 
         // make sure at least minCount unseen articles left before removing locally seen
         if localPlayersSeenFinalArticles.count < finalArticles.count - minCount {
@@ -43,6 +44,8 @@ public struct WKRSeenFinalArticlesStore {
             finalArticles = finalArticles.subtracting(localPlayersSeenFinalArticles)
         } else {
             // player has seen almost all articles already
+            resetLog = WKRLogEvent(type: .localVotingArticlesReset,
+                                   attributes: ["ArticleCount": localPlayersSeenFinalArticles.count])
             resetLocalPlayerSeenFinalArticles()
         }
 
@@ -51,7 +54,7 @@ public struct WKRSeenFinalArticlesStore {
             finalArticles = finalArticles.subtracting(uniqueRemotePlayersSeenFinalArticles)
         }
 
-        return Array(finalArticles)
+        return (Array(finalArticles), resetLog)
     }
 
     // MARK: - Local Player
@@ -91,6 +94,28 @@ public struct WKRSeenFinalArticlesStore {
 
     public static func resetRemotePlayersSeenFinalArticles() {
         uniqueRemotePlayersSeenFinalArticles = []
+    }
+
+    public static func hostLogEvents() -> [WKRLogEvent] {
+        let seenLocalCount = localPlayersSeenFinalArticles.count
+        let seenCollectiveCount = Set(localPlayersSeenFinalArticles)
+            .union(uniqueRemotePlayersSeenFinalArticles)
+            .count
+
+        return [
+            WKRLogEvent(type: .localVotingArticlesSeen,
+                        attributes: ["ArticleCount": seenLocalCount]),
+            WKRLogEvent(type: .collectiveVotingArticlesSeen,
+                        attributes: ["ArticleCount": seenCollectiveCount])
+        ]
+    }
+
+    public static func localLogEvents() -> [WKRLogEvent] {
+        let seenLocalCount = localPlayersSeenFinalArticles.count
+        return [
+            WKRLogEvent(type: .localVotingArticlesSeen,
+                        attributes: ["ArticleCount": seenLocalCount])
+        ]
     }
 
 }
