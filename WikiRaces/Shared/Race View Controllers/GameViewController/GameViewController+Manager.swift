@@ -39,11 +39,11 @@ extension GameViewController {
             webView?.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPointsScrolled):
             guard let raceType = statRaceType else { return }
-            PlayerStat.pointsScrolled.increment(by: Double(webViewPointsScrolled))
             StatsHelper.shared.completedRace(type: raceType,
                                              points: points,
                                              place: place,
-                                             timeRaced: timeRaced)
+                                             timeRaced: timeRaced,
+                                             pointsScrolled: webViewPointsScrolled)
             PlayerMetrics.log(event: .raceCompleted,
                               attributes: [
                                 "RaceType": raceType.rawValue,

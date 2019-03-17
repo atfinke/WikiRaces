@@ -28,6 +28,7 @@ enum PlayerStat: String, CaseIterable {
     case mpcRaceFinishSecond
     case mpcRaceFinishThird
     case mpcRaceDNF
+    case mpcPointsScrolled
 
     case gkVotes
     case gkHelp
@@ -45,6 +46,7 @@ enum PlayerStat: String, CaseIterable {
     case gkRaceFinishSecond
     case gkRaceFinishThird
     case gkRaceDNF
+    case gkPointsScrolled
 
     case soloVotes
     case soloHelp
@@ -53,8 +55,8 @@ enum PlayerStat: String, CaseIterable {
     case soloTotalTime
     case soloRaces
     case soloPressedHost
+    case soloPointsScrolled
 
-    case pointsScrolled
     case displayedMedals
 
     static var numericHighStats: [PlayerStat] = [
@@ -70,6 +72,7 @@ enum PlayerStat: String, CaseIterable {
         .mpcRaceFinishSecond,
         .mpcRaceFinishThird,
         .mpcRaceDNF,
+        .mpcPointsScrolled,
 
         .gkVotes,
         .gkHelp,
@@ -84,6 +87,7 @@ enum PlayerStat: String, CaseIterable {
         .gkRaceFinishSecond,
         .gkRaceFinishThird,
         .gkRaceDNF,
+        .gkPointsScrolled,
 
         .soloVotes,
         .soloHelp,
@@ -91,8 +95,8 @@ enum PlayerStat: String, CaseIterable {
         .soloTotalTime,
         .soloRaces,
         .soloPressedHost,
+        .soloPointsScrolled,
 
-        .pointsScrolled,
         .displayedMedals
     ]
 

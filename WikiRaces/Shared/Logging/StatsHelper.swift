@@ -57,6 +57,10 @@ internal class StatsHelper {
         return PlayerStat.mpcPages.value() + PlayerStat.gkPages.value()
     }
 
+    var multiplayerPointsScrolled: Double {
+        return PlayerStat.mpcPointsScrolled.value() + PlayerStat.gkPointsScrolled.value()
+    }
+
     var multiplayerTotalTime: Double {
         return PlayerStat.mpcTotalTime.value() + PlayerStat.gkTotalTime.value()
     }
@@ -150,7 +154,7 @@ internal class StatsHelper {
     }
 
     //swiftlint:disable:next function_body_length cyclomatic_complexity
-    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int) {
+    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int, pointsScrolled: Int) {
         switch type {
         case .mpc:
             PlayerStat.mpcPoints.increment(by: Double(points))
@@ -182,6 +186,7 @@ internal class StatsHelper {
             } else {
                 SKStoreReviewController.shouldPromptForRating = false
             }
+            PlayerStat.mpcPointsScrolled.increment(by: Double(pointsScrolled))
         case .gameKit:
             PlayerStat.gkPoints.increment(by: Double(points))
             PlayerStat.gkRaces.increment()
@@ -211,6 +216,7 @@ internal class StatsHelper {
             } else {
                 SKStoreReviewController.shouldPromptForRating = false
             }
+            PlayerStat.gkPointsScrolled.increment(by: Double(pointsScrolled))
         case .solo:
             PlayerStat.soloRaces.increment()
             PlayerStat.soloTotalTime.increment(by: Double(timeRaced))
@@ -223,6 +229,7 @@ internal class StatsHelper {
             }
 
             SKStoreReviewController.shouldPromptForRating = true
+            PlayerStat.soloPointsScrolled.increment(by: Double(pointsScrolled))
         }
 
         ubiquitousStoreSync()
@@ -347,6 +354,7 @@ internal class StatsHelper {
         let totalTime = multiplayerTotalTime
         let fastestTime = multiplayerFastestTime
         let pagesViewed = multiplayerPages
+        let pointsScrolled = multiplayerPointsScrolled
 
         let pointsScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.points")
         pointsScore.value = Int64(points)
@@ -360,7 +368,18 @@ internal class StatsHelper {
         let pagesViewedScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.pages")
         pagesViewedScore.value = Int64(pagesViewed)
 
-        var scores = [pointsScore, racesScore, totalTimeScore, totalTimeScore, pagesViewedScore]
+        let pointsScrolledScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.pointsscrolled")
+        pointsScrolledScore.value = Int64(pointsScrolled)
+
+        var scores = [
+            pointsScore,
+            racesScore,
+            totalTimeScore,
+            totalTimeScore,
+            pagesViewedScore,
+            pointsScrolledScore
+        ]
+
         if races >= 5 {
             let averageScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.ppr")
             averageScore.value = Int64(average * 1_000)
