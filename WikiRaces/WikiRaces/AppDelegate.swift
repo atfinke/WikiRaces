@@ -65,14 +65,14 @@ internal class AppDelegate: WKRAppDelegate {
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
-            PlayerMetrics.log(event: .cloudStatus,
+            PlayerAnonymousMetrics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
     }
 
     private func logInterfaceMode() {
         let mode = WKRUIStyle.isDark ? "Dark" : "Light"
-        PlayerMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
+        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
     }
 
     private func logBuild() {
@@ -96,7 +96,7 @@ internal class AppDelegate: WKRAppDelegate {
                                             animated: true,
                                             completion: nil)
 
-        PlayerMetrics.log(event: .banHammer)
+        PlayerAnonymousMetrics.log(event: .banHammer)
     }
 
 }
