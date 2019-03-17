@@ -22,13 +22,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     private var deferredUpdate = false
 
     private var entries = [WKRHistoryEntry]()
-    private var stats: WKRPlayerRaceStats? {
-        didSet {
-            if stats != oldValue {
-                tableView.reloadSections(IndexSet(integer: 1), with: .none)
-            }
-        }
-    }
+    private var stats: WKRPlayerRaceStats?
 
     var player: WKRPlayer? {
         didSet {
@@ -61,20 +55,30 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
     // MARK: - Logic
 
-    //swiftlint:disable:next function_body_length
+    // Update the table, with the goal of only updating the changed entries
+    // 1. Make sure the player is the same as the currently displayed one (else update the whole table)
+    // 2. Make sure the player and their history not nil (else ...)
+    // 3. Make sure something has changed
+    // 4. Make sure the controller is visable (else ...)
+    // 5. Make sure we aren't animating and the user isn't scrolling, otherwise the update will look poor (else ...)
+    // 6. Make sure that the new player object is actually newer than the last one and has more history entries (else ...)
+    // 7. Make sure we have the correct amount of new cells to insert (else ...)
+    // 8. Check if we have the same number of stats, if yes, don't use a table animation to update them
+    //swiftlint:disable:next function_body_length cyclomatic_complexity
     private func updateEntries(oldPlayer: WKRPlayer?) {
         title = player?.name
-        stats = player?.stats
 
         // New Player
         if let oldPlayer = oldPlayer, oldPlayer != player {
             entries = player?.raceHistory?.entries ?? []
+            stats = player?.stats
             tableView.reloadData()
             return
         }
 
         guard let player = player, let history = player.raceHistory else {
             entries = []
+            stats = nil
             tableView.reloadData()
             return
         }
@@ -86,6 +90,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
         if view.window == nil {
             self.entries = history.entries
+            stats = player.stats
             tableView.reloadData()
             return
         } else if isUserScrolling || isTableViewAnimating {
@@ -106,6 +111,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         // got an older history object, reset table
         if newEntryCount < 0 {
             self.entries = history.entries
+            stats = player.stats
             tableView.reloadData()
             return
         }
@@ -119,14 +125,37 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         // make sure the new history count = old + cell insert count
         guard history.entries.count == entries.count + rowsToInsert.count else {
             self.entries = history.entries
+            stats = player.stats
             tableView.reloadData()
             return
         }
 
         self.entries = history.entries
+
+        let oldStats = stats
+        stats = player.stats
+        let shouldUpdateStatsInfo = oldStats != stats
+        let shouldUpdateStatsCount = oldStats?.raw.count != stats?.raw.count
+
+        // Don't do a table animation if just updating the values
+        if let stats = stats, shouldUpdateStatsInfo && !shouldUpdateStatsCount {
+            for (index, stat) in stats.raw.enumerated() {
+                let indexPath = IndexPath(row: index, section: 1)
+                let cell = tableView.cellForRow(at: indexPath) as? HistoryTableViewStatsCell
+                cell?.stat = stat
+            }
+        }
+
+        print("stats i: \(shouldUpdateStatsInfo) c: \(shouldUpdateStatsCount)")
+
         tableView.performBatchUpdates({
             tableView.reloadRows(at: rowsToReload, with: .none)
             tableView.insertRows(at: rowsToInsert, with: .fade)
+
+            // Update with table animation if the number of stats has changed
+            if shouldUpdateStatsCount {
+                tableView.reloadSections(IndexSet(integer: 1), with: .none)
+            }
         }, completion: { _ in
             self.isTableViewAnimating = false
             if self.deferredUpdate {
@@ -138,7 +167,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     // MARK: - Actions
 
     @IBAction func doneButtonPressed() {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
@@ -225,7 +254,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         }
         present(controller, animated: true, completion: nil)
 
-        PlayerMetrics.log(event: .openedHistorySF)
+        PlayerAnonymousMetrics.log(event: .openedHistorySF)
     }
 
     // MARK: - SFSafariViewControllerDelegate
