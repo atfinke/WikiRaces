@@ -132,9 +132,11 @@ extension GameViewController {
     // MARK: - Alerts
 
     func quitAlertController(raceStarted: Bool) -> UIAlertController {
-        let message = "Are you sure you want to quit?"
+        let message = "Are you sure you want to leave the match?"
 
-        let alertController = UIAlertController(title: "Quit the Race", message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Leave the Match?",
+                                                message: message,
+                                                preferredStyle: .alert)
         alertController.addCancelAction(title: "Keep Playing")
 
         if raceStarted {
@@ -153,7 +155,7 @@ extension GameViewController {
             alertController.addAction(reloadAction)
         }
 
-        let quitAction = UIAlertAction(title: "Quit Race", style: .destructive) {  [weak self] _ in
+        let quitAction = UIAlertAction(title: "Leave Match", style: .destructive) {  [weak self] _ in
             PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
             PlayerAnonymousMetrics.log(event: .quitRace, attributes: nil)
             self?.playerQuit()
