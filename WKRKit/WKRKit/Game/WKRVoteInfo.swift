@@ -59,11 +59,13 @@ public struct WKRVoteInfo: Codable, Equatable {
         let totalPoints = Double(weights.values.reduce(0, +))
         let lowestScoringPlayers = weights.sorted(by: { $0.value < $1.value })
 
-        // 1. Make sure a few points have been given
-        // 2. Make sure we have a lowest player
-        // 3. Make sure player voted
-        // 4. Make sure player voted for article with most/tied amount of votes
-        if totalPoints > 4,
+        // 1. Make sure there is a tie
+        // 2. Make sure a few points have been given
+        // 3. Make sure we have a lowest player
+        // 4. Make sure player voted
+        // 5. Make sure player voted for article with most/tied amount of votes
+        if pagesWithMostVotes.count > 1,
+            totalPoints > 4,
             lowestScoringPlayers.count > 1,
             let player = lowestScoringPlayers.first,
             let page = playerVotes[player.key],
@@ -91,9 +93,10 @@ public struct WKRVoteInfo: Codable, Equatable {
             let nextLowestPoints = Double(lowestScoringPlayers[1].value)
             let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.4)
 
+            let chance = (1.0 - inversePercentChance) + (1 - (1.0 - inversePercentChance)) / 2
             var attributes: [String: Any] = [
                 "TiedCount": pagesWithMostVotes.count,
-                "Chance": 1.0 - inversePercentChance,
+                "Chance": chance,
                 "RawPointDiff": Int(nextLowestPoints) - player.value
             ]
 

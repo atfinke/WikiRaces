@@ -17,7 +17,7 @@ internal class GameViewController: UIViewController {
     // MARK: - Game Properties
 
     var isPlayerQuitting = false
-    var isInterfaceConfigured = false
+    var isConfigured = false
 
     var timeRaced = 0
     var raceTimer: Timer?
@@ -81,49 +81,56 @@ internal class GameViewController: UIViewController {
             return
         }
 
-        if !isInterfaceConfigured {
-            isInterfaceConfigured = true
-
-            let logEvents: [WKRLogEvent]
-            if networkConfig.isHost {
-                if case .solo? = networkConfig {
-                    logEvents = WKRSeenFinalArticlesStore.localLogEvents()
-                } else {
-                    logEvents = WKRSeenFinalArticlesStore.hostLogEvents()
-                }
-            } else {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.connectingLabel.alpha = 1.0
-                    self.activityIndicatorView.alpha = 1.0
-                })
-                logEvents = WKRSeenFinalArticlesStore.localLogEvents()
-            }
-
-            if case let .mpc(_, session, _)? = networkConfig {
-                // Due to low usage, not accounting for players joining mid session
-                let playerNames = session.connectedPeers.filter({ peerID -> Bool in
-                    return peerID != session.myPeerID
-                }).map({ peerID -> String in
-                    return peerID.displayName
-                })
-                PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
-            } else if case let .gameKit(match, _)? = networkConfig {
-                let playerNames = match.players.map({ player -> String in
-                    return player.alias
-                })
-                PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
-            } else if case .solo(_)? = networkConfig {
-                PlayerStatsManager.shared.connected(to: [], raceType: .solo)
-            }
-
-            logEvents.forEach { logEvent($0) }
+        if !isConfigured {
+            isConfigured = true
+            initalConfiguration()
         }
+
         if gameManager.gameState == .preMatch && networkConfig.isHost {
             gameManager.player(.startedGame)
             if case let .mpc(_, session, _)? = networkConfig {
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch,
                                     attributes: ["ConnectedPeers": session.connectedPeers.count])
             }
+        }
+    }
+
+    private func initalConfiguration() {
+        let logEvents: [WKRLogEvent]
+        if networkConfig.isHost {
+            if case .solo? = networkConfig {
+                logEvents = WKRSeenFinalArticlesStore.localLogEvents()
+            } else {
+                logEvents = WKRSeenFinalArticlesStore.hostLogEvents()
+            }
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.connectingLabel.alpha = 1.0
+                self.activityIndicatorView.alpha = 1.0
+            })
+            logEvents = WKRSeenFinalArticlesStore.localLogEvents()
+        }
+        logEvents.forEach { logEvent($0) }
+
+        guard let config = networkConfig else { return }
+        switch config {
+        case .solo:
+            PlayerStatsManager.shared.connected(to: [], raceType: .solo)
+        case .gameKit(let match, _):
+            let playerNames = match.players.map({ player -> String in
+                return player.alias
+            })
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
+        case .mpc(_, let session, _):
+            // Due to low usage, not accounting for players joining mid session
+            let playerNames = session.connectedPeers.filter({ peerID -> Bool in
+                return peerID != session.myPeerID
+            }).map({ peerID -> String in
+                return peerID.displayName
+            })
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
+        default:
+            break
         }
     }
 

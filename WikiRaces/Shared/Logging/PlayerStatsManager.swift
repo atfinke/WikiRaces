@@ -159,83 +159,79 @@ internal class PlayerStatsManager {
         ubiquitousStoreSync()
     }
 
-    //swiftlint:disable:next function_body_length cyclomatic_complexity
+    //swiftlint:disable:next function_body_length
     func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int, pixelsScrolled: Int) {
+        let pointsStat: PlayerDatabaseStat?
+        let racesStat: PlayerDatabaseStat
+        let totalTimeStat: PlayerDatabaseStat
+        let fastestTimeStat: PlayerDatabaseStat
+        let pixelsStat: PlayerDatabaseStat
+
+        let finishFirstStat: PlayerDatabaseStat
+        let finishSecondStat: PlayerDatabaseStat?
+        let finishThirdStat: PlayerDatabaseStat?
+        let finishDNFStat: PlayerDatabaseStat
+
         switch type {
         case .mpc:
-            PlayerDatabaseStat.mpcPoints.increment(by: Double(points))
-            PlayerDatabaseStat.mpcRaces.increment()
-            PlayerDatabaseStat.mpcTotalTime.increment(by: Double(timeRaced))
+            pointsStat = .mpcPoints
+            racesStat = .mpcRaces
+            totalTimeStat = .mpcTotalTime
+            fastestTimeStat = .mpcFastestTime
+            pixelsStat = .mpcPixelsScrolled
 
-            if let place = place {
-                if place == 1 {
-                    PlayerDatabaseStat.mpcRaceFinishFirst.increment()
-                } else if place == 2 {
-                    PlayerDatabaseStat.mpcRaceFinishSecond.increment()
-                } else if place == 3 {
-                    PlayerDatabaseStat.mpcRaceFinishThird.increment()
-                }
-            } else {
-                PlayerDatabaseStat.mpcRaceDNF.increment()
-            }
-
-            // If found page, check for fastest completion time
-            if points > 0 {
-                let currentFastestTime = PlayerDatabaseStat.mpcFastestTime.value()
-                if currentFastestTime == 0 {
-                    defaults.set(timeRaced, forKey: PlayerDatabaseStat.mpcFastestTime.key)
-                } else if timeRaced < Int(currentFastestTime) {
-                    defaults.set(timeRaced, forKey: PlayerDatabaseStat.mpcFastestTime.key)
-                }
-
-                SKStoreReviewController.shouldPromptForRating = true
-            } else {
-                SKStoreReviewController.shouldPromptForRating = false
-            }
-            PlayerDatabaseStat.mpcPixelsScrolled.increment(by: Double(pixelsScrolled))
+            finishFirstStat = .mpcRaceFinishFirst
+            finishSecondStat = .mpcRaceFinishSecond
+            finishThirdStat = .mpcRaceFinishThird
+            finishDNFStat = .mpcRaceDNF
         case .gameKit:
-            PlayerDatabaseStat.gkPoints.increment(by: Double(points))
-            PlayerDatabaseStat.gkRaces.increment()
-            PlayerDatabaseStat.gkTotalTime.increment(by: Double(timeRaced))
+            pointsStat = .gkPoints
+            racesStat = .gkRaces
+            totalTimeStat = .gkTotalTime
+            fastestTimeStat = .gkFastestTime
+            pixelsStat = .gkPixelsScrolled
 
-            if let place = place {
-                if place == 1 {
-                    PlayerDatabaseStat.gkRaceFinishFirst.increment()
-                } else if place == 2 {
-                    PlayerDatabaseStat.gkRaceFinishSecond.increment()
-                } else if place == 3 {
-                    PlayerDatabaseStat.gkRaceFinishThird.increment()
-                }
-            } else {
-                PlayerDatabaseStat.gkRaceDNF.increment()
-            }
-
-            // If found page, check for fastest completion time
-            if points > 0 {
-                let currentFastestTime = PlayerDatabaseStat.gkFastestTime.value()
-                if currentFastestTime == 0 {
-                    defaults.set(timeRaced, forKey: PlayerDatabaseStat.gkFastestTime.key)
-                } else if timeRaced < Int(currentFastestTime) {
-                    defaults.set(timeRaced, forKey: PlayerDatabaseStat.gkFastestTime.key)
-                }
-                SKStoreReviewController.shouldPromptForRating = true
-            } else {
-                SKStoreReviewController.shouldPromptForRating = false
-            }
-            PlayerDatabaseStat.gkPixelsScrolled.increment(by: Double(pixelsScrolled))
+            finishFirstStat = .gkRaceFinishFirst
+            finishSecondStat = .gkRaceFinishSecond
+            finishThirdStat = .gkRaceFinishThird
+            finishDNFStat = .gkRaceDNF
         case .solo:
-            PlayerDatabaseStat.soloRaces.increment()
-            PlayerDatabaseStat.soloTotalTime.increment(by: Double(timeRaced))
+            pointsStat = nil
+            racesStat = .soloRaces
+            totalTimeStat = .soloTotalTime
+            fastestTimeStat = .soloFastestTime
+            pixelsStat = .soloPixelsScrolled
 
-            let currentFastestTime = PlayerDatabaseStat.soloFastestTime.value()
-            if currentFastestTime == 0 {
-                defaults.set(timeRaced, forKey: PlayerDatabaseStat.soloFastestTime.key)
-            } else if timeRaced < Int(currentFastestTime) {
-                defaults.set(timeRaced, forKey: PlayerDatabaseStat.soloFastestTime.key)
+            finishFirstStat = .soloRaceFinishFirst
+            finishSecondStat = nil
+            finishThirdStat = nil
+            finishDNFStat = .soloRaceDNF
+        }
+
+        pointsStat?.increment(by: Double(points))
+        racesStat.increment()
+        totalTimeStat.increment(by: Double(timeRaced))
+        pixelsStat.increment(by: Double(pixelsScrolled))
+
+        if let place = place {
+            if place == 1 {
+                finishFirstStat.increment()
+            } else if place == 2 {
+                finishSecondStat?.increment()
+            } else if place == 3 {
+                finishThirdStat?.increment()
             }
 
+            let currentFastestTime = fastestTimeStat.value()
+            if currentFastestTime == 0 {
+                defaults.set(timeRaced, forKey: fastestTimeStat.key)
+            } else if timeRaced < Int(currentFastestTime) {
+                defaults.set(timeRaced, forKey: fastestTimeStat.key)
+            }
             SKStoreReviewController.shouldPromptForRating = true
-            PlayerDatabaseStat.soloPixelsScrolled.increment(by: Double(pixelsScrolled))
+        } else {
+            finishDNFStat.increment()
+            SKStoreReviewController.shouldPromptForRating = false
         }
 
         ubiquitousStoreSync()

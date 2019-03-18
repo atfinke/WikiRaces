@@ -45,10 +45,10 @@ internal struct PlayerAnonymousMetrics {
         case hostStartedSoloMatch
         case globalFailedToFindHost
 
-        case raceCompleted
+        case mpcRaceCompleted, gkRaceCompleted, soloRaceCompleted
         case banHammer
         case connectionTestResult
-        case displayedMedals
+        case displayedMedals, puzzleViewScrolled
 
         case collectiveVotingArticlesSeen, localVotingArticlesSeen, localVotingArticlesReset
         case votingArticleValidationFailure, votingArticlesWeightedTiebreak

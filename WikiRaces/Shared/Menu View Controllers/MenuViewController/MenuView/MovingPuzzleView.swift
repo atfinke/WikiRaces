@@ -55,6 +55,7 @@ class MovingPuzzleView: UIView, UIScrollViewDelegate {
         if contentOffset > innerPuzzleView.contentSize.width * 0.8 {
             animateContentOffsetReset()
         }
+        PlayerAnonymousMetrics.log(event: .puzzleViewScrolled)
     }
 
     private func animateContentOffsetReset() {

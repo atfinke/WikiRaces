@@ -56,6 +56,8 @@ enum PlayerDatabaseStat: String, CaseIterable {
     case soloTotalTime
     case soloRaces
     case soloMatch
+    case soloRaceFinishFirst
+    case soloRaceDNF
     case soloPixelsScrolled
 
     case triggeredEasterEgg
@@ -97,6 +99,8 @@ enum PlayerDatabaseStat: String, CaseIterable {
         .soloTotalTime,
         .soloRaces,
         .soloMatch,
+        .soloRaceFinishFirst,
+        .soloRaceDNF,
         .soloPixelsScrolled,
 
         .triggeredEasterEgg

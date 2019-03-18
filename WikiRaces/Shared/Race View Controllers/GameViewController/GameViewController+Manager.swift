@@ -44,12 +44,21 @@ extension GameViewController {
                                              place: place,
                                              timeRaced: timeRaced,
                                              pixelsScrolled: webViewPixelsScrolled)
-            PlayerAnonymousMetrics.log(event: .raceCompleted,
-                              attributes: [
-                                "RaceType": raceType.rawValue,
-                                "Time": timeRaced,
-                                "Points": points,
-                                "WebViewScrolled": webViewPixelsScrolled
+
+            let event: PlayerAnonymousMetrics.Event
+            switch raceType {
+            case .mpc:
+                event = .mpcRaceCompleted
+            case .gameKit:
+                event = .gkRaceCompleted
+            case .solo:
+                event = .soloRaceCompleted
+            }
+            PlayerAnonymousMetrics.log(event: event,
+                                       attributes: [
+                                        "Time": timeRaced,
+                                        "Points": points,
+                                        "WebViewScrolled": webViewPixelsScrolled
                 ])
         }
     }
