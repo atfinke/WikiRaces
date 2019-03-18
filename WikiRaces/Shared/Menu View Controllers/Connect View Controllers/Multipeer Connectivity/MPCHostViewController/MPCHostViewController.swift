@@ -28,6 +28,10 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         case declined
     }
 
+    enum ListenerUpdate {
+        case startMatch(isSolo: Bool)
+        case cancel
+    }
     // MARK: - Properties
 
     var peers = [MCPeerID: PeerState]()
@@ -46,10 +50,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     var serviceType: String?
     var browser: MCNearbyServiceBrowser?
 
-    /// Called when the start button is pressed
-    var didStartMatch: ((_ isSolo: Bool) -> Void)?
-    /// Called when the cancel button is pressed
-    var didCancelMatch: (() -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
 
     // MARK: - View Life Cycle
 
@@ -107,7 +108,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
 
         session?.disconnect()
-        didCancelMatch?()
+        listenerUpdate?(.cancel)
     }
 
     @objc
@@ -131,11 +132,11 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.didStartMatch?(false)
+                self.listenerUpdate?(.startMatch(isSolo: false))
             }
         } catch {
             session.disconnect()
-            didCancelMatch?()
+            listenerUpdate?(.cancel)
         }
     }
 
@@ -222,7 +223,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
-        didCancelMatch?()
+        listenerUpdate?(.cancel)
     }
 
     func browser(_ browser: MCNearbyServiceBrowser,

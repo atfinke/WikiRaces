@@ -12,14 +12,19 @@ import WKRUIKit
 
 internal class VotingViewController: CenteredTableViewController {
 
+    // MARK: - Types
+
+    enum ListenerUpdate {
+        case voted(WKRPage)
+        case quit
+    }
+
     // MARK: - Properties
 
     private var isShowingGuide = false
     private var isShowingVoteCountdown = true
 
-    var playerVoted: ((WKRPage) -> Void)?
-
-    var backupQuit: (() -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
     var quitAlertController: UIAlertController?
 
     var voteInfo: WKRVoteInfo? {
@@ -103,7 +108,7 @@ internal class VotingViewController: CenteredTableViewController {
         guard let alertController = quitAlertController else {
             PlayerAnonymousMetrics.log(event: .backupQuit,
                                        attributes: ["RawGameState": WKRGameState.voting.rawValue])
-            self.backupQuit?()
+            self.listenerUpdate?(.quit)
             return
         }
         present(alertController, animated: true, completion: nil)

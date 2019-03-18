@@ -10,15 +10,19 @@ import Foundation
 
 public class WKRGame {
 
+    // MARK: - Types
+
+    enum ListenerUpdate {
+        case bonusPoints(Int)
+        case playersReadyForNextRound
+        case readyStates(WKRReadyStates)
+        case hostResults(WKRResultsInfo)
+        case localResults(WKRResultsInfo)
+    }
+
     // MARK: - Closures
 
-    var bonusPointsUpdated: ((Int) -> Void)?
-
-    var allPlayersReadyForNextRound: (() -> Void)?
-    var readyStatesUpdated: ((WKRReadyStates) -> Void)?
-
-    var hostResultsCreated: ((WKRResultsInfo) -> Void)?
-    var localResultsUpdated: ((WKRResultsInfo) -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
 
     // MARK: - Properties
 
@@ -55,10 +59,11 @@ public class WKRGame {
             bonusTimer?.invalidate()
             bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRKitConstants.current.bonusPointsInterval,
                                               repeats: true) { [weak self] _ in
+                                                guard let self = self else { return }
                                                 //swiftlint:disable:next line_length
-                                                self?.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
-                                                if let points = self?.activeRace?.bonusPoints {
-                                                    self?.bonusPointsUpdated?(points)
+                                                self.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
+                                                if let points = self.activeRace?.bonusPoints {
+                                                    self.listenerUpdate?(.bonusPoints(points))
                                                 }
             }
         }
@@ -121,11 +126,11 @@ public class WKRGame {
         }
 
         let readyStates = WKRReadyStates(players: players)
-        readyStatesUpdated?(readyStates)
+        listenerUpdate?(.readyStates(readyStates))
         if localPlayer.isHost,
             let racePlayers = completedRaces.last?.players,
             readyStates.areAllRacePlayersReady(racePlayers: racePlayers) {
-            allPlayersReadyForNextRound?()
+            listenerUpdate?(.playersReadyForNextRound)
         }
     }
 
@@ -190,7 +195,7 @@ public class WKRGame {
                                             sessionPoints: sessionPoints)
 
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
-            localResultsUpdated?(currentResults)
+            listenerUpdate?(.localResults(currentResults))
             return
         }
 
@@ -203,7 +208,7 @@ public class WKRGame {
                                      sessionPoints: sessionPoints)
 
         finishedRace()
-        hostResultsCreated?(results)
+        listenerUpdate?(.hostResults(results))
     }
 
 }

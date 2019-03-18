@@ -18,14 +18,15 @@ class MenuView: UIView {
         case raceTypeOptions, noOptions, localOptions, noInterface
     }
 
+    enum ListenerUpdate {
+        case presentDebug, presentGlobalConnect, presentLeaderboard, presentGlobalAuth
+        case presentMPCConnect(isHost: Bool)
+        case presentAlert(UIAlertController)
+    }
+
     // MARK: - Closures
 
-    var presentDebugController: (() -> Void)?
-    var presentMPCConnectController: ((_ isHost: Bool) -> Void)?
-    var presentGlobalConnectController: (() -> Void)?
-    var presentLeaderboardController: (() -> Void)?
-    var presentGlobalAuthController: (() -> Void)?
-    var presentAlertController: ((UIAlertController) -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
 
     // MARK: - Properties
 
@@ -101,6 +102,7 @@ class MenuView: UIView {
         recognizer.numberOfTapsRequired = 2
         recognizer.numberOfTouchesRequired = 2
         titleLabel.addGestureRecognizer(recognizer)
+        titleLabel.isUserInteractionEnabled = true
 
         topView.translatesAutoresizingMaskIntoConstraints = false
         topView.backgroundColor = UIColor.wkrMenuTopViewColor
@@ -133,7 +135,7 @@ class MenuView: UIView {
     }
 
     @objc func tapGestureRecognizerFired() {
-        presentDebugController?()
+        listenerUpdate?(.presentDebug)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -253,7 +255,7 @@ class MenuView: UIView {
         })
         alertController.addAction(settingsAction)
 
-        presentAlertController?(alertController)
+        listenerUpdate?(.presentAlert(alertController))
         return true
     }
 

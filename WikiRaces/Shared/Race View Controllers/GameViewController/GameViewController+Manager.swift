@@ -190,24 +190,30 @@ extension GameViewController {
 
     private func showVotingController() {
         let controller = VotingViewController()
-        controller.playerVoted = { [weak self] page in
-            self?.gameManager.player(.voted(page))
-            // capitalized to keep consistent with past analytics
-            PlayerAnonymousMetrics.log(event: .voted, attributes: ["Page": page.title?.capitalized as Any])
+        controller.voteInfo = gameManager.voteInfo
+        controller.quitAlertController = quitAlertController(raceStarted: false)
+        controller.listenerUpdate = { [weak self] update in
+            guard let self = self else { return }
+            switch update {
+            case .voted(let page):
+                self.gameManager.player(.voted(page))
+                // capitalized to keep consistent with past analytics
+                PlayerAnonymousMetrics.log(event: .voted,
+                                           attributes: ["Page": page.title?.capitalized as Any])
 
-            if let raceType = self?.statRaceType {
-                var stat = PlayerDatabaseStat.mpcVotes
-                switch raceType {
-                case .mpc: stat = .mpcVotes
-                case .gameKit: stat = .gkVotes
-                case .solo: stat = .soloVotes
+                if let raceType = self.statRaceType {
+                    var stat = PlayerDatabaseStat.mpcVotes
+                    switch raceType {
+                    case .mpc: stat = .mpcVotes
+                    case .gameKit: stat = .gkVotes
+                    case .solo: stat = .soloVotes
+                    }
+                    stat.increment()
                 }
-                stat.increment()
+            case .quit:
+                self.playerQuit()
             }
         }
-        controller.voteInfo = gameManager.voteInfo
-        controller.backupQuit = playerQuit
-        controller.quitAlertController = quitAlertController(raceStarted: false)
 
         self.votingViewController = controller
 
@@ -249,16 +255,21 @@ extension GameViewController {
     private func showResultsController() {
         let controller = ResultsViewController()
         controller.localPlayer = gameManager.localPlayer
-        controller.readyButtonPressed = { [weak self] in
-            self?.gameManager.player(.ready)
-        }
-
         controller.addPlayersViewController = gameManager.hostNetworkInterface()
         controller.state = gameManager.gameState
         controller.resultsInfo = gameManager.hostResultsInfo
         controller.isPlayerHost = networkConfig.isHost
-        controller.backupQuit = playerQuit
         controller.quitAlertController = quitAlertController(raceStarted: false)
+
+        controller.listenerUpdate = { [weak self] update in
+            guard let self = self else { return }
+            switch update {
+            case .readyButtonPressed:
+                self.gameManager.player(.ready)
+            case .quit:
+                self.playerQuit()
+            }
+        }
 
         self.resultsViewController = controller
 

@@ -14,7 +14,7 @@ import WKRUIKit
 extension MenuViewController {
 
     @objc
-    func showDebugController() {
+    func presentDebugController() {
         PlayerAnonymousMetrics.log(event: .versionInfo)
 
         let message = "If your name isn't Andrew, you probably shouldn’t be here."

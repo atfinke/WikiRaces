@@ -12,13 +12,18 @@ import WKRUIKit
 
 internal class ResultsViewController: CenteredTableViewController {
 
+    // MARK: - Types
+
+    enum ListenerUpdate {
+        case readyButtonPressed
+        case quit
+    }
+
     // MARK: - Properties
 
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
     var historyViewController: HistoryViewController?
 
-    var readyButtonPressed: (() -> Void)?
-
-    var backupQuit: (() -> Void)?
     var quitAlertController: UIAlertController?
     var addPlayersViewController: UIViewController?
 
@@ -303,7 +308,7 @@ internal class ResultsViewController: CenteredTableViewController {
         addPlayersBarButtonItem?.isEnabled = false
         shareResultsBarButtonItem?.isEnabled = false
 
-        readyButtonPressed?()
+        listenerUpdate?(.readyButtonPressed)
         isOverlayButtonHidden = true
 
         UIView.animate(withDuration: WKRAnimationDurationConstants.resultsOverlayButtonToggle) {

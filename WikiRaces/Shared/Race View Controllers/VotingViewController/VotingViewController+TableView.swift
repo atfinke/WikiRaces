@@ -46,7 +46,7 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
             return
         }
 
-        playerVoted?(vote.page)
+        listenerUpdate?(.voted(vote.page))
     }
 
 }

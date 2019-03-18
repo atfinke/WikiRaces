@@ -33,12 +33,12 @@ extension MenuView {
         UISelectionFeedbackGenerator().selectionChanged()
 
         guard GKLocalPlayer.local.isAuthenticated else {
-            self.presentGlobalAuthController?()
+            self.listenerUpdate?(.presentGlobalAuth)
             return
         }
 
         animateMenuOut {
-            self.presentGlobalConnectController?()
+            self.listenerUpdate?(.presentGlobalConnect)
         }
     }
 
@@ -56,7 +56,7 @@ extension MenuView {
         }
 
         animateMenuOut {
-            self.presentMPCConnectController?(false)
+            self.listenerUpdate?(.presentMPCConnect(isHost: false))
         }
     }
 
@@ -74,7 +74,7 @@ extension MenuView {
         }
 
         animateMenuOut {
-            self.presentMPCConnectController?(true)
+            self.listenerUpdate?(.presentMPCConnect(isHost: true))
         }
     }
 
@@ -95,12 +95,12 @@ extension MenuView {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         guard GKLocalPlayer.local.isAuthenticated else {
-            self.presentGlobalAuthController?()
+            self.listenerUpdate?(.presentGlobalAuth)
             return
         }
 
         animateMenuOut {
-            self.presentLeaderboardController?()
+            self.listenerUpdate?(.presentLeaderboard)
         }
     }
 

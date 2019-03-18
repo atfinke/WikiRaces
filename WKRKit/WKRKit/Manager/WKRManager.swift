@@ -91,21 +91,37 @@ public class WKRGameManager {
         peerNetwork = setup.network
 
         game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork)
-        if localPlayer.isHost {
-            configure(game: game)
-        }
-
-        game.readyStatesUpdated = { readyStates in
-            resultsUpdate(.readyStates(readyStates))
-        }
-        game.localResultsUpdated = { [weak self] results in
-            if self?.gameState == .results || self?.gameState == .race {
+        game.listenerUpdate = { [weak self] update in
+            guard let self = self else { return }
+            switch update {
+            case .bonusPoints(let points):
+                guard self.localPlayer.isHost else { return }
+                let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
+                self.peerNetwork.send(object: bonusPoints)
+            case .playersReadyForNextRound:
+                guard self.localPlayer.isHost, self.gameState == .hostResults else { return }
+                //swiftlint:disable:next line_length
+                DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsAllReadyDelay, execute: {
+                    self.finishResultsCountdown()
+                })
+            case .readyStates(let states):
+                resultsUpdate(.readyStates(states))
+            case .hostResults(let results):
+                guard self.localPlayer.isHost else { return }
+                DispatchQueue.main.async {
+                    let state = WKRGameState.hostResults
+                    self.peerNetwork.send(object: WKRCodable(enum: state))
+                    self.peerNetwork.send(object: WKRCodable(results))
+                    self.prepareResultsCountdown()
+                }
+            case .localResults(let results):
+                guard self.gameState == .results || self.gameState == .race else { return }
                 resultsUpdate(.resultsInfo(results))
             }
         }
+        
 
         configure(network: peerNetwork)
-
         peerNetwork.send(object: WKRCodable(self.localPlayer))
     }
 

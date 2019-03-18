@@ -166,23 +166,25 @@ internal class MPCConnectViewController: ConnectViewController {
         controller.peerID = peerID
         controller.session = session
         controller.serviceType = serviceType
-        controller.didStartMatch = { [weak self] isSolo in
+        controller.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
-            self.isSolo = isSolo
-            self.dismiss(animated: true, completion: {
-                var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
-                if !isSolo {
-                    networkConfig = .mpc(serviceType: self.serviceType,
-                                         session: self.session,
-                                         isHost: self.isPlayerHost)
-                }
-                self.showMatch(for: networkConfig, andHide: [])
-            })
-        }
-        controller.didCancelMatch = { [weak self] in
-            self?.dismiss(animated: true, completion: {
-                self?.navigationController?.popToRootViewController(animated: false)
-            })
+            switch update {
+            case .startMatch(let isSolo):
+                self.isSolo = isSolo
+                self.dismiss(animated: true, completion: {
+                    var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
+                    if !isSolo {
+                        networkConfig = .mpc(serviceType: self.serviceType,
+                                             session: self.session,
+                                             isHost: self.isPlayerHost)
+                    }
+                    self.showMatch(for: networkConfig, andHide: [])
+                })
+            case .cancel:
+                self.dismiss(animated: true, completion: {
+                    self.navigationController?.popToRootViewController(animated: false)
+                })
+            }
         }
 
         let nav = UINavigationController(rootViewController: controller)

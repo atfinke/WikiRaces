@@ -48,19 +48,23 @@ internal class MenuViewController: UIViewController {
             }
         }
 
-        menuView.presentDebugController = showDebugController
-        menuView.presentMPCConnectController = presentMPCConnect
-        menuView.presentGlobalConnectController = presentGlobalConnect
-        menuView.presentLeaderboardController = {
-            let controller = GKGameCenterViewController()
-            controller.gameCenterDelegate = self
-            controller.viewState = .leaderboards
-            controller.leaderboardTimeScope = .allTime
-            self.present(controller, animated: true, completion: nil)
-        }
-        menuView.presentGlobalAuthController = attemptGlobalAuthentication
-        menuView.presentAlertController = { alertController in
-            self.present(alertController, animated: true, completion: nil)
+        menuView.listenerUpdate = { [weak self] update in
+            guard let self = self else { return }
+            switch update {
+            case .presentDebug: self.presentDebugController()
+            case .presentGlobalConnect: self.presentGlobalConnect()
+            case .presentGlobalAuth: self.attemptGlobalAuthentication()
+            case .presentMPCConnect(let isHost): self.presentMPCConnect(isHost: isHost)
+            case .presentAlert(let alertController):
+                self.present(alertController, animated: true, completion: nil)
+            case .presentLeaderboard:
+                let controller = GKGameCenterViewController()
+                controller.gameCenterDelegate = self
+                controller.viewState = .leaderboards
+                controller.leaderboardTimeScope = .allTime
+                self.present(controller, animated: true, completion: nil)
+            }
+
         }
 
         GlobalRaceHelper.shared.didReceiveInvite = {

@@ -10,36 +10,6 @@ import Foundation
 
 extension WKRGameManager {
 
-    // MARK: - Game Updates
-
-    func configure(game: WKRGame) {
-        guard localPlayer.isHost else { fatalError("Local player not host") }
-
-        game.allPlayersReadyForNextRound = { [weak self] in
-            guard let isHost = self?.localPlayer.isHost, let gameState = self?.gameState else {
-                return
-            }
-            if isHost && gameState == .hostResults {
-                //swiftlint:disable:next line_length
-                DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsAllReadyDelay, execute: {
-                    self?.finishResultsCountdown()
-                })
-            }
-        }
-        game.bonusPointsUpdated = { [weak self] points in
-            let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
-            self?.peerNetwork.send(object: bonusPoints)
-        }
-        game.hostResultsCreated = { [weak self] result in
-            DispatchQueue.main.async {
-                let state = WKRGameState.hostResults
-                self?.peerNetwork.send(object: WKRCodable(enum: state))
-                self?.peerNetwork.send(object: WKRCodable(result))
-                self?.prepareResultsCountdown()
-            }
-        }
-    }
-
     // MARK: - Results
 
     func prepareResultsCountdown() {

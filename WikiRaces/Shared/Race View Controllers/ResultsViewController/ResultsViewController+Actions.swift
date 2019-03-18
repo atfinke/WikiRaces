@@ -17,7 +17,7 @@ extension ResultsViewController {
         guard let alertController = quitAlertController else {
             PlayerAnonymousMetrics.log(event: .backupQuit,
                               attributes: ["RawGameState": state.rawValue])
-            self.backupQuit?()
+            listenerUpdate?(.quit)
             return
         }
         present(alertController, animated: true, completion: nil)
