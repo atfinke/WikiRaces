@@ -155,7 +155,7 @@ extension GameViewController {
 
         let quitAction = UIAlertAction(title: "Quit Race", style: .destructive) {  [weak self] _ in
             PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
-            PlayerAnonymousMetrics.log(event: .quitRace, attributes: ["View": self?.activeViewController?.description as Any])
+            PlayerAnonymousMetrics.log(event: .quitRace, attributes: nil)
             self?.playerQuit()
         }
         alertController.addAction(quitAction)

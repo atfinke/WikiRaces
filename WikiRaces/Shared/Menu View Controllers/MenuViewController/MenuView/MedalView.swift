@@ -39,18 +39,18 @@ class MedalView: SKView {
 
     func showMedals() {
         guard !medalScene.isActive else { return }
-        let firstMedals = PlayerStat.mpcRaceFinishFirst.value() +
-            PlayerStat.gkRaceFinishFirst.value()
-        let secondMedals = PlayerStat.mpcRaceFinishSecond.value() +
-            PlayerStat.gkRaceFinishSecond.value()
-        let thirdMedals = PlayerStat.mpcRaceFinishThird.value() +
-            PlayerStat.gkRaceFinishThird.value()
-        let dnfCount = PlayerStat.mpcRaceDNF.value() +
-            PlayerStat.gkRaceDNF.value()
+        let firstMedals = PlayerDatabaseStat.mpcRaceFinishFirst.value() +
+            PlayerDatabaseStat.gkRaceFinishFirst.value()
+        let secondMedals = PlayerDatabaseStat.mpcRaceFinishSecond.value() +
+            PlayerDatabaseStat.gkRaceFinishSecond.value()
+        let thirdMedals = PlayerDatabaseStat.mpcRaceFinishThird.value() +
+            PlayerDatabaseStat.gkRaceFinishThird.value()
+        let dnfCount = PlayerDatabaseStat.mpcRaceDNF.value() +
+            PlayerDatabaseStat.gkRaceDNF.value()
 
         let metalCount = Int(firstMedals + secondMedals + thirdMedals)
         PlayerAnonymousMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
-        PlayerStat.displayedMedals.increment()
+        PlayerDatabaseStat.triggeredEasterEgg.increment()
 
         guard metalCount > 0 else { return }
         medalScene.showMedals(gold: Int(firstMedals),

@@ -32,8 +32,8 @@ internal class GameViewController: UIViewController {
     var gameManager: WKRGameManager!
     var networkConfig: WKRPeerNetworkConfig!
 
-    var statRaceType: StatsHelper.RaceType? {
-        return StatsHelper.RaceType(networkConfig)
+    var statRaceType: PlayerStatsManager.RaceType? {
+        return PlayerStatsManager.RaceType(networkConfig)
     }
 
     // MARK: - User Interface
@@ -106,12 +106,14 @@ internal class GameViewController: UIViewController {
                 }).map({ peerID -> String in
                     return peerID.displayName
                 })
-                StatsHelper.shared.connected(to: playerNames, raceType: .mpc)
+                PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
             } else if case let .gameKit(match, _)? = networkConfig {
                 let playerNames = match.players.map({ player -> String in
                     return player.alias
                 })
-                StatsHelper.shared.connected(to: playerNames, raceType: .gameKit)
+                PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
+            } else if case .solo(_)? = networkConfig {
+                PlayerStatsManager.shared.connected(to: [], raceType: .solo)
             }
 
             logEvents.forEach { logEvent($0) }
@@ -163,7 +165,7 @@ internal class GameViewController: UIViewController {
         PlayerAnonymousMetrics.log(event: .usedHelp,
                           attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
-            let stat: PlayerStat
+            let stat: PlayerDatabaseStat
             switch raceType {
             case .mpc: stat = .mpcHelp
             case .gameKit: stat = .gkHelp

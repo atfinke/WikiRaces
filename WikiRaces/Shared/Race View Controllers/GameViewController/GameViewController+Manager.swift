@@ -39,7 +39,7 @@ extension GameViewController {
             webView?.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled):
             guard let raceType = statRaceType else { return }
-            StatsHelper.shared.completedRace(type: raceType,
+            PlayerStatsManager.shared.completedRace(type: raceType,
                                              points: points,
                                              place: place,
                                              timeRaced: timeRaced,
@@ -123,8 +123,8 @@ extension GameViewController {
         let metric = PlayerAnonymousMetrics.Event(event: logEvent)
         if metric == .pageView,
             let config = networkConfig,
-            let raceType = StatsHelper.RaceType(config) {
-            StatsHelper.shared.viewedPage(raceType: raceType)
+            let raceType = PlayerStatsManager.RaceType(config) {
+            PlayerStatsManager.shared.viewedPage(raceType: raceType)
         }
         PlayerAnonymousMetrics.log(event: metric, attributes: logEvent.attributes)
         #endif
@@ -196,7 +196,7 @@ extension GameViewController {
             PlayerAnonymousMetrics.log(event: .voted, attributes: ["Page": page.title?.capitalized as Any])
 
             if let raceType = self?.statRaceType {
-                var stat = PlayerStat.mpcVotes
+                var stat = PlayerDatabaseStat.mpcVotes
                 switch raceType {
                 case .mpc: stat = .mpcVotes
                 case .gameKit: stat = .gkVotes

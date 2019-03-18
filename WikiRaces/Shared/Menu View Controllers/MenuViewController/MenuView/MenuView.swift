@@ -99,8 +99,8 @@ class MenuView: UIView {
 
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerFired))
         recognizer.numberOfTapsRequired = 2
-        recognizer.numberOfTouchesRequired = 3
-        addGestureRecognizer(recognizer)
+        recognizer.numberOfTouchesRequired = 2
+        titleLabel.addGestureRecognizer(recognizer)
 
         topView.translatesAutoresizingMaskIntoConstraints = false
         topView.backgroundColor = UIColor.wkrMenuTopViewColor

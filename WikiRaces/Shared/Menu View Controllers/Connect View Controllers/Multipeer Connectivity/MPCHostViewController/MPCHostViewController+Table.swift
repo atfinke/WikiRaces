@@ -80,8 +80,7 @@ extension MPCHostViewController {
 
         if indexPath.section == 1 {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
-            PlayerStat.soloPressedHost.increment()
-
+            
             session?.disconnect()
             didStartMatch?(true)
             tableView.isUserInteractionEnabled = false

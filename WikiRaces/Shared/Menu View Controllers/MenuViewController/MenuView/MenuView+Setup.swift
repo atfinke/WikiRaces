@@ -172,12 +172,12 @@ extension MenuView {
         bottomView.addSubview(statsStackView)
 
         let leftMenuTile = MenuTile(title: "WIKI POINTS")
-        leftMenuTile.value = StatsHelper.shared.multiplayerPoints
+        leftMenuTile.value = PlayerStatsManager.shared.multiplayerPoints
         statsStackView.addArrangedSubview(leftMenuTile)
 
         let middleMenuTile = MenuTile(title: "AVG PER RACE")
         middleMenuTile.isAverage = true
-        middleMenuTile.value = PlayerStat.average.value()
+        middleMenuTile.value = PlayerDatabaseStat.average.value()
         statsStackView.addArrangedSubview(middleMenuTile)
 
         let leftThinLine = WKRUIThinLineView()
@@ -186,7 +186,7 @@ extension MenuView {
         middleMenuTile.addSubview(rightThinLine)
 
         let rightMenuTile = MenuTile(title: "RACES PLAYED")
-        rightMenuTile.value = StatsHelper.shared.multiplayerRaces
+        rightMenuTile.value = PlayerStatsManager.shared.multiplayerRaces
         statsStackView.addArrangedSubview(rightMenuTile)
 
         let constraints = [
@@ -210,7 +210,7 @@ extension MenuView {
         self.middleMenuTile = middleMenuTile
         self.rightMenuTile = rightMenuTile
 
-        StatsHelper.shared.menuStatsUpdated = { points, races, average in
+        PlayerStatsManager.shared.menuStatsUpdated = { points, races, average in
             DispatchQueue.main.async {
                 self.leftMenuTile?.value = points
                 self.middleMenuTile?.value = average

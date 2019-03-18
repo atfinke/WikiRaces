@@ -118,7 +118,6 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                         self.sendStartMessageToPlayers()
                     })
                 }
-                PlayerStat.gkConnectedToMatch.increment()
             } else {
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
                 self.showError(title: "Unable To Find Best Host",

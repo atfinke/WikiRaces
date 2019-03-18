@@ -38,7 +38,7 @@ internal class AppDelegate: WKRAppDelegate {
                                                name: PlayerDatabaseMetrics.banHammerNotification,
                                                object: nil)
 
-        StatsHelper.shared.start()
+        PlayerStatsManager.shared.start()
         PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()

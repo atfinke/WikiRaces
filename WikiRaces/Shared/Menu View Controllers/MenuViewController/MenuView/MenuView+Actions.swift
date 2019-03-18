@@ -28,7 +28,7 @@ extension MenuView {
     func joinGlobalRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .pressedGlobalJoin)
-        PlayerStat.gkPressedJoin.increment()
+        PlayerDatabaseStat.gkPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -47,7 +47,7 @@ extension MenuView {
     func joinLocalRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .pressedJoin)
-        PlayerStat.mpcPressedJoin.increment()
+        PlayerDatabaseStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -65,7 +65,7 @@ extension MenuView {
     func createLocalRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .pressedHost)
-        PlayerStat.mpcPressedHost.increment()
+        PlayerDatabaseStat.mpcPressedHost.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 

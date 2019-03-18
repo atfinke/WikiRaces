@@ -32,17 +32,17 @@ class WikiRacesTests: XCTestCase {
     func testMenuStats() {
         let menuView = MenuView()
 
-        var stat = PlayerStat.mpcPressedJoin
+        var stat = PlayerDatabaseStat.mpcPressedJoin
         var value = stat.value()
         menuView.joinLocalRace()
         XCTAssertEqual(value + 1, stat.value())
 
-        stat = PlayerStat.mpcPressedHost
+        stat = PlayerDatabaseStat.mpcPressedHost
         value = stat.value()
         menuView.createLocalRace()
         XCTAssertEqual(value + 1, stat.value())
 
-        stat = PlayerStat.gkPressedJoin
+        stat = PlayerDatabaseStat.gkPressedJoin
         value = stat.value()
         menuView.joinGlobalRace()
         XCTAssertEqual(value + 1, stat.value())
@@ -50,11 +50,11 @@ class WikiRacesTests: XCTestCase {
 
     func testViewedPage() {
         for raceIndex in 1...90 {
-            guard let raceType = StatsHelper.RaceType(rawValue: (raceIndex % 3) + 1) else {
+            guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
                 return
             }
-            let pageStat: PlayerStat
+            let pageStat: PlayerDatabaseStat
 
             switch raceType {
             case .mpc:
@@ -66,21 +66,21 @@ class WikiRacesTests: XCTestCase {
             }
 
             let value = Int(pageStat.value())
-            StatsHelper.shared.viewedPage(raceType: raceType)
+            PlayerStatsManager.shared.viewedPage(raceType: raceType)
             XCTAssertEqual(value + 1, Int(pageStat.value()))
         }
     }
 
     func testConnected() {
         for raceIndex in 4...40 {
-            guard let raceType = StatsHelper.RaceType(rawValue: (raceIndex % 2) + 1) else {
+            guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 2) + 1) else {
                 XCTFail("race type nil")
                 return
             }
 
             let playersKey: String
-            var uniqueStat: PlayerStat
-            var totalStat: PlayerStat
+            var uniqueStat: PlayerDatabaseStat
+            var totalStat: PlayerDatabaseStat
             switch raceType {
             case .mpc:
                 playersKey = "PlayersArray"
@@ -98,7 +98,7 @@ class WikiRacesTests: XCTestCase {
             let newPlayers = (1..<maxPlayers).map { $0.description }
             existingPlayers.append(contentsOf: newPlayers)
 
-            StatsHelper.shared.connected(to: newPlayers, raceType: raceType)
+            PlayerStatsManager.shared.connected(to: newPlayers, raceType: raceType)
             XCTAssertEqual(existingPlayers.count, Int(totalStat.value()))
             XCTAssertEqual(Set(existingPlayers).count, Int(uniqueStat.value()))
         }
@@ -106,12 +106,12 @@ class WikiRacesTests: XCTestCase {
 
     func testFastestTimeStat() {
         for raceIndex in 1...90 {
-            guard let raceType = StatsHelper.RaceType(rawValue: (raceIndex % 3) + 1) else {
+            guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
                 return
             }
 
-            let raceFastestTimeStat: PlayerStat
+            let raceFastestTimeStat: PlayerDatabaseStat
 
             switch raceType {
             case .mpc:
@@ -125,7 +125,7 @@ class WikiRacesTests: XCTestCase {
             let fastest = Int(raceFastestTimeStat.value())
             let timeRaced = Int.random(in: (100 - raceIndex)...200)
 
-            StatsHelper.shared.completedRace(type: raceType,
+            PlayerStatsManager.shared.completedRace(type: raceType,
                                              points: 10,
                                              place: 1,
                                              timeRaced: timeRaced,
@@ -141,9 +141,9 @@ class WikiRacesTests: XCTestCase {
 
     //swiftlint:disable:next cyclomatic_complexity function_body_length
     func testRaceCompletionStats() {
-        var testedStats = Set<PlayerStat>()
+        var testedStats = Set<PlayerDatabaseStat>()
         for raceIndex in 0..<600 {
-            guard let raceType = StatsHelper.RaceType(rawValue: (raceIndex % 3) + 1) else {
+            guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
                 return
             }
@@ -153,11 +153,11 @@ class WikiRacesTests: XCTestCase {
             let newTimeRaced = Double(Int.random(in: 0...100))
             let newPixelsScrolled = Double(Int.random(in: 0...100000))
 
-            let raceCountStat: PlayerStat
-            let racePointsStat: PlayerStat
-            let racePlaceStat: PlayerStat
-            let raceTimeStat: PlayerStat
-            let racePixelsScrolledStat: PlayerStat
+            let raceCountStat: PlayerDatabaseStat
+            let racePointsStat: PlayerDatabaseStat
+            let racePlaceStat: PlayerDatabaseStat
+            let raceTimeStat: PlayerDatabaseStat
+            let racePixelsScrolledStat: PlayerDatabaseStat
 
             switch raceType {
 
@@ -205,7 +205,7 @@ class WikiRacesTests: XCTestCase {
             let timeRaced = raceTimeStat.value()
             let racePixelsScrolled = racePixelsScrolledStat.value()
 
-            StatsHelper.shared.completedRace(type: raceType,
+            PlayerStatsManager.shared.completedRace(type: raceType,
                                              points: Int(newPoints),
                                              place: Int(newPlace),
                                              timeRaced: Int(newTimeRaced),

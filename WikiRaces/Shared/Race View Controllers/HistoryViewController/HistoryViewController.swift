@@ -61,7 +61,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     // 3. Make sure something has changed
     // 4. Make sure the controller is visable (else ...)
     // 5. Make sure we aren't animating and the user isn't scrolling, otherwise the update will look poor (else ...)
-    // 6. Make sure that the new player object is actually newer than the last one and has more history entries (else ...)
+    // 6. Make sure that the new player object has more history entries (else ...)
     // 7. Make sure we have the correct amount of new cells to insert (else ...)
     // 8. Check if we have the same number of stats, if yes, don't use a table animation to update them
     //swiftlint:disable:next function_body_length cyclomatic_complexity

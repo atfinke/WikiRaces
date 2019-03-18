@@ -70,7 +70,7 @@ class PlayerDatabaseMetrics: NSObject {
                 }
 
                 // Get user stats record, or create new one.
-                guard let statsRecordName = userRecord.object(forKey: "UserStatsNamev2") as? NSString,
+                guard let statsRecordName = userRecord.object(forKey: "UserStatsNamev3") as? NSString,
                     statsRecordName.length > 5 else {
                         self.createUserStatsRecord()
                         self.isConnecting = false
@@ -98,14 +98,14 @@ class PlayerDatabaseMetrics: NSObject {
         guard let userRecord = userRecord, !isCreatingStatsRecord else { return }
         isCreatingStatsRecord = true
 
-        let userStatsRecord = CKRecord(recordType: "UserStatsv2")
+        let userStatsRecord = CKRecord(recordType: "UserStatsv3")
         userStatsRecord["DeviceNames"] = [UIDevice.current.name]
         publicDB.save(userStatsRecord, completionHandler: { (savedUserStatsRecord, _) in
             guard let savedUserStatsRecord = savedUserStatsRecord else {
                 self.isCreatingStatsRecord = false
                 return
             }
-            userRecord["UserStatsNamev2"] = savedUserStatsRecord.recordID.recordName as NSString
+            userRecord["UserStatsNamev3"] = savedUserStatsRecord.recordID.recordName as NSString
 
             self.publicDB.save(userRecord, completionHandler: { (savedUserRecord, _) in
                 self.userRecord = savedUserRecord
@@ -162,7 +162,7 @@ class PlayerDatabaseMetrics: NSObject {
             }
         }
 
-        publicDB.save(record) { (savedUserStatsRecord, _) in
+        publicDB.save(record) { savedUserStatsRecord, _ in
             if let savedUserStatsRecord = savedUserStatsRecord {
                 self.userStatsRecord = savedUserStatsRecord
             } else {

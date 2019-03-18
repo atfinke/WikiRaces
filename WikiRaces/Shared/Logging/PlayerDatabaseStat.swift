@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PlayerStat: String, CaseIterable {
+enum PlayerDatabaseStat: String, CaseIterable {
     case average
 
     case mpcVotes
@@ -24,6 +24,7 @@ enum PlayerStat: String, CaseIterable {
     case mpcUniquePlayers
     case mpcPressedJoin
     case mpcPressedHost
+    case mpcMatch
     case mpcRaceFinishFirst
     case mpcRaceFinishSecond
     case mpcRaceFinishThird
@@ -41,7 +42,7 @@ enum PlayerStat: String, CaseIterable {
     case gkUniquePlayers
     case gkPressedJoin
     case gkInvitedToMatch
-    case gkConnectedToMatch
+    case gkMatch
     case gkRaceFinishFirst
     case gkRaceFinishSecond
     case gkRaceFinishThird
@@ -54,12 +55,12 @@ enum PlayerStat: String, CaseIterable {
     case soloFastestTime
     case soloTotalTime
     case soloRaces
-    case soloPressedHost
+    case soloMatch
     case soloPixelsScrolled
 
-    case displayedMedals
+    case triggeredEasterEgg
 
-    static var numericHighStats: [PlayerStat] = [
+    static var numericHighStats: [PlayerDatabaseStat] = [
         .mpcVotes,
         .mpcHelp,
         .mpcPoints,
@@ -68,6 +69,7 @@ enum PlayerStat: String, CaseIterable {
         .mpcRaces,
         .mpcPressedJoin,
         .mpcPressedHost,
+        .mpcMatch,
         .mpcRaceFinishFirst,
         .mpcRaceFinishSecond,
         .mpcRaceFinishThird,
@@ -82,7 +84,7 @@ enum PlayerStat: String, CaseIterable {
         .gkRaces,
         .gkPressedJoin,
         .gkInvitedToMatch,
-        .gkConnectedToMatch,
+        .gkMatch,
         .gkRaceFinishFirst,
         .gkRaceFinishSecond,
         .gkRaceFinishThird,
@@ -94,13 +96,13 @@ enum PlayerStat: String, CaseIterable {
         .soloPages,
         .soloTotalTime,
         .soloRaces,
-        .soloPressedHost,
+        .soloMatch,
         .soloPixelsScrolled,
 
-        .displayedMedals
+        .triggeredEasterEgg
     ]
 
-    static var numericLowStats: [PlayerStat] = [
+    static var numericLowStats: [PlayerDatabaseStat] = [
         .mpcFastestTime,
         .gkFastestTime,
         .soloFastestTime
@@ -122,8 +124,8 @@ enum PlayerStat: String, CaseIterable {
 
     func value() -> Double {
         if self == .average {
-            let races = PlayerStat.mpcPoints.value() + PlayerStat.gkPoints.value()
-            let points = PlayerStat.mpcRaces.value() + PlayerStat.gkRaces.value()
+            let races = PlayerDatabaseStat.mpcPoints.value() + PlayerDatabaseStat.gkPoints.value()
+            let points = PlayerDatabaseStat.mpcRaces.value() + PlayerDatabaseStat.gkRaces.value()
             let value = races / points
             return value.isNaN ? 0.0 : value
         } else {
