@@ -87,7 +87,7 @@ class PlayerDatabaseMetrics: NSObject {
                     self.userStatsRecord = userStatsRecord
                     self.isConnecting = false
                     DispatchQueue.main.async {
-                        self.sync()
+                        self.saveKeyValues()
                     }
                 })
             })
@@ -112,7 +112,7 @@ class PlayerDatabaseMetrics: NSObject {
                 self.userStatsRecord = savedUserStatsRecord
                 self.isCreatingStatsRecord = false
                 DispatchQueue.main.async {
-                    self.sync()
+                    self.saveKeyValues()
                 }
             })
         })
@@ -123,13 +123,13 @@ class PlayerDatabaseMetrics: NSObject {
     func log(value: CKRecordValueProtocol, for key: String) {
         DispatchQueue.main.async {
             self.queuedKeyValues[key] = value
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                self.sync()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                self.saveKeyValues()
             })
         }
     }
 
-    private func sync() {
+    private func saveKeyValues() {
         guard !queuedKeyValues.isEmpty,
                !isConnecting,
                 !isCreatingStatsRecord,
@@ -177,7 +177,7 @@ class PlayerDatabaseMetrics: NSObject {
             }
             DispatchQueue.main.async {
                 self.isSyncing = false
-                self.sync()
+                self.saveKeyValues()
             }
         }
     }
@@ -197,7 +197,7 @@ class PlayerDatabaseMetrics: NSObject {
         resultsRecord["PlayerCount"] = NSNumber(value: processedResults.playerCount)
         resultsRecord["TotalPlayerTime"] = NSNumber(value: processedResults.totalPlayerTime)
 
-        publicDB.save(resultsRecord) { (_, _) in
+        publicDB.save(resultsRecord) { _, _ in
             try? FileManager.default.removeItem(at: processedResults.csvURL)
         }
     }

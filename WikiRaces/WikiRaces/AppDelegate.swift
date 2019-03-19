@@ -84,6 +84,8 @@ internal class AppDelegate: WKRAppDelegate {
                     for: "WKRKitConstantsVersion")
         metrics.log(value: WKRUIKitConstants.current.version.description,
                     for: "WKRUIKitConstantsVersion")
+        metrics.log(value: UIDevice.current.systemVersion,
+                    for: "osVersion")
     }
 
     @objc

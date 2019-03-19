@@ -223,10 +223,8 @@ internal class PlayerStatsManager {
             }
 
             let currentFastestTime = fastestTimeStat.value()
-            if currentFastestTime == 0 {
-                defaults.set(timeRaced, forKey: fastestTimeStat.key)
-            } else if timeRaced < Int(currentFastestTime) {
-                defaults.set(timeRaced, forKey: fastestTimeStat.key)
+            if currentFastestTime == 0 || timeRaced < Int(currentFastestTime) {
+                fastestTimeStat.set(value: Double(timeRaced))
             }
             SKStoreReviewController.shouldPromptForRating = true
         } else {
@@ -340,7 +338,7 @@ internal class PlayerStatsManager {
         logAllStatsToMetric()
         menuStatsUpdated?(multiplayerPoints,
                          multiplayerRaces,
-                         PlayerDatabaseStat.average.value())
+                         PlayerDatabaseStat.multiplayerAverage.value())
     }
 
     private func leaderboardSync() {
@@ -350,7 +348,7 @@ internal class PlayerStatsManager {
 
         let points = multiplayerPoints
         let races = multiplayerRaces
-        let average = PlayerDatabaseStat.average.value()
+        let average = PlayerDatabaseStat.multiplayerAverage.value()
 
         let totalTime = multiplayerTotalTime
         let fastestTime = multiplayerFastestTime

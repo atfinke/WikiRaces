@@ -177,7 +177,7 @@ extension MenuView {
 
         let middleMenuTile = MenuTile(title: "AVG PER RACE")
         middleMenuTile.isAverage = true
-        middleMenuTile.value = PlayerDatabaseStat.average.value()
+        middleMenuTile.value = PlayerDatabaseStat.multiplayerAverage.value()
         statsStackView.addArrangedSubview(middleMenuTile)
 
         let leftThinLine = WKRUIThinLineView()

@@ -9,15 +9,13 @@
 import Foundation
 
 enum PlayerDatabaseStat: String, CaseIterable {
-    case average
+    case multiplayerAverage
 
     case mpcVotes
     case mpcHelp
     case mpcPoints
     case mpcPages
-    // seconds
     case mpcFastestTime
-    // minutes
     case mpcTotalTime
     case mpcRaces
     case mpcTotalPlayers
@@ -127,14 +125,18 @@ enum PlayerDatabaseStat: String, CaseIterable {
     }
 
     func value() -> Double {
-        if self == .average {
-            let races = PlayerDatabaseStat.mpcPoints.value() + PlayerDatabaseStat.gkPoints.value()
-            let points = PlayerDatabaseStat.mpcRaces.value() + PlayerDatabaseStat.gkRaces.value()
+        if self == .multiplayerAverage {
+            let races = PlayerStatsManager.shared.multiplayerRaces
+            let points = PlayerStatsManager.shared.multiplayerPoints
             let value = races / points
             return value.isNaN ? 0.0 : value
         } else {
             return UserDefaults.standard.double(forKey: key)
         }
+    }
+
+    func set(value: Double) {
+        UserDefaults.standard.set(value, forKey: key)
     }
 
     func increment(by value: Double = 1) {

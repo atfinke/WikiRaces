@@ -21,7 +21,7 @@ extension WKRGameManager {
                                                  attributes: [
                                                     "PageURL": self.truncated(url: url) as Any
                     ])))
-            case .loadingError(_):
+            case .loadingError:
                 self.displayNetworkAlert(title: "Error loading page", duration: 3)
 
                 self.webView?.completedPageLoad()
