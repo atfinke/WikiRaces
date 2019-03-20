@@ -128,7 +128,7 @@ enum PlayerDatabaseStat: String, CaseIterable {
         if self == .multiplayerAverage {
             let races = PlayerStatsManager.shared.multiplayerRaces
             let points = PlayerStatsManager.shared.multiplayerPoints
-            let value = races / points
+            let value = points / races
             return value.isNaN ? 0.0 : value
         } else {
             return UserDefaults.standard.double(forKey: key)
