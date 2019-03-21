@@ -134,8 +134,7 @@ internal class MPCConnectViewController: ConnectViewController {
                     self.startAdvertising()
                 }
             } else if !success {
-                self.showError(title: "Slow Connection",
-                               message: "A fast internet connection is required to play WikiRaces.")
+                self.showConnectionSpeedError()
             }
         }
 

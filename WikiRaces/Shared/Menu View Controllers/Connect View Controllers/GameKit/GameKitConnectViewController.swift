@@ -59,8 +59,7 @@ class GameKitConnectViewController: ConnectViewController {
                 self.toggleCoreInterface(isHidden: true, duration: 0.25)
                 self.findMatch()
             } else if !success {
-                self.showError(title: "Slow Connection",
-                               message: "A fast internet connection is required to play WikiRaces.")
+                self.showConnectionSpeedError()
             }
         }
 

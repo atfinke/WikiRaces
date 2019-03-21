@@ -128,6 +128,11 @@ class ConnectViewController: UIViewController {
                                                              font: UIFont.systemFont(ofSize: 20.0, weight: .semibold))
     }
 
+    func showConnectionSpeedError() {
+        showError(title: "Slow Connection",
+                  message: "A fast internet connection is required to play WikiRaces.")
+    }
+
     /// Shows an error with a title
     ///
     /// - Parameters:
