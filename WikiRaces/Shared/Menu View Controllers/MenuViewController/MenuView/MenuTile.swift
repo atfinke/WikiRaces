@@ -81,10 +81,10 @@ internal class MenuTile: UIControl {
     override var bounds: CGRect {
         didSet {
             if bounds.width > 200 {
-                titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+                titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
                 valueLabel.font = UIFont.systemFont(ofSize: 46)
             } else if bounds.width > 100 {
-                titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
+                titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
                 valueLabel.font = UIFont.systemFont(ofSize: 38)
             } else {
                 titleLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)

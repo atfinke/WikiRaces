@@ -94,7 +94,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
                 .typeIdentifier: kMonospacedNumbersSelector
             ]
         ]
-        let fontDescriptor = UIFont.boldSystemFont(ofSize: 100.0).fontDescriptor.addingAttributes(
+        let fontDescriptor = UIFont.systemFont(ofSize: 100, weight: .semibold).fontDescriptor.addingAttributes(
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
 

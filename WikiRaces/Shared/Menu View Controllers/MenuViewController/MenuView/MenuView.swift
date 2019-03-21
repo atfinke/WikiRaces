@@ -183,7 +183,7 @@ class MenuView: UIView {
         createLocalRaceButton.style = buttonStyle
 
         // Label Fonts
-        titleLabel.font = UIFont.boldSystemFont(ofSize: min(frame.size.width / 10.0, 55))
+        titleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 10.0, 55), weight: .semibold)
         subtitleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 18.0, 30), weight: .medium)
 
         // Constraints
