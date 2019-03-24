@@ -26,7 +26,7 @@ public struct WKRConnectionTester {
             completionHandler(false)
         }
 
-        WKRPageFetcher.fetch(path: "/United_States", useCache: false) { page in
+        WKRPageFetcher.fetch(path: "/United_States", useCache: false) { page, _ in
             timer.invalidate()
             if timedOut {
                 // Timer fired, completion handler already called

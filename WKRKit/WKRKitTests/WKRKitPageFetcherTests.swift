@@ -27,7 +27,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testError() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testError")
-            WKRPageFetcher.fetch(path: "", useCache: false) { page in
+            WKRPageFetcher.fetch(path: "", useCache: false) { page, _ in
                 XCTAssertNil(page)
                 testExpectation.fulfill()
             }
@@ -65,7 +65,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testPage() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testPage")
-            WKRPageFetcher.fetch(path: "/Apple_Inc.", useCache: false) { page in
+            WKRPageFetcher.fetch(path: "/Apple_Inc.", useCache: false) { page, _ in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
                     XCTFail("Page nil")
@@ -89,7 +89,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
     func testURL() {
         self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
             let testExpectation = expectation(description: "testURL")
-            WKRPageFetcher.fetch(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { page in
+            WKRPageFetcher.fetch(url: URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc.")!, useCache: false) { page, _ in
                 XCTAssertNotNil(page)
                 guard let unwrappedPage = page else {
                     XCTFail("Page nil")
@@ -137,6 +137,34 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
                 testExpectation.fulfill()
             }
 
+            waitForExpectations(timeout: 10.0, handler: { _ in
+                self.stopMeasuring()
+            })
+        }
+    }
+
+    func testRedirect() {
+        self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
+            let testExpectation = expectation(description: "testRedirect")
+            WKRPageFetcher.fetch(path: "/USA", useCache: false) { page, isRedirect in
+                XCTAssertNotNil(page)
+                XCTAssertTrue(isRedirect)
+                testExpectation.fulfill()
+            }
+            waitForExpectations(timeout: 10.0, handler: { _ in
+                self.stopMeasuring()
+            })
+        }
+    }
+
+    func testNotRedirect() {
+        self.measureMetrics([.wallClockTime], automaticallyStartMeasuring: true) {
+            let testExpectation = expectation(description: "testRedirect")
+            WKRPageFetcher.fetch(path: "/United_States", useCache: false) { page, isRedirect in
+                XCTAssertNotNil(page)
+                XCTAssertFalse(isRedirect)
+                testExpectation.fulfill()
+            }
             waitForExpectations(timeout: 10.0, handler: { _ in
                 self.stopMeasuring()
             })

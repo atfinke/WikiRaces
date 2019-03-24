@@ -105,12 +105,16 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             let operation = WKROperation()
             operation.addExecutionBlock { [unowned operation] in
                 // don't use cache to make sure to get most recent page
-                WKRPageFetcher.fetch(path: path, useCache: false) { page in
-                    // 1. Make sure page not nil
-                    // 2. Make sure page is not a link to a section "/USA#History"
-                    // 3. Sometimes removed pages redirect to the Wikipedia homepage.
-                    // 4/5. Make sure link not equal to starting page
-                    if let page = page,
+                WKRPageFetcher.fetch(path: path, useCache: false) { page, isRedirect in
+                    // 1. Make sure not redirect
+                    // 2. Make sure page not nil
+                    // 3. Make sure page not already in voting list for this race
+                    // 4. Make sure page is not a link to a section "/USA#History"
+                    // 5. Sometimes removed pages redirect to the Wikipedia homepage.
+                    // 6/7. Make sure link not equal to starting page
+                    if !isRedirect,
+                        let page = page,
+                        !pages.contains(page),
                         !page.url.absoluteString.contains("#"),
                          page.title != "Wikipedia, the free encyclopedia",
                         let startingPage = startingPage,

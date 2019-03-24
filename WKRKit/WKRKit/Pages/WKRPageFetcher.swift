@@ -47,9 +47,9 @@ internal struct WKRPageFetcher {
     // MARK: - Fetching
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
-    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
+    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
         guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
-            completionHandler(nil)
+            completionHandler(nil, false)
             return
         }
         fetch(url: url, useCache: useCache, completionHandler: completionHandler)
@@ -61,11 +61,13 @@ internal struct WKRPageFetcher {
             completionHandler(nil)
             return
         }
-        fetch(url: url, useCache: true, completionHandler: completionHandler)
+        fetch(url: url, useCache: true) { page, _ in
+            completionHandler(page)
+        }
     }
 
     /// Fetches a Wikipedia page at a given url
-    static func fetch(url: URL, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
+    static func fetch(url: URL, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
         let session: URLSession
         if useCache {
             session = WKRPageFetcher.session
@@ -74,9 +76,11 @@ internal struct WKRPageFetcher {
         }
         let task = session.dataTask(with: url) { (data, response, _) in
             if let data = data, let string = String(data: data, encoding: .utf8), let responseUrl = response?.url {
-                completionHandler(WKRPage(title: title(from: string), url: responseUrl))
+                let page = WKRPage(title: title(from: string), url: responseUrl)
+                let isRedirect = string.contains("Redirected from")
+                completionHandler(page, isRedirect)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, false)
             }
         }
         task.resume()
