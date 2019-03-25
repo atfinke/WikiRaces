@@ -20,6 +20,6 @@ platform :ios do
   lane :beta do
     build_app(scheme: "WikiRaces", analyze_build_time: true)
     changelog_from_git_commits(pretty:"[%ad] %s", date_format:"short")
-    upload_to_testflight
+    upload_to_testflight(distribute_external:true, notify_external_testers:false)
   end
 end
