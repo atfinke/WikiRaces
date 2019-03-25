@@ -854,9 +854,9 @@
 			isa = PBXGroup;
 			children = (
 				14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */,
-				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 				143A8BBB1F58746800580AA2 /* PlayerStatsManager.swift */,
 				14E0F19E22303A8F00BFF1E9 /* PlayerDatabaseStat.swift */,
+				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 			);
 			path = Logging;
 			sourceTree = "<group>";

@@ -35,7 +35,9 @@ public struct WKRSeenFinalArticlesStore {
     internal static func unseenArticles() -> (articles: [String], log: WKRLogEvent?) {
         var finalArticles = Set(WKRKitConstants.current.finalArticles)
 
-        let minCount = 50
+        // the remaining articles could all be invalid (i.e. redirects, deleted pages, etc.)
+        // make sure that we reset before the rest are invalid. minCount is that buffer.
+        let minCount = 500
         var resetLog: WKRLogEvent?
 
         // make sure at least minCount unseen articles left before removing locally seen
