@@ -29,7 +29,7 @@ public struct WKRPlayerRaceStats: Codable, Equatable {
     init(player: WKRPlayer) {
         statsDictionary["Average time per page"] = avergeTimeSpent(player)
         statsDictionary["Distance scrolled"] = "0 Pixels"
-        if let pixelsScrolled = player.pixelsScrolled,
+        if let pixelsScrolled = player.pixelsScrolledDuringCurrentRace,
             let formatted = WKRPlayerRaceStats.pixelFormatter.string(from: NSNumber(value: pixelsScrolled)) {
             statsDictionary["Distance scrolled"] = formatted + " Pixels"
         }
