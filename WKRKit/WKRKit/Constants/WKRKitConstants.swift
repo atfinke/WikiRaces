@@ -34,6 +34,9 @@ public struct WKRKitConstants {
 
     internal let bannedURLFragments: [String]
 
+    public let maxGlobalRacePlayers: Int
+    public let maxLocalRacePlayers: Int
+
     // MARK: - Initalization
 
     //swiftlint:disable:next cyclomatic_complexity function_body_length
@@ -83,6 +86,12 @@ public struct WKRKitConstants {
         guard let bannedURLFragments = documentsConstants["BannedURLFragments"] as? [String] else {
             fatalError("WKRKitConstants: No BannedURLFragments value")
         }
+        guard let maxGlobalRacePlayers = documentsConstants["MaxGlobalRacePlayers"] as? Int else {
+            fatalError("WKRKitConstants: No MaxGlobalRacePlayers value")
+        }
+        guard let maxLocalRacePlayers = documentsConstants["MaxLocalRacePlayers"] as? Int else {
+            fatalError("WKRKitConstants: No MaxLocalRacePlayers value")
+        }
 
         self.version = version
         self.isQuickRaceMode = quickRace
@@ -102,6 +111,8 @@ public struct WKRKitConstants {
         self.votingArticlesCount = votingArticlesCount
 
         self.bannedURLFragments = bannedURLFragments
+        self.maxGlobalRacePlayers = maxGlobalRacePlayers
+        self.maxLocalRacePlayers = maxLocalRacePlayers
     }
 
     // MARK: - Helpers

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MultipeerConnectivity
+import WKRKit
 
 extension MPCHostViewController {
 
@@ -89,6 +91,11 @@ extension MPCHostViewController {
 
         // Hits this case when the "Searching..." placeholder cell is selected
         guard !peers.isEmpty else { return }
+
+        let maxPlayerCount = min(WKRKitConstants.current.maxLocalRacePlayers,
+                                 kMCSessionMaximumNumberOfPeers)
+        let peerCount = session?.connectedPeers.count ?? 0
+        guard maxPlayerCount > peerCount + 1 else { return }
 
         let peerID = sortedPeers[indexPath.row]
         guard let session = session else {
