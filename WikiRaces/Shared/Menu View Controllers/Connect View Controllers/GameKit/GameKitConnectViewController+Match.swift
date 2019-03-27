@@ -25,8 +25,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
             GlobalRaceHelper.shared.lastInvite = nil
-        }
-        if let controller = GKMatchmakerViewController(matchRequest: request) {
+        } else if let controller = GKMatchmakerViewController(matchRequest: request) {
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
             #if !MULTIWINDOWDEBUG
