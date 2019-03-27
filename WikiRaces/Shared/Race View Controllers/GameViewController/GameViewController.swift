@@ -86,11 +86,16 @@ internal class GameViewController: UIViewController {
             initalConfiguration()
         }
 
-        if gameManager.gameState == .preMatch && networkConfig.isHost {
+        if gameManager.gameState == .preMatch && networkConfig.isHost, let config = networkConfig {
             gameManager.player(.startedGame)
-            if case let .mpc(_, session, _)? = networkConfig {
+            switch config {
+            case .gameKit(let match, _):
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch,
-                                    attributes: ["ConnectedPeers": session.connectedPeers.count])
+                                           attributes: ["ConnectedPeers": match.players.count - 1])
+            case .mpc(_, let session, _):
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
+                                           attributes: ["ConnectedPeers": session.connectedPeers.count])
+            default: break
             }
         }
     }
@@ -117,17 +122,15 @@ internal class GameViewController: UIViewController {
         case .solo:
             PlayerStatsManager.shared.connected(to: [], raceType: .solo)
         case .gameKit(let match, _):
-            let playerNames = match.players.map({ player -> String in
+            let playerNames = match.players.map { player -> String in
                 return player.alias
-            })
+            }
             PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
         case .mpc(_, let session, _):
             // Due to low usage, not accounting for players joining mid session
-            let playerNames = session.connectedPeers.filter({ peerID -> Bool in
-                return peerID != session.myPeerID
-            }).map({ peerID -> String in
+            let playerNames = session.connectedPeers.map { peerID -> String in
                 return peerID.displayName
-            })
+            }
             PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
         default:
             break
