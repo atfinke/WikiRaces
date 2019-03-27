@@ -135,6 +135,9 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                 self.listenerUpdate?(.startMatch(isSolo: false))
             }
         } catch {
+            let info = "startMatch: " + error.localizedDescription
+            PlayerAnonymousMetrics.log(event: .error(info))
+
             session.disconnect()
             listenerUpdate?(.cancel)
         }

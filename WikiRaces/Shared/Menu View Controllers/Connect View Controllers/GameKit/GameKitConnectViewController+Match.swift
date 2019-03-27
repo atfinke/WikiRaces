@@ -33,6 +33,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             #endif
         } else {
             showError(title: "Unable To Find Match", message: "Please try again later.")
+            let info = "findMatch: No valid controller"
+            PlayerAnonymousMetrics.log(event: .error(info))
         }
     }
 
@@ -43,6 +45,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         }
         guard let match = match else {
             fail()
+            let info = "findMatch: No valid match"
+            PlayerAnonymousMetrics.log(event: .error(info))
             return
         }
 
@@ -57,6 +61,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             }
         } catch {
             fail()
+            let info = "sendStartMessageToPlayers: " + error.localizedDescription
+            PlayerAnonymousMetrics.log(event: .error(info))
         }
     }
 
@@ -90,6 +96,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+        let info = "matchmaker...didFailWithError: " + error.localizedDescription
+        PlayerAnonymousMetrics.log(event: .error(info))
+
         dismiss(animated: true) {
             self.showError(title: "Unable To Find Match",
                            message: "Please try again later.")
@@ -121,6 +130,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
                     })
                 }
             } else {
+                let info = "matchmaker...didFind: No host player"
+                PlayerAnonymousMetrics.log(event: .error(info))
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
                 self.showError(title: "Unable To Find Best Host",
                                message: "Please try again later.")

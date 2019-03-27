@@ -123,6 +123,9 @@ extension GameViewController {
             })
         })
 
+        let info = "errorOccurred: " + error.message
+        PlayerAnonymousMetrics.log(event: .error(info))
+
         PlayerAnonymousMetrics.log(event: .fatalError,
                           attributes: ["Error": error.title as Any])
     }

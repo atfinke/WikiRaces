@@ -34,6 +34,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
             start()
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
             guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
+                let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
+                PlayerAnonymousMetrics.log(event: .error(info))
+
                 showError(title: "Connection Issue",
                           message: "The connection to the host was lost.")
                 return
@@ -58,6 +61,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                 self.connectingTrace = nil
                 #endif
             } else if state == .notConnected && peerID == self.hostPeerID {
+                let info = "session...didChange: Host not connected"
+                PlayerAnonymousMetrics.log(event: .error(info))
                 self.showError(title: "Connection Issue", message: "The connection to the host was lost.")
             }
         }
@@ -138,6 +143,9 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         // Previous versions didn't send a host context object
         guard let context = invite.context else { return }
         if context.minPeerAppBuild > Bundle.main.appInfo.build {
+            let info = "showNextInvite: \(context.minPeerAppBuild) > \(Bundle.main.appInfo.build)"
+            PlayerAnonymousMetrics.log(event: .error(info))
+
             //swiftlint:disable:next line_length
             let message = "You received an invite to a race that requires the latest version of WikiRaces. Please download the update on the App Store."
             showError(title: "Update Required", message: message)

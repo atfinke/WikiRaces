@@ -21,6 +21,7 @@ internal struct PlayerAnonymousMetrics {
     enum CrashLogEvent {
         case userAction(String)
         case gameState(String)
+        case error(String)
     }
 
     // MARK: - Analytic Event Types
@@ -83,6 +84,8 @@ internal struct PlayerAnonymousMetrics {
             print("UserAction: ", action)
         case .gameState(let description):
             print("GameState: ", description)
+        case .error(let error):
+            print("Error: ", error)
         }
         #else
         switch event {
@@ -90,7 +93,9 @@ internal struct PlayerAnonymousMetrics {
             CLSNSLogv("UserAction: %@", getVaList([action]))
         case .gameState(let description):
             CLSNSLogv("GameState: %@", getVaList([description]))
-}
+        case .error(let error):
+            CLSNSLogv("LoggedError: %@", getVaList([error]))
+        }
         #endif
     }
 

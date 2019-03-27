@@ -89,6 +89,8 @@ internal class GameViewController: UIViewController {
         if gameManager.gameState == .preMatch && networkConfig.isHost, let config = networkConfig {
             gameManager.player(.startedGame)
             switch config {
+            case .solo:
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
             case .gameKit(let match, _):
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch,
                                            attributes: ["ConnectedPeers": match.players.count - 1])

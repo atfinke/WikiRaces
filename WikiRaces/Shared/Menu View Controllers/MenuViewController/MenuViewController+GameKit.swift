@@ -27,6 +27,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                     self.presentGameKitAuthAlert()
                 }
             }
+            if let error = error {
+                let info = "attemptGlobalAuthentication: " + error.localizedDescription
+                PlayerAnonymousMetrics.log(event: .error(info))
+            }
         }
     }
 

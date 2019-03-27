@@ -141,6 +141,9 @@ internal class MPCConnectViewController: ConnectViewController {
         toggleCoreInterface(isHidden: false, duration: 0.5)
 
         if !isValidPlayerName {
+            let info = "viewDidAppear...isValidPlayerName: " + playerName
+            PlayerAnonymousMetrics.log(event: .error(info))
+
             let length = playerName.count == 0 ? "Short" : "Long"
             let message = "Your player name is too \(length.lowercased()). "
             showError(title: "Player Name Too \(length)",
