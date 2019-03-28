@@ -12,34 +12,31 @@ import WebKit
 /// A WKNavigationDelegate for controlling Wikipedia page loads during the race
 internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
+    // MARK: - Types
+
+    enum PageUpdate {
+        /// Called when the user taps a banned link (i.e. an image)
+        case urlBlocked(URL)
+        /// Called when there is an issue loading the page
+        case loadingError(Error?)
+        /// Called when the page starts to load
+        case startedLoading
+        /// Called when the page has completed loading
+        case loaded(WKRPage)
+
+        /// Called when the page is being loaded
+        case loadingProgess(Float)
+    }
+
     // MARK: - Properties
 
-    /// Called when the user taps a banned link (i.e. an image)
-    let pageURLBlocked: ((URL) -> Void)
-    /// Called when there is an issue loading the page
-    let pageLoadingError: (() -> Void)
-    /// Called when the page starts to load
-    let pageStartedLoading: (() -> Void)
-    /// Called when the page has completed loading
-    let pageLoaded: ((WKRPage) -> Void)
+    internal let pageUpdate: ((PageUpdate) -> Void)
 
     // MARK: - Initialization
 
     /// Creates a new WKRPageNavigation object
-    ///
-    /// - Parameters:
-    ///   - pageURLBlocked: Called when the user taps a banned link (i.e. an image)
-    ///   - pageLoadingError: Called when there is an issue loading the page
-    ///   - pageStartedLoading: Called when the page starts to load
-    ///   - pageLoaded: Called when the page has completed loading
-    init(pageURLBlocked: @escaping ((URL) -> Void),
-         pageLoadingError: @escaping (() -> Void),
-         pageStartedLoading: @escaping (() -> Void),
-         pageLoaded: @escaping ((WKRPage) -> Void)) {
-        self.pageURLBlocked = pageURLBlocked
-        self.pageLoadingError = pageLoadingError
-        self.pageStartedLoading = pageStartedLoading
-        self.pageLoaded = pageLoaded
+    init(pageUpdate: @escaping ((PageUpdate) -> Void)) {
+        self.pageUpdate = pageUpdate
     }
 
     // MARK: - Helpers
@@ -78,7 +75,7 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         // Make sure the url is legal for the race
         guard allow(url: requestURL) else {
             decisionHandler(.cancel)
-            pageURLBlocked(requestURL)
+            pageUpdate(.urlBlocked(requestURL))
             return
         }
 
@@ -93,15 +90,21 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
         if navigationAction.navigationType == .other {
             decisionHandler(.allow)
         } else {
-            pageStartedLoading()
+            pageUpdate(.startedLoading)
 
-            WKRPageFetcher.fetchSource(url: requestURL) { (source) in
+            WKRPageFetcher.fetchSource(url: requestURL,
+                                       useCache: true,
+                                       progressHandler: { progress in
+                                        self.pageUpdate(.loadingProgess(progress))
+                }, completionHandler: { source, error in
                 DispatchQueue.main.async {
                     if let source = source {
                         webView.loadHTMLString(source, baseURL: requestURL)
+                    } else {
+                        self.pageUpdate(.loadingError(error))
                     }
                 }
-            }
+            })
 
             decisionHandler(.cancel)
         }
@@ -109,18 +112,16 @@ internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if let url = webView.url {
-            pageLoaded(WKRPage(title: webView.title, url: url))
-        } else {
-            fatalError("webView didFinish with no url")
+            pageUpdate(.loaded(WKRPage(title: webView.title, url: url)))
         }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        pageLoadingError()
+        pageUpdate(.loadingError(error))
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        pageLoadingError()
+        pageUpdate(.loadingError(error))
     }
 
 }

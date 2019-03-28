@@ -35,5 +35,9 @@
 	<integer>2</integer>
 	<key>BonusPointsInterval</key>
 	<integer>120</integer>
+	<key>MaxGlobalRacePlayers</key>
+	<integer>4</integer>
+	<key>MaxLocalRacePlayers</key>
+	<integer>8</integer>
 </dict>
 </plist>

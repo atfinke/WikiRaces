@@ -65,7 +65,6 @@ WikiRaces/report.xml
 WikiRaces/Preview.html
 WikiRaces/screenshots
 WikiRaces/metadata
-WikiRaces/test_output
 
 WikiRaces/fabric.apikey
 WikiRaces/fabric.buildsecret
@@ -73,3 +72,15 @@ WikiRaces/fabric.buildsecret
 WikiRaces/WikiRaces/GoogleService-Info.plist
 
 WKRPython/env
+
+WKRPython/geckodriver.log
+
+WikiRaces/fabric.buildsecret
+
+WikiRaces/fabric.apikey
+
+WikiRaces/culprits.txt
+
+WikiRaces/fastlane/report.xml
+
+WikiRaces/fastlane/README.md

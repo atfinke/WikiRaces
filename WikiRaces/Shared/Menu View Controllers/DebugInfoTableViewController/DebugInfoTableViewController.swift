@@ -25,6 +25,9 @@ class DebugInfoTableViewController: UITableViewController {
                            forCellReuseIdentifier: DebugInfoTableViewCell.reuseIdentifier)
 
         navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
+                                                            target: self,
+                                                            action: #selector(share(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
                                                             target: self,
                                                             action: #selector(done))
@@ -35,6 +38,17 @@ class DebugInfoTableViewController: UITableViewController {
     @objc
     func done() {
         dismiss(animated: true, completion: nil)
+    }
+
+    @objc
+    func share(_ sender: UIBarButtonItem) {
+        var string = "WikiRaces Debug:\n"
+        for (key, value) in info {
+            string += "\n\nKey: \(key)\nValue:\n\(String(describing: value))"
+        }
+        let activityViewController = UIActivityViewController(activityItems: [string], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.barButtonItem = sender
+        present(activityViewController, animated: true, completion: nil)
     }
 
     // MARK: - UITableViewDataSource
@@ -55,4 +69,31 @@ class DebugInfoTableViewController: UITableViewController {
 
         return cell
     }
+
+    // UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView,
+                            canPerformAction action: Selector,
+                            forRowAt indexPath: IndexPath,
+                            withSender sender: Any?) -> Bool {
+        return action == #selector(copy(_:))
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            performAction action: Selector,
+                            forRowAt indexPath: IndexPath,
+                            withSender sender: Any?) {
+        guard action == #selector(copy(_:)),
+            let cell = tableView.cellForRow(at: indexPath),
+            let text = cell.textLabel?.text,
+            let detail = cell.detailTextLabel?.text else { return }
+
+        let string = "Key: \(text)\nValue:\n\(detail)"
+        UIPasteboard.general.string = string
+    }
+
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
 }

@@ -7,6 +7,18 @@
 //
 
 import UIKit
+import StoreKit
+
+extension Bundle {
+    var appInfo: (build: Int, version: String) {
+        guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let bundleBuild = Int(bundleBuildString),
+            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
+                fatalError("No bundle info dictionary")
+        }
+        return (bundleBuild, bundleVersion)
+    }
+}
 
 extension NSNotification.Name {
     static let localPlayerQuit = NSNotification.Name(rawValue: "LocalPlayerQuit")
@@ -58,5 +70,27 @@ extension UIView {
                 completion?()
             })
         })
+    }
+}
+
+extension SKStoreReviewController {
+    private static let shouldPromptForRatingKey = "ShouldPromptForRating"
+
+    static var shouldPromptForRating: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: shouldPromptForRatingKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: shouldPromptForRatingKey)
+        }
+    }
+}
+
+extension UIApplication {
+    func openSettings() {
+        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+            fatalError("Settings URL nil")
+        }
+        open(settingsURL, options: [:], completionHandler: nil)
     }
 }

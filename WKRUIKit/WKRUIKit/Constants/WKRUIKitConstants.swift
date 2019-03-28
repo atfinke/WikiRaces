@@ -14,15 +14,15 @@ public struct WKRUIKitConstants {
     // MARK: - Not Updated OTA
 
     static let webViewAnimateInDuration   = 0.25
-    static let webViewAnimateOutDuration  = 0.25
+    static let webViewAnimateOutDuration  = 0.15
 
     static let progessViewAnimateOutDelay     = 0.85
     static let progessViewAnimateOutDuration  = 0.4
 
     static let alertLabelHeight: CGFloat   = 30.0
-    static let alertAnimateInDuration      = 0.25
-    static let alertAnimateOutDuration     = 0.25
-    public static let alertDefaultDuration = 5.0
+    static let alertAnimateInDuration      = 0.2
+    static let alertAnimateOutDuration     = 0.15
+    public static let alertDefaultDuration = 3.0
 
     // MARK: - Updated OTA
 
@@ -57,20 +57,20 @@ public struct WKRUIKitConstants {
                 return
             }
 
-            guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
-                let recordStyleScriptAsset = record["StyleScriptFile"] as? CKAsset,
-                let recordStyleScriptDarkAsset = record["StyleScriptDarkFile"] as? CKAsset,
-                let recordCleanScriptAsset = record["CleanScriptFile"] as? CKAsset,
-                let recordContentBlockerAsset = record["ContentBlockerFile"] as? CKAsset else {
+            guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
+                let recordStyleScriptAssetURL = (record["StyleScriptFile"] as? CKAsset)?.fileURL,
+                let recordStyleScriptDarkAssetURL = (record["StyleScriptDarkFile"] as? CKAsset)?.fileURL,
+                let recordCleanScriptAssetURL = (record["CleanScriptFile"] as? CKAsset)?.fileURL,
+                let recordContentBlockerAssetURL = (record["ContentBlockerFile"] as? CKAsset)?.fileURL else {
                     return
             }
 
             DispatchQueue.main.async {
-                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                            newStyleScriptFileURL: recordStyleScriptAsset.fileURL,
-                            newStyleScriptDarkFileURL: recordStyleScriptDarkAsset.fileURL,
-                            newCleanScriptFileURL: recordCleanScriptAsset.fileURL,
-                            newContentBlockerFileURL: recordContentBlockerAsset.fileURL)
+                copyIfNewer(newConstantsFileURL: recordConstantsAssetURL,
+                            newStyleScriptFileURL: recordStyleScriptAssetURL,
+                            newStyleScriptDarkFileURL: recordStyleScriptDarkAssetURL,
+                            newCleanScriptFileURL: recordCleanScriptAssetURL,
+                            newContentBlockerFileURL: recordContentBlockerAssetURL)
             }
         }
     }
@@ -182,7 +182,7 @@ public struct WKRUIKitConstants {
 
     internal func contentBlocker() -> String {
         guard let source = try? String(contentsOf: WKRUIKitConstants.documentsPath(for: "WKRContentBlocker.json")) else {
-            fatalError("Failed to load style script")
+            fatalError("Failed to load blocker script")
         }
         return source
     }

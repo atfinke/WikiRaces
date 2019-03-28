@@ -37,41 +37,30 @@ class ViewController: UIViewController {
 
         if twoRows {
             for xPos in 0..<Int(windows / 2) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2))
-                window.playerName = windowNames[xPos]
-                window.rootViewController = self.menuViewController()
-                window.makeKeyAndVisible()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    window.rootViewController?.viewDidAppear(false)
-                }
+                let frame = CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: (view.frame.height - 2) / 2)
+                let name = windowNames[xPos]
+                createDebugWindow(frame: frame, named: name)
             }
             for xPos in 0..<Int(windows / 2) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2))
-                window.playerName = windowNames[xPos + Int(windows / 2)]
-                window.rootViewController = self.menuViewController()
-                window.makeKeyAndVisible()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    window.rootViewController?.viewDidAppear(false)
-                }
+                let frame = CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: (view.frame.height + 2) / 2, width: windowWidth, height: (view.frame.height - 2) / 2)
+                let name = windowNames[xPos + Int(windows / 2)]
+                createDebugWindow(frame: frame, named: name)
             }
         } else {
             for xPos in 0..<Int(windows) {
-                let window = DebugWindow(frame: CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: view.frame.height))
-                window.playerName = windowNames[xPos]
-                window.rootViewController = self.menuViewController()
-                window.makeKeyAndVisible()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    window.rootViewController?.viewDidAppear(false)
-                }
+                let frame = CGRect(x: CGFloat(xPos) * (windowWidth + 1.0), y: 0, width: windowWidth, height: view.frame.height)
+                let name = windowNames[xPos]
+                createDebugWindow(frame: frame, named: name)
             }
         }
         view.backgroundColor = UIColor.purple
     }
 
-    func menuViewController() -> MenuViewController {
-        let controller = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateInitialViewController() as! UINavigationController
-        return controller.viewControllers.first as! MenuViewController
+    func createDebugWindow(frame: CGRect, named name: String) {
+        let window = DebugWindow(frame: frame)
+        window.playerName = name
+        window.rootViewController = MenuViewController()
+        window.makeKeyAndVisible()
     }
 
 }

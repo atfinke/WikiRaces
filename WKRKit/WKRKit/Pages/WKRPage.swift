@@ -16,7 +16,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
     // The title of the page
     public let title: String?
     // The url of the page
-    internal let url: URL
+    public let url: URL
 
     // MARK: - Initialization
 
@@ -36,15 +36,10 @@ public struct WKRPage: Codable, Hashable, Equatable {
     private static func formattedTitle(for title: String?) -> String? {
         guard let title = title else { return nil }
 
-        func smartCapitalize(_ title: String) -> String {
-            // I can't stand Iphone / Os X
-            if title.first == "i" {
-                return title
-            } else if title.contains("OS X") || title.contains("R2-D2") || title.contains("C-3PO") {
-                return title
-            } else {
-                return title.capitalized
-            }
+        func smartFormat(_ title: String) -> String {
+            return title.replacingOccurrences(of: "&amp;", with: "&")
+                .replacingOccurrences(of: "&apos;", with: "'")
+                .replacingOccurrences(of: "&quot;", with: "\"")
         }
 
         // charactersToRemove is a fallback if simply replacing the "Wikipedia - " fails one day.
@@ -54,18 +49,12 @@ public struct WKRPage: Codable, Hashable, Equatable {
             // is updated one day to use raw character replacment instead of a string.
             let index = title.index(title.endIndex, offsetBy: -charactersToRemove)
             let clippedTitle = title[..<index]
-            return smartCapitalize(String(clippedTitle))
+            return smartFormat(String(clippedTitle))
         } else {
             // The expected path
             let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")
-            return smartCapitalize(title)
+            return smartFormat(title)
         }
-    }
-
-    // MARK: - Hashable
-
-    public var hashValue: Int {
-        return url.hashValue
     }
 
 }

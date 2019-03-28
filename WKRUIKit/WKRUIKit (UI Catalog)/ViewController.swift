@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         webView = WKRUIWebView()
-        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/apple")!))
+        webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org/wiki/apple_inc")!))
 
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
@@ -33,6 +33,12 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
 
         navigationController?.navigationBar.barStyle = .wkrStyle
+
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (_) in
+            DispatchQueue.main.async {
+                self.title = self.webView.pixelsScrolled.description
+            }
+        }
     }
 
 }

@@ -15,19 +15,45 @@ extension WKRGameManager {
     internal func receivedRaw(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
             game.preRaceConfig = preRaceConfig
-            voteInfoUpdate?(preRaceConfig.voteInfo)
+            votingUpdate(.voteInfo(preRaceConfig.voteInfo))
 
             if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
             }
+
+            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.voteInfo.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
-            voteFinalPageUpdate?(raceConfig.endingPage)
+            votingUpdate(.finalPage(raceConfig.endingPage))
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
                 peerNetwork.send(object: WKRCodable(localPlayer))
             }
             game.playerUpdated(playerObject)
+
+            // if: other player just got to the same page
+            // else if: local player just got to a new page
+            var samePagePlayers = [WKRPlayerProfile]()
+            if playerObject != localPlayer && game.shouldShowSamePageMessage(for: playerObject) {
+                samePagePlayers.append(playerObject.profile)
+            } else if playerObject == localPlayer {
+                for player in game.players where game.shouldShowSamePageMessage(for: player) {
+                    samePagePlayers.append(player.profile)
+                }
+            }
+
+            var samePageMessage: String?
+            if samePagePlayers.count == 1 {
+                samePageMessage = "\(samePagePlayers[0].name) is on same page"
+            } else if samePagePlayers.count > 1 {
+                samePageMessage = "\(samePagePlayers.count) players are on same page"
+            }
+            if let message = samePageMessage {
+                enqueue(message: message,
+                        duration: 2.0,
+                        isRaceSpecific: true,
+                        playHaptic: false)
+            }
 
             // Player joined mid-session
             if playerObject.state == .connecting
@@ -49,13 +75,30 @@ extension WKRGameManager {
         if let gameState = object.typeOfEnum(WKRGameState.self) {
             transitionGameState(to: gameState)
         } else if let message = object.typeOfEnum(WKRPlayerMessage.self), player != localPlayer.profile {
-            enqueue(message: message.text(for: player), duration: 5.0)
+            var isRaceSpecific = true
+            var playHaptic = false
+            if message == .quit {
+                isRaceSpecific = false
+            } else if message == .foundPage {
+                playHaptic = true
+            }
+
+            // Don't show "on USA" message if expected to show "is on same page" message
+            let lastPageTitle = localPlayer.raceHistory?.entries.last?.page.title ?? ""
+            if message == .onUSA && lastPageTitle == "United States" {
+                return
+            }
+
+            enqueue(message: message.text(for: player),
+                    duration: 3.0,
+                    isRaceSpecific: isRaceSpecific,
+                    playHaptic: playHaptic)
         } else if let error = object.typeOfEnum(WKRFatalError.self), !isFailing {
             isFailing = true
             localPlayer.state = .quit
             peerNetwork.send(object: WKRCodable(localPlayer))
             peerNetwork.disconnect()
-            stateUpdate(gameState, error)
+            gameUpdate(.error(error))
         }
     }
 
@@ -63,42 +106,52 @@ extension WKRGameManager {
         guard let int = object.typeOf(WKRInt.self) else { fatalError("Object not a WKRInt type") }
         switch int.type {
         case .votingTime, .votingPreRaceTime:
-            voteTimeUpdate?(int.value)
+            votingUpdate(.remainingTime(int.value))
         case .resultsTime:
-            resultsTimeUpdate?(int.value)
+            resultsUpdate(.remainingTime(int.value))
         case .bonusPoints:
             let string = int.value == 1 ? "Point" : "Points"
-            let message = "Match Bonus Now \(int.value) " + string
-            enqueue(message: message)
+            let message = "Race Bonus Now \(int.value) " + string
+            enqueue(message: message,
+                    duration: 2.0,
+                    isRaceSpecific: true,
+                    playHaptic: false)
         case .showReady:
-            resultsShowReady?(int.value == 1)
+            resultsUpdate(.isReadyUpEnabled(int.value == 1))
         }
     }
 
     // MARK: - Game Updates
 
     private func receivedFinalResults(_ resultsInfo: WKRResultsInfo) {
+        alertView.clearRaceSpecificMessages()
         game.finishedRace()
 
         if gameState != .hostResults {
             transitionGameState(to: .hostResults)
-
-            WKRConnectionTester.start(timeout: 15.0, completionHandler: { success in
-                if !success {
-                    self.errorOccurred(.internetSpeed)
-                }
-            })
         }
 
         hostResultsInfo = resultsInfo
-        resultsInfoHostUpdate?(resultsInfo)
+        resultsUpdate(.hostResultsInfo(resultsInfo))
 
         if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
         if localPlayer.shouldGetPoints {
             localPlayer.shouldGetPoints = false
-            pointsUpdate(resultsInfo.raceRewardPoints(for: localPlayer))
+
+            let points = resultsInfo.raceRewardPoints(for: localPlayer)
+            var place: Int?
+            for playerIndex in 0..<resultsInfo.playerCount {
+                let player = resultsInfo.raceRankingsPlayer(at: playerIndex)
+                if player == localPlayer && player.state == .foundPage {
+                    place = playerIndex + 1
+                }
+            }
+            let webViewPixelsScrolled = webView?.pixelsScrolled ?? 0
+            gameUpdate(.playerStatsForLastRace(points: points,
+                                               place: place,
+                                               webViewPixelsScrolled: webViewPixelsScrolled))
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
@@ -118,7 +171,7 @@ extension WKRGameManager {
             }
         case .race:
             guard let raceConfig = game.raceConfig else {
-                errorOccurred(.configCreationFailed)
+                localErrorOccurred(.configCreationFailed)
                 return
             }
             localPlayer.startedNewRace(on: raceConfig.startingPage)
@@ -129,7 +182,7 @@ extension WKRGameManager {
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
-        stateUpdate(state, nil)
+        gameUpdate(.state(state))
     }
 
 }

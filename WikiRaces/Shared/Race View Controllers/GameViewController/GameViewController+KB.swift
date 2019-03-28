@@ -62,13 +62,13 @@ extension GameViewController {
     @objc
     private func keyboardAttemptForfeit() {
         guard presentedViewController == nil else { return }
-        helpButtonPressed(helpBarButtonItem)
+        helpButtonPressed()
     }
 
     @objc
     private func keyboardAttemptQuit() {
         guard presentedViewController == nil else { return }
-        quitButtonPressed(quitBarButtonItem)
+        quitButtonPressed()
     }
 
     @objc
@@ -80,7 +80,7 @@ extension GameViewController {
         }
 
         let script = "document.getElementsByClassName('section-heading')[\(index - 1)].click()"
-        webView.evaluateJavaScript(script, completionHandler: nil)
+        webView?.evaluateJavaScript(script, completionHandler: nil)
     }
 
 }

@@ -29,7 +29,7 @@ extension ViewController {
         publicDB.add(queryOperation)
     }
 
-    private func queryRaceCompleted(cursor: CKQueryCursor?, error: Error?) {
+    private func queryRaceCompleted(cursor: CKQueryOperation.Cursor?, error: Error?) {
         DispatchQueue.main.async {
             if let error = error {
                 self.textView.textStorage?.append(NSAttributedString(string: "Error: \(error)\n"))
@@ -44,7 +44,7 @@ extension ViewController {
         }
     }
 
-    private func queryRaceStats(cursor: CKQueryCursor) {
+    private func queryRaceStats(cursor: CKQueryOperation.Cursor) {
         let queryOperation = CKQueryOperation(cursor: cursor)
         queryOperation.qualityOfService = .userInitiated
         queryOperation.recordFetchedBlock = { record in
@@ -71,7 +71,7 @@ extension ViewController {
         panel.beginSheetModal(for: self.view.window!) { _ in
             guard let url = panel.url else { return }
 
-            try! FileManager.default.createDirectory(at: url,
+            try? FileManager.default.createDirectory(at: url,
                                                 withIntermediateDirectories: false,
                                                 attributes: nil)
 
@@ -82,9 +82,9 @@ extension ViewController {
             csvString += "\n"
             for (index, record) in self.raceRecords.enumerated() {
                 for key in keys {
-                    if key == "URL", let asset = record.object(forKey: "CSV") as? CKAsset {
+                    if key == "URL", let assetURL = (record.object(forKey: "CSV") as? CKAsset)?.fileURL {
                         let fileURL = url.appendingPathComponent("\(index).csv")
-                        try? FileManager.default.copyItem(at: asset.fileURL, to: fileURL)
+                        try? FileManager.default.copyItem(at: assetURL, to: fileURL)
                         csvString += "\(fileURL)"
                     } else if let object = record.object(forKey: key) {
                         csvString += "\(object)"

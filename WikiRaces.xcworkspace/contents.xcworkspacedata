@@ -13,4 +13,7 @@
    <FileRef
       location = "group:WKRCloudStats/WKRCloudStats.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:WKRArticlesPreviewer/WKRArticlesPreviewer.xcodeproj">
+   </FileRef>
 </Workspace>

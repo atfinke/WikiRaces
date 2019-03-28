@@ -1,3 +1,7 @@
+window.onscroll = function () {
+    webkit.messageHandlers.scrollY.postMessage(window.scrollY);
+};
+
 function cleanPage() {
   console.log("WKRUIKit: cleanPage");
 

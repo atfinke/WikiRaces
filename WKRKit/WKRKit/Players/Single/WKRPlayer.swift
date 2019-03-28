@@ -10,18 +10,27 @@ import Foundation
 
 public class WKRPlayer: Codable, Hashable {
 
-    // MARK: - Properties
+    // MARK: - Properties [Must not break]
 
     internal let isHost: Bool
+
+    // poorly named (needs to stay backwards compatible), indicating if time spent + points awarded for race
     internal var shouldGetPoints = false
 
-    public var raceHistory: WKRHistory?
-    public var state: WKRPlayerState = .connecting
+    public internal(set) var raceHistory: WKRHistory?
+    public internal(set) var state: WKRPlayerState = .connecting
 
     internal let profile: WKRPlayerProfile
     public var name: String {
         return profile.name
     }
+
+    // MARK: - Stat Properties [Optional to be backwards compatible]
+
+    public private(set) var stats: WKRPlayerRaceStats?
+    internal private(set) var neededHelpCount: Int?
+    internal private(set) var pixelsScrolledDuringCurrentRace: Int?
+    public var isCreator: Bool?
 
     // MARK: - Initialization
 
@@ -35,20 +44,30 @@ public class WKRPlayer: Codable, Hashable {
     func startedNewRace(on page: WKRPage) {
         state = .racing
         raceHistory = WKRHistory(firstPage: page)
+        neededHelpCount = 0
+        pixelsScrolledDuringCurrentRace = 0
+        stats = WKRPlayerRaceStats(player: self)
     }
 
     func nowViewing(page: WKRPage, linkHere: Bool) {
         raceHistory?.append(page, linkHere: linkHere)
     }
 
-    func finishedViewingLastPage() {
+    func finishedViewingLastPage(pixelsScrolled: Int) {
         raceHistory?.finishedViewingLastPage()
+        pixelsScrolledDuringCurrentRace = pixelsScrolled
+        stats = WKRPlayerRaceStats(player: self)
+    }
+
+    func neededHelp() {
+        neededHelpCount = (neededHelpCount ?? 0) + 1
+        stats = WKRPlayerRaceStats(player: self)
     }
 
     // MARK: - Hashable
 
-    public var hashValue: Int {
-        return profile.playerID.hashValue
+    public func hash(into hasher: inout Hasher) {
+        return profile.playerID.hash(into: &hasher)
     }
 
     //swiftlint:disable:next operator_whitespace

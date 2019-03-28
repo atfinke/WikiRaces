@@ -13,7 +13,7 @@ class WKRKitRaceTests: WKRKitTestCase {
 
     func testPreRaceFetch() {
         let testExpectation = expectation(description: "finalPage")
-        WKRPreRaceConfig.new { preRaceConfig in
+        WKRPreRaceConfig.new { preRaceConfig, _  in
             XCTAssertNotNil(preRaceConfig)
             XCTAssert(preRaceConfig?.voteInfo.pageCount == WKRKitConstants.current.votingArticlesCount)
 

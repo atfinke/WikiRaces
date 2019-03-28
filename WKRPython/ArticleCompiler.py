@@ -1,39 +1,87 @@
-from os import listdir
-from time import sleep
-from os.path import join
-from selenium import webdriver
-from BeautifulSoup import BeautifulSoup
-
 import re
 import random
-import urllib2
+import urllib
+import urllib.request
+
 import plistlib
-import subprocess
+
+from os import listdir, makedirs
+from os.path import join, exists
+
+from time import sleep
+from selenium import webdriver
+from bs4 import BeautifulSoup
+
+MAX_PAGE_TITLE_LENGTH = 25
+ILLEGAL_PAGE_TITLE_ITEMS = [
+    ":",
+    "#",
+    ",_",
+    "List",
+    "disambiguation",
+    "(",
+    "Outline"
+]
 
 
-def isValidLink(link):
-    if len(link) > 25:
+def create_folders():
+    directory = "/Users/andrewfinke/Desktop/WKRPython/"
+    if not exists(directory):
+        makedirs(directory)
+
+    directory = "/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/"
+    if not exists(directory):
+        makedirs(directory)
+
+    directory = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/"
+    if not exists(directory):
+        makedirs(directory)
+
+
+def is_valid_article(article):
+    if len(article) > MAX_PAGE_TITLE_LENGTH:
         return False
 
-    bad = [":", "#", ",_", "List", "disambiguation", "(", "Outline"]
-    for badItem in bad:
-        if badItem in link:
+    for illegal_item in ILLEGAL_PAGE_TITLE_ITEMS:
+        if illegal_item in article:
             return False
 
     return True
 
 
-def validateArticles(articles):
-    validArticles = []
-    for article in set(articles):
-        if isValidLink("/wiki/" + article):
-            validArticles.append(article)
-        else:
-            print(article)
-    return validArticles
+def articles_properties(article):
+    url = "https://en.m.wikipedia.org/wiki" + article
+    try:
+        html_page = urllib.request.urlopen(url)
+        soup = BeautifulSoup(html_page)
+        allrows = soup.findAll('th')
+        userrows = [t for t in allrows if t.findAll(text=re.compile('Born'))]
+        is_person_article = len(userrows) > 0
+
+        dis_text = " page lists articles associated with the title "
+        is_disambiguation_article = dis_text in str(soup)
+    except:
+        print("ERROR: " + article)
+        return False, False
+    return is_person_article, is_disambiguation_article
 
 
-def combineArticlesAtPath(path):
+def remove_articles_with_year(articles):
+    years = [str(i) for i in range(1000, 2100)]
+    clean_articles = []
+    for article in articles:
+        is_clean = True
+        for year in years:
+            if year in article:
+                is_clean = False
+                break
+
+        if is_clean:
+            clean_articles.append(article)
+    return clean_articles
+
+
+def load_articles_in_directory(path):
     articles = []
     files = [join(path, f) for f in listdir(path)]
 
@@ -43,7 +91,7 @@ def combineArticlesAtPath(path):
     return set(articles)
 
 
-def commonTitleWords(articles):
+def word_count_in_strings(articles):
     words = {}
     for article in articles:
         for word in article[1:].replace("_", " ").split():
@@ -54,21 +102,16 @@ def commonTitleWords(articles):
     return words
 
 
-def commonTitleWordsAsString(articles):
-    words = commonTitleWords(articles)
+def formatted_word_count_in_strings(articles):
+    words = word_count_in_strings(articles)
 
     string = ""
     for k, v in sorted(words.items(), reverse=True, key=lambda x: x[1]):
         string += u'{0}: {1}'.format(k, v) + "\n"
-
     return string
-    # path = "/Users/andrewfinke/Desktop/NewMaster2.txt"
-    # text_file = open(path, "w")
-    # text_file.write(string)
-    # text_file.close()
 
 
-def fetchRedirect(driver, article):
+def fetch_redirect(driver, article):
     link = "https://en.m.wikipedia.org/wiki" + article
 
     driver.get(link)
@@ -76,254 +119,168 @@ def fetchRedirect(driver, article):
     sleep(0.4)
 
     split = driver.current_url.split("/")
-    newArticle = "/" + split[len(split) - 1]
+    new_article = "/" + split[len(split) - 1]
 
-    if newArticle != article:
-        print("REDIRECT: " + newArticle)
+    if new_article != article:
+        print("REDIRECT: " + new_article)
     else:
         print("NO REDIRECT")
-    return newArticle
+    return new_article
 
 
-def preciseContains(articleToCheck, articles):
-    for article in articles:
-        if article.lower() == articleToCheck.lower():
-            return True
-    return False
-
-
-def preciseRemoveAllDups(articles):
-    print("preciseRemoveDups")
-    newArticles = []
-    for article in articles:
-        if preciseContains(article, newArticles) == False:
-            newArticles.append(article)
-        else:
-            print("DUP: " + article)
-    return newArticles
-
-
-def fullNetworkingTest(articles):
+def run_networking_test(articles):
+    create_folders()
     driver = webdriver.Firefox()
 
-    validArticles = []
-    redirectArticles = []
-    errorArticles = []
+    normal_articles = []
+    redirecting_articles = []
+    error_articles = []
 
-    def saveArticles():
-        validPath = "/Users/andrewfinke/Desktop/FullTest/CValid.plist"
-        plistlib.writePlist(sorted(validArticles), validPath)
+    def save_results():
+        path = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/NormalArticles.plist"
+        plistlib.writePlist(sorted(normal_articles), path)
 
-        redirectPath = "/Users/andrewfinke/Desktop/FullTest/CRedirect.plist"
-        plistlib.writePlist(sorted(redirectArticles), redirectPath)
+        path = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/RedirectingArticles.plist"
+        plistlib.writePlist(sorted(redirecting_articles), path)
 
-        errorPath = "/Users/andrewfinke/Desktop/FullTest/CError.plist"
-        plistlib.writePlist(sorted(errorArticles), errorPath)
+        path = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/ErrorArticles.plist"
+        plistlib.writePlist(sorted(error_articles), path)
 
     for article in articles:
         print(article)
         try:
-            html_page = urllib2.urlopen(
-                "https://en.m.wikipedia.org/wiki" + article)
+            url = "https://en.m.wikipedia.org/wiki" + article
+            html_page = urllib.request.urlopen(url)
             if "Redirected from" in str(BeautifulSoup(html_page)):
                 print("POSSIBLE REDIRECT")
-                redirectArticles.append(fetchRedirect(driver, article))
+                possible_redirect = fetch_redirect(driver, article)
+                redirecting_articles.append(possible_redirect)
             else:
                 print("VALID")
-                validArticles.append(article)
+                normal_articles.append(article)
 
-        except urllib2.HTTPError as err:
-            print("ERROR")
-            errorArticles.append(article)
+        except urllib.error.HTTPError as err:
+            print("ERROR: " + str(err))
+            error_articles.append(article)
 
-        if len(validArticles) % 10 == 0:
-            saveArticles()
-    saveArticles()
+        if len(normal_articles) % 10 == 0:
+            save_results()
+    save_results()
     driver.quit()
 
 
-def randomArticles(articles):
-    for x in range(0, 300):
-        randomArticles = []
-        while len(randomArticles) != 8:
-            randomArticle = random.choice(articles)
-            if randomArticle not in randomArticles:
-                randomArticles.append(randomArticle)
-        print("\n=========\n")
-        for article in randomArticles:
-            print(article[1:].replace("_", " "))
-
-# '/Apple_Inc.'
-
-
-def fetchPageLinks(pageName):
-    html_page = urllib2.urlopen("https://en.m.wikipedia.org/wiki/" + pageName)
+def fetch_links_on_article(article):
+    url = "https://en.m.wikipedia.org/wiki" + article
+    html_page = urllib.request.urlopen(url)
     soup = BeautifulSoup(html_page)
-    validLinks = []
+
+    page_links = []
     for link in soup.findAll('a', attrs={'href': re.compile("/wiki/")}):
         href = link.get('href')
-        if isValidLink(href[5:]):
-            validLinks.append(href[5:])
+        prefix_removed = href[5:]
+        if is_valid_article(prefix_removed):
+            page_links.append(prefix_removed)
         else:
             print("NOT VALID: " + href)
-    return sorted(list(set(validLinks)), key=lambda s: s.lower())
+    return sorted(list(set(page_links)), key=lambda s: s.lower())
 
 
-def fetchPagesThatLinkTo(page):
+def fetch_links_to_article(article):
     url = "https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere" + \
-        page + "&namespace=0&limit=500&hidetrans=1"
+        article + "&namespace=0&limit=500&hidetrans=1&hideredirs=1"
     try:
-        html_page = urllib2.urlopen(url)
+        html_page = urllib.request.urlopen(url)
         soup = str(BeautifulSoup(html_page))
         return soup.count('/wiki/')
-    except urllib2.HTTPError as err:
+    except urllib.error.HTTPError as err:
         return 0
 
 
-def isDisambiguationPage(page):
-    url = "https://en.m.wikipedia.org/wiki" + page
-    try:
-        html_page = urllib2.urlopen(url)
-        soup = str(BeautifulSoup(html_page))
-        if " page lists articles associated with the title " in soup:
-            return True
-    except urllib2.HTTPError as err:
-        return False
-    return False
+def run_pages_that_link_to_articles_test(articles):
+    create_folders()
 
-
-def fullDisambiguationTests(articles):
-    print("fullDisambiguationTests")
-
-    articlesDis = []
-    progress = 0
-    for article in articles:
-        progress += 1
-        print(str(progress) + " / " + str(len(articles)))
-        if isDisambiguationPage(article):
-            articlesDis.append(article)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/DisambiguationLinks.plist"
-    plistlib.writePlist(articlesDis, path)
-
-
-def fullPageLinkTests(articles):
-    print("fullPageLinkTests")
-
-    articles50 = {}
-    articles100 = {}
-    articles150 = {}
-    articles250 = {}
-    articles350 = {}
-    articles500 = {}
-    articlesAll = {}
+    articles_50 = {}
+    articles_100 = {}
+    articles_150 = {}
+    articles_250 = {}
+    articles_350 = {}
+    articles_500 = {}
+    articles_all = {}
 
     progress = 0
     for article in articles:
         progress += 1
         print(str(progress) + " / " + str(len(articles)))
-        count = fetchPagesThatLinkTo(article)
-        articlesAll[article] = count
+        count = fetch_links_to_article(article)
+        articles_all[article] = count
         if count < 50:
-            articles50[article] = count
+            articles_50[article] = count
         elif count < 100:
-            articles100[article] = count
+            articles_100[article] = count
         elif count < 150:
-            articles150[article] = count
+            articles_150[article] = count
         elif count < 250:
-            articles250[article] = count
+            articles_250[article] = count
         elif count < 350:
-            articles350[article] = count
+            articles_350[article] = count
         else:
-            articles500[article] = count
+            articles_500[article] = count
 
-    path = "/Users/andrewfinke/Desktop/FullTest/50Links.plist"
-    plistlib.writePlist(articles50, path)
+    def save(page_link_articles, name):
+        path = "/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/" + name
+        plistlib.writePlist(page_link_articles, path)
 
-    path = "/Users/andrewfinke/Desktop/FullTest/100Links.plist"
-    plistlib.writePlist(articles100, path)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/150Links.plist"
-    plistlib.writePlist(articles150, path)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/250Links.plist"
-    plistlib.writePlist(articles250, path)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/350Links.plist"
-    plistlib.writePlist(articles350, path)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/500Links.plist"
-    plistlib.writePlist(articles500, path)
-
-    path = "/Users/andrewfinke/Desktop/FullTest/AllLinks.plist"
-    plistlib.writePlist(articlesAll, path)
+    save(articles_50, "50.plist")
+    save(articles_100, "100.plist")
+    save(articles_150, "150.plist")
+    save(articles_250, "250.plist")
+    save(articles_350, "350.plist")
+    save(articles_500, "500.plist")
+    save(articles_all, "All.plist")
 
 
-def removeArticles(articlesToRemove, articles):
-    for article, value in articlesToRemove.iteritems():
-        if value < 100:
-            if article in articles:
-                articles.remove(article)
-        else:
-            print(article)
-    return articles
+def print_random_articles(articles, count):
+    results = sorted(random.sample(articles, count))
+    print("\n=========\n")
+    for article in results:
+        print(article[1:].replace("_", " "))
 
 
-def isPersonArticle(article):
-    html_page = urllib2.urlopen("https://en.m.wikipedia.org/wiki" + article)
-    soup = BeautifulSoup(html_page)
-    allrows = soup.findAll('th')
-    userrows = [t for t in allrows if t.findAll(text=re.compile('Born'))]
-    return len(userrows) > 0
+def remove_articles_from_articles(articles_to_remove, articles):
+    cleaned = []
+    for article in articles:
+        if article not in articles_to_remove:
+            cleaned.append(article)
+    return cleaned
+
+
+def save_string_to_path(string, path):
+    text_file = open(path, "w")
+    text_file.write(string)
+    text_file.close()
+
+
+def load_articles_at_path(path):
+    return plistlib.readPlist(path)
+
+
+def save_articles_to_path(articles, path):
+    valid = []
+    for article in articles:
+        if is_valid_article(article):
+            valid.append(article)
+    plistlib.writePlist(sorted(list(set(valid)), key=lambda s: s.lower(
+    )), path)
 
 
 if __name__ == "__main__":
-    path = "/Users/andrewfinke/Desktop/NewMasterA.plist"
-    new_articles = plistlib.readPlist(
-        path) + plistlib.readPlist("/Users/andrewfinke/Desktop/WKRArticlesDataoo.plist")
-    #
-    # fullNetworkingTest(old_articles)
+    articles = load_articles_at_path(
+        "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
+    for i in range(0, 10):
+        print_random_articles(articles, 8)
 
-    # tpath = "/Users/andrewfinke/Desktop/NewMaster2.txt"
-    # text_file = open(tpath, "w")
-    # text_file.write(commonTitleWordsAsString(old_articles))
-    # text_file.close()
-
-    # paths = [
-    #     "/Users/andrewfinke/Desktop/FullTest/AValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/ARedirect.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/BValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/BRedirect.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/CValid.plist",
-    #     "/Users/andrewfinke/Desktop/FullTest/CRedirect.plist",
-    # ]
-    #
-    # old_articles = []
-    # for path in paths:
-    #     old_articles += plistlib.readPlist(path)
-    #
-    # new_articles = []
-    # for article in old_articles:
-    #     if isValidLink("/wiki" + article):
-    #         new_articles.append(article)
-    #
-
-    new_articles = preciseRemoveAllDups(new_articles)
-
-    # # fullPageLinkTests(old_articles)
-    # # new_articles = []
-    # #
-    # # for article in old_articles:
-    # #     if "_in_" not in article and "_of_" not in article:
-    # #         new_articles.append(article)
-    # #     # if isPersonArticle(article):
-    # #     #     print("Person: " + article)
-    # #     # else:
-    # #     #     new_articles.append(article)
-    # #
-    # # # updated_articles = removeArticles(old_articles, new_articles)
-    # #
-    # # # fullPageLinkTests(newArticles[5000:15000])
-    # # # # print(articles)
-    plistlib.writePlist(sorted(new_articles, key=lambda s: s.lower(
-    )), "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
+    for article in articles:
+        if not is_valid_link(article):
+            print("!!")
+            print(article)
+    # articles = fetch_links_on_article("/List_of_Disney_theme_park_attractions")

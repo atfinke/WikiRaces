@@ -28,13 +28,10 @@ class WikiRacesScreenshots: XCTestCase {
     func testExample() {
         sleep(5)
         XCUIDevice.shared.orientation = .landscapeLeft
-        sleep(2)
-        snapshot("Land")
-        XCUIDevice.shared.orientation = .portrait
-        sleep(2)
-        snapshot("Por")
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        snapshot("1_portrait")
+        XCUIApplication().buttons["GLOBAL RACE"].tap()
+        sleep(5)
+        snapshot("2_game")
     }
 
 }

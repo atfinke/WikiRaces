@@ -12,12 +12,12 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-internal class GameViewController: StateLogViewController {
+internal class GameViewController: UIViewController {
 
     // MARK: - Game Properties
 
     var isPlayerQuitting = false
-    var isInterfaceConfigured = false
+    var isConfigured = false
 
     var timeRaced = 0
     var raceTimer: Timer?
@@ -32,17 +32,21 @@ internal class GameViewController: StateLogViewController {
     var gameManager: WKRGameManager!
     var networkConfig: WKRPeerNetworkConfig!
 
+    var statRaceType: PlayerStatsManager.RaceType? {
+        return PlayerStatsManager.RaceType(networkConfig)
+    }
+
     // MARK: - User Interface
 
-    let webView = WKRUIWebView()
+    var webView: WKRUIWebView?
     let progressView = WKRUIProgressView()
     let navigationBarBottomLine = UIView()
 
     var helpBarButtonItem: UIBarButtonItem!
     var quitBarButtonItem: UIBarButtonItem!
 
-    @IBOutlet weak var connectingLabel: UILabel!
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    let connectingLabel = UILabel()
+    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
 
     // MARK: - View Controllers
 
@@ -61,66 +65,137 @@ internal class GameViewController: StateLogViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupGameManager()
+
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            setupGameManager()
+        }
+
         setupInterface()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !isInterfaceConfigured {
-            isInterfaceConfigured = true
-            if !networkConfig.isHost {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.connectingLabel.alpha = 1.0
-                    self.activityIndicatorView.alpha = 1.0
-                })
-            }
 
-            if case let .mpc(_, session, _)? = networkConfig {
-                // Due to low usage, not accounting for players joining mid session
-                let playerNames = session.connectedPeers.filter({ peerID -> Bool in
-                    return peerID != session.myPeerID
-                }).map({ peerID -> String in
-                    return peerID.displayName
-                })
-                StatsHelper.shared.connected(to: playerNames)
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            webView?.alpha = 1.0
+            return
+        }
+
+        if !isConfigured {
+            isConfigured = true
+            initalConfiguration()
+        }
+
+        if gameManager.gameState == .preMatch && networkConfig.isHost, let config = networkConfig {
+            gameManager.player(.startedGame)
+            switch config {
+            case .solo:
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
+            case .gameKit(let match, _):
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
+                                           attributes: ["ConnectedPeers": match.players.count - 1])
+            case .mpc(_, let session, _):
+                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
+                                           attributes: ["ConnectedPeers": session.connectedPeers.count])
+            default: break
             }
         }
-        if gameManager.gameState == .preMatch && networkConfig.isHost {
-            gameManager.player(.startedGame)
-            if case let .mpc(_, session, _)? = networkConfig {
-                PlayerMetrics.log(event: .hostStartedMatch,
-                                    attributes: ["ConnectedPeers": session.connectedPeers.count])
+    }
+
+    private func initalConfiguration() {
+        let logEvents: [WKRLogEvent]
+        if networkConfig.isHost {
+            if case .solo? = networkConfig {
+                logEvents = WKRSeenFinalArticlesStore.localLogEvents()
+            } else {
+                logEvents = WKRSeenFinalArticlesStore.hostLogEvents()
             }
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.connectingLabel.alpha = 1.0
+                self.activityIndicatorView.alpha = 1.0
+            })
+            logEvents = WKRSeenFinalArticlesStore.localLogEvents()
+        }
+        logEvents.forEach { logEvent($0) }
+
+        guard let config = networkConfig else { return }
+        switch config {
+        case .solo:
+            PlayerStatsManager.shared.connected(to: [], raceType: .solo)
+        case .gameKit(let match, _):
+            let playerNames = match.players.map { player -> String in
+                return player.alias
+            }
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
+        case .mpc(_, let session, _):
+            // Due to low usage, not accounting for players joining mid session
+            let playerNames = session.connectedPeers.map { peerID -> String in
+                return peerID.displayName
+            }
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
+        default:
+            break
         }
     }
 
     // MARK: - User Actions
 
-    @IBAction func helpButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+    @objc
+    func helpButtonPressed() {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         showHelp()
     }
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+    @objc
+    func quitButtonPressed() {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     func showHelp() {
-        PlayerMetrics.log(event: .userAction("flagButtonPressed:help"))
-        PlayerMetrics.log(event: .usedHelp, attributes: ["Page": self.finalPage?.title as Any])
         gameManager.player(.neededHelp)
-        performSegue(.showHelp)
+
+        let controller = HelpViewController()
+        controller.url = gameManager.finalPageURL
+        controller.linkTapped = { [weak self] in
+            self?.gameManager.enqueue(message: "Links disabled in help",
+                                      duration: 2.0,
+                                      isRaceSpecific: true,
+                                      playHaptic: true)
+        }
+        self.activeViewController = controller
+
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerAnonymousMetrics.log(event: .usedHelp,
+                          attributes: ["Page": self.finalPage?.title as Any])
+        if let raceType = statRaceType {
+            let stat: PlayerDatabaseStat
+            switch raceType {
+            case .mpc: stat = .mpcHelp
+            case .gameKit: stat = .gkHelp
+            case .solo: stat = .soloHelp
+            }
+            stat.increment()
+        }
     }
 
     func reloadPage() {
-        PlayerMetrics.log(event: .userAction("flagButtonPressed:reload"))
-        self.webView.reload()
+        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:reload"))
+        self.webView?.reload()
+    }
+
+    // Used for screenshots / fastlane
+    func prepareForScreenshots(for url: URL) {
+        webView?.load(URLRequest(url: url))
+        title = "Star Wars: Galaxy's Edge".uppercased()
     }
 
 }

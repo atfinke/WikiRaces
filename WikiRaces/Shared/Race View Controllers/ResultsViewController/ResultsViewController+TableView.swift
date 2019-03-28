@@ -30,37 +30,12 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     private func configure(cell: ResultsTableViewCell, with resultsInfo: WKRResultsInfo, at index: Int) {
         switch state {
         case .results, .hostResults:
-            let raceResults = resultsInfo.raceResults(at: index)
-            cell.isShowingCheckmark = readyStates?.playerReady(raceResults.player) ?? false
-            cell.update(for: raceResults.player, animated: true)
+            let player = resultsInfo.raceRankingsPlayer(at: index)
+            cell.isShowingCheckmark = readyStates?.isPlayerReady(player) ?? false
+            cell.updateResults(for: player, animated: true)
         case .points:
             let sessionResults = resultsInfo.sessionResults(at: index)
-            cell.isShowingActivityIndicatorView = false
-            cell.isShowingCheckmark = false
-
-            let detailString: String
-            if sessionResults.points == 1 {
-                detailString = sessionResults.points.description + " PT"
-            } else {
-                detailString = sessionResults.points.description + " PTS"
-            }
-
-            var subtitleString: String
-            if sessionResults.ranking == 1 {
-                subtitleString = "1st Place"
-            } else if  sessionResults.ranking == 2 {
-                subtitleString = "2nd Place"
-            } else if  sessionResults.ranking == 3 {
-                subtitleString = "3rd Place"
-            } else {
-                subtitleString = "\(sessionResults.ranking)th Place"
-            }
-            subtitleString += sessionResults.isTied ? " (Tied)" : ""
-
-            cell.update(playerName: sessionResults.profile.name,
-                        detail: detailString,
-                        subtitle: NSAttributedString(string: subtitleString),
-                        animated: false)
+            cell.updateStandings(for: sessionResults)
         default:
             fatalError("Unexpected state \(state)")
         }
@@ -69,16 +44,22 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - UITableViewDelegate
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        PlayerMetrics.log(event: .userAction(#function))
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         guard let resultsInfo = resultsInfo else {
             return
         }
 
-        let raceResults = resultsInfo.raceResults(at: indexPath.row)
-        performSegue(withIdentifier: "showHistory", sender: raceResults.player)
+        let controller = HistoryViewController(style: .grouped)
+        historyViewController = controller
+        controller.player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
 
-        PlayerMetrics.log(event: .openedHistory, attributes: ["GameState": state.rawValue.description as Any])
+        let navController = UINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerAnonymousMetrics.log(event: .openedHistory,
+                          attributes: ["GameState": state.rawValue.description as Any])
     }
 
 }

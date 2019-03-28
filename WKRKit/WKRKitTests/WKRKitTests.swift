@@ -68,14 +68,14 @@ class WKRKitTests: WKRKitTestCase {
 
         let playerOne = WKRPlayer.mock(named: "Andrew")
         playerOne.startedNewRace(on: starting)
-        playerOne.finishedViewingLastPage()
+        playerOne.finishedViewingLastPage(pixelsScrolled: 0)
         race.playerUpdated(playerOne)
         XCTAssertEqual(race.players.count, 1)
 
         let playerTwo = WKRPlayer.mock(named: "Midnight")
         playerTwo.startedNewRace(on: starting)
         sleep(1)
-        playerTwo.finishedViewingLastPage()
+        playerTwo.finishedViewingLastPage(pixelsScrolled: 0)
         race.playerUpdated(playerTwo)
         XCTAssertEqual(race.players.count, 2)
 
@@ -101,16 +101,28 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertNil(points[playerThree.profile])
 
         // same page
-        XCTAssertTrue(race.attributesFor(ending).foundPage)
+        XCTAssertTrue(race.attributes(for: ending).foundPage)
 
         // dif title, same url
-        XCTAssertTrue(race.attributesFor(WKRPage(title: "DifTitle", url: ending.url)).foundPage)
+        XCTAssertTrue(race.attributes(for: WKRPage(title: "DifTitle", url: ending.url)).foundPage)
 
         // same title, dif url
-        XCTAssertTrue(race.attributesFor(WKRPage(title: "Apple", url: starting.url)).foundPage)
+        XCTAssertTrue(race.attributes(for: WKRPage(title: "Apple", url: starting.url)).foundPage)
+
+//        https://en.m.wikipedia.org/wiki/Forward_pass#American_and_Canadian_football
+
+        if let url = URL(string: ending.url.absoluteString + "#section") {
+            // same title, url w/ section
+            XCTAssertTrue(race.attributes(for: WKRPage(title: "Apple", url: url)).foundPage)
+
+            // dif title, url w/ section
+            XCTAssertTrue(race.attributes(for: WKRPage(title: "DifTitle", url: url)).foundPage)
+        } else {
+            XCTFail("url nil")
+        }
 
         // dif title, dif url
-        XCTAssertFalse(race.attributesFor(WKRPage(title: "Dif", url: URL(string: "http://a.com")!)).foundPage)
+        XCTAssertFalse(race.attributes(for: WKRPage(title: "Dif", url: URL(string: "http://a.com")!)).foundPage)
     }
 
     // MARK: - WKRInt
@@ -191,7 +203,7 @@ class WKRKitTests: WKRKitTestCase {
 
         let page =  WKRPage.mockApple()
         player.startedNewRace(on: page)
-        player.finishedViewingLastPage()
+        player.finishedViewingLastPage(pixelsScrolled: 0)
 
         do {
             let data = try JSONEncoder().encode(player)
@@ -209,7 +221,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.updateConstants()
 
         let version = WKRKitConstants.current.version
-        XCTAssertEqual(WKRKitConstants.current.version, 11)
+        XCTAssertEqual(WKRKitConstants.current.version, 20)
 
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstants()
@@ -243,10 +255,6 @@ class WKRKitTests: WKRKitTestCase {
         var page = WKRPage(title: title, url: url)
         XCTAssertEqual(page.title, title)
 
-        title = "phone"
-        page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, title.capitalized)
-
         title = "iPhone - Wikipedia"
         page = WKRPage(title: title, url: url)
         XCTAssertEqual(page.title, "iPhone")
@@ -257,13 +265,9 @@ class WKRKitTests: WKRKitTestCase {
         // Testing removing 10 characters
         WKRKitConstants.updateConstantsForTestingCharacterClipping()
 
-        title = "phone"
-        page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, title.capitalized)
-
         title = "phone- Extra Characters"
         page = WKRPage(title: title, url: url)
-        XCTAssertEqual(page.title, "Phone- Extra ")
+        XCTAssertEqual(page.title, "phone- Extra ")
 
         title = "iPhone - Extra Characters"
         page = WKRPage(title: title, url: url)
@@ -327,6 +331,114 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertEqual(secondPageVotes?.votes, 1)
 
         testEncoding(for: votingObject)
+    }
+
+    // MARK: - WKRReadyStates
+
+    func testReadyStates() {
+        let playerA = WKRPlayer.mock(named: "A")
+        let playerB = WKRPlayer.mock(named: "B")
+        let playerC = WKRPlayer.mock(named: "C")
+        playerA.state = .readyForNextRound
+        playerB.state = .racing
+        playerC.state = .racing
+
+        let players = [
+            playerA,
+            playerB,
+            playerC
+        ]
+        let readyStates = WKRReadyStates(players: players)
+
+        XCTAssert(readyStates.isPlayerReady(playerA))
+        XCTAssertFalse(readyStates.isPlayerReady(playerB))
+        XCTAssertFalse(readyStates.areAllRacePlayersReady(racePlayers: players))
+
+        playerA.state = .readyForNextRound
+        playerB.state = .quit
+        playerC.state = .readyForNextRound
+
+        XCTAssert(readyStates.isPlayerReady(playerA))
+        XCTAssertFalse(readyStates.isPlayerReady(playerB))
+        XCTAssert(readyStates.areAllRacePlayersReady(racePlayers: players))
+
+        playerA.state = .readyForNextRound
+        playerB.state = .forcedEnd
+        playerC.state = .readyForNextRound
+
+        XCTAssert(readyStates.isPlayerReady(playerA))
+        XCTAssertFalse(readyStates.isPlayerReady(playerB))
+        XCTAssertFalse(readyStates.areAllRacePlayersReady(racePlayers: players))
+
+        playerA.state = .readyForNextRound
+        playerB.state = .readyForNextRound
+        playerC.state = .readyForNextRound
+
+        XCTAssert(readyStates.isPlayerReady(playerA))
+        XCTAssert(readyStates.isPlayerReady(playerB))
+        XCTAssert(readyStates.areAllRacePlayersReady(racePlayers: players))
+
+        playerA.state = .readyForNextRound
+        playerB.state = .readyForNextRound
+        playerC.state = .racing
+
+        XCTAssert(readyStates.isPlayerReady(playerA))
+        XCTAssertFalse(readyStates.isPlayerReady(playerC))
+        XCTAssert(readyStates.areAllRacePlayersReady(racePlayers: [playerA, playerB]))
+
+        let playerACopy = WKRPlayer(profile: playerA.profile, isHost: false)
+        let playerBCopy = WKRPlayer(profile: playerB.profile, isHost: false)
+        let playerCCopy = WKRPlayer(profile: playerC.profile, isHost: false)
+
+        playerA.state = .racing
+        playerB.state = .racing
+        playerC.state = .racing
+        playerACopy.state = .readyForNextRound
+        playerBCopy.state = .readyForNextRound
+        playerCCopy.state = .readyForNextRound
+
+        XCTAssertFalse(readyStates.isPlayerReady(playerCCopy))
+        XCTAssertFalse(readyStates.areAllRacePlayersReady(racePlayers: [
+            playerACopy,
+            playerBCopy,
+            playerCCopy]))
+
+        playerC.state = .readyForNextRound
+        XCTAssert(readyStates.isPlayerReady(playerCCopy))
+        XCTAssertFalse(readyStates.areAllRacePlayersReady(racePlayers: [
+            playerACopy,
+            playerBCopy,
+            playerCCopy]))
+
+        playerA.state = .quit
+        playerB.state = .readyForNextRound
+        XCTAssertFalse(readyStates.isPlayerReady(playerACopy))
+        XCTAssert(readyStates.isPlayerReady(playerBCopy))
+        XCTAssert(readyStates.areAllRacePlayersReady(racePlayers: [
+            playerACopy,
+            playerBCopy,
+            playerCCopy]))
+
+    }
+
+    // MARK: - WKRPlayerRaceStats
+
+    func testPlayerRaceStats() {
+        let starting = WKRPage.mockApple(withSuffix: "1")
+        let playerOne = WKRPlayer.mock(named: "Andrew")
+        playerOne.startedNewRace(on: starting)
+
+        var stats = WKRPlayerRaceStats(player: playerOne)
+        XCTAssertEqual(stats.raw.count, 2)
+        XCTAssertEqual(stats.raw[0].value, "-")
+        XCTAssertEqual(stats.raw[1].value, "0 Pixels")
+
+        sleep(1)
+
+        playerOne.finishedViewingLastPage(pixelsScrolled: 5)
+        stats = WKRPlayerRaceStats(player: playerOne)
+        XCTAssertEqual(stats.raw[0].value, "1 S")
+        XCTAssertEqual(stats.raw[1].value, "5 Pixels")
     }
 
 }

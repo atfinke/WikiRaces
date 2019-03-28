@@ -17,6 +17,8 @@ public class WKRUIThinLineView: UIView {
         alpha = 0.25
         backgroundColor = UIColor.wkrTextColor
         translatesAutoresizingMaskIntoConstraints = false
+
+        layer.cornerRadius = 1
     }
 
     required public init?(coder aDecoder: NSCoder) {

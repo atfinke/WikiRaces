@@ -9,9 +9,11 @@ Feel free to ping me with questions.
 ### Root Directory
 
 #### /Resources
-- Various iconography.
-#### /WKR Python
+- Various design resources.
+#### /WKRPython
 - Python scripts I use to compile the final articles list.
+#### /WKRArticlesPreviewer
+- macOS app for previewing the final articles list.
 #### /WKRCloudStats
 - macOS app that pulls app analytics from CloudKit.
 #### /WKRKit

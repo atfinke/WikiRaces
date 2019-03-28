@@ -16,6 +16,7 @@ public enum WKRPlayerMessage: Int {
     case neededHelp
     case forfeited
     case quit
+    case onUSA
 
     func text(for player: WKRPlayerProfile) -> String {
         switch self {
@@ -25,6 +26,7 @@ public enum WKRPlayerMessage: Int {
         case .forfeited: return player.name + " forfeited"
         case .quit: return player.name + " quit"
         case .missedLink: return player.name + " missed the link"
+        case .onUSA: return player.name + " is on USA"
         }
     }
 

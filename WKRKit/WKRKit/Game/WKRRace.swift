@@ -37,7 +37,7 @@ internal struct WKRRace {
     ///
     /// - Parameter player: The update player
     internal mutating func playerUpdated(_ player: WKRPlayer) {
-        if let index = players.index(of: player) {
+        if let index = players.firstIndex(of: player) {
             players[index] = player
         } else {
             players.append(player)
@@ -51,10 +51,20 @@ internal struct WKRRace {
     ///
     /// - Parameter page: The page to check againts
     /// - Returns: Tuple with found page and link on page values.
-    internal func attributesFor(_ page: WKRPage) -> (foundPage: Bool, linkOnPage: Bool) {
+    internal func attributes(for page: WKRPage) -> (foundPage: Bool, linkOnPage: Bool) {
+        var adjustedURL = page.url
+
+        // Adjust for links to sections
+        if adjustedURL.absoluteString.contains("#") {
+            var components = adjustedURL.absoluteString.components(separatedBy: "#")
+            if components.count == 2, let newURL = URL(string: components[0]) {
+                adjustedURL = newURL
+            }
+        }
+
         if page == finalPage {
             return (true, false)
-        } else if page.url == finalPage.url {
+        } else if adjustedURL == finalPage.url {
             return (true, false)
         } else if page.title == finalPage.title {
             return (true, false)
@@ -67,7 +77,7 @@ internal struct WKRRace {
     // MARK: - End Race Helpers
 
     /// Calculates how my points each place should receive for the race. Every player that found the article
-    /// gets points for how many players they did better then. The first player also gets the race bonus points
+    /// gets points for how many players they did better then. All players also get the race bonus points
     /// if there are any.
     ///
     /// - Returns: Each player's points in a dictionary
@@ -82,11 +92,7 @@ internal struct WKRRace {
             return times[lhs] ?? 0 < times[rhs] ?? 0
         }
         for (index, player) in positions.enumerated() {
-            if index == 0 {
-                points[player.profile] = players.count - 1 + bonusPoints
-            } else {
-                points[player.profile] = players.count - index - 1 + bonusPoints
-            }
+            points[player.profile] = players.count - index - 1 + bonusPoints
         }
         return points
     }

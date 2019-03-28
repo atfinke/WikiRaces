@@ -10,42 +10,16 @@ import Foundation
 
 extension WKRGameManager {
 
-    // MARK: - Game Updates
-
-    func configure(game: WKRGame) {
-        guard localPlayer.isHost else { fatalError("Local player not host") }
-
-        game.allPlayersReadyForNextRound = { [weak self] in
-            guard let isHost = self?.localPlayer.isHost, let gameState = self?.gameState else {
-                return
-            }
-            if isHost && gameState == .hostResults {
-                //swiftlint:disable:next line_length
-                DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsAllReadyDelay, execute: {
-                    self?.finishResultsCountdown()
-                })
-            }
-        }
-        game.bonusPointsUpdated = { [weak self] points in
-            let bonusPoints = WKRCodable(int: WKRInt(type: .bonusPoints, value: points))
-            self?.peerNetwork.send(object: bonusPoints)
-        }
-        game.hostResultsCreated = { [weak self] result in
-            DispatchQueue.main.async {
-                let state = WKRGameState.hostResults
-                self?.peerNetwork.send(object: WKRCodable(enum: state))
-                self?.peerNetwork.send(object: WKRCodable(result))
-                self?.prepareResultsCountdown()
-            }
-        }
-    }
-
     // MARK: - Results
 
     func prepareResultsCountdown() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsPreCountdown) {
+        var delay = WKRRaceDurationConstants.resultsPreCountdown
+        if peerNetwork is WKRSoloNetwork {
+            delay = 1
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             self.startResultsCountdown()
         }
     }
@@ -56,7 +30,7 @@ extension WKRGameManager {
         var timeLeft = WKRRaceDurationConstants.resultsState
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
 
-            if self?.gameState == .points {
+            if self?.gameState != .hostResults {
                 timer.invalidate()
                 return
             }
@@ -85,12 +59,14 @@ extension WKRGameManager {
         guard localPlayer.isHost && gameState != .points else { return }
 
         self.game.players = []
-        self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
 
-        if self.peerNetwork is WKRSoloNetwork {
-            self.alertView.enqueue(text: "No stats in solo races", duration: 5)
+        if peerNetwork is WKRSoloNetwork {
+            // skip points and go straight to voting if solo
+            peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
+            return
         }
 
+        self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.points))
         DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsStandings) {
             self.peerNetwork.send(object: WKRCodable(enum: WKRGameState.voting))
         }
@@ -123,12 +99,16 @@ extension WKRGameManager {
     }
 
     private func prepareRaceConfig() {
-        guard localPlayer.isHost, let raceConfig = game.createRaceConfig() else {
-            errorOccurred(.configCreationFailed)
+        guard localPlayer.isHost, let raceConfigCreation = game.createRaceConfig(), let config = raceConfigCreation.config else {
+            localErrorOccurred(.configCreationFailed)
             return
         }
 
-        peerNetwork.send(object: WKRCodable(raceConfig))
+        if let logEvent = raceConfigCreation.logEvent {
+            gameUpdate(.log(logEvent))
+        }
+
+        peerNetwork.send(object: WKRCodable(config))
         var timeLeft = WKRRaceDurationConstants.votingPreRace
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             timeLeft -= 1
@@ -147,14 +127,15 @@ extension WKRGameManager {
     internal func fetchPreRaceConfig() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        WKRPreRaceConfig.new { preRaceConfig in
+        WKRPreRaceConfig.new { preRaceConfig, logEvents in
             if let config = preRaceConfig {
                 self.game.preRaceConfig = config
                 self.sendPreRaceConfig()
                 self.prepareVotingCountdown()
             } else {
-                self.errorOccurred(.configCreationFailed)
+                self.localErrorOccurred(.configCreationFailed)
             }
+            logEvents.forEach { self.gameUpdate(.log($0)) }
         }
     }
 
@@ -167,7 +148,7 @@ extension WKRGameManager {
         }
 
         guard let unwrappedObject = game.preRaceConfig else {
-            errorOccurred(.configCreationFailed)
+            localErrorOccurred(.configCreationFailed)
             return
         }
 

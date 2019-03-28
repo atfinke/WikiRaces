@@ -16,7 +16,7 @@ public struct WKRKitConstants {
     public let version: Int
     public static var current = WKRKitConstants()
 
-    internal let quickRace: Bool
+    internal let isQuickRaceMode: Bool
     public let connectionTestTimeout: Double
 
     internal let pageTitleStringToReplace: String
@@ -33,6 +33,9 @@ public struct WKRKitConstants {
     internal let votingArticlesCount: Int
 
     internal let bannedURLFragments: [String]
+
+    public let maxGlobalRacePlayers: Int
+    public let maxLocalRacePlayers: Int
 
     // MARK: - Initalization
 
@@ -83,9 +86,15 @@ public struct WKRKitConstants {
         guard let bannedURLFragments = documentsConstants["BannedURLFragments"] as? [String] else {
             fatalError("WKRKitConstants: No BannedURLFragments value")
         }
+        guard let maxGlobalRacePlayers = documentsConstants["MaxGlobalRacePlayers"] as? Int else {
+            fatalError("WKRKitConstants: No MaxGlobalRacePlayers value")
+        }
+        guard let maxLocalRacePlayers = documentsConstants["MaxLocalRacePlayers"] as? Int else {
+            fatalError("WKRKitConstants: No MaxLocalRacePlayers value")
+        }
 
         self.version = version
-        self.quickRace = quickRace
+        self.isQuickRaceMode = quickRace
         self.connectionTestTimeout = connectionTestTimeout
 
         self.pageTitleStringToReplace = pageTitleStringToReplace
@@ -102,11 +111,13 @@ public struct WKRKitConstants {
         self.votingArticlesCount = votingArticlesCount
 
         self.bannedURLFragments = bannedURLFragments
+        self.maxGlobalRacePlayers = maxGlobalRacePlayers
+        self.maxLocalRacePlayers = maxLocalRacePlayers
     }
 
     // MARK: - Helpers
 
-    @available(*, deprecated, message: "Only for debugging")
+    @available(*, deprecated, message: "Only for testing")
     static public func removeConstants() {
         let fileManager = FileManager.default
 
@@ -123,7 +134,7 @@ public struct WKRKitConstants {
         }
     }
 
-    @available(*, deprecated, message: "Only for debugging")
+    @available(*, deprecated, message: "Only for testing")
     static public func updateConstantsForTestingCharacterClipping() {
         copyBundledResourcesToDocuments(constantsFileName: "WKRKitConstants-TESTING_ONLY")
     }
@@ -143,16 +154,16 @@ public struct WKRKitConstants {
                 return
             }
 
-            guard let recordConstantsAsset = record["ConstantsFile"] as? CKAsset,
-                let recordArticlesAsset = record["ArticlesFile"] as? CKAsset,
-                let recordGetLinksScriptAsset = record["GetLinksScriptFile"] as? CKAsset else {
+            guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
+                let recordArticlesAssetURL = (record["ArticlesFile"] as? CKAsset)?.fileURL,
+                let recordGetLinksScriptAssetURL = (record["GetLinksScriptFile"] as? CKAsset)?.fileURL else {
                     return
             }
 
             DispatchQueue.main.async {
-                copyIfNewer(newConstantsFileURL: recordConstantsAsset.fileURL,
-                            newArticlesFileURL: recordArticlesAsset.fileURL,
-                            newGetLinksScriptFileURL: recordGetLinksScriptAsset.fileURL)
+                copyIfNewer(newConstantsFileURL: recordConstantsAssetURL,
+                            newArticlesFileURL: recordArticlesAssetURL,
+                            newGetLinksScriptFileURL: recordGetLinksScriptAssetURL)
             }
         }
     }
@@ -171,6 +182,12 @@ public struct WKRKitConstants {
             let newConstantsVersion = newConstants["Version"] as? Int,
             let documentsDirectory = FileManager.default.documentsDirectory else {
                 return
+        }
+
+        if !FileManager.default.fileExists(atPath: documentsDirectory.path) {
+            try? FileManager.default.createDirectory(at: documentsDirectory,
+                                                withIntermediateDirectories: false,
+                                                attributes: nil)
         }
 
         let documentsArticlesURL = documentsDirectory.appendingPathComponent("WKRArticlesData.plist")
@@ -221,7 +238,7 @@ public struct WKRKitConstants {
                     newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
-    internal func finalArticles() -> [String] {
+    lazy private(set) var finalArticles: [String] = {
         //swiftlint:disable:next line_length
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
@@ -229,7 +246,7 @@ public struct WKRKitConstants {
                 fatalError("Failed to load articles plist")
         }
         return array
-    }
+    }()
 
     internal func getLinksScript() -> String {
         guard let documentsScriptURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRGetLinks.js"),

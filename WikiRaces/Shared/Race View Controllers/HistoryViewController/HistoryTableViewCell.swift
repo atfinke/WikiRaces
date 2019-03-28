@@ -46,8 +46,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         tintColor = UIColor.wkrTextColor
-        selectionStyle = .none
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.wkrBackgroundColor
 
         pageLabel.textColor = UIColor.wkrTextColor
         pageLabel.textAlignment = .left
@@ -59,7 +58,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         linkHereLabel.text = "Link Here"
         linkHereLabel.textColor = UIColor.lightGray
         linkHereLabel.textAlignment = .left
-        linkHereLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        linkHereLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         linkHereLabel.numberOfLines = 1
         linkHereLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(linkHereLabel)
@@ -77,7 +76,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activityIndicatorView)
 
-       setupContraints()
+       setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -86,7 +85,7 @@ internal class HistoryTableViewCell: UITableViewCell {
 
     // MARK: - Constraints
 
-    private func setupContraints() {
+    private func setupConstraints() {
         let leftMarginConstraint = NSLayoutConstraint(item: pageLabel,
                                                       attribute: .left,
                                                       relatedBy: .equal,

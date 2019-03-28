@@ -10,15 +10,19 @@ import Foundation
 
 public class WKRGame {
 
+    // MARK: - Types
+
+    enum ListenerUpdate {
+        case bonusPoints(Int)
+        case playersReadyForNextRound
+        case readyStates(WKRReadyStates)
+        case hostResults(WKRResultsInfo)
+        case localResults(WKRResultsInfo)
+    }
+
     // MARK: - Closures
 
-    var bonusPointsUpdated: ((Int) -> Void)?
-
-    var allPlayersReadyForNextRound: (() -> Void)?
-    var readyStatesUpdated: ((WKRReadyStates) -> Void)?
-
-    var hostResultsCreated: ((WKRResultsInfo) -> Void)?
-    var localResultsUpdated: ((WKRResultsInfo) -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
 
     // MARK: - Properties
 
@@ -55,19 +59,30 @@ public class WKRGame {
             bonusTimer?.invalidate()
             bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRKitConstants.current.bonusPointsInterval,
                                               repeats: true) { [weak self] _ in
+                                                guard let self = self else { return }
                                                 //swiftlint:disable:next line_length
-                                                self?.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
-                                                if let points = self?.activeRace?.bonusPoints {
-                                                    self?.bonusPointsUpdated?(points)
+                                                self.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
+                                                if let points = self.activeRace?.bonusPoints {
+                                                    self.listenerUpdate?(.bonusPoints(points))
                                                 }
             }
         }
 
     }
 
-    func createRaceConfig() -> WKRRaceConfig? {
+    func createRaceConfig() -> (config: WKRRaceConfig?, logEvent: WKRLogEvent?)? {
         guard localPlayer.isHost else { fatalError("Local player not host") }
-        return preRaceConfig?.raceConfig()
+
+        var sessionPoints = calculateSessionPoints()
+
+        // include players that have no points yet
+        let votingPlayers = players
+            .filter { $0.state == .voting }
+            .map { $0.profile }
+        for player in votingPlayers where sessionPoints[player] == nil {
+            sessionPoints[player] = 0
+        }
+        return preRaceConfig?.raceConfig(with: sessionPoints)
     }
 
     func finishedRace() {
@@ -94,7 +109,7 @@ public class WKRGame {
     // MARK: - Player States
 
     internal func playerUpdated(_ player: WKRPlayer) {
-        if let index = players.index(of: player) {
+        if let index = players.firstIndex(of: player) {
             players[index] = player
         } else {
             players.append(player)
@@ -111,15 +126,45 @@ public class WKRGame {
         }
 
         let readyStates = WKRReadyStates(players: players)
-        readyStatesUpdated?(readyStates)
-        if localPlayer.isHost && readyStates.isReadyForNextRound {
-            allPlayersReadyForNextRound?()
+        listenerUpdate?(.readyStates(readyStates))
+        if localPlayer.isHost,
+            let racePlayers = completedRaces.last?.players,
+            readyStates.areAllRacePlayersReady(racePlayers: racePlayers) {
+            listenerUpdate?(.playersReadyForNextRound)
         }
+    }
+
+    func shouldShowSamePageMessage(for player: WKRPlayer) -> Bool {
+        /*
+         Conditions:
+         - player can't be local player
+         - both players have to be racing
+         - both players need histories
+         - both players need at least three pages viewed (don't want to spam messages at start of race)
+         - last viewed page needs to be the same
+         - duration must be nil (must not be moving to new page)
+         - link can't be on the page (don't want players to know they are close)
+         */
+        guard localPlayer != player,
+            player.state == .racing,
+            localPlayer.state == .racing,
+            let playerEntries = player.raceHistory?.entries,
+            let localEntries = localPlayer.raceHistory?.entries,
+            playerEntries.count > 2,
+            localEntries.count > 2,
+            let localPage = localEntries.last?.page,
+            playerEntries.last?.page == localPage,
+            playerEntries.last?.duration == nil,
+            localEntries.last?.duration == nil,
+            let isLinkOnPage = activeRace?.attributes(for: localPage).linkOnPage,
+            !isLinkOnPage else { return false }
+
+        return true
     }
 
     // MARK: - Race End
 
-    func checkForRaceEnd() {
+    func calculateSessionPoints() -> [WKRPlayerProfile: Int] {
         var sessionPoints = [WKRPlayerProfile: Int]()
         for race in completedRaces {
             for (player, points) in race.calculatePoints() {
@@ -130,6 +175,11 @@ public class WKRGame {
                 }
             }
         }
+        return sessionPoints
+    }
+
+    func checkForRaceEnd() {
+        var sessionPoints = calculateSessionPoints()
 
         let racePoints = activeRace?.calculatePoints() ?? [:]
         for (player, points) in racePoints {
@@ -140,19 +190,25 @@ public class WKRGame {
             }
         }
 
-        let currentResults = WKRResultsInfo(players: players, racePoints: racePoints, sessionPoints: sessionPoints)
+        let currentResults = WKRResultsInfo(racePlayers: activeRace?.players ?? players,
+                                            racePoints: racePoints,
+                                            sessionPoints: sessionPoints)
+
         guard let race = activeRace, localPlayer.isHost, race.shouldEnd() else {
-            localResultsUpdated?(currentResults)
+            listenerUpdate?(.localResults(currentResults))
             return
         }
 
-        let adjustedPlayers = players
+        let adjustedPlayers = activeRace?.players ?? players
         for player in adjustedPlayers where player.state == .racing {
             player.state = .forcedEnd
         }
-        let results = WKRResultsInfo(players: adjustedPlayers, racePoints: racePoints, sessionPoints: sessionPoints)
+        let results = WKRResultsInfo(racePlayers: adjustedPlayers,
+                                     racePoints: racePoints,
+                                     sessionPoints: sessionPoints)
+
         finishedRace()
-        hostResultsCreated?(results)
+        listenerUpdate?(.hostResults(results))
     }
 
 }

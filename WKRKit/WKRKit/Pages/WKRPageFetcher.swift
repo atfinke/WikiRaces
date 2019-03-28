@@ -16,10 +16,21 @@ internal struct WKRPageFetcher {
     /// The standard URLSession
     static private let session: URLSession = {
         let config = URLSessionConfiguration.default
-        config.timeoutIntervalForRequest = 5.0
-        config.timeoutIntervalForResource = 5.0
+        config.timeoutIntervalForRequest = 7.5
+        config.timeoutIntervalForResource = 7.5
         return URLSession(configuration: config)
     }()
+
+    static private let noCacheSession: URLSession = {
+        let config = URLSessionConfiguration.default
+        config.timeoutIntervalForRequest = 7.5
+        config.timeoutIntervalForResource = 7.5
+        config.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        config.urlCache = nil
+        return URLSession(configuration: config)
+    }()
+
+    static private var observations = [UUID: NSKeyValueObservation]()
 
     // MARK: - Helpers
 
@@ -36,12 +47,12 @@ internal struct WKRPageFetcher {
     // MARK: - Fetching
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
-    static func fetch(path: String, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
+    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
         guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
-            completionHandler(nil)
+            completionHandler(nil, false)
             return
         }
-        fetch(url: url, completionHandler: completionHandler)
+        fetch(url: url, useCache: useCache, completionHandler: completionHandler)
     }
 
     /// Fetches a random Wikipedia page
@@ -50,30 +61,56 @@ internal struct WKRPageFetcher {
             completionHandler(nil)
             return
         }
-        fetch(url: url, completionHandler: completionHandler)
+        fetch(url: url, useCache: true) { page, _ in
+            completionHandler(page)
+        }
     }
 
     /// Fetches a Wikipedia page at a given url
-    static func fetch(url: URL, completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        let task = WKRPageFetcher.session.dataTask(with: url) { (data, response, _) in
+    static func fetch(url: URL, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
+        let session: URLSession
+        if useCache {
+            session = WKRPageFetcher.session
+        } else {
+            session = WKRPageFetcher.noCacheSession
+        }
+        let task = session.dataTask(with: url) { (data, response, _) in
             if let data = data, let string = String(data: data, encoding: .utf8), let responseUrl = response?.url {
-                completionHandler(WKRPage(title: title(from: string), url: responseUrl))
+                let page = WKRPage(title: title(from: string), url: responseUrl)
+                let isRedirect = string.contains("Redirected from")
+                completionHandler(page, isRedirect)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, false)
             }
         }
         task.resume()
     }
 
     /// Fetches a Wikipedia page source.
-    static func fetchSource(url: URL, completionHandler: @escaping (_ source: String?) -> Void) {
-        let task = WKRPageFetcher.session.dataTask(with: url) { (data, _, _) in
+    static func fetchSource(url: URL,
+                            useCache: Bool,
+                            progressHandler: @escaping (_ progress: Float) -> Void,
+                            completionHandler: @escaping (_ source: String?, _ error: Error?) -> Void) {
+        let session: URLSession
+        if useCache {
+            session = WKRPageFetcher.session
+        } else {
+            session = WKRPageFetcher.noCacheSession
+        }
+
+        let taskUUID = UUID()
+        let task = session.dataTask(with: url) { (data, _, error) in
+            observations[taskUUID] = nil
             if let data = data, let string = String(data: data, encoding: .utf8) {
-                completionHandler(string)
+                completionHandler(string, nil)
             } else {
-                completionHandler(nil)
+                completionHandler(nil, error)
             }
         }
+        observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
+            progressHandler(Float(progress.fractionCompleted))
+        }
+
         task.resume()
     }
 

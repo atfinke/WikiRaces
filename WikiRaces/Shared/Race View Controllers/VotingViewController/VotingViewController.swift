@@ -12,14 +12,19 @@ import WKRUIKit
 
 internal class VotingViewController: CenteredTableViewController {
 
+    // MARK: - Types
+
+    enum ListenerUpdate {
+        case voted(WKRPage)
+        case quit
+    }
+
     // MARK: - Properties
 
     private var isShowingGuide = false
     private var isShowingVoteCountdown = true
 
-    var playerVoted: ((WKRPage) -> Void)?
-
-    var backupQuit: (() -> Void)?
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
     var quitAlertController: UIAlertController?
 
     var voteInfo: WKRVoteInfo? {
@@ -79,7 +84,12 @@ internal class VotingViewController: CenteredTableViewController {
         guideLabel.text = "TAP ARTICLE TO VOTE"
         descriptionLabel.text = "VOTING STARTS SOON"
 
-        tableView.register(VotingTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(VotingTableViewCell.self,
+                           forCellReuseIdentifier: reuseIdentifier)
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
+                                                            target: self,
+                                                            action: #selector(doneButtonPressed))
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -93,15 +103,15 @@ internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Actions
 
-    @IBAction func quitButtonPressed(_ sender: Any) {
-        PlayerMetrics.log(event: .userAction(#function))
+    @objc func doneButtonPressed(_ sender: Any) {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerMetrics.log(event: .backupQuit, attributes: ["GameState": WKRGameState.voting.rawValue.description])
-            self.backupQuit?()
+            PlayerAnonymousMetrics.log(event: .backupQuit,
+                                       attributes: ["RawGameState": WKRGameState.voting.rawValue])
+            self.listenerUpdate?(.quit)
             return
         }
         present(alertController, animated: true, completion: nil)
-        PlayerMetrics.log(presentingOf: alertController, on: self)
     }
 
     // MARK: - Helpers

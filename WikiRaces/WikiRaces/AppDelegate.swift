@@ -9,6 +9,7 @@
 import CloudKit
 import UIKit
 
+import WKRKit
 import WKRUIKit
 
 import Crashlytics
@@ -20,24 +21,42 @@ internal class AppDelegate: WKRAppDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        #if !DEBUG
         guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
             let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
                 fatalError("Failed to get API keys")
         }
 
         Crashlytics.start(withAPIKey: key)
-        #endif
 
         FirebaseApp.configure()
 
-        StatsHelper.shared.start()
         configureConstants()
         configureAppearance()
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(showBanHammer),
+                                               name: PlayerDatabaseMetrics.banHammerNotification,
+                                               object: nil)
+
+        PlayerStatsManager.shared.start()
+        PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()
         logInterfaceMode()
         logBuild()
+
+        cleanTempDirectory()
+
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            UIView.setAnimationsEnabled(false)
+        }
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let controller = MenuViewController()
+        let nav = UINavigationController(rootViewController: controller)
+        nav.setNavigationBarHidden(true, animated: false)
+        window?.rootViewController = nav
+        window?.makeKeyAndVisible()
 
         return true
     }
@@ -46,22 +65,40 @@ internal class AppDelegate: WKRAppDelegate {
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
-            PlayerMetrics.log(event: .cloudStatus,
+            PlayerAnonymousMetrics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
     }
 
     private func logInterfaceMode() {
         let mode = WKRUIStyle.isDark ? "Dark" : "Light"
-        PlayerMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
+        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
     }
 
     private func logBuild() {
-        guard let bundleBuild = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
-            let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-                fatalError("No bundle info dictionary")
-        }
-        PlayerMetrics.log(event: .buildInfo(version: bundleVersion, build: bundleBuild))
+        let appInfo = Bundle.main.appInfo
+        let metrics = PlayerDatabaseMetrics.shared
+        metrics.log(value: appInfo.version, for: "coreVersion")
+        metrics.log(value: appInfo.build.description, for: "coreBuild")
+        metrics.log(value: WKRKitConstants.current.version.description,
+                    for: "WKRKitConstantsVersion")
+        metrics.log(value: WKRUIKitConstants.current.version.description,
+                    for: "WKRUIKitConstantsVersion")
+        metrics.log(value: UIDevice.current.systemVersion,
+                    for: "osVersion")
+    }
+
+    @objc
+    func showBanHammer() {
+        let controller = UIAlertController(title: "You have been banned from WikiRaces",
+                                           message: nil,
+                                           preferredStyle: .alert)
+
+        window?.rootViewController?.present(controller,
+                                            animated: true,
+                                            completion: nil)
+
+        PlayerAnonymousMetrics.log(event: .banHammer)
     }
 
 }

@@ -33,18 +33,18 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Initialization
 
-    init(players: [WKRPlayer],
+    init(racePlayers: [WKRPlayer],
          racePoints: [WKRPlayerProfile: Int],
          sessionPoints: [WKRPlayerProfile: Int]) {
 
         self.racePoints = racePoints
+        let players = racePlayers.sorted(by: { (lhs, rhs) -> Bool in
+            return lhs.profile.name.lowercased() < rhs.profile.name.lowercased()
+        })
 
-        // remove players that weren't in race
-        let playerProfiles = players.map { $0.profile }
+        let playerProfiles = racePlayers.map { $0.profile }
         self.sessionPoints = sessionPoints.filter { playerProfiles.contains($0.key) }
         self.playersSortedByPoints = players.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.profile.name < rhs.profile.name
-        }).sorted(by: { (lhs, rhs) -> Bool in
             return sessionPoints[lhs.profile] ?? 0 > sessionPoints[rhs.profile] ?? 0
         })
 
@@ -83,12 +83,6 @@ public struct WKRResultsInfo: Codable {
                 return lhs.profile.name < rhs.profile.name
             })
 
-        // The players that quit
-        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
-            .sorted(by: { (lhs, rhs) -> Bool in
-                return lhs.profile.name < rhs.profile.name
-            })
-
         // The players still racing
         let racingPlayers: [WKRPlayer] = players.filter({ $0.state == .racing })
             .sorted(by: { (lhs, rhs) -> Bool in
@@ -101,14 +95,18 @@ public struct WKRResultsInfo: Codable {
                 return lhs.profile.name < rhs.profile.name
             })
 
-        // Figure out what the difference between disconnected and quit should be
+        // The players that quit
+        let quitPlayers: [WKRPlayer] = players.filter({ $0.state == .quit })
+            .sorted(by: { (lhs, rhs) -> Bool in
+                return lhs.profile.name < rhs.profile.name
+            })
 
         let sortedPlayers: [WKRPlayer] = foundPagePlayers
             + forcedFinishPlayers
             + forfeitedPlayers
-            + quitPlayers
             + racingPlayers
             + connectingPlayers
+            + quitPlayers
 
         let otherPlayers: [WKRPlayer] = players.filter { !sortedPlayers.contains($0) }
         return sortedPlayers + otherPlayers
@@ -122,13 +120,12 @@ public struct WKRResultsInfo: Codable {
 
     // used to update history controller cells
     public func updatedPlayer(for player: WKRPlayer) -> WKRPlayer? {
-        guard let updatedPlayerIndex = playersSortedByState.index(of: player) else { return nil }
+        guard let updatedPlayerIndex = playersSortedByState.firstIndex(of: player) else { return nil }
         return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func raceResults(at index: Int) -> (player: WKRPlayer, playerState: WKRPlayerState) {
-        let player = playersSortedByState[index]
-        return (player, player.state)
+    public func raceRankingsPlayer(at index: Int) -> WKRPlayer {
+        return playersSortedByState[index]
     }
 
     public func sessionResults(at index: Int) -> WKRProfileSessionResults {
