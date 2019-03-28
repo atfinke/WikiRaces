@@ -221,7 +221,7 @@ class WKRKitTests: WKRKitTestCase {
         WKRKitConstants.updateConstants()
 
         let version = WKRKitConstants.current.version
-        XCTAssertEqual(WKRKitConstants.current.version, 18)
+        XCTAssertEqual(WKRKitConstants.current.version, 20)
 
         WKRKitConstants.removeConstants()
         WKRKitConstants.updateConstants()
