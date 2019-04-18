@@ -6,7 +6,39 @@ Feature work is merged into master when the update containing the corresponding 
 
 Feel free to ping me with questions.
 ***
-### Root Directory
+
+## App Store Reviews
+#### "Best Game Ever"
+"This is truly one of the best apps on the App Store. I don’t know who the developer is of this game, but whoever you are, I LOVE you!"<br>
+\- Youand18
+
+#### "Wow. Absolutely Amazing..."
+"...it’s basically my perfect game... this is BRILLIANT 🥰"<br>
+\- dörkåsbord
+
+#### "... LOVE this game"
+"I absolutely love playing this game. It combines fun with a bit of education..."<br>
+\- christinajcap
+
+#### "Fun app with friends"
+"Very fun with a group of friends in a room, love the competition"<br>
+\- hahdhakakfk
+
+#### "Needs Single Player!"
+"Do it! Edit: HE DID IT!!!"<br>
+\- Seanya Productions
+
+#### "Fantastic and fun game"
+"Great work creating an addicting and fun game to play with friends"<br>
+\- Hubbytubby
+
+## Player Tweets
+
+[Hiatus](https://twitter.com/SHINICHlKUDOU/status/1071589372028436480)<br>
+[Jumping Jacks](https://twitter.com/SHINICHlKUDOU/status/1037168065547591680)<br>
+[Intense](https://twitter.com/SHINICHlKUDOU/status/1036492428868505600)<br>
+
+## Repo Overview
 
 #### /Resources
 - Various design resources.
