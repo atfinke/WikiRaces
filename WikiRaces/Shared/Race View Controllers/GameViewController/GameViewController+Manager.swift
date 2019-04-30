@@ -176,13 +176,17 @@ extension GameViewController {
 
     private func transition(to state: WKRGameState) {
         guard !isPlayerQuitting, state != gameState else { return }
+
+        let lastState = state
         gameState = state
 
         switch state {
         case .voting:
             transitionToVoting()
         case .results, .hostResults, .points:
-            transitionToResults()
+            if lastState != .voting {
+                transitionToResults()
+            }
         case .race:
             transitionToRace()
         default: break
