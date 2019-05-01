@@ -158,21 +158,31 @@ extension GameViewController {
         let quitAction = UIAlertAction(title: "Leave Match", style: .destructive) {  [weak self] _ in
             PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
             PlayerAnonymousMetrics.log(event: .quitRace, attributes: nil)
-            self?.playerQuit()
+            self?.attemptQuit()
         }
         alertController.addAction(quitAction)
 
         return alertController
     }
 
-    func playerQuit() {
-        DispatchQueue.main.async {
-            self.isPlayerQuitting = true
-            self.resetActiveControllers()
-            self.gameManager.player(.quit)
-            NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit,
-                                            object: nil)
+    func attemptQuit() {
+        guard transitionState == TransitionState.none || transitionState == TransitionState.inProgress else {
+            return
         }
+
+        if transitionState == .none {
+            performQuit()
+        } else {
+            transitionState = .quitting(.waiting)
+        }
+    }
+
+    func performQuit() {
+        transitionState = .quitting(.inProgress)
+        resetActiveControllers()
+        gameManager.player(.quit)
+        NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit,
+                                        object: nil)
     }
 
 }
