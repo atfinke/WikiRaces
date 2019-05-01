@@ -28,7 +28,29 @@ extension GameViewController {
         switch gameUpdate {
         case .state(let state):
             PlayerAnonymousMetrics.log(event: .gameState("Transition: \(state)."))
-            transition(to: state)
+
+            func startTransition(to state: WKRGameState) {
+                transitionState = .inProgress
+                transition(to: state, completion: { [weak self] in
+                    guard let self = self else { return }
+                    switch self.transitionState {
+                    case .none, .inProgress:
+                        self.transitionState = .none
+                    case .quitting(let quitState):
+                        if quitState == .waiting {
+                            self.performQuit()
+                        }
+                    }
+                })
+            }
+
+            if transitionState == .none {
+                startTransition(to: state)
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    startTransition(to: state)
+                }
+            }
         case .error(let error):
             DispatchQueue.main.async {
                 self.errorOccurred(error)
@@ -38,29 +60,33 @@ extension GameViewController {
         case .playerRaceLinkCountForCurrentRace(let linkCount):
             webView?.text = linkCount.description
         case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled):
-            guard let raceType = statRaceType else { return }
-            PlayerStatsManager.shared.completedRace(type: raceType,
-                                             points: points,
-                                             place: place,
-                                             timeRaced: timeRaced,
-                                             pixelsScrolled: webViewPixelsScrolled)
-
-            let event: PlayerAnonymousMetrics.Event
-            switch raceType {
-            case .mpc:
-                event = .mpcRaceCompleted
-            case .gameKit:
-                event = .gkRaceCompleted
-            case .solo:
-                event = .soloRaceCompleted
-            }
-            PlayerAnonymousMetrics.log(event: event,
-                                       attributes: [
-                                        "Time": timeRaced,
-                                        "Points": points,
-                                        "WebViewScrolled": webViewPixelsScrolled
-                ])
+            processRaceStats(points: points, place: place, webViewPixelsScrolled: webViewPixelsScrolled)
         }
+    }
+
+    private func processRaceStats(points: Int, place: Int?, webViewPixelsScrolled: Int) {
+        guard let raceType = statRaceType else { return }
+        PlayerStatsManager.shared.completedRace(type: raceType,
+                                                points: points,
+                                                place: place,
+                                                timeRaced: timeRaced,
+                                                pixelsScrolled: webViewPixelsScrolled)
+
+        let event: PlayerAnonymousMetrics.Event
+        switch raceType {
+        case .mpc:
+            event = .mpcRaceCompleted
+        case .gameKit:
+            event = .gkRaceCompleted
+        case .solo:
+            event = .soloRaceCompleted
+        }
+        PlayerAnonymousMetrics.log(event: event,
+                                   attributes: [
+                                    "Time": timeRaced,
+                                    "Points": points,
+                                    "WebViewScrolled": webViewPixelsScrolled
+            ])
     }
 
     private func votingUpdate(_ votingUpdate: WKRGameManager.VotingUpdate) {
@@ -102,8 +128,8 @@ extension GameViewController {
     }
 
     private func errorOccurred(_ error: WKRFatalError) {
-        guard self.view.window != nil  && !isPlayerQuitting else { return }
-        isPlayerQuitting = true
+        guard self.view.window != nil && !isErrorPresented else { return }
+        isErrorPresented = true
 
         webView?.isUserInteractionEnabled = false
         navigationItem.leftBarButtonItem?.isEnabled = false
@@ -113,7 +139,7 @@ extension GameViewController {
                                                 message: error.message,
                                                 preferredStyle: .alert)
         let quitAction = UIAlertAction(title: "Menu", style: .default) { [weak self] _ in
-            self?.playerQuit()
+            self?.attemptQuit()
         }
         alertController.addAction(quitAction)
         self.dismissActiveController(completion: {
@@ -174,37 +200,37 @@ extension GameViewController {
 
     // MARK: - Transitions
 
-    private func transition(to state: WKRGameState) {
-        guard !isPlayerQuitting, state != gameState else { return }
+    private func transition(to state: WKRGameState, completion: @escaping () -> Void) {
+        guard state != gameState else {
+            completion()
+            return
+        }
 
-        let lastState = state
         gameState = state
-
         switch state {
         case .voting:
-            transitionToVoting()
+            transitionToVoting(completion: completion)
         case .results, .hostResults, .points:
-            if lastState != .voting {
-                transitionToResults()
-            }
+            transitionToResults(completion: completion)
         case .race:
-            transitionToRace()
-        default: break
+            transitionToRace(completion: completion)
+        default:
+            completion()
         }
     }
 
-    private func transitionToVoting() {
+    private func transitionToVoting(completion: @escaping () -> Void) {
         self.title = ""
         navigationController?.navigationBar.isHidden = true
         dismissActiveController(completion: { [weak self] in
-            self?.showVotingController()
+            self?.showVotingController(completion: completion)
         })
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
         setupNewWebView()
     }
 
-    private func showVotingController() {
+    private func showVotingController(completion: @escaping () -> Void) {
         let controller = VotingViewController()
         controller.voteInfo = gameManager.voteInfo
         controller.quitAlertController = quitAlertController(raceStarted: false)
@@ -227,7 +253,7 @@ extension GameViewController {
                     stat.increment()
                 }
             case .quit:
-                self.playerQuit()
+                self.attemptQuit()
             }
         }
 
@@ -239,14 +265,15 @@ extension GameViewController {
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
             self?.activityIndicatorView.alpha = 0.0
+            completion()
         }
     }
 
-    private func transitionToResults() {
+    private func transitionToResults(completion: @escaping () -> Void) {
         raceTimer?.invalidate()
         if activeViewController != resultsViewController || resultsViewController == nil {
             dismissActiveController(completion: { [weak self] in
-                self?.showResultsController()
+                self?.showResultsController(completion: completion)
                 UIView.animate(withDuration: WKRAnimationDurationConstants.gameFadeOut,
                                delay: WKRAnimationDurationConstants.gameFadeOutDelay,
                                options: .beginFromCurrentState,
@@ -268,7 +295,7 @@ extension GameViewController {
         }
     }
 
-    private func showResultsController() {
+    private func showResultsController(completion: @escaping () -> Void) {
         let controller = ResultsViewController()
         controller.localPlayer = gameManager.localPlayer
         controller.addPlayersViewController = gameManager.hostNetworkInterface()
@@ -283,7 +310,7 @@ extension GameViewController {
             case .readyButtonPressed:
                 self.gameManager.player(.ready)
             case .quit:
-                self.playerQuit()
+                self.attemptQuit()
             }
         }
 
@@ -295,10 +322,11 @@ extension GameViewController {
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
             self?.activityIndicatorView.alpha = 0.0
+            completion()
         }
     }
 
-    private func transitionToRace() {
+    private func transitionToRace(completion: @escaping () -> Void) {
         navigationController?.navigationBar.isHidden = false
         timeRaced = 0
         raceTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
@@ -313,7 +341,7 @@ extension GameViewController {
         connectingLabel.alpha = 0.0
         activityIndicatorView.alpha = 0.0
 
-        dismissActiveController(completion: nil)
+        dismissActiveController(completion: completion)
 
         if networkConfig.isHost {
             PlayerAnonymousMetrics.log(event: .hostStartedRace,
