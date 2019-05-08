@@ -16,7 +16,8 @@ extension ViewController {
     func queryPlayerStats() {
         textView.textStorage?.append(NSAttributedString(string: "Querying Player Stats\n"))
 
-        let query = CKQuery(recordType: "UserStats", predicate: NSPredicate(value: true))
+        let recordType = isUsingUserStatsV3 ? "UserStatsv3" : "UserStats"
+        let query = CKQuery(recordType: "UserStatsv3", predicate: NSPredicate(value: true))
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         let queryOperation = CKQueryOperation(query: query)
@@ -58,7 +59,7 @@ extension ViewController {
     // MARK: - Processing
 
     private func processPlayerStats() {
-        let keys = [
+        let v1Keys = [
             "CustomName",
             "DeviceName",
             "GCAlias",
@@ -78,6 +79,68 @@ extension ViewController {
             "ModifiedAt"
         ]
 
+        let v3Keys = [
+            "CustomNames",
+            "DeviceNames",
+            "GCAliases",
+
+            "gkFastestTime",
+            "gkHelp",
+            "gkInvitedToMatch",
+            "gkMatch",
+            "gkPages",
+            "gkPixelsScrolled",
+            "gkPoints",
+            "gkPressedJoin",
+            "gkRaceDNF",
+            "gkRaceFinishFirst",
+            "gkRaceFinishSecond",
+            "gkRaceFinishThird",
+            "gkRaces",
+            "gkTotalPlayers",
+            "gkTotalTime",
+            "gkUniquePlayers",
+            "gkVotes",
+            "mpcFastestTime",
+            "mpcHelp",
+            "mpcMatch",
+            "mpcPages",
+            "mpcPixelsScrolled",
+            "mpcPoints",
+            "mpcPressedHost",
+            "mpcPressedJoin",
+            "mpcRaceDNF",
+            "mpcRaceFinishFirst",
+            "mpcRaceFinishSecond",
+            "mpcRaceFinishThird",
+            "mpcRaces",
+            "mpcTotalPlayers",
+            "mpcTotalTime",
+            "mpcUniquePlayers",
+            "mpcVotes",
+            "multiplayerAverage",
+            "soloFastestTime",
+            "soloHelp",
+            "soloMatch",
+            "soloPages",
+            "soloPixelsScrolled",
+            "soloPressedHost",
+            "soloRaceDNF",
+            "soloRaceFinishFirst",
+            "soloRaces",
+            "soloTotalTime",
+            "soloVotes",
+            "triggeredEasterEgg",
+
+            "osVersion",
+            "coreVersion",
+            "coreBuild",
+            "CreatedAt",
+            "ModifiedAt"
+        ]
+
+        let keys = isUsingUserStatsV3 ? v3Keys : v1Keys
+
         var csvString = ""
         for key in keys {
             csvString += key + ","
@@ -86,7 +149,7 @@ extension ViewController {
         for record in playerRecords {
             for key in keys {
                 if let object = record.object(forKey: key) {
-                    csvString += "\(object)"
+                    csvString += "\(object)".replacingOccurrences(of: ",", with: "|").replacingOccurrences(of: "\n", with: "")
                 } else if key == "CreatedAt", let date = record.creationDate {
                     csvString += "\(date)"
                 } else if key == "ModifiedAt", let date = record.modificationDate {
