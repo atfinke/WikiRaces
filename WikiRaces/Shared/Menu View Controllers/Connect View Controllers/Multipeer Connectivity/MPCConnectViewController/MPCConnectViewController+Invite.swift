@@ -93,7 +93,8 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     // MARK: - MCAdvertiserAssistantDelegate
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
-
+        let info = "didNotStartAdvertisingPeer: " + error.localizedDescription
+        PlayerAnonymousMetrics.log(event: .error(info))
     }
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
