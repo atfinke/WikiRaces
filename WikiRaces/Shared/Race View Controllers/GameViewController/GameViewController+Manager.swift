@@ -286,6 +286,7 @@ extension GameViewController {
             })
         } else {
             resultsViewController?.state = gameState
+            completion()
         }
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil

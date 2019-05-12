@@ -226,6 +226,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        let info = "didNotStartBrowsingForPeers: " + error.localizedDescription
+        PlayerAnonymousMetrics.log(event: .error(info))
         listenerUpdate?(.cancel)
     }
 
