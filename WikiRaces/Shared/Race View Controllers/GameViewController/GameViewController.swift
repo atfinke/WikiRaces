@@ -14,9 +14,24 @@ import WKRUIKit
 
 internal class GameViewController: UIViewController {
 
+    // MARK: - Types
+
+    enum TransitionState: Equatable {
+        //swiftlint:disable:next nesting
+        enum QuitState {
+            case waiting, inProgress
+        }
+        case none, inProgress, quitting(QuitState)
+    }
+
     // MARK: - Game Properties
 
-    var isPlayerQuitting = false
+    var transitionState = TransitionState.none {
+        didSet {
+            PlayerAnonymousMetrics.log(event: .gameState("TransitionState: \(transitionState)"))
+        }
+    }
+    var isErrorPresented = false
     var isConfigured = false
 
     var timeRaced = 0

@@ -19,6 +19,8 @@ class ViewController: NSViewController {
     var playerRecords = [CKRecord]()
     let publicDB = CKContainer(identifier: "iCloud.com.andrewfinke.wikiraces").publicCloudDatabase
 
+    var isUsingUserStatsV3 = true
+    
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {

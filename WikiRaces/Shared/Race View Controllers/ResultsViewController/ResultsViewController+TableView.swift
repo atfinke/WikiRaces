@@ -37,7 +37,9 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
             let sessionResults = resultsInfo.sessionResults(at: index)
             cell.updateStandings(for: sessionResults)
         default:
-            fatalError("Unexpected state \(state)")
+            // Unexpected state
+            cell.isShowingActivityIndicatorView = false
+            cell.isShowingCheckmark = false
         }
     }
 

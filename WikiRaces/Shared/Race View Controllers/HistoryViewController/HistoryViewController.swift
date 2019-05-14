@@ -156,6 +156,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
             if shouldUpdateStatsCount {
                 tableView.reloadSections(IndexSet(integer: 1), with: .none)
             }
+
         }, completion: { _ in
             self.isTableViewAnimating = false
             if self.deferredUpdate {
@@ -187,9 +188,6 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if player?.stats == nil {
-            return 1
-        }
         return 2
     }
 

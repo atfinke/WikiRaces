@@ -315,6 +315,8 @@ internal class ResultsViewController: CenteredTableViewController {
     override func overlayButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
+        UISelectionFeedbackGenerator().selectionChanged()
+
         addPlayersBarButtonItem?.isEnabled = false
         shareResultsBarButtonItem?.isEnabled = false
 

@@ -59,7 +59,7 @@ internal class ViewController: UIViewController {
 //                            } else if arc4random() % 30 == 0 {
 //                                player.state = .forfeited
                             } else {
-                                player.finishedViewingLastPage(pointsScrolled: 5)
+                                player.finishedViewingLastPage(pixelsScrolled: 5)
                                 player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
                             }
 
