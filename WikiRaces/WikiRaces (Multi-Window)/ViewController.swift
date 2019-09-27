@@ -11,6 +11,8 @@ import UIKit
 //swiftlint:disable line_length function_body_length force_cast superfluous_disable_command
 class ViewController: UIViewController {
 
+    var windows = [DebugWindow]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +55,7 @@ class ViewController: UIViewController {
                 createDebugWindow(frame: frame, named: name)
             }
         }
-        view.backgroundColor = UIColor.purple
+        view.backgroundColor = .purple
     }
 
     func createDebugWindow(frame: CGRect, named name: String) {
@@ -61,6 +63,7 @@ class ViewController: UIViewController {
         window.playerName = name
         window.rootViewController = MenuViewController()
         window.makeKeyAndVisible()
+        windows.append(window)
     }
 
 }

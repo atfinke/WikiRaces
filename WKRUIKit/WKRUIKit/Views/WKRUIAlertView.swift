@@ -10,7 +10,7 @@ import UIKit
 
 public class WKRUIAlertView: WKRUIBottomOverlayView {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     private struct WKRAlertMessage: Equatable {
         let text: String
@@ -19,7 +19,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         let playHaptic: Bool
     }
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private var queue = [WKRAlertMessage]()
 
@@ -29,7 +29,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     private var isPresenting = false
 
-    // MARK: - Initalization
+    // MARK: - Initalization -
 
     public override init() {
         guard let window = UIApplication.shared.keyWindow else {
@@ -41,7 +41,6 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         alertWindow.addSubview(self)
 
-        label.textColor = UIColor.wkrTextColor
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
@@ -71,7 +70,14 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Enqueuing Messages
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        label.textColor = .wkrTextColor(for: traitCollection)
+    }
+
+    // MARK: - Enqueuing Messages -
 
     public func enqueue(text: String,
                         duration: Double = WKRUIKitConstants.alertDefaultDuration,
@@ -107,7 +113,7 @@ public class WKRUIAlertView: WKRUIBottomOverlayView {
         queue = queue.filter({ !$0.isRaceSpecific })
     }
 
-    // MARK: - State
+    // MARK: - State -
 
     private func present() {
         guard !queue.isEmpty, !isPresenting else { return }

@@ -8,16 +8,17 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 class ConnectViewController: UIViewController {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     struct StartMessage: Codable {
         let hostName: String
     }
 
-    // MARK: - Interface Elements
+    // MARK: - Interface Elements -
 
     /// General status label
     let descriptionLabel = UILabel()
@@ -30,10 +31,10 @@ class ConnectViewController: UIViewController {
     var isShowingMatch = false
     var onQuit: (() -> Void)?
 
-    // MARK: - Connection
+    // MARK: - Connection -
 
     func runConnectionTest(completion: @escaping (Bool) -> Void) {
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
 
@@ -41,7 +42,7 @@ class ConnectViewController: UIViewController {
         WKRConnectionTester.start { success in
             DispatchQueue.main.async {
                 if success {
-                    #if !MULTIWINDOWDEBUG
+                    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                     trace?.stop()
                     #endif
                 }
@@ -55,7 +56,7 @@ class ConnectViewController: UIViewController {
         }
     }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,20 +70,27 @@ class ConnectViewController: UIViewController {
         cancelButton.alpha = 0.0
     }
 
-    // MARK: - Core Interface
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let textColor: UIColor = .wkrTextColor(for: traitCollection)
+        cancelButton.setTitleColor(textColor, for: .normal)
+        descriptionLabel.textColor = textColor
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
+    }
+
+    // MARK: - Core Interface -
 
     func setupCoreInterface() {
+        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL",
+        spacing: 1.5), for: .normal)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        cancelButton.setTitleColor(.wkrTextColor, for: .normal)
         cancelButton.alpha = 0.0
-        cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL", spacing: 1.5), for: .normal)
         cancelButton.addTarget(self, action: #selector(pressedCancelButton), for: .touchUpInside)
         view.addSubview(cancelButton)
 
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.alpha = 0.0
-        descriptionLabel.textColor = .wkrTextColor
         descriptionLabel.textAlignment = .center
         descriptionLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         view.addSubview(descriptionLabel)
@@ -90,7 +98,6 @@ class ConnectViewController: UIViewController {
 
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicatorView.alpha = 0.0
-        activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
         activityIndicatorView.startAnimating()
         view.addSubview(activityIndicatorView)
 
@@ -103,8 +110,6 @@ class ConnectViewController: UIViewController {
             cancelButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-
-        view.backgroundColor = UIColor.wkrBackgroundColor
     }
 
     func toggleCoreInterface(isHidden: Bool,
@@ -120,7 +125,7 @@ class ConnectViewController: UIViewController {
         })
     }
 
-    // MARK: - Interface Updates
+    // MARK: - Interface Updates -
 
     func updateDescriptionLabel(to text: String) {
         descriptionLabel.attributedText = NSAttributedString(string: text.uppercased(),
@@ -188,8 +193,12 @@ class ConnectViewController: UIViewController {
                                      completion: {
                                         let controller = GameViewController()
                                         controller.networkConfig = networkConfig
-                                        let nav = UINavigationController(rootViewController: controller)
+                                        let nav = WKRUINavigationController(rootViewController: controller)
                                         nav.modalTransitionStyle = .crossDissolve
+                                        if #available(iOS 13.0, *) {
+                                            nav.isModalInPresentation = true
+                                            nav.modalPresentationStyle = .fullScreen
+                                        }
                                         self.present(nav, animated: true, completion: nil)
             })
         }

@@ -10,11 +10,11 @@ import SpriteKit
 
 class MedalView: SKView {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
-    let medalScene = MedalScene(size: .zero)
+    private let medalScene = MedalScene(size: .zero)
 
-    // MARK: - Initalization
+    // MARK: - Initalization -
 
     init() {
         super.init(frame: .zero)
@@ -30,7 +30,7 @@ class MedalView: SKView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func layoutSubviews() {
         super.layoutSubviews()

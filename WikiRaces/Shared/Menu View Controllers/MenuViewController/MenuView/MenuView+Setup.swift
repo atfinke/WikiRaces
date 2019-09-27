@@ -11,7 +11,7 @@ import WKRUIKit
 
 extension MenuView {
 
-    // MARK: - Top View
+    // MARK: - Top View -
 
     /// Sets up the top view of the menu
     //swiftlint:disable:next function_body_length
@@ -108,40 +108,27 @@ extension MenuView {
         topView.addSubview(createLocalRaceButton)
 
         localOptionsBackButton.setImage(UIImage(named: "Back")!, for: .normal)
-        localOptionsBackButton.tintColor = .wkrTextColor
         localOptionsBackButton.translatesAutoresizingMaskIntoConstraints = false
         localOptionsBackButton.addTarget(self, action: #selector(localOptionsBackButtonPressed), for: .touchUpInside)
         topView.addSubview(localOptionsBackButton)
 
         localOptionsBackButton.layer.borderWidth = 1.7
-        localOptionsBackButton.layer.borderColor = UIColor.wkrTextColor.cgColor
-    }
+       }
 
     /// Sets up the labels
     private func setupLabels() {
         titleLabel.text = "WikiRaces"
-        titleLabel.textColor = UIColor.wkrTextColor
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.addSubview(titleLabel)
 
-        #if DEBUG
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            titleLabel.textColor = UIColor(red: 51.0 / 255.0,
-                                           green: 102.0 / 255.0,
-                                           blue: 204.0 / 255.0,
-                                           alpha: 1.0)
-        }
-        #endif
-
         subtitleLabel.text = "Conquer the encyclopedia\nof everything."
         subtitleLabel.numberOfLines = 2
-        subtitleLabel.textColor = UIColor.wkrTextColor
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.clipsToBounds = true
         topView.addSubview(subtitleLabel)
     }
 
-    // MARK: - Bottom View
+    // MARK: - Bottom View -
 
     /// Sets up the bottom views
     func setupBottomView() {

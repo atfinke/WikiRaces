@@ -10,19 +10,18 @@ import UIKit
 
 internal class MPCHostSearchingCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private var dots: Int = 3
     private var timer: Timer?
 
     static let reuseIdentifier = "searchingCell"
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         isUserInteractionEnabled = false
-        backgroundColor = UIColor.wkrBackgroundColor
         textLabel?.textColor = UIColor(red: 184.0 / 255.0,
                                        green: 184.0 / 255.0,
                                        blue: 184.0 / 255.0,
@@ -38,7 +37,7 @@ internal class MPCHostSearchingCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     func updateText() {
         dots += 1

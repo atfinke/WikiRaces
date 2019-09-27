@@ -11,13 +11,13 @@ import Cocoa
 
 extension ViewController {
 
-    // MARK: - CloudKit Querying
+    // MARK: - CloudKit Querying -
 
     func queryPlayerStats() {
         textView.textStorage?.append(NSAttributedString(string: "Querying Player Stats\n"))
 
         let recordType = isUsingUserStatsV3 ? "UserStatsv3" : "UserStats"
-        let query = CKQuery(recordType: "UserStatsv3", predicate: NSPredicate(value: true))
+        let query = CKQuery(recordType: recordType, predicate: NSPredicate(value: true))
         query.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
 
         let queryOperation = CKQueryOperation(query: query)
@@ -36,7 +36,7 @@ extension ViewController {
                 self.textView.textStorage?.append(NSAttributedString(string: "Error: \(error)\n"))
                 self.processPlayerStats()
             } else if let cursor = cursor {
-                self.textView.textStorage?.append(NSAttributedString(string: "Querying w/ Cursor\n"))
+                self.textView.textStorage?.append(NSAttributedString(string: "Querying w/ Cursor \(self.playerRecords.count)\n"))
                 self.queryPlayerStats(cursor: cursor)
             } else {
                 self.textView.textStorage?.append(NSAttributedString(string: "Got All Player Stats\n"))

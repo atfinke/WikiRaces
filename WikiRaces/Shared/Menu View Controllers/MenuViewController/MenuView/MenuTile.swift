@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import WKRUIKit
 
 internal class MenuTile: UIControl {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     /// Used for displaying the stat number (i.e. 3.33333 to 3.33)
     static private let numberFormatter: NumberFormatter = {
@@ -48,8 +49,7 @@ internal class MenuTile: UIControl {
             }
             titleLabel.attributedText = NSAttributedString(string: text,
                                                            spacing: 3.0,
-                                                           font: titleLabel.font,
-                                                           textColor: UIColor.wkrTextColor)
+                                                           font: titleLabel.font)
         }
         get {
             return titleLabel.attributedText?.string
@@ -93,7 +93,7 @@ internal class MenuTile: UIControl {
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     /// Init with the tile's title
     ///
@@ -108,7 +108,6 @@ internal class MenuTile: UIControl {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
 
-        valueLabel.textColor = UIColor.wkrTextColor
         valueLabel.adjustsFontSizeToFitWidth = true
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(valueLabel)
@@ -129,6 +128,15 @@ internal class MenuTile: UIControl {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor: UIColor = .wkrTextColor(for: traitCollection)
+        titleLabel.textColor = textColor
+        valueLabel.textColor = textColor
     }
 
 }

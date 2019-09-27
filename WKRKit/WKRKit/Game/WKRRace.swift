@@ -56,7 +56,7 @@ internal struct WKRRace {
 
         // Adjust for links to sections
         if adjustedURL.absoluteString.contains("#") {
-            var components = adjustedURL.absoluteString.components(separatedBy: "#")
+            let components = adjustedURL.absoluteString.components(separatedBy: "#")
             if components.count == 2, let newURL = URL(string: components[0]) {
                 adjustedURL = newURL
             }

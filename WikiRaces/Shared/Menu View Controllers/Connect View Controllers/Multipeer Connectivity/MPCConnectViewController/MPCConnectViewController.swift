@@ -13,20 +13,20 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-#if !MULTIWINDOWDEBUG
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
 #endif
 
 internal class MPCConnectViewController: ConnectViewController {
 
-    // MARK: - Interface Elements
+    // MARK: - Interface Elements -
 
     let inviteView = UIView()
     let hostNameLabel = UILabel()
     let acceptButton = UIButton()
     let declineButton = UIButton()
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var playerName = UIDevice.current.name
     var isValidPlayerName = false
@@ -34,7 +34,7 @@ internal class MPCConnectViewController: ConnectViewController {
     var isPlayerHost = false
     var isShowingInvite = false
 
-    // MARK: - MPC Properties
+    // MARK: - MPC Properties -
 
     var advertiser: MCNearbyServiceAdvertiser?
     var activeInvite: ((Bool, MCSession) -> Void)?
@@ -51,11 +51,11 @@ internal class MPCConnectViewController: ConnectViewController {
         return MCSession(peer: self.peerID)
     }()
 
-    #if !MULTIWINDOWDEBUG
+    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var connectingTrace: Trace?
     #endif
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +71,7 @@ internal class MPCConnectViewController: ConnectViewController {
             PlayerAnonymousMetrics.log(event: .nameType, attributes: ["Type": "DeviceName"])
         }
 
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         Crashlytics.sharedInstance().setUserName(playerName)
         Analytics.setUserProperty(playerName, forName: "playerName")
         #endif
@@ -82,7 +82,8 @@ internal class MPCConnectViewController: ConnectViewController {
 
         // Uses existing peer ID object if already created (recommended per Apple docs)
         if let pastPeerIDData = UserDefaults.standard.data(forKey: "PeerID"),
-            let lastPeerID = NSKeyedUnarchiver.unarchiveObject(with: pastPeerIDData) as? MCPeerID,
+            let lastPeerID = try? NSKeyedUnarchiver.unarchivedObject(ofClass: MCPeerID.self,
+                                                                from: pastPeerIDData),
             lastPeerID.displayName == playerName {
             peerID = lastPeerID
         } else {
@@ -91,8 +92,10 @@ internal class MPCConnectViewController: ConnectViewController {
             UserDefaults.standard.set(true, forKey: "AttemptingMCPeerIDCreation")
             peerID = MCPeerID(displayName: playerName)
             UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
-            if let peerID = peerID {
-                let data = NSKeyedArchiver.archivedData(withRootObject: peerID)
+            if let peerID = peerID,
+                let data = try? NSKeyedArchiver.archivedData(withRootObject: peerID,
+            requiringSecureCoding: true) {
+
                 UserDefaults.standard.set(data, forKey: "PeerID")
             }
         }
@@ -152,7 +155,12 @@ internal class MPCConnectViewController: ConnectViewController {
         }
     }
 
-    // MARK: - State Changes
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        hostNameLabel.textColor = .wkrSubtitleTextColor(for: traitCollection)
+    }
+
+    // MARK: - State Changes -
 
     func stopAdvertising() {
         advertiser?.stopAdvertisingPeer()
@@ -189,7 +197,11 @@ internal class MPCConnectViewController: ConnectViewController {
             }
         }
 
-        let nav = UINavigationController(rootViewController: controller)
+        let nav = WKRUINavigationController(rootViewController: controller)
+        if #available(iOS 13.0, *) {
+            nav.isModalInPresentation = true
+            nav.modalPresentationStyle = .fullScreen
+        }
         present(nav, animated: true, completion: nil)
     }
 

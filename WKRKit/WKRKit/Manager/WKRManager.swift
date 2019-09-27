@@ -119,7 +119,6 @@ public class WKRGameManager {
                 resultsUpdate(.resultsInfo(results))
             }
         }
-        
 
         configure(network: peerNetwork)
         peerNetwork.send(object: WKRCodable(self.localPlayer))

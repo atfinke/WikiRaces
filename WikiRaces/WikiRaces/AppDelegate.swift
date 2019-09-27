@@ -12,8 +12,10 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
+#if !targetEnvironment(macCatalyst)
 import Crashlytics
 import FirebaseCore
+#endif
 
 @UIApplicationMain
 internal class AppDelegate: WKRAppDelegate {
@@ -26,12 +28,12 @@ internal class AppDelegate: WKRAppDelegate {
                 fatalError("Failed to get API keys")
         }
 
+        #if !targetEnvironment(macCatalyst)
         Crashlytics.start(withAPIKey: key)
-
         FirebaseApp.configure()
+        #endif
 
         configureConstants()
-        configureAppearance()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showBanHammer),
@@ -51,9 +53,9 @@ internal class AppDelegate: WKRAppDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window = WKRWindow(frame: UIScreen.main.bounds)
         let controller = MenuViewController()
-        let nav = UINavigationController(rootViewController: controller)
+        let nav = WKRUINavigationController(rootViewController: controller)
         nav.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
@@ -61,7 +63,7 @@ internal class AppDelegate: WKRAppDelegate {
         return true
     }
 
-    // MARK: - Logging
+    // MARK: - Logging -
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
@@ -71,7 +73,8 @@ internal class AppDelegate: WKRAppDelegate {
     }
 
     private func logInterfaceMode() {
-        let mode = WKRUIStyle.isDark ? "Dark" : "Light"
+        guard let traitCollection = window?.traitCollection else { return }
+        let mode = WKRUIStyle.isDark(traitCollection) ? "Dark" : "Light"
         PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
     }
 

@@ -95,9 +95,6 @@ class MenuView: UIView {
     init() {
         super.init(frame: .zero)
 
-        backgroundColor = UIColor.wkrBackgroundColor
-        UIApplication.shared.keyWindow?.backgroundColor = UIColor.wkrBackgroundColor
-
         let recognizer = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizerFired))
         recognizer.numberOfTapsRequired = 2
         recognizer.numberOfTouchesRequired = 2
@@ -105,10 +102,8 @@ class MenuView: UIView {
         titleLabel.isUserInteractionEnabled = true
 
         topView.translatesAutoresizingMaskIntoConstraints = false
-        topView.backgroundColor = UIColor.wkrMenuTopViewColor
         addSubview(topView)
 
-        bottomView.backgroundColor = UIColor.wkrMenuBottomViewColor
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(bottomView)
 
@@ -151,6 +146,14 @@ class MenuView: UIView {
     //swiftlint:disable:next function_body_length
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        bottomView.backgroundColor = .wkrMenuBottomViewColor(for: traitCollection)
+
+        let textColor: UIColor = .wkrTextColor(for: traitCollection)
+        titleLabel.textColor = textColor
+        subtitleLabel.textColor = textColor
+        localOptionsBackButton.tintColor = textColor
+        localOptionsBackButton.layer.borderColor = textColor.cgColor
 
         // Button Styles
 

@@ -8,10 +8,11 @@
 
 import Foundation
 import WKRKit
+import WKRUIKit
 
 extension GameViewController {
 
-    // MARK: - WKRGameManager
+    // MARK: - WKRGameManager -
 
     func setupGameManager() {
         gameManager = WKRGameManager(networkConfig: networkConfig,
@@ -168,7 +169,7 @@ extension GameViewController {
         #endif
     }
 
-    // MARK: - Controllers
+    // MARK: - Controllers -
 
     func resetActiveControllers() {
         alertController = nil
@@ -198,7 +199,7 @@ extension GameViewController {
         }
     }
 
-    // MARK: - Transitions
+    // MARK: - Transitions -
 
     private func transition(to state: WKRGameState, completion: @escaping () -> Void) {
         guard state != gameState else {
@@ -259,9 +260,14 @@ extension GameViewController {
 
         self.votingViewController = controller
 
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
+        if #available(iOS 13.0, *) {
+            navController.isModalInPresentation = true
+            navController.modalPresentationStyle = .overFullScreen
+        }
+
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
             self?.activityIndicatorView.alpha = 0.0
@@ -317,9 +323,15 @@ extension GameViewController {
 
         self.resultsViewController = controller
 
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
+
+        if #available(iOS 13.0, *) {
+            navController.isModalInPresentation = true
+            navController.modalPresentationStyle = .overFullScreen
+        }
+
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
             self?.activityIndicatorView.alpha = 0.0
@@ -350,7 +362,7 @@ extension GameViewController {
         }
     }
 
-    // MARK: - Log Final Votes
+    // MARK: - Log Final Votes -
 
     private func logFinalVotes() {
         guard networkConfig.isHost, let votingInfo = gameManager.voteInfo else { return }

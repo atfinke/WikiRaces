@@ -16,14 +16,15 @@ public class WKRUILabel: UILabel {
     public override var text: String? {
         didSet {
             if let text = text?.uppercased() {
-                super.attributedText = NSAttributedString(string: text, spacing: spacing)
+                super.attributedText = NSAttributedString(string: text,
+                                                          spacing: spacing)
             } else {
                 super.attributedText = nil
             }
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     public init(spacing: Double = 2.0) {
         self.spacing = spacing
@@ -34,4 +35,10 @@ public class WKRUILabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        textColor =  .wkrTextColor(for: traitCollection)
+    }
 }

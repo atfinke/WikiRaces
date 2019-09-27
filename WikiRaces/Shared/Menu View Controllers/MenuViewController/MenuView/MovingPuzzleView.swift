@@ -17,7 +17,6 @@ class MovingPuzzleView: UIView, UIScrollViewDelegate {
     init() {
         super.init(frame: .zero)
 
-        backgroundColor = UIColor.wkrMenuPuzzleViewColor
         translatesAutoresizingMaskIntoConstraints = false
 
         innerPuzzleView.delegate = self
@@ -50,6 +49,15 @@ class MovingPuzzleView: UIView, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - View Life Cycle -
+
+       public override func layoutSubviews() {
+           super.layoutSubviews()
+           backgroundColor = .wkrMenuPuzzleViewColor(for: traitCollection)
+       }
+
+    // MARK: - UIScrollViewDelegate -
+
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let contentOffset = innerPuzzleView.contentOffset.x
         if contentOffset > innerPuzzleView.contentSize.width * 0.8 {
@@ -57,6 +65,8 @@ class MovingPuzzleView: UIView, UIScrollViewDelegate {
         }
         PlayerAnonymousMetrics.log(event: .puzzleViewScrolled)
     }
+
+    // MARK: - Helpers -
 
     private func animateContentOffsetReset() {
         UIView.animate(withDuration: 0.25,

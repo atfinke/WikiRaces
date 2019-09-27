@@ -12,13 +12,13 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-#if !MULTIWINDOWDEBUG
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
 #endif
 
 internal class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     enum PeerState: String {
         case found
@@ -32,7 +32,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         case startMatch(isSolo: Bool)
         case cancel
     }
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
@@ -41,7 +41,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         })
     }
 
-    #if !MULTIWINDOWDEBUG
+    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var peersConnectTraces = [MCPeerID: Trace]()
     #endif
 
@@ -51,8 +51,9 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     var browser: MCNearbyServiceBrowser?
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
+    private let activityView = UIActivityIndicatorView(style: .gray)
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,9 +75,6 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                                           action: #selector(startMatch(_:)))
         startButton.isEnabled = false
         navigationItem.rightBarButtonItem = startButton
-        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
-
-        tableView.backgroundColor = WKRUIStyle.isDark ? UIColor.wkrBackgroundColor : UIColor.groupTableViewBackground
 
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
@@ -100,7 +98,12 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
-    // MARK: - Actions
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        activityView.color = .wkrActivityIndicatorColor(for: traitCollection)
+    }
+
+    // MARK: - Actions -
 
     @objc
     func cancelMatch(_ sender: Any) {
@@ -117,8 +120,6 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
         tableView.isUserInteractionEnabled = false
 
-        let activityView = UIActivityIndicatorView(style: .gray)
-        activityView.color = UIColor.wkrActivityIndicatorColor
         activityView.sizeToFit()
         activityView.startAnimating()
 
@@ -189,7 +190,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     }
 
     func performaceTrace(peerID: MCPeerID, newState: PeerState?) {
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 
         let hostInviteResponseTraceName = "Host Invite Response Trace"
         let hostInviteJoingTraceName = "Host Invite Joining Trace"
@@ -214,7 +215,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         #endif
     }
 
-    // MARK: - MCNearbyServiceBrowserDelegate
+    // MARK: - MCNearbyServiceBrowserDelegate -
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
@@ -239,7 +240,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         }
     }
 
-    // MARK: - MCSessionDelegate
+    // MARK: - MCSessionDelegate -
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DispatchQueue.main.async {
@@ -264,7 +265,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }
 
-    // MARK: - Unused MCSessionDelegate
+    // MARK: - Unused MCSessionDelegate -
 
     func session(_ session: MCSession,
                  didReceive stream: InputStream,

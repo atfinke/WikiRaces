@@ -10,7 +10,7 @@ import GameKit
 
 extension MenuViewController: GKGameCenterControllerDelegate {
 
-    // MARK: - Game Center
+    // MARK: - Game Center -
 
     /// Attempts Game Center login
     func attemptGlobalAuthentication() {
@@ -34,7 +34,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         }
     }
 
-    // MARK: - GKGameCenterControllerDelegate
+    // MARK: - GKGameCenterControllerDelegate -
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
@@ -43,7 +43,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         }
     }
 
-    // MARK: - Other
+    // MARK: - Other -
 
     func presentGameKitAuthAlert() {
         let title = "Global Races Unavailable"

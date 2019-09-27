@@ -17,7 +17,7 @@ import FirebasePerformance
 
 extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
 
-    // MARK: - MCSessionDelegate
+    // MARK: - MCSessionDelegate -
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         func start() {
@@ -56,7 +56,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                     }
                 })
 
-                #if !MULTIWINDOWDEBUG
+                #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                 self.connectingTrace?.stop()
                 self.connectingTrace = nil
                 #endif
@@ -90,7 +90,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         updateDescriptionLabel(to: "WAITING FOR INVITE")
     }
 
-    // MARK: - MCAdvertiserAssistantDelegate
+    // MARK: - MCAdvertiserAssistantDelegate -
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         let info = "didNotStartAdvertisingPeer: " + error.localizedDescription
@@ -153,7 +153,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         }
     }
 
-    // MARK: - User Actions
+    // MARK: - User Actions -
 
     /// Accepts the displayed invite
     @objc
@@ -173,7 +173,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         stopAdvertising()
 
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         connectingTrace = Performance.startTrace(name: "Player Connecting Trace")
         #endif
     }

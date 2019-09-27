@@ -22,9 +22,6 @@ internal class MPCHostPeerStateCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        backgroundColor = UIColor.wkrBackgroundColor
-
-        peerLabel.textColor = UIColor.wkrTextColor
         peerLabel.textAlignment = .left
         peerLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         peerLabel.numberOfLines = 0
@@ -32,7 +29,6 @@ internal class MPCHostPeerStateCell: UITableViewCell {
         addSubview(peerLabel)
 
         detailLabel.textAlignment = .right
-        detailLabel.textColor = UIColor.wkrTextColor
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
@@ -57,7 +53,8 @@ internal class MPCHostPeerStateCell: UITableViewCell {
             leftMarginConstraint,
             peerLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             peerLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 25),
-            peerLabel.rightAnchor.constraint(lessThanOrEqualTo: detailLabel.leftAnchor, constant: -10),
+            peerLabel.rightAnchor.constraint(lessThanOrEqualTo: detailLabel.leftAnchor,
+                                             constant: -10),
             peerLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
 
             rightMarginConstraint,
@@ -69,4 +66,14 @@ internal class MPCHostPeerStateCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        peerLabel.textColor = textColor
+        detailLabel.textColor = textColor
+    }
+
 }

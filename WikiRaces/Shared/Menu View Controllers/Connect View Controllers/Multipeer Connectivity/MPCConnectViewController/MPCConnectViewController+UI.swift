@@ -10,17 +10,15 @@ import UIKit
 
 extension MPCConnectViewController {
 
-    // MARK: - Interface
+    // MARK: - Interface -
 
     func setupInviteInterface() {
         inviteView.alpha = 0.0
-        inviteView.backgroundColor = UIColor.wkrBackgroundColor
         inviteView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(inviteView)
 
         hostNameLabel.text = ""
         hostNameLabel.numberOfLines = 0
-        hostNameLabel.textColor = UIColor.wkrLightTextColor
         hostNameLabel.textAlignment = .center
         hostNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         hostNameLabel.translatesAutoresizingMaskIntoConstraints = false

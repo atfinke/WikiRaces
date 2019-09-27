@@ -22,12 +22,6 @@ extension MenuViewController {
                                                 message: message,
                                                 preferredStyle: .alert)
 
-        let darkAction = UIAlertAction(title: "Toggle Dark UI", style: .default, handler: { _ in
-            WKRUIStyle.isDark = !WKRUIStyle.isDark
-            exit(1998)
-        })
-        alertController.addAction(darkAction)
-
         let buildAction = UIAlertAction(title: "Show Build Info", style: .default, handler: { _ in
             self.showDebugBuildInfo()
         })
@@ -49,7 +43,7 @@ extension MenuViewController {
 
         let appBundleInfo = Bundle.main.infoDictionary
         let kitBundleInfo = Bundle(for: WKRGameManager.self).infoDictionary
-        let interfaceBundleInfo = Bundle(for: WKRUIStyle.self).infoDictionary
+        let interfaceBundleInfo = Bundle(for: WKRUIWebView.self).infoDictionary
 
         guard let appBundleVersion = appBundleInfo?[versionKey] as? String,
             let appBundleShortVersion = appBundleInfo?[shortVersionKey] as? String,
@@ -71,7 +65,7 @@ extension MenuViewController {
             ("WKRUIKit Constants Version", "\(WKRUIKitConstants.current.version)")
         ]
 
-        let navController = UINavigationController(rootViewController: debugInfoController)
+        let navController = WKRUINavigationController(rootViewController: debugInfoController)
         present(navController, animated: true, completion: nil)
     }
 
@@ -85,7 +79,7 @@ extension MenuViewController {
                 return lhs.key.lowercased() < rhs.key.lowercased()
         }
 
-        let navController = UINavigationController(rootViewController: debugInfoController)
+        let navController = WKRUINavigationController(rootViewController: debugInfoController)
         present(navController, animated: true, completion: nil)
     }
 }

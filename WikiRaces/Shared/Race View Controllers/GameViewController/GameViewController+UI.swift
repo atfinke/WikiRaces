@@ -13,17 +13,17 @@ extension GameViewController {
 
     // MARK: - Interface
 
+    #if !targetEnvironment(macCatalyst)
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
+    #endif
 
     func setupInterface() {
         guard let navigationController = navigationController,
             let navigationView = navigationController.view else {
                 fatalError("No navigation controller view")
         }
-
-        view.backgroundColor = UIColor.wkrBackgroundColor
 
         helpBarButtonItem = UIBarButtonItem(image: UIImage(named: "HelpFlag")!,
                                             style: .plain,
@@ -44,7 +44,6 @@ extension GameViewController {
         } else {
             navigationController.setNavigationBarHidden(true, animated: false)
         }
-        navigationController.navigationBar.barStyle = UIBarStyle.wkrStyle
         navigationView.addSubview(navigationBarBottomLine)
 
         setupElements()
@@ -71,14 +70,12 @@ extension GameViewController {
 
     private func setupElements() {
         navigationBarBottomLine.alpha = 0
-        navigationBarBottomLine.backgroundColor = UIColor.wkrTextColor
         navigationBarBottomLine.translatesAutoresizingMaskIntoConstraints = false
 
         connectingLabel.translatesAutoresizingMaskIntoConstraints = false
         connectingLabel.alpha = 0.0
         connectingLabel.text = "CONNECTING"
         connectingLabel.textAlignment = .center
-        connectingLabel.textColor = .wkrTextColor
         connectingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         view.addSubview(connectingLabel)
 
@@ -112,7 +109,6 @@ extension GameViewController {
         view.addSubview(webView)
         view.bringSubviewToFront(progressView)
         webView.progressView = progressView
-        webView.backgroundColor = UIColor.wkrBackgroundColor
 
         let constraints: [NSLayoutConstraint] = [
             webView.topAnchor.constraint(equalTo: view.topAnchor),

@@ -10,14 +10,14 @@ import GameKit
 
 class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     static let shared = GlobalRaceHelper()
     var lastInvite: GKInvite?
     var isHandlerSetup = false
     var didReceiveInvite: (() -> Void)?
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     func authenticate(completion: ((UIViewController?, Error?, _ forceShowErrorMessage: Bool) -> Void)?) {
         guard !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
@@ -40,7 +40,7 @@ class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
         }
     }
 
-    // MARK: - GKLocalPlayerListener
+    // MARK: - GKLocalPlayerListener -
 
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
         PlayerDatabaseStat.gkInvitedToMatch.increment()

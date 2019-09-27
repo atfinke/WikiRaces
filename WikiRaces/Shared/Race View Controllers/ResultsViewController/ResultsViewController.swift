@@ -12,14 +12,14 @@ import WKRUIKit
 
 internal class ResultsViewController: CenteredTableViewController {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     enum ListenerUpdate {
         case readyButtonPressed
         case quit
     }
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     var historyViewController: HistoryViewController?
@@ -40,7 +40,7 @@ internal class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - Game States
+    // MARK: - Game States -
 
     var localPlayer: WKRPlayer?
 
@@ -83,7 +83,7 @@ internal class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -124,11 +124,7 @@ internal class ResultsViewController: CenteredTableViewController {
                                                             action: #selector(doneButtonPressed))
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIStatusBarStyle.wkrStatusBarStyle
-    }
-
-    // MARK: - Game Updates
+    // MARK: - Game Updates -
 
     private func updatedState(oldState: WKRGameState) {
         if state == .results || state == .hostResults {
@@ -217,7 +213,7 @@ internal class ResultsViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     private func updatedResultsImage() {
         guard let image = resultImage, UserDefaults.standard.bool(forKey: "force_save_result_image") else { return }

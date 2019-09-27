@@ -26,14 +26,21 @@ internal class HistoryTableViewStatsCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
 
-        textLabel?.textColor = .wkrTextColor
-        detailTextLabel?.textColor = .wkrTextColor
         detailTextLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         isUserInteractionEnabled = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        textLabel?.textColor = textColor
+        detailTextLabel?.textColor = textColor
     }
 
 }

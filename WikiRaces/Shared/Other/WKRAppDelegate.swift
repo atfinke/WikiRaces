@@ -14,7 +14,7 @@ import WKRUIKit
 
 internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    var window: WKRWindow?
 
     func configureConstants() {
         WKRKitConstants.updateConstants()
@@ -22,20 +22,6 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
         // Don't be that app that prompts people when they first open it
         SKStoreReviewController.shouldPromptForRating = false
-    }
-
-    func configureAppearance() {
-        UINavigationBar.appearance().tintColor = UIColor.wkrTextColor
-
-        UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: UIColor.wkrTextColor,
-            .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
-        ]
-        window?.backgroundColor = UIColor.wkrBackgroundColor
-
-        if WKRUIStyle.isDark {
-            UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self]).textColor = UIColor.white
-        }
     }
 
     func cleanTempDirectory() {

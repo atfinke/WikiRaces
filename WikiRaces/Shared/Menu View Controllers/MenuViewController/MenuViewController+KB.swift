@@ -10,7 +10,7 @@ import UIKit
 
 extension MenuViewController {
 
-    // MARK: - Keyboard Support
+    // MARK: - Keyboard Support -
 
     override var keyCommands: [UIKeyCommand]? {
         return [

@@ -16,8 +16,8 @@ public class WKRUICenteredTableView: UITableView {
         super.willMove(toSuperview: newSuperview)
         allowsSelection = false
         alwaysBounceVertical = false
-        separatorColor = UIColor.clear
-        backgroundColor = UIColor.clear
+        separatorColor = .clear
+        backgroundColor = .clear
     }
 
     public override func layoutSubviews() {

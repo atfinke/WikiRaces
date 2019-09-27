@@ -12,7 +12,7 @@ import WKRKit
 
 class PlayerDatabaseMetrics: NSObject {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     private struct ProcessedResults {
         let csvURL: URL
@@ -23,7 +23,7 @@ class PlayerDatabaseMetrics: NSObject {
 
     static let banHammerNotification = Notification.Name("banHammerNotification")
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     static var shared = PlayerDatabaseMetrics()
 
@@ -39,7 +39,7 @@ class PlayerDatabaseMetrics: NSObject {
 
     private var queuedKeyValues = [String: CKRecordValueProtocol]()
 
-    // MARK: - Connecting
+    // MARK: - Connecting -
 
     func connect() {
         #if MULTIWINDOWDEBUG
@@ -118,7 +118,7 @@ class PlayerDatabaseMetrics: NSObject {
         })
     }
 
-    // MARK: - Events
+    // MARK: - Events -
 
     func log(value: CKRecordValueProtocol, for key: String) {
         DispatchQueue.main.async {

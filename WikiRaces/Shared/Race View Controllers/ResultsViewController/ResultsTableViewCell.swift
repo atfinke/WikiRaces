@@ -58,31 +58,27 @@ internal class ResultsTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        tintColor = UIColor.wkrTextColor
         selectionStyle = .none
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
 
-        playerLabel.textColor = UIColor.wkrTextColor
         playerLabel.textAlignment = .left
         playerLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         playerLabel.numberOfLines = 0
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(playerLabel)
 
-        subtitleLabel.textColor = UIColor.wkrTextColor
         subtitleLabel.textAlignment = .left
         subtitleLabel.numberOfLines = 1
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(subtitleLabel)
 
         detailLabel.textAlignment = .right
-        detailLabel.textColor = UIColor.lightGray
+        detailLabel.textColor = .lightGray
         detailLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
 
-        activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.stopAnimating()
         activityIndicatorView.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -94,6 +90,17 @@ internal class ResultsTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        tintColor = textColor
+        playerLabel.textColor = textColor
+        subtitleLabel.textColor = textColor
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
 
     // MARK: - Constraints
@@ -244,9 +251,9 @@ internal class ResultsTableViewCell: UITableViewCell {
         subtitleString += sessionResults.isTied ? " (Tied)" : ""
 
         update(playerName: NSAttributedString(string: sessionResults.profile.name),
-                    detail: detailString,
-                    subtitle: NSAttributedString(string: subtitleString),
-                    animated: false)
+               detail: detailString,
+               subtitle: NSAttributedString(string: subtitleString),
+               animated: false)
     }
 
     // MARK: - Other

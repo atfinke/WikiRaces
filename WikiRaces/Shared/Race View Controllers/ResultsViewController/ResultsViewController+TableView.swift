@@ -8,6 +8,7 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
 
@@ -56,7 +57,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         historyViewController = controller
         controller.player = resultsInfo.raceRankingsPlayer(at: indexPath.row)
 
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 

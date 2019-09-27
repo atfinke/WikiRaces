@@ -11,7 +11,7 @@ import GameKit.GKLocalPlayer
 
 extension MenuView {
 
-    // MARK: - Actions
+    // MARK: - Actions -
 
     /// Join button pressed
     @objc
@@ -109,7 +109,7 @@ extension MenuView {
         medalView.showMedals()
     }
 
-    // MARK: - Menu Animations
+    // MARK: - Menu Animations -
 
     /// Animates the views on screen
     func animateMenuIn(completion: (() -> Void)? = nil) {
