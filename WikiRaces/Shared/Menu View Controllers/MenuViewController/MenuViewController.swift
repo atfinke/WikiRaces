@@ -76,7 +76,7 @@ internal class MenuViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
-
+        
         // adjusts views before animation if rotation occured
         menuView.setNeedsLayout()
         menuView.layoutIfNeeded()
@@ -159,8 +159,7 @@ internal class MenuViewController: UIViewController {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             let controller = GameViewController()
             let nav = WKRUINavigationController(rootViewController: controller)
-            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!
-            controller.prepareForScreenshots(for: url)
+            nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)
         } else if GKLocalPlayer.local.isAuthenticated {
             UIApplication.shared.isIdleTimerDisabled = true

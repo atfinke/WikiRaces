@@ -20,7 +20,6 @@ extension MenuView {
         PlayerAnonymousMetrics.log(event: .pressedLocalOptions)
 
         UISelectionFeedbackGenerator().selectionChanged()
-
         animateOptionsOutAndTransition(to: .localOptions)
     }
 
@@ -32,7 +31,7 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        guard GKLocalPlayer.local.isAuthenticated else {
+        guard GKLocalPlayer.local.isAuthenticated || UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
             self.listenerUpdate?(.presentGlobalAuth)
             return
         }
