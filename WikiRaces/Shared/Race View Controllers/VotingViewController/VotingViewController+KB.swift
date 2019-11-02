@@ -10,7 +10,7 @@ import UIKit
 
 extension VotingViewController {
 
-    // MARK: - Keyboard Support
+    // MARK: - Keyboard Support -
 
     override var keyCommands: [UIKeyCommand]? {
         var commands = [UIKeyCommand]()

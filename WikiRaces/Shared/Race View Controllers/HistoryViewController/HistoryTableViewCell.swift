@@ -17,7 +17,7 @@ internal class HistoryTableViewCell: UITableViewCell {
 
     private let linkHereLabel = UILabel()
     private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
-    private var linkLabelTopConstraint: NSLayoutConstraint!
+    private var linkLabelTopConstraint: NSLayoutConstraint?
 
     var isShowingActivityIndicatorView: Bool = false {
         didSet {
@@ -33,9 +33,8 @@ internal class HistoryTableViewCell: UITableViewCell {
     var isLinkHere: Bool = true {
         didSet {
             linkHereLabel.text = isLinkHere ? "Link Here" : nil
-            linkLabelTopConstraint.constant = isLinkHere ? 5 : 0
+            linkLabelTopConstraint?.constant = isLinkHere ? 5 : 0
         }
-
     }
 
     static let reuseIdentifier = "reuseIdentifier"
@@ -107,8 +106,9 @@ internal class HistoryTableViewCell: UITableViewCell {
                                                        multiplier: 1.0,
                                                        constant: 0.0)
 
-        linkLabelTopConstraint = linkHereLabel.topAnchor.constraint(equalTo: pageLabel.bottomAnchor,
-                                                                    constant: 5)
+        let linkLabelTopConstraint = linkHereLabel.topAnchor.constraint(equalTo: pageLabel.bottomAnchor,
+                                                                        constant: 5)
+        self.linkLabelTopConstraint = linkLabelTopConstraint
 
         let constraints = [
             leftMarginConstraint,
@@ -117,7 +117,7 @@ internal class HistoryTableViewCell: UITableViewCell {
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: detailLabel.leftAnchor, constant: -15),
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: activityIndicatorView.leftAnchor, constant: -15),
 
-            linkLabelTopConstraint!,
+            linkLabelTopConstraint,
             linkHereLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             linkHereLabel.leftAnchor.constraint(equalTo: pageLabel.leftAnchor),
             linkHereLabel.rightAnchor.constraint(equalTo: pageLabel.rightAnchor),

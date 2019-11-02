@@ -26,7 +26,7 @@ class WikiRacesScreenshots: XCTestCase {
     }
 
     func testExample() {
-        sleep(5)
+        sleep(2)
         XCUIDevice.shared.orientation = .landscapeLeft
         snapshot("1_portrait")
         XCUIApplication().buttons["GLOBAL RACE"].tap()

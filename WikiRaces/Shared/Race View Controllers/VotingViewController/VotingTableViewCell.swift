@@ -12,13 +12,13 @@ import WKRKit
 
 internal class VotingTableViewCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private let titleLabel = UILabel()
     private let countLabel = UILabel()
     private let stackView = UIStackView()
 
-    // MARK: - Property Observers
+    // MARK: - Property Observers -
 
     override var isSelected: Bool {
         didSet {
@@ -43,7 +43,7 @@ internal class VotingTableViewCell: UITableViewCell {
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

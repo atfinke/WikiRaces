@@ -13,7 +13,6 @@ import WKRKit
 import WKRUIKit
 
 #if !targetEnvironment(macCatalyst)
-import Crashlytics
 import FirebaseCore
 #endif
 
@@ -23,14 +22,9 @@ internal class AppDelegate: WKRAppDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
-            let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
-                fatalError("Failed to get API keys")
-        }
-
         #if !targetEnvironment(macCatalyst)
-        Crashlytics.start(withAPIKey: key)
         FirebaseApp.configure()
+        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
         #endif
 
         configureConstants()
