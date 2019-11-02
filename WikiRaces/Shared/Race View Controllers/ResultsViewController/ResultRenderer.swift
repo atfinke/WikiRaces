@@ -12,7 +12,7 @@ import WKRKit
 //swiftlint:disable function_body_length
 class ResultRenderer {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     private class RenderView: UIView {
         var onLayout: (() -> Void)?
@@ -22,12 +22,12 @@ class ResultRenderer {
         }
     }
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     let tintColor = #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0)
     private var isRendering = false
 
-    // MARK: - Rendering
+    // MARK: - Rendering -
 
     func render(with results: WKRResultsInfo,
                 for localPlayer: WKRPlayer,

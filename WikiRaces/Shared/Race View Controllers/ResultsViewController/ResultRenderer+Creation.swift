@@ -12,7 +12,7 @@ import WKRKit
 //swiftlint:disable function_body_length cyclomatic_complexity
 extension ResultRenderer {
 
-    // MARK: - Section Creation
+    // MARK: - Section Creation -
 
     func createHeaderView(title: String) -> UIView {
         let headerView = UIView()
@@ -122,6 +122,7 @@ extension ResultRenderer {
             let nameLabel = UILabel()
             nameLabel.translatesAutoresizingMaskIntoConstraints = false
             nameLabel.numberOfLines = 0
+            nameLabel.textColor = .black
 
             var placeString = (index + 1).description + "th"
             if index == 0 {
@@ -227,6 +228,7 @@ extension ResultRenderer {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.numberOfLines = 0
+            label.textColor = .black
 
             let num = index + 1
             let indexString = num.description + ". "
