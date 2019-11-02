@@ -134,7 +134,11 @@ internal class ResultsViewController: CenteredTableViewController {
         } else {
             tableView.isUserInteractionEnabled = false
 
-            if presentedViewController != nil {
+            if let hack = presentedViewController, hack.title == "Hack" {
+                hack.dismiss(animated: true) { [weak self] in
+                    self?.dismiss(animated: false, completion: nil)
+                }
+            } else if presentedViewController != nil {
                 dismiss(animated: true, completion: nil)
             }
 
