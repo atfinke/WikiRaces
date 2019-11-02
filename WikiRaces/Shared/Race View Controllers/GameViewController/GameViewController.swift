@@ -80,12 +80,14 @@ internal class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            setupInterface()
+            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World_Monorail_System")!
+            prepareForScreenshots(for: url)
+        } else {
             setupGameManager()
+            setupInterface()
         }
-
-        setupInterface()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -123,6 +125,7 @@ internal class GameViewController: UIViewController {
         navigationBarBottomLine.backgroundColor = textColor
         connectingLabel.textColor = textColor
         view.backgroundColor = .wkrBackgroundColor(for: traitCollection)
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
 
     private func initalConfiguration() {
@@ -160,6 +163,10 @@ internal class GameViewController: UIViewController {
         default:
             break
         }
+    }
+
+    deinit {
+        gameManager.alertView.removeFromSuperview()
     }
 
     // MARK: - User Actions
