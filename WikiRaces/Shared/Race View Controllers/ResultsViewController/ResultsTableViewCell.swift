@@ -11,7 +11,7 @@ import WKRKit
 
 internal class ResultsTableViewCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private let playerLabel = UILabel()
     private let detailLabel = UILabel()
@@ -32,7 +32,11 @@ internal class ResultsTableViewCell: UITableViewCell {
         didSet {
             guard isShowingCheckmark != oldValue else { return }
             if isShowingCheckmark {
-                rightMarginConstraint?.constant = -20
+                if #available(iOS 13.0, *) {
+                    rightMarginConstraint?.constant = -30
+                } else {
+                    rightMarginConstraint?.constant = -20
+                }
             } else {
                 rightMarginConstraint?.constant = 0
             }
@@ -53,7 +57,7 @@ internal class ResultsTableViewCell: UITableViewCell {
 
     private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -103,7 +107,7 @@ internal class ResultsTableViewCell: UITableViewCell {
         activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
 
-    // MARK: - Constraints
+    // MARK: - Constraints -
 
     private func setupConstraints() {
         let leftMarginConstraint = NSLayoutConstraint(item: playerLabel,
@@ -152,7 +156,7 @@ internal class ResultsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 
-    // MARK: - Updating
+    // MARK: - Updating -
 
     private func update(playerName: NSAttributedString,
                         detail: String,
@@ -256,7 +260,7 @@ internal class ResultsTableViewCell: UITableViewCell {
                animated: false)
     }
 
-    // MARK: - Other
+    // MARK: - Other -
 
     func playerNameAttributedString(for player: WKRPlayer) -> NSAttributedString {
         if let isCreator = player.isCreator, isCreator {
