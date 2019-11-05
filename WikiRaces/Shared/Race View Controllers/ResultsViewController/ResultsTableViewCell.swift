@@ -210,7 +210,7 @@ internal class ResultsTableViewCell: UITableViewCell {
             let range = NSRange(location: pageTitle.count, length: detail.count)
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor.lightGray,
-                .font: UIFont.systemFont(ofSize: 15)
+                .font: UIFont.systemFont(ofSize: 13, weight: .semibold)
             ]
             pageTitleAttributedString.addAttributes(attributes, range: range)
         }

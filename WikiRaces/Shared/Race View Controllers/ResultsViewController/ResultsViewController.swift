@@ -96,6 +96,7 @@ internal class ResultsViewController: CenteredTableViewController {
         guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
         descriptionLabel.text = "WAITING FOR PLAYERS TO FINISH"
 
+        tableView.alpha = 0.0
         tableView.isUserInteractionEnabled = true
         tableView.register(ResultsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.estimatedRowHeight = 150
@@ -122,6 +123,13 @@ internal class ResultsViewController: CenteredTableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
                                                             target: self,
                                                             action: #selector(doneButtonPressed))
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animate(withDuration: 0.4, delay: 0.2, animations: {
+            self.tableView.alpha = 1.0
+        })
     }
 
     // MARK: - Game Updates -

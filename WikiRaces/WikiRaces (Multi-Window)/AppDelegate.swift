@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRUIKit
 
 @UIApplicationMain
 internal class AppDelegate: WKRAppDelegate {
