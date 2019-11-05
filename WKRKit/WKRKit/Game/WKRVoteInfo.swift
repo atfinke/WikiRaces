@@ -71,36 +71,24 @@ public struct WKRVoteInfo: Codable, Equatable {
             let page = playerVotes[player.key],
             pagesWithMostVotes.contains(page) {
 
-            /*
-             P1 Points = player with lowest points
-             P2 Points = player with next lowest points
-             Break Tie Chance = chance that p1 will break the tie
-             Total Chance = Probability p1 article choosen (break tie chance + random chance)
-             - x way = x number of articles tied with most votes
+            let lowestScore = player.value
+            let secondLowestScore = lowestScoringPlayers[1].value
+            let diff = Double(secondLowestScore) - Double(lowestScore)
+            let extraChance: Double
+            if diff < 2 {
+                extraChance = 0
+            } else  {
+                extraChance = min((diff - 2) * 0.2, 0.8)
+            }
 
-             +-----------+-----------+------------------+----------------------+----------------------+
-             | P1 Points | P2 Points | Break Tie Chance | Total Chance (2 way) | Total Chance (3 way) |
-             +-----------+-----------+------------------+----------------------+----------------------+
-             |     0...4 |        10 | 60%              | 80%                  | 73.2%                |
-             |         5 |        10 | 50%              | 75%                  | 66.5%                |
-             |         6 |        10 | 40%              | 70%                  | 59.8%                |
-             |         7 |        10 | 30%              | 65%                  | 53.1%                |
-             |         8 |        10 | 20%              | 60%                  | 46.4%                |
-             |         9 |        10 | 10%              | 55%                  | 39.7%                |
-             |        10 |        10 | 0%               | 50%                  | 33%                  |
-             +-----------+-----------+------------------+----------------------+----------------------+
-            */
-            let nextLowestPoints = Double(lowestScoringPlayers[1].value)
-            let inversePercentChance = max(Double(player.value) / nextLowestPoints, 0.4)
-
-            let chance = (1.0 - inversePercentChance) + (1 - (1.0 - inversePercentChance)) / 2
+            let totalChance = extraChance + (1 - extraChance) * 0.5
             var attributes: [String: Any] = [
                 "TiedCount": pagesWithMostVotes.count,
-                "Chance": chance,
-                "RawPointDiff": Int(nextLowestPoints) - player.value
+                "Chance": totalChance,
+                "RawPointDiff": Int(diff)
             ]
 
-            if Double.random(in: 0..<1) > inversePercentChance {
+            if Double.random(in: 0..<1) <= extraChance {
                 attributes["BrokeTie"] = 1
                 return (page, WKRLogEvent(type: .votingArticlesWeightedTiebreak,
                                           attributes: attributes))
