@@ -76,6 +76,7 @@ class ConnectViewController: UIViewController {
         cancelButton.setTitleColor(textColor, for: .normal)
         descriptionLabel.textColor = textColor
         activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
+        view.backgroundColor = .wkrBackgroundColor(for: traitCollection)
     }
 
     // MARK: - Core Interface -
@@ -194,14 +195,13 @@ class ConnectViewController: UIViewController {
                                         let controller = GameViewController()
                                         controller.networkConfig = networkConfig
                                         let nav = WKRUINavigationController(rootViewController: controller)
+                                        nav.modalPresentationStyle = .fullScreen
                                         nav.modalTransitionStyle = .crossDissolve
                                         if #available(iOS 13.0, *) {
                                             nav.isModalInPresentation = true
-                                            nav.modalPresentationStyle = .fullScreen
                                         }
                                         self.present(nav, animated: true, completion: nil)
             })
         }
     }
-
 }

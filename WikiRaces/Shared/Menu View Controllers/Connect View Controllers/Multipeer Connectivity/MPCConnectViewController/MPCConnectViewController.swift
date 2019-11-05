@@ -198,9 +198,9 @@ internal class MPCConnectViewController: ConnectViewController {
         }
 
         let nav = WKRUINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .fullScreen
         if #available(iOS 13.0, *) {
             nav.isModalInPresentation = true
-            nav.modalPresentationStyle = .fullScreen
         }
         present(nav, animated: true, completion: nil)
     }

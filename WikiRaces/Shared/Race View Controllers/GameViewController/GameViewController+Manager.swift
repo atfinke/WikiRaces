@@ -265,7 +265,6 @@ extension GameViewController {
         navController.modalPresentationStyle = .overCurrentContext
         if #available(iOS 13.0, *) {
             navController.isModalInPresentation = true
-            navController.modalPresentationStyle = .overFullScreen
         }
 
         present(navController, animated: true) { [weak self] in
@@ -326,10 +325,8 @@ extension GameViewController {
         let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
-
         if #available(iOS 13.0, *) {
             navController.isModalInPresentation = true
-            navController.modalPresentationStyle = .overFullScreen
         }
 
         present(navController, animated: true) { [weak self] in
