@@ -14,6 +14,7 @@
 		1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
 		1414280721FC394600C48788 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
 		1414280B21FC437000C48788 /* GameKitConnectViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */; };
+		141854DF2373666A008C988A /* MPCHostAutoInviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141854DE2373666A008C988A /* MPCHostAutoInviteCell.swift */; };
 		141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */; };
 		141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
 		141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */; };
@@ -376,6 +377,7 @@
 		1414280221FC18F600C48788 /* GameKitConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKitConnectViewController.swift; sourceTree = "<group>"; };
 		1414280621FC394600C48788 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
 		1414280A21FC437000C48788 /* GameKitConnectViewController+Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameKitConnectViewController+Match.swift"; sourceTree = "<group>"; };
+		141854DE2373666A008C988A /* MPCHostAutoInviteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCHostAutoInviteCell.swift; sourceTree = "<group>"; };
 		141892F31F60EABC006748F0 /* MPCConnectViewController+Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+Invite.swift"; sourceTree = "<group>"; };
 		141E4CE62200DDD6000A0A15 /* ResultsViewController+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+Actions.swift"; sourceTree = "<group>"; };
 		141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDatabaseMetrics.swift; sourceTree = "<group>"; };
@@ -758,6 +760,7 @@
 				149357E2210E963800F6453A /* MPCHostPeerStateCell.swift */,
 				14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */,
 				14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */,
+				141854DE2373666A008C988A /* MPCHostAutoInviteCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1350,6 +1353,7 @@
 				142A09BE210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				144A1029202FC79B003DB51A /* CenteredTableViewController.swift in Sources */,
 				149357DF210E934300F6453A /* MPCConnectViewController+UI.swift in Sources */,
+				141854DF2373666A008C988A /* MPCHostAutoInviteCell.swift in Sources */,
 				143948C12144CC8C00992850 /* DebugInfoTableViewCell.swift in Sources */,
 				14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				14C6B1F41FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
@@ -1722,7 +1726,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1755,7 +1759,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -28,11 +28,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                       andHide: [inviteView])
         }
 
-        // 1. host context is nil when the invite was from a legacy app version (<= 3.6.2)
-        // 2. Otherwise, make sure that the host sent the start message
-        if hostContext == nil {
-            start()
-        } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
+        if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
             guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
                 let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
                 PlayerAnonymousMetrics.log(event: .error(info))
