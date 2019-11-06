@@ -132,7 +132,7 @@ class WKRKitPageFetcherTests: WKRKitTestCase {
             let testExpectation = expectation(description: "testLinkedPageFetcher")
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                XCTAssertGreaterThan(fetcher.foundURLs.count, 200)
+                XCTAssertGreaterThan(fetcher.foundURLs.count, 400)
                 XCTAssertLessThan(fetcher.foundURLs.count, 800)
                 testExpectation.fulfill()
             }

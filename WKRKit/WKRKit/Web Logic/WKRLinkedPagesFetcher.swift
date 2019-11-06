@@ -80,9 +80,9 @@ internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
     // MARK: - State
 
     func start(for page: WKRPage) {
-        let path = page.url.lastPathComponent
+        let path = page.url.absoluteString.replacingOccurrences(of: "https://en.m.wikipedia.org/wiki", with: "")
         let query = "&namespace=0&limit=500&hidetrans=1"
-        guard let url = URL(string: WKRKitConstants.current.whatLinksHereURLString + "/" + path + query) else { return }
+        guard let url = URL(string: WKRKitConstants.current.whatLinksHereURLString + path + query) else { return }
         load(url: url)
     }
 
