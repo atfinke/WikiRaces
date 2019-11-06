@@ -77,7 +77,7 @@ public struct WKRVoteInfo: Codable, Equatable {
             let extraChance: Double
             if diff < 2 {
                 extraChance = 0
-            } else  {
+            } else {
                 extraChance = min((diff - 2) * 0.2, 0.8)
             }
 

@@ -50,6 +50,18 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     var serviceType: String?
     var browser: MCNearbyServiceBrowser?
 
+    var isAutoInviteOn = false {
+        didSet {
+            if isAutoInviteOn {
+                peers.forEach { peerID, state in
+                    if state == PeerState.found {
+                        self.invite(peerID: peerID)
+                    }
+                }
+            }
+        }
+    }
+
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     private let activityView = UIActivityIndicatorView(style: .gray)
 
@@ -57,7 +69,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "INVITE NEARBY PLAYERS"
+        title = "CREATE RACE"
 
         guard let peerID = peerID, let serviceType = serviceType else {
             fatalError("Required properties peerID or serviceType not set")
@@ -82,6 +94,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                            forCellReuseIdentifier: MPCHostPeerStateCell.reuseIdentifier)
         tableView.register(MPCHostSearchingCell.self,
                            forCellReuseIdentifier: MPCHostSearchingCell.reuseIdentifier)
+        tableView.register(MPCHostAutoInviteCell.self,
+                           forCellReuseIdentifier: MPCHostAutoInviteCell.reuseIdentifier)
         tableView.register(MPCHostSoloCell.self,
                            forCellReuseIdentifier: MPCHostSoloCell.reuseIdentifier)
     }
@@ -237,6 +251,9 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                  withDiscoveryInfo info: [String: String]?) {
         DispatchQueue.main.async {
             self.update(peerID: peerID, to: .found)
+            if self.isAutoInviteOn {
+                self.invite(peerID: peerID)
+            }
         }
     }
 

@@ -76,7 +76,7 @@ internal class MenuViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
-        
+
         // adjusts views before animation if rotation occured
         menuView.setNeedsLayout()
         menuView.layoutIfNeeded()
