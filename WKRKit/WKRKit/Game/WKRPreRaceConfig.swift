@@ -111,18 +111,20 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                     // 3. Make sure page not already in voting list for this race
                     // 4. Make sure page is not a link to a section "/USA#History"
                     // 5. Sometimes removed pages redirect to the Wikipedia homepage.
-                    // 6/7. Make sure link not equal to starting page
+                    // 6. Make sure path in unseen
+                    // 7/8. Make sure link not equal to starting page
                     if !isRedirect,
                         let page = page,
                         !pages.contains(page),
                         !page.url.absoluteString.contains("#"),
                          page.title != "Wikipedia, the free encyclopedia",
+                        finalArticles.contains(page.path),
                         let startingPage = startingPage,
                         startingPage.url != page.url {
                         pages.append(page)
                     } else {
                         logEvents.append(WKRLogEvent(type: .votingArticleValidationFailure,
-                                                     attributes: nil))
+                                                     attributes: ["PagePath": path]))
                     }
                     operation.state = .isFinished
                 }
