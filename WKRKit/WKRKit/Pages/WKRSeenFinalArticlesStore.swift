@@ -67,8 +67,7 @@ public struct WKRSeenFinalArticlesStore {
     }
 
     internal static func addLocalPlayerSeenFinalPages(_ newSeenFinalPages: [WKRPage]) {
-        let paths = newSeenFinalPages.map({ "/" + $0.url.lastPathComponent })
-        let paths = newSeenFinalPages.map({ $0.url.absoluteString.replacingOccurrences(of: "https://en.m.wikipedia.org/wiki", with: "") })
+        let paths = newSeenFinalPages.map({ $0.path })
         var articles = localPlayersSeenFinalArticles
         articles.append(contentsOf: paths)
         localPlayersSeenFinalArticles = Array(Set(articles))
