@@ -50,8 +50,10 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     var serviceType: String?
     var browser: MCNearbyServiceBrowser?
 
-    var isAutoInviteOn = false {
+    private static let isAutoInviteOnKey = "isAutoInviteOnKey"
+    var isAutoInviteOn = UserDefaults.standard.bool(forKey: MPCHostViewController.isAutoInviteOnKey) {
         didSet {
+            UserDefaults.standard.set(isAutoInviteOn, forKey: MPCHostViewController.isAutoInviteOnKey)
             if isAutoInviteOn {
                 peers.forEach { peerID, state in
                     if state == PeerState.found {
