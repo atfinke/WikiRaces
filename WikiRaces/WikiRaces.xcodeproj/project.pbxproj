@@ -89,22 +89,22 @@
 		149FF8821F362BE4000A5D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8811F362BE4000A5D96 /* Assets.xcassets */; };
 		149FF8851F362BE4000A5D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 149FF8831F362BE4000A5D96 /* LaunchScreen.storyboard */; };
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
-		14A35E5F23660823002BCBF6 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E4D23660821002BCBF6 /* FirebaseCore.framework */; };
-		14A35E6023660823002BCBF6 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5023660821002BCBF6 /* GTMSessionFetcher.framework */; };
-		14A35E6123660823002BCBF6 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5123660822002BCBF6 /* GoogleToolboxForMac.framework */; };
-		14A35E6223660823002BCBF6 /* GoogleDataTransportCCTSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5223660822002BCBF6 /* GoogleDataTransportCCTSupport.framework */; };
-		14A35E6323660823002BCBF6 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5323660822002BCBF6 /* FirebaseCoreDiagnostics.framework */; };
-		14A35E6423660823002BCBF6 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5423660822002BCBF6 /* GoogleAppMeasurement.framework */; };
-		14A35E6523660823002BCBF6 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5523660822002BCBF6 /* nanopb.framework */; };
-		14A35E6623660823002BCBF6 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5623660822002BCBF6 /* FirebaseInstanceID.framework */; };
-		14A35E6723660823002BCBF6 /* FirebaseRemoteConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5723660822002BCBF6 /* FirebaseRemoteConfig.framework */; };
-		14A35E6823660823002BCBF6 /* FirebaseABTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5823660822002BCBF6 /* FirebaseABTesting.framework */; };
-		14A35E6923660823002BCBF6 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5923660823002BCBF6 /* FirebaseAnalytics.framework */; };
-		14A35E6A23660823002BCBF6 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5A23660823002BCBF6 /* FIRAnalyticsConnector.framework */; };
-		14A35E6B23660823002BCBF6 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5B23660823002BCBF6 /* GoogleDataTransport.framework */; };
-		14A35E6C23660823002BCBF6 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5C23660823002BCBF6 /* GoogleUtilities.framework */; };
-		14A35E6D23660823002BCBF6 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5D23660823002BCBF6 /* Protobuf.framework */; };
-		14A35E6E23660823002BCBF6 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5E23660823002BCBF6 /* FirebasePerformance.framework */; };
+		14A35E5F23660823002BCBF6 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E4D23660821002BCBF6 /* FirebaseCore.framework */; platformFilter = ios; };
+		14A35E6023660823002BCBF6 /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5023660821002BCBF6 /* GTMSessionFetcher.framework */; platformFilter = ios; };
+		14A35E6123660823002BCBF6 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5123660822002BCBF6 /* GoogleToolboxForMac.framework */; platformFilter = ios; };
+		14A35E6223660823002BCBF6 /* GoogleDataTransportCCTSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5223660822002BCBF6 /* GoogleDataTransportCCTSupport.framework */; platformFilter = ios; };
+		14A35E6323660823002BCBF6 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5323660822002BCBF6 /* FirebaseCoreDiagnostics.framework */; platformFilter = ios; };
+		14A35E6423660823002BCBF6 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5423660822002BCBF6 /* GoogleAppMeasurement.framework */; platformFilter = ios; };
+		14A35E6523660823002BCBF6 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5523660822002BCBF6 /* nanopb.framework */; platformFilter = ios; };
+		14A35E6623660823002BCBF6 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5623660822002BCBF6 /* FirebaseInstanceID.framework */; platformFilter = ios; };
+		14A35E6723660823002BCBF6 /* FirebaseRemoteConfig.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5723660822002BCBF6 /* FirebaseRemoteConfig.framework */; platformFilter = ios; };
+		14A35E6823660823002BCBF6 /* FirebaseABTesting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5823660822002BCBF6 /* FirebaseABTesting.framework */; platformFilter = ios; };
+		14A35E6923660823002BCBF6 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5923660823002BCBF6 /* FirebaseAnalytics.framework */; platformFilter = ios; };
+		14A35E6A23660823002BCBF6 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5A23660823002BCBF6 /* FIRAnalyticsConnector.framework */; platformFilter = ios; };
+		14A35E6B23660823002BCBF6 /* GoogleDataTransport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5B23660823002BCBF6 /* GoogleDataTransport.framework */; platformFilter = ios; };
+		14A35E6C23660823002BCBF6 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5C23660823002BCBF6 /* GoogleUtilities.framework */; platformFilter = ios; };
+		14A35E6D23660823002BCBF6 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5D23660823002BCBF6 /* Protobuf.framework */; platformFilter = ios; };
+		14A35E6E23660823002BCBF6 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14A35E5E23660823002BCBF6 /* FirebasePerformance.framework */; platformFilter = ios; };
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
 		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
 		14AD1E8022F78A2300DFEEE1 /* WKRWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD1E7F22F78A2300DFEEE1 /* WKRWindow.swift */; };
@@ -1726,14 +1726,14 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.6.6;
 				OTHER_LDFLAGS = " -ObjC";
-				OTHER_SWIFT_FLAGS = "";
+				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
@@ -1759,7 +1759,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

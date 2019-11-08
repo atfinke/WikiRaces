@@ -71,7 +71,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "CREATE RACE"
+        title = "CREATE LOCAL RACE"
 
         guard let peerID = peerID, let serviceType = serviceType else {
             fatalError("Required properties peerID or serviceType not set")
@@ -100,6 +100,9 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                            forCellReuseIdentifier: MPCHostAutoInviteCell.reuseIdentifier)
         tableView.register(MPCHostSoloCell.self,
                            forCellReuseIdentifier: MPCHostSoloCell.reuseIdentifier)
+
+        PlayerAnonymousMetrics.log(event: .autoInviteState,
+                                   attributes: ["On": isAutoInviteOn ? 1 : 0])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -200,8 +203,8 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                 tableView.reloadData()
             }
         }
-        navigationItem.rightBarButtonItem?.isEnabled = !peers.values.filter({ $0 == .joined }).isEmpty
-
+        let joinedPlayers: [MCPeerID: PeerState] = peers.filter({ $0.value == .joined })
+        navigationItem.rightBarButtonItem?.isEnabled = !joinedPlayers.isEmpty
         performaceTrace(peerID: peerID, newState: newState)
     }
 

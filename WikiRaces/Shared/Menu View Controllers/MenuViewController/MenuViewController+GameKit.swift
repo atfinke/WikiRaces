@@ -14,7 +14,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
 
     /// Attempts Game Center login
     func attemptGlobalAuthentication() {
-        GlobalRaceHelper.shared.authenticate { controller, error, forceShowError in
+        // seperated due to long type-checking time as closure
+        func auth(_ controller: UIViewController?, _ error: Error?, _ forceShowError: Bool) {
             if let controller = controller, self.menuView.state != .noInterface {
                 if self.presentedViewController == nil {
                     self.present(controller, animated: true, completion: nil)
@@ -32,6 +33,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                 PlayerAnonymousMetrics.log(event: .error(info))
             }
         }
+        GlobalRaceHelper.shared.authenticate(completion: auth)
     }
 
     // MARK: - GKGameCenterControllerDelegate -

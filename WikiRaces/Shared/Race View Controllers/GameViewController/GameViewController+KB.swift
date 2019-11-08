@@ -73,14 +73,15 @@ extension GameViewController {
 
     @objc
     private func keyboardAttemptToggleSection(_ keyCommand: UIKeyCommand) {
-        guard let input = keyCommand.input,
+        guard let webView = webView,
+            let input = keyCommand.input,
             let index = Int(input),
             gameState == .race else {
                 return
         }
 
         let script = "document.getElementsByClassName('section-heading')[\(index - 1)].click()"
-        webView?.evaluateJavaScript(script, completionHandler: nil)
+        webView.evaluateJavaScript(script, completionHandler: nil)
     }
 
 }

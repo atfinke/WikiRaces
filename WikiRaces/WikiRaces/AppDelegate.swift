@@ -38,7 +38,6 @@ internal class AppDelegate: WKRAppDelegate {
         PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()
-        logInterfaceMode()
         logBuild()
 
         cleanTempDirectory()
@@ -64,12 +63,6 @@ internal class AppDelegate: WKRAppDelegate {
             PlayerAnonymousMetrics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
-    }
-
-    private func logInterfaceMode() {
-        guard let traitCollection = window?.traitCollection else { return }
-        let mode = WKRUIStyle.isDark(traitCollection) ? "Dark" : "Light"
-        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
     }
 
     private func logBuild() {

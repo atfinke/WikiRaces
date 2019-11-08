@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRUIKit
 
 internal class MPCHostAutoInviteCell: UITableViewCell {
 
@@ -39,6 +40,7 @@ internal class MPCHostAutoInviteCell: UITableViewCell {
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
 
+        toggle.onTintColor = .lightGray
         toggle.addTarget(self, action: #selector(toggled), for: .valueChanged)
         toggle.translatesAutoresizingMaskIntoConstraints = false
         addSubview(toggle)
@@ -62,7 +64,6 @@ internal class MPCHostAutoInviteCell: UITableViewCell {
         let constraints = [
             leftMarginConstraint,
             detailLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            detailLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 25),
             detailLabel.rightAnchor.constraint(lessThanOrEqualTo: toggle.leftAnchor,
                                              constant: -10),
             detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
@@ -83,7 +84,6 @@ internal class MPCHostAutoInviteCell: UITableViewCell {
         super.layoutSubviews()
         let textColor = UIColor.wkrTextColor(for: traitCollection)
         detailLabel.textColor = textColor
-        toggle.onTintColor = tintColor
     }
 
     // MARK: - Helpers -

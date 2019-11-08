@@ -31,7 +31,7 @@ internal struct PlayerAnonymousMetrics {
         case leaderboard, versionInfo
         case pressedJoin, pressedHost, pressedGlobalJoin, pressedLocalOptions
         case namePromptResult, nameType
-        case cloudStatus, interfaceMode
+        case cloudStatus, interfaceMode, autoInviteToggled, autoInviteState
 
         // Game All Players
         case pageView, pageBlocked, pageError

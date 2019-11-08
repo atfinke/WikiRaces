@@ -113,6 +113,12 @@ internal class MenuViewController: UIViewController {
         becomeFirstResponder()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let mode = WKRUIStyle.isDark(traitCollection) ? 1 : 0
+        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Dark": mode])
+    }
+
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             menuView.triggeredEasterEgg()
