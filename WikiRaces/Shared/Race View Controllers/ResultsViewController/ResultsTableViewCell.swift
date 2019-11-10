@@ -56,6 +56,7 @@ internal class ResultsTableViewCell: UITableViewCell {
     }
 
     private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private var isPlayerCreator = false
 
     // MARK: - Initialization -
 
@@ -102,7 +103,9 @@ internal class ResultsTableViewCell: UITableViewCell {
         super.layoutSubviews()
         let textColor = UIColor.wkrTextColor(for: traitCollection)
         tintColor = textColor
-        playerLabel.textColor = textColor
+        if !isPlayerCreator {
+            playerLabel.textColor =  textColor
+        }
         subtitleLabel.textColor = textColor
         activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
@@ -264,14 +267,19 @@ internal class ResultsTableViewCell: UITableViewCell {
 
     func playerNameAttributedString(for player: WKRPlayer) -> NSAttributedString {
         if let isCreator = player.isCreator, isCreator {
+            self.isPlayerCreator = true
             let name = player.name
             let nameAttributedString = NSMutableAttributedString(string: name, attributes: nil)
             let range = NSRange(location: 0, length: name.count)
+
+            let font = UIFont.systemRoundedFont(ofSize: 20, weight: .semibold) ??
+                UIFont.systemFont(ofSize: 18, weight: .medium)
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor(displayP3Red: 69.0/255.0,
                                           green: 145.0/255.0,
                                           blue: 208.0/255.0,
-                                          alpha: 1.0)
+                                          alpha: 1.0),
+                .font: font
             ]
             nameAttributedString.addAttributes(attributes, range: range)
             return nameAttributedString

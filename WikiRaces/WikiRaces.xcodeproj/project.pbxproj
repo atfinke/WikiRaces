@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		140564D52112D4BD001E36AB /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140564D32112D4BC001E36AB /* Crashlytics.framework */; platformFilter = ios; };
 		140564D62112D4BD001E36AB /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 140564D42112D4BC001E36AB /* Fabric.framework */; platformFilter = ios; };
+		140C78D82377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C78D52377AD0D0034F6DE /* UIFont+Rounded.swift */; };
+		140C78D92377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C78D52377AD0D0034F6DE /* UIFont+Rounded.swift */; };
+		140C78DA2377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C78D52377AD0D0034F6DE /* UIFont+Rounded.swift */; };
 		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GameKitConnectViewController.swift */; };
@@ -373,6 +376,7 @@
 /* Begin PBXFileReference section */
 		140564D32112D4BC001E36AB /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		140564D42112D4BC001E36AB /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		140C78D52377AD0D0034F6DE /* UIFont+Rounded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Rounded.swift"; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		1414280221FC18F600C48788 /* GameKitConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameKitConnectViewController.swift; sourceTree = "<group>"; };
 		1414280621FC394600C48788 /* ConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectViewController.swift; sourceTree = "<group>"; };
@@ -827,6 +831,7 @@
 		14B55C951F3A499C0090E092 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				140C78D52377AD0D0034F6DE /* UIFont+Rounded.swift */,
 				14C4AB801F368A630086B77F /* CommonExtensions.swift */,
 				14B2DD4B22213A07009B8AB3 /* GlobalRacesHelper.swift */,
 				14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */,
@@ -1346,6 +1351,7 @@
 				14E0F19F22303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
+				140C78D82377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */,
 				1485B6772230724A00D6800B /* MedalScene.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
 				1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
@@ -1392,6 +1398,7 @@
 				14DF31B421169236005BA432 /* MPCConnectViewController+UI.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C4AB831F368A630086B77F /* CommonExtensions.swift in Sources */,
+				140C78D92377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */,
 				147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
@@ -1464,6 +1471,7 @@
 				142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
 				14DFBD20210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */,
+				140C78DA2377AD0D0034F6DE /* UIFont+Rounded.swift in Sources */,
 				14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */,
 				14B2DD3D22212298009B8AB3 /* MenuView.swift in Sources */,
 				1480F6C621FB77DE00081F58 /* DebugInfoTableViewCell.swift in Sources */,
