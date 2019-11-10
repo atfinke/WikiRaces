@@ -12,23 +12,22 @@ import WKRKit
 
 internal class VotingTableViewCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private let titleLabel = UILabel()
     private let countLabel = UILabel()
     private let stackView = UIStackView()
 
-    // MARK: - Property Observers
+    // MARK: - Property Observers -
 
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                countLabel.textColor = UIColor.wkrVoteCountSelectedTextColor
                 countLabel.font = UIFont.systemFont(ofSize: 22, weight: .medium)
             } else {
-                countLabel.textColor = UIColor.wkrVoteCountTextColor
                 countLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             }
+            setNeedsLayout()
         }
     }
 
@@ -44,7 +43,7 @@ internal class VotingTableViewCell: UITableViewCell {
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -56,14 +55,12 @@ internal class VotingTableViewCell: UITableViewCell {
         stackView.distribution = .fillProportionally
         stackView.alignment = .center
 
-        titleLabel.textColor = UIColor.wkrTextColor
         titleLabel.text = ""
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
 
         countLabel.text = "0"
         countLabel.textAlignment = .right
-        countLabel.textColor = UIColor.wkrVoteCountTextColor
 
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(countLabel)
@@ -81,6 +78,19 @@ internal class VotingTableViewCell: UITableViewCell {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    // MARK: - View Life Cycle -
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        titleLabel.textColor = .wkrTextColor(for: traitCollection)
+        if isSelected {
+            countLabel.textColor = .wkrVoteCountSelectedTextColor(for: traitCollection)
+        } else {
+            countLabel.textColor = .wkrVoteCountTextColor(for: traitCollection)
+        }
     }
 
 }

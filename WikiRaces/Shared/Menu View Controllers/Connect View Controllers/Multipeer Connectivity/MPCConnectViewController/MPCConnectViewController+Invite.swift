@@ -17,7 +17,7 @@ import FirebasePerformance
 
 extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSessionDelegate {
 
-    // MARK: - MCSessionDelegate
+    // MARK: - MCSessionDelegate -
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         func start() {
@@ -28,11 +28,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                       andHide: [inviteView])
         }
 
-        // 1. host context is nil when the invite was from a legacy app version (<= 3.6.2)
-        // 2. Otherwise, make sure that the host sent the start message
-        if hostContext == nil {
-            start()
-        } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
+        if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
             guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
                 let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
                 PlayerAnonymousMetrics.log(event: .error(info))
@@ -56,7 +52,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                     }
                 })
 
-                #if !MULTIWINDOWDEBUG
+                #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                 self.connectingTrace?.stop()
                 self.connectingTrace = nil
                 #endif
@@ -90,7 +86,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         updateDescriptionLabel(to: "WAITING FOR INVITE")
     }
 
-    // MARK: - MCAdvertiserAssistantDelegate
+    // MARK: - MCAdvertiserAssistantDelegate -
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         let info = "didNotStartAdvertisingPeer: " + error.localizedDescription
@@ -153,7 +149,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         }
     }
 
-    // MARK: - User Actions
+    // MARK: - User Actions -
 
     /// Accepts the displayed invite
     @objc
@@ -173,7 +169,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
         stopAdvertising()
 
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         connectingTrace = Performance.startTrace(name: "Player Connecting Trace")
         #endif
     }

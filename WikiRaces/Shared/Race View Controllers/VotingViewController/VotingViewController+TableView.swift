@@ -9,7 +9,7 @@ import UIKit
 
 extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
 
-    // MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource -
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return voteInfo?.pageCount ?? 0
@@ -24,7 +24,7 @@ extension VotingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
-    // MARK: - UITableViewDelegate
+    // MARK: - UITableViewDelegate -
 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let lastIndexPath = tableView.indexPathForSelectedRow else {

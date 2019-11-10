@@ -28,6 +28,20 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         webView.load(URLRequest(url: URL(string: "https://en.m.wikipedia.org")!))
         NSWorkspace.shared.openFile(NSTemporaryDirectory())
+
+        NSEvent.addLocalMonitorForEvents(matching: .keyUp) {
+            print($0.keyCode)
+            if $0.keyCode == 124 {
+                self.keepArticle(0)
+            } else if $0.keyCode == 126 {
+                self.removeArticle(0)
+            } else if $0.keyCode == 123 {
+                self.undoLastAction(0)
+            } else {
+                return nil
+            }
+            return $0
+        }
     }
 
     func moveToNextArticle(keepCurrent: Bool) {

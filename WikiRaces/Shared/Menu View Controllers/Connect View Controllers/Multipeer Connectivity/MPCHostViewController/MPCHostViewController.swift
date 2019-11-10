@@ -12,13 +12,13 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-#if !MULTIWINDOWDEBUG
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
 #endif
 
 internal class MPCHostViewController: UITableViewController, MCSessionDelegate, MCNearbyServiceBrowserDelegate {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     enum PeerState: String {
         case found
@@ -32,7 +32,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         case startMatch(isSolo: Bool)
         case cancel
     }
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
@@ -41,7 +41,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         })
     }
 
-    #if !MULTIWINDOWDEBUG
+    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var peersConnectTraces = [MCPeerID: Trace]()
     #endif
 
@@ -50,13 +50,28 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
     var serviceType: String?
     var browser: MCNearbyServiceBrowser?
 
-    var listenerUpdate: ((ListenerUpdate) -> Void)?
+    private static let isAutoInviteOnKey = "isAutoInviteOnKey"
+    var isAutoInviteOn = UserDefaults.standard.bool(forKey: MPCHostViewController.isAutoInviteOnKey) {
+        didSet {
+            UserDefaults.standard.set(isAutoInviteOn, forKey: MPCHostViewController.isAutoInviteOnKey)
+            if isAutoInviteOn {
+                peers.forEach { peerID, state in
+                    if state == PeerState.found {
+                        self.invite(peerID: peerID)
+                    }
+                }
+            }
+        }
+    }
 
-    // MARK: - View Life Cycle
+    var listenerUpdate: ((ListenerUpdate) -> Void)?
+    private let activityView = UIActivityIndicatorView(style: .gray)
+
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "INVITE NEARBY PLAYERS"
+        title = "CREATE LOCAL RACE"
 
         guard let peerID = peerID, let serviceType = serviceType else {
             fatalError("Required properties peerID or serviceType not set")
@@ -74,9 +89,6 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                                           action: #selector(startMatch(_:)))
         startButton.isEnabled = false
         navigationItem.rightBarButtonItem = startButton
-        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
-
-        tableView.backgroundColor = WKRUIStyle.isDark ? UIColor.wkrBackgroundColor : UIColor.groupTableViewBackground
 
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
@@ -84,8 +96,13 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                            forCellReuseIdentifier: MPCHostPeerStateCell.reuseIdentifier)
         tableView.register(MPCHostSearchingCell.self,
                            forCellReuseIdentifier: MPCHostSearchingCell.reuseIdentifier)
+        tableView.register(MPCHostAutoInviteCell.self,
+                           forCellReuseIdentifier: MPCHostAutoInviteCell.reuseIdentifier)
         tableView.register(MPCHostSoloCell.self,
                            forCellReuseIdentifier: MPCHostSoloCell.reuseIdentifier)
+
+        PlayerAnonymousMetrics.log(event: .autoInviteState,
+                                   attributes: ["On": isAutoInviteOn ? 1 : 0])
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -100,7 +117,12 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
-    // MARK: - Actions
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        activityView.color = .wkrActivityIndicatorColor(for: traitCollection)
+    }
+
+    // MARK: - Actions -
 
     @objc
     func cancelMatch(_ sender: Any) {
@@ -117,8 +139,6 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
 
         tableView.isUserInteractionEnabled = false
 
-        let activityView = UIActivityIndicatorView(style: .gray)
-        activityView.color = UIColor.wkrActivityIndicatorColor
         activityView.sizeToFit()
         activityView.startAnimating()
 
@@ -183,13 +203,13 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                 tableView.reloadData()
             }
         }
-        navigationItem.rightBarButtonItem?.isEnabled = !peers.values.filter({ $0 == .joined }).isEmpty
-
+        let joinedPlayers: [MCPeerID: PeerState] = peers.filter({ $0.value == .joined })
+        navigationItem.rightBarButtonItem?.isEnabled = !joinedPlayers.isEmpty
         performaceTrace(peerID: peerID, newState: newState)
     }
 
     func performaceTrace(peerID: MCPeerID, newState: PeerState?) {
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 
         let hostInviteResponseTraceName = "Host Invite Response Trace"
         let hostInviteJoingTraceName = "Host Invite Joining Trace"
@@ -214,7 +234,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         #endif
     }
 
-    // MARK: - MCNearbyServiceBrowserDelegate
+    // MARK: - MCNearbyServiceBrowserDelegate -
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
         DispatchQueue.main.async {
@@ -236,10 +256,13 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
                  withDiscoveryInfo info: [String: String]?) {
         DispatchQueue.main.async {
             self.update(peerID: peerID, to: .found)
+            if self.isAutoInviteOn {
+                self.invite(peerID: peerID)
+            }
         }
     }
 
-    // MARK: - MCSessionDelegate
+    // MARK: - MCSessionDelegate -
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DispatchQueue.main.async {
@@ -264,7 +287,7 @@ internal class MPCHostViewController: UITableViewController, MCSessionDelegate, 
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }
 
-    // MARK: - Unused MCSessionDelegate
+    // MARK: - Unused MCSessionDelegate -
 
     func session(_ session: MCSession,
                  didReceive stream: InputStream,

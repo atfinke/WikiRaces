@@ -34,12 +34,28 @@ extension ResultsViewController {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
 
+        let hackTitle = "Hack"
         let controller = UIActivityViewController(activityItems: [
             image,
             "#WikiRaces3"
             ], applicationActivities: nil)
+        controller.completionWithItemsHandler = { [weak self] activityType, completed, _, _ in
+            if !(completed && activityType == UIActivity.ActivityType.saveToCameraRoll),
+                let hack = self?.presentedViewController,
+                hack.title == hackTitle {
+                self?.dismiss(animated: false, completion: nil)
+            }
+        }
         controller.popoverPresentationController?.barButtonItem = sender
-        present(controller, animated: true, completion: nil)
+
+        // seriously, iOS 13 broke activity sheet save to photos??
+        let hack = UIViewController()
+        hack.title = hackTitle
+        hack.view.alpha = 0.0
+        hack.modalPresentationStyle = .overCurrentContext
+        present(hack, animated: false, completion: {
+            hack.present(controller, animated: true, completion: nil)
+        })
         PlayerAnonymousMetrics.log(event: .openedShare)
     }
 }

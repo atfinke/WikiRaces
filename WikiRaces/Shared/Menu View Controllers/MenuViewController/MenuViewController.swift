@@ -16,7 +16,7 @@ import WKRUIKit
 /// The main menu view controller
 internal class MenuViewController: UIViewController {
 
-    // MARK: - View
+    // MARK: - View -
 
     override func loadView() {
         view = MenuView()
@@ -28,11 +28,9 @@ internal class MenuViewController: UIViewController {
     }
 
     private var isFirstAppearence = true
-
     override var canBecomeFirstResponder: Bool { return true }
-    override var preferredStatusBarStyle: UIStatusBarStyle { return .wkrStatusBarStyle }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +91,7 @@ internal class MenuViewController: UIViewController {
 
         #if MULTIWINDOWDEBUG
         let controller = GameViewController()
-        let nav = UINavigationController(rootViewController: controller)
+        let nav = WKRUINavigationController(rootViewController: controller)
         let name = (view.window as? DebugWindow)?.playerName ?? ""
         controller.networkConfig = .multiwindow(windowName: name,
                                                 isHost: view.window!.frame.origin == .zero)
@@ -115,13 +113,19 @@ internal class MenuViewController: UIViewController {
         becomeFirstResponder()
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let mode = WKRUIStyle.isDark(traitCollection) ? 1 : 0
+        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Dark": mode])
+    }
+
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             menuView.triggeredEasterEgg()
         }
     }
 
-    // MARK: - Name Checking
+    // MARK: - Name Checking -
 
     func promptForInvalidName() {
         guard UserDefaults.standard.bool(forKey: "AttemptingMCPeerIDCreation") else {
@@ -147,7 +151,7 @@ internal class MenuViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    // MARK: - Other
+    // MARK: - Other -
 
     func presentMPCConnect(isHost: Bool) {
         UIApplication.shared.isIdleTimerDisabled = true
@@ -160,9 +164,8 @@ internal class MenuViewController: UIViewController {
     func presentGlobalConnect() {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             let controller = GameViewController()
-            let nav = UINavigationController(rootViewController: controller)
-            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World")!
-            controller.prepareForScreenshots(for: url)
+            let nav = WKRUINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)
         } else if GKLocalPlayer.local.isAuthenticated {
             UIApplication.shared.isIdleTimerDisabled = true

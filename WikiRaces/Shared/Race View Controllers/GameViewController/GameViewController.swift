@@ -80,12 +80,14 @@ internal class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            setupInterface()
+            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World_Monorail_System")!
+            prepareForScreenshots(for: url)
+        } else {
             setupGameManager()
+            setupInterface()
         }
-
-        setupInterface()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -115,6 +117,15 @@ internal class GameViewController: UIViewController {
             default: break
             }
         }
+    }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        let textColor: UIColor = .wkrTextColor(for: traitCollection)
+        navigationBarBottomLine.backgroundColor = textColor
+        connectingLabel.textColor = textColor
+        view.backgroundColor = .wkrBackgroundColor(for: traitCollection)
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
 
     private func initalConfiguration() {
@@ -154,6 +165,10 @@ internal class GameViewController: UIViewController {
         }
     }
 
+    deinit {
+        gameManager.alertView.removeFromSuperview()
+    }
+
     // MARK: - User Actions
 
     @objc
@@ -184,13 +199,13 @@ internal class GameViewController: UIViewController {
         }
         self.activeViewController = controller
 
-        let navController = UINavigationController(rootViewController: controller)
+        let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 
         PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:help"))
         PlayerAnonymousMetrics.log(event: .usedHelp,
-                          attributes: ["Page": self.finalPage?.title as Any])
+                                   attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
             let stat: PlayerDatabaseStat
             switch raceType {

@@ -59,7 +59,6 @@ public struct WKRUIKitConstants {
 
             guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
                 let recordStyleScriptAssetURL = (record["StyleScriptFile"] as? CKAsset)?.fileURL,
-                let recordStyleScriptDarkAssetURL = (record["StyleScriptDarkFile"] as? CKAsset)?.fileURL,
                 let recordCleanScriptAssetURL = (record["CleanScriptFile"] as? CKAsset)?.fileURL,
                 let recordContentBlockerAssetURL = (record["ContentBlockerFile"] as? CKAsset)?.fileURL else {
                     return
@@ -68,7 +67,6 @@ public struct WKRUIKitConstants {
             DispatchQueue.main.async {
                 copyIfNewer(newConstantsFileURL: recordConstantsAssetURL,
                             newStyleScriptFileURL: recordStyleScriptAssetURL,
-                            newStyleScriptDarkFileURL: recordStyleScriptDarkAssetURL,
                             newCleanScriptFileURL: recordCleanScriptAssetURL,
                             newContentBlockerFileURL: recordContentBlockerAssetURL)
             }
@@ -77,13 +75,11 @@ public struct WKRUIKitConstants {
 
     static private func copyIfNewer(newConstantsFileURL: URL,
                                     newStyleScriptFileURL: URL,
-                                    newStyleScriptDarkFileURL: URL,
                                     newCleanScriptFileURL: URL,
                                     newContentBlockerFileURL: URL) {
 
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newStyleScriptFileURL.path),
-            FileManager.default.fileExists(atPath: newStyleScriptDarkFileURL.path),
             FileManager.default.fileExists(atPath: newCleanScriptFileURL.path),
             FileManager.default.fileExists(atPath: newContentBlockerFileURL.path) else {
                 return
@@ -96,7 +92,6 @@ public struct WKRUIKitConstants {
 
         let documentsConstantsURL = documentsPath(for: "WKRUIConstants.plist")
         let documentsStyleScriptURL = documentsPath(for: "WKRStyleScript.js")
-        let documentsStyleScriptDarkURL = documentsPath(for: "WKRStyleScript-Dark.js")
         let documentsCleanScriptURL = documentsPath(for: "WKRCleanScript.js")
         let documentsContentBlcokerURL = documentsPath(for: "WKRContentBlocker.json")
 
@@ -118,9 +113,6 @@ public struct WKRUIKitConstants {
             do {
                 try? FileManager.default.removeItem(at: documentsStyleScriptURL)
                 try FileManager.default.copyItem(at: newStyleScriptFileURL, to: documentsStyleScriptURL)
-
-                try? FileManager.default.removeItem(at: documentsStyleScriptDarkURL)
-                try FileManager.default.copyItem(at: newStyleScriptDarkFileURL, to: documentsStyleScriptDarkURL)
 
                 try? FileManager.default.removeItem(at: documentsCleanScriptURL)
                 try FileManager.default.copyItem(at: newCleanScriptFileURL, to: documentsCleanScriptURL)
@@ -144,7 +136,6 @@ public struct WKRUIKitConstants {
             let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit"),
             let bundledPlistURL = bundle.url(forResource: "WKRUIConstants", withExtension: "plist"),
             let bundledStyleScriptURL = bundle.url(forResource: "WKRStyleScript", withExtension: "js"),
-            let bundledStyleScriptDarkURL = bundle.url(forResource: "WKRStyleScript-Dark", withExtension: "js"),
             let bundledCleanScriptURL = bundle.url(forResource: "WKRCleanScript", withExtension: "js"),
             let bundledContentBlockerURL = bundle.url(forResource: "WKRContentBlocker", withExtension: "json") else {
                 fatalError("Failed to load bundled constants")
@@ -152,7 +143,6 @@ public struct WKRUIKitConstants {
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,
                     newStyleScriptFileURL: bundledStyleScriptURL,
-                    newStyleScriptDarkFileURL: bundledStyleScriptDarkURL,
                     newCleanScriptFileURL: bundledCleanScriptURL,
                     newContentBlockerFileURL: bundledContentBlockerURL)
     }
@@ -162,13 +152,6 @@ public struct WKRUIKitConstants {
     internal func styleScript() -> String {
         guard let source = try? String(contentsOf: WKRUIKitConstants.documentsPath(for: "WKRStyleScript.js")) else {
             fatalError("Failed to load style script")
-        }
-        return source
-    }
-
-    internal func styleScriptDark() -> String {
-        guard let source = try? String(contentsOf: WKRUIKitConstants.documentsPath(for: "WKRStyleScript-Dark.js")) else {
-            fatalError("Failed to load style script dark")
         }
         return source
     }

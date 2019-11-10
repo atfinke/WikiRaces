@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-#if !MULTIWINDOWDEBUG
+#if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG
 import Crashlytics
 import FirebaseCore
 #endif
@@ -31,7 +31,7 @@ internal struct PlayerAnonymousMetrics {
         case leaderboard, versionInfo
         case pressedJoin, pressedHost, pressedGlobalJoin, pressedLocalOptions
         case namePromptResult, nameType
-        case cloudStatus, interfaceMode
+        case cloudStatus, interfaceMode, autoInviteToggled, autoInviteState
 
         // Game All Players
         case pageView, pageBlocked, pageError
@@ -78,7 +78,7 @@ internal struct PlayerAnonymousMetrics {
     // MARK: - Logging Events
 
     public static func log(event: CrashLogEvent) {
-        #if MULTIWINDOWDEBUG
+        #if MULTIWINDOWDEBUG || targetEnvironment(macCatalyst)
         switch event {
         case .userAction(let action):
             print("UserAction: ", action)
@@ -102,7 +102,7 @@ internal struct PlayerAnonymousMetrics {
     // MARK: - Analytic Events
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
-        #if !MULTIWINDOWDEBUG && !DEBUG
+        #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG && !DEBUG
             Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
         if !(attributes?.values.compactMap { $0 }.isEmpty ?? true) {
                 Analytics.logEvent(event.rawValue, parameters: attributes)

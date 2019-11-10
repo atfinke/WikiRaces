@@ -24,7 +24,6 @@ class DebugInfoTableViewController: UITableViewController {
         tableView.register(DebugInfoTableViewCell.self,
                            forCellReuseIdentifier: DebugInfoTableViewCell.reuseIdentifier)
 
-        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                             target: self,
                                                             action: #selector(share(_:)))

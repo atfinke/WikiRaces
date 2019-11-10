@@ -10,7 +10,7 @@ import UIKit
 
 public class WKRUIButton: UIButton {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     public var style: WKRUIButtonStyle {
         didSet {
@@ -23,23 +23,20 @@ public class WKRUIButton: UIButton {
             let font = style.font
             let spacing = style.textSpacing
             let uppercasedTitle = title.uppercased()
-
             let normalString =      NSAttributedString(string: uppercasedTitle,
                                                        spacing: spacing,
-                                                       font: font,
-                                                       textColor: UIColor.wkrTextColor)
+                                                       font: font)
 
             let highlightedString = NSAttributedString(string: uppercasedTitle,
                                                        spacing: spacing,
-                                                       font: font,
-                                                       textColor: UIColor.wkrLightTextColor)
+                                                       font: font)
 
             setAttributedTitle(normalString, for: .normal)
             setAttributedTitle(highlightedString, for: .highlighted)
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     public init(style: WKRUIButtonStyle = .normal) {
         self.style = style
@@ -47,14 +44,25 @@ public class WKRUIButton: UIButton {
 
         layer.cornerRadius = 5
         layer.borderWidth = 1.7
-        layer.borderColor = UIColor.wkrTextColor.cgColor
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
 
-        setTitleColor(UIColor.green, for: .highlighted)
+        setTitleColor(.green, for: .highlighted)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        let subtitleTextColor = UIColor.wkrSubtitleTextColor(for: traitCollection)
+
+        layer.borderColor = textColor.cgColor
+        setTitleColor(textColor, for: .normal)
+        setTitleColor(subtitleTextColor, for: .highlighted)
     }
 
 }

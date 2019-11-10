@@ -12,14 +12,14 @@ import WKRUIKit
 
 internal class VotingViewController: CenteredTableViewController {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     enum ListenerUpdate {
         case voted(WKRPage)
         case quit
     }
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private var isShowingGuide = false
     private var isShowingVoteCountdown = true
@@ -70,7 +70,7 @@ internal class VotingViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +101,7 @@ internal class VotingViewController: CenteredTableViewController {
         }
     }
 
-    // MARK: - Actions
+    // MARK: - Actions -
 
     @objc func doneButtonPressed(_ sender: Any) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
@@ -114,7 +114,7 @@ internal class VotingViewController: CenteredTableViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     func votingEnded() {
         isShowingVoteCountdown = false

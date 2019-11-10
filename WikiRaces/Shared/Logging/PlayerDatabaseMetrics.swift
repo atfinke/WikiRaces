@@ -12,7 +12,7 @@ import WKRKit
 
 class PlayerDatabaseMetrics: NSObject {
 
-    // MARK: - Types
+    // MARK: - Types -
 
     private struct ProcessedResults {
         let csvURL: URL
@@ -23,7 +23,7 @@ class PlayerDatabaseMetrics: NSObject {
 
     static let banHammerNotification = Notification.Name("banHammerNotification")
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     static var shared = PlayerDatabaseMetrics()
 
@@ -39,7 +39,7 @@ class PlayerDatabaseMetrics: NSObject {
 
     private var queuedKeyValues = [String: CKRecordValueProtocol]()
 
-    // MARK: - Connecting
+    // MARK: - Connecting -
 
     func connect() {
         #if MULTIWINDOWDEBUG
@@ -49,47 +49,61 @@ class PlayerDatabaseMetrics: NSObject {
         guard !isConnecting else { return }
         isConnecting = true
 
-        container.fetchUserRecordID(completionHandler: { (userRecordID, _) in
+        // seperated out due to type checking time
+
+        // step 2, get the user main record
+        func fetched(userRecord: CKRecord?) {
+            self.userRecord = userRecord
+            guard let userRecord = userRecord else {
+                isConnecting = false
+                return
+            }
+
+            // negative races indicates ban
+            if let raceCount = userRecord["Races"] as? NSNumber, raceCount.intValue == -1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    let name = PlayerDatabaseMetrics.banHammerNotification
+                    NotificationCenter.default.post(name: name, object: nil)
+                })
+                return
+            }
+
+            // Get user stats record, or create new one.
+            guard let statsRecordName = userRecord.object(forKey: "UserStatsNamev3") as? NSString,
+                statsRecordName.length > 5 else {
+                    self.createUserStatsRecord()
+                    self.isConnecting = false
+                    return
+            }
+            let userStatsRecordID = CKRecord.ID(recordName: statsRecordName as String)
+            self.publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { userStatsRecord, error in
+                fetched(userStatsRecord: userStatsRecord, error: error)
+            })
+        }
+
+        // step 3, get the current user stats record
+        func fetched(userStatsRecord: CKRecord?, error: Error?) {
+            if let error = error as? CKError, error.code == CKError.unknownItem {
+                createUserStatsRecord()
+                isConnecting = false
+                return
+            }
+            guard let userStatsRecord = userStatsRecord else { return }
+            self.userStatsRecord = userStatsRecord
+            isConnecting = false
+            DispatchQueue.main.async {
+                self.saveKeyValues()
+            }
+        }
+
+        // step 1
+        container.fetchUserRecordID(completionHandler: { userRecordID, _ in
             guard let userRecordID = userRecordID else {
                 self.isConnecting = false
                 return
             }
-            self.publicDB.fetch(withRecordID: userRecordID, completionHandler: { (userRecord, _) in
-                self.userRecord = userRecord
-                guard let userRecord = userRecord else {
-                    self.isConnecting = false
-                    return
-                }
-
-                if let raceCount = userRecord["Races"] as? NSNumber, raceCount.intValue == -1 {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        let name = PlayerDatabaseMetrics.banHammerNotification
-                        NotificationCenter.default.post(name: name, object: nil)
-                    })
-                    return
-                }
-
-                // Get user stats record, or create new one.
-                guard let statsRecordName = userRecord.object(forKey: "UserStatsNamev3") as? NSString,
-                    statsRecordName.length > 5 else {
-                        self.createUserStatsRecord()
-                        self.isConnecting = false
-                        return
-                }
-                let userStatsRecordID = CKRecord.ID(recordName: statsRecordName as String)
-                self.publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { (userStatsRecord, error) in
-                    if let error = error as? CKError, error.code == CKError.unknownItem {
-                        self.createUserStatsRecord()
-                        self.isConnecting = false
-                        return
-                    }
-                    guard let userStatsRecord = userStatsRecord else { return }
-                    self.userStatsRecord = userStatsRecord
-                    self.isConnecting = false
-                    DispatchQueue.main.async {
-                        self.saveKeyValues()
-                    }
-                })
+            self.publicDB.fetch(withRecordID: userRecordID, completionHandler: { userRecord, _ in
+                fetched(userRecord: userRecord)
             })
         })
     }
@@ -118,7 +132,7 @@ class PlayerDatabaseMetrics: NSObject {
         })
     }
 
-    // MARK: - Events
+    // MARK: - Events -
 
     func log(value: CKRecordValueProtocol, for key: String) {
         DispatchQueue.main.async {

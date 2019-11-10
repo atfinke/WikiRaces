@@ -10,7 +10,7 @@ import SpriteKit
 
 class MedalScene: SKScene {
 
-    // MARK: Properties
+    // MARK: Properties -
 
     private let goldNode: SKNode
     private let silverNode: SKNode
@@ -23,7 +23,7 @@ class MedalScene: SKScene {
         }
     }
 
-    // MARK: - Initalization
+    // MARK: - Initalization -
 
     override init(size: CGSize) {
         let physicsBody = SKPhysicsBody(circleOfRadius: 5)
@@ -69,7 +69,7 @@ class MedalScene: SKScene {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Update
+    // MARK: - Update -
 
     override func update(_ currentTime: TimeInterval) {
         for node in children where node.position.y < -50 {
@@ -80,7 +80,7 @@ class MedalScene: SKScene {
         }
     }
 
-    // MARK: - Other
+    // MARK: - Other -
 
     func showMedals(gold: Int, silver: Int, bronze: Int, dnf: Int) {
         func createMedal(place: Int) {

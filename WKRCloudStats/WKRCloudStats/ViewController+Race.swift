@@ -30,12 +30,19 @@ extension ViewController {
     }
 
     private func queryRaceCompleted(cursor: CKQueryOperation.Cursor?, error: Error?) {
+
         DispatchQueue.main.async {
+
+            if self.raceRecords.count > 200 {
+            self.processRaceStats()
+                        return
+                    }
+
             if let error = error {
                 self.textView.textStorage?.append(NSAttributedString(string: "Error: \(error)\n"))
                 self.processRaceStats()
             } else if let cursor = cursor {
-                self.textView.textStorage?.append(NSAttributedString(string: "Querying w/ Cursor\n"))
+                self.textView.textStorage?.append(NSAttributedString(string: "Querying w/ Cursor \(self.raceRecords.count)\n"))
                 self.queryRaceStats(cursor: cursor)
             } else {
                 self.textView.textStorage?.append(NSAttributedString(string: "Got All Race Stats\n"))

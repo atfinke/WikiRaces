@@ -11,7 +11,7 @@ import WKRKit
 
 extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControllerDelegate {
 
-    // MARK: - Helpers
+    // MARK: - Helpers -
 
     func findMatch() {
         let request = GKMatchRequest()
@@ -28,7 +28,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         } else if let controller = GKMatchmakerViewController(matchRequest: request) {
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
-            #if !MULTIWINDOWDEBUG
+            #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
             findTrace = Performance.startTrace(name: "Global Race Find Trace")
             #endif
         } else {
@@ -66,7 +66,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         }
     }
 
-    // MARK: - GKMatchDelegate
+    // MARK: - GKMatchDelegate -
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         if isPlayerHost, WKRSeenFinalArticlesStore.isRemoteTransferData(data) {
@@ -87,7 +87,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         }
     }
 
-    // MARK: - GKMatchmakerViewControllerDelegate
+    // MARK: - GKMatchmakerViewControllerDelegate -
 
     func matchmakerViewControllerWasCancelled(_ viewController: GKMatchmakerViewController) {
         dismiss(animated: true) {
@@ -106,7 +106,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         findTrace?.stop()
         #endif
         updateDescriptionLabel(to: "Finding best host")

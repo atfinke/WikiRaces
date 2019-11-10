@@ -16,10 +16,9 @@ public class WKRUIProgressView: UIProgressView {
         super.init(frame: .zero)
 
         progressViewStyle = .bar
-        progressTintColor = UIColor.white
+        progressTintColor = .white
 
         layer.borderWidth = 0.1
-        layer.borderColor = UIColor.wkrTextColor.cgColor
 
         isHidden = true
         translatesAutoresizingMaskIntoConstraints = false
@@ -27,6 +26,13 @@ public class WKRUIProgressView: UIProgressView {
 
     public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.borderColor = UIColor.wkrTextColor(for: traitCollection).cgColor
     }
 
     // MARK: - State

@@ -60,11 +60,17 @@ internal class CenteredTableViewController: UIViewController {
         isInterfaceLoaded = true
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        guideLabel.textColor = .wkrSubtitleTextColor(for: traitCollection)
+        descriptionLabel.textColor = .wkrTextColor(for: traitCollection)
+    }
+
     // MARK: - Interface
 
     //swiftlint:disable:next function_body_length
     private func setupInterface() {
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrBlurEffect)
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrLightBlurEffect)
 
         tableView.estimatedRowHeight = 0
         tableView.isUserInteractionEnabled = false
@@ -74,14 +80,12 @@ internal class CenteredTableViewController: UIViewController {
         tableView.allowsSelection = true
 
         guideLabel.textAlignment = .center
-        guideLabel.textColor = UIColor.wkrLightTextColor
         guideLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .medium)
         guideLabel.adjustsFontSizeToFitWidth = true
         guideLabel.translatesAutoresizingMaskIntoConstraints = false
         visualEffectView.contentView.addSubview(guideLabel)
 
         descriptionLabel.textAlignment = .center
-        descriptionLabel.textColor = UIColor.wkrTextColor
         descriptionLabel.font = UIFont(monospaceSize: 20, weight: .medium)
         descriptionLabel.adjustsFontSizeToFitWidth = true
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -101,7 +105,6 @@ internal class CenteredTableViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = .clear
-        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
 
         descriptionLabelBottomConstraint = descriptionLabel.bottomAnchor.constraint(equalTo: overlayView.topAnchor)
 

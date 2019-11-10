@@ -31,13 +31,11 @@ extension NSAttributedString {
 
     public convenience init(string: String,
                             spacing: Double,
-                            font: UIFont = UIFont.systemFont(ofSize: 16.0),
-                            textColor: UIColor = UIColor.wkrTextColor) {
+                            font: UIFont = UIFont.systemFont(ofSize: 16.0)) {
 
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
-            .kern: spacing,
-            .foregroundColor: textColor
+            .kern: spacing
         ]
         self.init(string: string, attributes: attributes)
     }

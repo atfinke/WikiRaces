@@ -10,14 +10,14 @@ import UIKit
 
 internal class HistoryTableViewCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     let pageLabel = UILabel()
     let detailLabel = UILabel()
 
     private let linkHereLabel = UILabel()
     private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
-    private var linkLabelTopConstraint: NSLayoutConstraint!
+    private var linkLabelTopConstraint: NSLayoutConstraint?
 
     var isShowingActivityIndicatorView: Bool = false {
         didSet {
@@ -33,22 +33,17 @@ internal class HistoryTableViewCell: UITableViewCell {
     var isLinkHere: Bool = true {
         didSet {
             linkHereLabel.text = isLinkHere ? "Link Here" : nil
-            linkLabelTopConstraint.constant = isLinkHere ? 5 : 0
+            linkLabelTopConstraint?.constant = isLinkHere ? 5 : 0
         }
-
     }
 
     static let reuseIdentifier = "reuseIdentifier"
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        tintColor = UIColor.wkrTextColor
-        backgroundColor = UIColor.wkrBackgroundColor
-
-        pageLabel.textColor = UIColor.wkrTextColor
         pageLabel.textAlignment = .left
         pageLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         pageLabel.numberOfLines = 0
@@ -56,7 +51,7 @@ internal class HistoryTableViewCell: UITableViewCell {
         addSubview(pageLabel)
 
         linkHereLabel.text = "Link Here"
-        linkHereLabel.textColor = UIColor.lightGray
+        linkHereLabel.textColor = .lightGray
         linkHereLabel.textAlignment = .left
         linkHereLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         linkHereLabel.numberOfLines = 1
@@ -64,26 +59,35 @@ internal class HistoryTableViewCell: UITableViewCell {
         addSubview(linkHereLabel)
 
         detailLabel.textAlignment = .right
-        detailLabel.textColor = UIColor.wkrTextColor
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
 
-        activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.stopAnimating()
         activityIndicatorView.setContentCompressionResistancePriority(.required, for: .horizontal)
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(activityIndicatorView)
 
-       setupConstraints()
+        setupConstraints()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    // MARK: - Constraints
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        tintColor = textColor
+        pageLabel.textColor = textColor
+        detailLabel.textColor = textColor
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
+    }
+
+    // MARK: - Constraints -
 
     private func setupConstraints() {
         let leftMarginConstraint = NSLayoutConstraint(item: pageLabel,
@@ -102,8 +106,9 @@ internal class HistoryTableViewCell: UITableViewCell {
                                                        multiplier: 1.0,
                                                        constant: 0.0)
 
-        linkLabelTopConstraint = linkHereLabel.topAnchor.constraint(equalTo: pageLabel.bottomAnchor,
-                                                                    constant: 5)
+        let linkLabelTopConstraint = linkHereLabel.topAnchor.constraint(equalTo: pageLabel.bottomAnchor,
+                                                                        constant: 5)
+        self.linkLabelTopConstraint = linkLabelTopConstraint
 
         let constraints = [
             leftMarginConstraint,
@@ -112,7 +117,7 @@ internal class HistoryTableViewCell: UITableViewCell {
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: detailLabel.leftAnchor, constant: -15),
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: activityIndicatorView.leftAnchor, constant: -15),
 
-            linkLabelTopConstraint!,
+            linkLabelTopConstraint,
             linkHereLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             linkHereLabel.leftAnchor.constraint(equalTo: pageLabel.leftAnchor),
             linkHereLabel.rightAnchor.constraint(equalTo: pageLabel.rightAnchor),

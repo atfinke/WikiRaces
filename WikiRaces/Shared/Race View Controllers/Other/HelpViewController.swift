@@ -12,23 +12,20 @@ import WKRUIKit
 
 internal class HelpViewController: UIViewController, WKNavigationDelegate {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var url: URL?
     var linkTapped: (() -> Void)?
 
-    let webView = WKRUIWebView()
-    let progressView = WKRUIProgressView()
+    private let webView = WKRUIWebView()
+    private let progressView = WKRUIProgressView()
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "HELP"
-        view.backgroundColor = UIColor.wkrBackgroundColor
-        navigationController?.navigationBar.barStyle = UIBarStyle.wkrStyle
-        navigationController?.view.backgroundColor = UIColor.wkrBackgroundColor
 
         webView.text = ""
         webView.navigationDelegate = self
@@ -64,14 +61,19 @@ internal class HelpViewController: UIViewController, WKNavigationDelegate {
                                                             action: #selector(doneButtonPressed))
     }
 
-    // MARK: - Actions
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        navigationController?.view.backgroundColor = .wkrBackgroundColor(for: traitCollection)
+    }
+
+    // MARK: - Actions -
 
     @IBAction func doneButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
-    // MARK: - WKNavigationDelegate
+    // MARK: - WKNavigationDelegate -
 
     func webView(_ webView: WKWebView,
                  decidePolicyFor navigationAction: WKNavigationAction,

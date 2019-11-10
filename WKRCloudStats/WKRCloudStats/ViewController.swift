@@ -11,7 +11,7 @@ import CloudKit
 
 class ViewController: NSViewController {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     @IBOutlet var textView: NSTextView!
 
@@ -20,11 +20,12 @@ class ViewController: NSViewController {
     let publicDB = CKContainer(identifier: "iCloud.com.andrewfinke.wikiraces").publicCloudDatabase
 
     var isUsingUserStatsV3 = true
-    
-    // MARK: - View Life Cycle
+
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        textView.textColor = NSColor.labelColor
     }
 
     @IBAction func downloadPlayerStats(_ sender: Any) {

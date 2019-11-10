@@ -11,7 +11,7 @@ import GameKit.GKLocalPlayer
 
 extension MenuView {
 
-    // MARK: - Actions
+    // MARK: - Actions -
 
     /// Join button pressed
     @objc
@@ -20,7 +20,6 @@ extension MenuView {
         PlayerAnonymousMetrics.log(event: .pressedLocalOptions)
 
         UISelectionFeedbackGenerator().selectionChanged()
-
         animateOptionsOutAndTransition(to: .localOptions)
     }
 
@@ -32,7 +31,7 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        guard GKLocalPlayer.local.isAuthenticated else {
+        guard GKLocalPlayer.local.isAuthenticated || UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
             self.listenerUpdate?(.presentGlobalAuth)
             return
         }
@@ -109,7 +108,7 @@ extension MenuView {
         medalView.showMedals()
     }
 
-    // MARK: - Menu Animations
+    // MARK: - Menu Animations -
 
     /// Animates the views on screen
     func animateMenuIn(completion: (() -> Void)? = nil) {

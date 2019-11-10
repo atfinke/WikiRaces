@@ -15,7 +15,7 @@ extension MPCHostViewController {
     // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -33,6 +33,8 @@ extension MPCHostViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "Choose 1 to 7 players"
+        } else if section == 1 {
+            return nil
         } else {
             return " "
         }
@@ -42,6 +44,8 @@ extension MPCHostViewController {
         if section == 0 {
             //swiftlint:disable:next line_length
             return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
+        } else if section == 1 {
+            return "Automatically invite nearby players to the race."
         } else {
             return "Practice your skills in solo races. Solo races will not count towards your stats."
         }
@@ -49,6 +53,17 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: MPCHostAutoInviteCell.reuseIdentifier,
+                                                           for: indexPath) as? MPCHostAutoInviteCell else {
+                                                            fatalError()
+            }
+            cell.isEnabled = isAutoInviteOn
+            cell.onToggle = { [weak self] toggle in
+                self?.isAutoInviteOn = toggle
+                PlayerAnonymousMetrics.log(event: .autoInviteToggled)
+            }
+            return cell
+        } else if indexPath.section == 2 {
             return tableView.dequeueReusableCell(withIdentifier: MPCHostSoloCell.reuseIdentifier,
                                                  for: indexPath)
         } else if peers.isEmpty {
@@ -78,9 +93,11 @@ extension MPCHostViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 { return }
+
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
 
             session?.disconnect()
@@ -92,15 +109,28 @@ extension MPCHostViewController {
         // Hits this case when the "Searching..." placeholder cell is selected
         guard !peers.isEmpty else { return }
 
-        let maxPlayerCount = min(WKRKitConstants.current.maxLocalRacePlayers,
-                                 kMCSessionMaximumNumberOfPeers)
-        let peerCount = session?.connectedPeers.count ?? 0
-        guard maxPlayerCount > peerCount + 1 else { return }
-
         let peerID = sortedPeers[indexPath.row]
+        invite(peerID: peerID)
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.section == 0 && peers.isEmpty) || indexPath.section == 1 {
+            return 44.0
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }
+
+    func invite(peerID: MCPeerID) {
         guard let session = session else {
             fatalError("Session is nil")
         }
+
+        let maxPlayerCount = min(WKRKitConstants.current.maxLocalRacePlayers,
+                                 kMCSessionMaximumNumberOfPeers)
+        let peerCount = session.connectedPeers.count
+        guard maxPlayerCount > peerCount + 1 else { return }
 
         if session.connectedPeers.map({ $0.displayName }).contains(peerID.displayName) {
             let alertController = UIAlertController(title: "Duplicate Name",
@@ -126,14 +156,6 @@ extension MPCHostViewController {
                             to: session,
                             withContext: data,
                             timeout: context.inviteTimeout)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 0 && peers.isEmpty) || indexPath.section == 1 {
-            return 44.0
-        }
-        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
 }

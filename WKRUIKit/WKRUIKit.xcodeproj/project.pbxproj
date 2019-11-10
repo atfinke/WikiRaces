@@ -21,7 +21,9 @@
 		1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF89B1F362C05000A5D96 /* WKRUIProgressView.swift */; };
 		1413AB2C1F36500400873ACA /* WKRUIWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1413AB2B1F36500400873ACA /* WKRUIWebView.swift */; };
 		142F7168210D034300C66558 /* WKRContentBlocker.json in Resources */ = {isa = PBXBuildFile; fileRef = 142F7167210D034300C66558 /* WKRContentBlocker.json */; };
-		145D3D702109937200115B62 /* WKRStyleScript-Dark.js in Resources */ = {isa = PBXBuildFile; fileRef = 145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */; };
+		1441A06522FFBE5E005D63B9 /* WKRUIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06422FFBE5E005D63B9 /* WKRUIStyle.swift */; };
+		1441A06722FFBE8D005D63B9 /* WKRUIKit+Blurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06622FFBE8D005D63B9 /* WKRUIKit+Blurs.swift */; };
+		1441A06922FFBEBA005D63B9 /* WKRUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06822FFBEBA005D63B9 /* WKRUINavigationController.swift */; };
 		145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145E903C1F79F80A00D31554 /* WKRUIConstants.plist */; };
 		149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */; };
 		14A3D4A21F3634110038388F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3D4A11F3634110038388F /* AppDelegate.swift */; };
@@ -65,7 +67,9 @@
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
 		1413AB2B1F36500400873ACA /* WKRUIWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWebView.swift; sourceTree = "<group>"; };
 		142F7167210D034300C66558 /* WKRContentBlocker.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = WKRContentBlocker.json; sourceTree = "<group>"; };
-		145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "WKRStyleScript-Dark.js"; sourceTree = "<group>"; };
+		1441A06422FFBE5E005D63B9 /* WKRUIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIStyle.swift; sourceTree = "<group>"; };
+		1441A06622FFBE8D005D63B9 /* WKRUIKit+Blurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Blurs.swift"; sourceTree = "<group>"; };
+		1441A06822FFBEBA005D63B9 /* WKRUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUINavigationController.swift; sourceTree = "<group>"; };
 		145E903C1F79F80A00D31554 /* WKRUIConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRUIConstants.plist; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF7F71F362B0D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,7 +127,6 @@
 			children = (
 				1413AB2B1F36500400873ACA /* WKRUIWebView.swift */,
 				1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */,
-				145D3D6F2109937200115B62 /* WKRStyleScript-Dark.js */,
 				1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */,
 				142F7167210D034300C66558 /* WKRContentBlocker.json */,
 			);
@@ -177,11 +180,13 @@
 		14A3D4B61F3634960038388F /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				1441A06422FFBE5E005D63B9 /* WKRUIStyle.swift */,
 				149FF8B31F362F21000A5D96 /* WKRUIButton.swift */,
 				149FF8B11F362D7A000A5D96 /* WKRUIButtonStyle.swift */,
 				149FF89A1F362C05000A5D96 /* WKRUICenteredTableView.swift */,
 				14FC668B1F3631F5001868C4 /* WKRUILabel.swift */,
 				149FF89B1F362C05000A5D96 /* WKRUIProgressView.swift */,
+				1441A06822FFBEBA005D63B9 /* WKRUINavigationController.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -189,6 +194,7 @@
 		14A3D4B71F3634A20038388F /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1441A06622FFBE8D005D63B9 /* WKRUIKit+Blurs.swift */,
 				149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */,
 				14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */,
 				14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */,
@@ -306,7 +312,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				145D3D702109937200115B62 /* WKRStyleScript-Dark.js in Resources */,
 				145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */,
 				1410DB411F4F51AC00F5CAD7 /* WKRCleanScript.js in Resources */,
 				1410DB401F4F51AC00F5CAD7 /* WKRStyleScript.js in Resources */,
@@ -380,6 +385,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1441A06922FFBEBA005D63B9 /* WKRUINavigationController.swift in Sources */,
+				1441A06522FFBE5E005D63B9 /* WKRUIStyle.swift in Sources */,
 				14EB9F6E1F36838B00FF1A9E /* WKRUIKit+Scripts.swift in Sources */,
 				1413AB251F364FE400873ACA /* WKRUIButtonStyle.swift in Sources */,
 				1413AB201F364FBA00873ACA /* WKRUIThinLineView.swift in Sources */,
@@ -393,6 +400,7 @@
 				1413AB221F364FC100873ACA /* WKRUIAlertView.swift in Sources */,
 				1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */,
 				1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */,
+				1441A06722FFBE8D005D63B9 /* WKRUIKit+Blurs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,10 +572,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 3.6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -590,10 +600,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 3.6.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

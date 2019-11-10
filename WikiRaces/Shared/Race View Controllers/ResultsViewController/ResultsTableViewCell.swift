@@ -11,7 +11,7 @@ import WKRKit
 
 internal class ResultsTableViewCell: UITableViewCell {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private let playerLabel = UILabel()
     private let detailLabel = UILabel()
@@ -32,7 +32,11 @@ internal class ResultsTableViewCell: UITableViewCell {
         didSet {
             guard isShowingCheckmark != oldValue else { return }
             if isShowingCheckmark {
-                rightMarginConstraint?.constant = -20
+                if #available(iOS 13.0, *) {
+                    rightMarginConstraint?.constant = -30
+                } else {
+                    rightMarginConstraint?.constant = -20
+                }
             } else {
                 rightMarginConstraint?.constant = 0
             }
@@ -52,37 +56,34 @@ internal class ResultsTableViewCell: UITableViewCell {
     }
 
     private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private var isPlayerCreator = false
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
-        tintColor = UIColor.wkrTextColor
         selectionStyle = .none
-        backgroundColor = UIColor.clear
+        backgroundColor = .clear
 
-        playerLabel.textColor = UIColor.wkrTextColor
         playerLabel.textAlignment = .left
         playerLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         playerLabel.numberOfLines = 0
         playerLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(playerLabel)
 
-        subtitleLabel.textColor = UIColor.wkrTextColor
         subtitleLabel.textAlignment = .left
         subtitleLabel.numberOfLines = 1
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(subtitleLabel)
 
         detailLabel.textAlignment = .right
-        detailLabel.textColor = UIColor.lightGray
+        detailLabel.textColor = .lightGray
         detailLabel.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
 
-        activityIndicatorView.color = UIColor.wkrActivityIndicatorColor
         activityIndicatorView.hidesWhenStopped = true
         activityIndicatorView.stopAnimating()
         activityIndicatorView.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -96,7 +97,20 @@ internal class ResultsTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
 
-    // MARK: - Constraints
+    // MARK: - View Life Cycle -
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        let textColor = UIColor.wkrTextColor(for: traitCollection)
+        tintColor = textColor
+        if !isPlayerCreator {
+            playerLabel.textColor =  textColor
+        }
+        subtitleLabel.textColor = textColor
+        activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
+    }
+
+    // MARK: - Constraints -
 
     private func setupConstraints() {
         let leftMarginConstraint = NSLayoutConstraint(item: playerLabel,
@@ -145,7 +159,7 @@ internal class ResultsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate(constraints)
     }
 
-    // MARK: - Updating
+    // MARK: - Updating -
 
     private func update(playerName: NSAttributedString,
                         detail: String,
@@ -199,7 +213,7 @@ internal class ResultsTableViewCell: UITableViewCell {
             let range = NSRange(location: pageTitle.count, length: detail.count)
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor.lightGray,
-                .font: UIFont.systemFont(ofSize: 15)
+                .font: UIFont.systemFont(ofSize: 13, weight: .semibold)
             ]
             pageTitleAttributedString.addAttributes(attributes, range: range)
         }
@@ -244,23 +258,28 @@ internal class ResultsTableViewCell: UITableViewCell {
         subtitleString += sessionResults.isTied ? " (Tied)" : ""
 
         update(playerName: NSAttributedString(string: sessionResults.profile.name),
-                    detail: detailString,
-                    subtitle: NSAttributedString(string: subtitleString),
-                    animated: false)
+               detail: detailString,
+               subtitle: NSAttributedString(string: subtitleString),
+               animated: false)
     }
 
-    // MARK: - Other
+    // MARK: - Other -
 
     func playerNameAttributedString(for player: WKRPlayer) -> NSAttributedString {
         if let isCreator = player.isCreator, isCreator {
+            self.isPlayerCreator = true
             let name = player.name
             let nameAttributedString = NSMutableAttributedString(string: name, attributes: nil)
             let range = NSRange(location: 0, length: name.count)
+
+            let font = UIFont.systemRoundedFont(ofSize: 20, weight: .semibold) ??
+                UIFont.systemFont(ofSize: 18, weight: .medium)
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor(displayP3Red: 69.0/255.0,
                                           green: 145.0/255.0,
                                           blue: 208.0/255.0,
-                                          alpha: 1.0)
+                                          alpha: 1.0),
+                .font: font
             ]
             nameAttributedString.addAttributes(attributes, range: range)
             return nameAttributedString

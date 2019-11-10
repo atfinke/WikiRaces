@@ -11,23 +11,23 @@ import GameKit
 
 import WKRKit
 
-#if !MULTIWINDOWDEBUG
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
 #endif
 
 class GameKitConnectViewController: ConnectViewController {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     var isPlayerHost = false
     var hostPlayerAlias: String?
     var match: GKMatch?
 
-    #if !MULTIWINDOWDEBUG
+    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var findTrace: Trace?
     #endif
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,7 @@ class GameKitConnectViewController: ConnectViewController {
             self?.match?.disconnect()
         }
 
-        #if !MULTIWINDOWDEBUG
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         let playerName = GKLocalPlayer.local.alias
         Crashlytics.sharedInstance().setUserName(playerName)
         Analytics.setUserProperty(playerName, forName: "playerName")

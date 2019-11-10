@@ -14,7 +14,7 @@ import SafariServices
 
 internal class HistoryViewController: UITableViewController, SFSafariViewControllerDelegate {
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     private var isUserScrolling = false
     private var isTableViewAnimating = false
@@ -24,13 +24,15 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
     private var entries = [WKRHistoryEntry]()
     private var stats: WKRPlayerRaceStats?
 
+    private var safariController: SFSafariViewController?
+
     var player: WKRPlayer? {
         didSet {
             updateEntries(oldPlayer: oldValue)
         }
     }
 
-    // MARK: - View Life Cycle
+    // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +40,6 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
-
-        navigationController?.navigationBar.barStyle = .wkrStyle
 
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
@@ -53,7 +53,12 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
                                                             action: #selector(doneButtonPressed))
     }
 
-    // MARK: - Logic
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        safariController?.preferredControlTintColor = .wkrTextColor(for: traitCollection)
+    }
+
+    // MARK: - Logic -
 
     // Update the table, with the goal of only updating the changed entries
     // 1. Make sure the player is the same as the currently displayed one (else update the whole table)
@@ -165,14 +170,14 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         })
     }
 
-    // MARK: - Actions
+    // MARK: - Actions -
 
     @IBAction func doneButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
-    // MARK: - UIScrollViewDelegate
+    // MARK: - UIScrollViewDelegate -
 
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isUserScrolling = true
@@ -185,7 +190,7 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
         }
     }
 
-    // MARK: - Table view data source
+    // MARK: - Table view data source -
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -246,20 +251,23 @@ internal class HistoryViewController: UITableViewController, SFSafariViewControl
 
         let controller = SFSafariViewController(url: entry.page.url)
         controller.delegate = self
-        controller.preferredControlTintColor = UIColor.wkrTextColor
+
+        controller.preferredControlTintColor = .wkrTextColor(for: traitCollection)
         if UIDevice.current.userInterfaceIdiom == .pad {
             controller.modalPresentationStyle = .overFullScreen
         }
         present(controller, animated: true, completion: nil)
+        safariController = controller
 
         PlayerAnonymousMetrics.log(event: .openedHistorySF)
     }
 
-    // MARK: - SFSafariViewControllerDelegate
+    // MARK: - SFSafariViewControllerDelegate -
 
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         tableView.deselectRow(at: indexPath, animated: true)
+        safariController = nil
     }
 
 }

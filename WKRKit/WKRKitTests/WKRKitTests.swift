@@ -441,4 +441,29 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertEqual(stats.raw[1].value, "5 Pixels")
     }
 
+    func testTiebreakVoting() {
+        let pageOne = WKRPage.mockApple(withSuffix: "One")
+        let pageTwo = WKRPage.mockApple(withSuffix: "Two")
+        var vote = WKRVoteInfo(pages: [pageOne, pageTwo])
+
+        let playerOne = WKRPlayerProfile.mock(named: "Andrew")
+        let playerTwo = WKRPlayerProfile.mock(named: "Carol")
+        vote.player(playerOne, votedFor: pageOne)
+        vote.player(playerTwo, votedFor: pageTwo)
+
+        for var diff in 0..<10 {
+            var oneWins = 0
+            let count = 10000
+            for _ in 0..<count {
+                let result = vote.selectFinalPage(with: [
+                    playerOne: 10,
+                    playerTwo: 10 + diff
+                ])
+                oneWins += result.0 == pageOne ? 1 : 0
+            }
+            let winPercent = Double(oneWins) / Double(count)
+            print("\(diff): \(winPercent)")
+        }
+    }
+
 }

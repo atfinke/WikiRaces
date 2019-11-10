@@ -12,8 +12,9 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-import Crashlytics
+#if !targetEnvironment(macCatalyst)
 import FirebaseCore
+#endif
 
 @UIApplicationMain
 internal class AppDelegate: WKRAppDelegate {
@@ -21,17 +22,12 @@ internal class AppDelegate: WKRAppDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        guard let url = Bundle.main.url(forResource: "fabric.apikey", withExtension: nil),
-            let key = try? String(contentsOf: url).replacingOccurrences(of: "\n", with: "") else {
-                fatalError("Failed to get API keys")
-        }
-
-        Crashlytics.start(withAPIKey: key)
-
+        #if !targetEnvironment(macCatalyst)
         FirebaseApp.configure()
+        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
+        #endif
 
         configureConstants()
-        configureAppearance()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showBanHammer),
@@ -42,7 +38,6 @@ internal class AppDelegate: WKRAppDelegate {
         PlayerDatabaseMetrics.shared.connect()
 
         logCloudStatus()
-        logInterfaceMode()
         logBuild()
 
         cleanTempDirectory()
@@ -51,9 +46,9 @@ internal class AppDelegate: WKRAppDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window = WKRWindow(frame: UIScreen.main.bounds)
         let controller = MenuViewController()
-        let nav = UINavigationController(rootViewController: controller)
+        let nav = WKRUINavigationController(rootViewController: controller)
         nav.setNavigationBarHidden(true, animated: false)
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
@@ -61,18 +56,13 @@ internal class AppDelegate: WKRAppDelegate {
         return true
     }
 
-    // MARK: - Logging
+    // MARK: - Logging -
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
             PlayerAnonymousMetrics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
-    }
-
-    private func logInterfaceMode() {
-        let mode = WKRUIStyle.isDark ? "Dark" : "Light"
-        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Mode": mode])
     }
 
     private func logBuild() {

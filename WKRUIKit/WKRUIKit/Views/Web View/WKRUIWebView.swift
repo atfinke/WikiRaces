@@ -10,23 +10,23 @@ import WebKit
 
 public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
-    // MARK: - Type
+    // MARK: - Types -
 
     // WKScriptMessageHandler leaks due to a retain cycle
     private class ScriptMessageDelegate: NSObject, WKScriptMessageHandler {
 
-        // MARK: - Properties
+        // MARK: - Properties -
 
         weak var delegate: WKScriptMessageHandler?
 
-        // MARK: - Initalization
+        // MARK: - Initalization -
 
         init(delegate: WKScriptMessageHandler) {
             self.delegate = delegate
             super.init()
         }
 
-        // MARK: - WKScriptMessageHandler
+        // MARK: - WKScriptMessageHandler -
 
         func userContentController(_ userContentController: WKUserContentController,
                                    didReceive message: WKScriptMessage) {
@@ -34,7 +34,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         }
     }
 
-    // MARK: - Properties
+    // MARK: - Properties -
 
     public var text: String? {
         set {
@@ -70,7 +70,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         }
     }
 
-    // MARK: - Initialization
+    // MARK: - Initialization -
 
     public init() {
         guard let config = WKRUIWebView.raceConfig() else {
@@ -82,7 +82,6 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         config.userContentController.add(messageDelegate, name: "scrollY")
 
         isOpaque = false
-        backgroundColor = UIColor.wkrBackgroundColor
         translatesAutoresizingMaskIntoConstraints = false
 
         allowsLinkPreview = false
@@ -114,7 +113,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         loadingView.addSubview(linkCountLabel)
 
         slowConnectionLabel.text = "IF YOU SEE THIS FOR > 10 SECONDS, PLEASE LMK."
-        slowConnectionLabel.textColor = UIColor.white
+        slowConnectionLabel.textColor = .white
         slowConnectionLabel.textAlignment = .center
         slowConnectionLabel.numberOfLines = 0
 
@@ -170,7 +169,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         configuration.userContentController.removeScriptMessageHandler(forName: "scrollY")
     }
 
-    // MARK: - State Updates
+    // MARK: - State Updates -
 
     @objc
     func keyboardWillShow() {
@@ -201,7 +200,7 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         }, completion: nil)
     }
 
-    // MARK: - Web View Configuration
+    // MARK: - Web View Configuration -
 
     private static func raceConfig() -> WKWebViewConfiguration? {
         let config = WKWebViewConfiguration()
@@ -236,20 +235,11 @@ public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         userContentController.addUserScript(endStyleScript)
         userContentController.addUserScript(cleanScript)
 
-        if WKRUIStyle.isDark {
-            let startStyleScriptDark = WKUserScript(source: WKRUIKitConstants.current.styleScriptDark(),
-                                                injectionTime: .atDocumentStart)
-            let endStyleScriptDark = WKUserScript(source: WKRUIKitConstants.current.styleScriptDark(),
-                                              injectionTime: .atDocumentEnd)
-            userContentController.addUserScript(startStyleScriptDark)
-            userContentController.addUserScript(endStyleScriptDark)
-        }
-
         config.userContentController = userContentController
         return config
     }
 
-    // MARK: - WKScriptMessageHandler
+    // MARK: - WKScriptMessageHandler -
 
     public func userContentController(_ userContentController: WKUserContentController,
                                       didReceive message: WKScriptMessage) {

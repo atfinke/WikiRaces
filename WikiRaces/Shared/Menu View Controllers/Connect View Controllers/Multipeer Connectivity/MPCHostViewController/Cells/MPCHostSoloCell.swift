@@ -18,7 +18,6 @@ internal class MPCHostSoloCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = UIColor.wkrBackgroundColor
         textLabel?.text = "Solo Race"
         textLabel?.textColor = UIColor(red: 0,
                                        green: 122.0 / 255.0,

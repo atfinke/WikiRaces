@@ -73,7 +73,7 @@ public class WKRGameManager {
             createPageNavigation()
         }
     }
-    internal let alertView = WKRUIAlertView()
+    public let alertView = WKRUIAlertView()
 
     // MARK: - Initialization
 
@@ -119,14 +119,9 @@ public class WKRGameManager {
                 resultsUpdate(.resultsInfo(results))
             }
         }
-        
 
         configure(network: peerNetwork)
         peerNetwork.send(object: WKRCodable(self.localPlayer))
-    }
-
-    deinit {
-        alertView.removeFromSuperview()
     }
 
     // MARK: - User Interface
