@@ -59,7 +59,7 @@ extension MPCHostViewController {
             }
             cell.isEnabled = isAutoInviteOn
             cell.onToggle = { [weak self] toggle in
-                self?.isAutoInviteOn = true
+                self?.isAutoInviteOn = toggle
                 PlayerAnonymousMetrics.log(event: .autoInviteToggled)
             }
             return cell
