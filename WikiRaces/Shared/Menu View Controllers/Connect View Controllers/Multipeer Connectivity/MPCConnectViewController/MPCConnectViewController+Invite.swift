@@ -33,8 +33,10 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                 let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
                 PlayerAnonymousMetrics.log(event: .error(info))
 
-                showError(title: "Connection Issue",
-                          message: "The connection to the host was lost.")
+                DispatchQueue.main.async {
+                    self.showError(title: "Connection Issue",
+                                   message: "The connection to the host was lost.")
+                }
                 return
             }
             start()
