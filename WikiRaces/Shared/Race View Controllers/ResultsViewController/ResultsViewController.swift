@@ -263,7 +263,11 @@ internal class ResultsViewController: CenteredTableViewController {
 
         var newIndexes = (0..<oldInfo.playerCount).map { $0 }
         for (index, player) in previousPlayerOrder.enumerated() {
-            guard let newIndex = newPlayerOrder.firstIndex(of: player) else { fatalError() }
+            guard let newIndex = newPlayerOrder.firstIndex(of: player) else {
+                // unexpected state
+                tableView.reloadData()
+                return
+            }
             newIndexes[index] = newIndex
         }
 
