@@ -22,12 +22,19 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         request.maxPlayers = maxPlayerCount
         if let invite = GlobalRaceHelper.shared.lastInvite,
             let controller = GKMatchmakerViewController(invite: invite) {
+
+                    PlayerAnonymousMetrics.log(event: .userAction("issue#119: invite"))
+
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
+            self.controller = controller
             GlobalRaceHelper.shared.lastInvite = nil
         } else if let controller = GKMatchmakerViewController(matchRequest: request) {
+                    PlayerAnonymousMetrics.log(event: .userAction("issue#119: matchRequest"))
+
             controller.matchmakerDelegate = self
             present(controller, animated: true, completion: nil)
+            self.controller = controller
             #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
             findTrace = Performance.startTrace(name: "Global Race Find Trace")
             #endif
@@ -39,6 +46,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func sendStartMessageToPlayers() {
+                PlayerAnonymousMetrics.log(event: .userAction("issue#119: sendStartMessageToPlayers"))
+
         func fail() {
             showError(title: "Unable To Start Match",
                       message: "Please try again later.")
@@ -69,6 +78,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     // MARK: - GKMatchDelegate -
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+                PlayerAnonymousMetrics.log(event: .userAction("issue#119: didReceive"))
+
         if isPlayerHost, WKRSeenFinalArticlesStore.isRemoteTransferData(data) {
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
@@ -90,12 +101,16 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     // MARK: - GKMatchmakerViewControllerDelegate -
 
     func matchmakerViewControllerWasCancelled(_ viewController: GKMatchmakerViewController) {
+                PlayerAnonymousMetrics.log(event: .userAction("issue#119: wasCancelled"))
+
         dismiss(animated: true) {
             self.pressedCancelButton()
         }
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+                PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFailWithError"))
+
         let info = "matchmaker...didFailWithError: " + error.localizedDescription
         PlayerAnonymousMetrics.log(event: .error(info))
 
@@ -106,6 +121,8 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+                PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
+
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         findTrace?.stop()
         #endif

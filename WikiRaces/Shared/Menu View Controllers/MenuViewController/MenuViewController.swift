@@ -75,6 +75,8 @@ internal class MenuViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: menu viewDidAppear"))
+
         UIApplication.shared.isIdleTimerDisabled = false
 
         // adjusts views before animation if rotation occured
