@@ -269,7 +269,7 @@ class MenuView: UIView {
         UserDefaults.standard.set(true, forKey: "PromptedGlobalRacesPopularity")
 
         //swiftlint:disable:next line_length
-        let message = "Most global races are completed with invited friends. Invite a friend for the best chance at joining a race."
+        let message = "Most global races are started with invited friends. Invite a friend for the best chance at joining a race."
         let alertController = UIAlertController(title: "Global Races", message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in

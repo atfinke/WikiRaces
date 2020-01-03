@@ -108,7 +108,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 1100;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
 					145623D31F8DE63C00B1ECAC = {
@@ -304,6 +304,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WKRCloudStats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRCloudStats;
@@ -321,6 +322,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WKRCloudStats/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRCloudStats;
