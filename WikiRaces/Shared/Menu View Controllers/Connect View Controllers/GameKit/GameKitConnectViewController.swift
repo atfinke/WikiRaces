@@ -22,6 +22,7 @@ class GameKitConnectViewController: ConnectViewController {
     var isPlayerHost = false
     var hostPlayerAlias: String?
     var match: GKMatch?
+    weak var controller: GKMatchmakerViewController?
 
     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var findTrace: Trace?
@@ -34,8 +35,8 @@ class GameKitConnectViewController: ConnectViewController {
         setupCoreInterface()
 
         onQuit = { [weak self] in
-            self?.match?.delegate = nil
-            self?.match?.disconnect()
+            guard let self = self else { return }
+            self.teardown()
         }
 
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
@@ -47,6 +48,8 @@ class GameKitConnectViewController: ConnectViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: viewDidAppear"))
 
         guard isFirstAppear else {
             return
@@ -64,6 +67,18 @@ class GameKitConnectViewController: ConnectViewController {
         }
 
         toggleCoreInterface(isHidden: false, duration: 0.5)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: viewDidDisappear"))
+    }
+
+    private func teardown() {
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: teardown game connect"))
+        controller?.matchmakerDelegate = nil
+        match?.delegate = nil
+        match?.disconnect()
     }
 
 }

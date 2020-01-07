@@ -166,7 +166,10 @@ internal class GameViewController: UIViewController {
     }
 
     deinit {
-        gameManager.alertView.removeFromSuperview()
+        let alertView = gameManager.alertView
+        DispatchQueue.main.async {
+            alertView.removeFromSuperview()
+        }
     }
 
     // MARK: - User Actions

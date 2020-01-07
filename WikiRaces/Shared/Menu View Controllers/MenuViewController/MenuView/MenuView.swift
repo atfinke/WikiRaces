@@ -262,4 +262,26 @@ class MenuView: UIView {
         return true
     }
 
+    func promptGlobalRacesPopularity() -> Bool {
+        guard !UserDefaults.standard.bool(forKey: "PromptedGlobalRacesPopularity") else {
+            return false
+        }
+        UserDefaults.standard.set(true, forKey: "PromptedGlobalRacesPopularity")
+
+        //swiftlint:disable:next line_length
+        let message = "Most global races are started with invited friends. Invite a friend for the best chance at joining a race."
+        let alertController = UIAlertController(title: "Global Races", message: message, preferredStyle: .alert)
+
+        let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            PlayerAnonymousMetrics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
+            self.animateMenuOut {
+                self.listenerUpdate?(.presentGlobalConnect)
+            }
+        })
+        alertController.addAction(action)
+
+        listenerUpdate?(.presentAlert(alertController))
+        return true
+    }
+
 }

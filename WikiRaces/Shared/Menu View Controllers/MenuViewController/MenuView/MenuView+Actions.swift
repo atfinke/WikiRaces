@@ -36,6 +36,10 @@ extension MenuView {
             return
         }
 
+        guard !promptGlobalRacesPopularity() else {
+            return
+        }
+
         animateMenuOut {
             self.listenerUpdate?(.presentGlobalConnect)
         }

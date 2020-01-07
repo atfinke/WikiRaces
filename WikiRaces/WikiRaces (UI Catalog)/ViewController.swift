@@ -86,7 +86,7 @@ internal class ViewController: UIViewController {
                     random()
                 }
 
-                if self.players.filter ({$0.state == .racing }).isEmpty && !self.rendered {
+                if self.players.filter({$0.state == .racing }).isEmpty && !self.rendered {
                     self.rendered = true
                     for player in self.players {
                         ResultRenderer().render(with: controller.resultsInfo!,
