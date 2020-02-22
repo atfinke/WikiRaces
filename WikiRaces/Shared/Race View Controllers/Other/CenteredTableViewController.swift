@@ -43,7 +43,7 @@ internal class CenteredTableViewController: UIViewController {
 
     let reuseIdentifier = "cell"
     let tableView = WKRUICenteredTableView()
-    private let overlayButton = WKRUIButton()
+    let overlayButton = WKRUIButton()
 
     var contentView: UIView!
     private var overlayBottomConstraint: NSLayoutConstraint!
