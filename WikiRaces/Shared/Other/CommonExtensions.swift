@@ -57,11 +57,12 @@ extension UIView {
     }
 
     static func animateFlash(withDuration duration: TimeInterval,
+                             toAlpha alpha: CGFloat = 0,
                              items: [UIView],
                              whenHidden: (() -> Void)?,
                              completion: (() -> Void)?) {
         UIView.animate(withDuration: duration / 2.0, animations: {
-            items.forEach { $0.alpha = 0.0 }
+            items.forEach { $0.alpha = alpha }
         }, completion: { _ in
             whenHidden?()
             UIView.animate(withDuration: duration / 2.0, animations: {

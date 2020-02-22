@@ -31,6 +31,7 @@ internal class ResultsViewController: CenteredTableViewController {
     var shareResultsBarButtonItem: UIBarButtonItem?
 
     var isAnimatingToPointsStandings = false
+    var isPulsingReadyButton = false
     var hasAnimatedToPointsStandings = false
 
     let resultRenderer = ResultRenderer()
@@ -236,14 +237,43 @@ internal class ResultsViewController: CenteredTableViewController {
                 return
         }
 
+        var isAnotherPlayerReady = false
+        var isLocalPlayerReady = false
         for index in 0..<resultsInfo.playerCount {
             let player = resultsInfo.raceRankingsPlayer(at: index)
             guard let cell = tableView.cellForRow(at: IndexPath(row: index)) as? ResultsTableViewCell else {
                 tableView.reloadData()
                 return
             }
-            cell.isShowingCheckmark = readyStates.isPlayerReady(player)
+            let isPlayerReady = readyStates.isPlayerReady(player)
+            cell.isShowingCheckmark = isPlayerReady
+
+            if player == localPlayer {
+                isLocalPlayerReady = isPlayerReady
+            } else if isPlayerReady {
+                isAnotherPlayerReady = true
+            }
         }
+
+        if isAnotherPlayerReady && !isLocalPlayerReady && !isAnimatingToPointsStandings {
+            isAnimatingToPointsStandings = true
+            animateButtonLabel()
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        }
+    }
+
+    func animateButtonLabel() {
+        guard viewIfLoaded?.window != nil,
+            let label = overlayButton.titleLabel else {
+            return
+        }
+        UIView.animateFlash(withDuration: 2,
+                            toAlpha: 0.25,
+                            items: [label],
+                            whenHidden: nil,
+                            completion: {
+            self.animateButtonLabel()
+        })
     }
 
     private func updateTableView(_ oldResultsInfo: WKRResultsInfo? = nil) {

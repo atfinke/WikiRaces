@@ -39,6 +39,7 @@
 		143BB7181F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
 		143BB7191F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
 		143BB7351F60DF4A00D00541 /* MPCConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7341F60DF4A00D00541 /* MPCConnectViewController.swift */; };
+		143FC31C2401BB0900AB313A /* MPCHostAutoInviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141854DE2373666A008C988A /* MPCHostAutoInviteCell.swift */; };
 		14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
 		14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
 		14495D8A21FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
@@ -1497,6 +1498,7 @@
 				14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */,
 				14DF31BB21169372005BA432 /* MPCConnectViewController+Invite.swift in Sources */,
 				14B2DD4E22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */,
+				143FC31C2401BB0900AB313A /* MPCHostAutoInviteCell.swift in Sources */,
 				144A102D202FC7A2003DB51A /* CenteredTableViewController.swift in Sources */,
 				14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */,
 				14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */,
@@ -1724,6 +1726,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
+				CURRENT_PROJECT_VERSION = 6344;
 				DEFINES_MODULE = YES;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -1740,7 +1743,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.02;
 				OTHER_LDFLAGS = " -ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -1758,6 +1761,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
+				CURRENT_PROJECT_VERSION = 6344;
 				DEFINES_MODULE = YES;
 				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -1774,7 +1778,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.02;
 				OTHER_LDFLAGS = " -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
