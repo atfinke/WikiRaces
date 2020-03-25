@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import WKRUIKit
 
-class WKRWindow: UIWindow {
-    override func layoutSubviews() {
+public class WKRUIWindow: UIWindow {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         backgroundColor = .wkrBackgroundColor(for: traitCollection)
     }

@@ -1,5 +1,5 @@
 //
-//  CommonExtensions.swift
+//  WKRUIKit+Common.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 
 extension Bundle {
-    var appInfo: (build: Int, version: String) {
+    public var appInfo: (build: Int, version: String) {
         guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleBuild = Int(bundleBuildString),
             let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
@@ -21,30 +21,30 @@ extension Bundle {
 }
 
 extension NSNotification.Name {
-    static let localPlayerQuit = NSNotification.Name(rawValue: "LocalPlayerQuit")
+    static public let localPlayerQuit = NSNotification.Name(rawValue: "LocalPlayerQuit")
 }
 
 extension IndexPath {
-    init(row: Int) {
+    public init(row: Int) {
         self.init(row: row, section: 0)
     }
 }
 
 extension UINavigationController {
-    var rootViewController: UIViewController? {
+    public var rootViewController: UIViewController? {
         return viewControllers.first
     }
 }
 
 extension UIAlertController {
-    func addCancelAction(title: String) {
+    public func addCancelAction(title: String) {
         let action = UIAlertAction(title: title, style: .cancel, handler: nil)
         addAction(action)
     }
 }
 
 extension UIView {
-    static func animate(withDuration duration: Double,
+    static public func animate(withDuration duration: Double,
                         delay: Double,
                         animations: @escaping () -> Void,
                         completion: ((Bool) -> Void)? = nil) {
@@ -56,7 +56,7 @@ extension UIView {
                        completion: completion)
     }
 
-    static func animateFlash(withDuration duration: TimeInterval,
+    static public func animateFlash(withDuration duration: TimeInterval,
                              toAlpha alpha: CGFloat = 0,
                              items: [UIView],
                              whenHidden: (() -> Void)?,
@@ -77,7 +77,7 @@ extension UIView {
 extension SKStoreReviewController {
     private static let shouldPromptForRatingKey = "ShouldPromptForRating"
 
-    static var shouldPromptForRating: Bool {
+    static public var shouldPromptForRating: Bool {
         get {
             return UserDefaults.standard.bool(forKey: shouldPromptForRatingKey)
         }
@@ -88,7 +88,7 @@ extension SKStoreReviewController {
 }
 
 extension UIApplication {
-    func openSettings() {
+    public func openSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             fatalError("Settings URL nil")
         }

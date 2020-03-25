@@ -46,7 +46,7 @@ internal class AppDelegate: WKRAppDelegate {
             UIView.setAnimationsEnabled(false)
         }
 
-        window = WKRWindow(frame: UIScreen.main.bounds)
+        window = WKRUIWindow(frame: UIScreen.main.bounds)
         let controller = MenuViewController()
         let nav = WKRUINavigationController(rootViewController: controller)
         nav.setNavigationBarHidden(true, animated: false)

@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Project E/Project E.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:WikiRaces/WikiRaces.xcodeproj">
    </FileRef>
    <FileRef

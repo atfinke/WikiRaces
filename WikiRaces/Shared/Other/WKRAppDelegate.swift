@@ -14,7 +14,7 @@ import WKRUIKit
 
 internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: WKRWindow?
+    var window: WKRUIWindow?
 
     func configureConstants() {
         WKRKitConstants.updateConstants()
