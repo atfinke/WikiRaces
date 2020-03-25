@@ -1,5 +1,0 @@
-framework module FirebaseABTesting {
-umbrella header "FirebaseABTesting.h"
-export *
-module * { export * }
-}
