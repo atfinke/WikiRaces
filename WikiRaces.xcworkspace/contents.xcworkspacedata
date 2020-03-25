@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Project E/Project E.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:WikiRaces/WikiRaces.xcodeproj">
    </FileRef>
    <FileRef
@@ -18,5 +15,8 @@
    </FileRef>
    <FileRef
       location = "group:WKRCloudStats/WKRCloudStats.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Project E/Project E.xcodeproj">
    </FileRef>
 </Workspace>
