@@ -38,6 +38,11 @@ extension MPCConnectViewController {
         declineButton.addTarget(self, action: #selector(declineInvite), for: .touchUpInside)
         inviteView.addSubview(declineButton)
 
+        if #available(iOS 13.4, *) {
+            acceptButton.isPointerInteractionEnabled = true
+            declineButton.isPointerInteractionEnabled = true
+        }
+
         setupConstraints()
     }
 

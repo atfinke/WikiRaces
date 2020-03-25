@@ -82,6 +82,9 @@ class ConnectViewController: UIViewController {
     // MARK: - Core Interface -
 
     func setupCoreInterface() {
+        if #available(iOS 13.4, *) {
+            cancelButton.isPointerInteractionEnabled = true
+        }
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL",
         spacing: 1.5), for: .normal)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false

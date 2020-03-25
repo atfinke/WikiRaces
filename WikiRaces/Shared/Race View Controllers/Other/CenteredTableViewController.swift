@@ -72,6 +72,7 @@ internal class CenteredTableViewController: UIViewController {
     private func setupInterface() {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrLightBlurEffect)
 
+        tableView.clipsToBounds = false
         tableView.estimatedRowHeight = 0
         tableView.isUserInteractionEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false

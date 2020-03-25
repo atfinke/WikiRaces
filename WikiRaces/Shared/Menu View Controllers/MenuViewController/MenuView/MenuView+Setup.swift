@@ -107,6 +107,9 @@ extension MenuView {
         createLocalRaceButton.addTarget(self, action: #selector(createLocalRace), for: .touchUpInside)
         topView.addSubview(createLocalRaceButton)
 
+        if #available(iOS 13.4, *) {
+            localOptionsBackButton.isPointerInteractionEnabled = true
+        }
         localOptionsBackButton.setImage(UIImage(named: "Back")!, for: .normal)
         localOptionsBackButton.translatesAutoresizingMaskIntoConstraints = false
         localOptionsBackButton.addTarget(self, action: #selector(localOptionsBackButtonPressed), for: .touchUpInside)

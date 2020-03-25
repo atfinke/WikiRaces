@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import WKRKit
 
-internal class VotingTableViewCell: UITableViewCell {
+internal class VotingTableViewCell: PointerInteractionTableViewCell {
 
     // MARK: - Properties -
 
@@ -67,9 +67,25 @@ internal class VotingTableViewCell: UITableViewCell {
 
         addSubview(stackView)
 
+        let leftMarginConstraint = NSLayoutConstraint(item: stackView,
+                                                      attribute: .left,
+                                                      relatedBy: .equal,
+                                                      toItem: self,
+                                                      attribute: .leftMargin,
+                                                      multiplier: 1.0,
+                                                      constant: 0.0)
+
+        let rightMarginConstraint = NSLayoutConstraint(item: stackView,
+                                                   attribute: .right,
+                                                   relatedBy: .equal,
+                                                   toItem: self,
+                                                   attribute: .rightMargin,
+                                                   multiplier: 1.0,
+                                                   constant: 0.0)
+
         let constraints = [
-            stackView.leftAnchor.constraint(equalTo: leftAnchor),
-            stackView.rightAnchor.constraint(equalTo: rightAnchor),
+            leftMarginConstraint,
+            rightMarginConstraint,
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ]
