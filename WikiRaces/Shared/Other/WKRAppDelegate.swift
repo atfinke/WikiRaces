@@ -14,9 +14,9 @@ import WKRUIKit
 
 internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: WKRUIWindow?
+    final var window: WKRUIWindow?
 
-    func configureConstants() {
+    final func configureConstants() {
         WKRKitConstants.updateConstants()
         WKRUIKitConstants.updateConstants()
 
@@ -24,7 +24,7 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         SKStoreReviewController.shouldPromptForRating = false
     }
 
-    func cleanTempDirectory() {
+    final func cleanTempDirectory() {
         let maxDayAge = 14.0
         let maxTimeInterval = maxDayAge * 60 * 60
         let manager = FileManager.default

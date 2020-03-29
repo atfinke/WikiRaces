@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import WKRKit
 
-internal class VotingTableViewCell: PointerInteractionTableViewCell {
+final internal class VotingTableViewCell: PointerInteractionTableViewCell {
 
     // MARK: - Properties -
 

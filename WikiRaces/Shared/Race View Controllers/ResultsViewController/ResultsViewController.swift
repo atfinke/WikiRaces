@@ -10,7 +10,8 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-internal class ResultsViewController: CenteredTableViewController {
+//swiftlint:disable:next type_body_length
+final internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Types -
 

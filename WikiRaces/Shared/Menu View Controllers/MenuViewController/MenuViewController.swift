@@ -14,7 +14,7 @@ import WKRKit
 import WKRUIKit
 
 /// The main menu view controller
-internal class MenuViewController: UIViewController {
+final internal class MenuViewController: UIViewController {
 
     // MARK: - View -
 

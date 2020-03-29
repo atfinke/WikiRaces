@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 
 extension Bundle {
-    public var appInfo: (build: Int, version: String) {
+    final public var appInfo: (build: Int, version: String) {
         guard let bundleBuildString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let bundleBuild = Int(bundleBuildString),
             let bundleVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
@@ -31,13 +31,13 @@ extension IndexPath {
 }
 
 extension UINavigationController {
-    public var rootViewController: UIViewController? {
+    final public var rootViewController: UIViewController? {
         return viewControllers.first
     }
 }
 
 extension UIAlertController {
-    public func addCancelAction(title: String) {
+    final public func addCancelAction(title: String) {
         let action = UIAlertAction(title: title, style: .cancel, handler: nil)
         addAction(action)
     }
@@ -88,7 +88,7 @@ extension SKStoreReviewController {
 }
 
 extension UIApplication {
-    public func openSettings() {
+    final public func openSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
             fatalError("Settings URL nil")
         }

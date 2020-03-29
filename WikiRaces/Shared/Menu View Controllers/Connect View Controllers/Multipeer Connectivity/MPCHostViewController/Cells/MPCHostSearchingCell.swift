@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class MPCHostSearchingCell: UITableViewCell {
+final internal class MPCHostSearchingCell: UITableViewCell {
 
     // MARK: - Properties -
 

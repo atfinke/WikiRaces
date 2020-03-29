@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovingPuzzleView: UIView, UIScrollViewDelegate {
+final class MovingPuzzleView: UIView, UIScrollViewDelegate {
 
     private var puzzleTimer: Timer?
     /// The puzzle piece view

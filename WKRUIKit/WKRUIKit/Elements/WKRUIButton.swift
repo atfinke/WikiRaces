@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUIButton: UIButton {
+final public class WKRUIButton: UIButton {
 
     // MARK: - Properties -
 

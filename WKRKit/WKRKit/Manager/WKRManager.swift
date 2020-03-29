@@ -8,7 +8,7 @@
 
 import WKRUIKit
 
-public class WKRGameManager {
+final public class WKRGameManager {
 
     // MARK: Types
 

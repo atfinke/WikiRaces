@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import WKRUIKit
 
-internal class HelpViewController: UIViewController, WKNavigationDelegate {
+final internal class HelpViewController: UIViewController, WKNavigationDelegate {
 
     // MARK: - Properties -
 

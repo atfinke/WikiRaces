@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class HistoryTableViewCell: UITableViewCell {
+final internal class HistoryTableViewCell: UITableViewCell {
 
     // MARK: - Properties -
 

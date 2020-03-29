@@ -8,8 +8,8 @@
 
 import UIKit
 
-public class WKRUINavigationController: UINavigationController {
-    open override func viewWillLayoutSubviews() {
+final public class WKRUINavigationController: UINavigationController {
+    public override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let color: UIColor = .wkrTextColor(for: traitCollection)
         navigationBar.tintColor = color

@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class MPCHostSoloCell: UITableViewCell {
+final internal class MPCHostSoloCell: UITableViewCell {
 
     // MARK: - Properties
 

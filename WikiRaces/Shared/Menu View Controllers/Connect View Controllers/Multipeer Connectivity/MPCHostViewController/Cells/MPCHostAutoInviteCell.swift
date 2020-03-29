@@ -9,7 +9,7 @@
 import UIKit
 import WKRUIKit
 
-internal class MPCHostAutoInviteCell: UITableViewCell {
+final internal class MPCHostAutoInviteCell: UITableViewCell {
 
     // MARK: - Properties
 

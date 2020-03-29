@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class MedalView: SKView {
+final class MedalView: SKView {
 
     // MARK: - Properties -
 

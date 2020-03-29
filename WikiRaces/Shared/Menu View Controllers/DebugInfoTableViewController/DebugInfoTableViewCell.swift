@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DebugInfoTableViewCell: UITableViewCell {
+final class DebugInfoTableViewCell: UITableViewCell {
 
     // MARK: - Properties
 

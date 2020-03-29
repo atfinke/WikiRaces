@@ -9,7 +9,7 @@
 import UIKit
 import WKRUIKit
 
-internal class MenuTile: UIControl {
+final internal class MenuTile: UIControl {
 
     // MARK: - Properties -
 

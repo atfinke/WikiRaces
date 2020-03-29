@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUIAlertView: WKRUIBottomOverlayView {
+final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Types -
 

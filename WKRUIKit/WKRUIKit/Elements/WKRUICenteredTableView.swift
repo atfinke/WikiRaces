@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUICenteredTableView: UITableView {
+final public class WKRUICenteredTableView: UITableView {
 
     // MARK: - View Life Cycle
 

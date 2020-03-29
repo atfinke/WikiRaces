@@ -9,7 +9,7 @@
 import Foundation
 
 /// Subclass the allows async operation blocks
-public class WKROperation: BlockOperation {
+final public class WKROperation: BlockOperation {
 
     // MARK: - Types
 

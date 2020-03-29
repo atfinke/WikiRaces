@@ -17,7 +17,7 @@ import FirebaseCore
 #endif
 
 @UIApplicationMain
-internal class AppDelegate: WKRAppDelegate {
+final internal class AppDelegate: WKRAppDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

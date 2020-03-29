@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WKRGame {
+final public class WKRGame {
 
     // MARK: - Types
 

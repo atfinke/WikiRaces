@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-internal class ResultsTableViewCell: PointerInteractionTableViewCell {
+final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
 
     // MARK: - Properties -
 

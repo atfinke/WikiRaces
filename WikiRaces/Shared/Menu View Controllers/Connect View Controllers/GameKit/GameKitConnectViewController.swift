@@ -15,7 +15,7 @@ import WKRKit
 import FirebasePerformance
 #endif
 
-class GameKitConnectViewController: ConnectViewController {
+final class GameKitConnectViewController: ConnectViewController {
 
     // MARK: - Properties -
 

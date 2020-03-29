@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUILabel: UILabel {
+final public class WKRUILabel: UILabel {
 
     // MARK: - Properties
 

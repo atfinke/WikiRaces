@@ -10,7 +10,7 @@ import Foundation
 import WebKit
 
 /// A WKNavigationDelegate for controlling Wikipedia page loads during the race
-internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
+final internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
 
     // MARK: - Types
 

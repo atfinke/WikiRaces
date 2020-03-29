@@ -8,7 +8,7 @@
 
 import WebKit
 
-internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
+final internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
 
     // MARK: - Types
 

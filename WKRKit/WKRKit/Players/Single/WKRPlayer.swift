@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WKRPlayer: Codable, Hashable {
+final public class WKRPlayer: Codable, Hashable {
 
     // MARK: - Properties [Must not break]
 

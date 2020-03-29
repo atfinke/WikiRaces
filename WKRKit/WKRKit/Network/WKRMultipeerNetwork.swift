@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
+final internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewControllerDelegate, WKRPeerNetwork {
 
     // MARK: - Closures
 
@@ -55,7 +55,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
 
     // MARK: - MCSessionDelegate
 
-    open func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
+    public func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         do {
             let object = try WKRCodable.decoder.decode(WKRCodable.self, from: data)
             networkUpdate?(.object(object, profile: peerID.wkrProfile()))
@@ -64,7 +64,7 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
         }
     }
 
-    open func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+    public func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         DispatchQueue.main.async {
             switch state {
             case .connected: self.networkUpdate?(.playerConnected(profile: peerID.wkrProfile()))
@@ -91,20 +91,20 @@ internal class WKRMultipeerNetwork: NSObject, MCSessionDelegate, MCBrowserViewCo
 
     // Not needed
 
-    open func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                       didStartReceivingResourceWithName resourceName: String,
                       fromPeer peerID: MCPeerID,
                       with progress: Progress) {
     }
 
-    open func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                       didFinishReceivingResourceWithName resourceName: String,
                       fromPeer peerID: MCPeerID,
                       at localURL: URL?,
                       withError error: Error?) {
     }
 
-    open func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                       didReceive stream: InputStream,
                       withName streamName: String,
                       fromPeer peerID: MCPeerID) {

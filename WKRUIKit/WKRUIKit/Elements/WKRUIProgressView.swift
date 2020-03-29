@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUIProgressView: UIProgressView {
+final public class WKRUIProgressView: UIProgressView {
 
     // MARK: - Initialization
 
