@@ -120,7 +120,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                          page.title != "Wikipedia, the free encyclopedia",
                         finalArticles.contains(page.path),
                         let startingPage = startingPage,
-                        startingPage.url != page.url {
+                        startingPage.url.absoluteString.lowercased() != page.url.absoluteString.lowercased() {
                         pages.append(page)
                     } else {
                         logEvents.append(WKRLogEvent(type: .votingArticleValidationFailure,
