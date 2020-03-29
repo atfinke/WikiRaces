@@ -15,6 +15,7 @@ import WKRUIKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
+import Crashlytics
 #endif
 
 internal class MPCConnectViewController: ConnectViewController {

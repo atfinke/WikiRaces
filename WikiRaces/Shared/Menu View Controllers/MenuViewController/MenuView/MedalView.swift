@@ -23,6 +23,8 @@ class MedalView: SKView {
         ignoresSiblingOrder = true
         allowsTransparency = true
         isUserInteractionEnabled = false
+
+        preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
         medalScene.isPaused = true
     }
 

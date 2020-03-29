@@ -19,7 +19,7 @@ extension UIBlurEffect {
 
     public static var wkrLightBlurEffect: UIBlurEffect {
         if #available(iOS 13.0, *) {
-            return UIBlurEffect(style: .systemMaterial)
+            return UIBlurEffect(style: .systemThickMaterial)
         } else {
             return UIBlurEffect(style: .extraLight)
         }

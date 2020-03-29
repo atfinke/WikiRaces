@@ -157,12 +157,9 @@ class ConnectViewController: UIViewController {
         }
         alertController.addAction(action)
 
-        if showSettingsButton {
+        if showSettingsButton, let settingsURL = URL(string: UIApplication.openSettingsURLString) {
             let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
                 PlayerAnonymousMetrics.log(event: .userAction("showError:settings"))
-                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
-                    fatalError("Settings URL nil")
-                }
                 UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                 self.pressedCancelButton()
             })
