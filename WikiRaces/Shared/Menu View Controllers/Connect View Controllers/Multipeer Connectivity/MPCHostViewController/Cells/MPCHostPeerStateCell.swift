@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class MPCHostPeerStateCell: UITableViewCell {
+final internal class MPCHostPeerStateCell: UITableViewCell {
 
     // MARK: - Properties
 

@@ -13,7 +13,7 @@ internal class CenteredTableViewController: UIViewController {
 
     // MARK: - Properties
 
-    var overlayButtonTitle: String? {
+    final var overlayButtonTitle: String? {
         set {
             overlayButton.title = newValue ?? ""
         }
@@ -22,7 +22,7 @@ internal class CenteredTableViewController: UIViewController {
         }
     }
 
-    var isOverlayButtonHidden: Bool {
+    final var isOverlayButtonHidden: Bool {
         set {
             guard isInterfaceLoaded else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
@@ -38,19 +38,19 @@ internal class CenteredTableViewController: UIViewController {
         }
     }
 
-    let guideLabel = UILabel()
-    let descriptionLabel = UILabel()
+    final let guideLabel = UILabel()
+    final let descriptionLabel = UILabel()
 
-    let reuseIdentifier = "cell"
-    let tableView = WKRUICenteredTableView()
-    let overlayButton = WKRUIButton()
+    final let reuseIdentifier = "cell"
+    final let tableView = WKRUICenteredTableView()
+    final let overlayButton = WKRUIButton()
 
-    var contentView: UIView!
-    private var overlayBottomConstraint: NSLayoutConstraint!
-    private var overlayHeightConstraint: NSLayoutConstraint!
-    private var descriptionLabelBottomConstraint: NSLayoutConstraint!
+    final var contentView: UIView!
+    final private var overlayBottomConstraint: NSLayoutConstraint!
+    final private var overlayHeightConstraint: NSLayoutConstraint!
+    final private var descriptionLabelBottomConstraint: NSLayoutConstraint!
 
-    private var isInterfaceLoaded = false
+    final private var isInterfaceLoaded = false
 
     // MARK: - View Life Cycle
 
@@ -72,6 +72,7 @@ internal class CenteredTableViewController: UIViewController {
     private func setupInterface() {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrLightBlurEffect)
 
+        tableView.clipsToBounds = false
         tableView.estimatedRowHeight = 0
         tableView.isUserInteractionEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -166,7 +167,7 @@ internal class CenteredTableViewController: UIViewController {
         fatalError("overlayButtonPressed not implemented")
     }
 
-    func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
+    final func registerTableView<T: UITableViewDelegate & UITableViewDataSource>(for controller: T) {
         tableView.delegate = controller
         tableView.dataSource = controller
     }

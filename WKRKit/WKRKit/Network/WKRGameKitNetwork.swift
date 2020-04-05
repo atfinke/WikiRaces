@@ -9,7 +9,7 @@
 import Foundation
 import GameKit
 
-internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
+final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
 
     // MARK: - Closures
 

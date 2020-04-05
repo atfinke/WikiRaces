@@ -12,7 +12,7 @@ import MultipeerConnectivity
 import WKRKit
 import WKRUIKit
 
-internal class GameViewController: UIViewController {
+final internal class GameViewController: UIViewController {
 
     // MARK: - Types
 

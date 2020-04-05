@@ -21,19 +21,19 @@ class ConnectViewController: UIViewController {
     // MARK: - Interface Elements -
 
     /// General status label
-    let descriptionLabel = UILabel()
+    final let descriptionLabel = UILabel()
     /// Activity spinner
-    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    final let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
     /// The button to cancel joining/creating a race
-    let cancelButton = UIButton()
+    final let cancelButton = UIButton()
 
-    var isFirstAppear = true
-    var isShowingMatch = false
-    var onQuit: (() -> Void)?
+    final var isFirstAppear = true
+    final var isShowingMatch = false
+    final var onQuit: (() -> Void)?
 
     // MARK: - Connection -
 
-    func runConnectionTest(completion: @escaping (Bool) -> Void) {
+    final func runConnectionTest(completion: @escaping (Bool) -> Void) {
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
@@ -47,10 +47,10 @@ class ConnectViewController: UIViewController {
                     #endif
                 }
                 PlayerAnonymousMetrics.log(event: .connectionTestResult,
-                                  attributes: [
-                                    "Result": NSNumber(value: success).intValue,
-                                    "Duration": -startDate.timeIntervalSinceNow
-                    ])
+                                           attributes: [
+                                            "Result": NSNumber(value: success).intValue,
+                                            "Duration": -startDate.timeIntervalSinceNow
+                ])
                 completion(success)
             }
         }
@@ -81,9 +81,12 @@ class ConnectViewController: UIViewController {
 
     // MARK: - Core Interface -
 
-    func setupCoreInterface() {
+    final func setupCoreInterface() {
+        if #available(iOS 13.4, *) {
+            cancelButton.isPointerInteractionEnabled = true
+        }
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL",
-        spacing: 1.5), for: .normal)
+                                                           spacing: 1.5), for: .normal)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         cancelButton.alpha = 0.0
@@ -113,10 +116,10 @@ class ConnectViewController: UIViewController {
         NSLayoutConstraint.activate(constraints)
     }
 
-    func toggleCoreInterface(isHidden: Bool,
-                             duration: TimeInterval,
-                             and items: [UIView] = [],
-                             completion: (() -> Void)? = nil) {
+    final func toggleCoreInterface(isHidden: Bool,
+                                   duration: TimeInterval,
+                                   and items: [UIView] = [],
+                                   completion: (() -> Void)? = nil) {
         let views = [descriptionLabel, activityIndicatorView, cancelButton] + items
         UIView.animate(withDuration: duration,
                        animations: {
@@ -128,13 +131,13 @@ class ConnectViewController: UIViewController {
 
     // MARK: - Interface Updates -
 
-    func updateDescriptionLabel(to text: String) {
+    final func updateDescriptionLabel(to text: String) {
         descriptionLabel.attributedText = NSAttributedString(string: text.uppercased(),
                                                              spacing: 2.0,
                                                              font: UIFont.systemFont(ofSize: 20.0, weight: .semibold))
     }
 
-    func showConnectionSpeedError() {
+    final func showConnectionSpeedError() {
         showError(title: "Slow Connection",
                   message: "A fast internet connection is required to play WikiRaces.")
     }
@@ -145,7 +148,7 @@ class ConnectViewController: UIViewController {
     ///   - title: The title of the error message
     ///   - message: The message body of the error
     @objc
-    func showError(title: String, message: String, showSettingsButton: Bool = false) {
+    final func showError(title: String, message: String, showSettingsButton: Bool = false) {
         onQuit?()
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -154,12 +157,9 @@ class ConnectViewController: UIViewController {
         }
         alertController.addAction(action)
 
-        if showSettingsButton {
+        if showSettingsButton, let settingsURL = URL(string: UIApplication.openSettingsURLString) {
             let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
                 PlayerAnonymousMetrics.log(event: .userAction("showError:settings"))
-                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
-                    fatalError("Settings URL nil")
-                }
                 UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                 self.pressedCancelButton()
             })
@@ -170,7 +170,8 @@ class ConnectViewController: UIViewController {
     }
 
     /// Cancels the join/create a race action and sends player back to main menu
-    @objc func pressedCancelButton() {
+    @objc
+    final func pressedCancelButton() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         onQuit?()
 
@@ -181,8 +182,8 @@ class ConnectViewController: UIViewController {
         })
     }
 
-    func showMatch(for networkConfig: WKRPeerNetworkConfig,
-                   andHide views: [UIView]) {
+    final func showMatch(for networkConfig: WKRPeerNetworkConfig,
+                         andHide views: [UIView]) {
 
         guard !isShowingMatch else { return }
         isShowingMatch = true

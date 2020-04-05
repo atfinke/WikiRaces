@@ -12,7 +12,7 @@ import WKRUIKit
 
 import SafariServices
 
-internal class HistoryViewController: UITableViewController, SFSafariViewControllerDelegate {
+final internal class HistoryViewController: UITableViewController, SFSafariViewControllerDelegate {
 
     // MARK: - Properties -
 

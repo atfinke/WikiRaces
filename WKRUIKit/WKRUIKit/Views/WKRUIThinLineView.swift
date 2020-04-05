@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUIThinLineView: UIView {
+final public class WKRUIThinLineView: UIView {
 
     // MARK: - Initialization -
 

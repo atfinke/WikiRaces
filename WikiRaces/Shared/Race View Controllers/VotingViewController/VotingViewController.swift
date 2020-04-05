@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-internal class VotingViewController: CenteredTableViewController {
+final internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Types -
 

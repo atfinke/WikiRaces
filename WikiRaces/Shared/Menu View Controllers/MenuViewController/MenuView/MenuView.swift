@@ -10,7 +10,7 @@ import UIKit
 import StoreKit
 import WKRUIKit
 
-class MenuView: UIView {
+final class MenuView: UIView {
 
     // MARK: Types
 

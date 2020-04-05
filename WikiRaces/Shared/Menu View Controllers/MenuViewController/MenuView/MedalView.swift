@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class MedalView: SKView {
+final class MedalView: SKView {
 
     // MARK: - Properties -
 
@@ -23,6 +23,8 @@ class MedalView: SKView {
         ignoresSiblingOrder = true
         allowsTransparency = true
         isUserInteractionEnabled = false
+
+        preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
         medalScene.isPaused = true
     }
 

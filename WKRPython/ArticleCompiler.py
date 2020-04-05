@@ -130,10 +130,10 @@ def fetch_redirect(driver, article):
 
 def run_networking_test(articles):
     create_folders()
-    driver = webdriver.Firefox()
+    driver = webdriver.Safari()
 
     normal_articles = []
-    redirecting_articles = []
+    redirecting_articles = {}
     error_articles = []
 
     def save_results():
@@ -141,7 +141,7 @@ def run_networking_test(articles):
         plistlib.writePlist(sorted(normal_articles), path)
 
         path = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/RedirectingArticles.plist"
-        plistlib.writePlist(sorted(redirecting_articles), path)
+        plistlib.writePlist(redirecting_articles, path)
 
         path = "/Users/andrewfinke/Desktop/WKRPython/NetworkTests/ErrorArticles.plist"
         plistlib.writePlist(sorted(error_articles), path)
@@ -150,17 +150,16 @@ def run_networking_test(articles):
         print(article)
         try:
             url = "https://en.m.wikipedia.org/wiki" + article
-            html_page = urllib.request.urlopen(url)
-            if "Redirected from" in str(BeautifulSoup(html_page)):
+            html_page = urllib.request.urlopen(url, timeout=10)
+            if "Redirected from" in str(BeautifulSoup(html_page, features="html.parser")):
                 print("POSSIBLE REDIRECT")
                 possible_redirect = fetch_redirect(driver, article)
-                redirecting_articles.append(possible_redirect)
+                redirecting_articles[article] = possible_redirect
             else:
                 print("VALID")
                 normal_articles.append(article)
-
-        except urllib.error.HTTPError as err:
-            print("ERROR: " + str(err))
+        except:
+            print("ERROR: ")
             error_articles.append(article)
 
         if len(normal_articles) % 10 == 0:
@@ -190,7 +189,7 @@ def fetch_links_to_article(article):
         article + "&namespace=0&limit=500&hidetrans=1&hideredirs=1"
     try:
         html_page = urllib.request.urlopen(url)
-        soup = str(BeautifulSoup(html_page))
+        soup = str(BeautifulSoup(html_page, features="html.parser"))
         return soup.count('/wiki/')
     except urllib.error.HTTPError as err:
         return 0
@@ -276,11 +275,4 @@ def save_articles_to_path(articles, path):
 if __name__ == "__main__":
     articles = load_articles_at_path(
         "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
-    for i in range(0, 10):
-        print_random_articles(articles, 8)
-
-    for article in articles:
-        if not is_valid_link(article):
-            print("!!")
-            print(article)
-    # articles = fetch_links_on_article("/List_of_Disney_theme_park_attractions")
+    run_networking_test(articles)

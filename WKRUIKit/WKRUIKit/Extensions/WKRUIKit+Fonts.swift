@@ -25,6 +25,18 @@ extension UIFont {
         self.init(descriptor: fontDescriptor, size: monospaceSize)
     }
 
+    static public func systemRoundedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont? {
+        if #available(iOS 13.0, *) {
+            let font = UIFont.systemFont(ofSize: size, weight: weight)
+            guard let descriptor = font.fontDescriptor.withDesign(.rounded) else {
+                fatalError()
+            }
+            return UIFont(descriptor: descriptor, size: size)
+        } else {
+            return nil
+        }
+    }
+
 }
 
 extension NSAttributedString {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal class WKRSoloNetwork: WKRPeerNetwork {
+final internal class WKRSoloNetwork: WKRPeerNetwork {
 
     // MARK: - Closures
 

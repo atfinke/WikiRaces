@@ -6,20 +6,17 @@
 	<string>/100_metres</string>
 	<string>/10_Downing_Street</string>
 	<string>/15th_century</string>
-	<string>/16-bit</string>
 	<string>/16th_century</string>
 	<string>/18th_century</string>
 	<string>/19th_century</string>
 	<string>/20_July_plot</string>
-	<string>/20th_century</string>
-	<string>/20th_Century_Fox</string>
 	<string>/20th_Television</string>
-	<string>/21st_century</string>
+	<string>/20th_century</string>
 	<string>/21st_Century_Fox</string>
+	<string>/21st_century</string>
 	<string>/23andMe</string>
 	<string>/2D_computer_graphics</string>
 	<string>/2nd_millennium_BC</string>
-	<string>/32-bit</string>
 	<string>/3D_computer_graphics</string>
 	<string>/3D_film</string>
 	<string>/3D_modeling</string>
@@ -29,35 +26,44 @@
 	<string>/3D_scanning</string>
 	<string>/3G</string>
 	<string>/4-8-4</string>
-	<string>/4chan</string>
 	<string>/4D_film</string>
 	<string>/4G</string>
 	<string>/4K_resolution</string>
+	<string>/4chan</string>
 	<string>/60_Minutes</string>
 	<string>/64-bit_computing</string>
 	<string>/7-Eleven</string>
 	<string>/70_mm_film</string>
 	<string>/720p</string>
-	<string>/8-bit</string>
 	<string>/8-track_tape</string>
 	<string>/8_mm_video_format</string>
+	<string>/ABBA</string>
+	<string>/ABC_News</string>
+	<string>/ABC_Studios</string>
+	<string>/AC/DC</string>
+	<string>/ADX_Florence</string>
+	<string>/AK-47</string>
+	<string>/AMC_Networks</string>
+	<string>/AOL</string>
+	<string>/AOL_Radio</string>
+	<string>/ARM_architecture</string>
+	<string>/ARPANET</string>
+	<string>/ASCII</string>
+	<string>/AT%26T</string>
 	<string>/A_Bug%27s_Life</string>
-	<string>/A_cappella</string>
 	<string>/A_Christmas_Carol</string>
 	<string>/A_Goofy_Movie</string>
 	<string>/A_Pup_Named_Scooby-Doo</string>
 	<string>/A_Song_of_Ice_and_Fire</string>
+	<string>/A_cappella</string>
 	<string>/Aardvark</string>
 	<string>/Aardwolf</string>
 	<string>/Aaron_Rodgers</string>
 	<string>/Aaron_Sorkin</string>
 	<string>/Abacus</string>
-	<string>/ABBA</string>
 	<string>/Abbey</string>
 	<string>/Abbey_Road</string>
 	<string>/Abbey_Road_Studios</string>
-	<string>/ABC_News</string>
-	<string>/ABC_Studios</string>
 	<string>/Abductive_reasoning</string>
 	<string>/Abiogenesis</string>
 	<string>/Abiotic_component</string>
@@ -78,7 +84,6 @@
 	<string>/Absurdist_fiction</string>
 	<string>/Absurdity</string>
 	<string>/Abu_Dhabi</string>
-	<string>/AC/DC</string>
 	<string>/Academi</string>
 	<string>/Academic_art</string>
 	<string>/Academic_conference</string>
@@ -127,10 +132,10 @@
 	<string>/Actinide</string>
 	<string>/Actinium</string>
 	<string>/Action-adventure_game</string>
+	<string>/Action_Man</string>
 	<string>/Action_figure</string>
 	<string>/Action_film</string>
 	<string>/Action_game</string>
-	<string>/Action_Man</string>
 	<string>/Action_potential</string>
 	<string>/Action_role-playing_game</string>
 	<string>/Activation_energy</string>
@@ -142,9 +147,9 @@
 	<string>/Actuarial_science</string>
 	<string>/Actuary</string>
 	<string>/Actuator</string>
-	<string>/Adam_and_Eve</string>
 	<string>/Adam_Driver</string>
 	<string>/Adam_Sandler</string>
+	<string>/Adam_and_Eve</string>
 	<string>/Adaptation</string>
 	<string>/Adaptive_reuse</string>
 	<string>/Addiction</string>
@@ -173,12 +178,12 @@
 	<string>/Adsorption</string>
 	<string>/Adult</string>
 	<string>/Advance_Publications</string>
-	<string>/Advanced_capitalism</string>
 	<string>/Advanced_Micro_Devices</string>
+	<string>/Advanced_capitalism</string>
 	<string>/Adventure</string>
+	<string>/Adventure_Time</string>
 	<string>/Adventure_fiction</string>
 	<string>/Adventure_game</string>
-	<string>/Adventure_Time</string>
 	<string>/Adventures_by_Disney</string>
 	<string>/Adverb</string>
 	<string>/Adverse_effect</string>
@@ -186,7 +191,6 @@
 	<string>/Advocacy</string>
 	<string>/Advocacy_group</string>
 	<string>/Advocate</string>
-	<string>/ADX_Florence</string>
 	<string>/Adze</string>
 	<string>/Aegean_Sea</string>
 	<string>/Aegithalidae</string>
@@ -213,11 +217,13 @@
 	<string>/Affective_science</string>
 	<string>/Affirmative_action</string>
 	<string>/Afghan</string>
-	<string>/Afghan_afghani</string>
 	<string>/Afghan_National_Police</string>
+	<string>/Afghan_afghani</string>
 	<string>/Afghanistan</string>
 	<string>/Africa</string>
 	<string>/African_Americans</string>
+	<string>/African_Union</string>
+	<string>/African_Youth_Games</string>
 	<string>/African_art</string>
 	<string>/African_buffalo</string>
 	<string>/African_bush_elephant</string>
@@ -226,9 +232,7 @@
 	<string>/African_philosophy</string>
 	<string>/African_spoonbill</string>
 	<string>/African_studies</string>
-	<string>/African_Union</string>
 	<string>/African_wild_dog</string>
-	<string>/African_Youth_Games</string>
 	<string>/Africanized_bee</string>
 	<string>/Afro</string>
 	<string>/Afterlife</string>
@@ -258,26 +262,28 @@
 	<string>/Agrophysics</string>
 	<string>/Aida</string>
 	<string>/Aim_for_the_Ace!</string>
+	<string>/AirAsia</string>
+	<string>/AirPort_Time_Capsule</string>
+	<string>/AirTrain_JFK</string>
 	<string>/Air_Canada</string>
-	<string>/Air_charter</string>
 	<string>/Air_China</string>
+	<string>/Air_France</string>
+	<string>/Air_India</string>
+	<string>/Air_Jordan</string>
+	<string>/Air_New_Zealand</string>
+	<string>/Air_charter</string>
 	<string>/Air_combat_manoeuvring</string>
 	<string>/Air_conditioning</string>
 	<string>/Air_force</string>
-	<string>/Air_France</string>
 	<string>/Air_hockey</string>
-	<string>/Air_India</string>
-	<string>/Air_Jordan</string>
 	<string>/Air_mass</string>
 	<string>/Air_medical_services</string>
-	<string>/Air_New_Zealand</string>
 	<string>/Air_pollution</string>
 	<string>/Air_show</string>
 	<string>/Air_superiority_fighter</string>
 	<string>/Air_taxi</string>
 	<string>/Air_traffic_control</string>
 	<string>/Air_travel</string>
-	<string>/AirAsia</string>
 	<string>/Airbag</string>
 	<string>/Airbnb</string>
 	<string>/Airbrush</string>
@@ -303,13 +309,10 @@
 	<string>/Airmail</string>
 	<string>/Airplane</string>
 	<string>/Airport</string>
-	<string>/AirPort_Time_Capsule</string>
 	<string>/Airship</string>
 	<string>/Airsoft</string>
 	<string>/Airstrike</string>
-	<string>/AirTrain_JFK</string>
 	<string>/Aitraaz</string>
-	<string>/AK-47</string>
 	<string>/Akamai_Technologies</string>
 	<string>/Akbar</string>
 	<string>/Akira_Toriyama</string>
@@ -388,27 +391,26 @@
 	<string>/Almond</string>
 	<string>/Almond_milk</string>
 	<string>/Alpaca</string>
+	<string>/AlphaGo</string>
 	<string>/Alpha_Centauri</string>
 	<string>/Alpha_compositing</string>
 	<string>/Alpha_particle</string>
 	<string>/Alphabet</string>
 	<string>/Alphabet_Inc.</string>
-	<string>/AlphaGo</string>
 	<string>/Alpine_plant</string>
 	<string>/Alpine_skiing</string>
 	<string>/Alps</string>
 	<string>/Alquerque</string>
 	<string>/Alsace_wine</string>
 	<string>/Alt-right</string>
+	<string>/AltaVista</string>
 	<string>/Altai_Mountains</string>
 	<string>/Altar</string>
-	<string>/AltaVista</string>
 	<string>/Alter_ego</string>
 	<string>/Altera</string>
 	<string>/Altered_Beast</string>
 	<string>/Alternate_history</string>
 	<string>/Alternating_current</string>
-	<string>/Alternative_energy</string>
 	<string>/Alternative_metal</string>
 	<string>/Alternative_rock</string>
 	<string>/Altruism</string>
@@ -422,49 +424,46 @@
 	<string>/Amazon_Echo</string>
 	<string>/Amazon_Kindle</string>
 	<string>/Amazon_Prime</string>
-	<string>/Amazon_rainforest</string>
 	<string>/Amazon_River</string>
-	<string>/Amazon_Video</string>
 	<string>/Amazon_Web_Services</string>
+	<string>/Amazon_rainforest</string>
 	<string>/Amber</string>
 	<string>/Ambient_music</string>
 	<string>/Ambulance</string>
-	<string>/AMC_Networks</string>
 	<string>/Amchitka</string>
 	<string>/America_Sings</string>
 	<string>/American_Airlines</string>
-	<string>/American_alligator</string>
-	<string>/American_bison</string>
-	<string>/American_bullfrog</string>
 	<string>/American_Civil_War</string>
-	<string>/American_comic_book</string>
 	<string>/American_Crime_Story</string>
-	<string>/American_crocodile</string>
-	<string>/American_cuisine</string>
 	<string>/American_Dad!</string>
 	<string>/American_Dream</string>
 	<string>/American_English</string>
-	<string>/American_exceptionalism</string>
 	<string>/American_Express</string>
 	<string>/American_Film_Institute</string>
-	<string>/American_football</string>
-	<string>/American_frontier</string>
 	<string>/American_Graffiti</string>
 	<string>/American_Hustle</string>
 	<string>/American_Idiot</string>
 	<string>/American_Idol</string>
-	<string>/American_imperialism</string>
 	<string>/American_Indian_Wars</string>
 	<string>/American_League</string>
-	<string>/American_middle_class</string>
 	<string>/American_Ninja_Warrior</string>
-	<string>/American_philosophy</string>
 	<string>/American_Red_Cross</string>
 	<string>/American_Revolution</string>
-	<string>/American_robin</string>
 	<string>/American_Samoa</string>
+	<string>/American_alligator</string>
+	<string>/American_bison</string>
+	<string>/American_bullfrog</string>
+	<string>/American_comic_book</string>
+	<string>/American_crocodile</string>
+	<string>/American_cuisine</string>
+	<string>/American_exceptionalism</string>
+	<string>/American_football</string>
+	<string>/American_frontier</string>
+	<string>/American_imperialism</string>
+	<string>/American_middle_class</string>
+	<string>/American_philosophy</string>
+	<string>/American_robin</string>
 	<string>/American_studies</string>
-	<string>/American_wine</string>
 	<string>/Americas</string>
 	<string>/AmigaOS</string>
 	<string>/Amiibo</string>
@@ -497,8 +496,8 @@
 	<string>/Amygdalin</string>
 	<string>/Anaerobic_exercise</string>
 	<string>/Analgesic</string>
-	<string>/Analog_computer</string>
 	<string>/Analog_Devices</string>
+	<string>/Analog_computer</string>
 	<string>/Analog_signal</string>
 	<string>/Analog_synthesizer</string>
 	<string>/Analog_television</string>
@@ -523,11 +522,11 @@
 	<string>/Ancient_Greek</string>
 	<string>/Ancient_Greek_astronomy</string>
 	<string>/Ancient_Greek_philosophy</string>
+	<string>/Ancient_Olympic_Games</string>
+	<string>/Ancient_Rome</string>
 	<string>/Ancient_history</string>
 	<string>/Ancient_monument</string>
-	<string>/Ancient_Olympic_Games</string>
 	<string>/Ancient_philosophy</string>
-	<string>/Ancient_Rome</string>
 	<string>/Anderson_Cooper</string>
 	<string>/Andes</string>
 	<string>/Andha_Naal</string>
@@ -554,11 +553,11 @@
 	<string>/Angry_Birds</string>
 	<string>/Angus_cattle</string>
 	<string>/Animal</string>
+	<string>/Animal_Crossing</string>
+	<string>/Animal_Farm</string>
 	<string>/Animal_coloration</string>
 	<string>/Animal_communication</string>
-	<string>/Animal_Crossing</string>
 	<string>/Animal_echolocation</string>
-	<string>/Animal_Farm</string>
 	<string>/Animal_feed</string>
 	<string>/Animal_husbandry</string>
 	<string>/Animal_law</string>
@@ -568,7 +567,6 @@
 	<string>/Animal_training</string>
 	<string>/Animal_welfare</string>
 	<string>/Animaniacs</string>
-	<string>/Animated_cartoon</string>
 	<string>/Animated_documentary</string>
 	<string>/Animated_series</string>
 	<string>/Animated_sitcom</string>
@@ -627,8 +625,6 @@
 	<string>/Antwerp</string>
 	<string>/Anvil</string>
 	<string>/Anxiety</string>
-	<string>/AOL</string>
-	<string>/AOL_Radio</string>
 	<string>/Apache_HTTP_Server</string>
 	<string>/Apartheid</string>
 	<string>/Apartment</string>
@@ -644,8 +640,8 @@
 	<string>/Apollo_13</string>
 	<string>/Apollo_17</string>
 	<string>/Apollo_8</string>
-	<string>/Apollo_asteroid</string>
 	<string>/Apollo_Computer</string>
+	<string>/Apollo_asteroid</string>
 	<string>/Apollo_program</string>
 	<string>/Apostrophe</string>
 	<string>/App_store</string>
@@ -657,51 +653,51 @@
 	<string>/Appetite</string>
 	<string>/Applause</string>
 	<string>/Apple</string>
+	<string>/AppleCare</string>
+	<string>/AppleScript</string>
 	<string>/Apple_A4</string>
 	<string>/Apple_A5</string>
 	<string>/Apple_A6</string>
-	<string>/Apple_butter</string>
-	<string>/Apple_cake</string>
 	<string>/Apple_Campus</string>
-	<string>/Apple_cider</string>
-	<string>/Apple_community</string>
 	<string>/Apple_Corps</string>
-	<string>/Apple_crisp</string>
 	<string>/Apple_Developer</string>
 	<string>/Apple_I</string>
 	<string>/Apple_ID</string>
 	<string>/Apple_II</string>
+	<string>/Apple_III</string>
 	<string>/Apple_II_Plus</string>
 	<string>/Apple_II_series</string>
 	<string>/Apple_IIe</string>
 	<string>/Apple_IIe_Card</string>
-	<string>/Apple_III</string>
 	<string>/Apple_Inc.</string>
-	<string>/Apple_juice</string>
 	<string>/Apple_Lisa</string>
 	<string>/Apple_Maps</string>
 	<string>/Apple_Music</string>
 	<string>/Apple_Network_Server</string>
-	<string>/Apple_of_Discord</string>
-	<string>/Apple_pie</string>
 	<string>/Apple_Remote_Desktop</string>
-	<string>/Apple_sauce</string>
-	<string>/Apple_scab</string>
-	<string>/Apple_seed_oil</string>
 	<string>/Apple_Specialist</string>
 	<string>/Apple_Store</string>
 	<string>/Apple_TV</string>
 	<string>/Apple_Watch</string>
 	<string>/Apple_Wireless_Keyboard</string>
-	<string>/AppleCare</string>
+	<string>/Apple_butter</string>
+	<string>/Apple_cake</string>
+	<string>/Apple_cider</string>
+	<string>/Apple_community</string>
+	<string>/Apple_crisp</string>
+	<string>/Apple_juice</string>
+	<string>/Apple_of_Discord</string>
+	<string>/Apple_pie</string>
+	<string>/Apple_sauce</string>
+	<string>/Apple_scab</string>
+	<string>/Apple_seed_oil</string>
 	<string>/Applecrab</string>
-	<string>/AppleScript</string>
 	<string>/Application_layer</string>
 	<string>/Application_software</string>
+	<string>/Applied_Materials</string>
 	<string>/Applied_arts</string>
 	<string>/Applied_economics</string>
 	<string>/Applied_ethics</string>
-	<string>/Applied_Materials</string>
 	<string>/Applied_mathematics</string>
 	<string>/Applied_mechanics</string>
 	<string>/Applied_physics</string>
@@ -717,9 +713,9 @@
 	<string>/Aquarium</string>
 	<string>/Aqueous_solution</string>
 	<string>/Aquifer</string>
-	<string>/Arab_cuisine</string>
 	<string>/Arab_League</string>
 	<string>/Arab_Spring</string>
+	<string>/Arab_cuisine</string>
 	<string>/Arab_world</string>
 	<string>/Arabian_Desert</string>
 	<string>/Arabian_Peninsula</string>
@@ -762,10 +758,10 @@
 	<string>/Archive</string>
 	<string>/Arctic</string>
 	<string>/Arctic_Apples</string>
-	<string>/Arctic_fox</string>
 	<string>/Arctic_Monkeys</string>
 	<string>/Arctic_Ocean</string>
 	<string>/Arctic_Winter_Games</string>
+	<string>/Arctic_fox</string>
 	<string>/Arduino</string>
 	<string>/Area</string>
 	<string>/Area_51</string>
@@ -793,7 +789,6 @@
 	<string>/Arizona_Territory</string>
 	<string>/Ark_of_the_Covenant</string>
 	<string>/Arkansas</string>
-	<string>/ARM_architecture</string>
 	<string>/Armadillo</string>
 	<string>/Armenia</string>
 	<string>/Armenian_dram_sign</string>
@@ -807,30 +802,29 @@
 	<string>/Arne_Jacobsen</string>
 	<string>/Arno</string>
 	<string>/Arnold_Schwarzenegger</string>
-	<string>/ARPANET</string>
 	<string>/Arrhenius_equation</string>
 	<string>/Ars_Technica</string>
 	<string>/Arsenal_F.C.</string>
 	<string>/Arsenic</string>
 	<string>/Arson</string>
 	<string>/Art</string>
+	<string>/Art_Deco</string>
+	<string>/Art_Directors_Guild</string>
+	<string>/Art_Institute_of_Chicago</string>
+	<string>/Art_Linkletter</string>
+	<string>/Art_Nouveau</string>
 	<string>/Art_colony</string>
 	<string>/Art_critic</string>
 	<string>/Art_criticism</string>
-	<string>/Art_Deco</string>
 	<string>/Art_director</string>
-	<string>/Art_Directors_Guild</string>
 	<string>/Art_film</string>
 	<string>/Art_game</string>
 	<string>/Art_glass</string>
 	<string>/Art_history</string>
-	<string>/Art_Institute_of_Chicago</string>
 	<string>/Art_intervention</string>
-	<string>/Art_Linkletter</string>
 	<string>/Art_movement</string>
 	<string>/Art_museum</string>
 	<string>/Art_music</string>
-	<string>/Art_Nouveau</string>
 	<string>/Art_of_Disney_Animation</string>
 	<string>/Art_rock</string>
 	<string>/Art_therapy</string>
@@ -847,20 +841,19 @@
 	<string>/Artist</string>
 	<string>/Arts_centre</string>
 	<string>/Asbestos</string>
-	<string>/ASCII</string>
 	<string>/Ascot_tie</string>
 	<string>/Asia</string>
 	<string>/Asia-Pacific</string>
 	<string>/Asian_Americans</string>
 	<string>/Asian_Beach_Games</string>
-	<string>/Asian_elephant</string>
 	<string>/Asian_Games</string>
 	<string>/Asian_Indoor_Games</string>
 	<string>/Asian_Para_Games</string>
-	<string>/Asian_people</string>
-	<string>/Asian_studies</string>
 	<string>/Asian_Winter_Games</string>
 	<string>/Asian_Youth_Games</string>
+	<string>/Asian_elephant</string>
+	<string>/Asian_people</string>
+	<string>/Asian_studies</string>
 	<string>/Ask.com</string>
 	<string>/Asparagus</string>
 	<string>/Asperger_syndrome</string>
@@ -903,7 +896,6 @@
 	<string>/Astronomy</string>
 	<string>/Astrophysics</string>
 	<string>/Asus</string>
-	<string>/AT%26T</string>
 	<string>/At_sign</string>
 	<string>/Atalanta</string>
 	<string>/Atari</string>
@@ -924,17 +916,15 @@
 	<string>/Atmosphere_of_Earth</string>
 	<string>/Atmosphere_of_Jupiter</string>
 	<string>/Atmosphere_of_Mars</string>
-	<string>/Atmosphere_of_the_Moon</string>
 	<string>/Atmosphere_of_Venus</string>
+	<string>/Atmosphere_of_the_Moon</string>
 	<string>/Atmospheric_chemistry</string>
 	<string>/Atmospheric_circulation</string>
 	<string>/Atmospheric_pressure</string>
-	<string>/Atmospheric_sciences</string>
 	<string>/Atoll</string>
 	<string>/Atom</string>
 	<string>/Atomic_clock</string>
 	<string>/Atomic_force_microscopy</string>
-	<string>/Atomic_mass_unit</string>
 	<string>/Atomic_nucleus</string>
 	<string>/Atomic_number</string>
 	<string>/Atomic_orbital</string>
@@ -988,11 +978,11 @@
 	<string>/Autism_Cymru</string>
 	<string>/Autism_Is_a_World</string>
 	<string>/Auto-Tune</string>
+	<string>/AutoCAD</string>
 	<string>/Auto_polo</string>
 	<string>/Auto_racing</string>
 	<string>/Auto_rickshaw</string>
 	<string>/Autobahn</string>
-	<string>/AutoCAD</string>
 	<string>/Autodesk</string>
 	<string>/Autodidacticism</string>
 	<string>/Autograph</string>
@@ -1004,7 +994,6 @@
 	<string>/Automotive_battery</string>
 	<string>/Automotive_engineering</string>
 	<string>/Automotive_industry</string>
-	<string>/Autonomous_car</string>
 	<string>/Autonomy</string>
 	<string>/Autopia</string>
 	<string>/Autopsy</string>
@@ -1042,6 +1031,32 @@
 	<string>/Aztec_Empire</string>
 	<string>/Aztec_religion</string>
 	<string>/Aztecs</string>
+	<string>/BAFTA_Fellowship</string>
+	<string>/BASIC</string>
+	<string>/BBC</string>
+	<string>/BBC_Films</string>
+	<string>/BBC_Four</string>
+	<string>/BBC_Light_Programme</string>
+	<string>/BBC_News</string>
+	<string>/BBC_One</string>
+	<string>/BBC_Online</string>
+	<string>/BBC_Parliament</string>
+	<string>/BBC_Radio</string>
+	<string>/BBC_Sport</string>
+	<string>/BBC_Television</string>
+	<string>/BBC_Two</string>
+	<string>/BBC_World_Service</string>
+	<string>/BC_Rail</string>
+	<string>/BEAM_robotics</string>
+	<string>/BG_Group</string>
+	<string>/BMW</string>
+	<string>/BMW_3_Series</string>
+	<string>/BMW_M3</string>
+	<string>/BMX</string>
+	<string>/BMX_bike</string>
+	<string>/BMX_racing</string>
+	<string>/BP</string>
+	<string>/BURN-E</string>
 	<string>/Babe_Ruth</string>
 	<string>/Baboon</string>
 	<string>/Baby_boomers</string>
@@ -1069,14 +1084,13 @@
 	<string>/Bacteria</string>
 	<string>/Bactrian_camel</string>
 	<string>/Bad_Aibling</string>
-	<string>/Bad_breath</string>
 	<string>/Bad_Robot_Productions</string>
+	<string>/Bad_breath</string>
 	<string>/Badge</string>
 	<string>/Badger</string>
 	<string>/Badlands</string>
 	<string>/Badlands_National_Park</string>
 	<string>/Badminton</string>
-	<string>/BAFTA_Fellowship</string>
 	<string>/Bag</string>
 	<string>/Bagel</string>
 	<string>/Baghdad</string>
@@ -1179,7 +1193,6 @@
 	<string>/Baseball_glove</string>
 	<string>/Baseball_park</string>
 	<string>/Basement</string>
-	<string>/BASIC</string>
 	<string>/Basic_research</string>
 	<string>/Basilisk</string>
 	<string>/Basis_point</string>
@@ -1211,6 +1224,7 @@
 	<string>/Battery_recycling</string>
 	<string>/Batting_average</string>
 	<string>/Battle</string>
+	<string>/BattleBots</string>
 	<string>/Battle_axe</string>
 	<string>/Battle_of_Britain</string>
 	<string>/Battle_of_Champion_Hill</string>
@@ -1222,10 +1236,9 @@
 	<string>/Battle_of_Gettysburg</string>
 	<string>/Battle_of_Malvern_Hill</string>
 	<string>/Battle_of_Midway</string>
-	<string>/Battle_of_the_Crater</string>
 	<string>/Battle_of_York</string>
+	<string>/Battle_of_the_Crater</string>
 	<string>/Battle_royale_game</string>
-	<string>/BattleBots</string>
 	<string>/Battlecruiser</string>
 	<string>/Battlefield_2</string>
 	<string>/Battleship</string>
@@ -1241,20 +1254,6 @@
 	<string>/Baylor_University</string>
 	<string>/Bayonet</string>
 	<string>/Baywatch</string>
-	<string>/BBC</string>
-	<string>/BBC_Films</string>
-	<string>/BBC_Four</string>
-	<string>/BBC_Light_Programme</string>
-	<string>/BBC_News</string>
-	<string>/BBC_One</string>
-	<string>/BBC_Online</string>
-	<string>/BBC_Parliament</string>
-	<string>/BBC_Radio</string>
-	<string>/BBC_Sport</string>
-	<string>/BBC_Television</string>
-	<string>/BBC_Two</string>
-	<string>/BBC_World_Service</string>
-	<string>/BC_Rail</string>
 	<string>/Be_Our_Guest</string>
 	<string>/Be_Our_Guest_Restaurant</string>
 	<string>/Beach</string>
@@ -1266,7 +1265,6 @@
 	<string>/Beagle</string>
 	<string>/Beak</string>
 	<string>/Beam_bridge</string>
-	<string>/BEAM_robotics</string>
 	<string>/Bean</string>
 	<string>/Beanie_Babies</string>
 	<string>/Bear</string>
@@ -1281,11 +1279,11 @@
 	<string>/Bee</string>
 	<string>/Bee-eater</string>
 	<string>/Beef</string>
+	<string>/Beef_Wellington</string>
 	<string>/Beef_brain</string>
 	<string>/Beef_noodle_soup</string>
 	<string>/Beef_tenderloin</string>
 	<string>/Beef_tongue</string>
-	<string>/Beef_Wellington</string>
 	<string>/Beefsteak</string>
 	<string>/Beekeeping</string>
 	<string>/Beer</string>
@@ -1348,7 +1346,6 @@
 	<string>/Bette_Davis</string>
 	<string>/Better_Call_Saul</string>
 	<string>/Beyonc%C3%A9</string>
-	<string>/BG_Group</string>
 	<string>/Bhutan</string>
 	<string>/Biathlon</string>
 	<string>/Bible</string>
@@ -1358,20 +1355,18 @@
 	<string>/Bibliometrics</string>
 	<string>/Bibliophilia</string>
 	<string>/Bicycle</string>
-	<string>/Bicycle_lane</string>
 	<string>/Bicycle_Thieves</string>
 	<string>/Big-game_fishing</string>
 	<string>/Big_Bang</string>
 	<string>/Big_Ben</string>
 	<string>/Big_Bend_National_Park</string>
-	<string>/Big_cat</string>
-	<string>/Big_Data</string>
-	<string>/Big_data</string>
 	<string>/Big_Mac</string>
 	<string>/Big_O_notation</string>
 	<string>/Big_Star</string>
 	<string>/Big_Ten_Conference</string>
 	<string>/Big_Ten_Network</string>
+	<string>/Big_cat</string>
+	<string>/Big_data</string>
 	<string>/Bijection</string>
 	<string>/Bill_Clinton</string>
 	<string>/Bill_Cosby</string>
@@ -1387,6 +1382,9 @@
 	<string>/Binary_tree</string>
 	<string>/Binitarianism</string>
 	<string>/Binoculars</string>
+	<string>/BioShock</string>
+	<string>/BioShock_Infinite</string>
+	<string>/BioWare</string>
 	<string>/Biochemical_engineering</string>
 	<string>/Biochemist</string>
 	<string>/Biochemistry</string>
@@ -1422,12 +1420,9 @@
 	<string>/Biophysical_chemistry</string>
 	<string>/Biophysics</string>
 	<string>/Biosensor</string>
-	<string>/BioShock</string>
-	<string>/BioShock_Infinite</string>
 	<string>/Biosphere</string>
 	<string>/Biostatistics</string>
 	<string>/Biotechnology</string>
-	<string>/BioWare</string>
 	<string>/Bipedalism</string>
 	<string>/Birch</string>
 	<string>/Bird</string>
@@ -1460,28 +1455,28 @@
 	<string>/Biweekly</string>
 	<string>/Bix_Beiderbecke</string>
 	<string>/Black</string>
-	<string>/Black_and_white</string>
-	<string>/Black_bun</string>
-	<string>/Black_Death</string>
-	<string>/Black_Francis</string>
-	<string>/Black_Hills</string>
-	<string>/Black_hole</string>
-	<string>/Black_Lives_Matter</string>
-	<string>/Black_market</string>
-	<string>/Black_panther</string>
-	<string>/Black_pepper</string>
-	<string>/Black_rhinoceros</string>
-	<string>/Black_Sea</string>
-	<string>/Black_site</string>
-	<string>/Blackbeard</string>
 	<string>/BlackBerry</string>
 	<string>/BlackBerry_10</string>
 	<string>/BlackBerry_Limited</string>
 	<string>/BlackBerry_OS</string>
 	<string>/BlackBerry_World</string>
+	<string>/BlackRock</string>
+	<string>/Black_Death</string>
+	<string>/Black_Francis</string>
+	<string>/Black_Hills</string>
+	<string>/Black_Lives_Matter</string>
+	<string>/Black_Sea</string>
+	<string>/Black_and_white</string>
+	<string>/Black_bun</string>
+	<string>/Black_hole</string>
+	<string>/Black_market</string>
+	<string>/Black_panther</string>
+	<string>/Black_pepper</string>
+	<string>/Black_rhinoceros</string>
+	<string>/Black_site</string>
+	<string>/Blackbeard</string>
 	<string>/Blackboard</string>
 	<string>/Blackjack</string>
-	<string>/BlackRock</string>
 	<string>/Blacksmith</string>
 	<string>/Blade_Runner</string>
 	<string>/Blame</string>
@@ -1512,23 +1507,17 @@
 	<string>/Blossom</string>
 	<string>/Blu-ray</string>
 	<string>/Blue</string>
-	<string>/Blue_cheese</string>
-	<string>/Blue_jay</string>
 	<string>/Blue_Lias</string>
 	<string>/Blue_Network</string>
 	<string>/Blue_Origin</string>
+	<string>/Blue_cheese</string>
+	<string>/Blue_jay</string>
 	<string>/Blue_whale</string>
 	<string>/Blueberry</string>
 	<string>/Bluebird</string>
 	<string>/Blues</string>
 	<string>/Blues_rock</string>
 	<string>/Bluetooth</string>
-	<string>/BMW</string>
-	<string>/BMW_3_Series</string>
-	<string>/BMW_M3</string>
-	<string>/BMX</string>
-	<string>/BMX_bike</string>
-	<string>/BMX_racing</string>
 	<string>/Boa_constrictor</string>
 	<string>/Board_game</string>
 	<string>/Boarding_school</string>
@@ -1577,7 +1566,6 @@
 	<string>/Bologna</string>
 	<string>/Bomb</string>
 	<string>/Bomb_disposal</string>
-	<string>/Bombardier_Dash_8</string>
 	<string>/Bomber</string>
 	<string>/Bombyx_mori</string>
 	<string>/Bomis</string>
@@ -1634,16 +1622,15 @@
 	<string>/Bowls</string>
 	<string>/Bowsprit</string>
 	<string>/Box</string>
+	<string>/Box_Office_Mojo</string>
 	<string>/Box_jellyfish</string>
 	<string>/Box_office</string>
-	<string>/Box_Office_Mojo</string>
 	<string>/Box_set</string>
 	<string>/Boxer_Rebellion</string>
 	<string>/Boxer_shorts</string>
 	<string>/Boxing</string>
 	<string>/Boxing_Day</string>
 	<string>/Boycott</string>
-	<string>/BP</string>
 	<string>/Bracelet</string>
 	<string>/Bracket</string>
 	<string>/Brad_Bird</string>
@@ -1695,19 +1682,19 @@
 	<string>/British_Airways</string>
 	<string>/British_America</string>
 	<string>/British_Army</string>
-	<string>/British_baseball</string>
 	<string>/British_Columbia</string>
 	<string>/British_Empire</string>
 	<string>/British_Invasion</string>
 	<string>/British_Isles</string>
 	<string>/British_Library</string>
-	<string>/British_literature</string>
 	<string>/British_Museum</string>
-	<string>/British_people</string>
 	<string>/British_Rail</string>
+	<string>/British_Virgin_Islands</string>
+	<string>/British_baseball</string>
+	<string>/British_literature</string>
+	<string>/British_people</string>
 	<string>/British_royal_family</string>
 	<string>/British_sitcom</string>
-	<string>/British_Virgin_Islands</string>
 	<string>/Broadband</string>
 	<string>/Broadcasting</string>
 	<string>/Broadcasting_House</string>
@@ -1729,12 +1716,12 @@
 	<string>/Brother</string>
 	<string>/Brother_Bear</string>
 	<string>/Brown</string>
+	<string>/Brown_University</string>
 	<string>/Brown_bear</string>
 	<string>/Brown_dwarf</string>
 	<string>/Brown_hair</string>
 	<string>/Brown_pelican</string>
 	<string>/Brown_spider_monkey</string>
-	<string>/Brown_University</string>
 	<string>/Brownfield_land</string>
 	<string>/Browser_game</string>
 	<string>/Bruce_Lee</string>
@@ -1771,9 +1758,9 @@
 	<string>/Bulk_cargo</string>
 	<string>/Bulk_carrier</string>
 	<string>/Bull</string>
+	<string>/Bull_Terrier</string>
 	<string>/Bull_riding</string>
 	<string>/Bull_shark</string>
-	<string>/Bull_Terrier</string>
 	<string>/Bulldog</string>
 	<string>/Bulldozer</string>
 	<string>/Bullet</string>
@@ -1793,7 +1780,6 @@
 	<string>/Burger_King</string>
 	<string>/Burial</string>
 	<string>/Burj_Khalifa</string>
-	<string>/BURN-E</string>
 	<string>/Burning_Rangers</string>
 	<string>/Burqa</string>
 	<string>/Burrito</string>
@@ -1805,9 +1791,9 @@
 	<string>/Bush_v._Gore</string>
 	<string>/Business</string>
 	<string>/Business-to-business</string>
+	<string>/Business_Insider</string>
 	<string>/Business_cycle</string>
 	<string>/Business_executive</string>
-	<string>/Business_Insider</string>
 	<string>/Business_magnate</string>
 	<string>/Business_manager</string>
 	<string>/Business_model</string>
@@ -1823,11 +1809,11 @@
 	<string>/Butterfly_stroke</string>
 	<string>/Buttermilk</string>
 	<string>/Button</string>
-	<string>/Buzz_Aldrin</string>
-	<string>/Buzz_cut</string>
-	<string>/Buzz_Lightyear</string>
-	<string>/Buzzard</string>
 	<string>/BuzzFeed</string>
+	<string>/Buzz_Aldrin</string>
+	<string>/Buzz_Lightyear</string>
+	<string>/Buzz_cut</string>
+	<string>/Buzzard</string>
 	<string>/Bypass_ratio</string>
 	<string>/Byte</string>
 	<string>/Bytecode</string>
@@ -1836,6 +1822,31 @@
 	<string>/C%2B%2B</string>
 	<string>/C-3PO</string>
 	<string>/C-SPAN</string>
+	<string>/CBC_News</string>
+	<string>/CBC_Sports</string>
+	<string>/CBS</string>
+	<string>/CBS_Corporation</string>
+	<string>/CBS_Films</string>
+	<string>/CBS_Interactive</string>
+	<string>/CBS_Morning_News</string>
+	<string>/CBS_News</string>
+	<string>/CD-ROM</string>
+	<string>/CD_Projekt</string>
+	<string>/CD_player</string>
+	<string>/CERN</string>
+	<string>/CFM_International</string>
+	<string>/CMOS</string>
+	<string>/CMYK_color_model</string>
+	<string>/CM_Punk</string>
+	<string>/CNBC</string>
+	<string>/CNET</string>
+	<string>/CNN</string>
+	<string>/CNN_International</string>
+	<string>/CN_Tower</string>
+	<string>/COBOL</string>
+	<string>/CPU_cache</string>
+	<string>/CSI_effect</string>
+	<string>/CT_scan</string>
 	<string>/Cabbage</string>
 	<string>/Cabinetry</string>
 	<string>/Cable_modem</string>
@@ -1868,11 +1879,11 @@
 	<string>/Cali_Cartel</string>
 	<string>/Caliber</string>
 	<string>/California</string>
-	<string>/California_cuisine</string>
 	<string>/California_Gold_Rush</string>
 	<string>/California_Pizza_Kitchen</string>
 	<string>/California_Trail</string>
 	<string>/California_Zephyr</string>
+	<string>/California_cuisine</string>
 	<string>/Californium</string>
 	<string>/Call_centre</string>
 	<string>/Call_of_Duty</string>
@@ -1910,8 +1921,8 @@
 	<string>/Canada</string>
 	<string>/Canada_Games</string>
 	<string>/Canada_goose</string>
-	<string>/Canadian_dollar</string>
 	<string>/Canadian_English</string>
+	<string>/Canadian_dollar</string>
 	<string>/Canadian_football</string>
 	<string>/Canadian_wine</string>
 	<string>/Canal</string>
@@ -1920,13 +1931,12 @@
 	<string>/Candied_fruit</string>
 	<string>/Candle</string>
 	<string>/Candy</string>
+	<string>/Candy_Land</string>
 	<string>/Candy_apple</string>
 	<string>/Candy_cane</string>
-	<string>/Candy_Land</string>
 	<string>/Cane_toad</string>
 	<string>/Canned_fish</string>
 	<string>/Cannes_Film_Festival</string>
-	<string>/Cannibal</string>
 	<string>/Canning</string>
 	<string>/Cannon</string>
 	<string>/Canoe</string>
@@ -1944,9 +1954,9 @@
 	<string>/Cape</string>
 	<string>/Cape_Canaveral</string>
 	<string>/Cape_Cod</string>
-	<string>/Cape_of_Good_Hope</string>
 	<string>/Cape_Town</string>
 	<string>/Cape_Verde</string>
+	<string>/Cape_of_Good_Hope</string>
 	<string>/Capital_city</string>
 	<string>/Capital_market</string>
 	<string>/Capital_punishment</string>
@@ -2009,7 +2019,6 @@
 	<string>/Carnival_game</string>
 	<string>/Carnivore</string>
 	<string>/Carousel</string>
-	<string>/Carousel_of_Progress</string>
 	<string>/Carp</string>
 	<string>/Carpenter_bee</string>
 	<string>/Carpentry</string>
@@ -2066,7 +2075,6 @@
 	<string>/Catfish</string>
 	<string>/Cathedral</string>
 	<string>/Catherine_the_Great</string>
-	<string>/Cathode_ray_tube</string>
 	<string>/Catholic_Church</string>
 	<string>/Catshark</string>
 	<string>/Cattle</string>
@@ -2082,17 +2090,6 @@
 	<string>/Cave_painting</string>
 	<string>/Cavity_magnetron</string>
 	<string>/Cayman_Islands</string>
-	<string>/CBC_News</string>
-	<string>/CBC_Sports</string>
-	<string>/CBS</string>
-	<string>/CBS_Corporation</string>
-	<string>/CBS_Films</string>
-	<string>/CBS_Interactive</string>
-	<string>/CBS_Morning_News</string>
-	<string>/CBS_News</string>
-	<string>/CD-ROM</string>
-	<string>/CD_player</string>
-	<string>/CD_Projekt</string>
 	<string>/Cease_and_desist</string>
 	<string>/Ceasefire</string>
 	<string>/Cecilia_Colledge</string>
@@ -2127,11 +2124,11 @@
 	<string>/Central_Africa</string>
 	<string>/Central_America</string>
 	<string>/Central_Asia</string>
-	<string>/Central_bank</string>
 	<string>/Central_Committee</string>
 	<string>/Central_Europe</string>
 	<string>/Central_London</string>
 	<string>/Central_Park</string>
+	<string>/Central_bank</string>
 	<string>/Central_processing_unit</string>
 	<string>/Centrifugation</string>
 	<string>/Centripetal_force</string>
@@ -2144,16 +2141,13 @@
 	<string>/Cerebral_cortex</string>
 	<string>/Ceremony</string>
 	<string>/Cerium</string>
-	<string>/CERN</string>
 	<string>/Cetology</string>
-	<string>/CFM_International</string>
 	<string>/Chad</string>
 	<string>/Chain</string>
 	<string>/Chain_store</string>
 	<string>/Chainsaw</string>
 	<string>/Chair</string>
 	<string>/Chairlift</string>
-	<string>/Chairman</string>
 	<string>/Chalcolithic</string>
 	<string>/Chamber_music</string>
 	<string>/Chameleon</string>
@@ -2235,8 +2229,8 @@
 	<string>/Chesapeake_Bay</string>
 	<string>/Cheshire</string>
 	<string>/Chess</string>
-	<string>/Chess_club</string>
 	<string>/Chess_Olympiad</string>
+	<string>/Chess_club</string>
 	<string>/Chess_opening</string>
 	<string>/Chess_piece</string>
 	<string>/Chess_theory</string>
@@ -2288,17 +2282,17 @@
 	<string>/China_Unicom</string>
 	<string>/Chinatown</string>
 	<string>/Chinchilla</string>
+	<string>/Chinese_Civil_War</string>
+	<string>/Chinese_New_Year</string>
 	<string>/Chinese_architecture</string>
 	<string>/Chinese_art</string>
 	<string>/Chinese_astronomy</string>
 	<string>/Chinese_calendar</string>
 	<string>/Chinese_characters</string>
-	<string>/Chinese_Civil_War</string>
 	<string>/Chinese_folk_religion</string>
 	<string>/Chinese_garden</string>
 	<string>/Chinese_language</string>
 	<string>/Chinese_mythology</string>
-	<string>/Chinese_New_Year</string>
 	<string>/Chinese_noodles</string>
 	<string>/Chinese_opera</string>
 	<string>/Chinese_painting</string>
@@ -2352,7 +2346,6 @@
 	<string>/Chronology</string>
 	<string>/Chrysler</string>
 	<string>/Chrysler_Building</string>
-	<string>/Chuck_E._Cheese%27s</string>
 	<string>/Chuck_steak</string>
 	<string>/Church_music</string>
 	<string>/Churro</string>
@@ -2369,10 +2362,10 @@
 	<string>/Cinco_de_Mayo</string>
 	<string>/Cinderella</string>
 	<string>/Cinderella_Castle</string>
+	<string>/CinemaScore</string>
 	<string>/Cinema_of_Europe</string>
 	<string>/Cinema_of_Italy</string>
 	<string>/Cinema_of_Japan</string>
-	<string>/CinemaScore</string>
 	<string>/Cinematographer</string>
 	<string>/Cinematography</string>
 	<string>/Cinnabon</string>
@@ -2388,8 +2381,8 @@
 	<string>/Circulatory_system</string>
 	<string>/Circumference</string>
 	<string>/Circus</string>
-	<string>/Circus_clown</string>
 	<string>/Circus_Maximus</string>
+	<string>/Circus_clown</string>
 	<string>/Circus_music</string>
 	<string>/Cirque_du_Soleil</string>
 	<string>/Cisco_Systems</string>
@@ -2430,12 +2423,12 @@
 	<string>/Clarinet</string>
 	<string>/Class_conflict</string>
 	<string>/Class_discrimination</string>
-	<string>/Classic_car</string>
 	<string>/Classic_Mac_OS</string>
-	<string>/Classical_antiquity</string>
+	<string>/Classic_car</string>
 	<string>/Classical_Chinese</string>
-	<string>/Classical_economics</string>
 	<string>/Classical_Greece</string>
+	<string>/Classical_antiquity</string>
+	<string>/Classical_economics</string>
 	<string>/Classical_mechanics</string>
 	<string>/Classical_music</string>
 	<string>/Classical_mythology</string>
@@ -2448,8 +2441,8 @@
 	<string>/Clay</string>
 	<string>/Clay_animation</string>
 	<string>/Claymore</string>
-	<string>/Clean_technology</string>
 	<string>/Clean_Water_Act</string>
+	<string>/Clean_technology</string>
 	<string>/Clement_Greenberg</string>
 	<string>/Cleopatra</string>
 	<string>/Clerk</string>
@@ -2460,7 +2453,6 @@
 	<string>/Cliffhanger</string>
 	<string>/Clifford_algebra</string>
 	<string>/Climate</string>
-	<string>/Climate_change</string>
 	<string>/Climate_of_Antarctica</string>
 	<string>/Climatology</string>
 	<string>/Climax_community</string>
@@ -2479,23 +2471,15 @@
 	<string>/Clothing</string>
 	<string>/Clotted_cream</string>
 	<string>/Cloud</string>
+	<string>/Cloud_Strife</string>
 	<string>/Cloud_computing</string>
 	<string>/Cloud_gaming</string>
 	<string>/Cloud_storage</string>
-	<string>/Cloud_Strife</string>
 	<string>/Clown</string>
 	<string>/Club_33</string>
 	<string>/Club_Penguin</string>
 	<string>/Clutch</string>
-	<string>/CM_Punk</string>
-	<string>/CMOS</string>
-	<string>/CMYK_color_model</string>
-	<string>/CN_Tower</string>
-	<string>/CNBC</string>
-	<string>/CNET</string>
 	<string>/Cnidaria</string>
-	<string>/CNN</string>
-	<string>/CNN_International</string>
 	<string>/Coaching</string>
 	<string>/Coal</string>
 	<string>/Coal_mining</string>
@@ -2506,7 +2490,6 @@
 	<string>/Coated_paper</string>
 	<string>/Coaxial_cable</string>
 	<string>/Cobalt</string>
-	<string>/COBOL</string>
 	<string>/Cobra</string>
 	<string>/Cobra_Triangle</string>
 	<string>/Coca-Cola</string>
@@ -2549,11 +2532,11 @@
 	<string>/Coin_flipping</string>
 	<string>/Coin_magic</string>
 	<string>/Cola</string>
-	<string>/Cold_cathode</string>
-	<string>/Cold_dark_matter</string>
 	<string>/Cold_Feet</string>
 	<string>/Cold_Stone_Creamery</string>
 	<string>/Cold_War</string>
+	<string>/Cold_cathode</string>
+	<string>/Cold_dark_matter</string>
 	<string>/Coldplay</string>
 	<string>/Colin_McCahon</string>
 	<string>/Colin_McGinn</string>
@@ -2615,8 +2598,8 @@
 	<string>/Comedian</string>
 	<string>/Comedic_genres</string>
 	<string>/Comedy</string>
-	<string>/Comedy_album</string>
 	<string>/Comedy_Central</string>
+	<string>/Comedy_album</string>
 	<string>/Comedy_club</string>
 	<string>/Comedy_film</string>
 	<string>/Comet</string>
@@ -2635,8 +2618,8 @@
 	<string>/Commercial_art</string>
 	<string>/Commodity</string>
 	<string>/Commodore_64</string>
-	<string>/Common_cold</string>
 	<string>/Common_Era</string>
+	<string>/Common_cold</string>
 	<string>/Common_law</string>
 	<string>/Common_nightingale</string>
 	<string>/Common_ostrich</string>
@@ -2691,6 +2674,8 @@
 	<string>/Computation</string>
 	<string>/Computer</string>
 	<string>/Computer-aided_design</string>
+	<string>/Computer_History_Museum</string>
+	<string>/Computer_Space</string>
 	<string>/Computer_animation</string>
 	<string>/Computer_architecture</string>
 	<string>/Computer_art</string>
@@ -2702,7 +2687,6 @@
 	<string>/Computer_file</string>
 	<string>/Computer_graphics</string>
 	<string>/Computer_hardware</string>
-	<string>/Computer_History_Museum</string>
 	<string>/Computer_keyboard</string>
 	<string>/Computer_memory</string>
 	<string>/Computer_monitor</string>
@@ -2715,7 +2699,6 @@
 	<string>/Computer_scientist</string>
 	<string>/Computer_security</string>
 	<string>/Computer_simulation</string>
-	<string>/Computer_Space</string>
 	<string>/Computer_terminal</string>
 	<string>/Computer_virus</string>
 	<string>/Computer_vision</string>
@@ -2803,11 +2786,11 @@
 	<string>/Continent</string>
 	<string>/Continental_Army</string>
 	<string>/Continental_Congress</string>
-	<string>/Continental_crust</string>
-	<string>/Continental_drift</string>
 	<string>/Continental_Europe</string>
 	<string>/Continental_Marines</string>
 	<string>/Continental_Navy</string>
+	<string>/Continental_crust</string>
+	<string>/Continental_drift</string>
 	<string>/Continental_shelf</string>
 	<string>/Continued_fraction</string>
 	<string>/Continuous_track</string>
@@ -2828,8 +2811,8 @@
 	<string>/Cookbook</string>
 	<string>/Cookie</string>
 	<string>/Cooking</string>
-	<string>/Cooking_apple</string>
 	<string>/Cooking_Channel</string>
+	<string>/Cooking_apple</string>
 	<string>/Cooking_oil</string>
 	<string>/Cooking_show</string>
 	<string>/Cookware_and_bakeware</string>
@@ -2934,7 +2917,6 @@
 	<string>/Cowboy_hat</string>
 	<string>/Coyote</string>
 	<string>/Coypu</string>
-	<string>/CPU_cache</string>
 	<string>/Cr%C3%AApe</string>
 	<string>/Crab</string>
 	<string>/Crab_meat</string>
@@ -2969,10 +2951,10 @@
 	<string>/Crew_cut</string>
 	<string>/Cribbage</string>
 	<string>/Cricket</string>
-	<string>/Cricket_ball</string>
-	<string>/Cricket_bat</string>
 	<string>/Cricket_Cola</string>
 	<string>/Cricket_World_Cup</string>
+	<string>/Cricket_ball</string>
+	<string>/Cricket_bat</string>
 	<string>/Crime</string>
 	<string>/Crime_and_Punishment</string>
 	<string>/Crime_fiction</string>
@@ -3003,7 +2985,6 @@
 	<string>/Cross-cultural</string>
 	<string>/Cross_country_running</string>
 	<string>/Crossbow</string>
-	<string>/Crosswalk</string>
 	<string>/Crossword</string>
 	<string>/Crow</string>
 	<string>/Crowd_simulation</string>
@@ -3031,19 +3012,17 @@
 	<string>/Cryptosporidium</string>
 	<string>/Crystal</string>
 	<string>/Crystal_Cubism</string>
+	<string>/Crystal_Tools</string>
 	<string>/Crystal_radio</string>
 	<string>/Crystal_structure</string>
-	<string>/Crystal_Tools</string>
 	<string>/Crystallography</string>
 	<string>/Crytek</string>
-	<string>/CSI_effect</string>
-	<string>/CT_scan</string>
 	<string>/Cuba</string>
 	<string>/Cuban_Missile_Crisis</string>
 	<string>/Cuban_Revolution</string>
 	<string>/Cube</string>
-	<string>/Cube_root</string>
 	<string>/CubeSat</string>
+	<string>/Cube_root</string>
 	<string>/Cubic_function</string>
 	<string>/Cubism</string>
 	<string>/Cuckoo</string>
@@ -3058,6 +3037,7 @@
 	<string>/Cult_following</string>
 	<string>/Cult_of_personality</string>
 	<string>/Cultivar</string>
+	<string>/Cultural_Revolution</string>
 	<string>/Cultural_area</string>
 	<string>/Cultural_artifact</string>
 	<string>/Cultural_assimilation</string>
@@ -3073,7 +3053,6 @@
 	<string>/Cultural_movement</string>
 	<string>/Cultural_practice</string>
 	<string>/Cultural_relativism</string>
-	<string>/Cultural_Revolution</string>
 	<string>/Cultural_studies</string>
 	<string>/Cultural_tourism</string>
 	<string>/Cultural_turn</string>
@@ -3129,10 +3108,26 @@
 	<string>/Cytogenetics</string>
 	<string>/Cytoskeleton</string>
 	<string>/Cyworld</string>
+	<string>/Czech_Republic</string>
 	<string>/Czech_comics</string>
 	<string>/Czech_handball</string>
-	<string>/Czech_Republic</string>
 	<string>/Czechoslovakia</string>
+	<string>/DARPA</string>
+	<string>/DC_Comics</string>
+	<string>/DC_Extended_Universe</string>
+	<string>/DC_animated_universe</string>
+	<string>/DIY_ethic</string>
+	<string>/DJ_Hero</string>
+	<string>/DMOZ</string>
+	<string>/DNA</string>
+	<string>/DNA_computing</string>
+	<string>/DNA_microarray</string>
+	<string>/DNA_nanotechnology</string>
+	<string>/DNA_replication</string>
+	<string>/DNA_sequencing</string>
+	<string>/DOS</string>
+	<string>/DVD</string>
+	<string>/DVD_player</string>
 	<string>/Dachshund</string>
 	<string>/Dada</string>
 	<string>/Daffy_Duck</string>
@@ -3140,9 +3135,9 @@
 	<string>/Dagger</string>
 	<string>/Daily_Mail</string>
 	<string>/Dairy</string>
+	<string>/Dairy_Queen</string>
 	<string>/Dairy_farming</string>
 	<string>/Dairy_product</string>
-	<string>/Dairy_Queen</string>
 	<string>/Daisy_Ridley</string>
 	<string>/Dalai_Lama</string>
 	<string>/Dallas</string>
@@ -3167,16 +3162,14 @@
 	<string>/Daniel_Webster</string>
 	<string>/Danish_language</string>
 	<string>/Danish_longball</string>
+	<string>/Dark_Souls</string>
 	<string>/Dark_chocolate</string>
 	<string>/Dark_energy</string>
 	<string>/Dark_fantasy</string>
 	<string>/Dark_matter</string>
-	<string>/Dark_Ranger</string>
 	<string>/Dark_ride</string>
-	<string>/Dark_Souls</string>
 	<string>/Dark_tourism</string>
 	<string>/Dark_web</string>
-	<string>/DARPA</string>
 	<string>/Darter</string>
 	<string>/Darth_Maul</string>
 	<string>/Darth_Vader</string>
@@ -3188,7 +3181,6 @@
 	<string>/Data_breach</string>
 	<string>/Data_center</string>
 	<string>/Data_compression</string>
-	<string>/Data_flow_diagram</string>
 	<string>/Data_link_layer</string>
 	<string>/Data_management</string>
 	<string>/Data_mining</string>
@@ -3214,12 +3206,9 @@
 	<string>/Daylight_saving_time</string>
 	<string>/Days_of_Future_Past</string>
 	<string>/Daytona_500</string>
-	<string>/DC_animated_universe</string>
-	<string>/DC_Comics</string>
-	<string>/DC_Extended_Universe</string>
 	<string>/De-extinction</string>
-	<string>/De_jure</string>
 	<string>/De_Stijl</string>
+	<string>/De_jure</string>
 	<string>/Dead_Poets_Society</string>
 	<string>/Dead_Sea</string>
 	<string>/Deadpan</string>
@@ -3250,9 +3239,9 @@
 	<string>/Decoupage</string>
 	<string>/Dedicated_console</string>
 	<string>/Deductive_reasoning</string>
+	<string>/DeepMind</string>
 	<string>/Deep_frying</string>
 	<string>/Deep_learning</string>
-	<string>/DeepMind</string>
 	<string>/Deepwater_Horizon</string>
 	<string>/Deer</string>
 	<string>/Defamation</string>
@@ -3340,7 +3329,6 @@
 	<string>/Development_theory</string>
 	<string>/Developmental_biology</string>
 	<string>/Devil</string>
-	<string>/DHL_Express</string>
 	<string>/Diacritic</string>
 	<string>/Diagram</string>
 	<string>/Dial-up_Internet_access</string>
@@ -3362,8 +3350,8 @@
 	<string>/Diddy_Kong_Racing</string>
 	<string>/Die-cast_toy</string>
 	<string>/Die_Another_Day</string>
-	<string>/Die_casting</string>
 	<string>/Die_Hard</string>
+	<string>/Die_casting</string>
 	<string>/Diesel_engine</string>
 	<string>/Diesel_fuel</string>
 	<string>/Diesel_locomotive</string>
@@ -3379,6 +3367,7 @@
 	<string>/Diffraction</string>
 	<string>/Diffusion</string>
 	<string>/Digestion</string>
+	<string>/Digital_Revolution</string>
 	<string>/Digital_art</string>
 	<string>/Digital_asset</string>
 	<string>/Digital_audio</string>
@@ -3396,7 +3385,6 @@
 	<string>/Digital_photography</string>
 	<string>/Digital_radio</string>
 	<string>/Digital_recording</string>
-	<string>/Digital_Revolution</string>
 	<string>/Digital_rights</string>
 	<string>/Digital_signature</string>
 	<string>/Digital_television</string>
@@ -3424,12 +3412,12 @@
 	<string>/Dipping_sauce</string>
 	<string>/Diptych</string>
 	<string>/Dire_wolf</string>
+	<string>/DirecTV</string>
 	<string>/Direct-to-video</string>
 	<string>/Direct3D</string>
+	<string>/DirectX</string>
 	<string>/Direct_current</string>
 	<string>/Direct_democracy</string>
-	<string>/DirecTV</string>
-	<string>/DirectX</string>
 	<string>/Dirt_road</string>
 	<string>/Disability</string>
 	<string>/Disappointment</string>
@@ -3458,9 +3446,7 @@
 	<string>/Disney_Dream</string>
 	<string>/Disney_Dreams!</string>
 	<string>/Disney_Fantasy</string>
-	<string>/Disney_in_the_Stars</string>
 	<string>/Disney_Junior</string>
-	<string>/Disney_on_Parade</string>
 	<string>/Disney_Renaissance</string>
 	<string>/Disney_Research</string>
 	<string>/Disney_Resort_Line</string>
@@ -3468,19 +3454,21 @@
 	<string>/Disney_Springs</string>
 	<string>/Disney_Store</string>
 	<string>/Disney_Transport</string>
-	<string>/Disney_utilidor_system</string>
 	<string>/Disney_Vacation_Club</string>
 	<string>/Disney_Wonder</string>
 	<string>/Disney_XD</string>
+	<string>/Disney_in_the_Stars</string>
+	<string>/Disney_on_Parade</string>
+	<string>/Disney_utilidor_system</string>
 	<string>/Disneyland</string>
 	<string>/Disneyland_Paris</string>
 	<string>/Disneyland_Railroad</string>
 	<string>/Disneyland_Resort</string>
 	<string>/Dispatcher</string>
+	<string>/DisplayPort</string>
 	<string>/Display_case</string>
 	<string>/Display_device</string>
 	<string>/Display_resolution</string>
-	<string>/DisplayPort</string>
 	<string>/Disposition</string>
 	<string>/Dissection</string>
 	<string>/Distance_education</string>
@@ -3494,23 +3482,14 @@
 	<string>/Divinity</string>
 	<string>/Divorce</string>
 	<string>/Diwali</string>
-	<string>/DIY_ethic</string>
-	<string>/DJ_Hero</string>
 	<string>/Django_Unchained</string>
 	<string>/Dmitri_Mendeleev</string>
-	<string>/DMOZ</string>
-	<string>/DNA</string>
-	<string>/DNA_computing</string>
-	<string>/DNA_microarray</string>
-	<string>/DNA_nanotechnology</string>
-	<string>/DNA_replication</string>
-	<string>/DNA_sequencing</string>
 	<string>/Do_the_Right_Thing</string>
 	<string>/Doctor_Doom</string>
-	<string>/Doctor_of_Medicine</string>
-	<string>/Doctor_of_Philosophy</string>
 	<string>/Doctor_Strange</string>
 	<string>/Doctor_Who</string>
+	<string>/Doctor_of_Medicine</string>
+	<string>/Doctor_of_Philosophy</string>
 	<string>/Doctorate</string>
 	<string>/Doctrine</string>
 	<string>/Document</string>
@@ -3535,9 +3514,9 @@
 	<string>/Dolomites</string>
 	<string>/Dolphin</string>
 	<string>/Dolphinarium</string>
+	<string>/Domain_Name_System</string>
 	<string>/Domain_knowledge</string>
 	<string>/Domain_name</string>
-	<string>/Domain_Name_System</string>
 	<string>/Dome</string>
 	<string>/Dome_of_the_Rock</string>
 	<string>/Domed_city</string>
@@ -3573,7 +3552,6 @@
 	<string>/Doritos</string>
 	<string>/Dormouse</string>
 	<string>/Dorothy_Parker</string>
-	<string>/DOS</string>
 	<string>/Dot-com_bubble</string>
 	<string>/Dota_2</string>
 	<string>/Double-decker_bus</string>
@@ -3606,8 +3584,8 @@
 	<string>/Drag_racing</string>
 	<string>/Dragon</string>
 	<string>/Dragon_Ball</string>
-	<string>/Dragon_boat</string>
 	<string>/Dragon_Quest</string>
+	<string>/Dragon_boat</string>
 	<string>/Dragonfly</string>
 	<string>/Drainage</string>
 	<string>/Drainage_basin</string>
@@ -3619,8 +3597,8 @@
 	<string>/Dreadlocks</string>
 	<string>/Dreadnought</string>
 	<string>/Dream</string>
-	<string>/Dreamcast</string>
 	<string>/DreamWorks_Animation</string>
+	<string>/Dreamcast</string>
 	<string>/Dredd</string>
 	<string>/Dress</string>
 	<string>/Dress_code</string>
@@ -3656,9 +3634,9 @@
 	<string>/Dublin</string>
 	<string>/Dubstep</string>
 	<string>/Duck</string>
-	<string>/Duck_as_food</string>
-	<string>/Duck_Hunt</string>
 	<string>/DuckTales</string>
+	<string>/Duck_Hunt</string>
+	<string>/Duck_as_food</string>
 	<string>/Due_process</string>
 	<string>/Duel</string>
 	<string>/Duet</string>
@@ -3682,8 +3660,6 @@
 	<string>/Dutch_Empire</string>
 	<string>/Dutch_language</string>
 	<string>/Duty</string>
-	<string>/DVD</string>
-	<string>/DVD_player</string>
 	<string>/Dwarf_galaxy</string>
 	<string>/Dwarf_planet</string>
 	<string>/Dwarfism</string>
@@ -3702,22 +3678,28 @@
 	<string>/E-commerce</string>
 	<string>/E-democracy</string>
 	<string>/E-reader</string>
+	<string>/EBay</string>
+	<string>/EFF_DES_cracker</string>
+	<string>/ESPN</string>
+	<string>/ESPN2</string>
+	<string>/ESPN_Inc.</string>
+	<string>/ESPN_Zone</string>
+	<string>/ESPN_on_ABC</string>
+	<string>/ETH_Zurich</string>
 	<string>/E_ticket</string>
-	<string>/EA_DICE</string>
 	<string>/Eagle_Eye</string>
 	<string>/Ear</string>
-	<string>/Earful_Tower</string>
 	<string>/Early_Middle_Ages</string>
 	<string>/Early_music</string>
 	<string>/Earth</string>
 	<string>/Earth%27s_orbit</string>
 	<string>/Earth%27s_rotation</string>
+	<string>/EarthBound</string>
 	<string>/Earth_Day</string>
+	<string>/Earth_Summit</string>
 	<string>/Earth_mass</string>
 	<string>/Earth_oven</string>
 	<string>/Earth_science</string>
-	<string>/Earth_Summit</string>
-	<string>/EarthBound</string>
 	<string>/Earthquake</string>
 	<string>/Earthrise</string>
 	<string>/Earthworm</string>
@@ -3736,22 +3718,20 @@
 	<string>/Easter_Island</string>
 	<string>/Eastern_Bloc</string>
 	<string>/Eastern_Europe</string>
-	<string>/Eastern_grey_kangaroo</string>
 	<string>/Eastern_Hemisphere</string>
-	<string>/Eastern_philosophy</string>
 	<string>/Eastern_Time_Zone</string>
 	<string>/Eastern_Ukraine</string>
 	<string>/Eastern_Washington</string>
+	<string>/Eastern_grey_kangaroo</string>
+	<string>/Eastern_philosophy</string>
 	<string>/Eastern_world</string>
 	<string>/Eating</string>
 	<string>/Eating_disorder</string>
-	<string>/EBay</string>
 	<string>/Ebenezer_Scrooge</string>
 	<string>/Ebola_vaccine</string>
 	<string>/Ebony</string>
 	<string>/Eclipse</string>
 	<string>/Ecliptic</string>
-	<string>/Ecodesign</string>
 	<string>/Ecological_collapse</string>
 	<string>/Ecological_niche</string>
 	<string>/Ecological_pyramid</string>
@@ -3793,7 +3773,6 @@
 	<string>/Ediacaran_biota</string>
 	<string>/Editing</string>
 	<string>/Editor-in-chief</string>
-	<string>/Editorial_cartoon</string>
 	<string>/Edo_period</string>
 	<string>/Edsger_W._Dijkstra</string>
 	<string>/Education</string>
@@ -3814,7 +3793,6 @@
 	<string>/Eega</string>
 	<string>/Eel_as_food</string>
 	<string>/Eero_Saarinen</string>
-	<string>/EFF_DES_cracker</string>
 	<string>/Effectiveness</string>
 	<string>/Efficacy</string>
 	<string>/Efficiency</string>
@@ -3830,13 +3808,13 @@
 	<string>/EgyptAir</string>
 	<string>/Egyptian_Arabic</string>
 	<string>/Egyptian_Army</string>
+	<string>/Egyptian_Hall</string>
+	<string>/Egyptian_Museum</string>
+	<string>/Egyptian_National_Police</string>
 	<string>/Egyptian_astronomy</string>
 	<string>/Egyptian_calendar</string>
-	<string>/Egyptian_Hall</string>
 	<string>/Egyptian_hieroglyphs</string>
-	<string>/Egyptian_Museum</string>
 	<string>/Egyptian_mythology</string>
-	<string>/Egyptian_National_Police</string>
 	<string>/Egyptian_pyramids</string>
 	<string>/Egyptian_temple</string>
 	<string>/Eidetic_memory</string>
@@ -3848,6 +3826,7 @@
 	<string>/El_Dorado</string>
 	<string>/El_Lissitzky</string>
 	<string>/El_Salvador</string>
+	<string>/ElecTRONica</string>
 	<string>/Election</string>
 	<string>/Electoral_district</string>
 	<string>/Electoral_system</string>
@@ -3883,21 +3862,19 @@
 	<string>/Electron_mobility</string>
 	<string>/Electronegativity</string>
 	<string>/Electronic_Arts</string>
+	<string>/Electronic_Games</string>
 	<string>/Electronic_circuit</string>
 	<string>/Electronic_component</string>
 	<string>/Electronic_dance_music</string>
 	<string>/Electronic_engineering</string>
 	<string>/Electronic_game</string>
-	<string>/Electronic_Games</string>
 	<string>/Electronic_music</string>
 	<string>/Electronic_paper</string>
 	<string>/Electronic_waste</string>
-	<string>/ElecTRONica</string>
 	<string>/Electronics</string>
 	<string>/Electronvolt</string>
 	<string>/Elementary_algebra</string>
 	<string>/Elementary_particle</string>
-	<string>/Elementary_school</string>
 	<string>/Elephant</string>
 	<string>/Elephant_seal</string>
 	<string>/Elevated_railway</string>
@@ -3905,8 +3882,8 @@
 	<string>/Elevator</string>
 	<string>/Elf</string>
 	<string>/Eli_Lilly</string>
-	<string>/Elizabeth_I_of_England</string>
 	<string>/Elizabeth_II</string>
+	<string>/Elizabeth_I_of_England</string>
 	<string>/Elizabeth_Warren</string>
 	<string>/Elk</string>
 	<string>/Ellen_DeGeneres</string>
@@ -3925,7 +3902,6 @@
 	<string>/Email_client</string>
 	<string>/Embarrassment</string>
 	<string>/Embedded_system</string>
-	<string>/Emberizidae</string>
 	<string>/Emblem</string>
 	<string>/Embraer_E-Jet_family</string>
 	<string>/Embroidery</string>
@@ -3950,8 +3926,8 @@
 	<string>/Empathy</string>
 	<string>/Emperor_penguin</string>
 	<string>/Empire</string>
-	<string>/Empire_of_Japan</string>
 	<string>/Empire_State_Building</string>
+	<string>/Empire_of_Japan</string>
 	<string>/Empire_style</string>
 	<string>/Empirical_evidence</string>
 	<string>/Empirical_research</string>
@@ -3962,7 +3938,6 @@
 	<string>/Emulator</string>
 	<string>/Emulsion</string>
 	<string>/Enceladus</string>
-	<string>/Enchanted_Tiki_Room</string>
 	<string>/Enchilada</string>
 	<string>/Enclave_and_exclave</string>
 	<string>/Encryption</string>
@@ -3997,15 +3972,15 @@
 	<string>/Engineering_statistics</string>
 	<string>/England</string>
 	<string>/England_and_Wales</string>
-	<string>/English_billiards</string>
 	<string>/English_Channel</string>
 	<string>/English_Civil_War</string>
 	<string>/English_Dissenters</string>
+	<string>/English_Wikipedia</string>
+	<string>/English_billiards</string>
 	<string>/English_language</string>
 	<string>/English_literature</string>
 	<string>/English_longbow</string>
 	<string>/English_studies</string>
-	<string>/English_Wikipedia</string>
 	<string>/Engraving</string>
 	<string>/Enigma_machine</string>
 	<string>/Enola_Gay</string>
@@ -4025,7 +4000,6 @@
 	<string>/Envelope</string>
 	<string>/Environmental_chemistry</string>
 	<string>/Environmental_history</string>
-	<string>/Environmental_issue</string>
 	<string>/Environmental_law</string>
 	<string>/Environmental_protection</string>
 	<string>/Environmental_science</string>
@@ -4040,8 +4014,8 @@
 	<string>/Epcot</string>
 	<string>/Epcot_Resort_Area</string>
 	<string>/Ephemera</string>
-	<string>/Epic_film</string>
 	<string>/Epic_Games</string>
+	<string>/Epic_film</string>
 	<string>/Epic_poetry</string>
 	<string>/Epicuticular_wax</string>
 	<string>/Epidemiology</string>
@@ -4075,12 +4049,6 @@
 	<string>/Escapology</string>
 	<string>/Eskimo</string>
 	<string>/Espionage</string>
-	<string>/ESPN</string>
-	<string>/ESPN2</string>
-	<string>/ESPN_Inc.</string>
-	<string>/ESPN_on_ABC</string>
-	<string>/ESPN_Zone</string>
-	<string>/ESports</string>
 	<string>/Espresso</string>
 	<string>/Essay</string>
 	<string>/Essentialism</string>
@@ -4089,7 +4057,6 @@
 	<string>/Estonia</string>
 	<string>/Estuary</string>
 	<string>/Eternal_youth</string>
-	<string>/ETH_Zurich</string>
 	<string>/Ethan_Hawke</string>
 	<string>/Ethanol</string>
 	<string>/Ethanol_fuel</string>
@@ -4125,9 +4092,10 @@
 	<string>/Eurasia</string>
 	<string>/Euripides</string>
 	<string>/Euro</string>
-	<string>/Euro_Disney_S.C.A.</string>
 	<string>/Euro_sign</string>
 	<string>/Europe</string>
+	<string>/European_Space_Agency</string>
+	<string>/European_Union</string>
 	<string>/European_bison</string>
 	<string>/European_comics</string>
 	<string>/European_debt_crisis</string>
@@ -4135,9 +4103,7 @@
 	<string>/European_hedgehog</string>
 	<string>/European_polecat</string>
 	<string>/European_rabbit</string>
-	<string>/European_Space_Agency</string>
 	<string>/European_studies</string>
-	<string>/European_Union</string>
 	<string>/European_wildcat</string>
 	<string>/Eurostar</string>
 	<string>/Eurozone</string>
@@ -4194,8 +4160,8 @@
 	<string>/Exploration_of_Mars</string>
 	<string>/Exploration_of_Mercury</string>
 	<string>/Exploration_of_Saturn</string>
-	<string>/Exploration_of_the_Moon</string>
 	<string>/Exploration_of_Uranus</string>
+	<string>/Exploration_of_the_Moon</string>
 	<string>/Exploratorium</string>
 	<string>/Explosive</string>
 	<string>/Exponential_growth</string>
@@ -4216,10 +4182,16 @@
 	<string>/ExxonMobil</string>
 	<string>/Eye</string>
 	<string>/Eyebrow</string>
+	<string>/FAQ</string>
+	<string>/FC_Barcelona</string>
+	<string>/FIFA</string>
+	<string>/FIFA_World_Cup</string>
+	<string>/FLAC</string>
+	<string>/FM_broadcasting</string>
 	<string>/Fable</string>
 	<string>/Facade</string>
-	<string>/Facebook</string>
 	<string>/FaceTime</string>
+	<string>/Facebook</string>
 	<string>/Facial_expression</string>
 	<string>/Facial_hair</string>
 	<string>/Facial_muscles</string>
@@ -4228,12 +4200,12 @@
 	<string>/Factory</string>
 	<string>/Fahrenheit</string>
 	<string>/Fair</string>
+	<string>/FairTax</string>
 	<string>/Fair_Deal</string>
 	<string>/Fair_trade</string>
 	<string>/Fair_use</string>
 	<string>/Fairlie_locomotive</string>
 	<string>/Fairmount_Park</string>
-	<string>/FairTax</string>
 	<string>/Fairy</string>
 	<string>/Fairy_Tail</string>
 	<string>/Fairy_tale</string>
@@ -4244,9 +4216,9 @@
 	<string>/Falcon_Heavy</string>
 	<string>/Falconidae</string>
 	<string>/Falconry</string>
+	<string>/Fall_Out_Boy</string>
 	<string>/Fall_of_Antwerp</string>
 	<string>/Fall_of_Constantinople</string>
-	<string>/Fall_Out_Boy</string>
 	<string>/Fallacy</string>
 	<string>/Fallibilism</string>
 	<string>/Fallingwater</string>
@@ -4273,8 +4245,6 @@
 	<string>/Fantasy_film</string>
 	<string>/Fantasy_in_the_Sky</string>
 	<string>/Fantasyland</string>
-	<string>/Fantasyland_Theater</string>
-	<string>/FAQ</string>
 	<string>/Far-right_politics</string>
 	<string>/Farce</string>
 	<string>/Fare</string>
@@ -4287,13 +4257,13 @@
 	<string>/Fashion_design</string>
 	<string>/Fashion_doll</string>
 	<string>/Fashion_show</string>
+	<string>/FastPass</string>
 	<string>/Fast_%26_Furious_6</string>
-	<string>/Fast_casual_restaurant</string>
 	<string>/Fast_Five</string>
+	<string>/Fast_casual_restaurant</string>
 	<string>/Fast_food</string>
 	<string>/Fast_food_restaurant</string>
 	<string>/Fasting</string>
-	<string>/FastPass</string>
 	<string>/Fat</string>
 	<string>/Fatal_Attraction</string>
 	<string>/Father</string>
@@ -4303,26 +4273,25 @@
 	<string>/Fauna</string>
 	<string>/Fauvism</string>
 	<string>/Fax</string>
-	<string>/FC_Barcelona</string>
 	<string>/Fear</string>
 	<string>/Fear_the_Walking_Dead</string>
 	<string>/Feasibility_study</string>
 	<string>/Feather</string>
 	<string>/Feature_film</string>
 	<string>/February</string>
+	<string>/FedEx</string>
 	<string>/Federal_Hall</string>
-	<string>/Federal_judge</string>
-	<string>/Federal_law</string>
 	<string>/Federal_Power_Act</string>
-	<string>/Federal_prison</string>
-	<string>/Federal_republic</string>
 	<string>/Federal_Reserve</string>
 	<string>/Federal_Reserve_Act</string>
 	<string>/Federal_Reserve_Note</string>
+	<string>/Federal_judge</string>
+	<string>/Federal_law</string>
+	<string>/Federal_prison</string>
+	<string>/Federal_republic</string>
 	<string>/Federalism</string>
 	<string>/Federalist_Party</string>
 	<string>/Federation</string>
-	<string>/FedEx</string>
 	<string>/Fedora</string>
 	<string>/Feedback</string>
 	<string>/Feeling</string>
@@ -4363,8 +4332,6 @@
 	<string>/Field_handball</string>
 	<string>/Field_hockey</string>
 	<string>/Field_lacrosse</string>
-	<string>/FIFA</string>
-	<string>/FIFA_World_Cup</string>
 	<string>/Fifth_Avenue</string>
 	<string>/Fight_Club</string>
 	<string>/Fighter-bomber</string>
@@ -4377,14 +4344,13 @@
 	<string>/Figurine</string>
 	<string>/Fiji</string>
 	<string>/File_Allocation_Table</string>
+	<string>/File_Transfer_Protocol</string>
 	<string>/File_format</string>
 	<string>/File_manager</string>
 	<string>/File_sharing</string>
 	<string>/File_system</string>
 	<string>/File_transfer</string>
-	<string>/File_Transfer_Protocol</string>
 	<string>/File_viewer</string>
-	<string>/FileMaker</string>
 	<string>/Filename_extension</string>
 	<string>/Filet_mignon</string>
 	<string>/Filing_cabinet</string>
@@ -4419,11 +4385,11 @@
 	<string>/Final_Fantasy</string>
 	<string>/Final_good</string>
 	<string>/Finance</string>
+	<string>/Financial_Times</string>
 	<string>/Financial_adviser</string>
 	<string>/Financial_analyst</string>
 	<string>/Financial_capital</string>
 	<string>/Financial_planner</string>
-	<string>/Financial_Times</string>
 	<string>/Finch</string>
 	<string>/Finding_Dory</string>
 	<string>/Finding_Nemo</string>
@@ -4436,11 +4402,11 @@
 	<string>/Firaxis_Games</string>
 	<string>/Fire</string>
 	<string>/Fire-tube_boiler</string>
+	<string>/Fire_Emblem</string>
+	<string>/Fire_Emblem_Fates</string>
 	<string>/Fire_breathing</string>
 	<string>/Fire_eating</string>
 	<string>/Fire_ecology</string>
-	<string>/Fire_Emblem</string>
-	<string>/Fire_Emblem_Fates</string>
 	<string>/Fire_extinguisher</string>
 	<string>/Fire_lookout_tower</string>
 	<string>/Fire_performance</string>
@@ -4457,11 +4423,11 @@
 	<string>/Firmament</string>
 	<string>/Firmware</string>
 	<string>/First-person_shooter</string>
-	<string>/First_aid</string>
-	<string>/First_language</string>
 	<string>/First_Nations</string>
 	<string>/First_ScotRail</string>
 	<string>/First_World</string>
+	<string>/First_aid</string>
+	<string>/First_language</string>
 	<string>/Fiscal_policy</string>
 	<string>/Fiscal_year</string>
 	<string>/Fish</string>
@@ -4487,7 +4453,6 @@
 	<string>/Five_Pillars_of_Islam</string>
 	<string>/Fixed-wing_aircraft</string>
 	<string>/Fjord</string>
-	<string>/FLAC</string>
 	<string>/Flag</string>
 	<string>/Flag_football</string>
 	<string>/Flag_semaphore</string>
@@ -4496,14 +4461,13 @@
 	<string>/Flamingo</string>
 	<string>/Flank_steak</string>
 	<string>/Flannel</string>
-	<string>/Flash_animation</string>
 	<string>/Flash_Gordon</string>
-	<string>/Flash_memory</string>
 	<string>/Flash_Video</string>
+	<string>/Flash_animation</string>
+	<string>/Flash_memory</string>
 	<string>/Flashdance</string>
 	<string>/Flashforward</string>
 	<string>/Flashtube</string>
-	<string>/Flat_panel_display</string>
 	<string>/Flatbread</string>
 	<string>/Flattop</string>
 	<string>/Flavan-3-ol</string>
@@ -4554,11 +4518,10 @@
 	<string>/Flux</string>
 	<string>/Fly</string>
 	<string>/Fly_system</string>
+	<string>/Flying_Spaghetti_Monster</string>
 	<string>/Flying_ace</string>
 	<string>/Flying_fish</string>
 	<string>/Flying_junction</string>
-	<string>/Flying_Spaghetti_Monster</string>
-	<string>/FM_broadcasting</string>
 	<string>/Foam</string>
 	<string>/Focal_length</string>
 	<string>/Focus_puller</string>
@@ -4576,6 +4539,8 @@
 	<string>/Fontainebleau</string>
 	<string>/Foo_Fighters</string>
 	<string>/Food</string>
+	<string>/Food_Network</string>
+	<string>/Food_Rocks</string>
 	<string>/Food_allergy</string>
 	<string>/Food_bank</string>
 	<string>/Food_cart</string>
@@ -4586,11 +4551,9 @@
 	<string>/Food_energy</string>
 	<string>/Food_engineering</string>
 	<string>/Food_industry</string>
-	<string>/Food_Network</string>
 	<string>/Food_presentation</string>
 	<string>/Food_preservation</string>
 	<string>/Food_processing</string>
-	<string>/Food_Rocks</string>
 	<string>/Food_science</string>
 	<string>/Food_security</string>
 	<string>/Food_truck</string>
@@ -4615,10 +4578,10 @@
 	<string>/Ford_Motor_Company</string>
 	<string>/Ford_Mustang</string>
 	<string>/Forecasting</string>
+	<string>/Foreign_Policy</string>
 	<string>/Foreign_exchange_market</string>
 	<string>/Foreign_language</string>
 	<string>/Foreign_minister</string>
-	<string>/Foreign_Policy</string>
 	<string>/Forensic_Files</string>
 	<string>/Forensic_pathology</string>
 	<string>/Forensic_science</string>
@@ -4658,19 +4621,18 @@
 	<string>/Foster_the_People</string>
 	<string>/Foundationalism</string>
 	<string>/Fountain</string>
-	<string>/Fountain_of_Nations</string>
 	<string>/Fountain_pen</string>
 	<string>/Four-player_chess</string>
 	<string>/Four_color_theorem</string>
 	<string>/Fourier_analysis</string>
-	<string>/Fourth_wall</string>
 	<string>/Fourth_World</string>
+	<string>/Fourth_wall</string>
 	<string>/Fowl</string>
 	<string>/Fox</string>
-	<string>/Fox_hunting</string>
 	<string>/Fox_News</string>
 	<string>/Fox_News_Radio</string>
 	<string>/Fox_Sports_Networks</string>
+	<string>/Fox_hunting</string>
 	<string>/Foxconn</string>
 	<string>/Fractal</string>
 	<string>/Frame_of_reference</string>
@@ -4712,21 +4674,21 @@
 	<string>/Freeze-drying</string>
 	<string>/Freight_transport</string>
 	<string>/French_Alps</string>
-	<string>/French_and_Indian_War</string>
 	<string>/French_Armed_Forces</string>
 	<string>/French_Army</string>
-	<string>/French_cuisine</string>
-	<string>/French_franc</string>
-	<string>/French_fries</string>
 	<string>/French_Guiana</string>
-	<string>/French_language</string>
 	<string>/French_Open</string>
-	<string>/French_people</string>
 	<string>/French_Quarter</string>
 	<string>/French_Revolution</string>
 	<string>/French_Riviera</string>
-	<string>/French_toast</string>
 	<string>/French_Union</string>
+	<string>/French_and_Indian_War</string>
+	<string>/French_cuisine</string>
+	<string>/French_franc</string>
+	<string>/French_fries</string>
+	<string>/French_language</string>
+	<string>/French_people</string>
+	<string>/French_toast</string>
 	<string>/French_wine</string>
 	<string>/Frequency</string>
 	<string>/Fresco</string>
@@ -4808,6 +4770,14 @@
 	<string>/Fuzzy_logic</string>
 	<string>/G.I._Joe</string>
 	<string>/G20</string>
+	<string>/GE_Aviation</string>
+	<string>/GIF</string>
+	<string>/GIMP</string>
+	<string>/GLONASS</string>
+	<string>/GNU_Core_Utilities</string>
+	<string>/GNU_Debugger</string>
+	<string>/GNU_Project</string>
+	<string>/GSM</string>
 	<string>/Gadolinium</string>
 	<string>/Gag_cartoon</string>
 	<string>/Gagarino</string>
@@ -4825,32 +4795,32 @@
 	<string>/Galvanic_cell</string>
 	<string>/Gambling</string>
 	<string>/Game</string>
+	<string>/GameCube</string>
+	<string>/GameFAQs</string>
+	<string>/GameSpot</string>
 	<string>/Game_Boy</string>
 	<string>/Game_Boy_Advance</string>
 	<string>/Game_Boy_Color</string>
 	<string>/Game_Boy_Micro</string>
 	<string>/Game_Center</string>
+	<string>/Game_Gear</string>
 	<string>/Game_controller</string>
 	<string>/Game_demo</string>
 	<string>/Game_design</string>
 	<string>/Game_engine</string>
-	<string>/Game_Gear</string>
 	<string>/Game_mechanics</string>
+	<string>/Game_of_Thrones</string>
 	<string>/Game_of_chance</string>
 	<string>/Game_of_skill</string>
-	<string>/Game_of_Thrones</string>
 	<string>/Game_reserve</string>
 	<string>/Game_show</string>
 	<string>/Game_studies</string>
 	<string>/Game_theory</string>
-	<string>/GameCube</string>
-	<string>/GameFAQs</string>
 	<string>/Gameloft</string>
 	<string>/Gamepad</string>
 	<string>/Gameplay</string>
 	<string>/Gamer</string>
 	<string>/Gamescom</string>
-	<string>/GameSpot</string>
 	<string>/Gaming_convention</string>
 	<string>/Gamma</string>
 	<string>/Gamma-ray_burst</string>
@@ -4862,8 +4832,8 @@
 	<string>/Gangnam_Style</string>
 	<string>/Gantt_chart</string>
 	<string>/Gap_Inc.</string>
-	<string>/Garage_sale</string>
 	<string>/GarageBand</string>
+	<string>/Garage_sale</string>
 	<string>/Garden</string>
 	<string>/Garden_design</string>
 	<string>/Garden_of_Eden</string>
@@ -4888,7 +4858,6 @@
 	<string>/Gaza_Strip</string>
 	<string>/Gaze</string>
 	<string>/Gazelle</string>
-	<string>/GE_Aviation</string>
 	<string>/Gear</string>
 	<string>/Gears_of_War</string>
 	<string>/Geek</string>
@@ -4907,14 +4876,14 @@
 	<string>/Gene_flow</string>
 	<string>/Gene_therapy</string>
 	<string>/Genealogy</string>
-	<string>/General_aviation</string>
 	<string>/General_Electric</string>
 	<string>/General_Foods</string>
 	<string>/General_Mills</string>
 	<string>/General_Motors</string>
+	<string>/General_Post_Office</string>
+	<string>/General_aviation</string>
 	<string>/General_officer</string>
 	<string>/General_order</string>
-	<string>/General_Post_Office</string>
 	<string>/General_relativity</string>
 	<string>/General_topology</string>
 	<string>/Generation</string>
@@ -4982,14 +4951,14 @@
 	<string>/Gerald_Ford</string>
 	<string>/Gerard_Butler</string>
 	<string>/Geriatrics</string>
-	<string>/German_colonial_empire</string>
 	<string>/German_East_Africa</string>
 	<string>/German_Empire</string>
+	<string>/German_Shepherd</string>
+	<string>/German_colonial_empire</string>
 	<string>/German_gold_mark</string>
 	<string>/German_idealism</string>
 	<string>/German_language</string>
 	<string>/German_reunification</string>
-	<string>/German_Shepherd</string>
 	<string>/German_studies</string>
 	<string>/German_submarine_U-331</string>
 	<string>/German_wine</string>
@@ -5003,7 +4972,6 @@
 	<string>/Get_Out</string>
 	<string>/Gettier_problem</string>
 	<string>/Gettysburg_Address</string>
-	<string>/Gettysburg_Campaign</string>
 	<string>/Geyser</string>
 	<string>/Ghana</string>
 	<string>/Ghanaian_cedi</string>
@@ -5018,7 +4986,6 @@
 	<string>/Giant_star</string>
 	<string>/Gibbs_free_energy</string>
 	<string>/Gibraltar</string>
-	<string>/GIF</string>
 	<string>/Gift_economy</string>
 	<string>/Gift_shop</string>
 	<string>/Gift_tax</string>
@@ -5028,7 +4995,6 @@
 	<string>/Gilbert_Ryle</string>
 	<string>/Gilded_Age</string>
 	<string>/Gill</string>
-	<string>/GIMP</string>
 	<string>/Gin</string>
 	<string>/Ginger</string>
 	<string>/Ginger_ale</string>
@@ -5067,12 +5033,11 @@
 	<string>/Globe_Theatre</string>
 	<string>/Globes</string>
 	<string>/Glock</string>
-	<string>/GLONASS</string>
+	<string>/Glossary_of_HVAC_terms</string>
+	<string>/Glossary_of_Islam</string>
 	<string>/Glossary_of_chess</string>
 	<string>/Glossary_of_golf</string>
-	<string>/Glossary_of_HVAC_terms</string>
 	<string>/Glossary_of_ichthyology</string>
-	<string>/Glossary_of_Islam</string>
 	<string>/Glossary_of_tennis_terms</string>
 	<string>/Gloster_Meteor</string>
 	<string>/Glove</string>
@@ -5082,10 +5047,8 @@
 	<string>/Glycolysis</string>
 	<string>/Gmail</string>
 	<string>/Gnosticism</string>
-	<string>/GNU_Core_Utilities</string>
-	<string>/GNU_Debugger</string>
-	<string>/GNU_Project</string>
 	<string>/Go-kart</string>
+	<string>/GoPro</string>
 	<string>/Goal</string>
 	<string>/Goat</string>
 	<string>/Goat_meat</string>
@@ -5105,35 +5068,34 @@
 	<string>/Gold_reserve</string>
 	<string>/Gold_rush</string>
 	<string>/Gold_standard</string>
+	<string>/GoldenEye</string>
 	<string>/Golden_Age_of_Radio</string>
-	<string>/Golden_apple</string>
 	<string>/Golden_Delicious</string>
-	<string>/Golden_eagle</string>
 	<string>/Golden_Gate</string>
 	<string>/Golden_Gate_Bridge</string>
 	<string>/Golden_Gate_Park</string>
-	<string>/Golden_Globe_Award</string>
 	<string>/Golden_Horseshoe_Saloon</string>
 	<string>/Golden_Lion</string>
-	<string>/Golden_ratio</string>
 	<string>/Golden_Retriever</string>
 	<string>/Golden_State_Warriors</string>
 	<string>/Golden_Zephyr</string>
-	<string>/GoldenEye</string>
+	<string>/Golden_apple</string>
+	<string>/Golden_eagle</string>
+	<string>/Golden_ratio</string>
 	<string>/Goldfish</string>
 	<string>/Goldman_Sachs</string>
 	<string>/Golf</string>
-	<string>/Golf_ball</string>
 	<string>/Golf_Channel</string>
+	<string>/Golf_ball</string>
 	<string>/Golf_club</string>
 	<string>/Golgi_apparatus</string>
 	<string>/Gomphidae</string>
 	<string>/Gondola_lift</string>
 	<string>/Gondwana</string>
 	<string>/Gonzaga_Bulldogs</string>
-	<string>/Good_and_evil</string>
 	<string>/Good_Friday</string>
 	<string>/Good_Morning_America</string>
+	<string>/Good_and_evil</string>
 	<string>/Goods</string>
 	<string>/Goofy</string>
 	<string>/Goofy%27s_Sky_School</string>
@@ -5154,7 +5116,6 @@
 	<string>/Googly_eyes</string>
 	<string>/Goose</string>
 	<string>/Goosebumps</string>
-	<string>/GoPro</string>
 	<string>/Gordon_Moore</string>
 	<string>/Gorilla</string>
 	<string>/Goris</string>
@@ -5180,8 +5141,6 @@
 	<string>/Granary</string>
 	<string>/Grand_Canyon</string>
 	<string>/Grand_Central_Terminal</string>
-	<string>/Grand_Chess</string>
-	<string>/Grand_jury</string>
 	<string>/Grand_Ole_Opry</string>
 	<string>/Grand_Palais</string>
 	<string>/Grand_Theft_Auto</string>
@@ -5189,6 +5148,7 @@
 	<string>/Grand_Theft_Auto_IV</string>
 	<string>/Grand_Theft_Auto_V</string>
 	<string>/Grand_Tour</string>
+	<string>/Grand_jury</string>
 	<string>/Grandparent</string>
 	<string>/Granite</string>
 	<string>/Granny_Smith</string>
@@ -5250,14 +5210,14 @@
 	<string>/Greeks</string>
 	<string>/Green</string>
 	<string>/Green_Bay_Packers</string>
+	<string>/Green_Day</string>
+	<string>/Green_Hill_Zone</string>
+	<string>/Green_Revolution</string>
 	<string>/Green_bean</string>
 	<string>/Green_building</string>
 	<string>/Green_chemistry</string>
-	<string>/Green_Day</string>
 	<string>/Green_economy</string>
-	<string>/Green_Hill_Zone</string>
 	<string>/Green_politics</string>
-	<string>/Green_Revolution</string>
 	<string>/Green_roof</string>
 	<string>/Green_sea_turtle</string>
 	<string>/Green_tea</string>
@@ -5274,15 +5234,14 @@
 	<string>/Grenade</string>
 	<string>/Grey</string>
 	<string>/Grey%27s_Anatomy</string>
-	<string>/Grey_goo</string>
 	<string>/Greyhound_racing</string>
 	<string>/Grid_computing</string>
 	<string>/Grilling</string>
 	<string>/Grim_Fandango</string>
 	<string>/Grimms%27_Fairy_Tales</string>
 	<string>/Gristmill</string>
-	<string>/Grizzly_bear</string>
 	<string>/Grizzly_River_Run</string>
+	<string>/Grizzly_bear</string>
 	<string>/Grocery_store</string>
 	<string>/Gross_domestic_product</string>
 	<string>/Grotesque</string>
@@ -5305,7 +5264,6 @@
 	<string>/Growth_management</string>
 	<string>/Gruel</string>
 	<string>/Gruiformes</string>
-	<string>/GSM</string>
 	<string>/Guacamole</string>
 	<string>/Guadalajara</string>
 	<string>/Guam</string>
@@ -5357,6 +5315,18 @@
 	<string>/Gymnastics</string>
 	<string>/Gynaecology</string>
 	<string>/Gyroscope</string>
+	<string>/HBO</string>
+	<string>/HDMI</string>
+	<string>/HD_DVD</string>
+	<string>/HD_Radio</string>
+	<string>/HFS_Plus</string>
+	<string>/HMS_Queen_Mary</string>
+	<string>/HP_Labs</string>
+	<string>/HSBC</string>
+	<string>/HTC</string>
+	<string>/HTML</string>
+	<string>/HTML5</string>
+	<string>/HTTPS</string>
 	<string>/H_II_region</string>
 	<string>/Habitat</string>
 	<string>/Habitat_destruction</string>
@@ -5399,9 +5369,8 @@
 	<string>/Hammer</string>
 	<string>/Hammerhead_shark</string>
 	<string>/Hamster</string>
-	<string>/Han_dynasty</string>
 	<string>/Han_Solo</string>
-	<string>/Hand-me-down</string>
+	<string>/Han_dynasty</string>
 	<string>/Hand_tool</string>
 	<string>/Handbag</string>
 	<string>/Handball</string>
@@ -5413,7 +5382,6 @@
 	<string>/Handkerchief</string>
 	<string>/Handlebar_moustache</string>
 	<string>/Handycam</string>
-	<string>/Hang_glider</string>
 	<string>/Hang_gliding</string>
 	<string>/Hanging</string>
 	<string>/Hank_Aaron</string>
@@ -5428,9 +5396,9 @@
 	<string>/Happy_Meal</string>
 	<string>/Haptic_technology</string>
 	<string>/Harbor</string>
+	<string>/Hard_Rock_Cafe</string>
 	<string>/Hard_disk_drive</string>
 	<string>/Hard_rock</string>
-	<string>/Hard_Rock_Cafe</string>
 	<string>/Hardness</string>
 	<string>/Hardwood</string>
 	<string>/Hare</string>
@@ -5465,19 +5433,15 @@
 	<string>/Haunted_Mansion_Holiday</string>
 	<string>/Havana</string>
 	<string>/Hawaii</string>
-	<string>/Hawaiian_honeycreeper</string>
 	<string>/Hawaiian_Islands</string>
 	<string>/Hawaiian_Vacation</string>
+	<string>/Hawaiian_honeycreeper</string>
 	<string>/Hawk</string>
 	<string>/Hay</string>
 	<string>/Hayao_Miyazaki</string>
 	<string>/Hazardous_waste</string>
 	<string>/Hazel</string>
 	<string>/Hazelnut</string>
-	<string>/HBO</string>
-	<string>/HD_DVD</string>
-	<string>/HD_Radio</string>
-	<string>/HDMI</string>
 	<string>/Head_of_state</string>
 	<string>/Headband</string>
 	<string>/Headgear</string>
@@ -5571,7 +5535,6 @@
 	<string>/Hexadecimal</string>
 	<string>/Hexagonal_chess</string>
 	<string>/Hexane</string>
-	<string>/HFS_Plus</string>
 	<string>/Hidden_Mickey</string>
 	<string>/Hide-and-seek</string>
 	<string>/Hierarchy</string>
@@ -5579,15 +5542,14 @@
 	<string>/High-pass_filter</string>
 	<string>/High-speed_rail</string>
 	<string>/High-yield_debt</string>
-	<string>/High_availability</string>
 	<string>/High_Earth_orbit</string>
+	<string>/High_School_Musical</string>
+	<string>/High_Seas_Fleet</string>
+	<string>/High_availability</string>
 	<string>/High_fidelity</string>
 	<string>/High_jump</string>
-	<string>/High_School_Musical</string>
 	<string>/High_school_radio</string>
-	<string>/High_Seas_Fleet</string>
 	<string>/High_tech</string>
-	<string>/High_treason</string>
 	<string>/Higher_education</string>
 	<string>/Highway</string>
 	<string>/Hijab</string>
@@ -5627,26 +5589,25 @@
 	<string>/History_of_Africa</string>
 	<string>/History_of_Antarctica</string>
 	<string>/History_of_Asia</string>
-	<string>/History_of_aviation</string>
-	<string>/History_of_biology</string>
 	<string>/History_of_China</string>
-	<string>/History_of_comics</string>
-	<string>/History_of_dance</string>
 	<string>/History_of_Earth</string>
-	<string>/History_of_ecology</string>
 	<string>/History_of_Europe</string>
-	<string>/History_of_film</string>
 	<string>/History_of_India</string>
 	<string>/History_of_Iran</string>
+	<string>/History_of_Russia</string>
+	<string>/History_of_Song</string>
+	<string>/History_of_aviation</string>
+	<string>/History_of_biology</string>
+	<string>/History_of_comics</string>
+	<string>/History_of_dance</string>
+	<string>/History_of_ecology</string>
+	<string>/History_of_film</string>
 	<string>/History_of_logic</string>
 	<string>/History_of_manga</string>
-	<string>/History_of_Russia</string>
 	<string>/History_of_science</string>
-	<string>/History_of_Song</string>
 	<string>/History_of_theatre</string>
 	<string>/Hitoshi_Sakimoto</string>
 	<string>/Hives</string>
-	<string>/HMS_Queen_Mary</string>
 	<string>/Ho_Chi_Minh_City</string>
 	<string>/Hobby</string>
 	<string>/Hobby_farm</string>
@@ -5669,6 +5630,7 @@
 	<string>/Holy_Roman_Empire</string>
 	<string>/Holy_Spirit</string>
 	<string>/Home</string>
+	<string>/HomePod</string>
 	<string>/Home_Alone</string>
 	<string>/Home_appliance</string>
 	<string>/Home_automation</string>
@@ -5680,7 +5642,6 @@
 	<string>/Home_video_game_console</string>
 	<string>/Homelessness</string>
 	<string>/Homemaking</string>
-	<string>/HomePod</string>
 	<string>/Homer</string>
 	<string>/Homer_Simpson</string>
 	<string>/Homeschooling</string>
@@ -5732,12 +5693,12 @@
 	<string>/Hospital_ship</string>
 	<string>/Hospodar</string>
 	<string>/Hostel</string>
+	<string>/Hot_Wheels</string>
 	<string>/Hot_air_balloon</string>
 	<string>/Hot_chocolate</string>
 	<string>/Hot_dog</string>
 	<string>/Hot_sauce</string>
 	<string>/Hot_tub</string>
-	<string>/Hot_Wheels</string>
 	<string>/Hotel</string>
 	<string>/Hotel_California</string>
 	<string>/Hotel_Mario</string>
@@ -5761,13 +5722,7 @@
 	<string>/Howard_Stern</string>
 	<string>/Howard_the_Duck</string>
 	<string>/Howitzer</string>
-	<string>/HP_Labs</string>
 	<string>/Hryvnia_sign</string>
-	<string>/HSBC</string>
-	<string>/HTC</string>
-	<string>/HTML</string>
-	<string>/HTML5</string>
-	<string>/HTTPS</string>
 	<string>/Hua_Mulan</string>
 	<string>/Huawei</string>
 	<string>/Hubble_Space_Telescope</string>
@@ -5835,7 +5790,6 @@
 	<string>/Hurva_Synagogue</string>
 	<string>/Husband</string>
 	<string>/Hut</string>
-	<string>/HVAC</string>
 	<string>/Hybrid_vehicle</string>
 	<string>/Hydraulic_engineering</string>
 	<string>/Hydrocarbon</string>
@@ -5855,8 +5809,8 @@
 	<string>/Hyena</string>
 	<string>/Hygiene</string>
 	<string>/Hymn</string>
-	<string>/Hyperbole</string>
 	<string>/HyperCard</string>
+	<string>/Hyperbole</string>
 	<string>/Hyperion_Theater</string>
 	<string>/Hyperlink</string>
 	<string>/Hyperloop</string>
@@ -5872,22 +5826,38 @@
 	<string>/Hypotenuse</string>
 	<string>/Hypothermia</string>
 	<string>/Hypothesis</string>
-	<string>/iAd</string>
+	<string>/IBM</string>
+	<string>/IBM_Personal_Computer</string>
+	<string>/ICANN</string>
+	<string>/IEEE_1394</string>
+	<string>/IGN</string>
+	<string>/IKEA</string>
+	<string>/IMAX</string>
+	<string>/IMAX_Corporation</string>
+	<string>/IMDb</string>
+	<string>/IMac</string>
+	<string>/IMovie</string>
+	<string>/IOS</string>
+	<string>/IP_address</string>
+	<string>/IPad</string>
+	<string>/IPhone</string>
+	<string>/IPod</string>
+	<string>/IPod_Classic</string>
+	<string>/IPod_Nano</string>
+	<string>/IPod_Touch</string>
+	<string>/IPv6</string>
+	<string>/IRobot</string>
+	<string>/ITunes</string>
 	<string>/Ian_Fleming</string>
 	<string>/Ian_McKellen</string>
 	<string>/Ibis</string>
-	<string>/IBM</string>
-	<string>/IBM_Personal_Computer</string>
 	<string>/Ibn_al-Haytham</string>
-	<string>/IBooks</string>
-	<string>/ICANN</string>
 	<string>/Ice</string>
+	<string>/Ice_Cube</string>
 	<string>/Ice_age</string>
 	<string>/Ice_core</string>
 	<string>/Ice_cream</string>
 	<string>/Ice_cream_van</string>
-	<string>/Ice_Cube</string>
-	<string>/Ice_dancing</string>
 	<string>/Ice_hockey</string>
 	<string>/Ice_sheet</string>
 	<string>/Ice_shelf</string>
@@ -5901,7 +5871,6 @@
 	<string>/Iceland</string>
 	<string>/Ichthyology</string>
 	<string>/Ichthyosaur</string>
-	<string>/iCloud</string>
 	<string>/Ico</string>
 	<string>/Icon</string>
 	<string>/Iconography</string>
@@ -5915,32 +5884,25 @@
 	<string>/Identity_element</string>
 	<string>/Ideology</string>
 	<string>/Idris_Elba</string>
-	<string>/IEEE_1394</string>
 	<string>/Igloo</string>
-	<string>/IGN</string>
 	<string>/Iguana</string>
-	<string>/IKEA</string>
 	<string>/Iliad</string>
 	<string>/Illegal_drug_trade</string>
 	<string>/Illegal_logging</string>
 	<string>/Illinois</string>
 	<string>/Illinois_Senate</string>
+	<string>/IllumiNations</string>
 	<string>/Illuminated_manuscript</string>
 	<string>/Illuminati</string>
-	<string>/IllumiNations</string>
 	<string>/Illusion</string>
 	<string>/Illustration</string>
 	<string>/Illustrator</string>
-	<string>/IMac</string>
 	<string>/Image</string>
 	<string>/Image_file_formats</string>
 	<string>/Image_resolution</string>
 	<string>/Imagery</string>
 	<string>/Imagination</string>
 	<string>/Imagine_Dragons</string>
-	<string>/IMAX</string>
-	<string>/IMAX_Corporation</string>
-	<string>/IMDb</string>
 	<string>/Imgur</string>
 	<string>/Imhotep</string>
 	<string>/Imitation</string>
@@ -5949,8 +5911,6 @@
 	<string>/Immune_system</string>
 	<string>/Immunohistochemistry</string>
 	<string>/Immunology</string>
-	<string>/IMovie</string>
-	<string>/iMovie</string>
 	<string>/Impact_crater</string>
 	<string>/Impact_event</string>
 	<string>/Impact_factor</string>
@@ -5965,8 +5925,8 @@
 	<string>/In_silico</string>
 	<string>/In_vitro</string>
 	<string>/In_vivo</string>
-	<string>/Inca_architecture</string>
 	<string>/Inca_Empire</string>
+	<string>/Inca_architecture</string>
 	<string>/Inca_mythology</string>
 	<string>/Incandescent_light_bulb</string>
 	<string>/Inception</string>
@@ -5981,13 +5941,12 @@
 	<string>/Independent_contractor</string>
 	<string>/Independent_film</string>
 	<string>/India</string>
-	<string>/Indian_astronomy</string>
-	<string>/Indian_logic</string>
 	<string>/Indian_Ocean</string>
 	<string>/Indian_Railways</string>
+	<string>/Indian_astronomy</string>
+	<string>/Indian_logic</string>
 	<string>/Indian_rupee</string>
 	<string>/Indian_rupee_sign</string>
-	<string>/Indian_War_Canoes</string>
 	<string>/Indiana</string>
 	<string>/Indiana_Jones</string>
 	<string>/Indiana_Jones_Adventure</string>
@@ -6004,12 +5963,12 @@
 	<string>/Indoor</string>
 	<string>/Inductive_reasoning</string>
 	<string>/Inductor</string>
+	<string>/Industrial_Revolution</string>
 	<string>/Industrial_action</string>
 	<string>/Industrial_design</string>
 	<string>/Industrial_engineering</string>
 	<string>/Industrial_music</string>
 	<string>/Industrial_park</string>
-	<string>/Industrial_Revolution</string>
 	<string>/Industrial_robot</string>
 	<string>/Industrial_society</string>
 	<string>/Industrial_warfare</string>
@@ -6088,8 +6047,8 @@
 	<string>/Intellectual</string>
 	<string>/Intellectual_property</string>
 	<string>/Intelligence</string>
-	<string>/Intelligent_agent</string>
 	<string>/Intelligent_Systems</string>
+	<string>/Intelligent_agent</string>
 	<string>/Intelligentsia</string>
 	<string>/Intelsat_I</string>
 	<string>/Intensive_animal_farming</string>
@@ -6115,29 +6074,28 @@
 	<string>/Internal_energy</string>
 	<string>/Internal_medicine</string>
 	<string>/International_Date_Line</string>
+	<string>/International_Sign</string>
 	<string>/International_law</string>
 	<string>/International_relations</string>
-	<string>/International_Sign</string>
 	<string>/International_trade</string>
 	<string>/International_unit</string>
 	<string>/Internet</string>
+	<string>/Internet_Archive</string>
+	<string>/Internet_Explorer</string>
+	<string>/Internet_Protocol</string>
+	<string>/Internet_Relay_Chat</string>
 	<string>/Internet_access</string>
 	<string>/Internet_activism</string>
-	<string>/Internet_Archive</string>
 	<string>/Internet_censorship</string>
 	<string>/Internet_culture</string>
-	<string>/Internet_Explorer</string>
 	<string>/Internet_forum</string>
 	<string>/Internet_layer</string>
 	<string>/Internet_meme</string>
 	<string>/Internet_of_things</string>
 	<string>/Internet_privacy</string>
-	<string>/Internet_Protocol</string>
 	<string>/Internet_protocol_suite</string>
 	<string>/Internet_radio</string>
-	<string>/Internet_Relay_Chat</string>
 	<string>/Internet_slang</string>
-	<string>/Internet_television</string>
 	<string>/Internment</string>
 	<string>/Interplanetary_medium</string>
 	<string>/Interpol</string>
@@ -6165,35 +6123,12 @@
 	<string>/Ion</string>
 	<string>/Ionic_bonding</string>
 	<string>/Ionic_compound</string>
-	<string>/IOS</string>
 	<string>/Iowa</string>
 	<string>/Iowa_caucuses</string>
-	<string>/IP_address</string>
-	<string>/IPad</string>
-	<string>/iPhone</string>
-	<string>/IPhone</string>
-	<string>/iPhone_3G</string>
-	<string>/iPhone_3GS</string>
-	<string>/iPhone_4</string>
-	<string>/iPhone_4S</string>
-	<string>/iPhone_5</string>
-	<string>/iPhone_5C</string>
-	<string>/iPhone_5S</string>
-	<string>/iPhone_6</string>
-	<string>/iPhone_6S</string>
-	<string>/iPhoto</string>
-	<string>/IPod</string>
-	<string>/IPod_Classic</string>
-	<string>/IPod_Nano</string>
-	<string>/iPod_Nano</string>
-	<string>/iPod_Shuffle</string>
-	<string>/iPod_Touch</string>
-	<string>/IPod_Touch</string>
-	<string>/IPv6</string>
 	<string>/Iran</string>
 	<string>/Iran_hostage_crisis</string>
-	<string>/Iranian_peoples</string>
 	<string>/Iranian_Revolution</string>
+	<string>/Iranian_peoples</string>
 	<string>/Iranian_rial</string>
 	<string>/Iranian_studies</string>
 	<string>/Iraq</string>
@@ -6204,7 +6139,6 @@
 	<string>/Irish_elk</string>
 	<string>/Irish_mythology</string>
 	<string>/Irish_people</string>
-	<string>/IRobot</string>
 	<string>/Iron</string>
 	<string>/Iron_Age</string>
 	<string>/Iron_Curtain</string>
@@ -6247,31 +6181,30 @@
 	<string>/Israelites</string>
 	<string>/Istanbul</string>
 	<string>/It%27s_a_Small_World</string>
-	<string>/Italian_beef</string>
 	<string>/Italian_Fascism</string>
+	<string>/Italian_Renaissance</string>
+	<string>/Italian_Wars</string>
+	<string>/Italian_beef</string>
 	<string>/Italian_literature</string>
 	<string>/Italian_neorealism</string>
 	<string>/Italian_opera</string>
-	<string>/Italian_Renaissance</string>
-	<string>/Italian_Wars</string>
 	<string>/Italians</string>
 	<string>/Italy</string>
-	<string>/ITS_launch_vehicle</string>
-	<string>/ITunes</string>
-	<string>/iTunes_Store</string>
 	<string>/Ivan_Pavlov</string>
 	<string>/Ivory</string>
 	<string>/Ivory_Coast</string>
 	<string>/Ivy_League</string>
-	<string>/iWork</string>
 	<string>/J._J._Abrams</string>
 	<string>/J._K._Rowling</string>
 	<string>/J._R._R._Tolkien</string>
+	<string>/JPEG</string>
+	<string>/JPMorgan_Chase</string>
+	<string>/JSON</string>
 	<string>/Jabba_the_Hutt</string>
 	<string>/Jack-in-the-box</string>
 	<string>/Jack-o%27-lantern</string>
-	<string>/Jack_in_the_Box</string>
 	<string>/Jack_Sparrow</string>
+	<string>/Jack_in_the_Box</string>
 	<string>/Jack_the_Ripper</string>
 	<string>/Jackal</string>
 	<string>/Jacket</string>
@@ -6304,10 +6237,10 @@
 	<string>/Jargon</string>
 	<string>/Jason_Voorhees</string>
 	<string>/Java</string>
+	<string>/JavaScript</string>
 	<string>/Java_Man</string>
 	<string>/Java_virtual_machine</string>
 	<string>/Javan_rhinoceros</string>
-	<string>/JavaScript</string>
 	<string>/Javelin</string>
 	<string>/Javelin_throw</string>
 	<string>/Jaws_2</string>
@@ -6322,7 +6255,6 @@
 	<string>/Jealousy</string>
 	<string>/Jeans</string>
 	<string>/Jedi</string>
-	<string>/Jedi_Training_Academy</string>
 	<string>/Jeep</string>
 	<string>/Jeff_Bezos</string>
 	<string>/Jellyfish</string>
@@ -6335,14 +6267,14 @@
 	<string>/Jessica_Jones</string>
 	<string>/Jester</string>
 	<string>/Jesus</string>
+	<string>/JetBlue</string>
+	<string>/Jet_Force_Gemini</string>
 	<string>/Jet_aircraft</string>
 	<string>/Jet_airliner</string>
 	<string>/Jet_bridge</string>
 	<string>/Jet_engine</string>
-	<string>/Jet_Force_Gemini</string>
 	<string>/Jet_fuel</string>
 	<string>/Jet_stream</string>
-	<string>/JetBlue</string>
 	<string>/Jetpac</string>
 	<string>/Jewellery</string>
 	<string>/Jewish_mysticism</string>
@@ -6391,9 +6323,6 @@
 	<string>/Joy_Division</string>
 	<string>/Joystick</string>
 	<string>/Joystiq</string>
-	<string>/JPEG</string>
-	<string>/JPMorgan_Chase</string>
-	<string>/JSON</string>
 	<string>/Judaism</string>
 	<string>/Judge</string>
 	<string>/Judge_Judy</string>
@@ -6414,8 +6343,8 @@
 	<string>/Jumpsuit</string>
 	<string>/June</string>
 	<string>/Jungle</string>
-	<string>/Jungle_cat</string>
 	<string>/Jungle_Cruise</string>
+	<string>/Jungle_cat</string>
 	<string>/Junk_food</string>
 	<string>/Junk_science</string>
 	<string>/Jupiter</string>
@@ -6436,6 +6365,8 @@
 	<string>/Jute</string>
 	<string>/K-pop</string>
 	<string>/K2</string>
+	<string>/KDE_Software_Compilation</string>
+	<string>/KFC</string>
 	<string>/Kaaba</string>
 	<string>/Kabaddi</string>
 	<string>/Kabul</string>
@@ -6472,7 +6403,6 @@
 	<string>/Kayaking</string>
 	<string>/Kazakhstan</string>
 	<string>/Kazakhstani_tenge</string>
-	<string>/KDE_Software_Compilation</string>
 	<string>/Kebab</string>
 	<string>/Keep</string>
 	<string>/Keg</string>
@@ -6495,7 +6425,6 @@
 	<string>/Kevin_Warwick</string>
 	<string>/Key_lime_pie</string>
 	<string>/Keystone_Pipeline</string>
-	<string>/KFC</string>
 	<string>/Khan_Noonien_Singh</string>
 	<string>/Kia_Motors</string>
 	<string>/Kick_scooter</string>
@@ -6524,8 +6453,8 @@
 	<string>/Kinetoscope</string>
 	<string>/King_Arthur</string>
 	<string>/King_Arthur_Carrousel</string>
-	<string>/King_cake</string>
 	<string>/King_Kong</string>
+	<string>/King_cake</string>
 	<string>/Kingdom_Hearts</string>
 	<string>/Kingdom_of_Great_Britain</string>
 	<string>/Kingfisher</string>
@@ -6558,13 +6487,11 @@
 	<string>/Komodo_dragon</string>
 	<string>/Konqueror</string>
 	<string>/Korea</string>
-	<string>/Korean_animation</string>
+	<string>/Korean_War</string>
 	<string>/Korean_barbecue</string>
 	<string>/Korean_language</string>
 	<string>/Korean_mythology</string>
-	<string>/Korean_Peninsula</string>
 	<string>/Korean_punctuation</string>
-	<string>/Korean_War</string>
 	<string>/Kowloon</string>
 	<string>/Kraft_Foods</string>
 	<string>/Kraft_Heinz</string>
@@ -6582,8 +6509,14 @@
 	<string>/Kyoto_Protocol</string>
 	<string>/Kyrgyzstan</string>
 	<string>/LA_Galaxy</string>
+	<string>/LED_display</string>
+	<string>/LED_lamp</string>
+	<string>/LGBT</string>
+	<string>/LG_Corporation</string>
+	<string>/LG_Electronics</string>
 	<string>/La_Paz</string>
 	<string>/La_Vega_Province</string>
+	<string>/LabVIEW</string>
 	<string>/Label</string>
 	<string>/Labor_Day</string>
 	<string>/Laboratory</string>
@@ -6592,14 +6525,13 @@
 	<string>/Labour_economics</string>
 	<string>/Labour_law</string>
 	<string>/Labrador_Retriever</string>
-	<string>/LabVIEW</string>
 	<string>/Lacrosse</string>
 	<string>/Lacrosse_stick</string>
 	<string>/Lactic_acid</string>
 	<string>/Ladakh</string>
 	<string>/Ladin_language</string>
-	<string>/Lady_and_the_Tramp</string>
 	<string>/Lady_Gaga</string>
+	<string>/Lady_and_the_Tramp</string>
 	<string>/Lager</string>
 	<string>/Lagoon</string>
 	<string>/Lagos</string>
@@ -6665,12 +6597,12 @@
 	<string>/Lasagne</string>
 	<string>/Lascaux</string>
 	<string>/Laser</string>
+	<string>/LaserDisc</string>
 	<string>/Laser_cutting</string>
 	<string>/Laser_diode</string>
 	<string>/Laser_pointer</string>
 	<string>/Laser_printing</string>
 	<string>/Laser_tag</string>
-	<string>/LaserDisc</string>
 	<string>/Late_Middle_Ages</string>
 	<string>/Latin</string>
 	<string>/Latin_America</string>
@@ -6698,6 +6630,7 @@
 	<string>/Lawyer</string>
 	<string>/Layoff</string>
 	<string>/Lazy_river</string>
+	<string>/LeBron_James</string>
 	<string>/Le_Carrousel_de_Lancelot</string>
 	<string>/Le_Corbusier</string>
 	<string>/Lead</string>
@@ -6721,10 +6654,7 @@
 	<string>/Leather_jacket</string>
 	<string>/Leave_of_absence</string>
 	<string>/Lebanon</string>
-	<string>/LeBron_James</string>
 	<string>/Lectin</string>
-	<string>/LED_display</string>
-	<string>/LED_lamp</string>
 	<string>/Led_Zeppelin</string>
 	<string>/Led_Zeppelin_IV</string>
 	<string>/Lee_Unkrich</string>
@@ -6757,8 +6687,8 @@
 	<string>/Leo_Ornstein</string>
 	<string>/Leo_Tolstoy</string>
 	<string>/Leon_Trotsky</string>
-	<string>/Leonardo_da_Vinci</string>
 	<string>/Leonardo_DiCaprio</string>
+	<string>/Leonardo_da_Vinci</string>
 	<string>/Leonhard_Euler</string>
 	<string>/Leonidas_I</string>
 	<string>/Leopard</string>
@@ -6771,21 +6701,17 @@
 	<string>/Level_design</string>
 	<string>/Lever</string>
 	<string>/Leveraged_buyout</string>
-	<string>/Lewis_acids_and_bases</string>
 	<string>/Lewis_Black</string>
+	<string>/Lewis_acids_and_bases</string>
 	<string>/Lexicology</string>
 	<string>/Lexicon</string>
 	<string>/Lexmark</string>
-	<string>/LG_Corporation</string>
-	<string>/LG_Electronics</string>
-	<string>/LGBT</string>
 	<string>/Liam_Neeson</string>
 	<string>/Liao_dynasty</string>
 	<string>/Liberalism</string>
 	<string>/Liberia</string>
 	<string>/Libertarianism</string>
 	<string>/Liberty</string>
-	<string>/Liberty_Belle_Riverboat</string>
 	<string>/Liberty_ship</string>
 	<string>/Librarian</string>
 	<string>/Library</string>
@@ -6804,20 +6730,20 @@
 	<string>/Liechtenstein</string>
 	<string>/Lieutenant_general</string>
 	<string>/Life</string>
+	<string>/Life_Is_Strange</string>
+	<string>/Life_Savers</string>
 	<string>/Life_expectancy</string>
 	<string>/Life_extension</string>
-	<string>/Life_Is_Strange</string>
 	<string>/Life_of_Pi</string>
-	<string>/Life_Savers</string>
 	<string>/Life_simulation_game</string>
 	<string>/Lifelong_learning</string>
 	<string>/Liger</string>
 	<string>/Light</string>
 	<string>/Light-emitting_diode</string>
 	<string>/Light-year</string>
+	<string>/Light_Magic</string>
 	<string>/Light_fixture</string>
 	<string>/Light_gun_shooter</string>
-	<string>/Light_Magic</string>
 	<string>/Light_pollution</string>
 	<string>/Light_rail</string>
 	<string>/Lighter</string>
@@ -6846,8 +6772,8 @@
 	<string>/Linen</string>
 	<string>/Linguistics</string>
 	<string>/Link_layer</string>
-	<string>/Linked_list</string>
 	<string>/LinkedIn</string>
+	<string>/Linked_list</string>
 	<string>/Linkin_Park</string>
 	<string>/Linnaean_taxonomy</string>
 	<string>/Linux</string>
@@ -6881,10 +6807,10 @@
 	<string>/Lithosphere</string>
 	<string>/Lithuania</string>
 	<string>/Litre</string>
+	<string>/LittleBigPlanet</string>
 	<string>/Little_Bo-Peep</string>
 	<string>/Little_Busters!</string>
 	<string>/Little_green_men</string>
-	<string>/LittleBigPlanet</string>
 	<string>/Littoral_combat_ship</string>
 	<string>/Liturgy</string>
 	<string>/Liu_Kang</string>
@@ -6920,12 +6846,12 @@
 	<string>/Logarithm</string>
 	<string>/Logging</string>
 	<string>/Logic</string>
+	<string>/Logic_Pro</string>
+	<string>/Logic_Studio</string>
 	<string>/Logic_gate</string>
 	<string>/Logic_in_China</string>
-	<string>/Logic_Pro</string>
 	<string>/Logic_programming</string>
 	<string>/Logic_puzzle</string>
-	<string>/Logic_Studio</string>
 	<string>/Logical_connective</string>
 	<string>/Logical_consequence</string>
 	<string>/Logical_form</string>
@@ -6938,15 +6864,15 @@
 	<string>/Lollipop</string>
 	<string>/London</string>
 	<string>/London_Eye</string>
-	<string>/London_sewerage_system</string>
 	<string>/London_Underground</string>
 	<string>/London_Zoo</string>
+	<string>/London_sewerage_system</string>
 	<string>/Loneliness</string>
 	<string>/Long-distance_running</string>
 	<string>/Long-term_memory</string>
-	<string>/Long_hair</string>
 	<string>/Long_Island</string>
 	<string>/Long_John_Silver</string>
+	<string>/Long_hair</string>
 	<string>/Long_jump</string>
 	<string>/Longbow</string>
 	<string>/Longevity</string>
@@ -6980,8 +6906,8 @@
 	<string>/Low-cost_carrier</string>
 	<string>/Low-pass_filter</string>
 	<string>/Low-pressure_area</string>
-	<string>/Low_culture</string>
 	<string>/Low_Earth_orbit</string>
+	<string>/Low_culture</string>
 	<string>/Lower_Saxony</string>
 	<string>/Lozenge</string>
 	<string>/LucasArts</string>
@@ -7026,6 +6952,27 @@
 	<string>/M-learning</string>
 	<string>/M16_rifle</string>
 	<string>/MAC_address</string>
+	<string>/MATLAB</string>
+	<string>/MESSENGER</string>
+	<string>/MIDI</string>
+	<string>/MIT_Press</string>
+	<string>/MLB_Advanced_Media</string>
+	<string>/MP3</string>
+	<string>/MP3_player</string>
+	<string>/MPEG-4</string>
+	<string>/MS-DOS</string>
+	<string>/MSN</string>
+	<string>/MSNBC</string>
+	<string>/MTR</string>
+	<string>/MTV</string>
+	<string>/MacBook</string>
+	<string>/MacBook_Air</string>
+	<string>/MacBook_Pro</string>
+	<string>/MacOS</string>
+	<string>/MacOS_High_Sierra</string>
+	<string>/MacOS_Server</string>
+	<string>/MacOS_Sierra</string>
+	<string>/MacPaint</string>
 	<string>/Mac_Mini</string>
 	<string>/Mac_OS_X_Lion</string>
 	<string>/Mac_OS_X_Panther</string>
@@ -7034,9 +6981,6 @@
 	<string>/Macau</string>
 	<string>/Macaw</string>
 	<string>/Macbeth</string>
-	<string>/MacBook</string>
-	<string>/MacBook_Air</string>
-	<string>/MacBook_Pro</string>
 	<string>/Machete</string>
 	<string>/Machine</string>
 	<string>/Machine_code</string>
@@ -7052,11 +6996,6 @@
 	<string>/Macintosh_Classic</string>
 	<string>/Mackerel</string>
 	<string>/Mackerel_as_food</string>
-	<string>/MacOS</string>
-	<string>/MacOS_High_Sierra</string>
-	<string>/MacOS_Server</string>
-	<string>/MacOS_Sierra</string>
-	<string>/MacPaint</string>
 	<string>/Macroecology</string>
 	<string>/Macroeconomics</string>
 	<string>/Macy%27s</string>
@@ -7071,15 +7010,14 @@
 	<string>/Magazine</string>
 	<string>/Maggie_Gyllenhaal</string>
 	<string>/Magic_8-Ball</string>
-	<string>/Magic_Carpets_of_Aladdin</string>
-	<string>/Magic_in_fiction</string>
 	<string>/Magic_Johnson</string>
 	<string>/Magic_Journeys</string>
 	<string>/Magic_Kingdom</string>
-	<string>/Magic_lantern</string>
 	<string>/Magic_Mouse</string>
-	<string>/Magic_realism</string>
 	<string>/Magic_Trackpad</string>
+	<string>/Magic_in_fiction</string>
+	<string>/Magic_lantern</string>
+	<string>/Magic_realism</string>
 	<string>/Maglev</string>
 	<string>/Magma</string>
 	<string>/Magna_Carta</string>
@@ -7096,8 +7034,8 @@
 	<string>/Mahjong</string>
 	<string>/Mail</string>
 	<string>/Mail_order</string>
-	<string>/Main_sequence</string>
 	<string>/Main_Street</string>
+	<string>/Main_sequence</string>
 	<string>/Maine</string>
 	<string>/Mainframe_computer</string>
 	<string>/Mainland_China</string>
@@ -7106,10 +7044,10 @@
 	<string>/Maize</string>
 	<string>/Majin_Tensei</string>
 	<string>/Major</string>
-	<string>/Major_film_studio</string>
 	<string>/Major_League_Baseball</string>
 	<string>/Major_League_Gaming</string>
 	<string>/Major_League_Soccer</string>
+	<string>/Major_film_studio</string>
 	<string>/Major_religious_groups</string>
 	<string>/Make-A-Wish_Foundation</string>
 	<string>/Make-up_artist</string>
@@ -7280,8 +7218,8 @@
 	<string>/Mask</string>
 	<string>/Masonry</string>
 	<string>/Mass</string>
-	<string>/Mass_communication</string>
 	<string>/Mass_Effect</string>
+	<string>/Mass_communication</string>
 	<string>/Mass_media</string>
 	<string>/Mass_production</string>
 	<string>/Mass_society</string>
@@ -7291,10 +7229,9 @@
 	<string>/Massachusetts</string>
 	<string>/Massachusetts_Bay</string>
 	<string>/Massif</string>
+	<string>/Master_System</string>
 	<string>/Master_of_Orion</string>
 	<string>/Master_of_Science</string>
-	<string>/Master_System</string>
-	<string>/MasterCard</string>
 	<string>/Masters_Tournament</string>
 	<string>/Mastodon</string>
 	<string>/Match_fixing</string>
@@ -7310,7 +7247,6 @@
 	<string>/Mathematician</string>
 	<string>/Mathematics</string>
 	<string>/Mating</string>
-	<string>/MATLAB</string>
 	<string>/Matryoshka_doll</string>
 	<string>/Mattel</string>
 	<string>/Matter</string>
@@ -7369,8 +7305,8 @@
 	<string>/Medal</string>
 	<string>/Medell%C3%ADn</string>
 	<string>/Medell%C3%ADn_Cartel</string>
-	<string>/Media_psychology</string>
 	<string>/MediaWiki</string>
+	<string>/Media_psychology</string>
 	<string>/Medicaid</string>
 	<string>/Medical_device</string>
 	<string>/Medical_drama</string>
@@ -7400,7 +7336,6 @@
 	<string>/Megamouth_shark</string>
 	<string>/Megapode</string>
 	<string>/Megaproject</string>
-	<string>/Meiji_period</string>
 	<string>/Meiosis</string>
 	<string>/Melanesia</string>
 	<string>/Melanin</string>
@@ -7414,11 +7349,11 @@
 	<string>/Meme</string>
 	<string>/Memorial_Day</string>
 	<string>/Memory</string>
+	<string>/Memory_Stick</string>
 	<string>/Memory_and_aging</string>
 	<string>/Memory_and_trauma</string>
 	<string>/Memory_card</string>
 	<string>/Memory_inhibition</string>
-	<string>/Memory_Stick</string>
 	<string>/Memristor</string>
 	<string>/Men_in_Black_II</string>
 	<string>/Mena_Suvari</string>
@@ -7427,7 +7362,6 @@
 	<string>/Mental_health</string>
 	<string>/Mental_image</string>
 	<string>/Mental_model</string>
-	<string>/Mental_process</string>
 	<string>/Mentalism</string>
 	<string>/Merate</string>
 	<string>/Mercantilism</string>
@@ -7437,18 +7371,15 @@
 	<string>/Merchandising</string>
 	<string>/Merchant</string>
 	<string>/Merchant_ship</string>
-	<string>/Merchant_vessel</string>
 	<string>/Mercury_poisoning</string>
 	<string>/Merlin</string>
 	<string>/Mermaid</string>
 	<string>/Merriam-Webster</string>
-	<string>/Merrill_Lynch</string>
 	<string>/Meryl_Streep</string>
 	<string>/Mesa</string>
 	<string>/Mesite</string>
 	<string>/Mesoamerica</string>
 	<string>/Mesopotamia</string>
-	<string>/MESSENGER</string>
 	<string>/Meta</string>
 	<string>/Meta-ethics</string>
 	<string>/Metabolism</string>
@@ -7456,9 +7387,8 @@
 	<string>/Metacomet_Ridge</string>
 	<string>/Metadata</string>
 	<string>/Metal</string>
-	<string>/Metal_fabrication</string>
 	<string>/Metal_Gear</string>
-	<string>/Metal_Gear_Solid</string>
+	<string>/Metal_fabrication</string>
 	<string>/Metallica</string>
 	<string>/Metallurgy</string>
 	<string>/Metalogic</string>
@@ -7484,11 +7414,11 @@
 	<string>/Metroid_Prime</string>
 	<string>/Metropolitan_area</string>
 	<string>/Mewtwo</string>
-	<string>/Mexican_art</string>
 	<string>/Mexican_Cession</string>
 	<string>/Mexican_Drug_War</string>
-	<string>/Mexican_muralism</string>
 	<string>/Mexican_Revolution</string>
+	<string>/Mexican_art</string>
+	<string>/Mexican_muralism</string>
 	<string>/Mexico</string>
 	<string>/Mexico_City</string>
 	<string>/Mexico_Pavilion_at_Epcot</string>
@@ -7507,7 +7437,6 @@
 	<string>/Michelin</string>
 	<string>/Michelle_Obama</string>
 	<string>/Michigan</string>
-	<string>/Mickey%27s_Fun_Wheel</string>
 	<string>/Mickey%27s_PhilharMagic</string>
 	<string>/Mickey%27s_Toontown</string>
 	<string>/Mickey_Mantle</string>
@@ -7518,7 +7447,6 @@
 	<string>/Microbiologist</string>
 	<string>/Microbiology</string>
 	<string>/Microbotics</string>
-	<string>/Microburst</string>
 	<string>/Microcontroller</string>
 	<string>/Microeconomics</string>
 	<string>/Microelectronics</string>
@@ -7543,16 +7471,14 @@
 	<string>/Mid-ocean_ridge</string>
 	<string>/Middle-earth</string>
 	<string>/Middle_Ages</string>
-	<string>/Middle_class</string>
 	<string>/Middle_East</string>
-	<string>/MIDI</string>
+	<string>/Middle_class</string>
 	<string>/Midtown_Manhattan</string>
 	<string>/Midwestern_United_States</string>
 	<string>/Midwifery</string>
 	<string>/Migraine</string>
 	<string>/Migration_Period</string>
 	<string>/Mike_Fink_Keel_Boats</string>
-	<string>/Mike_Wazowski</string>
 	<string>/Mildew</string>
 	<string>/Mile</string>
 	<string>/Mile_run</string>
@@ -7561,11 +7487,11 @@
 	<string>/Militarism</string>
 	<string>/Militarization</string>
 	<string>/Military</string>
+	<string>/Military_Cross</string>
 	<string>/Military_aircraft</string>
 	<string>/Military_alliance</string>
 	<string>/Military_aviation</string>
 	<string>/Military_base</string>
-	<string>/Military_Cross</string>
 	<string>/Military_engineering</string>
 	<string>/Military_exercise</string>
 	<string>/Military_glider</string>
@@ -7601,8 +7527,8 @@
 	<string>/Mime_artist</string>
 	<string>/Minamata_disease</string>
 	<string>/Mind</string>
-	<string>/Mind_map</string>
 	<string>/Mind_Meld</string>
+	<string>/Mind_map</string>
 	<string>/Mind_sport</string>
 	<string>/Mindfulness</string>
 	<string>/Mindset</string>
@@ -7631,7 +7557,6 @@
 	<string>/Minneapolis</string>
 	<string>/Minnesota</string>
 	<string>/Minnesota_Twins</string>
-	<string>/Minnie%27s_House</string>
 	<string>/Minnie_Mouse</string>
 	<string>/Minnow</string>
 	<string>/Minoan_pottery</string>
@@ -7656,7 +7581,6 @@
 	<string>/Missouri_Compromise</string>
 	<string>/Missouri_River</string>
 	<string>/Missouri_Territory</string>
-	<string>/MIT_Press</string>
 	<string>/Mite</string>
 	<string>/Mitochondrion</string>
 	<string>/Mitosis</string>
@@ -7668,9 +7592,9 @@
 	<string>/Mixed_reality</string>
 	<string>/Mixtape</string>
 	<string>/Mixture</string>
-	<string>/MLB_Advanced_Media</string>
 	<string>/Mnemonic</string>
 	<string>/Moai</string>
+	<string>/MobileMe</string>
 	<string>/Mobile_app</string>
 	<string>/Mobile_blogging</string>
 	<string>/Mobile_computing</string>
@@ -7680,20 +7604,17 @@
 	<string>/Mobile_payment</string>
 	<string>/Mobile_phone</string>
 	<string>/Mobile_robot</string>
-	<string>/Mobile_Web</string>
-	<string>/MobileMe</string>
 	<string>/Mockingbird</string>
 	<string>/Modal_logic</string>
 	<string>/Model_aircraft</string>
 	<string>/Model_car</string>
 	<string>/Model_theory</string>
 	<string>/Modem</string>
+	<string>/Modern_Family</string>
+	<string>/Modern_Paganism</string>
 	<string>/Modern_architecture</string>
 	<string>/Modern_art</string>
 	<string>/Modern_dance</string>
-	<string>/Modern_Family</string>
-	<string>/Modern_history</string>
-	<string>/Modern_Paganism</string>
 	<string>/Modern_pentathlon</string>
 	<string>/Modern_philosophy</string>
 	<string>/Modern_physics</string>
@@ -7840,13 +7761,13 @@
 	<string>/Mount_Everest</string>
 	<string>/Mount_Fuji</string>
 	<string>/Mount_Kilimanjaro</string>
-	<string>/Mount_of_the_Holy_Cross</string>
 	<string>/Mount_Olympus</string>
 	<string>/Mount_Rushmore</string>
 	<string>/Mount_St._Helens</string>
 	<string>/Mount_Tai</string>
 	<string>/Mount_Tambora</string>
 	<string>/Mount_Vesuvius</string>
+	<string>/Mount_of_the_Holy_Cross</string>
 	<string>/Mountain</string>
 	<string>/Mountain_bike</string>
 	<string>/Mountain_goat</string>
@@ -7864,19 +7785,10 @@
 	<string>/Mowgli</string>
 	<string>/Mozilla</string>
 	<string>/Mozzarella</string>
-	<string>/MP3</string>
-	<string>/MP3_player</string>
-	<string>/MPEG-4</string>
-	<string>/MPEG-4_AVC</string>
 	<string>/Mr._Bean</string>
 	<string>/Mr._Potato_Head</string>
 	<string>/Mr._Toad%27s_Wild_Ride</string>
-	<string>/MS-DOS</string>
 	<string>/Ms._Pac-Man</string>
-	<string>/MSN</string>
-	<string>/MSNBC</string>
-	<string>/MTR</string>
-	<string>/MTV</string>
 	<string>/Mucus</string>
 	<string>/Muffin</string>
 	<string>/Muggle</string>
@@ -7887,12 +7799,12 @@
 	<string>/Multi-core_processor</string>
 	<string>/Multi-licensing</string>
 	<string>/Multi-touch</string>
+	<string>/MultiMediaCard</string>
 	<string>/Multicellular_organism</string>
 	<string>/Multiculturalism</string>
 	<string>/Multilateralism</string>
 	<string>/Multilingualism</string>
 	<string>/Multimedia</string>
-	<string>/MultiMediaCard</string>
 	<string>/Multimeter</string>
 	<string>/Multiplayer_video_game</string>
 	<string>/Multiple_unit</string>
@@ -7940,12 +7852,12 @@
 	<string>/Musicology</string>
 	<string>/Musket</string>
 	<string>/Muskox</string>
-	<string>/Muslim</string>
 	<string>/Muslim_conquest_of_Egypt</string>
 	<string>/Muslim_world</string>
 	<string>/Mustang</string>
 	<string>/Mutation</string>
 	<string>/Mute_swan</string>
+	<string>/MySQL</string>
 	<string>/My_Little_Pony</string>
 	<string>/Mycelium</string>
 	<string>/Mycology</string>
@@ -7953,14 +7865,24 @@
 	<string>/Myr</string>
 	<string>/Myrmecology</string>
 	<string>/Myspace</string>
-	<string>/MySQL</string>
 	<string>/Myst</string>
 	<string>/Mystery_House</string>
 	<string>/Mysticism</string>
 	<string>/Myth</string>
 	<string>/MythBusters</string>
-	<string>/Mythology</string>
 	<string>/N.W.A</string>
+	<string>/NASA</string>
+	<string>/NASCAR</string>
+	<string>/NATO</string>
+	<string>/NBA_Finals</string>
+	<string>/NBA_Store</string>
+	<string>/NBC</string>
+	<string>/NBCUniversal</string>
+	<string>/NBC_Sports</string>
+	<string>/NEC</string>
+	<string>/NICAM</string>
+	<string>/NPR</string>
+	<string>/NTSC</string>
 	<string>/Na%27vi_River_Journey</string>
 	<string>/Nachos</string>
 	<string>/Nagasaki</string>
@@ -7985,8 +7907,8 @@
 	<string>/Nantucket</string>
 	<string>/Napalm</string>
 	<string>/Napoleon</string>
-	<string>/Napoleonic_era</string>
 	<string>/Napoleonic_Wars</string>
+	<string>/Napoleonic_era</string>
 	<string>/Napster</string>
 	<string>/Narcissism</string>
 	<string>/Narcos</string>
@@ -7996,29 +7918,25 @@
 	<string>/Narrowband</string>
 	<string>/Naruto</string>
 	<string>/Narwhal</string>
-	<string>/NASA</string>
-	<string>/NASCAR</string>
 	<string>/Nation</string>
 	<string>/Nation_state</string>
-	<string>/National_anthem</string>
-	<string>/National_dish</string>
 	<string>/National_Fascist_Party</string>
 	<string>/National_Gallery</string>
 	<string>/National_Gallery_of_Art</string>
 	<string>/National_Geographic</string>
 	<string>/National_Hockey_League</string>
-	<string>/National_identity</string>
 	<string>/National_Mall</string>
 	<string>/National_Palace_Museum</string>
-	<string>/National_park</string>
 	<string>/National_Park_Service</string>
-	<string>/National_security</string>
 	<string>/National_Security_Agency</string>
+	<string>/National_anthem</string>
+	<string>/National_dish</string>
+	<string>/National_identity</string>
+	<string>/National_park</string>
+	<string>/National_security</string>
 	<string>/National_sport</string>
 	<string>/Nationalism</string>
 	<string>/Nationality</string>
-	<string>/NATO</string>
-	<string>/Natural_and_legal_rights</string>
 	<string>/Natural_disaster</string>
 	<string>/Natural_environment</string>
 	<string>/Natural_fiber</string>
@@ -8050,17 +7968,13 @@
 	<string>/Nazi_Germany</string>
 	<string>/Nazi_Party</string>
 	<string>/Nazism</string>
-	<string>/NBA_Finals</string>
-	<string>/NBA_Store</string>
-	<string>/NBC</string>
-	<string>/NBC_Sports</string>
-	<string>/NBCUniversal</string>
+	<string>/NeXT</string>
+	<string>/NeXTSTEP</string>
 	<string>/Neanderthal</string>
 	<string>/Near_East</string>
 	<string>/Nebraska</string>
 	<string>/Nebula</string>
 	<string>/Nebular_hypothesis</string>
-	<string>/NEC</string>
 	<string>/Necklace</string>
 	<string>/Necktie</string>
 	<string>/Need_for_Speed</string>
@@ -8071,9 +7985,9 @@
 	<string>/Neighbourhood</string>
 	<string>/Neighbours</string>
 	<string>/Neil_Armstrong</string>
-	<string>/Neil_deGrasse_Tyson</string>
 	<string>/Neil_Patrick_Harris</string>
 	<string>/Neil_Postman</string>
+	<string>/Neil_deGrasse_Tyson</string>
 	<string>/Nelson_Mandela</string>
 	<string>/Nematode</string>
 	<string>/Nematology</string>
@@ -8094,6 +8008,7 @@
 	<string>/Nervous_system</string>
 	<string>/Nest</string>
 	<string>/Nestl%C3%A9</string>
+	<string>/NetWare</string>
 	<string>/Net_income</string>
 	<string>/Net_neutrality</string>
 	<string>/Netball</string>
@@ -8102,18 +8017,15 @@
 	<string>/Netherlands</string>
 	<string>/Netscape</string>
 	<string>/Netscape_Navigator</string>
-	<string>/NetWare</string>
 	<string>/Network_packet</string>
 	<string>/Network_science</string>
 	<string>/Network_switch</string>
-	<string>/Neural_development</string>
 	<string>/Neural_engineering</string>
 	<string>/Neurite</string>
 	<string>/Neuroanatomy</string>
 	<string>/Neurochemistry</string>
 	<string>/Neuroeconomics</string>
 	<string>/Neuroethology</string>
-	<string>/Neuroglia</string>
 	<string>/Neuroimaging</string>
 	<string>/Neuroinformatics</string>
 	<string>/Neurolinguistics</string>
@@ -8150,7 +8062,6 @@
 	<string>/New_Horizons</string>
 	<string>/New_Jersey</string>
 	<string>/New_Mexico</string>
-	<string>/New_moon</string>
 	<string>/New_Orleans</string>
 	<string>/New_Orleans_Square</string>
 	<string>/New_START</string>
@@ -8173,24 +8084,22 @@
 	<string>/New_York_Yankees</string>
 	<string>/New_Zealand</string>
 	<string>/New_Zealand_wine</string>
+	<string>/New_moon</string>
 	<string>/Newgate_Prison</string>
 	<string>/News</string>
+	<string>/NewsRadio</string>
 	<string>/News_broadcasting</string>
 	<string>/News_media</string>
 	<string>/Newseum</string>
 	<string>/Newsletter</string>
 	<string>/Newspaper</string>
 	<string>/Newsprint</string>
-	<string>/NewsRadio</string>
 	<string>/Newsweek</string>
 	<string>/Newt</string>
-	<string>/NeXT</string>
-	<string>/NeXTSTEP</string>
 	<string>/Ni_no_Kuni</string>
 	<string>/Niacin</string>
 	<string>/Niagara_Falls</string>
 	<string>/Niall_Ferguson</string>
-	<string>/NICAM</string>
 	<string>/Nicaragua</string>
 	<string>/Nice_guy</string>
 	<string>/Nick_Fury</string>
@@ -8204,9 +8113,9 @@
 	<string>/Nigeria</string>
 	<string>/Nigerian_naira</string>
 	<string>/Night</string>
+	<string>/Night_Trap</string>
 	<string>/Night_at_the_Museum</string>
 	<string>/Night_sky</string>
-	<string>/Night_Trap</string>
 	<string>/Night_vision</string>
 	<string>/Nightclub</string>
 	<string>/Nightjar</string>
@@ -8229,7 +8138,6 @@
 	<string>/Nintendo_DS</string>
 	<string>/Nintendo_DSi</string>
 	<string>/Nintendo_Switch</string>
-	<string>/Niqab</string>
 	<string>/Nissan</string>
 	<string>/Nitric_acid</string>
 	<string>/Nitrogen</string>
@@ -8245,7 +8153,6 @@
 	<string>/Noise_pollution</string>
 	<string>/Nokia</string>
 	<string>/Nomad</string>
-	<string>/Non-fiction</string>
 	<string>/Nondualism</string>
 	<string>/Nonfiction</string>
 	<string>/Nonlinear_system</string>
@@ -8277,11 +8184,11 @@
 	<string>/North_Pole</string>
 	<string>/North_Sea</string>
 	<string>/North_Vietnam</string>
-	<string>/Northern_blot</string>
 	<string>/Northern_Europe</string>
 	<string>/Northern_Hemisphere</string>
 	<string>/Northern_Ireland</string>
 	<string>/Northern_Spy</string>
+	<string>/Northern_blot</string>
 	<string>/Northern_storm_petrel</string>
 	<string>/Northwest_Passage</string>
 	<string>/Northwest_Territory</string>
@@ -8301,9 +8208,7 @@
 	<string>/Novelization</string>
 	<string>/November</string>
 	<string>/November_Uprising</string>
-	<string>/NPR</string>
 	<string>/Nth_root</string>
-	<string>/NTSC</string>
 	<string>/Nuclear_arms_race</string>
 	<string>/Nuclear_chain_reaction</string>
 	<string>/Nuclear_chemistry</string>
@@ -8350,9 +8255,17 @@
 	<string>/Nymphaea</string>
 	<string>/O-ring</string>
 	<string>/O._J._Simpson</string>
+	<string>/OCLC</string>
+	<string>/OCaml</string>
+	<string>/OLED</string>
+	<string>/OPEC</string>
+	<string>/OSI_model</string>
+	<string>/OS_X_El_Capitan</string>
+	<string>/OS_X_Mavericks</string>
+	<string>/OS_X_Mountain_Lion</string>
+	<string>/OS_X_Yosemite</string>
 	<string>/Oak</string>
 	<string>/Oakland_Athletics</string>
-	<string>/Oakland_Raiders</string>
 	<string>/Oasis</string>
 	<string>/Oat</string>
 	<string>/Oatmeal</string>
@@ -8370,11 +8283,10 @@
 	<string>/Obstacle_course</string>
 	<string>/Obstetrics</string>
 	<string>/Obstruction_of_justice</string>
-	<string>/OCaml</string>
 	<string>/Occult</string>
 	<string>/Occultation</string>
-	<string>/Occupy_movement</string>
 	<string>/Occupy_Wall_Street</string>
+	<string>/Occupy_movement</string>
 	<string>/Ocean</string>
 	<string>/Ocean_acidification</string>
 	<string>/Ocean_chemistry</string>
@@ -8385,7 +8297,6 @@
 	<string>/Oceanic_trench</string>
 	<string>/Oceanography</string>
 	<string>/Ocelot</string>
-	<string>/OCLC</string>
 	<string>/Octagon</string>
 	<string>/October</string>
 	<string>/Octopus</string>
@@ -8410,7 +8321,6 @@
 	<string>/Ohm</string>
 	<string>/Ohm%27s_law</string>
 	<string>/Oil</string>
-	<string>/Oil_field</string>
 	<string>/Oil_paint</string>
 	<string>/Oil_painting</string>
 	<string>/Oil_platform</string>
@@ -8428,20 +8338,19 @@
 	<string>/Old_Norse_religion</string>
 	<string>/Old_World</string>
 	<string>/Old_World_monkey</string>
-	<string>/OLED</string>
 	<string>/Olfaction</string>
 	<string>/Oligarchy</string>
 	<string>/Olive</string>
 	<string>/Olive_oil</string>
 	<string>/Oliver_Sacks</string>
 	<string>/Olmecs</string>
-	<string>/Olympic_flame</string>
 	<string>/Olympic_Games</string>
-	<string>/Olympic_medal</string>
 	<string>/Olympic_National_Park</string>
-	<string>/Olympic_sports</string>
 	<string>/Olympic_Stadium</string>
 	<string>/Olympic_Village</string>
+	<string>/Olympic_flame</string>
+	<string>/Olympic_medal</string>
+	<string>/Olympic_sports</string>
 	<string>/Olympus_Mons</string>
 	<string>/Omelette</string>
 	<string>/Omnivore</string>
@@ -8466,16 +8375,15 @@
 	<string>/Oogenesis</string>
 	<string>/Oology</string>
 	<string>/Oort_cloud</string>
-	<string>/OPEC</string>
 	<string>/Open-pit_mining</string>
 	<string>/Open-source_license</string>
 	<string>/Open-source_model</string>
 	<string>/Open-source_software</string>
-	<string>/Open_society</string>
 	<string>/OpenDocument</string>
 	<string>/OpenGL</string>
-	<string>/Opening_credits</string>
 	<string>/OpenVMS</string>
+	<string>/Open_society</string>
+	<string>/Opening_credits</string>
 	<string>/Opera</string>
 	<string>/Opera_house</string>
 	<string>/Operating_system</string>
@@ -8557,17 +8465,12 @@
 	<string>/Orthography</string>
 	<string>/Orthopedic_surgery</string>
 	<string>/Orval_Grove</string>
-	<string>/OS_X_El_Capitan</string>
-	<string>/OS_X_Mavericks</string>
-	<string>/OS_X_Mountain_Lion</string>
-	<string>/OS_X_Yosemite</string>
 	<string>/Osaka</string>
 	<string>/Osama_bin_Laden</string>
 	<string>/Osamu_Tezuka</string>
 	<string>/Oscar_Isaac</string>
 	<string>/Oscillation</string>
 	<string>/Oseberg_Ship</string>
-	<string>/OSI_model</string>
 	<string>/Oslo</string>
 	<string>/Ostrich</string>
 	<string>/Oswald_the_Lucky_Rabbit</string>
@@ -8610,12 +8513,23 @@
 	<string>/Ozone_layer</string>
 	<string>/Ozzie_Nelson</string>
 	<string>/Ozzie_Smith</string>
+	<string>/PAL</string>
+	<string>/PBS</string>
+	<string>/PBS_NewsHour</string>
+	<string>/PCC_streetcar</string>
+	<string>/PC_Magazine</string>
+	<string>/PC_game</string>
+	<string>/PDF</string>
+	<string>/PGA_Championship</string>
+	<string>/PGA_Tour</string>
+	<string>/PG_Tips</string>
+	<string>/PH</string>
+	<string>/PHP</string>
 	<string>/Paavo_Nurmi</string>
 	<string>/Pablo_Escobar</string>
 	<string>/Pablo_Picasso</string>
 	<string>/Pac-Man</string>
 	<string>/Pachycephalidae</string>
-	<string>/Pacific_Islands</string>
 	<string>/Pacific_Ocean</string>
 	<string>/Pacific_War</string>
 	<string>/Pacifism</string>
@@ -8634,7 +8548,6 @@
 	<string>/Pakistan</string>
 	<string>/Pakistan_Railways</string>
 	<string>/Pakistan_studies</string>
-	<string>/PAL</string>
 	<string>/Palace</string>
 	<string>/Palace_of_Versailles</string>
 	<string>/Palaeognathae</string>
@@ -8706,9 +8619,9 @@
 	<string>/Parallel_computing</string>
 	<string>/Paralympic_Games</string>
 	<string>/Paramagnetism</string>
-	<string>/Paramount_leader</string>
 	<string>/Paramount_Network</string>
 	<string>/Paramount_Pictures</string>
+	<string>/Paramount_leader</string>
 	<string>/Paranormal</string>
 	<string>/Parapsychology</string>
 	<string>/Parasailing</string>
@@ -8783,12 +8696,6 @@
 	<string>/Paw</string>
 	<string>/Pay-per-view</string>
 	<string>/PayPal</string>
-	<string>/PBS</string>
-	<string>/PBS_NewsHour</string>
-	<string>/PC_game</string>
-	<string>/PC_Magazine</string>
-	<string>/PCC_streetcar</string>
-	<string>/PDF</string>
 	<string>/Pea</string>
 	<string>/Peace</string>
 	<string>/Peace_Corps</string>
@@ -8854,8 +8761,8 @@
 	<string>/Penstock</string>
 	<string>/People</string>
 	<string>/People%27s_Bank_of_China</string>
-	<string>/People_mover</string>
 	<string>/PeopleMover</string>
+	<string>/People_mover</string>
 	<string>/Pepper_spray</string>
 	<string>/Peppermint</string>
 	<string>/Pepperoni</string>
@@ -8868,8 +8775,8 @@
 	<string>/Percussion_instrument</string>
 	<string>/Peregrine_falcon</string>
 	<string>/Perennial_plant</string>
-	<string>/Perfect_competition</string>
 	<string>/Perfect_Dark</string>
+	<string>/Perfect_competition</string>
 	<string>/Perfect_game</string>
 	<string>/Performance</string>
 	<string>/Performance_art</string>
@@ -8928,15 +8835,10 @@
 	<string>/Peyton_Manning</string>
 	<string>/Pez</string>
 	<string>/Pfennig</string>
-	<string>/PG_Tips</string>
-	<string>/PGA_Championship</string>
-	<string>/PGA_Tour</string>
-	<string>/PH</string>
 	<string>/Phacochoerus</string>
 	<string>/Phaleristics</string>
 	<string>/Phantom_Manor</string>
 	<string>/Pharaoh</string>
-	<string>/Pharmaceutical_drug</string>
 	<string>/Pharmaceutical_industry</string>
 	<string>/Pharmacist</string>
 	<string>/Pharmacology</string>
@@ -8996,23 +8898,19 @@
 	<string>/Photosphere</string>
 	<string>/Photosynthesis</string>
 	<string>/Photovoltaics</string>
-	<string>/PHP</string>
 	<string>/Phrase</string>
 	<string>/Phrenology</string>
 	<string>/Phrygians</string>
 	<string>/Phycology</string>
-	<string>/Phylloscopidae</string>
 	<string>/Phyllotaxis</string>
 	<string>/Phylogenetics</string>
 	<string>/Phylum</string>
 	<string>/Physical_activity</string>
-	<string>/Physical_body</string>
 	<string>/Physical_chemistry</string>
 	<string>/Physical_cosmology</string>
 	<string>/Physical_education</string>
 	<string>/Physical_fitness</string>
 	<string>/Physical_geography</string>
-	<string>/Physical_law</string>
 	<string>/Physical_layer</string>
 	<string>/Physical_therapy</string>
 	<string>/Physician</string>
@@ -9058,8 +8956,8 @@
 	<string>/Pinocchio</string>
 	<string>/Pinterest</string>
 	<string>/Pioneer_10</string>
-	<string>/Pioneer_program</string>
 	<string>/Pioneer_Zephyr</string>
+	<string>/Pioneer_program</string>
 	<string>/Pipe_organ</string>
 	<string>/Pipeline_transport</string>
 	<string>/Piracy</string>
@@ -9079,8 +8977,8 @@
 	<string>/Pixel_art</string>
 	<string>/Pixie_Hollow</string>
 	<string>/Pizza</string>
-	<string>/Pizza_delivery</string>
 	<string>/Pizza_Hut</string>
+	<string>/Pizza_delivery</string>
 	<string>/Placebo</string>
 	<string>/Placenta</string>
 	<string>/Plagiarism</string>
@@ -9098,7 +8996,6 @@
 	<string>/Planetary_system</string>
 	<string>/Planktology</string>
 	<string>/Plankton</string>
-	<string>/Planned_maintenance</string>
 	<string>/Planning</string>
 	<string>/Plant</string>
 	<string>/Plant_breeding</string>
@@ -9122,19 +9019,13 @@
 	<string>/Platform_game</string>
 	<string>/Plating</string>
 	<string>/Platinum</string>
-	<string>/Platinum_Hits</string>
 	<string>/PlatinumGames</string>
+	<string>/Platinum_Hits</string>
 	<string>/Plato</string>
 	<string>/Platonic_solid</string>
 	<string>/Platonism</string>
 	<string>/Platypus</string>
 	<string>/Play-Doh</string>
-	<string>/Play_of_the_Month</string>
-	<string>/Playbill</string>
-	<string>/Playground</string>
-	<string>/Playing_card</string>
-	<string>/Playlist</string>
-	<string>/Playoffs</string>
 	<string>/PlayStation</string>
 	<string>/PlayStation_2</string>
 	<string>/PlayStation_3</string>
@@ -9143,8 +9034,14 @@
 	<string>/PlayStation_Move</string>
 	<string>/PlayStation_Network</string>
 	<string>/PlayStation_Portable</string>
-	<string>/PlayStation_Vita</string>
 	<string>/PlayStation_VR</string>
+	<string>/PlayStation_Vita</string>
+	<string>/Play_of_the_Month</string>
+	<string>/Playbill</string>
+	<string>/Playground</string>
+	<string>/Playing_card</string>
+	<string>/Playlist</string>
+	<string>/Playoffs</string>
 	<string>/Playwright</string>
 	<string>/Pleasure</string>
 	<string>/Plesiosauria</string>
@@ -9155,7 +9052,6 @@
 	<string>/Plumage</string>
 	<string>/Plumbing</string>
 	<string>/Pluto</string>
-	<string>/Plutoid</string>
 	<string>/Plutonium</string>
 	<string>/Plymouth_Colony</string>
 	<string>/Pneumonia</string>
@@ -9186,7 +9082,6 @@
 	<string>/Policy</string>
 	<string>/Policy_analysis</string>
 	<string>/Policy_studies</string>
-	<string>/Poliomyelitis</string>
 	<string>/Political_campaign</string>
 	<string>/Political_correctness</string>
 	<string>/Political_criticism</string>
@@ -9220,7 +9115,6 @@
 	<string>/Polynesia</string>
 	<string>/Polynomial</string>
 	<string>/Polyphenol</string>
-	<string>/Polyploid</string>
 	<string>/Pome</string>
 	<string>/Pompeii</string>
 	<string>/Poncho</string>
@@ -9230,14 +9124,14 @@
 	<string>/Poodle</string>
 	<string>/Pooh%27s_Hunny_Hunt</string>
 	<string>/Pool_of_Radiance</string>
-	<string>/Pop-culture_tourism</string>
 	<string>/Pop-Tarts</string>
+	<string>/Pop-culture_tourism</string>
+	<string>/PopCap_Games</string>
 	<string>/Pop_art</string>
 	<string>/Pop_icon</string>
 	<string>/Pop_music</string>
 	<string>/Pop_punk</string>
 	<string>/Pop_rock</string>
-	<string>/PopCap_Games</string>
 	<string>/Popcorn</string>
 	<string>/Pope</string>
 	<string>/Pope_Francis</string>
@@ -9299,17 +9193,17 @@
 	<string>/Powdered_sugar</string>
 	<string>/Powell_Library</string>
 	<string>/Power-up</string>
+	<string>/PowerShell</string>
+	<string>/Power_Rangers</string>
 	<string>/Power_electronics</string>
 	<string>/Power_engineering</string>
 	<string>/Power_outage</string>
-	<string>/Power_Rangers</string>
 	<string>/Power_station</string>
 	<string>/Power_supply</string>
 	<string>/Powerade</string>
 	<string>/Powerball</string>
 	<string>/Powerboating</string>
 	<string>/Powerlifting</string>
-	<string>/PowerShell</string>
 	<string>/Practical_shooting</string>
 	<string>/Pragmatics</string>
 	<string>/Pragmatism</string>
@@ -9324,7 +9218,6 @@
 	<string>/Precast_concrete</string>
 	<string>/Precedent</string>
 	<string>/Precious_metal</string>
-	<string>/Precocial</string>
 	<string>/Predation</string>
 	<string>/Prediction</string>
 	<string>/Prefabrication</string>
@@ -9380,10 +9273,10 @@
 	<string>/Prisoner_of_war</string>
 	<string>/Privacy</string>
 	<string>/Private_spaceflight</string>
+	<string>/ProCare</string>
 	<string>/Probability</string>
 	<string>/Probability_theory</string>
 	<string>/Problem_solving</string>
-	<string>/ProCare</string>
 	<string>/Procedural_law</string>
 	<string>/Procellariidae</string>
 	<string>/Procellariiformes</string>
@@ -9407,9 +9300,9 @@
 	<string>/Progressive_Era</string>
 	<string>/Progressive_tax</string>
 	<string>/Project_Gemini</string>
-	<string>/Project_management</string>
-	<string>/Project_Mercury</string>
 	<string>/Project_MKUltra</string>
+	<string>/Project_Mercury</string>
+	<string>/Project_management</string>
 	<string>/Prokaryote</string>
 	<string>/Prolog</string>
 	<string>/Pronoun</string>
@@ -9469,8 +9362,10 @@
 	<string>/Ptolemaic_Kingdom</string>
 	<string>/Ptolemy_I_Soter</string>
 	<string>/Pub</string>
+	<string>/PubMed_Central</string>
 	<string>/Public</string>
 	<string>/Public-key_cryptography</string>
+	<string>/Public_Storage</string>
 	<string>/Public_administration</string>
 	<string>/Public_art</string>
 	<string>/Public_company</string>
@@ -9488,14 +9383,12 @@
 	<string>/Public_sociology</string>
 	<string>/Public_speaking</string>
 	<string>/Public_sphere</string>
-	<string>/Public_Storage</string>
 	<string>/Public_toilet</string>
 	<string>/Public_transport</string>
 	<string>/Public_utility</string>
 	<string>/Public_works</string>
 	<string>/Publication</string>
 	<string>/Publishing</string>
-	<string>/PubMed_Central</string>
 	<string>/Pudding</string>
 	<string>/Puerto_Rico</string>
 	<string>/Puerto_Vallarta</string>
@@ -9533,13 +9426,13 @@
 	<string>/Pythagorean_theorem</string>
 	<string>/Pythonidae</string>
 	<string>/Q*bert</string>
+	<string>/QRIO</string>
+	<string>/QR_code</string>
 	<string>/Qantas</string>
 	<string>/Qatar</string>
 	<string>/Qatar_Airways</string>
 	<string>/Qi</string>
 	<string>/Qin_dynasty</string>
-	<string>/QR_code</string>
-	<string>/QRIO</string>
 	<string>/Quadratic_equation</string>
 	<string>/Quadratic_form</string>
 	<string>/Quadrivium</string>
@@ -9565,8 +9458,8 @@
 	<string>/Quasigroup</string>
 	<string>/Qubit</string>
 	<string>/Quebec</string>
-	<string>/Queen_bee</string>
 	<string>/Queen_Victoria</string>
+	<string>/Queen_bee</string>
 	<string>/Queensland</string>
 	<string>/Quenching</string>
 	<string>/Quentin_Tarantino</string>
@@ -9577,8 +9470,8 @@
 	<string>/Question_mark</string>
 	<string>/Quetta</string>
 	<string>/Queueing_theory</string>
-	<string>/Quicksort</string>
 	<string>/QuickTime</string>
+	<string>/Quicksort</string>
 	<string>/Quilt</string>
 	<string>/Quilting</string>
 	<string>/Quintic_function</string>
@@ -9588,6 +9481,15 @@
 	<string>/Quotient_ring</string>
 	<string>/Quran</string>
 	<string>/R2-D2</string>
+	<string>/RAF_Menwith_Hill</string>
+	<string>/RAID</string>
+	<string>/RAND_Corporation</string>
+	<string>/RC_Racer</string>
+	<string>/RGB_color_model</string>
+	<string>/RKO_Pictures</string>
+	<string>/RMS_Titanic</string>
+	<string>/RNA</string>
+	<string>/ROM_cartridge</string>
 	<string>/Ra</string>
 	<string>/Rabbit</string>
 	<string>/Raccoon</string>
@@ -9613,10 +9515,11 @@
 	<string>/Radiator_Springs_Racers</string>
 	<string>/Radio</string>
 	<string>/Radio-controlled_car</string>
+	<string>/RadioShack</string>
+	<string>/Radio_Disney</string>
 	<string>/Radio_astronomy</string>
 	<string>/Radio_broadcasting</string>
 	<string>/Radio_comedy</string>
-	<string>/Radio_Disney</string>
 	<string>/Radio_documentary</string>
 	<string>/Radio_drama</string>
 	<string>/Radio_format</string>
@@ -9626,7 +9529,6 @@
 	<string>/Radio_programming</string>
 	<string>/Radio_promotion</string>
 	<string>/Radio_propagation</string>
-	<string>/Radio_station</string>
 	<string>/Radio_telescope</string>
 	<string>/Radio_wave</string>
 	<string>/Radioactive_decay</string>
@@ -9634,16 +9536,13 @@
 	<string>/Radiocarbon_dating</string>
 	<string>/Radiochemistry</string>
 	<string>/Radiology</string>
-	<string>/RadioShack</string>
 	<string>/Radium</string>
 	<string>/Radius</string>
 	<string>/Radon</string>
-	<string>/RAF_Menwith_Hill</string>
 	<string>/Rafting</string>
 	<string>/Rag_doll</string>
 	<string>/Raging_Spirits</string>
 	<string>/Ragtime</string>
-	<string>/RAID</string>
 	<string>/Raiders_of_the_Lost_Ark</string>
 	<string>/Rail_freight_transport</string>
 	<string>/Rail_transport</string>
@@ -9669,7 +9568,6 @@
 	<string>/Ramon_Llull</string>
 	<string>/Ranch</string>
 	<string>/Ranch_dressing</string>
-	<string>/RAND_Corporation</string>
 	<string>/Rangeland</string>
 	<string>/Raphael</string>
 	<string>/Rapid_transit</string>
@@ -9697,7 +9595,6 @@
 	<string>/Raymond_Berry</string>
 	<string>/Raymond_Williams</string>
 	<string>/Razor</string>
-	<string>/RC_Racer</string>
 	<string>/Reading</string>
 	<string>/Reading_Rainbow</string>
 	<string>/Reaganomics</string>
@@ -9723,7 +9620,6 @@
 	<string>/Recipe</string>
 	<string>/Reconnaissance_aircraft</string>
 	<string>/Reconnaissance_satellite</string>
-	<string>/Reconstruction_Era</string>
 	<string>/Record_label</string>
 	<string>/Recorded_history</string>
 	<string>/Records_management</string>
@@ -9738,20 +9634,20 @@
 	<string>/Recycling</string>
 	<string>/Recycling_bin</string>
 	<string>/Red</string>
-	<string>/Red_blood_cell</string>
 	<string>/Red_Bull</string>
 	<string>/Red_Car_Trolley</string>
 	<string>/Red_Dead_Redemption</string>
+	<string>/Red_Hot_Chili_Peppers</string>
+	<string>/Red_Sea</string>
+	<string>/Red_Skelton</string>
+	<string>/Red_Square</string>
+	<string>/Red_blood_cell</string>
 	<string>/Red_deer</string>
 	<string>/Red_giant</string>
-	<string>/Red_Hot_Chili_Peppers</string>
 	<string>/Red_kangaroo</string>
 	<string>/Red_meat</string>
 	<string>/Red_panda</string>
 	<string>/Red_rain_in_Kerala</string>
-	<string>/Red_Sea</string>
-	<string>/Red_Skelton</string>
-	<string>/Red_Square</string>
 	<string>/Red_wine</string>
 	<string>/Redox</string>
 	<string>/Reducing_agent</string>
@@ -9801,9 +9697,9 @@
 	<string>/Remix</string>
 	<string>/Remix_album</string>
 	<string>/Renaissance</string>
+	<string>/Renaissance_Latin</string>
 	<string>/Renaissance_architecture</string>
 	<string>/Renaissance_art</string>
-	<string>/Renaissance_Latin</string>
 	<string>/Renewable_energy</string>
 	<string>/Renewable_resource</string>
 	<string>/Renminbi</string>
@@ -9834,7 +9730,6 @@
 	<string>/Review</string>
 	<string>/Revolution</string>
 	<string>/Rexx</string>
-	<string>/RGB_color_model</string>
 	<string>/Rheidae</string>
 	<string>/Rhetoric</string>
 	<string>/Rheumatology</string>
@@ -9879,8 +9774,8 @@
 	<string>/Rings_of_Uranus</string>
 	<string>/Ringtone</string>
 	<string>/Rio_Carnival</string>
-	<string>/Rio_de_Janeiro</string>
 	<string>/Rio_Grande</string>
+	<string>/Rio_de_Janeiro</string>
 	<string>/Riot</string>
 	<string>/Risk</string>
 	<string>/Risk_management</string>
@@ -9892,9 +9787,6 @@
 	<string>/River_rapids_ride</string>
 	<string>/Riverboat</string>
 	<string>/Rivers_of_Light</string>
-	<string>/RKO_Pictures</string>
-	<string>/RMS_Titanic</string>
-	<string>/RNA</string>
 	<string>/Road</string>
 	<string>/Road_bicycle_racing</string>
 	<string>/Road_pricing</string>
@@ -9923,8 +9815,8 @@
 	<string>/Robotic_spacecraft</string>
 	<string>/Robotics</string>
 	<string>/Robotics_Institute</string>
-	<string>/Rock_and_roll</string>
 	<string>/Rock_Band</string>
+	<string>/Rock_and_roll</string>
 	<string>/Rock_candy</string>
 	<string>/Rock_climbing</string>
 	<string>/Rock_festival</string>
@@ -9934,10 +9826,10 @@
 	<string>/Rockefeller_family</string>
 	<string>/Rocket</string>
 	<string>/Rocket-propelled_grenade</string>
+	<string>/Rocket_Rods</string>
 	<string>/Rocket_artillery</string>
 	<string>/Rocket_engine</string>
 	<string>/Rocket_launch</string>
-	<string>/Rocket_Rods</string>
 	<string>/Rockstar_Games</string>
 	<string>/Rocky</string>
 	<string>/Rocky_Mountains</string>
@@ -9961,19 +9853,18 @@
 	<string>/Roller_derby</string>
 	<string>/Roller_skates</string>
 	<string>/Roller_skating</string>
-	<string>/Rolling_stock</string>
 	<string>/Rolling_Stone</string>
-	<string>/ROM_cartridge</string>
+	<string>/Rolling_stock</string>
+	<string>/Roman_Empire</string>
+	<string>/Roman_Forum</string>
+	<string>/Roman_Republic</string>
 	<string>/Roman_aqueduct</string>
 	<string>/Roman_army</string>
 	<string>/Roman_art</string>
 	<string>/Roman_calendar</string>
 	<string>/Roman_emperor</string>
-	<string>/Roman_Empire</string>
-	<string>/Roman_Forum</string>
 	<string>/Roman_mosaic</string>
 	<string>/Roman_mythology</string>
-	<string>/Roman_Republic</string>
 	<string>/Roman_triumph</string>
 	<string>/Romania</string>
 	<string>/Romanian_language</string>
@@ -10016,13 +9907,13 @@
 	<string>/Roy_E._Disney</string>
 	<string>/Roy_O._Disney</string>
 	<string>/Roy_of_the_Rovers</string>
-	<string>/Royal_assent</string>
 	<string>/Royal_Collection</string>
 	<string>/Royal_Dutch_Shell</string>
-	<string>/Royal_family</string>
 	<string>/Royal_Institution</string>
 	<string>/Royal_Navy</string>
 	<string>/Royal_Society</string>
+	<string>/Royal_assent</string>
+	<string>/Royal_family</string>
 	<string>/Rubik%27s_Cube</string>
 	<string>/Ruble_sign</string>
 	<string>/Rugby_football</string>
@@ -10040,21 +9931,29 @@
 	<string>/Russia</string>
 	<string>/Russian_Civil_War</string>
 	<string>/Russian_Empire</string>
-	<string>/Russian_language</string>
 	<string>/Russian_Railways</string>
 	<string>/Russian_Revolution</string>
+	<string>/Russian_language</string>
 	<string>/Russian_roulette</string>
 	<string>/Russo_brothers</string>
 	<string>/Ryan_Reynolds</string>
 	<string>/Rye_bread</string>
 	<string>/S%C3%A3o_Paulo</string>
 	<string>/S.H.I.E.L.D.</string>
+	<string>/SAP_SE</string>
+	<string>/SAT</string>
+	<string>/SECAM</string>
+	<string>/SIGGRAPH</string>
+	<string>/SI_derived_unit</string>
+	<string>/SMS</string>
+	<string>/SNCF</string>
+	<string>/SQL</string>
+	<string>/SS_Andrea_Doria</string>
 	<string>/Saber-toothed_cat</string>
 	<string>/Sabotage</string>
 	<string>/Sabre</string>
 	<string>/Sacha_Baron_Cohen</string>
 	<string>/Sacred</string>
-	<string>/Sacred_architecture</string>
 	<string>/Sacred_king</string>
 	<string>/Sacrifice</string>
 	<string>/Saddle</string>
@@ -10088,10 +9987,9 @@
 	<string>/Salmon_as_food</string>
 	<string>/Salt</string>
 	<string>/Salt-cured_meat</string>
+	<string>/Salt_Lake_City</string>
 	<string>/Salt_and_pepper_shakers</string>
 	<string>/Salt_lake</string>
-	<string>/Salt_Lake_City</string>
-	<string>/Saltbox</string>
 	<string>/Salted_fish</string>
 	<string>/Saltwater_crocodile</string>
 	<string>/Salvation</string>
@@ -10103,6 +10001,7 @@
 	<string>/Samsung</string>
 	<string>/Samuel_L._Jackson</string>
 	<string>/Samurai</string>
+	<string>/SanDisk</string>
 	<string>/San_Diego</string>
 	<string>/San_Diego_Bay</string>
 	<string>/San_Diego_Comic-Con</string>
@@ -10117,7 +10016,6 @@
 	<string>/Sand_casting</string>
 	<string>/Sandal</string>
 	<string>/Sandgrouse</string>
-	<string>/SanDisk</string>
 	<string>/Sandpaper</string>
 	<string>/Sandpiper</string>
 	<string>/Sandra_Bullock</string>
@@ -10131,11 +10029,9 @@
 	<string>/Sanssouci</string>
 	<string>/Santa_Claus</string>
 	<string>/Santosh_Sivan</string>
-	<string>/SAP_SE</string>
 	<string>/Sapphire</string>
 	<string>/Sarcasm</string>
 	<string>/Sardines_as_food</string>
-	<string>/SAT</string>
 	<string>/Satan</string>
 	<string>/Satellite</string>
 	<string>/Satellite_dish</string>
@@ -10194,11 +10090,11 @@
 	<string>/Schizophrenia</string>
 	<string>/Scholasticism</string>
 	<string>/School</string>
+	<string>/School_Daze</string>
+	<string>/School_Rumble</string>
 	<string>/School_bus</string>
 	<string>/School_counselor</string>
-	<string>/School_Daze</string>
 	<string>/School_psychology</string>
-	<string>/School_Rumble</string>
 	<string>/Schoolhouse_Rock!</string>
 	<string>/Schooner</string>
 	<string>/Science</string>
@@ -10228,10 +10124,10 @@
 	<string>/Scotch_whisky</string>
 	<string>/Scotland</string>
 	<string>/Scott_Forstall</string>
-	<string>/Scottish_clan</string>
 	<string>/Scottish_Parliament</string>
-	<string>/Scottish_people</string>
 	<string>/Scottish_Reformation</string>
+	<string>/Scottish_clan</string>
+	<string>/Scottish_people</string>
 	<string>/Scrabble</string>
 	<string>/Scramble_for_Africa</string>
 	<string>/Scrambled_eggs</string>
@@ -10246,6 +10142,9 @@
 	<string>/Sculpture</string>
 	<string>/Scythe</string>
 	<string>/Sea</string>
+	<string>/SeaWorld</string>
+	<string>/SeaWorld_Orlando</string>
+	<string>/SeaWorld_San_Diego</string>
 	<string>/Sea_captain</string>
 	<string>/Sea_ice</string>
 	<string>/Sea_level</string>
@@ -10274,10 +10173,6 @@
 	<string>/Seawall</string>
 	<string>/Seawater</string>
 	<string>/Seaweed</string>
-	<string>/SeaWorld</string>
-	<string>/SeaWorld_Orlando</string>
-	<string>/SeaWorld_San_Diego</string>
-	<string>/SECAM</string>
 	<string>/Second</string>
 	<string>/Second-order_cybernetics</string>
 	<string>/Second-wave_feminism</string>
@@ -10293,9 +10188,7 @@
 	<string>/Sect</string>
 	<string>/Section_sign</string>
 	<string>/Secularity</string>
-	<string>/Secure_Digital</string>
 	<string>/Security</string>
-	<string>/Security_cameras</string>
 	<string>/Sediment</string>
 	<string>/Sedimentary_rock</string>
 	<string>/Sedimentology</string>
@@ -10334,8 +10227,8 @@
 	<string>/Self-realization</string>
 	<string>/Self-reflection</string>
 	<string>/Selfie</string>
-	<string>/Semantic_network</string>
 	<string>/Semantic_Web</string>
+	<string>/Semantic_network</string>
 	<string>/Semantics</string>
 	<string>/Semi-trailer_truck</string>
 	<string>/Semicolon</string>
@@ -10369,9 +10262,9 @@
 	<string>/Serotonin</string>
 	<string>/Serval</string>
 	<string>/Servomechanism</string>
-	<string>/Sesame_oil</string>
 	<string>/Sesame_Street</string>
 	<string>/Sesame_Workshop</string>
+	<string>/Sesame_oil</string>
 	<string>/Set_theory</string>
 	<string>/Seth_MacFarlane</string>
 	<string>/Seven_Dwarfs_Mine_Train</string>
@@ -10408,8 +10301,8 @@
 	<string>/Shareware</string>
 	<string>/Sharia</string>
 	<string>/Shark</string>
-	<string>/Shark_attack</string>
 	<string>/Shark_Tank</string>
+	<string>/Shark_attack</string>
 	<string>/Sharon_Tate</string>
 	<string>/Sharp_Corporation</string>
 	<string>/Shaving</string>
@@ -10476,7 +10369,6 @@
 	<string>/Shrine</string>
 	<string>/Shrub</string>
 	<string>/Shuffle!</string>
-	<string>/SI_derived_unit</string>
 	<string>/Siargao</string>
 	<string>/Siberia</string>
 	<string>/Siberian_tiger</string>
@@ -10495,7 +10387,6 @@
 	<string>/Siege_engine</string>
 	<string>/Siemens</string>
 	<string>/Sierra_Leone</string>
-	<string>/SIGGRAPH</string>
 	<string>/Sightline</string>
 	<string>/Sigi_Schmid</string>
 	<string>/Sigmund_Freud</string>
@@ -10508,8 +10399,8 @@
 	<string>/Silent_film</string>
 	<string>/Silesia</string>
 	<string>/Silicon</string>
-	<string>/Silicon_dioxide</string>
 	<string>/Silicon_Valley</string>
+	<string>/Silicon_dioxide</string>
 	<string>/Silicone</string>
 	<string>/Silk</string>
 	<string>/Silk_Road</string>
@@ -10518,11 +10409,11 @@
 	<string>/Silo</string>
 	<string>/Silver</string>
 	<string>/SimCity</string>
+	<string>/SimTower</string>
 	<string>/Simmering</string>
 	<string>/Simple_group</string>
 	<string>/Simple_machine</string>
 	<string>/Simplicity</string>
-	<string>/SimTower</string>
 	<string>/Simulation</string>
 	<string>/Simulation_video_game</string>
 	<string>/Simulator_ride</string>
@@ -10530,10 +10421,10 @@
 	<string>/Sina_Weibo</string>
 	<string>/Sine</string>
 	<string>/Sinestro_Corps_War</string>
+	<string>/SingStar</string>
 	<string>/Singapore</string>
 	<string>/Singapore_Airlines</string>
 	<string>/Singing</string>
-	<string>/SingStar</string>
 	<string>/Sinkhole</string>
 	<string>/Sinology</string>
 	<string>/Siphonophorae</string>
@@ -10604,7 +10495,6 @@
 	<string>/Slime_mold</string>
 	<string>/Slinky</string>
 	<string>/Slinky_Dog_Dash</string>
-	<string>/Slinky_Dog_Zig_Zag_Spin</string>
 	<string>/Slipper</string>
 	<string>/Slit_drum</string>
 	<string>/Sloop</string>
@@ -10616,12 +10506,12 @@
 	<string>/Slovenia</string>
 	<string>/Slug</string>
 	<string>/Slum</string>
+	<string>/Smart_TV</string>
 	<string>/Smart_card</string>
 	<string>/Smart_grid</string>
 	<string>/Smart_growth</string>
 	<string>/Smart_meter</string>
 	<string>/Smart_speaker</string>
-	<string>/Smart_TV</string>
 	<string>/Smartglasses</string>
 	<string>/Smartphone</string>
 	<string>/Smartwatch</string>
@@ -10635,14 +10525,12 @@
 	<string>/Smoking</string>
 	<string>/Smoothie</string>
 	<string>/Smoothness</string>
-	<string>/SMS</string>
 	<string>/Smuggling</string>
 	<string>/Snack</string>
 	<string>/Snail</string>
 	<string>/Snake</string>
 	<string>/Snakes_and_Ladders</string>
 	<string>/Snapchat</string>
-	<string>/SNCF</string>
 	<string>/Sneakers</string>
 	<string>/Snickers</string>
 	<string>/Snipe</string>
@@ -10650,9 +10538,9 @@
 	<string>/Snoop_Dogg</string>
 	<string>/Snorri_Sturluson</string>
 	<string>/Snow</string>
-	<string>/Snow_leopard</string>
 	<string>/Snow_White</string>
 	<string>/Snow_White_Grotto</string>
+	<string>/Snow_leopard</string>
 	<string>/Snowball_Earth</string>
 	<string>/Snowboard</string>
 	<string>/Snowboarding</string>
@@ -10664,6 +10552,7 @@
 	<string>/Soarin%27</string>
 	<string>/Sochi</string>
 	<string>/Social</string>
+	<string>/Social_Security_Act</string>
 	<string>/Social_actions</string>
 	<string>/Social_behavior</string>
 	<string>/Social_capital</string>
@@ -10691,7 +10580,6 @@
 	<string>/Social_relation</string>
 	<string>/Social_research</string>
 	<string>/Social_science</string>
-	<string>/Social_Security_Act</string>
 	<string>/Social_software</string>
 	<string>/Social_stigma</string>
 	<string>/Social_structure</string>
@@ -10747,6 +10635,7 @@
 	<string>/Soil_fertility</string>
 	<string>/Soil_science</string>
 	<string>/Sojourner_Truth</string>
+	<string>/Solar_System</string>
 	<string>/Solar_cell</string>
 	<string>/Solar_cycle</string>
 	<string>/Solar_eclipse</string>
@@ -10755,7 +10644,6 @@
 	<string>/Solar_panel</string>
 	<string>/Solar_power</string>
 	<string>/Solar_sail</string>
-	<string>/Solar_System</string>
 	<string>/Solar_water_heating</string>
 	<string>/Solar_wind</string>
 	<string>/Soldering</string>
@@ -10787,9 +10675,9 @@
 	<string>/Sonic_Jam</string>
 	<string>/Sonic_Lost_World</string>
 	<string>/Sonic_Rush</string>
-	<string>/Sonic_the_Hedgehog</string>
 	<string>/Sonic_Unleashed</string>
 	<string>/Sonic_X</string>
+	<string>/Sonic_the_Hedgehog</string>
 	<string>/Sony</string>
 	<string>/Sony_Pictures</string>
 	<string>/Sophocles</string>
@@ -10800,13 +10688,13 @@
 	<string>/Soul_music</string>
 	<string>/Soul_patch</string>
 	<string>/Sound</string>
+	<string>/SoundCloud</string>
 	<string>/Sound_barrier</string>
 	<string>/Sound_card</string>
 	<string>/Sound_design</string>
 	<string>/Sound_effect</string>
 	<string>/Sound_film</string>
 	<string>/Sound_stage</string>
-	<string>/SoundCloud</string>
 	<string>/Soundness</string>
 	<string>/Soundtrack</string>
 	<string>/Soundtrack_album</string>
@@ -10837,21 +10725,21 @@
 	<string>/Southeast_Asian_Games</string>
 	<string>/Southeast_Europe</string>
 	<string>/Southern_Africa</string>
-	<string>/Southern_blot</string>
 	<string>/Southern_Europe</string>
 	<string>/Southern_Hemisphere</string>
 	<string>/Southern_Ocean</string>
-	<string>/Southern_right_whale</string>
 	<string>/Southern_United_States</string>
+	<string>/Southern_blot</string>
+	<string>/Southern_right_whale</string>
 	<string>/Southwest_Airlines</string>
 	<string>/Southwest_Territory</string>
 	<string>/Souvenir</string>
 	<string>/Sovereign_state</string>
 	<string>/Sovereignty</string>
 	<string>/Soviet_Empire</string>
+	<string>/Soviet_Union</string>
 	<string>/Soviet_people</string>
 	<string>/Soviet_space_program</string>
-	<string>/Soviet_Union</string>
 	<string>/Sowing</string>
 	<string>/Soy_milk</string>
 	<string>/Soy_sauce</string>
@@ -10861,22 +10749,25 @@
 	<string>/Spa</string>
 	<string>/Space</string>
 	<string>/Space-based_economy</string>
+	<string>/SpaceShipTwo</string>
+	<string>/SpaceX</string>
+	<string>/SpaceX_Dragon</string>
 	<string>/Space_Age</string>
+	<string>/Space_Invaders</string>
+	<string>/Space_Jam</string>
+	<string>/Space_Mountain</string>
+	<string>/Space_Oddity</string>
+	<string>/Space_Race</string>
+	<string>/Space_Shuttle</string>
+	<string>/Space_Shuttle_Endeavour</string>
+	<string>/Space_Shuttle_program</string>
 	<string>/Space_capsule</string>
 	<string>/Space_colonization</string>
 	<string>/Space_elevator</string>
 	<string>/Space_exploration</string>
 	<string>/Space_heater</string>
-	<string>/Space_Invaders</string>
-	<string>/Space_Jam</string>
-	<string>/Space_Mountain</string>
-	<string>/Space_Oddity</string>
 	<string>/Space_opera</string>
 	<string>/Space_probe</string>
-	<string>/Space_Race</string>
-	<string>/Space_Shuttle</string>
-	<string>/Space_Shuttle_Endeavour</string>
-	<string>/Space_Shuttle_program</string>
 	<string>/Space_station</string>
 	<string>/Space_telescope</string>
 	<string>/Space_tourism</string>
@@ -10886,10 +10777,7 @@
 	<string>/Spaceflight</string>
 	<string>/Spaceport</string>
 	<string>/Spaceship_Earth</string>
-	<string>/SpaceShipTwo</string>
 	<string>/Spacewar!</string>
-	<string>/SpaceX</string>
-	<string>/SpaceX_Dragon</string>
 	<string>/Spaghetti</string>
 	<string>/Spain</string>
 	<string>/Spandrel</string>
@@ -10899,9 +10787,9 @@
 	<string>/Spanish_East_Indies</string>
 	<string>/Spanish_Empire</string>
 	<string>/Spanish_Florida</string>
+	<string>/Spanish_Inquisition</string>
 	<string>/Spanish_flu</string>
 	<string>/Spanish_garden</string>
-	<string>/Spanish_Inquisition</string>
 	<string>/Spanish_language</string>
 	<string>/Spanish_peseta</string>
 	<string>/Spare_ribs</string>
@@ -10972,8 +10860,8 @@
 	<string>/Splash_Mountain</string>
 	<string>/Spoken_word</string>
 	<string>/Sponge</string>
-	<string>/Sponge_cake</string>
 	<string>/SpongeBob_SquarePants</string>
+	<string>/Sponge_cake</string>
 	<string>/Spoon</string>
 	<string>/Spoonbill</string>
 	<string>/Spork</string>
@@ -10982,6 +10870,8 @@
 	<string>/Sport_coat</string>
 	<string>/Sport_psychology</string>
 	<string>/Sport_utility_vehicle</string>
+	<string>/SportsCenter</string>
+	<string>/Sports_Illustrated</string>
 	<string>/Sports_agent</string>
 	<string>/Sports_car</string>
 	<string>/Sports_club</string>
@@ -10989,14 +10879,12 @@
 	<string>/Sports_drink</string>
 	<string>/Sports_equipment</string>
 	<string>/Sports_game</string>
-	<string>/Sports_Illustrated</string>
 	<string>/Sports_journalism</string>
 	<string>/Sports_league</string>
 	<string>/Sports_marketing</string>
 	<string>/Sports_medicine</string>
 	<string>/Sports_science</string>
 	<string>/Sports_venue</string>
-	<string>/SportsCenter</string>
 	<string>/Sportsmanship</string>
 	<string>/Spotify</string>
 	<string>/Spotted_hyena</string>
@@ -11005,7 +10893,6 @@
 	<string>/Sprint_Corporation</string>
 	<string>/Sputnik_1</string>
 	<string>/Spyware</string>
-	<string>/SQL</string>
 	<string>/Squall_line</string>
 	<string>/Square</string>
 	<string>/Square_Enix</string>
@@ -11016,13 +10903,11 @@
 	<string>/Squid_as_food</string>
 	<string>/Squirrel</string>
 	<string>/Sri_Lanka</string>
-	<string>/SS_Andrea_Doria</string>
 	<string>/St._Louis</string>
 	<string>/St._Louis_Cardinals</string>
 	<string>/Stable</string>
 	<string>/Stack_interchange</string>
 	<string>/Stadium</string>
-	<string>/Stage_illusions</string>
 	<string>/Stagecoach</string>
 	<string>/Stagecraft</string>
 	<string>/Stain</string>
@@ -11040,27 +10925,26 @@
 	<string>/Stan_Lee</string>
 	<string>/Stan_Musial</string>
 	<string>/Stand-up_comedy</string>
-	<string>/Standard_deviation</string>
 	<string>/Standard_Oil</string>
+	<string>/Standard_deviation</string>
 	<string>/Standardization</string>
 	<string>/Stanford_University</string>
 	<string>/Stanley_Cup</string>
 	<string>/Star</string>
 	<string>/Star-Lord</string>
 	<string>/Star-nosed_mole</string>
-	<string>/Star_formation</string>
-	<string>/Star_system</string>
+	<string>/StarCraft</string>
 	<string>/Star_Tours</string>
 	<string>/Star_Trek</string>
 	<string>/Star_Trek_Beyond</string>
 	<string>/Star_Wars</string>
-	<string>/Star_Wars_Hotel</string>
 	<string>/Star_Wars_Launch_Bay</string>
 	<string>/Star_Wars_Rebels</string>
 	<string>/Star_Wars_Weekends</string>
+	<string>/Star_formation</string>
+	<string>/Star_system</string>
 	<string>/Starbucks</string>
 	<string>/Starch</string>
-	<string>/StarCraft</string>
 	<string>/Starfish</string>
 	<string>/Stark_Raving_Dad</string>
 	<string>/Starkiller</string>
@@ -11176,8 +11060,8 @@
 	<string>/Streaming_media</string>
 	<string>/Streaming_television</string>
 	<string>/Street</string>
-	<string>/Street_art</string>
 	<string>/Street_Fighter</string>
+	<string>/Street_art</string>
 	<string>/Street_fighting</string>
 	<string>/Street_food</string>
 	<string>/Street_football</string>
@@ -11216,8 +11100,8 @@
 	<string>/Subjectivism</string>
 	<string>/Subjectivity</string>
 	<string>/Submarine</string>
-	<string>/Submarine_sandwich</string>
 	<string>/Submarine_Voyage</string>
+	<string>/Submarine_sandwich</string>
 	<string>/Subregion</string>
 	<string>/Subsidiary</string>
 	<string>/Subsidy</string>
@@ -11325,7 +11209,6 @@
 	<string>/Suspenders</string>
 	<string>/Suspense</string>
 	<string>/Suspension_bridge</string>
-	<string>/Sustain</string>
 	<string>/Sustainability</string>
 	<string>/Sustainable_agriculture</string>
 	<string>/Sustainable_architecture</string>
@@ -11340,8 +11223,8 @@
 	<string>/Sweden</string>
 	<string>/Swedish_Empire</string>
 	<string>/Sweet_Child_o%27_Mine</string>
-	<string>/Sweet_corn</string>
 	<string>/Sweet_Home_Alabama</string>
+	<string>/Sweet_corn</string>
 	<string>/Sweet_potato</string>
 	<string>/Sweet_soy_sauce</string>
 	<string>/Swift</string>
@@ -11352,8 +11235,8 @@
 	<string>/Swing_music</string>
 	<string>/Swing_state</string>
 	<string>/Swiss_Army_knife</string>
-	<string>/Swiss_cheese</string>
 	<string>/Swiss_Family_Treehouse</string>
+	<string>/Swiss_cheese</string>
 	<string>/Switch</string>
 	<string>/Switzerland</string>
 	<string>/Sword</string>
@@ -11382,12 +11265,11 @@
 	<string>/Synthetic_diamond</string>
 	<string>/Syria</string>
 	<string>/Syrian_Air_Force</string>
-	<string>/Syrian_Civil_War</string>
 	<string>/Syrup</string>
 	<string>/System</string>
+	<string>/System_Shock</string>
 	<string>/System_call</string>
 	<string>/System_dynamics</string>
-	<string>/System_Shock</string>
 	<string>/System_software</string>
 	<string>/Systematics</string>
 	<string>/Systems_analysis</string>
@@ -11398,16 +11280,26 @@
 	<string>/Systems_psychology</string>
 	<string>/Systems_science</string>
 	<string>/Systems_theory</string>
-	<string>/T-bone_steak</string>
 	<string>/T-Mobile_US</string>
+	<string>/T-bone_steak</string>
 	<string>/T-shirt</string>
 	<string>/T-top</string>
+	<string>/TCF_Bank_Stadium</string>
+	<string>/TGI_Fridays</string>
+	<string>/TGV</string>
+	<string>/THX</string>
+	<string>/TIE_fighter</string>
+	<string>/TIFF</string>
+	<string>/TNT</string>
+	<string>/TNT_equivalent</string>
+	<string>/TRIZ</string>
+	<string>/TSMC</string>
 	<string>/Taare_Zameen_Par</string>
 	<string>/Tabasco</string>
 	<string>/Tabasco_pepper</string>
+	<string>/Table_Mountain</string>
 	<string>/Table_apple</string>
 	<string>/Table_football</string>
-	<string>/Table_Mountain</string>
 	<string>/Table_tennis</string>
 	<string>/Tablet_computer</string>
 	<string>/Tabletop_game</string>
@@ -11469,8 +11361,8 @@
 	<string>/Taxidermy</string>
 	<string>/Taxon</string>
 	<string>/Taylor_Swift</string>
-	<string>/TCF_Bank_Stadium</string>
 	<string>/Tcl</string>
+	<string>/TeX</string>
 	<string>/Te_Rauparaha</string>
 	<string>/Tea</string>
 	<string>/Tea_bag</string>
@@ -11478,9 +11370,9 @@
 	<string>/Teacup</string>
 	<string>/Teahouse</string>
 	<string>/Team</string>
-	<string>/Team_building</string>
 	<string>/Team_Disney</string>
 	<string>/Team_Fortress_2</string>
+	<string>/Team_building</string>
 	<string>/Team_sport</string>
 	<string>/Teapot</string>
 	<string>/Teasing</string>
@@ -11554,22 +11446,21 @@
 	<string>/Territory_of_Alaska</string>
 	<string>/Terry_Sanford</string>
 	<string>/Tertiary_education</string>
-	<string>/Tesla_coil</string>
 	<string>/Tesla_Factory</string>
 	<string>/Tesla_Model_S</string>
 	<string>/Tesla_Powerwall</string>
-	<string>/Test_pilot</string>
+	<string>/Tesla_coil</string>
 	<string>/Test_Track</string>
+	<string>/Test_pilot</string>
 	<string>/Test_tube</string>
 	<string>/Testosterone</string>
 	<string>/Tetrahedron</string>
 	<string>/Tetris</string>
-	<string>/TeX</string>
 	<string>/Texas</string>
-	<string>/Texas_annexation</string>
-	<string>/Texas_hold_%27em</string>
 	<string>/Texas_Instruments</string>
 	<string>/Texas_Revolution</string>
+	<string>/Texas_annexation</string>
+	<string>/Texas_hold_%27em</string>
 	<string>/Text_editor</string>
 	<string>/Text_file</string>
 	<string>/Text_messaging</string>
@@ -11579,8 +11470,6 @@
 	<string>/Textile_design</string>
 	<string>/Textile_industry</string>
 	<string>/Texture_mapping</string>
-	<string>/TGI_Fridays</string>
-	<string>/TGV</string>
 	<string>/Thai_art</string>
 	<string>/Thai_baht</string>
 	<string>/Thailand</string>
@@ -11591,7 +11480,6 @@
 	<string>/The_A-Team</string>
 	<string>/The_All-American_Rejects</string>
 	<string>/The_Archers</string>
-	<string>/The_arts</string>
 	<string>/The_Auk</string>
 	<string>/The_Barnstormer</string>
 	<string>/The_Beatles</string>
@@ -11608,7 +11496,6 @@
 	<string>/The_Elder_Scrolls</string>
 	<string>/The_Empire_Strikes_Back</string>
 	<string>/The_Fifth_Element</string>
-	<string>/The_finger</string>
 	<string>/The_Game_of_Life</string>
 	<string>/The_Godfather</string>
 	<string>/The_Good_Dinosaur</string>
@@ -11669,6 +11556,8 @@
 	<string>/The_Washington_Post</string>
 	<string>/The_West_Wing</string>
 	<string>/The_Wire</string>
+	<string>/The_arts</string>
+	<string>/The_finger</string>
 	<string>/Theatre</string>
 	<string>/Theatre_director</string>
 	<string>/Theatrical_property</string>
@@ -11700,9 +11589,9 @@
 	<string>/Thetis</string>
 	<string>/Thiamine</string>
 	<string>/Thimble</string>
+	<string>/ThinkPad</string>
 	<string>/Think_different</string>
 	<string>/Think_tank</string>
-	<string>/ThinkPad</string>
 	<string>/Third_World</string>
 	<string>/Thirteen_Colonies</string>
 	<string>/Thomas_Edison</string>
@@ -11727,7 +11616,6 @@
 	<string>/Thrust_fault</string>
 	<string>/Thunderstorm</string>
 	<string>/Thursday</string>
-	<string>/THX</string>
 	<string>/Thymus</string>
 	<string>/Tian_Shan</string>
 	<string>/Tibet</string>
@@ -11737,10 +11625,8 @@
 	<string>/Tidal_power</string>
 	<string>/Tide</string>
 	<string>/Tie-dye</string>
-	<string>/TIE_fighter</string>
 	<string>/Tied-arch_bridge</string>
 	<string>/Tied_island</string>
-	<string>/TIFF</string>
 	<string>/Tiger</string>
 	<string>/Tiger_shark</string>
 	<string>/Tigger</string>
@@ -11758,9 +11644,9 @@
 	<string>/Timber_framing</string>
 	<string>/Timbuktu</string>
 	<string>/Time</string>
+	<string>/Time_Inc.</string>
 	<string>/Time_capsule</string>
 	<string>/Time_geography</string>
-	<string>/Time_Inc.</string>
 	<string>/Time_to_Get_Tough</string>
 	<string>/Time_travel</string>
 	<string>/Time_zone</string>
@@ -11768,7 +11654,6 @@
 	<string>/Times_Square</string>
 	<string>/Timon_and_Pumbaa</string>
 	<string>/Tin</string>
-	<string>/Tin_can</string>
 	<string>/Tin_Toy</string>
 	<string>/Tina_Fey</string>
 	<string>/Tinamou</string>
@@ -11782,11 +11667,9 @@
 	<string>/Titanium</string>
 	<string>/Titration</string>
 	<string>/Tlingit</string>
-	<string>/TNT</string>
-	<string>/TNT_equivalent</string>
-	<string>/To_be_announced</string>
 	<string>/To_Kill_a_Mockingbird</string>
 	<string>/To_Pimp_a_Butterfly</string>
+	<string>/To_be_announced</string>
 	<string>/Toad</string>
 	<string>/Toast</string>
 	<string>/Toaster</string>
@@ -11799,18 +11682,18 @@
 	<string>/Toilet_seat</string>
 	<string>/Token_coin</string>
 	<string>/Tokyo</string>
+	<string>/Tokyo_DisneySea</string>
 	<string>/Tokyo_Disney_Resort</string>
 	<string>/Tokyo_Disneyland</string>
-	<string>/Tokyo_DisneySea</string>
 	<string>/Toleration</string>
 	<string>/Toll_bridge</string>
 	<string>/Toll_road</string>
-	<string>/Tom_and_Jerry</string>
 	<string>/Tom_Felton</string>
 	<string>/Tom_Hanks</string>
 	<string>/Tom_Hardy</string>
 	<string>/Tom_Hiddleston</string>
 	<string>/Tom_Sawyer_Island</string>
+	<string>/Tom_and_Jerry</string>
 	<string>/Tomato</string>
 	<string>/Tomato_juice</string>
 	<string>/Tomato_sauce</string>
@@ -11870,8 +11753,8 @@
 	<string>/Toy_Story_4</string>
 	<string>/Toy_Story_Land</string>
 	<string>/Toy_Story_Midway_Mania!</string>
-	<string>/Toy_Story_of_Terror!</string>
 	<string>/Toy_Story_Racer</string>
+	<string>/Toy_Story_of_Terror!</string>
 	<string>/Toy_train</string>
 	<string>/Toyota</string>
 	<string>/Toyota_Corolla</string>
@@ -11929,9 +11812,9 @@
 	<string>/Transmission_line</string>
 	<string>/Transmitter</string>
 	<string>/Transport</string>
+	<string>/Transport_Layer_Security</string>
 	<string>/Transport_law</string>
 	<string>/Transport_layer</string>
-	<string>/Transport_Layer_Security</string>
 	<string>/Transportation_planning</string>
 	<string>/Transporter_bridge</string>
 	<string>/Transshipment</string>
@@ -11983,7 +11866,6 @@
 	<string>/Triumph_of_the_Will</string>
 	<string>/Trivia</string>
 	<string>/Trivial_Pursuit</string>
-	<string>/TRIZ</string>
 	<string>/Trogon</string>
 	<string>/Trojan_Horse</string>
 	<string>/Trojan_War</string>
@@ -11992,8 +11874,8 @@
 	<string>/Trolleybus</string>
 	<string>/Trombone</string>
 	<string>/Tron</string>
-	<string>/Tropic_of_Cancer</string>
 	<string>/Tropic_Thunder</string>
+	<string>/Tropic_of_Cancer</string>
 	<string>/Tropical_climate</string>
 	<string>/Tropical_cyclone</string>
 	<string>/Tropical_rainforest</string>
@@ -12015,7 +11897,6 @@
 	<string>/Truth</string>
 	<string>/Truth-bearer</string>
 	<string>/Tsar</string>
-	<string>/TSMC</string>
 	<string>/Tsunami</string>
 	<string>/Tuba</string>
 	<string>/Tuberculosis</string>
@@ -12045,7 +11926,6 @@
 	<string>/Turing_test</string>
 	<string>/Turkey</string>
 	<string>/Turkish_Airlines</string>
-	<string>/Turkish_lira_sign</string>
 	<string>/Turkmenistan</string>
 	<string>/Turn-based_strategy</string>
 	<string>/Turnkey</string>
@@ -12059,7 +11939,6 @@
 	<string>/Twin</string>
 	<string>/Twin_prime</string>
 	<string>/Twisted_pair</string>
-	<string>/Twitch.tv</string>
 	<string>/Twitter</string>
 	<string>/Twycross_Zoo</string>
 	<string>/Type_conversion</string>
@@ -12075,6 +11954,16 @@
 	<string>/U-boat</string>
 	<string>/U.S._state</string>
 	<string>/U2</string>
+	<string>/UKUSA_Agreement</string>
+	<string>/UNESCO</string>
+	<string>/UNICEF</string>
+	<string>/UPS_Airlines</string>
+	<string>/URL</string>
+	<string>/USA_Today</string>
+	<string>/USB</string>
+	<string>/USB-C</string>
+	<string>/USB_flash_drive</string>
+	<string>/UTF-8</string>
 	<string>/Uber</string>
 	<string>/Ubisoft</string>
 	<string>/Udon</string>
@@ -12082,12 +11971,10 @@
 	<string>/Ukraine</string>
 	<string>/Ukrainian_wine</string>
 	<string>/Ukulele</string>
-	<string>/UKUSA_Agreement</string>
 	<string>/Ultrasound</string>
 	<string>/Ultraviolet</string>
 	<string>/Ultraviolet_astronomy</string>
 	<string>/Umbrella</string>
-	<string>/Umbrella_term</string>
 	<string>/Uncertainty</string>
 	<string>/Uncle</string>
 	<string>/Uncle_Sam</string>
@@ -12106,10 +11993,8 @@
 	<string>/Underwater_sports</string>
 	<string>/Underworld</string>
 	<string>/Unemployment</string>
-	<string>/UNESCO</string>
 	<string>/Uneven_bars</string>
 	<string>/Unexploded_ordnance</string>
-	<string>/UNICEF</string>
 	<string>/Unicode</string>
 	<string>/Unicode_symbols</string>
 	<string>/Unicorn</string>
@@ -12129,16 +12014,16 @@
 	<string>/United_Parcel_Service</string>
 	<string>/United_States</string>
 	<string>/United_States_Army</string>
-	<string>/United_States_dollar</string>
 	<string>/United_States_Navy</string>
+	<string>/United_States_Senate</string>
+	<string>/United_States_dollar</string>
 	<string>/United_States_passport</string>
 	<string>/United_States_patent_law</string>
-	<string>/United_States_Senate</string>
-	<string>/Universal_algebra</string>
 	<string>/Universal_Media_Disc</string>
 	<string>/Universal_Orlando</string>
 	<string>/Universal_Pictures</string>
 	<string>/Universal_Time</string>
+	<string>/Universal_algebra</string>
 	<string>/Universe</string>
 	<string>/University</string>
 	<string>/University_of_Cambridge</string>
@@ -12151,7 +12036,6 @@
 	<string>/Unsupervised_learning</string>
 	<string>/Upper_class</string>
 	<string>/Uppsala_Cathedral</string>
-	<string>/UPS_Airlines</string>
 	<string>/Upstate_New_York</string>
 	<string>/Uptown_Funk</string>
 	<string>/Uranium</string>
@@ -12179,25 +12063,22 @@
 	<string>/Urbanization</string>
 	<string>/Urdu</string>
 	<string>/Urial</string>
-	<string>/URL</string>
 	<string>/Urology</string>
-	<string>/USA_Today</string>
 	<string>/Usability</string>
-	<string>/USB</string>
-	<string>/USB-C</string>
-	<string>/USB_flash_drive</string>
 	<string>/Usenet</string>
 	<string>/Usenet_newsgroup</string>
 	<string>/User_agent</string>
 	<string>/User_interface</string>
 	<string>/User_interface_design</string>
 	<string>/Utah</string>
-	<string>/UTF-8</string>
 	<string>/Utilitarianism</string>
 	<string>/Utility</string>
 	<string>/Utility_tunnel</string>
 	<string>/Utopia</string>
 	<string>/Uzbekistan</string>
+	<string>/VGA_connector</string>
+	<string>/VHS</string>
+	<string>/VLC_media_player</string>
 	<string>/V_for_Vendetta</string>
 	<string>/Vaccination</string>
 	<string>/Vaccine</string>
@@ -12267,8 +12148,6 @@
 	<string>/Vertical_bar</string>
 	<string>/Vertical_farming</string>
 	<string>/Veterans_Day</string>
-	<string>/VGA_connector</string>
-	<string>/VHS</string>
 	<string>/Viacom</string>
 	<string>/Viaduct</string>
 	<string>/Vice_admiral</string>
@@ -12277,9 +12156,9 @@
 	<string>/Victorian_era</string>
 	<string>/Victory_garden</string>
 	<string>/Video</string>
+	<string>/Video_CD</string>
 	<string>/Video_art</string>
 	<string>/Video_card</string>
-	<string>/Video_CD</string>
 	<string>/Video_game</string>
 	<string>/Video_game_art</string>
 	<string>/Video_game_console</string>
@@ -12298,8 +12177,8 @@
 	<string>/Viduidae</string>
 	<string>/Vienna</string>
 	<string>/Vienna_Circle</string>
-	<string>/Vienna_sausage</string>
 	<string>/Vienna_Secession</string>
+	<string>/Vienna_sausage</string>
 	<string>/Viet_Cong</string>
 	<string>/Vietnam</string>
 	<string>/Vietnam_War</string>
@@ -12326,13 +12205,13 @@
 	<string>/Virgin_Galactic</string>
 	<string>/Virginia</string>
 	<string>/Virology</string>
+	<string>/Virtual_Theatre</string>
 	<string>/Virtual_assistant</string>
 	<string>/Virtual_camera_system</string>
 	<string>/Virtual_machine</string>
 	<string>/Virtual_memory</string>
 	<string>/Virtual_private_network</string>
 	<string>/Virtual_reality</string>
-	<string>/Virtual_Theatre</string>
 	<string>/Virtue</string>
 	<string>/Virtue_ethics</string>
 	<string>/Virus</string>
@@ -12355,7 +12234,6 @@
 	<string>/Vitruvius</string>
 	<string>/Vladimir_K._Zworykin</string>
 	<string>/Vladimir_Putin</string>
-	<string>/VLC_media_player</string>
 	<string>/Vodafone</string>
 	<string>/Vodka</string>
 	<string>/Voice_acting</string>
@@ -12386,6 +12264,9 @@
 	<string>/Voyager_program</string>
 	<string>/Vulgate</string>
 	<string>/Vulture</string>
+	<string>/WALL-E</string>
+	<string>/WAV</string>
+	<string>/WHSmith</string>
 	<string>/Waffle</string>
 	<string>/Wage</string>
 	<string>/Wakamaru</string>
@@ -12395,7 +12276,6 @@
 	<string>/Walking_stick</string>
 	<string>/Walkman</string>
 	<string>/Wall</string>
-	<string>/WALL-E</string>
 	<string>/Wall_Street</string>
 	<string>/Wallaby</string>
 	<string>/Wallachia</string>
@@ -12410,7 +12290,6 @@
 	<string>/Walt_Disney_Records</string>
 	<string>/Walt_Disney_Studios_Park</string>
 	<string>/Walt_Disney_World</string>
-	<string>/Walt_Disney_World_Resort</string>
 	<string>/Walter_Camp</string>
 	<string>/Walter_Payton</string>
 	<string>/Walter_Pitts</string>
@@ -12422,7 +12301,6 @@
 	<string>/War_elephant</string>
 	<string>/War_film</string>
 	<string>/War_on_drugs</string>
-	<string>/War_on_Terror</string>
 	<string>/Warbler</string>
 	<string>/Warcraft</string>
 	<string>/Wardrobe</string>
@@ -12450,9 +12328,9 @@
 	<string>/Waste_management</string>
 	<string>/Wastewater</string>
 	<string>/Watch</string>
+	<string>/WatchOS</string>
 	<string>/Watchmaker</string>
 	<string>/Watchmen</string>
-	<string>/WatchOS</string>
 	<string>/Water</string>
 	<string>/Water_bottle</string>
 	<string>/Water_buffalo</string>
@@ -12474,7 +12352,6 @@
 	<string>/Water_treatment</string>
 	<string>/Water_turbine</string>
 	<string>/Water_vapor</string>
-	<string>/Water_well</string>
 	<string>/Water_wheel</string>
 	<string>/Waterbuck</string>
 	<string>/Watercolor_painting</string>
@@ -12487,7 +12364,6 @@
 	<string>/Watermill</string>
 	<string>/Waterway</string>
 	<string>/Watt</string>
-	<string>/WAV</string>
 	<string>/Wave</string>
 	<string>/Wave_farm</string>
 	<string>/Wave_function</string>
@@ -12503,8 +12379,8 @@
 	<string>/Waymo</string>
 	<string>/Waze</string>
 	<string>/We_Are_the_Champions</string>
-	<string>/We_will_bury_you</string>
 	<string>/We_Will_Rock_You</string>
+	<string>/We_will_bury_you</string>
 	<string>/Wealth</string>
 	<string>/Weapon</string>
 	<string>/Wearable_computer</string>
@@ -12551,6 +12427,7 @@
 	<string>/Werewolf</string>
 	<string>/Wes_Anderson</string>
 	<string>/West</string>
+	<string>/WestCOT</string>
 	<string>/West_Africa</string>
 	<string>/West_Bank</string>
 	<string>/West_End_theatre</string>
@@ -12559,15 +12436,14 @@
 	<string>/West_Nile_virus</string>
 	<string>/West_Pakistan</string>
 	<string>/West_Virginia</string>
-	<string>/WestCOT</string>
 	<string>/Western_Asia</string>
 	<string>/Western_Australia</string>
-	<string>/Western_blot</string>
 	<string>/Western_Confederacy</string>
-	<string>/Western_culture</string>
-	<string>/Western_esotericism</string>
 	<string>/Western_Europe</string>
 	<string>/Western_Hemisphere</string>
+	<string>/Western_blot</string>
+	<string>/Western_culture</string>
+	<string>/Western_esotericism</string>
 	<string>/Western_philosophy</string>
 	<string>/Western_world</string>
 	<string>/Westernization</string>
@@ -12591,10 +12467,10 @@
 	<string>/Whistling</string>
 	<string>/White</string>
 	<string>/White-tailed_deer</string>
+	<string>/White_House</string>
 	<string>/White_blood_cell</string>
 	<string>/White_chocolate</string>
 	<string>/White_dwarf</string>
-	<string>/White_House</string>
 	<string>/White_meat</string>
 	<string>/White_rhinoceros</string>
 	<string>/White_tiger</string>
@@ -12605,7 +12481,6 @@
 	<string>/Whole_language</string>
 	<string>/Whoopi_Goldberg</string>
 	<string>/Whooping_crane</string>
-	<string>/WHSmith</string>
 	<string>/Wi-Fi</string>
 	<string>/Wide-body_aircraft</string>
 	<string>/Wide_area_network</string>
@@ -12632,8 +12507,8 @@
 	<string>/Wilderness</string>
 	<string>/Wildfire</string>
 	<string>/Wildlife</string>
-	<string>/Wildlife_corridor</string>
 	<string>/Wildlife_Express_Train</string>
+	<string>/Wildlife_corridor</string>
 	<string>/William_Howard_Taft</string>
 	<string>/William_Shakespeare</string>
 	<string>/Willis_Tower</string>
@@ -12668,7 +12543,6 @@
 	<string>/Winter_Olympic_Games</string>
 	<string>/Winter_Paralympic_Games</string>
 	<string>/Winter_solstice</string>
-	<string>/Winter_sport</string>
 	<string>/Wire</string>
 	<string>/Wire-frame_model</string>
 	<string>/Wire_rope</string>
@@ -12691,13 +12565,13 @@
 	<string>/Women%27s_rights</string>
 	<string>/Women%27s_suffrage</string>
 	<string>/Women_artists</string>
-	<string>/Women_in_science</string>
 	<string>/Women_in_STEM_fields</string>
+	<string>/Women_in_science</string>
 	<string>/Won_sign</string>
+	<string>/WonderSwan</string>
 	<string>/Wonder_Twins</string>
 	<string>/Wonder_Woman</string>
 	<string>/Wonders_of_the_World</string>
-	<string>/WonderSwan</string>
 	<string>/Wood</string>
 	<string>/Wood_carving</string>
 	<string>/Wood_lemming</string>
@@ -12729,10 +12603,14 @@
 	<string>/World%27s_fair</string>
 	<string>/World_Bank</string>
 	<string>/World_Chess_Championship</string>
+	<string>/World_Series</string>
+	<string>/World_Trade_Organization</string>
+	<string>/World_War_I</string>
+	<string>/World_War_II</string>
+	<string>/World_Wide_Web</string>
 	<string>/World_cinema</string>
 	<string>/World_economy</string>
 	<string>/World_government</string>
-	<string>/World_Heritage_site</string>
 	<string>/World_history</string>
 	<string>/World_literature</string>
 	<string>/World_map</string>
@@ -12740,21 +12618,14 @@
 	<string>/World_of_Motion</string>
 	<string>/World_of_Warcraft</string>
 	<string>/World_population</string>
-	<string>/World_Series</string>
-	<string>/World_Trade_Organization</string>
-	<string>/World_view</string>
 	<string>/World_war</string>
-	<string>/World_War_I</string>
-	<string>/World_War_II</string>
-	<string>/World_Wide_Web</string>
 	<string>/Worm</string>
 	<string>/Wreck-It_Ralph</string>
 	<string>/Wren</string>
-	<string>/Wrestler</string>
 	<string>/Wrestling</string>
-	<string>/Wright_brothers</string>
 	<string>/Wright_Flyer</string>
 	<string>/Wright_Model_A</string>
+	<string>/Wright_brothers</string>
 	<string>/Wrigley_Company</string>
 	<string>/Wrigley_Field</string>
 	<string>/Writer</string>
@@ -12769,6 +12640,8 @@
 	<string>/X-ray</string>
 	<string>/X86</string>
 	<string>/X86-64</string>
+	<string>/XML</string>
+	<string>/XM_Satellite_Radio</string>
 	<string>/X_Games</string>
 	<string>/Xbox</string>
 	<string>/Xbox_360</string>
@@ -12785,8 +12658,6 @@
 	<string>/Xerxes_I</string>
 	<string>/Xgrid</string>
 	<string>/Xinjiang</string>
-	<string>/XM_Satellite_Radio</string>
-	<string>/XML</string>
 	<string>/Xsan</string>
 	<string>/Xylophone</string>
 	<string>/Yahoo!</string>
@@ -12813,11 +12684,12 @@
 	<string>/York</string>
 	<string>/Yosemite_National_Park</string>
 	<string>/Yoshi</string>
+	<string>/YouTube</string>
 	<string>/Youth</string>
 	<string>/Youth_subculture</string>
-	<string>/YouTube</string>
 	<string>/Yukon</string>
 	<string>/Yunnan</string>
+	<string>/ZX_Spectrum</string>
 	<string>/Zac_Efron</string>
 	<string>/Zack_Snyder</string>
 	<string>/Zagreb_Synagogue</string>
@@ -12842,6 +12714,32 @@
 	<string>/Zoosemiotics</string>
 	<string>/Zootopia</string>
 	<string>/Zoroastrianism</string>
-	<string>/ZX_Spectrum</string>
+	<string>/iAd</string>
+	<string>/iCloud</string>
+	<string>/iMovie</string>
+	<string>/iPhone</string>
+	<string>/iPhone_3G</string>
+	<string>/iPhone_3GS</string>
+	<string>/iPhone_4</string>
+	<string>/iPhone_4S</string>
+	<string>/iPhone_5</string>
+	<string>/iPhone_5C</string>
+	<string>/iPhone_5S</string>
+	<string>/iPhone_6</string>
+	<string>/iPhone_6S</string>
+	<string>/iPhoto</string>
+	<string>/iPod_Nano</string>
+	<string>/iPod_Shuffle</string>
+	<string>/iPod_Touch</string>
+	<string>/iTunes_Store</string>
+	<string>/iWork</string>
+	<string>/Earffel_Tower</string>
+	<string>/Esports</string>
+	<string>/Apple_Books</string>
+	<string>/Streaming_television</string>
+	<string>/Mark_Twain_Riverboat</string>
+	<string>/The_Magic_Carpets_of_Aladdin</string>
+	<string>/Pixar_Pal-A-Round</string>
+	<string>/Slinky_Dog_Zigzag_Spin</string>
 </array>
 </plist>

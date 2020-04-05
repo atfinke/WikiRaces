@@ -8,7 +8,7 @@
 
 import WebKit
 
-public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
+final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
     // MARK: - Types -
 

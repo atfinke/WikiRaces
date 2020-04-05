@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import WKRUIKit
 
-internal class HelpViewController: UIViewController, WKNavigationDelegate {
+final internal class HelpViewController: UIViewController, WKNavigationDelegate {
 
     // MARK: - Properties -
 
@@ -45,7 +45,7 @@ internal class HelpViewController: UIViewController, WKNavigationDelegate {
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leftAnchor.constraint(equalTo: view.leftAnchor),
             progressView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 6)
+            progressView.heightAnchor.constraint(equalToConstant: 4)
         ]
         NSLayoutConstraint.activate(constraints)
 

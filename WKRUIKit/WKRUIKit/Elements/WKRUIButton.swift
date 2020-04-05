@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class WKRUIButton: UIButton {
+final public class WKRUIButton: UIButton {
 
     // MARK: - Properties -
 
@@ -47,6 +47,10 @@ public class WKRUIButton: UIButton {
         backgroundColor = .clear
 
         setTitleColor(.green, for: .highlighted)
+
+        if #available(iOS 13.4, *) {
+            isPointerInteractionEnabled = true
+        }
     }
 
     required public init?(coder aDecoder: NSCoder) {

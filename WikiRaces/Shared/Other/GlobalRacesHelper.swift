@@ -8,7 +8,7 @@
 
 import GameKit
 
-class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
+final class GlobalRaceHelper: NSObject, GKLocalPlayerListener {
 
     // MARK: - Properties -
 

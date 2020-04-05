@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-internal class ResultsTableViewCell: UITableViewCell {
+final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
 
     // MARK: - Properties -
 
@@ -149,14 +149,13 @@ internal class ResultsTableViewCell: UITableViewCell {
         ]
 
         if UIScreen.main.bounds.width > 340 {
-            constraints.append(subtitleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15)
-            )
+            constraints.append(subtitleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15))
         } else {
-            constraints.append(subtitleLabel.heightAnchor.constraint(equalToConstant: 0)
-            )
+            constraints.append(subtitleLabel.heightAnchor.constraint(equalToConstant: 0))
         }
 
         NSLayoutConstraint.activate(constraints)
+
     }
 
     // MARK: - Updating -

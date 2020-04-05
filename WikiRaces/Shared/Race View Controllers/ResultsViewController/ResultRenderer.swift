@@ -10,7 +10,7 @@ import UIKit
 import WKRKit
 
 //swiftlint:disable function_body_length
-class ResultRenderer {
+final class ResultRenderer {
 
     // MARK: - Types -
 

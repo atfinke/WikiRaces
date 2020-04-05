@@ -13,7 +13,7 @@ import StoreKit
 import WKRKit
 
 //swiftlint:disable:next type_body_length
-internal class PlayerStatsManager {
+final internal class PlayerStatsManager {
 
     // MARK: - Types
 

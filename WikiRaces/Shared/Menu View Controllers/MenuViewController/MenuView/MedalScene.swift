@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class MedalScene: SKScene {
+final class MedalScene: SKScene {
 
     // MARK: Properties -
 

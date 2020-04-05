@@ -24,6 +24,8 @@
 		1441A06522FFBE5E005D63B9 /* WKRUIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06422FFBE5E005D63B9 /* WKRUIStyle.swift */; };
 		1441A06722FFBE8D005D63B9 /* WKRUIKit+Blurs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06622FFBE8D005D63B9 /* WKRUIKit+Blurs.swift */; };
 		1441A06922FFBEBA005D63B9 /* WKRUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1441A06822FFBEBA005D63B9 /* WKRUINavigationController.swift */; };
+		144C221D241BEEBD00176EB5 /* WKRUIKit+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144C221B241BEEBC00176EB5 /* WKRUIKit+Common.swift */; };
+		144C221E241BEEBD00176EB5 /* WKRUIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144C221C241BEEBD00176EB5 /* WKRUIWindow.swift */; };
 		145E903D1F79F80A00D31554 /* WKRUIConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145E903C1F79F80A00D31554 /* WKRUIConstants.plist */; };
 		149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */; };
 		14A3D4A21F3634110038388F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A3D4A11F3634110038388F /* AppDelegate.swift */; };
@@ -70,6 +72,8 @@
 		1441A06422FFBE5E005D63B9 /* WKRUIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIStyle.swift; sourceTree = "<group>"; };
 		1441A06622FFBE8D005D63B9 /* WKRUIKit+Blurs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Blurs.swift"; sourceTree = "<group>"; };
 		1441A06822FFBEBA005D63B9 /* WKRUINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUINavigationController.swift; sourceTree = "<group>"; };
+		144C221B241BEEBC00176EB5 /* WKRUIKit+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Common.swift"; sourceTree = "<group>"; };
+		144C221C241BEEBD00176EB5 /* WKRUIWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIWindow.swift; sourceTree = "<group>"; };
 		145E903C1F79F80A00D31554 /* WKRUIConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRUIConstants.plist; sourceTree = "<group>"; };
 		149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		149FF7F71F362B0D000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -198,6 +202,7 @@
 				149FF8AB1F362CF6000A5D96 /* WKRUIKit+Colors.swift */,
 				14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */,
 				14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */,
+				144C221B241BEEBC00176EB5 /* WKRUIKit+Common.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -205,6 +210,7 @@
 		14A3D4B81F3634DF0038388F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				144C221C241BEEBD00176EB5 /* WKRUIWindow.swift */,
 				149FF89C1F362C05000A5D96 /* WKRUIAlertView.swift */,
 				149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */,
 				149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */,
@@ -399,6 +405,8 @@
 				149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */,
 				1413AB221F364FC100873ACA /* WKRUIAlertView.swift in Sources */,
 				1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */,
+				144C221E241BEEBD00176EB5 /* WKRUIWindow.swift in Sources */,
+				144C221D241BEEBD00176EB5 /* WKRUIKit+Common.swift in Sources */,
 				1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */,
 				1441A06722FFBE8D005D63B9 /* WKRUIKit+Blurs.swift in Sources */,
 			);
@@ -577,7 +585,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.03.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -605,7 +613,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.01;
+				MARKETING_VERSION = 2020.03.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

@@ -10,7 +10,7 @@ import CloudKit
 import UIKit
 import WKRKit
 
-class PlayerDatabaseMetrics: NSObject {
+final class PlayerDatabaseMetrics: NSObject {
 
     // MARK: - Types -
 

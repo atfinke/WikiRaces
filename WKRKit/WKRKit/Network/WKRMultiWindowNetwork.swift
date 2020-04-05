@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal class WKRSplitViewNetwork: WKRPeerNetwork {
+final internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
      // MARK: - Closures
 
