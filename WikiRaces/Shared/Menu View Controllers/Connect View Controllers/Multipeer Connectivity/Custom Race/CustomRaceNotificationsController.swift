@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRKit
 
 final class CustomRaceNotificationsController: UITableViewController {
 
@@ -42,16 +43,16 @@ final class CustomRaceNotificationsController: UITableViewController {
 
     // MARK: - Properties -
 
-    var notifications: RaceSettings.Notifications {
+    var notifications: WKRGameSettings.Notifications {
         didSet {
             didUpdate?(notifications)
         }
     }
-    var didUpdate: ((RaceSettings.Notifications) -> Void)?
+    var didUpdate: ((WKRGameSettings.Notifications) -> Void)?
 
     // MARK: - Initalization -
 
-    init(notifications: RaceSettings.Notifications) {
+    init(notifications: WKRGameSettings.Notifications) {
         self.notifications = notifications
         super.init(style: .grouped)
         title = "Player Messages"
@@ -90,7 +91,7 @@ final class CustomRaceNotificationsController: UITableViewController {
             cell.switchElement.isOn = notifications.linkOnPage
         case 2:
             cell.textLabel?.text = "X Missed The Link"
-            cell.switchElement.isOn = notifications.missedTheLink
+            cell.switchElement.isOn = notifications.missedLink
         case 3:
             cell.textLabel?.text = "X Is On USA"
             cell.switchElement.isOn = notifications.isOnUSA
@@ -112,10 +113,10 @@ final class CustomRaceNotificationsController: UITableViewController {
 
     @objc
     func switchChanged(updatedSwitch: UISwitch) {
-        notifications = RaceSettings.Notifications(
+        notifications = WKRGameSettings.Notifications(
             neededHelp: updatedSwitch.tag == 0 ? updatedSwitch.isOn : notifications.neededHelp,
             linkOnPage: updatedSwitch.tag == 1 ? updatedSwitch.isOn : notifications.linkOnPage,
-            missedTheLink: updatedSwitch.tag == 2 ? updatedSwitch.isOn : notifications.missedTheLink,
+            missedTheLink: updatedSwitch.tag == 2 ? updatedSwitch.isOn : notifications.missedLink,
             isOnUSA: updatedSwitch.tag == 3 ? updatedSwitch.isOn : notifications.isOnUSA,
             isOnSamePage: updatedSwitch.tag == 4 ? updatedSwitch.isOn : notifications.isOnSamePage)
     }

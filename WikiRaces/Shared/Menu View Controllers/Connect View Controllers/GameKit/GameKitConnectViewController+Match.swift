@@ -63,13 +63,15 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             return
         }
 
-        let message = StartMessage(hostName: GKLocalPlayer.local.alias)
+        let settings = WKRGameSettings()
+        let message = StartMessage(hostName: GKLocalPlayer.local.alias, gameSettings: settings)
         do {
             let data = try JSONEncoder().encode(message)
             try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.showMatch(for: .gameKit(match: match,
                                              isHost: true),
+                               settings: settings,
                                andHide: [])
             }
         } catch {
@@ -98,6 +100,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             }
             showMatch(for: .gameKit(match: match,
                                     isHost: isPlayerHost),
+                      settings: object.gameSettings,
                       andHide: [])
         }
     }
@@ -125,20 +128,24 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
-                PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
-
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
+        
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        findTrace?.stop()
+        DispatchQueue.global().async {
+            self.findTrace?.stop()
+        }
         #endif
         updateDescriptionLabel(to: "Finding best host")
-
+        
         dismiss(animated: true) {
             self.toggleCoreInterface(isHidden: false, duration: 0.25)
         }
-
+        
         match.delegate = self
         self.match = match
-
+        
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind match set"))
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)

@@ -28,9 +28,9 @@ final class CustomRacePageViewController: UITableViewController {
     var customPages: [WKRPage]
     var indexPathsOfSelectedOptions: Set<IndexPath> = []
 
-    var didUpdateStartPage: ((RaceSettings.StartPage) -> Void)?
-    var didUpdateEndPage: ((RaceSettings.EndPage) -> Void)?
-    var didUpdateBannedPages: (([RaceSettings.BannedPage]) -> Void)?
+    var didUpdateStartPage: ((WKRGameSettings.StartPage) -> Void)?
+    var didUpdateEndPage: ((WKRGameSettings.EndPage) -> Void)?
+    var didUpdateBannedPages: (([WKRGameSettings.BannedPage]) -> Void)?
 
     // MARK: - Initalization -
 
@@ -59,7 +59,7 @@ final class CustomRacePageViewController: UITableViewController {
         switch pageType {
         case .start:
             title = "Start Page"
-            guard let page = selectedOption as? RaceSettings.StartPage else { fatalError() }
+            guard let page = selectedOption as? WKRGameSettings.StartPage else { fatalError() }
             switch page {
             case .random:
                 select(indexPath: IndexPath(row: 0, section: 0))
@@ -71,7 +71,7 @@ final class CustomRacePageViewController: UITableViewController {
             }
         case .end:
             title = "End Page"
-            guard let page = selectedOption as? RaceSettings.EndPage else { fatalError() }
+            guard let page = selectedOption as? WKRGameSettings.EndPage else { fatalError() }
             switch page {
             case .curatedVoting:
                 select(indexPath: IndexPath(row: 0, section: 0))
@@ -85,7 +85,7 @@ final class CustomRacePageViewController: UITableViewController {
             }
         case .banned:
             title = "Banned Pages"
-            guard let pages = selectedOption as? [RaceSettings.BannedPage] else { fatalError() }
+            guard let pages = selectedOption as? [WKRGameSettings.BannedPage] else { fatalError() }
             for page in pages {
                 switch page {
                 case .portal:
@@ -198,7 +198,7 @@ final class CustomRacePageViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        let str = "Setting a custom start page prevents race stats from counting."
+        let str = "Stats Effect: Prevents setting new fastest race records."
         return section == 1 && pageType == .start ? str : nil
     }
 
@@ -213,9 +213,9 @@ final class CustomRacePageViewController: UITableViewController {
                 tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
                 indexPathsOfSelectedOptions.insert(indexPath)
             }
-            var pages = [RaceSettings.BannedPage]()
+            var pages = [WKRGameSettings.BannedPage]()
             for indexPath in indexPathsOfSelectedOptions.sorted() {
-                let page: RaceSettings.BannedPage
+                let page: WKRGameSettings.BannedPage
                 if indexPath.row == 0 && indexPath.section == 0 {
                     page = .portal
                 } else {
@@ -233,7 +233,7 @@ final class CustomRacePageViewController: UITableViewController {
             indexPathsOfSelectedOptions.insert(indexPath)
 
             if pageType == .start {
-                let page: RaceSettings.StartPage
+                let page: WKRGameSettings.StartPage
                 if indexPath.row == 0 && indexPath.section == 0 {
                     page = .random
                 } else {
@@ -241,7 +241,7 @@ final class CustomRacePageViewController: UITableViewController {
                 }
                 didUpdateStartPage?(page)
             } else {
-                let page: RaceSettings.EndPage
+                let page: WKRGameSettings.EndPage
                 if indexPath.row == 0 && indexPath.section == 0 {
                     page = .curatedVoting
                 } else if indexPath.row == 1 && indexPath.section == 0 {

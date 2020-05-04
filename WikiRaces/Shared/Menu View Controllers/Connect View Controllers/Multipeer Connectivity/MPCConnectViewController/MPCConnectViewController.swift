@@ -190,7 +190,7 @@ final internal class MPCConnectViewController: ConnectViewController {
                                              session: self.session,
                                              isHost: self.isPlayerHost)
                     }
-                    self.showMatch(for: networkConfig, andHide: [])
+                    self.showMatch(for: networkConfig, settings: controller.gameSettings, andHide: [])
                 })
             case .cancel:
                 self.dismiss(animated: true, completion: {

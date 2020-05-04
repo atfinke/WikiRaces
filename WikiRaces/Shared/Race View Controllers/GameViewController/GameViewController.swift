@@ -45,7 +45,9 @@ final internal class GameViewController: UIViewController {
     }
 
     var gameManager: WKRGameManager!
-    var networkConfig: WKRPeerNetworkConfig!
+
+    let networkConfig: WKRPeerNetworkConfig
+    let gameSettings: WKRGameSettings
 
     var statRaceType: PlayerStatsManager.RaceType? {
         return PlayerStatsManager.RaceType(networkConfig)
@@ -76,6 +78,18 @@ final internal class GameViewController: UIViewController {
         didSet { activeViewController = resultsViewController }
     }
 
+    // MARK: - Initalization -
+
+    init(network: WKRPeerNetworkConfig, settings: WKRGameSettings) {
+        self.networkConfig = network
+        self.gameSettings = settings
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
@@ -103,9 +117,9 @@ final internal class GameViewController: UIViewController {
             initalConfiguration()
         }
 
-        if gameManager.gameState == .preMatch && networkConfig.isHost, let config = networkConfig {
+        if gameManager.gameState == .preMatch && networkConfig.isHost {
             gameManager.player(.startedGame)
-            switch config {
+            switch networkConfig {
             case .solo:
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
             case .gameKit(let match, _):
@@ -131,7 +145,7 @@ final internal class GameViewController: UIViewController {
     private func initalConfiguration() {
         let logEvents: [WKRLogEvent]
         if networkConfig.isHost {
-            if case .solo? = networkConfig {
+            if case .solo = networkConfig {
                 logEvents = WKRSeenFinalArticlesStore.localLogEvents()
             } else {
                 logEvents = WKRSeenFinalArticlesStore.hostLogEvents()
@@ -145,8 +159,7 @@ final internal class GameViewController: UIViewController {
         }
         logEvents.forEach { logEvent($0) }
 
-        guard let config = networkConfig else { return }
-        switch config {
+        switch networkConfig {
         case .solo:
             PlayerStatsManager.shared.connected(to: [], raceType: .solo)
         case .gameKit(let match, _):
@@ -177,7 +190,17 @@ final internal class GameViewController: UIViewController {
     @objc
     func helpButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-        showHelp()
+
+        if gameSettings.other.isHelpEnabled {
+            showHelp()
+        } else {
+            let controller = UIAlertController(
+                title: "Custom Race",
+                message: "The host disabled help for this race",
+                preferredStyle: .alert)
+            controller.addCancelAction(title: "Ok")
+            present(controller, animated: true, completion: nil)
+        }
     }
 
     @objc

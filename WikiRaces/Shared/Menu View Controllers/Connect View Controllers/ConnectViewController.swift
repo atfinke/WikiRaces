@@ -20,6 +20,7 @@ class ConnectViewController: UIViewController {
 
     struct StartMessage: Codable {
         let hostName: String
+        let gameSettings: WKRGameSettings
     }
 
     // MARK: - Interface Elements -
@@ -187,6 +188,7 @@ class ConnectViewController: UIViewController {
     }
 
     final func showMatch(for networkConfig: WKRPeerNetworkConfig,
+                         settings: WKRGameSettings,
                          andHide views: [UIView]) {
 
         guard !isShowingMatch else { return }
@@ -197,8 +199,7 @@ class ConnectViewController: UIViewController {
                                      duration: 0.25,
                                      and: views,
                                      completion: {
-                                        let controller = GameViewController()
-                                        controller.networkConfig = networkConfig
+                                        let controller = GameViewController(network: networkConfig, settings: settings)
                                         let nav = WKRUINavigationController(rootViewController: controller)
                                         nav.modalPresentationStyle = .fullScreen
                                         nav.modalTransitionStyle = .crossDissolve

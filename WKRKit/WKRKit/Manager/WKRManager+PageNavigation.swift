@@ -11,7 +11,7 @@ import Foundation
 extension WKRGameManager {
 
     func createPageNavigation() {
-        let pageNavigation = WKRPageNavigation(pageUpdate: { [weak self] pageUpdate in
+        let pageNavigation = WKRPageNavigation(settings: settings, pageUpdate: { [weak self] pageUpdate in
             guard let self = self else { return }
 
             switch pageUpdate {

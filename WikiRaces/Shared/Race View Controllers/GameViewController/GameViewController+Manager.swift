@@ -16,6 +16,7 @@ extension GameViewController {
 
     func setupGameManager() {
         gameManager = WKRGameManager(networkConfig: networkConfig,
+                                     settings: gameSettings,
                                      gameUpdate: { [weak self] gameUpdate in
                                         self?.gameUpdate(gameUpdate)
             }, votingUpdate: { [weak self] votingUpdate in
@@ -71,7 +72,9 @@ extension GameViewController {
                                                 points: points,
                                                 place: place,
                                                 timeRaced: timeRaced,
-                                                pixelsScrolled: webViewPixelsScrolled)
+                                                pixelsScrolled: webViewPixelsScrolled,
+                                                isEligibleForPoints: gameSettings.points.isStandard,
+                                                isEligibleForSpeed: gameSettings.startPage.isStandard)
 
         let event: PlayerAnonymousMetrics.Event
         switch raceType {
@@ -161,8 +164,7 @@ extension GameViewController {
         #if !MULTIWINDOWDEBUG
         let metric = PlayerAnonymousMetrics.Event(event: logEvent)
         if metric == .pageView,
-            let config = networkConfig,
-            let raceType = PlayerStatsManager.RaceType(config) {
+            let raceType = PlayerStatsManager.RaceType(networkConfig) {
             PlayerStatsManager.shared.viewedPage(raceType: raceType)
         }
         PlayerAnonymousMetrics.log(event: metric, attributes: logEvent.attributes)

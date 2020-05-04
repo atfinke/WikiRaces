@@ -31,11 +31,13 @@ final internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
     // MARK: - Properties
 
     internal let pageUpdate: ((PageUpdate) -> Void)
+    private let settings: WKRGameSettings
 
     // MARK: - Initialization
 
     /// Creates a new WKRPageNavigation object
-    init(pageUpdate: @escaping ((PageUpdate) -> Void)) {
+    init(settings: WKRGameSettings, pageUpdate: @escaping ((PageUpdate) -> Void)) {
+        self.settings = settings
         self.pageUpdate = pageUpdate
     }
 
@@ -57,6 +59,20 @@ final internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
                 return false
             }
         }
+
+        for bannedPage in settings.bannedPages {
+            switch bannedPage {
+            case .portal:
+                if urlString.contains("org/wiki/Portal:") {
+                    return false
+                }
+            case .custom(let page):
+                if urlString.hasSuffix(page.path) {
+                    return false
+                }
+            }
+        }
+
         return urlString.contains(WKRKitConstants.current.baseURLString)
     }
 

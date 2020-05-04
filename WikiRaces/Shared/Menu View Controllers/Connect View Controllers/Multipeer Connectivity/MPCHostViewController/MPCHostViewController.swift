@@ -34,9 +34,9 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
     // MARK: - Properties -
 
-    var raceSettings = RaceSettings()
+    var gameSettings = WKRGameSettings()
     var allCustomPages = [WKRPage]()
-    var raceSettingsController: CustomRaceViewController?
+    var gameSettingsController: CustomRaceViewController?
 
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
@@ -113,7 +113,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         super.viewWillAppear(animated)
         browser?.startBrowsingForPeers()
 
-        if let controller = raceSettingsController {
+        if let controller = gameSettingsController {
             allCustomPages = controller.allCustomPages
             tableView.reloadRows(at: [IndexPath(item: 0, section: 2)], with: .none)
         }
@@ -154,7 +154,9 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
 
         guard let session = session else { fatalError("Session is nil") }
         do {
-            let message = ConnectViewController.StartMessage(hostName: session.myPeerID.displayName)
+            let message = ConnectViewController.StartMessage(
+                hostName: session.myPeerID.displayName,
+                gameSettings: gameSettings)
             let data = try JSONEncoder().encode(message)
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 

@@ -60,6 +60,8 @@ final public class WKRGameManager {
     internal let peerNetwork: WKRPeerNetwork
     internal var pageNavigation: WKRPageNavigation?
 
+    internal let settings: WKRGameSettings
+
     // MARK: - Closures
 
     internal let gameUpdate: ((GameUpdate) -> Void)
@@ -78,9 +80,11 @@ final public class WKRGameManager {
     // MARK: - Initialization
 
     public init(networkConfig: WKRPeerNetworkConfig,
+                settings: WKRGameSettings,
                 gameUpdate: @escaping ((GameUpdate) -> Void),
                 votingUpdate: @escaping ((VotingUpdate) -> Void),
                 resultsUpdate: @escaping ((ResultsUpdate) -> Void)) {
+        self.settings = settings
         self.gameUpdate = gameUpdate
         self.votingUpdate = votingUpdate
         self.resultsUpdate = resultsUpdate
@@ -90,7 +94,7 @@ final public class WKRGameManager {
         localPlayer.isCreator = WKRPlayer.isLocalPlayerCreator
         peerNetwork = setup.network
 
-        game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork)
+        game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork, settings: settings)
         game.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {

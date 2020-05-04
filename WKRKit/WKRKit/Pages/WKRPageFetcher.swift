@@ -31,6 +31,7 @@ public struct WKRPageFetcher {
     }()
 
     static private var observations = [UUID: NSKeyValueObservation]()
+    static private let observationsQueue = DispatchQueue(label: "com.andrewfinke.wikiraces.pagefetcher.observations", qos: .utility)
 
     // MARK: - Helpers
 
@@ -100,16 +101,21 @@ public struct WKRPageFetcher {
 
         let taskUUID = UUID()
         let task = session.dataTask(with: url) { (data, _, error) in
-            observations[taskUUID] = nil
+            observationsQueue.async {
+                self.observations[taskUUID] = nil
+            }
             if let data = data, let string = String(data: data, encoding: .utf8) {
                 completionHandler(string, nil)
             } else {
                 completionHandler(nil, error)
             }
         }
-        observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
-            progressHandler(Float(progress.fractionCompleted))
+        observationsQueue.async {
+            self.observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
+                progressHandler(Float(progress.fractionCompleted))
+            }
         }
+        
 
         task.resume()
     }

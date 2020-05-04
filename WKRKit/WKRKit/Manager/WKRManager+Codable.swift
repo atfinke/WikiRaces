@@ -89,6 +89,19 @@ extension WKRGameManager {
                 return
             }
 
+            switch message {
+            case .linkOnPage:
+                if !settings.notifications.linkOnPage { return }
+            case .missedLink:
+                if !settings.notifications.missedLink { return }
+            case .neededHelp:
+                if !settings.notifications.neededHelp { return }
+            case .onUSA:
+                if !settings.notifications.isOnUSA { return }
+            default:
+                break
+            }
+
             enqueue(message: message.text(for: player),
                     duration: 3.0,
                     isRaceSpecific: isRaceSpecific,

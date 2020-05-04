@@ -160,7 +160,7 @@ final internal class PlayerStatsManager {
     }
 
     //swiftlint:disable:next function_body_length
-    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int, pixelsScrolled: Int) {
+    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int, pixelsScrolled: Int, isEligibleForPoints: Bool, isEligibleForSpeed: Bool) {
         let pointsStat: PlayerDatabaseStat?
         let racesStat: PlayerDatabaseStat
         let totalTimeStat: PlayerDatabaseStat
@@ -208,8 +208,11 @@ final internal class PlayerStatsManager {
             finishDNFStat = .soloRaceDNF
         }
 
-        pointsStat?.increment(by: Double(points))
-        racesStat.increment()
+        if isEligibleForPoints {
+            pointsStat?.increment(by: Double(points))
+            racesStat.increment()
+        }
+        
         totalTimeStat.increment(by: Double(timeRaced))
         pixelsStat.increment(by: Double(pixelsScrolled))
 
@@ -222,9 +225,11 @@ final internal class PlayerStatsManager {
                 finishThirdStat?.increment()
             }
 
-            let currentFastestTime = fastestTimeStat.value()
-            if currentFastestTime == 0 || timeRaced < Int(currentFastestTime) {
-                fastestTimeStat.set(value: Double(timeRaced))
+            if isEligibleForSpeed {
+                let currentFastestTime = fastestTimeStat.value()
+                if currentFastestTime == 0 || timeRaced < Int(currentFastestTime) {
+                    fastestTimeStat.set(value: Double(timeRaced))
+                }
             }
             SKStoreReviewController.shouldPromptForRating = true
         } else {

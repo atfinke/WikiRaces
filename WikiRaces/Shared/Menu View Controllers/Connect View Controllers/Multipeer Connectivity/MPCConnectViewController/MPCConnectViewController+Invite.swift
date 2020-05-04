@@ -20,27 +20,27 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
     // MARK: - MCSessionDelegate -
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        func start() {
-            session.delegate = nil
-            showMatch(for: .mpc(serviceType: serviceType,
-                                session: session,
-                                isHost: isPlayerHost),
-                      andHide: [inviteView])
+        guard let object = try? JSONDecoder().decode(StartMessage.self, from: data) else {
+            return
         }
 
-        if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
-            guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
-                let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
-                PlayerAnonymousMetrics.log(event: .error(info))
+        guard let hostName = hostPeerID?.displayName, object.hostName == hostName else {
+            let info = "session...didReceive: \(String(describing: hostPeerID?.displayName)), \(object.hostName)"
+            PlayerAnonymousMetrics.log(event: .error(info))
 
-                DispatchQueue.main.async {
-                    self.showError(title: "Connection Issue",
-                                   message: "The connection to the host was lost.")
-                }
-                return
+            DispatchQueue.main.async {
+                self.showError(title: "Connection Issue",
+                               message: "The connection to the host was lost.")
             }
-            start()
+            return
         }
+
+        session.delegate = nil
+        showMatch(for: .mpc(serviceType: serviceType,
+                            session: session,
+                            isHost: isPlayerHost),
+                  settings: object.gameSettings,
+                  andHide: [inviteView])
     }
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
@@ -150,7 +150,7 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
 
             //swiftlint:disable:next line_length
             let message = "You received an invite to a race from a host with an old version of WikiRaces. Please have the host download the lastest update on the App Store."
-            showError(title: "Update Required", message: message)
+            showError(title: "Host Update Required", message: message)
         }
     }
 

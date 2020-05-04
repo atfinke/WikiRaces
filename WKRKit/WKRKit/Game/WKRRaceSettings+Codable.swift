@@ -1,5 +1,5 @@
 //
-//  RaceSettings+Codable.swift
+//  WKRGameSettings+Codable.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 5/3/20.
@@ -7,9 +7,8 @@
 //
 
 import Foundation
-import WKRKit
 
-extension RaceSettings.StartPage: Codable {
+extension WKRGameSettings.StartPage: Codable {
     private enum CodingKeys: String, CodingKey {
         case base, page
     }
@@ -18,7 +17,7 @@ extension RaceSettings.StartPage: Codable {
         case random, custom
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
@@ -30,7 +29,7 @@ extension RaceSettings.StartPage: Codable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let base = try container.decode(Base.self, forKey: .base)
 
@@ -45,7 +44,7 @@ extension RaceSettings.StartPage: Codable {
 
 }
 
-extension RaceSettings.EndPage: Codable {
+extension WKRGameSettings.EndPage: Codable {
     private enum CodingKeys: String, CodingKey {
         case base, page
     }
@@ -54,7 +53,7 @@ extension RaceSettings.EndPage: Codable {
         case curatedVoting, randomVoting, custom
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
@@ -68,7 +67,7 @@ extension RaceSettings.EndPage: Codable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let base = try container.decode(Base.self, forKey: .base)
 
@@ -85,7 +84,7 @@ extension RaceSettings.EndPage: Codable {
 
 }
 
-extension RaceSettings.BannedPage: Codable {
+extension WKRGameSettings.BannedPage: Codable {
     private enum CodingKeys: String, CodingKey {
         case base, page
     }
@@ -94,7 +93,7 @@ extension RaceSettings.BannedPage: Codable {
         case portal, custom
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
         switch self {
@@ -106,7 +105,7 @@ extension RaceSettings.BannedPage: Codable {
         }
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let base = try container.decode(Base.self, forKey: .base)
 

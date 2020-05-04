@@ -25,7 +25,7 @@ final class CustomRaceViewController: UITableViewController {
 
     private let settingOptions = Setting.allCases
     var allCustomPages = [WKRPage]()
-    let settings: RaceSettings
+    let settings: WKRGameSettings
 
     private var isEnabled: Bool {
         return false
@@ -33,7 +33,7 @@ final class CustomRaceViewController: UITableViewController {
 
     // MARK: - Initalization -
 
-    init(settings: RaceSettings) {
+    init(settings: WKRGameSettings) {
         self.settings = settings
         super.init(style: .grouped)
         title = "Customize Race"

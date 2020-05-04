@@ -70,7 +70,7 @@ extension MPCHostViewController {
         } else if indexPath.section == 2 {
             let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
             cell.textLabel?.text = "Customize Race"
-            cell.detailTextLabel?.text = raceSettings.isCustom ? "Custom" : "Standard"
+            cell.detailTextLabel?.text = gameSettings.isCustom ? "Custom" : "Standard"
             cell.accessoryType = .disclosureIndicator
             return cell
         } else if indexPath.section == 3 {
@@ -110,10 +110,10 @@ extension MPCHostViewController {
         if indexPath.section == 2 {
             PlayerAnonymousMetrics.log(event: .customRaceOpened)
 
-            let controller = CustomRaceViewController(settings: raceSettings)
+            let controller = CustomRaceViewController(settings: gameSettings)
             controller.allCustomPages = allCustomPages
             navigationController?.pushViewController(controller, animated: true)
-            self.raceSettingsController = controller
+            self.gameSettingsController = controller
         } else if indexPath.section == 3 {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
 

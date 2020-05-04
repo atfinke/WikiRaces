@@ -7,7 +7,6 @@
 		<string>/wiki/File</string>
 		<string>org/wiki/Wikipedia:</string>
 		<string>org/wiki/Special:</string>
-		<string>org/wiki/Portal:</string>
 		<string>org/wiki/Template:</string>
 		<string>org/wiki/Help:</string>
 		<string>org/wiki/Category:</string>
@@ -20,6 +19,8 @@
 	<integer>0</integer>
 	<key>PageTitleStringToReplace</key>
 	<string> - Wikipedia</string>
+	<key>PageTitleMaxRandomLength</key>
+	<integer>20</integer>
 	<key>QuickRace</key>
 	<false/>
 	<key>ConnectionTestTimeout</key>
@@ -27,7 +28,7 @@
 	<key>RandomURLString</key>
 	<string>https://en.m.wikipedia.org/wiki/Special:Random</string>
 	<key>Version</key>
-	<integer>22</integer>
+	<integer>25</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
 	<key>MaxFoundPagePlayers</key>

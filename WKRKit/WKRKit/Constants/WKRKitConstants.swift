@@ -21,6 +21,7 @@ public struct WKRKitConstants {
 
     internal let pageTitleStringToReplace: String
     internal let pageTitleCharactersToRemove: Int
+    internal let pageTitleMaxRandomLength: Int
 
     internal let baseURLString: String
     internal let randomURLString: String
@@ -62,6 +63,9 @@ public struct WKRKitConstants {
         guard let pageTitleCharactersToRemove = documentsConstants["PageTitleCharactersToRemove"] as? Int else {
             fatalError("WKRKitConstants: No PageTitleCharactersToRemove value")
         }
+        guard let pageTitleMaxRandomLength = documentsConstants["PageTitleMaxRandomLength"] as? Int else {
+            fatalError("WKRKitConstants: No PageTitleMaxRandomLength value")
+        }
         guard let baseURLString = documentsConstants["BaseURLString"] as? String else {
             fatalError("WKRKitConstants: No BaseURLString value")
         }
@@ -99,6 +103,7 @@ public struct WKRKitConstants {
 
         self.pageTitleStringToReplace = pageTitleStringToReplace
         self.pageTitleCharactersToRemove = pageTitleCharactersToRemove
+        self.pageTitleMaxRandomLength = pageTitleMaxRandomLength
 
         self.baseURLString = baseURLString
         self.randomURLString = randomURLString

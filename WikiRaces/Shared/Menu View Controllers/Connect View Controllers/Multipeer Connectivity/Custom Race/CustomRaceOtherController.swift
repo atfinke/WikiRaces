@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRKit
 
 final class CustomRaceOtherController: UITableViewController {
 
@@ -43,16 +44,16 @@ final class CustomRaceOtherController: UITableViewController {
 
     // MARK: - Properties -
 
-    var other: RaceSettings.Other {
+    var other: WKRGameSettings.Other {
         didSet {
             didUpdate?(other)
         }
     }
-    var didUpdate: ((RaceSettings.Other) -> Void)?
+    var didUpdate: ((WKRGameSettings.Other) -> Void)?
 
     // MARK: - Initalization -
 
-    init(other: RaceSettings.Other) {
+    init(other: WKRGameSettings.Other) {
         self.other = other
         super.init(style: .grouped)
         title = "Other"
@@ -97,7 +98,7 @@ final class CustomRaceOtherController: UITableViewController {
 
     @objc
     func switchChanged(updatedSwitch: UISwitch) {
-        other = RaceSettings.Other(isHelpEnabled: updatedSwitch.tag == 0 ? updatedSwitch.isOn : other.isHelpEnabled)
+        other = WKRGameSettings.Other(isHelpEnabled: updatedSwitch.tag == 0 ? updatedSwitch.isOn : other.isHelpEnabled)
     }
 
 }

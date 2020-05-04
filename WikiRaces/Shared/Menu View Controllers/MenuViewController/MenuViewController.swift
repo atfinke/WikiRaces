@@ -92,11 +92,11 @@ final internal class MenuViewController: UIViewController {
         })
 
         #if MULTIWINDOWDEBUG
-        let controller = GameViewController()
-        let nav = WKRUINavigationController(rootViewController: controller)
         let name = (view.window as? DebugWindow)?.playerName ?? ""
-        controller.networkConfig = .multiwindow(windowName: name,
-                                                isHost: view.window!.frame.origin == .zero)
+        let controller = GameViewController(
+            network: .multiwindow(windowName: name, isHost: view.window!.frame.origin == .zero),
+            settings: WKRGameSettings())
+        let nav = WKRUINavigationController(rootViewController: controller)
         present(nav, animated: false, completion: nil)
         #else
         if isFirstAppearence {
@@ -165,7 +165,7 @@ final internal class MenuViewController: UIViewController {
 
     func presentGlobalConnect() {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            let controller = GameViewController()
+            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
             let nav = WKRUINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)

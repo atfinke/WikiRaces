@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRKit
 
 class CustomRaceNumericalViewController: UITableViewController {
 
@@ -60,21 +61,21 @@ class CustomRaceNumericalViewController: UITableViewController {
 
     // MARK: - Properties -
 
-    var points: RaceSettings.Points? {
+    var points: WKRGameSettings.Points? {
         didSet {
             guard let value = points else { fatalError() }
             didUpdatePoints?(value)
         }
     }
-    var timing: RaceSettings.Timing? {
+    var timing: WKRGameSettings.Timing? {
         didSet {
             guard let value = timing else { fatalError() }
             didUpdateTiming?(value)
         }
     }
 
-    var didUpdatePoints: ((RaceSettings.Points) -> Void)?
-    var didUpdateTiming: ((RaceSettings.Timing) -> Void)?
+    var didUpdatePoints: ((WKRGameSettings.Points) -> Void)?
+    var didUpdateTiming: ((WKRGameSettings.Timing) -> Void)?
 
     let type: SettingsType
 
@@ -86,11 +87,11 @@ class CustomRaceNumericalViewController: UITableViewController {
 
         switch type {
         case .points:
-            guard let points = currentValue as? RaceSettings.Points else { fatalError() }
+            guard let points = currentValue as? WKRGameSettings.Points else { fatalError() }
             self.points = points
             title = "Points"
         case .timing:
-            guard let timing = currentValue as? RaceSettings.Timing else { fatalError() }
+            guard let timing = currentValue as? WKRGameSettings.Timing else { fatalError() }
             self.timing = timing
             title = "Timing"
         }
@@ -133,15 +134,15 @@ class CustomRaceNumericalViewController: UITableViewController {
                 cell.stepper.minimumValue = 5
                 cell.stepper.maximumValue = 360
                 cell.stepper.stepValue = 5
-                cell.stepper.value = Double(points.bonusPointsInterval)
-                cell.valueLabel.text = points.bonusPointsInterval.description + " S"
+                cell.stepper.value = points.bonusPointsInterval
+                cell.valueLabel.text = Int(points.bonusPointsInterval).description + " S"
             } else {
                 cell.textLabel?.text = "Award Amount"
                 cell.stepper.minimumValue = 0
                 cell.stepper.maximumValue = 20
                 cell.stepper.stepValue = 1
-                cell.stepper.value = Double(points.bonusPointsReward)
-                cell.valueLabel.text = points.bonusPointsReward.description
+                cell.stepper.value = Double(points.bonusPointReward)
+                cell.valueLabel.text = points.bonusPointReward.description
             }
         case .timing:
             guard let timing = timing else { fatalError() }
@@ -170,7 +171,7 @@ class CustomRaceNumericalViewController: UITableViewController {
             let title = """
 The award interval is the frequency at which bonus points are added to the total points awarded. If set to 60, then every 60 seconds, the total points awarded to the race winner will increase by the amount specified.
 
-Setting custom point properties prevents race stats from counting.
+Stats Effect: Prevents improving points per race average and total number of races.
 """
             //swiftlint:enable line_length
             return title
@@ -187,20 +188,20 @@ Setting custom point properties prevents race stats from counting.
         case .points:
             guard let points = points else { fatalError() }
             if indexPath.row == 0 {
-                self.points = RaceSettings.Points(
-                    bonusPointsReward: points.bonusPointsReward,
-                    bonusPointsInterval: Int(stepper.value))
+                self.points = WKRGameSettings.Points(
+                    bonusPointReward: points.bonusPointReward,
+                    bonusPointsInterval: stepper.value)
             } else {
-                self.points = RaceSettings.Points(
-                    bonusPointsReward: Int(stepper.value),
+                self.points = WKRGameSettings.Points(
+                    bonusPointReward: Int(stepper.value),
                     bonusPointsInterval: points.bonusPointsInterval)
             }
         case .timing:
             guard let timing = timing else { fatalError() }
             if indexPath.row == 0 {
-                self.timing = RaceSettings.Timing(votingTime: Int(stepper.value), resultsTime: timing.resultsTime)
+                self.timing = WKRGameSettings.Timing(votingTime: Int(stepper.value), resultsTime: timing.resultsTime)
             } else {
-                self.timing = RaceSettings.Timing(votingTime: timing.votingTime, resultsTime: Int(stepper.value))
+                self.timing = WKRGameSettings.Timing(votingTime: timing.votingTime, resultsTime: Int(stepper.value))
             }
         }
         tableView.reloadRows(at: [indexPath], with: .none)
