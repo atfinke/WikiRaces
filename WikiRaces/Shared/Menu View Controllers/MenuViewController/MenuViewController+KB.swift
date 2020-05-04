@@ -14,18 +14,18 @@ extension MenuViewController {
 
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(input: "n",
-                         modifierFlags: .command,
+            UIKeyCommand(title: "Create Local Race",
                          action: #selector(keyboardCreateLocalRace),
-                         discoverabilityTitle: "Create Local Race"),
-            UIKeyCommand(input: "j",
-                         modifierFlags: .command,
+                         input: "n",
+                         modifierFlags: .command),
+            UIKeyCommand(title: "Join Local Race",
                          action: #selector(keyboardJoinLocalRace),
-                         discoverabilityTitle: "Join Local Race"),
-            UIKeyCommand(input: "g",
-                         modifierFlags: .command,
+                         input: "j",
+                         modifierFlags: .command),
+            UIKeyCommand(title: "Join Global Race",
                          action: #selector(keyboardJoinGlobalRace),
-                         discoverabilityTitle: "Join Global Race")
+                         input: "g",
+                         modifierFlags: .command)
         ]
     }
 

@@ -10,6 +10,10 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebasePerformance
+#endif
+
 class ConnectViewController: UIViewController {
 
     // MARK: - Types -
@@ -23,7 +27,7 @@ class ConnectViewController: UIViewController {
     /// General status label
     final let descriptionLabel = UILabel()
     /// Activity spinner
-    final let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    final let activityIndicatorView = UIActivityIndicatorView(style: .large)
     /// The button to cancel joining/creating a race
     final let cancelButton = UIButton()
 

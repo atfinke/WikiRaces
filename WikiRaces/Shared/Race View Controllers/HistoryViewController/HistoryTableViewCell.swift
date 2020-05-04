@@ -16,7 +16,7 @@ final internal class HistoryTableViewCell: UITableViewCell {
     let detailLabel = UILabel()
 
     private let linkHereLabel = UILabel()
-    private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private let activityIndicatorView = UIActivityIndicatorView(style: .medium)
     private var linkLabelTopConstraint: NSLayoutConstraint?
 
     var isShowingActivityIndicatorView: Bool = false {

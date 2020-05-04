@@ -55,7 +55,7 @@ final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
         }
     }
 
-    private let activityIndicatorView = UIActivityIndicatorView(style: .gray)
+    private let activityIndicatorView = UIActivityIndicatorView(style: .medium)
     private var isPlayerCreator = false
 
     // MARK: - Initialization -
@@ -265,7 +265,7 @@ final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
     // MARK: - Other -
 
     func playerNameAttributedString(for player: WKRPlayer) -> NSAttributedString {
-        if let isCreator = player.isCreator, isCreator {
+        if player.isCreator {
             self.isPlayerCreator = true
             let name = player.name
             let nameAttributedString = NSMutableAttributedString(string: name, attributes: nil)

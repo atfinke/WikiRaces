@@ -100,12 +100,10 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
 
-        var hostContext: MPCHostContext?
-        if let data = context,
-            let object = try? JSONDecoder().decode(MPCHostContext.self, from: data) {
-            hostContext = object
+        guard let data = context, let object = try? JSONDecoder().decode(MPCHostContext.self, from: data) else {
+            return
         }
-        invites.append((invitationHandler, peerID, hostContext))
+        invites.append((invitationHandler, peerID, object))
         showNextInvite()
     }
 
@@ -132,21 +130,26 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
         updateDescriptionLabel(to: "INVITE RECEIVED")
 
         activeInviteTimeoutTimer?.invalidate()
-        let timeout: TimeInterval = invite.context?.inviteTimeout ?? 10.0
+        let timeout: TimeInterval = invite.context.inviteTimeout
         activeInviteTimeoutTimer = Timer.scheduledTimer(withTimeInterval: timeout,
                                                         repeats: false,
                                                         block: { [weak self] _ in
                                                             self?.declineInvite()
         })
 
-        // Previous versions didn't send a host context object
-        guard let context = invite.context else { return }
-        if context.minPeerAppBuild > Bundle.main.appInfo.build {
-            let info = "showNextInvite: \(context.minPeerAppBuild) > \(Bundle.main.appInfo.build)"
+        if invite.context.minPeerAppBuild > Bundle.main.appInfo.build {
+            let info = "showNextInvite: \(invite.context.minPeerAppBuild) > \(Bundle.main.appInfo.build)"
             PlayerAnonymousMetrics.log(event: .error(info))
 
             //swiftlint:disable:next line_length
-            let message = "You received an invite to a race that requires the latest version of WikiRaces. Please download the update on the App Store."
+            let message = "You received an invite to a race that requires the latest version of WikiRaces. Please download the lastest update on the App Store."
+            showError(title: "Update Required", message: message)
+        } else if invite.context.minPeerAppBuild < MPCHostContext.minBuildToJoinRemoteHost {
+            let info = "showNextInvite: \(invite.context.minPeerAppBuild) < \(MPCHostContext.minBuildToJoinRemoteHost)"
+            PlayerAnonymousMetrics.log(event: .error(info))
+
+            //swiftlint:disable:next line_length
+            let message = "You received an invite to a race from a host with an old version of WikiRaces. Please have the host download the lastest update on the App Store."
             showError(title: "Update Required", message: message)
         }
     }

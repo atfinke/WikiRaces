@@ -15,6 +15,7 @@ import WKRUIKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
+import FirebaseAnalytics
 import Crashlytics
 #endif
 
@@ -41,7 +42,7 @@ final internal class MPCConnectViewController: ConnectViewController {
     var activeInvite: ((Bool, MCSession) -> Void)?
     var activeInviteTimeoutTimer: Timer?
 
-    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext?)]()
+    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext)]()
 
     var peerID: MCPeerID!
     var hostPeerID: MCPeerID?

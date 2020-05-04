@@ -13,6 +13,8 @@ import WKRKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
+import FirebaseAnalytics
+import Crashlytics
 #endif
 
 final class GameKitConnectViewController: ConnectViewController {

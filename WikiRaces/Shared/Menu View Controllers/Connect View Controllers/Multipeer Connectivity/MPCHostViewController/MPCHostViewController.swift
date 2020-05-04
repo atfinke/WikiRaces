@@ -69,7 +69,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
-    private let activityView = UIActivityIndicatorView(style: .gray)
+    private let activityView = UIActivityIndicatorView(style: .medium)
 
     // MARK: - View Life Cycle -
 
@@ -112,7 +112,6 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         browser?.startBrowsingForPeers()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
         if let controller = raceSettingsController {
             allCustomPages = controller.allCustomPages
@@ -123,7 +122,6 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         browser?.stopBrowsingForPeers()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
     override func viewWillLayoutSubviews() {

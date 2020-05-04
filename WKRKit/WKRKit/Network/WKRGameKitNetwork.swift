@@ -79,7 +79,7 @@ final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwor
 
 extension GKPlayer {
     func wkrProfile() -> WKRPlayerProfile {
-        return WKRPlayerProfile(name: alias, playerID: playerID)
+        return WKRPlayerProfile(name: alias, playerID: teamPlayerID)
     }
 }
 

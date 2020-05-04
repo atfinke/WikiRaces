@@ -24,7 +24,7 @@ final internal class AppDelegate: WKRAppDelegate {
 
         #if !targetEnvironment(macCatalyst)
         FirebaseApp.configure()
-        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
+//        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
         #endif
 
         configureConstants()

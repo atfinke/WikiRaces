@@ -164,7 +164,7 @@ extension MPCHostViewController {
                                      appVersion: appInfo.version,
                                      name: session.myPeerID.displayName,
                                      inviteTimeout: 45.0,
-                                     minPeerAppBuild: 6400)
+                                     minPeerAppBuild: MPCHostContext.minBuildToJoinLocalHost)
         guard let data = try? JSONEncoder().encode(context) else {
             fatalError("Couldn't encode context")
         }

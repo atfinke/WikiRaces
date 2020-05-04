@@ -25,12 +25,12 @@ final public class WKRPlayer: Codable, Hashable {
         return profile.name
     }
 
-    // MARK: - Stat Properties [Optional to be backwards compatible]
+    // MARK: - Stat Properties
 
     public private(set) var stats: WKRPlayerRaceStats?
-    internal private(set) var neededHelpCount: Int?
-    internal private(set) var pixelsScrolledDuringCurrentRace: Int?
-    public var isCreator: Bool?
+    internal private(set) var neededHelpCount: Int = 0
+    internal private(set) var pixelsScrolledDuringCurrentRace: Int = 0
+    public var isCreator: Bool = false
 
     // MARK: - Initialization
 
@@ -60,7 +60,7 @@ final public class WKRPlayer: Codable, Hashable {
     }
 
     func neededHelp() {
-        neededHelpCount = (neededHelpCount ?? 0) + 1
+        neededHelpCount += 1
         stats = WKRPlayerRaceStats(player: self)
     }
 

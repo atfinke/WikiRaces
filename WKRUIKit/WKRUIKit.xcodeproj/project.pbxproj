@@ -583,9 +583,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -611,9 +611,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

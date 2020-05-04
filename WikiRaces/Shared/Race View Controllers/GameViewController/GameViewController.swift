@@ -61,7 +61,7 @@ final internal class GameViewController: UIViewController {
     var quitBarButtonItem: UIBarButtonItem!
 
     let connectingLabel = UILabel()
-    let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    let activityIndicatorView = UIActivityIndicatorView(style: .large)
 
     // MARK: - View Controllers
 

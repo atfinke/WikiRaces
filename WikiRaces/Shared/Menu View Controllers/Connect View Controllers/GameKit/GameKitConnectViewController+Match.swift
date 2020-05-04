@@ -9,6 +9,10 @@
 import GameKit
 import WKRKit
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebasePerformance
+#endif
+
 extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControllerDelegate {
 
     // MARK: - Helpers -
@@ -138,9 +142,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)
-            if let hostPlayer = players.sorted(by: { $0.playerID > $1.playerID }).first {
+            if let hostPlayer = players.sorted(by: { $0.teamPlayerID > $1.teamPlayerID }).first {
                 self.hostPlayerAlias = hostPlayer.alias
-                if hostPlayer.playerID == GKLocalPlayer.local.playerID {
+                if hostPlayer.teamPlayerID == GKLocalPlayer.local.teamPlayerID {
                     self.isPlayerHost = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                         self.sendStartMessageToPlayers()

@@ -205,7 +205,7 @@ final internal class ResultsViewController: CenteredTableViewController {
                 }
             }
 
-            guard let window = UIApplication.shared.keyWindow,
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
                 let results = self.resultsInfo,
                 let player = resultsPlayer,
                 player.raceHistory != nil else { return }

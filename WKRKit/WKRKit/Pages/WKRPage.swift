@@ -18,10 +18,8 @@ public struct WKRPage: Codable, Hashable, Equatable {
     // The url of the page
     public let url: URL
 
-    // should be `let`, but that would break backwards compatibility
-    internal var path: String {
-        return url.absoluteString.replacingOccurrences(of: "https://en.m.wikipedia.org/wiki", with: "")
-    }
+    // The path of the page
+    public let path: String
 
     // MARK: - Initialization
 
@@ -33,6 +31,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
     public init(title: String?, url: URL) {
         self.title = WKRPage.formattedTitle(for: title)
         self.url = url
+        self.path = url.absoluteString.replacingOccurrences(of: "https://en.m.wikipedia.org/wiki", with: "")
     }
 
     // MARK: - Helpers

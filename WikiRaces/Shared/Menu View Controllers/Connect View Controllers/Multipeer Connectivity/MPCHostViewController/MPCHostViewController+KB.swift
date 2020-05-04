@@ -15,19 +15,19 @@ extension MPCHostViewController {
     override var keyCommands: [UIKeyCommand]? {
         //swiftlint:disable line_length
         var commands = [
-            UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(keyboardQuit(_:)), discoverabilityTitle: "Return to Menu"),
-            UIKeyCommand(input: "s", modifierFlags: [.command, .shift], action: #selector(keyboardAttemptStartSolo), discoverabilityTitle: "Start Solo Race")
+            UIKeyCommand(title: "Return to Menu", action: #selector(keyboardQuit(_:)), input: UIKeyCommand.inputEscape, modifierFlags: []),
+            UIKeyCommand(title: "Start Solo Race", action: #selector(keyboardAttemptStartSolo), input: "s", modifierFlags: [.command, .shift])
         ]
         if navigationItem.rightBarButtonItem?.isEnabled ?? false {
-            commands.append(UIKeyCommand(input: "s", modifierFlags: .command, action: #selector(keyboardAttemptStartMPC(_:)), discoverabilityTitle: "Start Multiplayer Race"))
+            commands.append(UIKeyCommand(title: "Start Multiplayer Race", action: #selector(keyboardAttemptStartMPC(_:)), input: "s", modifierFlags: .command))
         }
 
         for (index, peer) in sortedPeers.enumerated() {
             guard peers[peer] == .found || peers[peer] == .declined else { continue }
-            let command = UIKeyCommand(input: (index + 1).description,
-                                       modifierFlags: .command,
+            let command = UIKeyCommand(title: "Invite " + peer.displayName,
                                        action: #selector(keyboardAttemptInvitePlayer(_:)),
-                                       discoverabilityTitle: "Invite " + peer.displayName)
+                                       input: (index + 1).description,
+                                       modifierFlags: .command)
             commands.append(command)
         }
         return commands
