@@ -34,6 +34,10 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
     // MARK: - Properties -
 
+    var raceSettings = RaceSettings()
+    var allCustomPages = [WKRPage]()
+    var raceSettingsController: CustomRaceViewController?
+
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
         return peers.keys.sorted(by: { (lhs, rhs) -> Bool in
@@ -109,6 +113,11 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         super.viewWillAppear(animated)
         browser?.startBrowsingForPeers()
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
+        if let controller = raceSettingsController {
+            allCustomPages = controller.allCustomPages
+            tableView.reloadRows(at: [IndexPath(item: 0, section: 2)], with: .none)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

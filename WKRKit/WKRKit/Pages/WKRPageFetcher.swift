@@ -9,7 +9,7 @@
 import Foundation
 
 /// Feteched Wikipedia pages
-internal struct WKRPageFetcher {
+public struct WKRPageFetcher {
 
     // MARK: - Properties
 
@@ -47,7 +47,7 @@ internal struct WKRPageFetcher {
     // MARK: - Fetching
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
-    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
+    public static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
         guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
             completionHandler(nil, false)
             return

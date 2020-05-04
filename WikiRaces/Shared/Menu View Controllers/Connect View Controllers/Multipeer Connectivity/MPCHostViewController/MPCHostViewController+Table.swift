@@ -15,7 +15,7 @@ extension MPCHostViewController {
     // MARK: - UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,8 +35,10 @@ extension MPCHostViewController {
             return "Choose 1 to 7 players"
         } else if section == 1 {
             return nil
+        } else if section == 2 {
+            return nil
         } else {
-            return " "
+            return nil
         }
     }
 
@@ -46,6 +48,8 @@ extension MPCHostViewController {
             return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
         } else if section == 1 {
             return "Automatically invite nearby players to the race."
+        } else if section == 2 {
+            return nil
         } else {
             return "Practice your skills in solo races. Solo races will not count towards your stats."
         }
@@ -64,6 +68,12 @@ extension MPCHostViewController {
             }
             return cell
         } else if indexPath.section == 2 {
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
+            cell.textLabel?.text = "Customize Race"
+            cell.detailTextLabel?.text = raceSettings.isCustom ? "Custom" : "Standard"
+            cell.accessoryType = .disclosureIndicator
+            return cell
+        } else if indexPath.section == 3 {
             return tableView.dequeueReusableCell(withIdentifier: MPCHostSoloCell.reuseIdentifier,
                                                  for: indexPath)
         } else if peers.isEmpty {
@@ -98,6 +108,13 @@ extension MPCHostViewController {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         if indexPath.section == 2 {
+            PlayerAnonymousMetrics.log(event: .customRaceOpened)
+
+            let controller = CustomRaceViewController(settings: raceSettings)
+            controller.allCustomPages = allCustomPages
+            navigationController?.pushViewController(controller, animated: true)
+            self.raceSettingsController = controller
+        } else if indexPath.section == 3 {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
 
             session?.disconnect()
@@ -147,7 +164,7 @@ extension MPCHostViewController {
                                      appVersion: appInfo.version,
                                      name: session.myPeerID.displayName,
                                      inviteTimeout: 45.0,
-                                     minPeerAppBuild: 3706)
+                                     minPeerAppBuild: 6400)
         guard let data = try? JSONEncoder().encode(context) else {
             fatalError("Couldn't encode context")
         }

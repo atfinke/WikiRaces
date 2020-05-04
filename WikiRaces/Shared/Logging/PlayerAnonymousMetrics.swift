@@ -45,6 +45,7 @@ internal struct PlayerAnonymousMetrics {
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
         case globalFailedToFindHost
+        case customRaceOpened
 
         case mpcRaceCompleted, gkRaceCompleted, soloRaceCompleted
         case banHammer
