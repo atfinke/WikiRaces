@@ -9,7 +9,6 @@
 import UIKit
 import WKRKit
 
-//swiftlint:disable function_body_length cyclomatic_complexity
 extension ResultRenderer {
 
     // MARK: - Section Creation -
@@ -310,4 +309,3 @@ extension ResultRenderer {
         return historyView
     }
 }
-//swiftlint:enable function_body_length type_body_length cyclomatic_complexity

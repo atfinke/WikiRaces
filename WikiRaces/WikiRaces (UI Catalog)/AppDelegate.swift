@@ -12,7 +12,6 @@ import WKRUIKit
 @UIApplicationMain
 class AppDelegate: WKRAppDelegate {
 
-    //swiftlint:disable:next line_length
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureConstants()
         cleanTempDirectory()

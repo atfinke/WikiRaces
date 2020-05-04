@@ -12,7 +12,6 @@ import StoreKit
 
 import WKRKit
 
-//swiftlint:disable:next type_body_length
 final internal class PlayerStatsManager {
 
     // MARK: - Types
@@ -159,7 +158,6 @@ final internal class PlayerStatsManager {
         ubiquitousStoreSync()
     }
 
-    //swiftlint:disable:next function_body_length function_parameter_count
     func completedRace(type: RaceType,
                        points: Int,
                        place: Int?,

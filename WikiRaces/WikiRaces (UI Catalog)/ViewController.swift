@@ -20,7 +20,6 @@ internal class ViewController: UIViewController {
 
     var rendered = false
 
-    //swiftlint:disable:next function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
 

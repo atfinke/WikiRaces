@@ -59,7 +59,6 @@ internal struct PlayerAnonymousMetrics {
         case forcedIntoStoreFromCustomize
         case forcedIntoStoreFromStats
 
-        //swiftlint:disable:next cyclomatic_complexity
         init(event: WKRLogEvent) {
             switch event.type {
             case .linkOnPage:       self = .linkOnPage

@@ -139,7 +139,6 @@ class WikiRacesTests: XCTestCase {
         }
     }
 
-    //swiftlint:disable:next cyclomatic_complexity function_body_length
     func testRaceCompletionStats() {
         var testedStats = Set<PlayerDatabaseStat>()
         for raceIndex in 0..<600 {

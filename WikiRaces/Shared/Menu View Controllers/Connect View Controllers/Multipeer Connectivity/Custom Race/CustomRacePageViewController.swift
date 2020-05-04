@@ -34,7 +34,6 @@ final class CustomRacePageViewController: UITableViewController {
 
     // MARK: - Initalization -
 
-    //swiftlint:disable:next cyclomatic_complexity function_body_length
     init(pageType: PageType, customPages: [WKRPage], selectedOption: Any) {
         self.pageType = pageType
 

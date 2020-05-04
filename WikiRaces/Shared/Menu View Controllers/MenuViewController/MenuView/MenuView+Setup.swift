@@ -14,7 +14,6 @@ extension MenuView {
     // MARK: - Top View -
 
     /// Sets up the top view of the menu
-    //swiftlint:disable:next function_body_length
     func setupTopView() {
         setupLabels()
         setupButtons()
@@ -192,7 +191,6 @@ extension MenuView {
     }
 
     /// Sets up the stack view that holds the menu tiles
-    //swiftlint:disable:next function_body_length
     private func setupStatsStackView() -> UIStackView {
         let statsStackView = UIStackView()
         statsStackView.distribution = .fillEqually

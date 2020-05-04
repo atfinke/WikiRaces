@@ -44,7 +44,6 @@ extension MPCHostViewController {
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if section == 0 {
-            //swiftlint:disable:next line_length
             return "Make sure all players are on the same Wi-Fi network and have Bluetooth enabled for the best results."
         } else if section == 1 {
             return "Automatically invite nearby players to the race."
@@ -81,7 +80,6 @@ extension MPCHostViewController {
                                                  for: indexPath)
         }
 
-        //swiftlint:disable:next line_length
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MPCHostPeerStateCell.reuseIdentifier, for: indexPath) as? MPCHostPeerStateCell else {
             fatalError()
         }

@@ -17,7 +17,6 @@ final internal class GameViewController: UIViewController {
     // MARK: - Types
 
     enum TransitionState: Equatable {
-        //swiftlint:disable:next nesting
         enum QuitState {
             case waiting, inProgress
         }

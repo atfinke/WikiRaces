@@ -42,10 +42,8 @@ final internal class WKRSplitViewNetwork: WKRPeerNetwork {
         let localPlayer = WKRPlayerProfile(name: playerName, playerID: playerName)
         players.append(localPlayer)
 
-        //swiftlint:disable:next discarded_notification_center_observer
         NotificationCenter.default
             .addObserver(forName: Notification.Name("Object"), object: nil, queue: nil) { notification in
-                //swiftlint:disable:next force_cast
                 let splitMessage = notification.object as! WKRSplitMessage
                 let messageSender = WKRPlayerProfile(name: splitMessage.sender, playerID: splitMessage.sender)
 

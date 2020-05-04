@@ -66,7 +66,6 @@ final class CustomRaceViewController: UITableViewController {
 
     // MARK: - UITableViewDelegate -
 
-    //swiftlint:disable:next function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !PlusStore.shared.isPlus {
             PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromCustomize)
@@ -163,7 +162,6 @@ final class CustomRaceViewController: UITableViewController {
 
     // MARK: - Helpers -
 
-    //swiftlint:disable:next cyclomatic_complexity
     private func value(for setting: Setting) -> String {
         switch setting {
         case .startPage:

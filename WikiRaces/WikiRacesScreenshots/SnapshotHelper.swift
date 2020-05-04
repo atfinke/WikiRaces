@@ -12,7 +12,6 @@
 //            the new SnapshotHelper.swift
 // -----------------------------------------------------
 
-//swiftlint:disable line_length
 
 import Foundation
 import XCTest
@@ -303,5 +302,3 @@ private extension CGFloat {
 // Please don't remove the lines below
 // They are used to detect outdated configuration files
 // SnapshotHelperVersion [1.211]
-
-//swiftlint:enable line_length

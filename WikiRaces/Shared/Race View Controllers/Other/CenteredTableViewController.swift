@@ -68,7 +68,6 @@ internal class CenteredTableViewController: UIViewController {
 
     // MARK: - Interface
 
-    //swiftlint:disable:next function_body_length
     private func setupInterface() {
         let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrLightBlurEffect)
 

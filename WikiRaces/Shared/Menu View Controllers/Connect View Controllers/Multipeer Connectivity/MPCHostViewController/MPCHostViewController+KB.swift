@@ -13,7 +13,6 @@ extension MPCHostViewController {
     // MARK: - Keyboard Support
 
     override var keyCommands: [UIKeyCommand]? {
-        //swiftlint:disable line_length
         var commands = [
             UIKeyCommand(title: "Return to Menu", action: #selector(keyboardQuit(_:)), input: UIKeyCommand.inputEscape, modifierFlags: []),
             UIKeyCommand(title: "Start Solo Race", action: #selector(keyboardAttemptStartSolo), input: "s", modifierFlags: [.command, .shift])

@@ -35,7 +35,6 @@ final internal class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //swiftlint:disable:next discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
                                                object: nil,
                                                queue: nil) { _ in
@@ -144,7 +143,6 @@ final internal class MenuViewController: UIViewController {
         }
         UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
 
-        //swiftlint:disable:next line_length
         let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
         let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 

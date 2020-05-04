@@ -9,7 +9,6 @@
 import UIKit
 import WKRKit
 
-//swiftlint:disable function_body_length
 final class ResultRenderer {
 
     // MARK: - Types -
@@ -142,4 +141,3 @@ final class ResultRenderer {
     }
 
 }
-//swiftlint:enable function_body_length type_body_length cyclomatic_complexity

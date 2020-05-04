@@ -8,7 +8,6 @@
 
 import UIKit
 
-//swiftlint:disable line_length function_body_length force_cast superfluous_disable_command
 class ViewController: UIViewController {
 
     var windows = [DebugWindow]()

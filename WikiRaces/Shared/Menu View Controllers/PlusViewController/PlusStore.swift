@@ -201,7 +201,6 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         }
     }
 
-    //swiftlint:disable:next function_body_length
     func verifyReceipt(completion: ((_ isValid: Bool) -> Void)?) {
         os_log("%{public}s: called", log: .store, type: .info, #function)
         guard let appStoreReceiptURL = Bundle.main.appStoreReceiptURL else {

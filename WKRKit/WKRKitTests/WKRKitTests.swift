@@ -9,7 +9,6 @@
 import XCTest
 @testable import WKRKit
 
-//swiftlint:disable:next
 class WKRKitTests: WKRKitTestCase {
 
     // MARK: - WKRGameState

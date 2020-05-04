@@ -13,7 +13,6 @@ extension GameViewController {
     // MARK: - Keyboard Support
 
     override var keyCommands: [UIKeyCommand]? {
-        // swiftlint:disable line_length
         var commands = [
             UIKeyCommand(title: "Help", action: #selector(keyboardHelp), input: "?", modifierFlags: .command),
             UIKeyCommand(title: "Reload Page", action: #selector(keyboardReload), input: "r", modifierFlags: .command),

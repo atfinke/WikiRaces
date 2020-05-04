@@ -141,14 +141,12 @@ extension MPCConnectViewController: MCNearbyServiceAdvertiserDelegate, MCSession
             let info = "showNextInvite: \(invite.context.minPeerAppBuild) > \(Bundle.main.appInfo.build)"
             PlayerAnonymousMetrics.log(event: .error(info))
 
-            //swiftlint:disable:next line_length
             let message = "You received an invite to a race that requires the latest version of WikiRaces. Please download the lastest update on the App Store."
             showError(title: "Update Required", message: message)
         } else if invite.context.minPeerAppBuild < MPCHostContext.minBuildToJoinRemoteHost {
             let info = "showNextInvite: \(invite.context.minPeerAppBuild) < \(MPCHostContext.minBuildToJoinRemoteHost)"
             PlayerAnonymousMetrics.log(event: .error(info))
 
-            //swiftlint:disable:next line_length
             let message = "You received an invite to a race from a host with an old version of WikiRaces. Please have the host download the lastest update on the App Store."
             showError(title: "Host Update Required", message: message)
         }

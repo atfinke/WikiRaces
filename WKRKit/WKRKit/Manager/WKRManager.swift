@@ -104,7 +104,6 @@ final public class WKRGameManager {
                 self.peerNetwork.send(object: bonusPoints)
             case .playersReadyForNextRound:
                 guard self.localPlayer.isHost, self.gameState == .hostResults else { return }
-                //swiftlint:disable:next line_length
                 DispatchQueue.main.asyncAfter(deadline: .now() + WKRRaceDurationConstants.resultsAllReadyDelay, execute: {
                     self.finishResultsCountdown()
                 })

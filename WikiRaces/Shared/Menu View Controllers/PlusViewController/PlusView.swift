@@ -265,7 +265,6 @@ class PlusView: UIView {
 
     // MARK: - Helpers -
 
-    //swiftlint:disable:next identifier_name
     private func toggleProductButtons(on: Bool) {
         loadingOptionsLabel.isHidden = on
         standardOptionButton.isHidden = !on

@@ -167,13 +167,11 @@ class CustomRaceNumericalViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         if type == .points {
-            //swiftlint:disable line_length
             let title = """
 The award interval is the frequency at which bonus points are added to the total points awarded. If set to 60, then every 60 seconds, the total points awarded to the race winner will increase by the amount specified.
 
 Stats Effect: Prevents improving points per race average and total number of races.
 """
-            //swiftlint:enable line_length
             return title
         } else {
             return nil

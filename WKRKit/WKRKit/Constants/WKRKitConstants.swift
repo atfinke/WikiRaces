@@ -40,9 +40,7 @@ public struct WKRKitConstants {
 
     // MARK: - Initalization
 
-    //swiftlint:disable:next cyclomatic_complexity function_body_length
     init() {
-        //swiftlint:disable:next line_length
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String: Any] else {
                 fatalError("Failed to load constants")
@@ -243,7 +241,6 @@ public struct WKRKitConstants {
     }
 
     lazy private(set) var finalArticles: [String] = {
-        //swiftlint:disable:next line_length
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
             let array = arrayFromURL as? [String] else {

@@ -70,7 +70,6 @@ final public class WKRPlayer: Codable, Hashable {
         return profile.playerID.hash(into: &hasher)
     }
 
-    //swiftlint:disable:next operator_whitespace
     public static func ==(lhs: WKRPlayer, rhs: WKRPlayer) -> Bool {
         return lhs.profile == rhs.profile
     }
