@@ -35,6 +35,11 @@ extension MenuView {
         createLocalRaceButtonWidthConstraint = createLocalRaceButton.widthAnchor.constraint(equalToConstant: 0)
         localOptionsBackButtonWidth = localOptionsBackButton.widthAnchor.constraint(equalToConstant: 30)
 
+        statsButtonLeftConstraint = statsButton.leftAnchor.constraint(equalTo: topView.leftAnchor,
+                                                                      constant: 0)
+
+        statsButtonWidthConstraint = statsButton.widthAnchor.constraint(equalToConstant: 0)
+
         let constraints = [
             titleLabelConstraint!,
 
@@ -60,13 +65,18 @@ extension MenuView {
             createLocalRaceButtonWidthConstraint!,
             localOptionsBackButtonWidth!,
 
+            statsButtonLeftConstraint!,
+            statsButtonWidthConstraint!,
+
             localRaceTypeButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
                                                      constant: 40.0),
             joinLocalRaceButton.topAnchor.constraint(equalTo: localRaceTypeButton.topAnchor),
+            statsButton.topAnchor.constraint(equalTo: localRaceTypeButton.topAnchor),
 
             globalRaceTypeButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
             joinLocalRaceButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
             createLocalRaceButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
+            statsButton.heightAnchor.constraint(equalTo: localRaceTypeButton.heightAnchor),
 
             globalRaceTypeButton.leftAnchor.constraint(equalTo: localRaceTypeButton.leftAnchor),
             createLocalRaceButton.leftAnchor.constraint(equalTo: joinLocalRaceButton.leftAnchor),
@@ -80,7 +90,19 @@ extension MenuView {
                                                         constant: 20.0),
 
             localOptionsBackButton.heightAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor,
-                                                           multiplier: 1)
+                                                           multiplier: 1),
+
+            plusOptionsBackButton.leftAnchor.constraint(equalTo: statsButton.leftAnchor),
+            plusOptionsBackButton.topAnchor.constraint(equalTo: statsButton.bottomAnchor,
+                                            constant: 20.0),
+            plusOptionsBackButton.widthAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor),
+            plusOptionsBackButton.heightAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor),
+
+            plusButton.leftAnchor.constraint(equalTo: localRaceTypeButton.leftAnchor),
+            plusButton.topAnchor.constraint(equalTo: globalRaceTypeButton.bottomAnchor,
+                                            constant: 20.0),
+            plusButton.widthAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor),
+            plusButton.heightAnchor.constraint(equalTo: localOptionsBackButton.widthAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -107,20 +129,36 @@ extension MenuView {
         createLocalRaceButton.addTarget(self, action: #selector(createLocalRace), for: .touchUpInside)
         topView.addSubview(createLocalRaceButton)
 
+        statsButton.title = "race stats"
+        statsButton.translatesAutoresizingMaskIntoConstraints = false
+        statsButton.addTarget(self, action: #selector(statsButtonPressed), for: .touchUpInside)
+        topView.addSubview(statsButton)
+
         if #available(iOS 13.4, *) {
             localOptionsBackButton.isPointerInteractionEnabled = true
+            plusButton.isPointerInteractionEnabled = true
         }
+
         localOptionsBackButton.setImage(UIImage(named: "Back")!, for: .normal)
         localOptionsBackButton.translatesAutoresizingMaskIntoConstraints = false
-        localOptionsBackButton.addTarget(self, action: #selector(localOptionsBackButtonPressed), for: .touchUpInside)
+        localOptionsBackButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         topView.addSubview(localOptionsBackButton)
 
-        localOptionsBackButton.layer.borderWidth = 1.7
+        plusOptionsBackButton.setImage(UIImage(named: "Back")!, for: .normal)
+        plusOptionsBackButton.translatesAutoresizingMaskIntoConstraints = false
+        plusOptionsBackButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        topView.addSubview(plusOptionsBackButton)
+
+        let config = UIImage.SymbolConfiguration(weight: .semibold)
+        plusButton.setImage(UIImage(systemName: "plus", withConfiguration: config)!,
+                            for: .normal)
+        plusButton.translatesAutoresizingMaskIntoConstraints = false
+        plusButton.addTarget(self, action: #selector(plusButtonPressed), for: .touchUpInside)
+        topView.addSubview(plusButton)
        }
 
     /// Sets up the labels
     private func setupLabels() {
-        titleLabel.text = "WikiRaces"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         topView.addSubview(titleLabel)
 

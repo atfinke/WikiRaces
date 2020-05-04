@@ -115,7 +115,6 @@ public struct WKRPageFetcher {
                 progressHandler(Float(progress.fractionCompleted))
             }
         }
-        
 
         task.resume()
     }

@@ -159,8 +159,14 @@ final internal class PlayerStatsManager {
         ubiquitousStoreSync()
     }
 
-    //swiftlint:disable:next function_body_length
-    func completedRace(type: RaceType, points: Int, place: Int?, timeRaced: Int, pixelsScrolled: Int, isEligibleForPoints: Bool, isEligibleForSpeed: Bool) {
+    //swiftlint:disable:next function_body_length function_parameter_count
+    func completedRace(type: RaceType,
+                       points: Int,
+                       place: Int?,
+                       timeRaced: Int,
+                       pixelsScrolled: Int,
+                       isEligibleForPoints: Bool,
+                       isEligibleForSpeed: Bool) {
         let pointsStat: PlayerDatabaseStat?
         let racesStat: PlayerDatabaseStat
         let totalTimeStat: PlayerDatabaseStat
@@ -212,7 +218,7 @@ final internal class PlayerStatsManager {
             pointsStat?.increment(by: Double(points))
             racesStat.increment()
         }
-        
+
         totalTimeStat.increment(by: Double(timeRaced))
         pixelsStat.increment(by: Double(pixelsScrolled))
 

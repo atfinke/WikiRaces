@@ -61,6 +61,15 @@ final internal class MenuViewController: UIViewController {
                 controller.viewState = .leaderboards
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
+            case .presentStats:
+                if PlusStore.shared.isPlus {
+                    
+                } else {
+                    PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
+                    let controller = PlusViewController()
+                    controller.modalPresentationStyle = .overCurrentContext
+                    self.present(controller, animated: false, completion: nil)
+                }
             }
 
         }

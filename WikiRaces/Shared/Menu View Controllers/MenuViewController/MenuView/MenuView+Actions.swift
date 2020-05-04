@@ -82,12 +82,32 @@ extension MenuView {
     }
 
     @objc
-    func localOptionsBackButtonPressed() {
+    func backButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         UISelectionFeedbackGenerator().selectionChanged()
 
         animateOptionsOutAndTransition(to: .raceTypeOptions)
+    }
+
+    @objc
+    func plusButtonPressed() {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+
+        UISelectionFeedbackGenerator().selectionChanged()
+
+        animateOptionsOutAndTransition(to: .plusOptions)
+    }
+
+    @objc
+    func statsButtonPressed() {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+
+        UISelectionFeedbackGenerator().selectionChanged()
+
+        animateMenuOut {
+            self.listenerUpdate?(.presentStats)
+        }
     }
 
     /// Called when a tile is pressed

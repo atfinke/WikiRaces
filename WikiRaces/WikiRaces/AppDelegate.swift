@@ -27,6 +27,7 @@ final internal class AppDelegate: WKRAppDelegate {
 //        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
         #endif
 
+        PlusStore.shared.sync()
         configureConstants()
 
         NotificationCenter.default.addObserver(self,

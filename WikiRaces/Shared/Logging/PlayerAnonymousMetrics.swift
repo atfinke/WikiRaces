@@ -56,6 +56,8 @@ internal struct PlayerAnonymousMetrics {
         case votingArticleValidationFailure, votingArticlesWeightedTiebreak
 
         case automaticResultsImageSave
+        case forcedIntoStoreFromCustomize
+        case forcedIntoStoreFromStats
 
         //swiftlint:disable:next cyclomatic_complexity
         init(event: WKRLogEvent) {

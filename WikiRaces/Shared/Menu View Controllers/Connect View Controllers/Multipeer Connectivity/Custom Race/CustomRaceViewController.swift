@@ -27,10 +27,6 @@ final class CustomRaceViewController: UITableViewController {
     var allCustomPages = [WKRPage]()
     let settings: WKRGameSettings
 
-    private var isEnabled: Bool {
-        return false
-    }
-
     // MARK: - Initalization -
 
     init(settings: WKRGameSettings) {
@@ -72,7 +68,14 @@ final class CustomRaceViewController: UITableViewController {
 
     //swiftlint:disable:next function_body_length
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if !PlusStore.shared.isPlus {
+            PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromCustomize)
+            let controller = PlusViewController()
+            controller.modalPresentationStyle = .overCurrentContext
+            present(controller, animated: false, completion: nil)
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        } else if indexPath.section == 1 {
             settings.reset()
             tableView.reloadData()
             return

@@ -129,23 +129,23 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
         PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
-        
+
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         DispatchQueue.global().async {
             self.findTrace?.stop()
         }
         #endif
         updateDescriptionLabel(to: "Finding best host")
-        
+
         dismiss(animated: true) {
             self.toggleCoreInterface(isHidden: false, duration: 0.25)
         }
-        
+
         match.delegate = self
         self.match = match
-        
+
         PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind match set"))
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)
