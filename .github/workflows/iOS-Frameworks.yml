@@ -1,0 +1,15 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+    build:
+        name: Build iOS
+        runs-on: macOS-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Build WKRKit
+              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WKRKit -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+            - name: Test WKRKit
+              run: xcodebuild clean test -workspace WikiRaces.xcworkspace -scheme WKRKitOfflineTests -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+            - name: Build WKRUIKit
+              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WKRUIKit -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
