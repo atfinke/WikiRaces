@@ -154,7 +154,7 @@ class ConnectViewController: UIViewController {
     ///   - title: The title of the error message
     ///   - message: The message body of the error
     @objc
-    final func showError(title: String, message: String, showSettingsButton: Bool = false) {
+    func showError(title: String, message: String, showSettingsButton: Bool = false) {
         guard !isShowingError else { return }
         isShowingError = true
         

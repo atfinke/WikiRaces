@@ -204,5 +204,11 @@ final internal class MPCConnectViewController: ConnectViewController {
         nav.isModalInPresentation = true
         present(nav, animated: true, completion: nil)
     }
+    
+    override func showError(title: String, message: String, showSettingsButton: Bool = false) {
+        activeInvite?(false, session)
+        invites.forEach { $0.handler?(false, session) }
+        super.showError(title: title, message: message, showSettingsButton: showSettingsButton)
+    }
 
 }
