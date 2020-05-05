@@ -36,7 +36,7 @@ final class CustomRaceNotificationsController: UITableViewController {
         override func layoutSubviews() {
             super.layoutSubviews()
             toggle.onTintColor = .wkrTextColor(for: traitCollection)
-            
+
             toggle.center = CGPoint(
                 x: contentView.frame.width - contentView.layoutMargins.right - toggle.frame.width / 2,
                 y: contentView.frame.height / 2)
@@ -86,29 +86,25 @@ final class CustomRaceNotificationsController: UITableViewController {
 
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "X Needed Help"
+            cell.textLabel?.text = "Player needed help"
             cell.toggle.isOn = notifications.neededHelp
         case 1:
-            cell.textLabel?.text = "X Is Close"
+            cell.textLabel?.text = "Player is close"
             cell.toggle.isOn = notifications.linkOnPage
         case 2:
-            cell.textLabel?.text = "X Missed The Link"
+            cell.textLabel?.text = "Player missed the kink"
             cell.toggle.isOn = notifications.missedLink
         case 3:
-            cell.textLabel?.text = "X Is On USA"
+            cell.textLabel?.text = "Player is on USA"
             cell.toggle.isOn = notifications.isOnUSA
         case 4:
-            cell.textLabel?.text = "X Is On The Same Page"
+            cell.textLabel?.text = "Player is on same page"
             cell.toggle.isOn = notifications.isOnSamePage
         default:
             fatalError()
         }
 
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return "X indicates player name"
     }
 
     // MARK: - Helpers -

@@ -183,7 +183,7 @@ Stats Effect: Prevents improving points per race average and total number of rac
     @objc func stepperChanged(stepper: UIStepper) {
         let indexPath = IndexPath(row: stepper.tag, section: 0)
         guard let cell = tableView.cellForRow(at: indexPath) as? Cell else { fatalError() }
-        
+
         switch type {
         case .points:
             guard let points = points else { fatalError() }

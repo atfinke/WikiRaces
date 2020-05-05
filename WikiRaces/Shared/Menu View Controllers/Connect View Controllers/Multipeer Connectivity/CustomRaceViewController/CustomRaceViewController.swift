@@ -10,9 +10,9 @@ import UIKit
 import WKRKit
 
 final class CustomRaceViewController: UITableViewController {
-    
+
     // MARK: - Types -
-    
+
     enum Setting: String, CaseIterable {
         case startPage = "Start Page"
         case endPage = "End Page"
@@ -20,55 +20,74 @@ final class CustomRaceViewController: UITableViewController {
         case notifications = "Player Messages"
         case points, timing, other
     }
-    
+
     // MARK: - Properties -
-    
+
     private let settingOptions = Setting.allCases
     var allCustomPages = [WKRPage]()
     let settings: WKRGameSettings
-    
+
     // MARK: - Initalization -
-    
+
     init(settings: WKRGameSettings) {
         self.settings = settings
         super.init(style: .grouped)
         title = "Customize Race".uppercased()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - UITableViewDataSource -
-    
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? settingOptions.count : 1
+        if section == 0 {
+            return settingOptions.count
+        } else if section == 1 {
+            return 1
+        } else {
+            return 3
+        }
     }
-    
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 2 ? "Presets" : nil
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         if indexPath.section == 1 {
             cell.textLabel?.text = "Reset to Default"
             cell.textLabel?.textColor = .systemRed
             return cell
+        } else if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                cell.textLabel?.text = "First to Magic Kingdom"
+            } else if indexPath.row == 1 {
+                cell.textLabel?.text = "No USA"
+            } else if indexPath.row == 2 {
+                cell.textLabel?.text = "Rapid random voting"
+            }
+            return cell
         }
-        
+
         let setting = settingOptions[indexPath.row]
         cell.textLabel?.text = setting.rawValue.capitalized
         cell.detailTextLabel?.text = value(for: setting)
         cell.accessoryType = .disclosureIndicator
         return cell
     }
-    
+
     // MARK: - UITableViewDelegate -
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !PlusStore.shared.isPlus {
+        if PlusStore.shared.isPlus {
             PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromCustomize)
             let controller = PlusViewController()
             controller.modalPresentationStyle = .overCurrentContext
@@ -79,15 +98,31 @@ final class CustomRaceViewController: UITableViewController {
             settings.reset()
             tableView.reloadData()
             return
+        } else if indexPath.section == 2 {
+            settings.reset()
+            if indexPath.row == 0 {
+                guard let url = URL(string: "https://en.m.wikipedia.org/wiki/Magic_Kingdom") else { fatalError() }
+                let page = WKRPage(title: "Magic Kingdom", url: url)
+                settings.endPage = .custom(page)
+            } else if indexPath.row == 1 {
+                guard let url = URL(string: "https://en.m.wikipedia.org/wiki/United_States") else { fatalError() }
+                let page = WKRPage(title: "United States", url: url)
+                settings.bannedPages = [.portal, .custom(page)]
+            } else if indexPath.row == 2 {
+                settings.timing = WKRGameSettings.Timing(votingTime: 5, resultsTime: 60)
+                settings.endPage = .randomVoting
+            }
+            tableView.reloadData()
+            return
         }
-        
+
         let setting = settingOptions[indexPath.row]
         switch setting {
         case .startPage:
             let controller = CustomRacePageViewController(
                 pageType: .start,
                 customPages: allCustomPages,
-                selectedOption: settings.startPage)
+                settings: settings)
             navigationController?.pushViewController(controller, animated: true)
             controller.didUpdateStartPage = { [weak self] page, customPages in
                 guard let self = self else { return }
@@ -101,7 +136,7 @@ final class CustomRaceViewController: UITableViewController {
             let controller = CustomRacePageViewController(
                 pageType: .end,
                 customPages: allCustomPages,
-                selectedOption: settings.endPage)
+                settings: settings)
             navigationController?.pushViewController(controller, animated: true)
             controller.didUpdateEndPage = { [weak self] page, customPages in
                 guard let self = self else { return }
@@ -115,7 +150,7 @@ final class CustomRaceViewController: UITableViewController {
             let controller = CustomRacePageViewController(
                 pageType: .banned,
                 customPages: allCustomPages,
-                selectedOption: settings.bannedPages)
+                settings: settings)
             navigationController?.pushViewController(controller, animated: true)
             controller.didUpdateBannedPages = { [weak self] pages, customPages in
                 guard let self = self else { return }
@@ -167,9 +202,9 @@ final class CustomRaceViewController: UITableViewController {
             }
         }
     }
-    
+
     // MARK: - Helpers -
-    
+
     private func value(for setting: Setting) -> String {
         switch setting {
         case .startPage:

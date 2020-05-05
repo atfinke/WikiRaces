@@ -24,6 +24,7 @@ final class CustomRacePageViewController: UITableViewController {
     // MARK: - Properties -
 
     private let pageType: PageType
+    private let settings: WKRGameSettings
 
     private var customPages: [WKRPage]
     private var indexPathsOfSelectedOptions: Set<IndexPath> = []
@@ -34,22 +35,21 @@ final class CustomRacePageViewController: UITableViewController {
 
     // MARK: - Initalization -
 
-    init(pageType: PageType, customPages: [WKRPage], selectedOption: Any) {
+    init(pageType: PageType, customPages: [WKRPage], settings: WKRGameSettings) {
         self.pageType = pageType
-
         self.customPages = customPages
-        if customPages.isEmpty {
+        self.settings = settings
 
+        if customPages.isEmpty {
             guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
                 let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States"),
-                let waltURL = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney") else {
+                let disURL = URL(string: "https://en.m.wikipedia.org/wiki/Magic_Kingdom") else {
                     fatalError()
             }
-
             self.customPages.append(contentsOf: [
                 WKRPage(title: "Apple Inc", url: appleURL),
-                WKRPage(title: "United States", url: usaURL),
-                WKRPage(title: "Walt Disney", url: waltURL)
+                WKRPage(title: "Magic Kingdom", url: disURL),
+                WKRPage(title: "United States", url: usaURL)
             ])
         }
 
@@ -58,41 +58,32 @@ final class CustomRacePageViewController: UITableViewController {
         switch pageType {
         case .start:
             title = "Start Page".uppercased()
-            guard let page = selectedOption as? WKRGameSettings.StartPage else { fatalError() }
-            switch page {
+            switch settings.startPage {
             case .random:
                 select(indexPath: IndexPath(row: 0, section: 0))
             case .custom(let customPage):
-                guard let index = customPages.firstIndex(where: { page -> Bool in
-                    return customPage == page
-                }) else { fatalError() }
+                guard let index = self.customPages.firstIndex(of: customPage) else { fatalError() }
                 select(indexPath: IndexPath(row: index, section: 1))
             }
         case .end:
             title = "End Page".uppercased()
-            guard let page = selectedOption as? WKRGameSettings.EndPage else { fatalError() }
-            switch page {
+            switch settings.endPage {
             case .curatedVoting:
                 select(indexPath: IndexPath(row: 0, section: 0))
             case .randomVoting:
                 select(indexPath: IndexPath(row: 1, section: 0))
             case .custom(let customPage):
-                guard let index = customPages.firstIndex(where: { page -> Bool in
-                    return customPage == page
-                }) else { fatalError() }
+                guard let index = self.customPages.firstIndex(of: customPage) else { fatalError() }
                 select(indexPath: IndexPath(row: index, section: 1))
             }
         case .banned:
             title = "Banned Pages".uppercased()
-            guard let pages = selectedOption as? [WKRGameSettings.BannedPage] else { fatalError() }
-            for page in pages {
+            for page in settings.bannedPages {
                 switch page {
                 case .portal:
                     select(indexPath: IndexPath(row: 0, section: 0))
                 case .custom(let customPage):
-                    guard let index = customPages.firstIndex(where: { page -> Bool in
-                        return customPage == page
-                    }) else { fatalError() }
+                    guard let index = self.customPages.firstIndex(of: customPage) else { fatalError() }
                     select(indexPath: IndexPath(row: index, section: 1))
                 }
             }
@@ -119,7 +110,7 @@ final class CustomRacePageViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        
+
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 switch pageType {
