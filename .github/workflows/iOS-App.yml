@@ -5,9 +5,12 @@ jobs:
     build:
         name: iOS App
         runs-on: macOS-latest
+        strategy:
+            matrix:
+                destination: ["name=iPhone 11 Pro"]
         steps:
             - uses: actions/checkout@v1
             - name: Build WikiRaces
-              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WikiRaces -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WikiRaces -destination ${destination} CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
             - name: Test WikiRaces
-              run: xcodebuild clean test -workspace WikiRaces.xcworkspace -scheme WikiRacesTests -destination 'platform=iOS Simulator,OS=13.3,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
+              run: xcodebuild clean test -workspace WikiRaces.xcworkspace -scheme WikiRacesTests -destination ${destination} CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
