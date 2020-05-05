@@ -18,7 +18,7 @@ final public class WKRGameManager {
         case log(WKRLogEvent)
 
         case playerRaceLinkCountForCurrentRace(Int)
-        case playerStatsForLastRace(points: Int, place: Int?, webViewPixelsScrolled: Int)
+        case playerStatsForLastRace(points: Int, place: Int?, webViewPixelsScrolled: Int, pages: [WKRPage])
     }
 
     public enum VotingUpdate {

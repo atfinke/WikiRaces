@@ -163,6 +163,7 @@ final internal class PlayerStatsManager {
                        place: Int?,
                        timeRaced: Int,
                        pixelsScrolled: Int,
+                       pages: [WKRPage],
                        isEligibleForPoints: Bool,
                        isEligibleForSpeed: Bool) {
         let pointsStat: PlayerDatabaseStat?
@@ -244,6 +245,41 @@ final internal class PlayerStatsManager {
         ubiquitousStoreSync()
         leaderboardSync()
         playerDatabaseSync()
+
+        DispatchQueue.global(qos: .utility).async {
+            let manager = FileManager.default
+            guard let docs = manager.urls(for: .documentDirectory, in: .userDomainMask).last else { fatalError() }
+            let pagesViewedDir = docs.appendingPathComponent("PagesViewed")
+            try? manager.createDirectory(at: pagesViewedDir, withIntermediateDirectories: false, attributes: nil)
+
+            let totalsFileURL = pagesViewedDir.appendingPathComponent("Totals.txt")
+            var seenPages: [WKRPage: Int]
+            if let data = try? Data(contentsOf: totalsFileURL),
+                let diskPages = try? JSONDecoder().decode([WKRPage: Int].self, from: data) {
+                seenPages = diskPages
+            } else {
+                seenPages = [:]
+            }
+
+            for page in pages {
+                if let existing = seenPages[page] {
+                    seenPages[page] = existing + 1
+                } else {
+                    seenPages[page] = 1
+                }
+            }
+
+            let encoder = JSONEncoder()
+            if let data = try? encoder.encode(seenPages) {
+                try? data.write(to: totalsFileURL)
+            }
+
+            let date = Date().timeIntervalSince1970.description.split(separator: ".")[0]
+            let url = pagesViewedDir.appendingPathComponent(date + ".txt")
+            if let data = try? encoder.encode(pages) {
+                try? data.write(to: url)
+            }
+        }
     }
 
     // MARK: - Syncing

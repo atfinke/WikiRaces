@@ -61,18 +61,19 @@ extension GameViewController {
             logEvent(event)
         case .playerRaceLinkCountForCurrentRace(let linkCount):
             webView?.text = linkCount.description
-        case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled):
-            processRaceStats(points: points, place: place, webViewPixelsScrolled: webViewPixelsScrolled)
+        case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled, let pages):
+            processRaceStats(points: points, place: place, webViewPixelsScrolled: webViewPixelsScrolled, pages: pages)
         }
     }
 
-    private func processRaceStats(points: Int, place: Int?, webViewPixelsScrolled: Int) {
+    private func processRaceStats(points: Int, place: Int?, webViewPixelsScrolled: Int, pages: [WKRPage]) {
         guard let raceType = statRaceType else { return }
         PlayerStatsManager.shared.completedRace(type: raceType,
                                                 points: points,
                                                 place: place,
                                                 timeRaced: timeRaced,
                                                 pixelsScrolled: webViewPixelsScrolled,
+                                                pages: pages,
                                                 isEligibleForPoints: gameSettings.points.isStandard,
                                                 isEligibleForSpeed: gameSettings.startPage.isStandard)
 

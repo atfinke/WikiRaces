@@ -162,9 +162,11 @@ extension WKRGameManager {
                 }
             }
             let webViewPixelsScrolled = webView?.pixelsScrolled ?? 0
+            let pages = resultsInfo.pagesViewed(for: localPlayer)
             gameUpdate(.playerStatsForLastRace(points: points,
                                                place: place,
-                                               webViewPixelsScrolled: webViewPixelsScrolled))
+                                               webViewPixelsScrolled: webViewPixelsScrolled,
+                                               pages: pages))
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))

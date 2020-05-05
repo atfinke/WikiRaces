@@ -117,6 +117,13 @@ public struct WKRResultsInfo: Codable {
     internal func raceRewardPoints(for player: WKRPlayer) -> Int {
         return racePoints[player.profile] ?? 0
     }
+    
+    internal func pagesViewed(for player: WKRPlayer) -> [WKRPage] {
+        return playersSortedByState.first(where: { $0 == player })?
+            .raceHistory?
+            .entries
+            .map { $0.page } ?? []
+    }
 
     // used to update history controller cells
     public func updatedPlayer(for player: WKRPlayer) -> WKRPlayer? {
