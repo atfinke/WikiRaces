@@ -108,11 +108,7 @@ final class ResultRenderer {
 
         let format = UIGraphicsImageRendererFormat()
         format.opaque = false
-        if #available(iOS 12.0, *) {
-            format.preferredRange = .standard
-        } else {
-            format.prefersExtendedRange = false
-        }
+        format.preferredRange = .standard
 
         let fullRenderer = UIGraphicsImageRenderer(size: view.bounds.size, format: format)
         view.isHidden = false

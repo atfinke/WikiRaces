@@ -32,11 +32,7 @@ final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
         didSet {
             guard isShowingCheckmark != oldValue else { return }
             if isShowingCheckmark {
-                if #available(iOS 13.0, *) {
-                    rightMarginConstraint?.constant = -30
-                } else {
-                    rightMarginConstraint?.constant = -20
-                }
+                rightMarginConstraint?.constant = -30
             } else {
                 rightMarginConstraint?.constant = 0
             }

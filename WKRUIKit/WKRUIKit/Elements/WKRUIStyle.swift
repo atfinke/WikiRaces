@@ -10,7 +10,7 @@ import UIKit
 
 final public class WKRUIStyle {
     public static func isDark(_ traitCollection: UITraitCollection) -> Bool {
-        if #available(iOS 12.0, *), traitCollection.userInterfaceStyle == .dark {
+        if traitCollection.userInterfaceStyle == .dark {
             return true
         } else {
             return false

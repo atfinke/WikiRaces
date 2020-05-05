@@ -195,18 +195,17 @@ class ConnectViewController: UIViewController {
         isShowingMatch = true
 
         DispatchQueue.main.async {
-            self.toggleCoreInterface(isHidden: true,
-                                     duration: 0.25,
-                                     and: views,
-                                     completion: {
-                                        let controller = GameViewController(network: networkConfig, settings: settings)
-                                        let nav = WKRUINavigationController(rootViewController: controller)
-                                        nav.modalPresentationStyle = .fullScreen
-                                        nav.modalTransitionStyle = .crossDissolve
-                                        if #available(iOS 13.0, *) {
-                                            nav.isModalInPresentation = true
-                                        }
-                                        self.present(nav, animated: true, completion: nil)
+            self.toggleCoreInterface(
+                isHidden: true,
+                duration: 0.25,
+                and: views,
+                completion: {
+                    let controller = GameViewController(network: networkConfig, settings: settings)
+                    let nav = WKRUINavigationController(rootViewController: controller)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.modalTransitionStyle = .crossDissolve
+                    nav.isModalInPresentation = true
+                    self.present(nav, animated: true, completion: nil)
             })
         }
     }
