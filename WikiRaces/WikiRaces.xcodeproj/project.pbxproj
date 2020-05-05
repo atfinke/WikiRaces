@@ -1392,7 +1392,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Shared/Frameworks/Analytics/Fabric.framework/upload-symbols\" -a 80c3b2d37f1bca4e182e7fbf7976e6f069340b4d -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n\n";
+			shellScript = "
+";
 		};
 		149FDEC61F4F490C003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2096,7 +2097,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRacesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2120,7 +2121,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WikiRacesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

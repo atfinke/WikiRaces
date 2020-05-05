@@ -267,8 +267,7 @@ final internal class ResultsTableViewCell: PointerInteractionTableViewCell {
             let nameAttributedString = NSMutableAttributedString(string: name, attributes: nil)
             let range = NSRange(location: 0, length: name.count)
 
-            let font = UIFont.systemRoundedFont(ofSize: 20, weight: .semibold) ??
-                UIFont.systemFont(ofSize: 18, weight: .medium)
+            let font = UIFont.systemRoundedFont(ofSize: 20, weight: .semibold)
             let attributes: [NSAttributedString.Key: Any] = [
                 .foregroundColor: UIColor(displayP3Red: 69.0/255.0,
                                           green: 145.0/255.0,

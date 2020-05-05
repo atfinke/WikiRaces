@@ -382,8 +382,8 @@ final internal class PlayerStatsManager {
     private func playerDatabaseSync() {
         logAllStatsToMetric()
         menuStatsUpdated?(multiplayerPoints,
-                         multiplayerRaces,
-                         PlayerDatabaseStat.multiplayerAverage.value())
+                          multiplayerRaces,
+                          PlayerDatabaseStat.multiplayerAverage.value())
     }
 
     private func leaderboardSync() {

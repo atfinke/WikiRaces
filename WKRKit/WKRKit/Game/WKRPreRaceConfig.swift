@@ -157,7 +157,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                             let title = page.title,
                             !page.url.absoluteString.contains("#"),
                             title != "Wikipedia, the free encyclopedia",
-                        title.count < 30 /*WKRKitConstants.current.pageTitleMaxRandomLength*/ {
+                        title.count < WKRKitConstants.current.pageTitleMaxRandomLength {
                             potentialFinalPages.append(page)
                         } else {
                             // Don't log the analytics, keep validation to just curated articles

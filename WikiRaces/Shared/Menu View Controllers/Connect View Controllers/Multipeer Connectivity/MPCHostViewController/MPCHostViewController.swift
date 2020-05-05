@@ -138,7 +138,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
 
         browser?.stopBrowsingForPeers()
         browser?.delegate = nil
-        
+
         session?.disconnect()
         session?.delegate = nil
         listenerUpdate?(.cancel)

@@ -152,7 +152,7 @@ class PlusView: UIView {
                     self?.toggleProductButtons(on: true)
                 }
         }
-        
+
         toggleProductButtons(on: PlusStore.shared.products != nil)
     }
 

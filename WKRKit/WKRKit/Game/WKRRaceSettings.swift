@@ -108,14 +108,6 @@ public class WKRGameSettings: Codable {
 
     // MARK: - Properties -
 
-    public var isEligibleForStats: Bool {
-        if points.isStandard, case StartPage.random = startPage {
-            return true
-        } else {
-            return false
-        }
-    }
-
     public var isCustom: Bool {
         if notifications.isStandard
             && points.isStandard

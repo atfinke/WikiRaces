@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
     build:
-        name: iOS Frameworks
+        name: iOS WKRKit
         runs-on: macOS-latest
         strategy:
             matrix:
@@ -14,5 +14,3 @@ jobs:
               run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WKRKit -destination '${{ matrix.destination }}' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
             - name: Test WKRKit
               run: xcodebuild clean test -workspace WikiRaces.xcworkspace -scheme WKRKitOfflineTests -destination '${{ matrix.destination }}' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-            - name: Build WKRUIKit
-              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WKRUIKit -destination '${{ matrix.destination }}' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO

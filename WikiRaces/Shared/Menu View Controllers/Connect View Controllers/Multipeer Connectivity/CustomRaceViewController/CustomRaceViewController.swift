@@ -87,7 +87,7 @@ final class CustomRaceViewController: UITableViewController {
     // MARK: - UITableViewDelegate -
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if PlusStore.shared.isPlus {
+        if !PlusStore.shared.isPlus {
             PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromCustomize)
             let controller = PlusViewController()
             controller.modalPresentationStyle = .overCurrentContext

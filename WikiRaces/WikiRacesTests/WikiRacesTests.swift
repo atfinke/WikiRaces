@@ -129,7 +129,10 @@ class WikiRacesTests: XCTestCase {
                                              points: 10,
                                              place: 1,
                                              timeRaced: timeRaced,
-                                             pixelsScrolled: 0)
+                                             pixelsScrolled: 0,
+                                             pages: [],
+                                             isEligibleForPoints: true,
+                                             isEligibleForSpeed: true)
 
             var newTime = timeRaced
             if fastest != 0 {
@@ -208,7 +211,10 @@ class WikiRacesTests: XCTestCase {
                                              points: Int(newPoints),
                                              place: Int(newPlace),
                                              timeRaced: Int(newTimeRaced),
-                                             pixelsScrolled: Int(newPixelsScrolled))
+                                             pixelsScrolled: Int(newPixelsScrolled),
+                                             pages: [],
+                                             isEligibleForPoints: true,
+                                             isEligibleForSpeed: true)
 
             if raceType != .solo {
                 XCTAssertEqual(points + newPoints, racePointsStat.value())
