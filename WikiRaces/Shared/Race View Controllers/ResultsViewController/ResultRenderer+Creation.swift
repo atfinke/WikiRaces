@@ -64,7 +64,7 @@ extension ResultRenderer {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
-        titleLabel.text = "WikiRaces 3"
+        titleLabel.text = "WikiRaces"
         titleLabel.textColor = tintColor
         innerBannerView.addSubview(titleLabel)
 
@@ -78,8 +78,8 @@ extension ResultRenderer {
         let constraints = [
             innerBannerView.topAnchor.constraint(equalTo: bannerView.topAnchor, constant: 10),
             innerBannerView.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor),
-            innerBannerView.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor, constant: -10),
-            innerBannerView.widthAnchor.constraint(equalToConstant: 250),
+            innerBannerView.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor, constant: -5),
+            innerBannerView.widthAnchor.constraint(equalToConstant: 225),
 
             imageView.leftAnchor.constraint(equalTo: innerBannerView.leftAnchor),
             imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
