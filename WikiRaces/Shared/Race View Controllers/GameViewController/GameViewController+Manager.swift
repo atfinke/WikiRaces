@@ -356,8 +356,12 @@ extension GameViewController {
         dismissActiveController(completion: completion)
 
         if networkConfig.isHost {
-            PlayerAnonymousMetrics.log(event: .hostStartedRace,
-                              attributes: ["Page": finalPage?.title as Any])
+            PlayerAnonymousMetrics.log(
+                event: .hostStartedRace,
+                attributes: [
+                    "Page": finalPage?.title as Any,
+                    "Custom": gameSettings.isCustom ? 1 : 0
+            ])
         }
     }
 

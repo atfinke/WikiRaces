@@ -132,8 +132,8 @@ final internal class MPCConnectViewController: ConnectViewController {
                     self.toggleCoreInterface(isHidden: true,
                                         duration: 0.25,
                                         and: [self.inviteView],
-                                        completion: {
-                                            self.presentHostInterface()
+                                        completion: { [weak self] in
+                                            self?.presentHostInterface()
                     })
                 } else {
                     self.startAdvertising()

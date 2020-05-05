@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-class CustomRaceNumericalViewController: UITableViewController {
+final class CustomRaceNumericalViewController: UITableViewController {
 
     // MARK: - Types -
 
@@ -89,11 +89,11 @@ class CustomRaceNumericalViewController: UITableViewController {
         case .points:
             guard let points = currentValue as? WKRGameSettings.Points else { fatalError() }
             self.points = points
-            title = "Points"
+            title = "Points".uppercased()
         case .timing:
             guard let timing = currentValue as? WKRGameSettings.Timing else { fatalError() }
             self.timing = timing
-            title = "Timing"
+            title = "Timing".uppercased()
         }
 
         tableView.allowsSelection = false
@@ -182,6 +182,8 @@ Stats Effect: Prevents improving points per race average and total number of rac
 
     @objc func stepperChanged(stepper: UIStepper) {
         let indexPath = IndexPath(row: stepper.tag, section: 0)
+        guard let cell = tableView.cellForRow(at: indexPath) as? Cell else { fatalError() }
+        
         switch type {
         case .points:
             guard let points = points else { fatalError() }
@@ -189,19 +191,26 @@ Stats Effect: Prevents improving points per race average and total number of rac
                 self.points = WKRGameSettings.Points(
                     bonusPointReward: points.bonusPointReward,
                     bonusPointsInterval: stepper.value)
+                cell.valueLabel.text = Int(stepper.value).description + " S"
             } else {
                 self.points = WKRGameSettings.Points(
                     bonusPointReward: Int(stepper.value),
                     bonusPointsInterval: points.bonusPointsInterval)
+                cell.valueLabel.text = Int(stepper.value).description
             }
         case .timing:
             guard let timing = timing else { fatalError() }
             if indexPath.row == 0 {
-                self.timing = WKRGameSettings.Timing(votingTime: Int(stepper.value), resultsTime: timing.resultsTime)
+                self.timing = WKRGameSettings.Timing(
+                    votingTime: Int(stepper.value),
+                    resultsTime: timing.resultsTime)
+                cell.valueLabel.text = Int(stepper.value).description + " S"
             } else {
-                self.timing = WKRGameSettings.Timing(votingTime: timing.votingTime, resultsTime: Int(stepper.value))
+                self.timing = WKRGameSettings.Timing(
+                    votingTime: timing.votingTime,
+                    resultsTime: Int(stepper.value))
+                cell.valueLabel.text = Int(stepper.value).description + " S"
             }
         }
-        tableView.reloadRows(at: [indexPath], with: .none)
     }
 }

@@ -48,7 +48,10 @@ class StatsViewController: UITableViewController {
                     detail: String(format: "%.2f PPR", PlayerDatabaseStat.multiplayerAverage.value())),
                 Item(
                     name: "Total Time",
-                    detail: formatted(for: [.soloTotalTime, .mpcTotalTime, .gkTotalTime], suffix: "S", checkPlural: false))
+                    detail: formatted(for: [.soloTotalTime, .mpcTotalTime, .gkTotalTime], suffix: "S", checkPlural: false)),
+                Item(
+                    name: "Pages Viewed",
+                    detail: formatted(for: [.soloPages, .mpcPages, .gkPages], suffix: "Page"))
         ]),
         Section(
             name: "Solo",
@@ -117,7 +120,7 @@ class StatsViewController: UITableViewController {
 
     init() {
         super.init(style: .grouped)
-        title = "Stats"
+        title = "Stats".uppercased()
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .stop,
             target: self,

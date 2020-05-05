@@ -36,13 +36,13 @@
 		1429329E242B0E5C00D64834 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293283242B0E5B00D64834 /* FirebaseInstanceID.xcframework */; };
 		1429329F242B0E5C00D64834 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293283242B0E5B00D64834 /* FirebaseInstanceID.xcframework */; };
 		142932A0242B0E5C00D64834 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293283242B0E5B00D64834 /* FirebaseInstanceID.xcframework */; };
-		142932A1242B0E5C00D64834 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293284242B0E5B00D64834 /* FIRAnalyticsConnector.framework */; };
+		142932A1242B0E5C00D64834 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293284242B0E5B00D64834 /* FIRAnalyticsConnector.framework */; platformFilter = ios; };
 		142932A2242B0E5C00D64834 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293284242B0E5B00D64834 /* FIRAnalyticsConnector.framework */; };
 		142932A3242B0E5C00D64834 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293284242B0E5B00D64834 /* FIRAnalyticsConnector.framework */; };
-		142932A4242B0E5C00D64834 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293285242B0E5B00D64834 /* GoogleAppMeasurement.framework */; };
+		142932A4242B0E5C00D64834 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293285242B0E5B00D64834 /* GoogleAppMeasurement.framework */; platformFilter = ios; };
 		142932A5242B0E5C00D64834 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293285242B0E5B00D64834 /* GoogleAppMeasurement.framework */; };
 		142932A6242B0E5C00D64834 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293285242B0E5B00D64834 /* GoogleAppMeasurement.framework */; };
-		142932A7242B0E5C00D64834 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293286242B0E5B00D64834 /* FirebaseAnalytics.framework */; };
+		142932A7242B0E5C00D64834 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293286242B0E5B00D64834 /* FirebaseAnalytics.framework */; platformFilter = ios; };
 		142932A8242B0E5C00D64834 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293286242B0E5B00D64834 /* FirebaseAnalytics.framework */; };
 		142932A9242B0E5C00D64834 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293286242B0E5B00D64834 /* FirebaseAnalytics.framework */; };
 		142932AA242B0E5C00D64834 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293287242B0E5B00D64834 /* GoogleDataTransportCCTSupport.xcframework */; };
@@ -51,7 +51,7 @@
 		142932AD242B0E5C00D64834 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293288242B0E5B00D64834 /* FirebaseInstallations.xcframework */; };
 		142932AE242B0E5C00D64834 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293288242B0E5B00D64834 /* FirebaseInstallations.xcframework */; };
 		142932AF242B0E5C00D64834 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293288242B0E5B00D64834 /* FirebaseInstallations.xcframework */; };
-		142932B0242B0E5C00D64834 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293289242B0E5C00D64834 /* FirebasePerformance.framework */; };
+		142932B0242B0E5C00D64834 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293289242B0E5C00D64834 /* FirebasePerformance.framework */; platformFilter = ios; };
 		142932B1242B0E5C00D64834 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293289242B0E5C00D64834 /* FirebasePerformance.framework */; };
 		142932B2242B0E5C00D64834 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293289242B0E5C00D64834 /* FirebasePerformance.framework */; };
 		142932B3242B0E5C00D64834 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1429328A242B0E5C00D64834 /* GTMSessionFetcher.xcframework */; };
@@ -75,14 +75,33 @@
 		142932C8242B0E5C00D64834 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293291242B0E5C00D64834 /* PromisesObjC.xcframework */; };
 		142932C9242B0E5C00D64834 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293291242B0E5C00D64834 /* PromisesObjC.xcframework */; };
 		142932CA242B0E5C00D64834 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14293291242B0E5C00D64834 /* PromisesObjC.xcframework */; };
-		142932CC242B0F2F00D64834 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CB242B0F2F00D64834 /* Crashlytics.framework */; };
+		142932CC242B0F2F00D64834 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CB242B0F2F00D64834 /* Crashlytics.framework */; platformFilter = ios; };
 		142932CD242B0F2F00D64834 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CB242B0F2F00D64834 /* Crashlytics.framework */; };
 		142932CE242B0F2F00D64834 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CB242B0F2F00D64834 /* Crashlytics.framework */; };
-		142932D0242B0F6800D64834 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CF242B0F6800D64834 /* Fabric.framework */; };
+		142932D0242B0F6800D64834 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CF242B0F6800D64834 /* Fabric.framework */; platformFilter = ios; };
 		142932D1242B0F6800D64834 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CF242B0F6800D64834 /* Fabric.framework */; };
 		142932D2242B0F6800D64834 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142932CF242B0F6800D64834 /* Fabric.framework */; };
 		142A09BE210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */; };
 		142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */; };
+		142ABDFA24600559008E7F77 /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDF924600559008E7F77 /* PlusViewController.swift */; };
+		142ABDFB2460055B008E7F77 /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDF924600559008E7F77 /* PlusViewController.swift */; };
+		142ABDFC2460055C008E7F77 /* PlusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDF924600559008E7F77 /* PlusViewController.swift */; };
+		142ABDFE24600576008E7F77 /* PlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDFD24600576008E7F77 /* PlusView.swift */; };
+		142ABDFF24600576008E7F77 /* PlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDFD24600576008E7F77 /* PlusView.swift */; };
+		142ABE0024600576008E7F77 /* PlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDFD24600576008E7F77 /* PlusView.swift */; };
+		142ABE022460057C008E7F77 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE012460057C008E7F77 /* ActivityButton.swift */; };
+		142ABE032460057C008E7F77 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE012460057C008E7F77 /* ActivityButton.swift */; };
+		142ABE042460057C008E7F77 /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE012460057C008E7F77 /* ActivityButton.swift */; };
+		142ABE0624600A74008E7F77 /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0524600A74008E7F77 /* PlusStore.swift */; };
+		142ABE0724600A74008E7F77 /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0524600A74008E7F77 /* PlusStore.swift */; };
+		142ABE0824600A74008E7F77 /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0524600A74008E7F77 /* PlusStore.swift */; };
+		142ABE0E24600ABE008E7F77 /* MagicSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */; };
+		142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */; };
+		142ABE1024600ABE008E7F77 /* MagicSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */; };
+		142ABE1224600AF0008E7F77 /* OSLog+Magic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE1124600AF0008E7F77 /* OSLog+Magic.swift */; };
+		142ABE1324600AF0008E7F77 /* OSLog+Magic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE1124600AF0008E7F77 /* OSLog+Magic.swift */; };
+		142ABE1424600AF0008E7F77 /* OSLog+Magic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE1124600AF0008E7F77 /* OSLog+Magic.swift */; };
+		142ABE16246013BC008E7F77 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142ABE15246013BC008E7F77 /* StoreKit.framework */; };
 		142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F714E210C33FC00C66558 /* MenuViewController+KB.swift */; };
 		142F7153210C34A300C66558 /* MPCHostViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */; };
 		142F7155210C35BC00C66558 /* VotingViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7154210C35BC00C66558 /* VotingViewController+KB.swift */; };
@@ -176,7 +195,7 @@
 		14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
 		14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB6A2224FA54007D4B54 /* MPCHostSoloCell.swift */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
-		14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B8F80C222C456B006C7A06 /* GameKit.framework */; platformFilter = ios; };
+		14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B8F80C222C456B006C7A06 /* GameKit.framework */; };
 		14B8F811222C47FA006C7A06 /* GKMessageImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 14B8F810222C47FA006C7A06 /* GKMessageImage.png */; };
 		14BA538921FE3B1400A8CB01 /* ConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* ConnectViewController.swift */; };
 		14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
@@ -234,6 +253,12 @@
 		14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */; };
 		14C6B1F61FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
 		14C6B1F71FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
+		14D18CDC2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
+		14D18CDD2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
+		14D18CDE2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
+		14D18CE02460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		14D18CE12460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		14D18CE22460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
 		14D8AD471F81828D00914E5A /* PlayerAnonymousMetrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */; };
 		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14DC66D31F9072180026C6ED /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
@@ -268,6 +293,21 @@
 		14E6D55E1F86A1CA005EB3B9 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14E6D5611F86A1CF005EB3B9 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
 		14E6D5621F86A1CF005EB3B9 /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14EF51D2245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */; };
+		14EF51D3245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */; };
+		14EF51D4245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */; };
+		14EF51D5245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */; };
+		14EF51D6245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */; };
+		14EF51D7245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */; };
+		14EF51D8245FAE5600F3653F /* CustomRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */; };
+		14EF51D9245FAE5600F3653F /* CustomRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */; };
+		14EF51DA245FAE5600F3653F /* CustomRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */; };
+		14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */; };
+		14EF51DC245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */; };
+		14EF51DD245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */; };
+		14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
+		14EF51DF245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
+		14EF51E0245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -441,11 +481,17 @@
 		142932CB242B0F2F00D64834 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		142932CF242B0F6800D64834 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		142A09BD210EEBD000979C46 /* MPCConnectViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCConnectViewController+KB.swift"; sourceTree = "<group>"; };
+		142ABDF924600559008E7F77 /* PlusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusViewController.swift; sourceTree = "<group>"; };
+		142ABDFD24600576008E7F77 /* PlusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusView.swift; sourceTree = "<group>"; };
+		142ABE012460057C008E7F77 /* ActivityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityButton.swift; sourceTree = "<group>"; };
+		142ABE0524600A74008E7F77 /* PlusStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusStore.swift; sourceTree = "<group>"; };
+		142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicSubscription.swift; sourceTree = "<group>"; };
+		142ABE1124600AF0008E7F77 /* OSLog+Magic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OSLog+Magic.swift"; sourceTree = "<group>"; };
+		142ABE15246013BC008E7F77 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		142F714E210C33FC00C66558 /* MenuViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7152210C34A300C66558 /* MPCHostViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7154210C35BC00C66558 /* VotingViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VotingViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7156210C375F00C66558 /* GameViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+KB.swift"; sourceTree = "<group>"; };
-		143054D01F8959DA00C0BC27 /* BridgingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewStatsCell.swift; sourceTree = "<group>"; };
 		143948BC2144CC0F00992850 /* DebugInfoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoTableViewController.swift; sourceTree = "<group>"; };
 		143948C02144CC8C00992850 /* DebugInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugInfoTableViewCell.swift; sourceTree = "<group>"; };
@@ -522,6 +568,9 @@
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
 		14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostViewController.swift; sourceTree = "<group>"; };
 		14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostSearchingCell.swift; sourceTree = "<group>"; };
+		14D18CDB2460CF00002E4F5D /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
+		14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPlayersViewController.swift; sourceTree = "<group>"; };
+		14D7DC70245FC0D800772E6F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAnimationDurationConstants.swift; sourceTree = "<group>"; };
 		14DFBD1D210EFDEE00BD8DAF /* MPCHostViewController+Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MPCHostViewController+Table.swift"; sourceTree = "<group>"; };
 		14E0F19E22303A8F00BFF1E9 /* PlayerDatabaseStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDatabaseStat.swift; sourceTree = "<group>"; };
@@ -530,6 +579,11 @@
 		14E0F1AC22303FD100BFF1E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAnonymousMetrics.swift; sourceTree = "<group>"; };
 		14E1B1A01F798A520082F4FA /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceOtherController.swift; sourceTree = "<group>"; };
+		14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRacePageViewController.swift; sourceTree = "<group>"; };
+		14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceViewController.swift; sourceTree = "<group>"; };
+		14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceNotificationsController.swift; sourceTree = "<group>"; };
+		14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceNumericalViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -554,6 +608,7 @@
 				142932B6242B0E5C00D64834 /* FirebaseCore.xcframework in Frameworks */,
 				1429329E242B0E5C00D64834 /* FirebaseInstanceID.xcframework in Frameworks */,
 				142932C5242B0E5C00D64834 /* GoogleToolboxForMac.xcframework in Frameworks */,
+				142ABE16246013BC008E7F77 /* StoreKit.framework in Frameworks */,
 				1429329B242B0E5C00D64834 /* FirebaseRemoteConfig.xcframework in Frameworks */,
 				142932A7242B0E5C00D64834 /* FirebaseAnalytics.framework in Frameworks */,
 				142932AA242B0E5C00D64834 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */,
@@ -653,15 +708,31 @@
 			isa = PBXGroup;
 			children = (
 				147EF6F82202436600583D73 /* MPCHostContext.swift */,
+				14EF51C6245FAE3600F3653F /* CustomRaceViewController */,
 				14DFBD21210EFE8E00BD8DAF /* MPCConnectViewController */,
 				14DFBD22210EFE9900BD8DAF /* MPCHostViewController */,
 			);
 			path = "Multipeer Connectivity";
 			sourceTree = "<group>";
 		};
+		142ABDF624600550008E7F77 /* PlusViewController */ = {
+			isa = PBXGroup;
+			children = (
+				142ABDF924600559008E7F77 /* PlusViewController.swift */,
+				142ABDFD24600576008E7F77 /* PlusView.swift */,
+				142ABE0524600A74008E7F77 /* PlusStore.swift */,
+				142ABE012460057C008E7F77 /* ActivityButton.swift */,
+				142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */,
+				142ABE1124600AF0008E7F77 /* OSLog+Magic.swift */,
+			);
+			path = PlusViewController;
+			sourceTree = "<group>";
+		};
 		143054C01F8958DC00C0BC27 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
+				14BAB5332229DC6200C5AE27 /* Firebase.h */,
+				14D7DC70245FC0D800772E6F /* module.modulemap */,
 				142932CF242B0F6800D64834 /* Fabric.framework */,
 				142932CB242B0F2F00D64834 /* Crashlytics.framework */,
 				14293284242B0E5B00D64834 /* FIRAnalyticsConnector.framework */,
@@ -682,8 +753,6 @@
 				1429328D242B0E5C00D64834 /* nanopb.xcframework */,
 				14293291242B0E5C00D64834 /* PromisesObjC.xcframework */,
 				1429327F242B0E5B00D64834 /* Protobuf.xcframework */,
-				14BAB5332229DC6200C5AE27 /* Firebase.h */,
-				143054D01F8959DA00C0BC27 /* BridgingHeader.h */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -811,6 +880,7 @@
 			children = (
 				14B55C901F3A49670090E092 /* MenuViewController */,
 				143BB7331F60DF0200D00541 /* Connect View Controllers */,
+				142ABDF624600550008E7F77 /* PlusViewController */,
 				143948C22144CCAE00992850 /* DebugInfoTableViewController */,
 			);
 			path = "Menu View Controllers";
@@ -872,6 +942,8 @@
 				14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */,
 				143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */,
 				142F714E210C33FC00C66558 /* MenuViewController+KB.swift */,
+				14D18CDB2460CF00002E4F5D /* StatsViewController.swift */,
+				14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */,
 			);
 			path = MenuViewController;
 			sourceTree = "<group>";
@@ -991,6 +1063,7 @@
 		14E1B19F1F798A520082F4FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				142ABE15246013BC008E7F77 /* StoreKit.framework */,
 				14B8F80C222C456B006C7A06 /* GameKit.framework */,
 				14E1B1A01F798A520082F4FA /* CloudKit.framework */,
 			);
@@ -1015,6 +1088,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		14EF51C6245FAE3600F3653F /* CustomRaceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */,
+				14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */,
+				14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */,
+				14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */,
+				14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */,
+			);
+			path = CustomRaceViewController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1027,7 +1112,6 @@
 				149FF8461F362B83000A5D96 /* Frameworks */,
 				149FF8471F362B83000A5D96 /* Resources */,
 				1410DB321F4F4BEA00F5CAD7 /* Embed Frameworks */,
-				14C580B921103EB5005C192D /* Swiftlint */,
 				14360F7C23664321005A80F0 /* DSYM */,
 			);
 			buildRules = (
@@ -1308,7 +1392,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Shared/Frameworks/Analytics/Fabric.framework/upload-symbols\" -gsp \"${PROJECT_DIR}/WikiRaces/GoogleService-Info.plist\" -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n\n";
+			shellScript = "\"${PROJECT_DIR}/Shared/Frameworks/Analytics/Fabric.framework/upload-symbols\" -a 80c3b2d37f1bca4e182e7fbf7976e6f069340b4d -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n\n";
 		};
 		149FDEC61F4F490C003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1338,24 +1422,6 @@
 			shellPath = /bin/sh;
 			shellScript = "buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"";
 		};
-		14C580B921103EB5005C192D /* Swiftlint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = Swiftlint;
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1377,6 +1443,7 @@
 				14C4AB511F3689E20086B77F /* VotingViewController+TableView.swift in Sources */,
 				142F7155210C35BC00C66558 /* VotingViewController+KB.swift in Sources */,
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				142ABDFE24600576008E7F77 /* PlusView.swift in Sources */,
 				14C4AB351F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				14DF31A8211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
@@ -1386,11 +1453,14 @@
 				145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				143BB7351F60DF4A00D00541 /* MPCConnectViewController.swift in Sources */,
 				14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
+				142ABE022460057C008E7F77 /* ActivityButton.swift in Sources */,
 				14B2DD4C22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */,
+				14D18CE02460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				142F7153210C34A300C66558 /* MPCHostViewController+KB.swift in Sources */,
 				1414280B21FC437000C48788 /* GameKitConnectViewController+Match.swift in Sources */,
+				14D18CDC2460CF00002E4F5D /* StatsViewController.swift in Sources */,
 				14C4AB851F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				147EF6F92202436600583D73 /* MPCHostContext.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
@@ -1402,20 +1472,29 @@
 				14B2DD4522212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141E4CF122012B2F000A0A15 /* PlayerDatabaseMetrics.swift in Sources */,
+				14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
+				14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
+				142ABE0624600A74008E7F77 /* PlusStore.swift in Sources */,
+				142ABDFA24600559008E7F77 /* PlusViewController.swift in Sources */,
 				1473E2A0210DAD7C00726377 /* HelpViewController+KB.swift in Sources */,
 				1414280321FC18F600C48788 /* GameKitConnectViewController.swift in Sources */,
 				14B2DD412221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
+				142ABE1224600AF0008E7F77 /* OSLog+Magic.swift in Sources */,
+				14EF51D5245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				141892F41F60EABC006748F0 /* MPCConnectViewController+Invite.swift in Sources */,
 				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
 				1485B67D223072AB00D6800B /* MedalView.swift in Sources */,
 				14E0F19F22303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
+				14EF51D8245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				1485B6772230724A00D6800B /* MedalScene.swift in Sources */,
 				14C4AB3D1F3689AE0086B77F /* MenuViewController.swift in Sources */,
+				142ABE0E24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				149357E3210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				142A09BE210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
+				14EF51D2245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				144A1029202FC79B003DB51A /* CenteredTableViewController.swift in Sources */,
 				149357DF210E934300F6453A /* MPCConnectViewController+UI.swift in Sources */,
 				141854DF2373666A008C988A /* MPCHostAutoInviteCell.swift in Sources */,
@@ -1431,6 +1510,7 @@
 			files = (
 				14DF31B721169290005BA432 /* MPCConnectViewController.swift in Sources */,
 				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
+				142ABE1324600AF0008E7F77 /* OSLog+Magic.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				14891AA6214F6BDB001BDEB8 /* DebugInfoTableViewCell.swift in Sources */,
 				14E0F1A022303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
@@ -1441,30 +1521,40 @@
 				141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				143BB7151F60AEC900D00541 /* PlayerStatsManager.swift in Sources */,
 				143BB7191F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */,
+				14EF51D9245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				14DF31A9211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				1485B6782230724A00D6800B /* MedalScene.swift in Sources */,
+				142ABE032460057C008E7F77 /* ActivityButton.swift in Sources */,
+				14EF51DF245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				14C4AB371F3689A40086B77F /* ResultsTableViewCell.swift in Sources */,
 				14DF31B62116923C005BA432 /* MPCHostViewController.swift in Sources */,
+				142ABDFF24600576008E7F77 /* PlusView.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14B4DB662224F1B9007D4B54 /* GameKitConnectViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
+				142ABE0724600A74008E7F77 /* PlusStore.swift in Sources */,
 				14B2DD422221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
+				142ABDFB2460055B008E7F77 /* PlusViewController.swift in Sources */,
 				14B4DB682224F1BC007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,
 				14DF31B421169236005BA432 /* MPCConnectViewController+UI.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
+				14EF51DC245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
+				142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
 				14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */,
 				1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
+				14EF51D3245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				1437C52022285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				14B4DB6C2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				14DD97252202293900AAB389 /* ConnectViewController.swift in Sources */,
+				14EF51D6245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
@@ -1472,9 +1562,11 @@
 				149357E4210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
 				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */,
+				14D18CE12460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
 				144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
 				144A102B202FC7A1003DB51A /* CenteredTableViewController.swift in Sources */,
 				14B4DB622224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
+				14D18CDD2460CF00002E4F5D /* StatsViewController.swift in Sources */,
 				14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */,
 				14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14DF31B521169239005BA432 /* MPCHostViewController+Table.swift in Sources */,
@@ -1502,8 +1594,10 @@
 			files = (
 				14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */,
 				147EF7122202D76000583D73 /* MPCHostContext.swift in Sources */,
+				14D18CE22460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				14DF31AA211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
+				142ABDFC2460055C008E7F77 /* PlusViewController.swift in Sources */,
 				14E0F1A122303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
 				149357DB210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */,
@@ -1518,14 +1612,19 @@
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
 				14B4DB672224F1BA007D4B54 /* GameKitConnectViewController.swift in Sources */,
+				14EF51D7245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14B2DD432221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				14BA538F21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
+				14EF51E0245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
+				14EF51DD245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				14DD97292202295100AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				14B4DB692224F1BD007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,
 				142A09C0210EEBD000979C46 /* MPCConnectViewController+KB.swift in Sources */,
+				14EF51DA245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
 				14DFBD20210EFDEE00BD8DAF /* MPCHostViewController+Table.swift in Sources */,
+				142ABE1424600AF0008E7F77 /* OSLog+Magic.swift in Sources */,
 				14C2600A1F6F02A500CD7373 /* WKRAppDelegate.swift in Sources */,
 				1429327E242AE29000D64834 /* PointerInteractionTableViewCell.swift in Sources */,
 				14B2DD3D22212298009B8AB3 /* MenuView.swift in Sources */,
@@ -1533,8 +1632,10 @@
 				1480F6C321FB77D300081F58 /* DebugInfoTableViewController.swift in Sources */,
 				14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */,
 				1437C52122285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
+				142ABE1024600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				14B4DB6D2224FA54007D4B54 /* MPCHostSoloCell.swift in Sources */,
 				1478B1B322095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
+				14EF51D4245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				14C260031F6F02A500CD7373 /* HistoryViewController.swift in Sources */,
 				141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				14C6B1F71FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */,
@@ -1544,13 +1645,17 @@
 				144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */,
 				14D8AD471F81828D00914E5A /* PlayerAnonymousMetrics.swift in Sources */,
 				14C25FF21F6F028100CD7373 /* MenuViewController.swift in Sources */,
+				142ABE0824600A74008E7F77 /* PlusStore.swift in Sources */,
 				14C260001F6F02A500CD7373 /* ResultsViewController+TableView.swift in Sources */,
 				14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
+				142ABE0024600576008E7F77 /* PlusView.swift in Sources */,
 				14C260051F6F02A500CD7373 /* VotingViewController+TableView.swift in Sources */,
 				14C25FF51F6F028100CD7373 /* MenuViewController+GameKit.swift in Sources */,
+				142ABE042460057C008E7F77 /* ActivityButton.swift in Sources */,
 				14C260061F6F02A500CD7373 /* VotingTableViewCell.swift in Sources */,
 				14DF31BB21169372005BA432 /* MPCConnectViewController+Invite.swift in Sources */,
+				14D18CDE2460CF00002E4F5D /* StatsViewController.swift in Sources */,
 				14B2DD4E22213A07009B8AB3 /* GlobalRacesHelper.swift in Sources */,
 				143FC31C2401BB0900AB313A /* MPCHostAutoInviteCell.swift in Sources */,
 				144A102D202FC7A2003DB51A /* CenteredTableViewController.swift in Sources */,
@@ -1788,22 +1893,22 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Shared/Frameworks/Analytics";
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05;
 				OTHER_LDFLAGS = " -ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = Shared/Frameworks/Analytics/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1823,21 +1928,21 @@
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Shared/Frameworks/Analytics";
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05;
 				OTHER_LDFLAGS = " -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_UIKITFORMAC = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = Shared/Frameworks/Analytics/BridgingHeader.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1855,7 +1960,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1880,7 +1985,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1943,7 +2048,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1969,7 +2074,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -17,15 +17,14 @@ final class CustomRaceOtherController: UITableViewController {
 
         // MARK: - Properties -
 
-        let switchElement = UISwitch()
+        let toggle = UISwitch()
         static let reuseIdentifier = "reuseIdentifier"
 
         // MARK: - Initalization -
 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            contentView.addSubview(switchElement)
-
+            contentView.addSubview(toggle)
         }
 
         required init?(coder: NSCoder) {
@@ -36,8 +35,9 @@ final class CustomRaceOtherController: UITableViewController {
 
         override func layoutSubviews() {
             super.layoutSubviews()
-            switchElement.center = CGPoint(
-                x: contentView.frame.width - contentView.layoutMargins.right - switchElement.frame.width / 2,
+            toggle.onTintColor = .wkrTextColor(for: traitCollection)
+            toggle.center = CGPoint(
+                x: contentView.frame.width - contentView.layoutMargins.right - toggle.frame.width / 2,
                 y: contentView.frame.height / 2)
         }
     }
@@ -56,7 +56,7 @@ final class CustomRaceOtherController: UITableViewController {
     init(other: WKRGameSettings.Other) {
         self.other = other
         super.init(style: .grouped)
-        title = "Other"
+        title = "Other".uppercased()
         tableView.allowsSelection = false
         tableView.register(Cell.self, forCellReuseIdentifier: Cell.reuseIdentifier)
     }
@@ -80,13 +80,13 @@ final class CustomRaceOtherController: UITableViewController {
                                                        for: indexPath) as? Cell else {
                                                         fatalError()
         }
-        cell.switchElement.tag = indexPath.row
-        cell.switchElement.addTarget(self, action: #selector(switchChanged(updatedSwitch:)), for: .valueChanged)
+        cell.toggle.tag = indexPath.row
+        cell.toggle.addTarget(self, action: #selector(switchChanged(updatedSwitch:)), for: .valueChanged)
 
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "Help Enabled"
-            cell.switchElement.isOn = other.isHelpEnabled
+            cell.toggle.isOn = other.isHelpEnabled
         default:
             fatalError()
         }

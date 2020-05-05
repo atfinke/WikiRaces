@@ -36,7 +36,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
 
     var gameSettings = WKRGameSettings()
     var allCustomPages = [WKRPage]()
-    var gameSettingsController: CustomRaceViewController?
+    weak var gameSettingsController: CustomRaceViewController?
 
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
@@ -136,7 +136,11 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
 
+        browser?.stopBrowsingForPeers()
+        browser?.delegate = nil
+        
         session?.disconnect()
+        session?.delegate = nil
         listenerUpdate?(.cancel)
     }
 

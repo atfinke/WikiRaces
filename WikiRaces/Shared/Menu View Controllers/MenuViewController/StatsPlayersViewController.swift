@@ -38,7 +38,7 @@ class StatsPlayersViewController: UITableViewController {
         }
 
         super.init(style: .plain)
-        title = "Players Raced"
+        title = "Players Raced".uppercased()
         tableView.allowsSelection = false
     }
 

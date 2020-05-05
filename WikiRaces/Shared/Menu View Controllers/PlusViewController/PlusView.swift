@@ -81,7 +81,7 @@ class PlusView: UIView {
 
     private let loadingOptionsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Loading Products"
+        label.text = "Loading"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
@@ -141,19 +141,19 @@ class PlusView: UIView {
         NotificationCenter.default.addObserver(
             forName: PlusStore.productsUpdatedNotificationName,
             object: nil,
-            queue: nil) { _ in
+            queue: nil) { [weak self] _ in
                 DispatchQueue.main.async {
                     guard let products = PlusStore.shared.products else {
-                        self.toggleProductButtons(on: false)
+                        self?.toggleProductButtons(on: false)
                         return
                     }
-                    self.standardOptionButton.label.text = products.standard.displayString
-                    self.ultimateOptionButton.label.text = products.ultimate.displayString
-                    self.toggleProductButtons(on: true)
+                    self?.standardOptionButton.label.text = products.standard.displayString
+                    self?.ultimateOptionButton.label.text = products.ultimate.displayString
+                    self?.toggleProductButtons(on: true)
                 }
         }
-
-        self.toggleProductButtons(on: true)
+        
+        toggleProductButtons(on: PlusStore.shared.products != nil)
     }
 
     required init?(coder: NSCoder) {
@@ -319,9 +319,9 @@ class PlusView: UIView {
 
     @objc
     func purchaseUltimate() {
-        standardOptionButton.displayState = .activity
+        ultimateOptionButton.displayState = .activity
         purchase(type: .ultimate, onError: { [weak self] in
-            self?.standardOptionButton.displayState = .label
+            self?.ultimateOptionButton.displayState = .label
         })
     }
 

@@ -17,14 +17,14 @@ final class CustomRaceNotificationsController: UITableViewController {
 
         // MARK: - Properties -
 
-        let switchElement = UISwitch()
+        let toggle = UISwitch()
         static let reuseIdentifier = "reuseIdentifier"
 
         // MARK: - Initalization -
 
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            contentView.addSubview(switchElement)
+            contentView.addSubview(toggle)
         }
 
         required init?(coder: NSCoder) {
@@ -35,8 +35,10 @@ final class CustomRaceNotificationsController: UITableViewController {
 
         override func layoutSubviews() {
             super.layoutSubviews()
-            switchElement.center = CGPoint(
-                x: contentView.frame.width - contentView.layoutMargins.right - switchElement.frame.width / 2,
+            toggle.onTintColor = .wkrTextColor(for: traitCollection)
+            
+            toggle.center = CGPoint(
+                x: contentView.frame.width - contentView.layoutMargins.right - toggle.frame.width / 2,
                 y: contentView.frame.height / 2)
         }
     }
@@ -55,7 +57,7 @@ final class CustomRaceNotificationsController: UITableViewController {
     init(notifications: WKRGameSettings.Notifications) {
         self.notifications = notifications
         super.init(style: .grouped)
-        title = "Player Messages"
+        title = "Player Messages".uppercased()
         tableView.allowsSelection = false
         tableView.register(Cell.self, forCellReuseIdentifier: Cell.reuseIdentifier)
     }
@@ -79,25 +81,25 @@ final class CustomRaceNotificationsController: UITableViewController {
                                                        for: indexPath) as? Cell else {
                                                         fatalError()
         }
-        cell.switchElement.tag = indexPath.row
-        cell.switchElement.addTarget(self, action: #selector(switchChanged(updatedSwitch:)), for: .valueChanged)
+        cell.toggle.tag = indexPath.row
+        cell.toggle.addTarget(self, action: #selector(switchChanged(updatedSwitch:)), for: .valueChanged)
 
         switch indexPath.row {
         case 0:
             cell.textLabel?.text = "X Needed Help"
-            cell.switchElement.isOn = notifications.neededHelp
+            cell.toggle.isOn = notifications.neededHelp
         case 1:
             cell.textLabel?.text = "X Is Close"
-            cell.switchElement.isOn = notifications.linkOnPage
+            cell.toggle.isOn = notifications.linkOnPage
         case 2:
             cell.textLabel?.text = "X Missed The Link"
-            cell.switchElement.isOn = notifications.missedLink
+            cell.toggle.isOn = notifications.missedLink
         case 3:
             cell.textLabel?.text = "X Is On USA"
-            cell.switchElement.isOn = notifications.isOnUSA
+            cell.toggle.isOn = notifications.isOnUSA
         case 4:
             cell.textLabel?.text = "X Is On The Same Page"
-            cell.switchElement.isOn = notifications.isOnSamePage
+            cell.toggle.isOn = notifications.isOnSamePage
         default:
             fatalError()
         }

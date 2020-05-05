@@ -10,9 +10,9 @@ import UIKit
 import WKRKit
 
 final class CustomRaceViewController: UITableViewController {
-
+    
     // MARK: - Types -
-
+    
     enum Setting: String, CaseIterable {
         case startPage = "Start Page"
         case endPage = "End Page"
@@ -20,36 +20,36 @@ final class CustomRaceViewController: UITableViewController {
         case notifications = "Player Messages"
         case points, timing, other
     }
-
+    
     // MARK: - Properties -
-
+    
     private let settingOptions = Setting.allCases
     var allCustomPages = [WKRPage]()
     let settings: WKRGameSettings
-
+    
     // MARK: - Initalization -
-
+    
     init(settings: WKRGameSettings) {
         self.settings = settings
         super.init(style: .grouped)
-        title = "Customize Race"
+        title = "Customize Race".uppercased()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - UITableViewDataSource -
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? settingOptions.count : 1
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
         if indexPath.section == 1 {
@@ -57,18 +57,18 @@ final class CustomRaceViewController: UITableViewController {
             cell.textLabel?.textColor = .systemRed
             return cell
         }
-
+        
         let setting = settingOptions[indexPath.row]
         cell.textLabel?.text = setting.rawValue.capitalized
         cell.detailTextLabel?.text = value(for: setting)
         cell.accessoryType = .disclosureIndicator
         return cell
     }
-
+    
     // MARK: - UITableViewDelegate -
-
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if PlusStore.shared.isPlus {
+        if !PlusStore.shared.isPlus {
             PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromCustomize)
             let controller = PlusViewController()
             controller.modalPresentationStyle = .overCurrentContext
@@ -80,7 +80,7 @@ final class CustomRaceViewController: UITableViewController {
             tableView.reloadData()
             return
         }
-
+        
         let setting = settingOptions[indexPath.row]
         switch setting {
         case .startPage:
@@ -89,35 +89,38 @@ final class CustomRaceViewController: UITableViewController {
                 customPages: allCustomPages,
                 selectedOption: settings.startPage)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdateStartPage = { page in
+            controller.didUpdateStartPage = { [weak self] page, customPages in
+                guard let self = self else { return }
                 self.settings.startPage = page
-                self.allCustomPages = controller.customPages
+                self.allCustomPages = customPages
                 DispatchQueue.main.async {
                     tableView.reloadData()
                 }
             }
         case .endPage:
             let controller = CustomRacePageViewController(
-            pageType: .end,
-            customPages: allCustomPages,
-            selectedOption: settings.endPage)
+                pageType: .end,
+                customPages: allCustomPages,
+                selectedOption: settings.endPage)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdateEndPage = { page in
+            controller.didUpdateEndPage = { [weak self] page, customPages in
+                guard let self = self else { return }
                 self.settings.endPage = page
-                self.allCustomPages = controller.customPages
+                self.allCustomPages = customPages
                 DispatchQueue.main.async {
                     tableView.reloadData()
                 }
             }
         case .bannedPages:
             let controller = CustomRacePageViewController(
-            pageType: .banned,
-            customPages: allCustomPages,
-            selectedOption: settings.bannedPages)
+                pageType: .banned,
+                customPages: allCustomPages,
+                selectedOption: settings.bannedPages)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdateBannedPages = { pages in
+            controller.didUpdateBannedPages = { [weak self] pages, customPages in
+                guard let self = self else { return }
                 self.settings.bannedPages = pages
-                self.allCustomPages = controller.customPages
+                self.allCustomPages = customPages
                 DispatchQueue.main.async {
                     tableView.reloadData()
                 }
@@ -125,7 +128,8 @@ final class CustomRaceViewController: UITableViewController {
         case .notifications:
             let controller = CustomRaceNotificationsController(notifications: settings.notifications)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdate = { notifications in
+            controller.didUpdate = { [weak self] notifications in
+                guard let self = self else { return }
                 self.settings.notifications = notifications
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -134,7 +138,8 @@ final class CustomRaceViewController: UITableViewController {
         case .points:
             let controller = CustomRaceNumericalViewController(settingsType: .points, currentValue: settings.points)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdatePoints = { points in
+            controller.didUpdatePoints = { [weak self] points in
+                guard let self = self else { return }
                 self.settings.points = points
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -143,7 +148,8 @@ final class CustomRaceViewController: UITableViewController {
         case .timing:
             let controller = CustomRaceNumericalViewController(settingsType: .timing, currentValue: settings.timing)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdateTiming = { timing in
+            controller.didUpdateTiming = { [weak self] timing in
+                guard let self = self else { return }
                 self.settings.timing = timing
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -152,7 +158,8 @@ final class CustomRaceViewController: UITableViewController {
         case .other:
             let controller = CustomRaceOtherController(other: settings.other)
             navigationController?.pushViewController(controller, animated: true)
-            controller.didUpdate = { other in
+            controller.didUpdate = { [weak self] other in
+                guard let self = self else { return }
                 self.settings.other = other
                 DispatchQueue.main.async {
                     tableView.reloadData()
@@ -160,9 +167,9 @@ final class CustomRaceViewController: UITableViewController {
             }
         }
     }
-
+    
     // MARK: - Helpers -
-
+    
     private func value(for setting: Setting) -> String {
         switch setting {
         case .startPage:

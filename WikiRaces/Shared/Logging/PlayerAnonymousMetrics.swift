@@ -11,7 +11,7 @@ import WKRKit
 
 #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG
 import Crashlytics
-import FirebaseCore
+import FirebaseAnalytics
 #endif
 
 internal struct PlayerAnonymousMetrics {

@@ -23,14 +23,14 @@ final class CustomRacePageViewController: UITableViewController {
 
     // MARK: - Properties -
 
-    let pageType: PageType
+    private let pageType: PageType
 
-    var customPages: [WKRPage]
-    var indexPathsOfSelectedOptions: Set<IndexPath> = []
+    private var customPages: [WKRPage]
+    private var indexPathsOfSelectedOptions: Set<IndexPath> = []
 
-    var didUpdateStartPage: ((WKRGameSettings.StartPage) -> Void)?
-    var didUpdateEndPage: ((WKRGameSettings.EndPage) -> Void)?
-    var didUpdateBannedPages: (([WKRGameSettings.BannedPage]) -> Void)?
+    var didUpdateStartPage: ((WKRGameSettings.StartPage, [WKRPage]) -> Void)?
+    var didUpdateEndPage: ((WKRGameSettings.EndPage, [WKRPage]) -> Void)?
+    var didUpdateBannedPages: (([WKRGameSettings.BannedPage], [WKRPage]) -> Void)?
 
     // MARK: - Initalization -
 
@@ -57,7 +57,7 @@ final class CustomRacePageViewController: UITableViewController {
 
         switch pageType {
         case .start:
-            title = "Start Page"
+            title = "Start Page".uppercased()
             guard let page = selectedOption as? WKRGameSettings.StartPage else { fatalError() }
             switch page {
             case .random:
@@ -69,7 +69,7 @@ final class CustomRacePageViewController: UITableViewController {
                 select(indexPath: IndexPath(row: index, section: 1))
             }
         case .end:
-            title = "End Page"
+            title = "End Page".uppercased()
             guard let page = selectedOption as? WKRGameSettings.EndPage else { fatalError() }
             switch page {
             case .curatedVoting:
@@ -83,7 +83,7 @@ final class CustomRacePageViewController: UITableViewController {
                 select(indexPath: IndexPath(row: index, section: 1))
             }
         case .banned:
-            title = "Banned Pages"
+            title = "Banned Pages".uppercased()
             guard let pages = selectedOption as? [WKRGameSettings.BannedPage] else { fatalError() }
             for page in pages {
                 switch page {
@@ -97,7 +97,6 @@ final class CustomRacePageViewController: UITableViewController {
                 }
             }
         }
-
     }
 
     required init?(coder: NSCoder) {
@@ -120,7 +119,7 @@ final class CustomRacePageViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-
+        
         if indexPath.section == 0 {
             if indexPath.row == 0 {
                 switch pageType {
@@ -149,6 +148,7 @@ final class CustomRacePageViewController: UITableViewController {
             cell.accessoryType = .checkmark
         }
 
+        cell.tintColor = .wkrTextColor(for: traitCollection)
         return cell
     }
 
@@ -222,7 +222,7 @@ final class CustomRacePageViewController: UITableViewController {
                 }
                 pages.append(page)
             }
-            didUpdateBannedPages?(pages)
+            didUpdateBannedPages?(pages, customPages)
         } else {
             if let first = indexPathsOfSelectedOptions.first {
                 tableView.cellForRow(at: first)?.accessoryType = .none
@@ -238,7 +238,7 @@ final class CustomRacePageViewController: UITableViewController {
                 } else {
                     page = .custom(customPages[indexPath.row])
                 }
-                didUpdateStartPage?(page)
+                didUpdateStartPage?(page, customPages)
             } else {
                 let page: WKRGameSettings.EndPage
                 if indexPath.row == 0 && indexPath.section == 0 {
@@ -248,7 +248,7 @@ final class CustomRacePageViewController: UITableViewController {
                 } else {
                     page = .custom(customPages[indexPath.row])
                 }
-                didUpdateEndPage?(page)
+                didUpdateEndPage?(page, customPages)
             }
         }
     }

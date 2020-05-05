@@ -28,12 +28,12 @@ class PlusViewController: UIViewController {
 
         view.backgroundColor = .clear
 
-        plusView.onCompletion = {
-            self.done()
+        plusView.onCompletion = { [weak self] in
+            self?.done()
         }
 
-        plusView.onError = { controller in
-            self.present(controller, animated: true, completion: nil)
+        plusView.onError = { [weak self] controller in
+            self?.present(controller, animated: true, completion: nil)
         }
     }
 

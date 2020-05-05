@@ -40,7 +40,6 @@ final internal class MPCHostAutoInviteCell: UITableViewCell {
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(detailLabel)
 
-        toggle.onTintColor = .lightGray
         toggle.addTarget(self, action: #selector(toggled), for: .valueChanged)
         toggle.translatesAutoresizingMaskIntoConstraints = false
         addSubview(toggle)
@@ -83,6 +82,7 @@ final internal class MPCHostAutoInviteCell: UITableViewCell {
     public override func layoutSubviews() {
         super.layoutSubviews()
         let textColor = UIColor.wkrTextColor(for: traitCollection)
+        toggle.onTintColor = textColor
         detailLabel.textColor = textColor
     }
 
