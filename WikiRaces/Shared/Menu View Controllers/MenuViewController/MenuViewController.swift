@@ -61,14 +61,14 @@ final internal class MenuViewController: UIViewController {
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
             case .presentStats:
-                if PlusStore.shared.isPlus {
-                    
-                } else {
-                    PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
-                    let controller = PlusViewController()
-                    controller.modalPresentationStyle = .overCurrentContext
-                    self.present(controller, animated: false, completion: nil)
-                }
+                let nav = WKRUINavigationController(rootViewController: StatsViewController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            case.presentSubscription:
+                PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
+                let controller = PlusViewController()
+                controller.modalPresentationStyle = .overCurrentContext
+                self.present(controller, animated: false, completion: nil)
             }
 
         }

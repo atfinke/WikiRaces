@@ -105,8 +105,12 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        animateMenuOut {
-            self.listenerUpdate?(.presentStats)
+        if PlusStore.shared.isPlus {
+            animateMenuOut {
+                self.listenerUpdate?(.presentStats)
+            }
+        } else {
+            listenerUpdate?(.presentSubscription)
         }
     }
 

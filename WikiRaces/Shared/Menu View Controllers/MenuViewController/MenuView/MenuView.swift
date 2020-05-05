@@ -22,7 +22,7 @@ final class MenuView: UIView {
         case presentDebug, presentGlobalConnect, presentLeaderboard, presentGlobalAuth
         case presentMPCConnect(isHost: Bool)
         case presentAlert(UIAlertController)
-        case presentStats
+        case presentStats, presentSubscription
     }
 
     // MARK: - Closures

@@ -166,6 +166,12 @@ extension MenuView {
         subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         subtitleLabel.clipsToBounds = true
         topView.addSubview(subtitleLabel)
+
+        NotificationCenter.default.addObserver(forName: PlusStore.plusStatusUpdatedNotificationName, object: nil, queue: nil) { _ in
+            DispatchQueue.main.async {
+                self.titleLabel.text = "WikiRaces" + (PlusStore.shared.isPlus ? "+" : "")
+            }
+        }
     }
 
     // MARK: - Bottom View -

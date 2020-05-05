@@ -48,9 +48,9 @@ class CustomRaceNumericalViewController: UITableViewController {
 
             let labelX = stepper.frame.minX - stepper.layoutMargins.left * 2
             valueLabel.frame = CGRect(
-                x: labelX - 40,
+                x: labelX - 50,
                 y: 0,
-                width: 40,
+                width: 50,
                 height: frame.height)
         }
     }

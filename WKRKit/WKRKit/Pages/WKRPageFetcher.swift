@@ -99,24 +99,25 @@ public struct WKRPageFetcher {
             session = WKRPageFetcher.noCacheSession
         }
 
-        let taskUUID = UUID()
-        let task = session.dataTask(with: url) { (data, _, error) in
-            observationsQueue.async {
-                self.observations[taskUUID] = nil
-            }
-            if let data = data, let string = String(data: data, encoding: .utf8) {
-                completionHandler(string, nil)
-            } else {
-                completionHandler(nil, error)
-            }
-        }
         observationsQueue.async {
+            let taskUUID = UUID()
+            let task = session.dataTask(with: url) { (data, _, error) in
+                observationsQueue.async {
+                    self.observations[taskUUID] = nil
+                }
+                if let data = data, let string = String(data: data, encoding: .utf8) {
+                    completionHandler(string, nil)
+                } else {
+                    completionHandler(nil, error)
+                }
+            }
+
             self.observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
                 progressHandler(Float(progress.fractionCompleted))
             }
-        }
 
-        task.resume()
+            task.resume()
+        }
     }
 
 }

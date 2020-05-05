@@ -150,8 +150,8 @@ extension WKRGameManager {
         if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
-        if localPlayer.shouldGetPoints {
-            localPlayer.shouldGetPoints = false
+        if !localPlayer.hasReceivedPointsForCurrentRace {
+            localPlayer.hasReceivedPointsForCurrentRace = true
 
             let points = resultsInfo.raceRewardPoints(for: localPlayer)
             var place: Int?
@@ -178,7 +178,7 @@ extension WKRGameManager {
             hostResultsInfo = nil
             localPlayer.state = .voting
             localPlayer.raceHistory = nil
-            localPlayer.shouldGetPoints = true
+            localPlayer.hasReceivedPointsForCurrentRace = false
             if localPlayer.isHost {
                 fetchPreRaceConfig()
             }

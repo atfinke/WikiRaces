@@ -14,8 +14,7 @@ final public class WKRPlayer: Codable, Hashable {
 
     internal let isHost: Bool
 
-    // poorly named (needs to stay backwards compatible), indicating if time spent + points awarded for race
-    internal var shouldGetPoints = false
+    internal var hasReceivedPointsForCurrentRace = false
 
     public internal(set) var raceHistory: WKRHistory?
     public internal(set) var state: WKRPlayerState = .connecting
@@ -27,9 +26,7 @@ final public class WKRPlayer: Codable, Hashable {
 
     // MARK: - Stat Properties
 
-    public private(set) var stats: WKRPlayerRaceStats?
-    internal private(set) var neededHelpCount: Int = 0
-    internal private(set) var pixelsScrolledDuringCurrentRace: Int = 0
+    public private(set) var stats = WKRPlayerRaceStats()
     public var isCreator: Bool = false
 
     // MARK: - Initialization
@@ -44,9 +41,7 @@ final public class WKRPlayer: Codable, Hashable {
     func startedNewRace(on page: WKRPage) {
         state = .racing
         raceHistory = WKRHistory(firstPage: page)
-        neededHelpCount = 0
-        pixelsScrolledDuringCurrentRace = 0
-        stats = WKRPlayerRaceStats(player: self)
+        stats.reset()
     }
 
     func nowViewing(page: WKRPage, linkHere: Bool) {
@@ -55,19 +50,17 @@ final public class WKRPlayer: Codable, Hashable {
 
     func finishedViewingLastPage(pixelsScrolled: Int) {
         raceHistory?.finishedViewingLastPage()
-        pixelsScrolledDuringCurrentRace = pixelsScrolled
-        stats = WKRPlayerRaceStats(player: self)
+        stats.update(history: raceHistory, state: state, pixels: pixelsScrolled)
     }
 
     func neededHelp() {
-        neededHelpCount += 1
-        stats = WKRPlayerRaceStats(player: self)
+        stats.neededHelp()
     }
 
     // MARK: - Hashable
 
     public func hash(into hasher: inout Hasher) {
-        return profile.playerID.hash(into: &hasher)
+        return profile.hash(into: &hasher)
     }
 
     public static func ==(lhs: WKRPlayer, rhs: WKRPlayer) -> Bool {

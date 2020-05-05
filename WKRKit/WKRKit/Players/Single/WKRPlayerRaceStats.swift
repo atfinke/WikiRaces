@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct WKRPlayerRaceStats: Codable, Equatable {
+public class WKRPlayerRaceStats: Codable, Equatable {
 
     // MARK: - Properties
 
@@ -19,6 +19,7 @@ public struct WKRPlayerRaceStats: Codable, Equatable {
     }()
 
     private var statsDictionary = [String: String]()
+    private var helpNeeded = 0
 
     public var raw: [(key: String, value: String)] {
         return statsDictionary
@@ -26,19 +27,38 @@ public struct WKRPlayerRaceStats: Codable, Equatable {
             .sorted(by: { $0.0 < $1.0 })
     }
 
-    init(player: WKRPlayer) {
-        statsDictionary["Average time per page"] = avergeTimeSpent(player)
-        statsDictionary["Distance scrolled"] = "0 Pixels"
+    // MARK: - Initalization -
 
-        let pixelsScrolled = player.pixelsScrolledDuringCurrentRace
-        if let formatted = WKRPlayerRaceStats.pixelFormatter.string(from: NSNumber(value: pixelsScrolled)) {
+    init() {
+        reset()
+    }
+
+    func reset() {
+        helpNeeded = 0
+        update(history: nil, state: .connecting, pixels: 0)
+        statsDictionary["Help needed"] = "0 Times"
+    }
+
+    func update(history: WKRHistory?, state: WKRPlayerState, pixels: Int) {
+        statsDictionary["Links missed"] = linksMissed(history: history, state: state)
+        statsDictionary["Average time per page"] = avergeTimeSpent(history: history)
+
+        if let formatted = WKRPlayerRaceStats.pixelFormatter.string(from: NSNumber(value: pixels)) {
             statsDictionary["Distance scrolled"] = formatted + " Pixels"
+        } else {
+            statsDictionary["Distance scrolled"] = "0 Pixels"
         }
     }
 
-    func linksMissed(_ player: WKRPlayer) -> String {
-        guard let history = player.raceHistory else { return "-" }
-        let state = player.state
+    func neededHelp() {
+        helpNeeded += 1
+        statsDictionary["Help needed"] = "\(helpNeeded) Time" + (helpNeeded == 1 ? "" : "s")
+    }
+
+    // MARK: - Helpers -
+
+    private func linksMissed(history: WKRHistory?, state: WKRPlayerState) -> String {
+        guard let history = history else { return "-" }
 
         var linkCount = history.entries.filter({ $0.linkHere }).count
         // on a page with the link
@@ -53,12 +73,11 @@ public struct WKRPlayerRaceStats: Codable, Equatable {
             history.entries[history.entries.count - 2].linkHere {
             linkCount -= 1
         }
-        return linkCount.description
+        return "\(linkCount) Link" + (linkCount == 1 ? "" : "s")
     }
 
-    func avergeTimeSpent(_ player: WKRPlayer) -> String {
-        guard let history = player.raceHistory,
-            let duration = history.duration else { return "-" }
+    private func avergeTimeSpent(history: WKRHistory?) -> String {
+        guard let history = history, let duration = history.duration else { return "-" }
         var entriesCount = history.entries.count
 
         // viewing this page, don't count yet
@@ -71,4 +90,11 @@ public struct WKRPlayerRaceStats: Codable, Equatable {
         let average = Int(round(Double(duration) / Double(entriesCount)))
         return WKRDurationFormatter.string(for: average) ?? "-"
     }
+
+    // MARK: - Equatable -
+
+    public static func == (lhs: WKRPlayerRaceStats, rhs: WKRPlayerRaceStats) -> Bool {
+        return lhs.statsDictionary == rhs.statsDictionary
+    }
+
 }

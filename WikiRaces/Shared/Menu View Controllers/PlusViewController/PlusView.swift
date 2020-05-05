@@ -35,7 +35,7 @@ class PlusView: UIView {
 
     private let subtitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Thanks for using WikiRaces!"
+        label.text = "Thanks for playing WikiRaces!"
         label.textAlignment = .center
         label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
@@ -140,20 +140,20 @@ class PlusView: UIView {
 
         NotificationCenter.default.addObserver(
             forName: PlusStore.productsUpdatedNotificationName,
-                                               object: nil,
-                                               queue: nil) { _ in
-                                                DispatchQueue.main.async {
-                                                    guard let products = PlusStore.shared.products else {
-                                                        self.toggleProductButtons(on: false)
-                                                        return
-                                                    }
-                                                    self.standardOptionButton.label.text = products.standard.displayString
-                                                    self.ultimateOptionButton.label.text = products.ultimate.displayString
-                                                    self.toggleProductButtons(on: true)
-                                                }
+            object: nil,
+            queue: nil) { _ in
+                DispatchQueue.main.async {
+                    guard let products = PlusStore.shared.products else {
+                        self.toggleProductButtons(on: false)
+                        return
+                    }
+                    self.standardOptionButton.label.text = products.standard.displayString
+                    self.ultimateOptionButton.label.text = products.ultimate.displayString
+                    self.toggleProductButtons(on: true)
+                }
         }
 
-                self.toggleProductButtons(on: true)
+        self.toggleProductButtons(on: true)
     }
 
     required init?(coder: NSCoder) {
@@ -175,14 +175,14 @@ class PlusView: UIView {
         termsButton.setTitleColor(.secondaryLabel, for: .normal)
 
         let closeImageViewImageSize: CGFloat = 20
-        closeButton.frame = CGRect(
+        closeImageView.frame = CGRect(
             x: bounds.width - closeImageViewImageSize - 15,
             y: 15,
             width: closeImageViewImageSize,
             height: closeImageViewImageSize)
-        closeImageView.frame = closeButton.frame
+        closeButton.frame = closeImageView.frame.insetBy(dx: -10, dy: -10)
 
-        let padding: CGFloat = 25
+        let padding: CGFloat = 20
         let paddedWidth = frame.width - padding * 2
 
         let paddedSize = CGSize(width: paddedWidth, height: .greatestFiniteMagnitude)
@@ -332,11 +332,15 @@ class PlusView: UIView {
 
     @objc
     func openPrivacy() {
-        //  UIApplication.shared.open(resort.privacyURL, options: [:], completionHandler: nil)
+        let urlString = "https://www.andrewfinke.com/privacy"
+        guard let url = URL(string: urlString) else { fatalError() }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 
     @objc
     func openTerms() {
-        // UIApplication.shared.open(resort.termsURL, options: [:], completionHandler: nil)
+        let urlString = "https://www.andrewfinke.com/terms"
+        guard let url = URL(string: urlString) else { fatalError() }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }

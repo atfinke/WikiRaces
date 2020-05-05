@@ -112,6 +112,7 @@ extension MPCHostViewController {
             controller.allCustomPages = allCustomPages
             navigationController?.pushViewController(controller, animated: true)
             self.gameSettingsController = controller
+            return
         } else if indexPath.section == 3 {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
 

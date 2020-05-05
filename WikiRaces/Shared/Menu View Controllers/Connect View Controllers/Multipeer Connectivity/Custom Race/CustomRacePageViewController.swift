@@ -41,7 +41,7 @@ final class CustomRacePageViewController: UITableViewController {
         if customPages.isEmpty {
 
             guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
-                let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States."),
+                let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States"),
                 let waltURL = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney") else {
                     fatalError()
             }

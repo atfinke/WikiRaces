@@ -85,6 +85,10 @@ final internal class VotingViewController: CenteredTableViewController {
 
         guideLabel.alpha = 0.0
         guideLabel.text = "TAP ARTICLE TO VOTE"
+        if voteInfo?.pageCount == 1 {
+            guideLabel.text = "HOST SELECTED PAGE"
+        }
+
         descriptionLabel.text = "VOTING STARTS SOON"
 
         tableView.rowHeight = UITableView.automaticDimension
