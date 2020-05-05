@@ -149,9 +149,9 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)
-            if let hostPlayer = players.sorted(by: { $0.teamPlayerID > $1.teamPlayerID }).first {
+            if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
                 self.hostPlayerAlias = hostPlayer.alias
-                if hostPlayer.teamPlayerID == GKLocalPlayer.local.teamPlayerID {
+                if hostPlayer.alias == GKLocalPlayer.local.alias {
                     self.isPlayerHost = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                         self.sendStartMessageToPlayers()

@@ -92,7 +92,7 @@ final class CustomRaceNotificationsController: UITableViewController {
             cell.textLabel?.text = "Player is close"
             cell.toggle.isOn = notifications.linkOnPage
         case 2:
-            cell.textLabel?.text = "Player missed the kink"
+            cell.textLabel?.text = "Player missed the link"
             cell.toggle.isOn = notifications.missedLink
         case 3:
             cell.textLabel?.text = "Player is on USA"

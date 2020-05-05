@@ -155,7 +155,7 @@ final class MenuView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        titleLabel.text = "WikiRaces" + (PlusStore.shared.isPlus ? "+" : "")
+        titleLabel.text = "WikiRaces"
         bottomView.backgroundColor = .wkrMenuBottomViewColor(for: traitCollection)
 
         let textColor: UIColor = .wkrTextColor(for: traitCollection)

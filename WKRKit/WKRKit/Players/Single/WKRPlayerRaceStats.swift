@@ -58,7 +58,7 @@ public class WKRPlayerRaceStats: Codable, Equatable {
     // MARK: - Helpers -
 
     private func linksMissed(history: WKRHistory?, state: WKRPlayerState) -> String {
-        guard let history = history else { return "-" }
+        guard let history = history else { return "0 Links" }
 
         var linkCount = history.entries.filter({ $0.linkHere }).count
         // on a page with the link

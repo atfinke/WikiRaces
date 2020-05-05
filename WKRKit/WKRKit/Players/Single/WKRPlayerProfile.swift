@@ -14,13 +14,11 @@ public struct WKRPlayerProfile: Codable, Hashable, Equatable {
 
     public let name: String
     public let playerID: String
-    private let uuid: UUID
 
     // MARK: - Initalization -
 
     internal init(name: String, playerID: String) {
         self.name = name
         self.playerID = playerID
-        self.uuid = UUID()
     }
 }
