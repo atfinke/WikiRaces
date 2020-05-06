@@ -42,7 +42,6 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
 
     static let shared = PlusStore()
     static let productsUpdatedNotificationName = Notification.Name("productsUpdatedNotificationName")
-    static let plusStatusUpdatedNotificationName = Notification.Name("plusStatusUpdatedNotificationName")
 
     private let queue = SKPaymentQueue.default()
     var products: (standard: MagicSubscription, ultimate: MagicSubscription)?
@@ -55,7 +54,6 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     var isPlus: Bool {
         set {
             UserDefaults.standard.set(newValue, forKey: "isPlus")
-            NotificationCenter.default.post(name: PlusStore.plusStatusUpdatedNotificationName, object: nil)
         }
         get {
             UserDefaults.standard.bool(forKey: "isPlus")

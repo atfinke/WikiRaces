@@ -48,11 +48,12 @@ final internal class VotingViewController: CenteredTableViewController {
             if isShowingVoteCountdown {
                 let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
                 if !isShowingGuide {
-                    UIView.animateFlash(withDuration: WKRAnimationDurationConstants.votingLabelsFlash,
-                                        items: [guideLabel, descriptionLabel],
-                                        whenHidden: {
-                        self.descriptionLabel.text = timeString
-                        self.isShowingGuide = true
+                    UIView.animateFlash(
+                        withDuration: WKRAnimationDurationConstants.votingLabelsFlash,
+                        items: [guideLabel, descriptionLabel],
+                        whenHidden: {
+                            self.descriptionLabel.text = timeString
+                            self.isShowingGuide = true
                     }, completion: nil)
                     tableView.isUserInteractionEnabled = true
                 } else if voteTimeRemaing == 0 {
@@ -97,9 +98,10 @@ final internal class VotingViewController: CenteredTableViewController {
         tableView.register(VotingTableViewCell.self,
                            forCellReuseIdentifier: reuseIdentifier)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     override func viewDidAppear(_ animated: Bool) {

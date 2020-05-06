@@ -157,7 +157,7 @@ class ConnectViewController: UIViewController {
     func showError(title: String, message: String, showSettingsButton: Bool = false) {
         guard !isShowingError else { return }
         isShowingError = true
-        
+
         onQuit?()
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -197,7 +197,7 @@ class ConnectViewController: UIViewController {
 
         guard !isShowingError else { return }
         isShowingError = true
-        
+
         guard !isShowingMatch else { return }
         isShowingMatch = true
 

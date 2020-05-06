@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-final class CustomRaceViewController: UITableViewController {
+final class CustomRaceViewController: CustomRaceController {
 
     // MARK: - Types -
 
@@ -33,7 +33,6 @@ final class CustomRaceViewController: UITableViewController {
         self.settings = settings
         super.init(style: .grouped)
         title = "Customize Race".uppercased()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
     }
 
     required init?(coder: NSCoder) {

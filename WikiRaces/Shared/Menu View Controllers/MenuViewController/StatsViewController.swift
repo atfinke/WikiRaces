@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRUIKit
 
 class StatsViewController: UITableViewController {
 
@@ -121,8 +122,8 @@ class StatsViewController: UITableViewController {
     init() {
         super.init(style: .grouped)
         title = "Stats".uppercased()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .stop,
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
             target: self,
             action: #selector(done))
     }

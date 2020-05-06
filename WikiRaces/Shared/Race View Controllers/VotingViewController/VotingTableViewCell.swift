@@ -21,11 +21,6 @@ final internal class VotingTableViewCell: PointerInteractionTableViewCell {
 
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                countLabel.font = UIFont.systemFont(ofSize: 22, weight: .medium)
-            } else {
-                countLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-            }
             setNeedsLayout()
         }
     }
@@ -59,6 +54,7 @@ final internal class VotingTableViewCell: PointerInteractionTableViewCell {
 
         countLabel.text = "0"
         countLabel.textAlignment = .right
+        countLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
         countLabel.translatesAutoresizingMaskIntoConstraints = false
         countLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 

@@ -9,7 +9,7 @@
 import UIKit
 import WKRKit
 
-final class CustomRaceOtherController: UITableViewController {
+final class CustomRaceOtherController: CustomRaceController {
 
     // MARK: - Types -
 

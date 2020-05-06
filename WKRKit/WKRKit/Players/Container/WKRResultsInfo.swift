@@ -117,7 +117,7 @@ public struct WKRResultsInfo: Codable {
     internal func raceRewardPoints(for player: WKRPlayer) -> Int {
         return racePoints[player.profile] ?? 0
     }
-    
+
     internal func pagesViewed(for player: WKRPlayer) -> [WKRPage] {
         return playersSortedByState.first(where: { $0 == player })?
             .raceHistory?

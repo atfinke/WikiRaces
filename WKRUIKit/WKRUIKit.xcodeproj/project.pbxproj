@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140ADB7724628E320080F825 /* WKRUIBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140ADB7624628E320080F825 /* WKRUIBarButtonItem.swift */; };
 		1410DB401F4F51AC00F5CAD7 /* WKRStyleScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */; };
 		1410DB411F4F51AC00F5CAD7 /* WKRCleanScript.js in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */; };
 		1413AB1E1F364F2400873ACA /* WKRUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1413AB1D1F364F2000873ACA /* WKRUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -64,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140ADB7624628E320080F825 /* WKRUIBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIBarButtonItem.swift; sourceTree = "<group>"; };
 		1410DB3E1F4F51AC00F5CAD7 /* WKRStyleScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRStyleScript.js; sourceTree = "<group>"; };
 		1410DB3F1F4F51AC00F5CAD7 /* WKRCleanScript.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = WKRCleanScript.js; sourceTree = "<group>"; };
 		1413AB1D1F364F2000873ACA /* WKRUIKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WKRUIKit.h; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				149FF89C1F362C05000A5D96 /* WKRUIAlertView.swift */,
 				149FF89E1F362C05000A5D96 /* WKRUIBottomOverlayView.swift */,
 				149FF8AD1F362D16000A5D96 /* WKRUIThinLineView.swift */,
+				140ADB7624628E320080F825 /* WKRUIBarButtonItem.swift */,
 				1410DB421F4F51B200F5CAD7 /* Web View */,
 			);
 			path = Views;
@@ -405,6 +408,7 @@
 				149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */,
 				1413AB221F364FC100873ACA /* WKRUIAlertView.swift in Sources */,
 				1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */,
+				140ADB7724628E320080F825 /* WKRUIBarButtonItem.swift in Sources */,
 				144C221E241BEEBD00176EB5 /* WKRUIWindow.swift in Sources */,
 				144C221D241BEEBD00176EB5 /* WKRUIKit+Common.swift in Sources */,
 				1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */,

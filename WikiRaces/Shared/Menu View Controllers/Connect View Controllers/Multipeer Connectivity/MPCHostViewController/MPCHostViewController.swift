@@ -84,13 +84,13 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         browser?.delegate = self
         session?.delegate = self
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                           target: self,
-                                                           action: #selector(cancelMatch(_:)))
+        navigationItem.leftBarButtonItem = WKRUIBarButtonItem(systemName: "xmark",
+                                                              target: self,
+                                                              action: #selector(cancelMatch(_:)))
 
-        let startButton = UIBarButtonItem(barButtonSystemItem: .play,
-                                          target: self,
-                                          action: #selector(startMatch(_:)))
+        let startButton = WKRUIBarButtonItem(systemName: "play.fill",
+                                             target: self,
+                                             action: #selector(startMatch(_:)))
         startButton.isEnabled = false
         navigationItem.rightBarButtonItem = startButton
 
@@ -147,6 +147,9 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     @objc
     func startMatch(_ sender: Any) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
+
+        browser?.stopBrowsingForPeers()
+        browser?.delegate = nil
 
         tableView.isUserInteractionEnabled = false
 

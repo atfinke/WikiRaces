@@ -253,6 +253,9 @@
 		14C6B1F51FF2EABD00F6B422 /* MPCHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */; };
 		14C6B1F61FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
 		14C6B1F71FF2EABD00F6B422 /* MPCHostSearchingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */; };
+		14C6DA772462900300EC9817 /* CustomRaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DA762462900300EC9817 /* CustomRaceController.swift */; };
+		14C6DA782462900300EC9817 /* CustomRaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DA762462900300EC9817 /* CustomRaceController.swift */; };
+		14C6DA792462900300EC9817 /* CustomRaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DA762462900300EC9817 /* CustomRaceController.swift */; };
 		14D18CDC2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
 		14D18CDD2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
 		14D18CDE2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
@@ -568,6 +571,7 @@
 		14C4AB841F368AED0086B77F /* VotingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingTableViewCell.swift; sourceTree = "<group>"; };
 		14C6B1F01FF2EABC00F6B422 /* MPCHostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostViewController.swift; sourceTree = "<group>"; };
 		14C6B1F31FF2EABC00F6B422 /* MPCHostSearchingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCHostSearchingCell.swift; sourceTree = "<group>"; };
+		14C6DA762462900300EC9817 /* CustomRaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRaceController.swift; sourceTree = "<group>"; };
 		14D18CDB2460CF00002E4F5D /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPlayersViewController.swift; sourceTree = "<group>"; };
 		14D7DC70245FC0D800772E6F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
@@ -1091,6 +1095,7 @@
 		14EF51C6245FAE3600F3653F /* CustomRaceViewController */ = {
 			isa = PBXGroup;
 			children = (
+				14C6DA762462900300EC9817 /* CustomRaceController.swift */,
 				14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */,
 				14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */,
 				14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */,
@@ -1432,6 +1437,7 @@
 			files = (
 				143BB7181F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */,
 				143A8BBC1F58746800580AA2 /* PlayerStatsManager.swift in Sources */,
+				14C6DA772462900300EC9817 /* CustomRaceController.swift in Sources */,
 				142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */,
 				143948BD2144CC0F00992850 /* DebugInfoTableViewController.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
@@ -1545,6 +1551,7 @@
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14EF51DC245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
+				14C6DA782462900300EC9817 /* CustomRaceController.swift in Sources */,
 				147EF6FA2202436600583D73 /* MPCHostContext.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
 				14C4AB871F368AED0086B77F /* VotingTableViewCell.swift in Sources */,
@@ -1618,6 +1625,7 @@
 				14BA538F21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 				14EF51E0245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				149357E5210E963800F6453A /* MPCHostPeerStateCell.swift in Sources */,
+				14C6DA792462900300EC9817 /* CustomRaceController.swift in Sources */,
 				14EF51DD245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				14DD97292202295100AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				14B4DB692224F1BD007D4B54 /* GameKitConnectViewController+Match.swift in Sources */,

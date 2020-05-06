@@ -48,9 +48,10 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         tableView.register(HistoryTableViewStatsCell.self,
                            forCellReuseIdentifier: HistoryTableViewStatsCell.reuseIdentifier)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     override func viewWillLayoutSubviews() {
