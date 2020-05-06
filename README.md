@@ -1,4 +1,4 @@
-# WikiRaces [![Build Status](https://travis-ci.org/atfinke/WikiRaces.svg?branch=master)](https://travis-ci.org/atfinke/WikiRaces)
+# WikiRaces ![Build Status](https://github.com/atfinke/WikiRaces/workflows/CI/badge.svg)
 
 The source code for [WikiRaces 3](https://itunes.apple.com/us/app/wikiraces-3/id1030997904?mt=8) on the App Store.
 
