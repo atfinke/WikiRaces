@@ -790,6 +790,15 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		1452EED22462940A00F357D3 /* StatsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				14D18CDB2460CF00002E4F5D /* StatsViewController.swift */,
+				14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */,
+			);
+			path = StatsViewController;
+			sourceTree = "<group>";
+		};
 		149FDED51F4F4AAF003A71D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +893,7 @@
 			children = (
 				14B55C901F3A49670090E092 /* MenuViewController */,
 				143BB7331F60DF0200D00541 /* Connect View Controllers */,
+				1452EED22462940A00F357D3 /* StatsViewController */,
 				142ABDF624600550008E7F77 /* PlusViewController */,
 				143948C22144CCAE00992850 /* DebugInfoTableViewController */,
 			);
@@ -946,8 +956,6 @@
 				14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */,
 				143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */,
 				142F714E210C33FC00C66558 /* MenuViewController+KB.swift */,
-				14D18CDB2460CF00002E4F5D /* StatsViewController.swift */,
-				14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */,
 			);
 			path = MenuViewController;
 			sourceTree = "<group>";
@@ -1397,8 +1405,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\"${PROJECT_DIR}/Shared/Frameworks/Analytics/Fabric.framework/upload-symbols\" -a 80c3b2d37f1bca4e182e7fbf7976e6f069340b4d -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
 		};
 		149FDEC61F4F490C003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;

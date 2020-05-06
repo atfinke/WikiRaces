@@ -10,8 +10,8 @@ import Foundation
 
 struct MPCHostContext: Codable {
 
-    static let minBuildToJoinLocalHost: Int = 6900
-    static let minBuildToJoinRemoteHost: Int = 6900
+    static let minBuildToJoinLocalHost: Int = 7000
+    static let minBuildToJoinRemoteHost: Int = 7000
 
     let appBuild: Int
     let appVersion: String
