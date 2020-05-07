@@ -36,6 +36,8 @@
 		14AF1CB81F57C52E000EFC2B /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */; };
 		14B4DB87222674E2007D4B54 /* WKRLogEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */; };
 		14BA31021FF60E7B00B10C70 /* WKRPlayerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */; };
+		14D7DC73245FC58300772E6F /* WKRRaceSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D7DC72245FC58300772E6F /* WKRRaceSettings.swift */; };
+		14D7DC74245FC58300772E6F /* WKRRaceSettings+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D7DC71245FC58200772E6F /* WKRRaceSettings+Codable.swift */; };
 		14E1B1981F7954A00082F4FA /* WKRKitConstants.plist in Resources */ = {isa = PBXBuildFile; fileRef = 14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */; };
 		14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */; };
 		14E6DFB01F3685EF002755C3 /* WKRKit+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */; };
@@ -104,6 +106,8 @@
 		14AF1CB91F57C52E000EFC2B /* WKRUIKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = WKRUIKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRLogEvent.swift; sourceTree = "<group>"; };
 		14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerAction.swift; sourceTree = "<group>"; };
+		14D7DC71245FC58200772E6F /* WKRRaceSettings+Codable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WKRRaceSettings+Codable.swift"; sourceTree = "<group>"; };
+		14D7DC72245FC58300772E6F /* WKRRaceSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKRRaceSettings.swift; sourceTree = "<group>"; };
 		14E1B1971F7954A00082F4FA /* WKRKitConstants.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WKRKitConstants.plist; sourceTree = "<group>"; };
 		14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPreRaceConfig.swift; sourceTree = "<group>"; };
 		14E6DFAF1F3685EF002755C3 /* WKRKit+Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRKit+Array.swift"; sourceTree = "<group>"; };
@@ -245,6 +249,8 @@
 		14E6DFB31F3686EE002755C3 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				14D7DC72245FC58300772E6F /* WKRRaceSettings.swift */,
+				14D7DC71245FC58200772E6F /* WKRRaceSettings+Codable.swift */,
 				14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */,
 				1497F3191F588EBE001653DE /* WKRReadyStates.swift */,
 				14EB9F491F3682A000FF1A9E /* WKRGameState.swift */,
@@ -495,11 +501,13 @@
 				14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */,
 				14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */,
 				1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */,
+				14D7DC73245FC58300772E6F /* WKRRaceSettings.swift in Sources */,
 				14EB9F711F36850800FF1A9E /* WKRInt.swift in Sources */,
 				14B4DB87222674E2007D4B54 /* WKRLogEvent.swift in Sources */,
 				14EB9F561F3682E500FF1A9E /* WKRManager+PeerNetwork.swift in Sources */,
 				14EB9F4A1F3682A000FF1A9E /* WKRGameState.swift in Sources */,
 				142CB29A202EAC6B00BC6A33 /* WKRSoloNetwork.swift in Sources */,
+				14D7DC74245FC58300772E6F /* WKRRaceSettings+Codable.swift in Sources */,
 				14E6DFAE1F3685B8002755C3 /* WKRPreRaceConfig.swift in Sources */,
 				1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */,
 				142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */,
@@ -666,9 +674,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -695,9 +703,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.03.1;
+				MARKETING_VERSION = 2020.05.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -714,6 +722,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WKRKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,6 +737,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = WKRKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

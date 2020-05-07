@@ -9,6 +9,16 @@
 import Foundation
 
 public struct WKRPlayerProfile: Codable, Hashable, Equatable {
+
+    // MARK: - Properties -
+
     public let name: String
     public let playerID: String
+
+    // MARK: - Initalization -
+
+    internal init(name: String, playerID: String) {
+        self.name = name
+        self.playerID = playerID
+    }
 }

@@ -34,6 +34,10 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
     // MARK: - Properties -
 
+    var gameSettings = WKRGameSettings()
+    var allCustomPages = [WKRPage]()
+    weak var gameSettingsController: CustomRaceViewController?
+
     var peers = [MCPeerID: PeerState]()
     var sortedPeers: [MCPeerID] {
         return peers.keys.sorted(by: { (lhs, rhs) -> Bool in
@@ -65,7 +69,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
-    private let activityView = UIActivityIndicatorView(style: .gray)
+    private let activityView = UIActivityIndicatorView(style: .medium)
 
     // MARK: - View Life Cycle -
 
@@ -80,13 +84,13 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         browser?.delegate = self
         session?.delegate = self
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                           target: self,
-                                                           action: #selector(cancelMatch(_:)))
+        navigationItem.leftBarButtonItem = WKRUIBarButtonItem(systemName: "xmark",
+                                                              target: self,
+                                                              action: #selector(cancelMatch(_:)))
 
-        let startButton = UIBarButtonItem(barButtonSystemItem: .play,
-                                          target: self,
-                                          action: #selector(startMatch(_:)))
+        let startButton = WKRUIBarButtonItem(systemName: "play.fill",
+                                             target: self,
+                                             action: #selector(startMatch(_:)))
         startButton.isEnabled = false
         navigationItem.rightBarButtonItem = startButton
 
@@ -108,13 +112,16 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         browser?.startBrowsingForPeers()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+
+        if let controller = gameSettingsController {
+            allCustomPages = controller.allCustomPages
+            tableView.reloadRows(at: [IndexPath(item: 0, section: 2)], with: .none)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         browser?.stopBrowsingForPeers()
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
 
     override func viewWillLayoutSubviews() {
@@ -129,13 +136,20 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
 
+        browser?.stopBrowsingForPeers()
+        browser?.delegate = nil
+
         session?.disconnect()
+        session?.delegate = nil
         listenerUpdate?(.cancel)
     }
 
     @objc
     func startMatch(_ sender: Any) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
+
+        browser?.stopBrowsingForPeers()
+        browser?.delegate = nil
 
         tableView.isUserInteractionEnabled = false
 
@@ -147,7 +161,9 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
 
         guard let session = session else { fatalError("Session is nil") }
         do {
-            let message = ConnectViewController.StartMessage(hostName: session.myPeerID.displayName)
+            let message = ConnectViewController.StartMessage(
+                hostName: session.myPeerID.displayName,
+                gameSettings: gameSettings)
             let data = try JSONEncoder().encode(message)
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 

@@ -40,12 +40,6 @@
 			<key>AutocorrectionType</key>
 			<string>No</string>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>GLOBAL RACES USE GAME CENTER NAME</string>
-		</dict>
 	</array>
 </dict>
 </plist>

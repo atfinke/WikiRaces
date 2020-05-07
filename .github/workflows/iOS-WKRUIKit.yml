@@ -1,0 +1,14 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+    build:
+        name: iOS WKRUIKit
+        runs-on: macOS-latest
+        strategy:
+            matrix:
+                destination: ["name=iPhone 11 Pro"]
+        steps:
+            - uses: actions/checkout@v1
+            - name: Build WKRUIKit
+              run: xcodebuild clean build -workspace WikiRaces.xcworkspace -scheme WKRUIKit -destination '${{ matrix.destination }}' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO

@@ -11,7 +11,7 @@ import WKRKit
 
 #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG
 import Crashlytics
-import FirebaseCore
+import FirebaseAnalytics
 #endif
 
 internal struct PlayerAnonymousMetrics {
@@ -45,6 +45,7 @@ internal struct PlayerAnonymousMetrics {
         case hostCancelledPreMatch, hostStartMidMatchInviting
         case hostStartedSoloMatch
         case globalFailedToFindHost
+        case customRaceOpened
 
         case mpcRaceCompleted, gkRaceCompleted, soloRaceCompleted
         case banHammer
@@ -55,8 +56,9 @@ internal struct PlayerAnonymousMetrics {
         case votingArticleValidationFailure, votingArticlesWeightedTiebreak
 
         case automaticResultsImageSave
+        case forcedIntoStoreFromCustomize
+        case forcedIntoStoreFromStats
 
-        //swiftlint:disable:next cyclomatic_complexity
         init(event: WKRLogEvent) {
             switch event.type {
             case .linkOnPage:       self = .linkOnPage

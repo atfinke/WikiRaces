@@ -14,7 +14,6 @@ internal struct WKRCodable: Codable {
 
     private struct WKREnumCodable: Codable {
 
-        //swiftlint:disable:next nesting
         private enum WKREnumType: String, Codable {
             case gameState = "WKRGameState"
             case playerState = "WKRPlayerState"

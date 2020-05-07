@@ -48,9 +48,10 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         tableView.register(HistoryTableViewStatsCell.self,
                            forCellReuseIdentifier: HistoryTableViewStatsCell.reuseIdentifier)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     override func viewWillLayoutSubviews() {
@@ -69,7 +70,6 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
     // 6. Make sure that the new player object has more history entries (else ...)
     // 7. Make sure we have the correct amount of new cells to insert (else ...)
     // 8. Check if we have the same number of stats, if yes, don't use a table animation to update them
-    //swiftlint:disable:next function_body_length cyclomatic_complexity
     private func updateEntries(oldPlayer: WKRPlayer?) {
         title = player?.name
 

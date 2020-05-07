@@ -79,7 +79,8 @@ final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwor
 
 extension GKPlayer {
     func wkrProfile() -> WKRPlayerProfile {
-        return WKRPlayerProfile(name: alias, playerID: playerID)
+        // alias is unique, but teamPlayerID is different depending on local or remote player
+        return WKRPlayerProfile(name: alias, playerID: alias)
     }
 }
 

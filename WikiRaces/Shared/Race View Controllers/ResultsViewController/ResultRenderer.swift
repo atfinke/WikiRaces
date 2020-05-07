@@ -9,7 +9,6 @@
 import UIKit
 import WKRKit
 
-//swiftlint:disable function_body_length
 final class ResultRenderer {
 
     // MARK: - Types -
@@ -109,11 +108,7 @@ final class ResultRenderer {
 
         let format = UIGraphicsImageRendererFormat()
         format.opaque = false
-        if #available(iOS 12.0, *) {
-            format.preferredRange = .standard
-        } else {
-            format.prefersExtendedRange = false
-        }
+        format.preferredRange = .standard
 
         let fullRenderer = UIGraphicsImageRenderer(size: view.bounds.size, format: format)
         view.isHidden = false
@@ -142,4 +137,3 @@ final class ResultRenderer {
     }
 
 }
-//swiftlint:enable function_body_length type_body_length cyclomatic_complexity

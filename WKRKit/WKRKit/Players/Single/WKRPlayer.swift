@@ -14,8 +14,7 @@ final public class WKRPlayer: Codable, Hashable {
 
     internal let isHost: Bool
 
-    // poorly named (needs to stay backwards compatible), indicating if time spent + points awarded for race
-    internal var shouldGetPoints = false
+    internal var hasReceivedPointsForCurrentRace = false
 
     public internal(set) var raceHistory: WKRHistory?
     public internal(set) var state: WKRPlayerState = .connecting
@@ -25,12 +24,10 @@ final public class WKRPlayer: Codable, Hashable {
         return profile.name
     }
 
-    // MARK: - Stat Properties [Optional to be backwards compatible]
+    // MARK: - Stat Properties
 
-    public private(set) var stats: WKRPlayerRaceStats?
-    internal private(set) var neededHelpCount: Int?
-    internal private(set) var pixelsScrolledDuringCurrentRace: Int?
-    public var isCreator: Bool?
+    public private(set) var stats = WKRPlayerRaceStats()
+    public var isCreator: Bool = false
 
     // MARK: - Initialization
 
@@ -44,9 +41,7 @@ final public class WKRPlayer: Codable, Hashable {
     func startedNewRace(on page: WKRPage) {
         state = .racing
         raceHistory = WKRHistory(firstPage: page)
-        neededHelpCount = 0
-        pixelsScrolledDuringCurrentRace = 0
-        stats = WKRPlayerRaceStats(player: self)
+        stats.reset()
     }
 
     func nowViewing(page: WKRPage, linkHere: Bool) {
@@ -55,22 +50,19 @@ final public class WKRPlayer: Codable, Hashable {
 
     func finishedViewingLastPage(pixelsScrolled: Int) {
         raceHistory?.finishedViewingLastPage()
-        pixelsScrolledDuringCurrentRace = pixelsScrolled
-        stats = WKRPlayerRaceStats(player: self)
+        stats.update(history: raceHistory, state: state, pixels: pixelsScrolled)
     }
 
     func neededHelp() {
-        neededHelpCount = (neededHelpCount ?? 0) + 1
-        stats = WKRPlayerRaceStats(player: self)
+        stats.neededHelp()
     }
 
     // MARK: - Hashable
 
     public func hash(into hasher: inout Hasher) {
-        return profile.playerID.hash(into: &hasher)
+        return profile.hash(into: &hasher)
     }
 
-    //swiftlint:disable:next operator_whitespace
     public static func ==(lhs: WKRPlayer, rhs: WKRPlayer) -> Bool {
         return lhs.profile == rhs.profile
     }

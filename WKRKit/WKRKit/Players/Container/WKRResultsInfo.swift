@@ -118,6 +118,13 @@ public struct WKRResultsInfo: Codable {
         return racePoints[player.profile] ?? 0
     }
 
+    internal func pagesViewed(for player: WKRPlayer) -> [WKRPage] {
+        return playersSortedByState.first(where: { $0 == player })?
+            .raceHistory?
+            .entries
+            .map { $0.page } ?? []
+    }
+
     // used to update history controller cells
     public func updatedPlayer(for player: WKRPlayer) -> WKRPlayer? {
         guard let updatedPlayerIndex = playersSortedByState.firstIndex(of: player) else { return nil }

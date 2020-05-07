@@ -15,18 +15,18 @@ extension VotingViewController {
     override var keyCommands: [UIKeyCommand]? {
         var commands = [UIKeyCommand]()
         if navigationItem.rightBarButtonItem?.isEnabled ?? false {
-            let command = UIKeyCommand(input: "q",
-                                       modifierFlags: .command,
+            let command = UIKeyCommand(title: "Return to Menu",
                                        action: #selector(keyboardAttemptQuit),
-                                       discoverabilityTitle: "Return to Menu")
+                                       input: "q",
+                                       modifierFlags: .command)
             commands.append(command)
         }
         if let info = voteInfo, tableView.isUserInteractionEnabled {
             let voteCommands = (0..<info.pageCount).map { index in
-                return UIKeyCommand(input: (index + 1).description,
-                                    modifierFlags: .command,
+                return UIKeyCommand(title: info.page(for: index)?.page.title ?? "Unknown",
                                     action: #selector(keyboardAttemptSelectArticle(_:)),
-                                    discoverabilityTitle: info.page(for: index)?.page.title ?? "Unknown")
+                                    input: (index + 1).description,
+                                    modifierFlags: .command)
             }
             commands.append(contentsOf: voteCommands)
         }

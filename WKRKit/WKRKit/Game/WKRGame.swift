@@ -27,6 +27,7 @@ final public class WKRGame {
     // MARK: - Properties
 
     private let isSolo: Bool
+    private let settings: WKRGameSettings
 
     private var bonusTimer: Timer?
     private let localPlayer: WKRPlayer
@@ -43,9 +44,10 @@ final public class WKRGame {
 
     // MARK: - Initialization
 
-    init(localPlayer: WKRPlayer, isSolo: Bool) {
+    init(localPlayer: WKRPlayer, isSolo: Bool, settings: WKRGameSettings) {
         self.isSolo = isSolo
         self.localPlayer = localPlayer
+        self.settings = settings
     }
 
     // MARK: - Race Config
@@ -57,14 +59,14 @@ final public class WKRGame {
 
         if localPlayer.isHost && !isSolo {
             bonusTimer?.invalidate()
-            bonusTimer = Timer.scheduledTimer(withTimeInterval: WKRKitConstants.current.bonusPointsInterval,
-                                              repeats: true) { [weak self] _ in
-                                                guard let self = self else { return }
-                                                //swiftlint:disable:next line_length
-                                                self.activeRace?.bonusPoints += WKRKitConstants.current.bonusPointReward
-                                                if let points = self.activeRace?.bonusPoints {
-                                                    self.listenerUpdate?(.bonusPoints(points))
-                                                }
+            bonusTimer = Timer.scheduledTimer(
+                withTimeInterval: settings.points.bonusPointsInterval,
+                repeats: true) { [weak self] _ in
+                    guard let self = self else { return }
+                    self.activeRace?.bonusPoints += self.settings.points.bonusPointReward
+                    if let points = self.activeRace?.bonusPoints {
+                        self.listenerUpdate?(.bonusPoints(points))
+                    }
             }
         }
 
@@ -145,7 +147,8 @@ final public class WKRGame {
          - duration must be nil (must not be moving to new page)
          - link can't be on the page (don't want players to know they are close)
          */
-        guard localPlayer != player,
+        guard settings.notifications.isOnSamePage,
+            localPlayer != player,
             player.state == .racing,
             localPlayer.state == .racing,
             let playerEntries = player.raceHistory?.entries,

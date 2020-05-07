@@ -25,14 +25,15 @@ extension GameViewController {
                 fatalError("No navigation controller view")
         }
 
-        helpBarButtonItem = UIBarButtonItem(image: UIImage(named: "HelpFlag")!,
-                                            style: .plain,
-                                            target: self,
-                                            action: #selector(helpButtonPressed))
+        helpBarButtonItem = WKRUIBarButtonItem(
+            systemName: "questionmark",
+            target: self,
+            action: #selector(helpButtonPressed))
 
-        quitBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                            target: self,
-                                            action: #selector(quitButtonPressed))
+        quitBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(quitButtonPressed))
 
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = nil

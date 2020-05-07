@@ -16,6 +16,7 @@ extension GameViewController {
 
     func setupGameManager() {
         gameManager = WKRGameManager(networkConfig: networkConfig,
+                                     settings: gameSettings,
                                      gameUpdate: { [weak self] gameUpdate in
                                         self?.gameUpdate(gameUpdate)
             }, votingUpdate: { [weak self] votingUpdate in
@@ -60,18 +61,21 @@ extension GameViewController {
             logEvent(event)
         case .playerRaceLinkCountForCurrentRace(let linkCount):
             webView?.text = linkCount.description
-        case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled):
-            processRaceStats(points: points, place: place, webViewPixelsScrolled: webViewPixelsScrolled)
+        case .playerStatsForLastRace(let points, let place, let webViewPixelsScrolled, let pages):
+            processRaceStats(points: points, place: place, webViewPixelsScrolled: webViewPixelsScrolled, pages: pages)
         }
     }
 
-    private func processRaceStats(points: Int, place: Int?, webViewPixelsScrolled: Int) {
+    private func processRaceStats(points: Int, place: Int?, webViewPixelsScrolled: Int, pages: [WKRPage]) {
         guard let raceType = statRaceType else { return }
         PlayerStatsManager.shared.completedRace(type: raceType,
                                                 points: points,
                                                 place: place,
                                                 timeRaced: timeRaced,
-                                                pixelsScrolled: webViewPixelsScrolled)
+                                                pixelsScrolled: webViewPixelsScrolled,
+                                                pages: pages,
+                                                isEligibleForPoints: gameSettings.points.isStandard,
+                                                isEligibleForSpeed: gameSettings.startPage.isStandard)
 
         let event: PlayerAnonymousMetrics.Event
         switch raceType {
@@ -161,8 +165,7 @@ extension GameViewController {
         #if !MULTIWINDOWDEBUG
         let metric = PlayerAnonymousMetrics.Event(event: logEvent)
         if metric == .pageView,
-            let config = networkConfig,
-            let raceType = PlayerStatsManager.RaceType(config) {
+            let raceType = PlayerStatsManager.RaceType(networkConfig) {
             PlayerStatsManager.shared.viewedPage(raceType: raceType)
         }
         PlayerAnonymousMetrics.log(event: metric, attributes: logEvent.attributes)
@@ -263,9 +266,7 @@ extension GameViewController {
         let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
-        if #available(iOS 13.0, *) {
-            navController.isModalInPresentation = true
-        }
+        navController.isModalInPresentation = true
 
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
@@ -325,9 +326,7 @@ extension GameViewController {
         let navController = WKRUINavigationController(rootViewController: controller)
         navController.modalTransitionStyle = .crossDissolve
         navController.modalPresentationStyle = .overCurrentContext
-        if #available(iOS 13.0, *) {
-            navController.isModalInPresentation = true
-        }
+        navController.isModalInPresentation = true
 
         present(navController, animated: true) { [weak self] in
             self?.connectingLabel.alpha = 0.0
@@ -354,8 +353,12 @@ extension GameViewController {
         dismissActiveController(completion: completion)
 
         if networkConfig.isHost {
-            PlayerAnonymousMetrics.log(event: .hostStartedRace,
-                              attributes: ["Page": finalPage?.title as Any])
+            PlayerAnonymousMetrics.log(
+                event: .hostStartedRace,
+                attributes: [
+                    "Page": finalPage?.title as Any,
+                    "Custom": gameSettings.isCustom ? 1 : 0
+            ])
         }
     }
 

@@ -27,10 +27,11 @@ extension WKRGameManager {
     private func startResultsCountdown() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        var timeLeft = WKRRaceDurationConstants.resultsState
+        var timeLeft = settings.timing.resultsTime
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
 
-            if self?.gameState != .hostResults {
+            if self.gameState != .hostResults {
                 timer.invalidate()
                 return
             }
@@ -38,19 +39,19 @@ extension WKRGameManager {
             timeLeft -= 1
 
             let resultsTime = WKRCodable(int: WKRInt(type: .resultsTime, value: timeLeft))
-            self?.peerNetwork.send(object: resultsTime)
+            self.peerNetwork.send(object: resultsTime)
 
-            let showReadyTime = WKRRaceDurationConstants.resultsState - WKRRaceDurationConstants.resultsShowReadyAfter
+            let showReadyTime = self.settings.timing.resultsTime - WKRRaceDurationConstants.resultsShowReadyAfter
 
             if timeLeft <= 0 {
-                self?.finishResultsCountdown()
+                self.finishResultsCountdown()
                 timer.invalidate()
             } else if timeLeft == showReadyTime {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 1))
-                self?.peerNetwork.send(object: showReady)
+                self.peerNetwork.send(object: showReady)
             } else if timeLeft == WKRRaceDurationConstants.resultsDisableReadyBefore {
                 let showReady = WKRCodable(int: WKRInt(type: .showReady, value: 0))
-                self?.peerNetwork.send(object: showReady)
+                self.peerNetwork.send(object: showReady)
             }
         }
     }
@@ -84,7 +85,7 @@ extension WKRGameManager {
     private func startVotingCountdown() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        var timeLeft = WKRRaceDurationConstants.votingState
+        var timeLeft = settings.timing.votingTime
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] timer in
             timeLeft -= 1
 
@@ -127,7 +128,7 @@ extension WKRGameManager {
     internal func fetchPreRaceConfig() {
         guard localPlayer.isHost else { fatalError("Local player not host") }
 
-        WKRPreRaceConfig.new { preRaceConfig, logEvents in
+        WKRPreRaceConfig.new(settings: settings) { preRaceConfig, logEvents in
             if let config = preRaceConfig {
                 self.game.preRaceConfig = config
                 self.sendPreRaceConfig()

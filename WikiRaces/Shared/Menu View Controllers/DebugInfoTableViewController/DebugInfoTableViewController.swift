@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRUIKit
 
 final class DebugInfoTableViewController: UITableViewController {
 
@@ -25,11 +26,12 @@ final class DebugInfoTableViewController: UITableViewController {
                            forCellReuseIdentifier: DebugInfoTableViewCell.reuseIdentifier)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
-                                                            target: self,
-                                                            action: #selector(share(_:)))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(done))
+                                                           target: self,
+                                                           action: #selector(share(_:)))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(done))
     }
 
     // MARK: - Actions

@@ -16,17 +16,11 @@ final internal class VotingTableViewCell: PointerInteractionTableViewCell {
 
     private let titleLabel = UILabel()
     private let countLabel = UILabel()
-    private let stackView = UIStackView()
 
     // MARK: - Property Observers -
 
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                countLabel.font = UIFont.systemFont(ofSize: 22, weight: .medium)
-            } else {
-                countLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-            }
             setNeedsLayout()
         }
     }
@@ -51,23 +45,23 @@ final internal class VotingTableViewCell: PointerInteractionTableViewCell {
         selectionStyle = .none
         backgroundColor = UIColor.clear
 
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .center
-
+        titleLabel.numberOfLines = 0
         titleLabel.text = ""
         titleLabel.textAlignment = .left
         titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.setContentCompressionResistancePriority(.required, for: .vertical)
 
         countLabel.text = "0"
         countLabel.textAlignment = .right
+        countLabel.font = UIFont.systemFont(ofSize: 19, weight: .medium)
+        countLabel.translatesAutoresizingMaskIntoConstraints = false
+        countLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(countLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(countLabel)
 
-        addSubview(stackView)
-
-        let leftMarginConstraint = NSLayoutConstraint(item: stackView,
+        let leftMarginConstraint = NSLayoutConstraint(item: titleLabel,
                                                       attribute: .left,
                                                       relatedBy: .equal,
                                                       toItem: self,
@@ -75,19 +69,22 @@ final internal class VotingTableViewCell: PointerInteractionTableViewCell {
                                                       multiplier: 1.0,
                                                       constant: 0.0)
 
-        let rightMarginConstraint = NSLayoutConstraint(item: stackView,
+        let rightMarginConstraint = NSLayoutConstraint(item: countLabel,
                                                    attribute: .right,
                                                    relatedBy: .equal,
                                                    toItem: self,
                                                    attribute: .rightMargin,
                                                    multiplier: 1.0,
                                                    constant: 0.0)
-
         let constraints = [
             leftMarginConstraint,
             rightMarginConstraint,
-            stackView.topAnchor.constraint(equalTo: topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
+
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            titleLabel.rightAnchor.constraint(equalTo: countLabel.rightAnchor, constant: -20),
+
+            countLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }

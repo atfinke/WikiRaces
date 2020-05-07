@@ -10,7 +10,6 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
-//swiftlint:disable:next type_body_length
 final internal class ResultsViewController: CenteredTableViewController {
 
     // MARK: - Types -
@@ -108,8 +107,8 @@ final internal class ResultsViewController: CenteredTableViewController {
                                                         action: #selector(shareResultsBarButtonItemPressed(_:)))
         shareResultsBarButtonItem.isEnabled = false
         let addPlayersBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                  target: self,
-                                                  action: #selector(addPlayersBarButtonItemPressed))
+                                                      target: self,
+                                                      action: #selector(addPlayersBarButtonItemPressed))
         addPlayersBarButtonItem.isEnabled = false
 
         var items = [shareResultsBarButtonItem]
@@ -121,9 +120,10 @@ final internal class ResultsViewController: CenteredTableViewController {
         self.shareResultsBarButtonItem = shareResultsBarButtonItem
         self.addPlayersBarButtonItem = addPlayersBarButtonItem
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     // MARK: - Game Updates -
@@ -145,7 +145,6 @@ final internal class ResultsViewController: CenteredTableViewController {
             }
 
             if oldState != .points {
-
                 let fadeAnimation = CATransition()
                 fadeAnimation.duration = WKRAnimationDurationConstants.resultsTableFlash / 4
                 fadeAnimation.type = .fade
@@ -155,13 +154,13 @@ final internal class ResultsViewController: CenteredTableViewController {
                 navigationItem.title = ""
 
                 isAnimatingToPointsStandings = true
-                UIView.animateFlash(withDuration: WKRAnimationDurationConstants.resultsTableFlash,
-                                    items: [tableView],
-                                    whenHidden: {
-                                        self.tableView.reloadData()
-                                        navLayer?.add(fadeAnimation, forKey: "fadeIn")
-                                        self.navigationItem.title = "STANDINGS"
-
+                UIView.animateFlash(
+                    withDuration: WKRAnimationDurationConstants.resultsTableFlash,
+                    items: [tableView],
+                    whenHidden: {
+                        self.tableView.reloadData()
+                        navLayer?.add(fadeAnimation, forKey: "fadeIn")
+                        self.navigationItem.title = "STANDINGS"
                 }, completion: {
                     self.isAnimatingToPointsStandings = false
                     self.hasAnimatedToPointsStandings = true
@@ -188,11 +187,12 @@ final internal class ResultsViewController: CenteredTableViewController {
     private func updatedTime(oldTime: Int) {
         tableView.isUserInteractionEnabled = true
         if oldTime == 100 {
-            UIView.animateFlash(withDuration: 0.75,
-                                items: [guideLabel, descriptionLabel],
-                                whenHidden: {
-                self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
-                self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
+            UIView.animateFlash(
+                withDuration: 0.75,
+                items: [guideLabel, descriptionLabel],
+                whenHidden: {
+                    self.guideLabel.text = "TAP PLAYER TO VIEW HISTORY"
+                    self.descriptionLabel.text = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
             }, completion: nil)
 
             guard let localPlayer = localPlayer else { return }
@@ -205,7 +205,7 @@ final internal class ResultsViewController: CenteredTableViewController {
                 }
             }
 
-            guard let window = UIApplication.shared.keyWindow,
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
                 let results = self.resultsInfo,
                 let player = resultsPlayer,
                 player.raceHistory != nil else { return }
@@ -266,14 +266,14 @@ final internal class ResultsViewController: CenteredTableViewController {
     func animateButtonLabel() {
         guard viewIfLoaded?.window != nil,
             let label = overlayButton.titleLabel else {
-            return
+                return
         }
         UIView.animateFlash(withDuration: 2,
                             toAlpha: 0.25,
                             items: [label],
                             whenHidden: nil,
                             completion: {
-            self.animateButtonLabel()
+                                self.animateButtonLabel()
         })
     }
 
@@ -285,8 +285,8 @@ final internal class ResultsViewController: CenteredTableViewController {
         guard let oldInfo = oldResultsInfo,
             let newInfo = resultsInfo,
             oldInfo.playerCount == newInfo.playerCount else {
-            tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-            return
+                tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                return
         }
 
         let previousPlayerOrder = oldInfo.raceResultsPlayerProfileOrder()

@@ -15,13 +15,14 @@ final class MenuView: UIView {
     // MARK: Types
 
     enum InterfaceState {
-        case raceTypeOptions, noOptions, localOptions, noInterface
+        case raceTypeOptions, noOptions, localOptions, plusOptions, noInterface
     }
 
     enum ListenerUpdate {
         case presentDebug, presentGlobalConnect, presentLeaderboard, presentGlobalAuth
         case presentMPCConnect(isHost: Bool)
         case presentAlert(UIAlertController)
+        case presentStats, presentSubscription
     }
 
     // MARK: - Closures
@@ -50,6 +51,11 @@ final class MenuView: UIView {
     let joinLocalRaceButton = WKRUIButton()
     let createLocalRaceButton = WKRUIButton()
     let localOptionsBackButton = UIButton()
+
+    let plusButton = UIButton()
+
+    let statsButton = WKRUIButton()
+    let plusOptionsBackButton = UIButton()
 
     /// The Wiki Points tile
     var leftMenuTile: MenuTile?
@@ -89,6 +95,9 @@ final class MenuView: UIView {
     var joinLocalRaceButtonWidthConstraint: NSLayoutConstraint!
     var createLocalRaceButtonWidthConstraint: NSLayoutConstraint!
     var localOptionsBackButtonWidth: NSLayoutConstraint!
+
+    var statsButtonLeftConstraint: NSLayoutConstraint!
+    var statsButtonWidthConstraint: NSLayoutConstraint!
 
     // MARK: - View Life Cycle
 
@@ -143,10 +152,10 @@ final class MenuView: UIView {
         bottomViewHeightConstraint.constant = 250 + safeAreaInsets.bottom / 2
     }
 
-    //swiftlint:disable:next function_body_length
     override func layoutSubviews() {
         super.layoutSubviews()
 
+        titleLabel.text = "WikiRaces"
         bottomView.backgroundColor = .wkrMenuBottomViewColor(for: traitCollection)
 
         let textColor: UIColor = .wkrTextColor(for: traitCollection)
@@ -154,9 +163,17 @@ final class MenuView: UIView {
         subtitleLabel.textColor = textColor
         localOptionsBackButton.tintColor = textColor
         localOptionsBackButton.layer.borderColor = textColor.cgColor
+        localOptionsBackButton.layer.borderWidth = 1.7
+
+        plusOptionsBackButton.tintColor = localOptionsBackButton.tintColor
+        plusOptionsBackButton.layer.borderColor = localOptionsBackButton.layer.borderColor
+        plusOptionsBackButton.layer.borderWidth = localOptionsBackButton.layer.borderWidth
+
+        plusButton.tintColor = localOptionsBackButton.tintColor
+        plusButton.layer.borderColor = localOptionsBackButton.layer.borderColor
+        plusButton.layer.borderWidth = localOptionsBackButton.layer.borderWidth
 
         // Button Styles
-
         let buttonStyle: WKRUIButtonStyle
         let buttonWidth: CGFloat
         let buttonHeight: CGFloat
@@ -184,6 +201,7 @@ final class MenuView: UIView {
         globalRaceTypeButton.style = buttonStyle
         joinLocalRaceButton.style = buttonStyle
         createLocalRaceButton.style = buttonStyle
+        statsButton.style = buttonStyle
 
         // Label Fonts
         titleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 10.0, 55), weight: .semibold)
@@ -200,6 +218,7 @@ final class MenuView: UIView {
         case .raceTypeOptions:
             localRaceTypeButtonLeftConstraint.constant = 30
             joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
+            statsButtonLeftConstraint.constant = -statsButton.frame.width
 
             topViewLeftConstraint.constant = 0
             bottomViewAnchorConstraint.constant = 0
@@ -210,6 +229,7 @@ final class MenuView: UIView {
         case .noOptions:
             localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
             joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
+            statsButtonLeftConstraint.constant = -statsButton.frame.width
         case .localOptions:
             localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
             joinLocalRaceButtonLeftConstraint.constant = 30
@@ -218,6 +238,9 @@ final class MenuView: UIView {
             bottomViewAnchorConstraint.constant = bottomView.frame.height
             localRaceTypeButtonLeftConstraint.constant = 30
             joinLocalRaceButtonLeftConstraint.constant = 30
+        case .plusOptions:
+            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
+            statsButtonLeftConstraint.constant = 30
         }
 
         localRaceTypeButtonHeightConstraint.constant = buttonHeight
@@ -228,7 +251,11 @@ final class MenuView: UIView {
         createLocalRaceButtonWidthConstraint.constant = buttonWidth + 30
         localOptionsBackButtonWidth.constant = buttonHeight - 10
 
+        statsButtonWidthConstraint.constant = buttonWidth + 13
+
         localOptionsBackButton.layer.cornerRadius = localOptionsBackButtonWidth.constant / 2
+        plusOptionsBackButton.layer.cornerRadius = localOptionsBackButton.layer.cornerRadius
+        plusButton.layer.cornerRadius = localOptionsBackButton.layer.cornerRadius
     }
 
     func promptForCustomName(isHost: Bool) -> Bool {
@@ -268,7 +295,6 @@ final class MenuView: UIView {
         }
         UserDefaults.standard.set(true, forKey: "PromptedGlobalRacesPopularity")
 
-        //swiftlint:disable:next line_length
         let message = "Most global races are started with invited friends. Invite a friend for the best chance at joining a race."
         let alertController = UIAlertController(title: "Global Races", message: message, preferredStyle: .alert)
 

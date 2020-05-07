@@ -9,7 +9,7 @@
 import Foundation
 
 /// Feteched Wikipedia pages
-internal struct WKRPageFetcher {
+public struct WKRPageFetcher {
 
     // MARK: - Properties
 
@@ -31,6 +31,7 @@ internal struct WKRPageFetcher {
     }()
 
     static private var observations = [UUID: NSKeyValueObservation]()
+    static private let observationsQueue = DispatchQueue(label: "com.andrewfinke.wikiraces.pagefetcher.observations", qos: .utility)
 
     // MARK: - Helpers
 
@@ -47,7 +48,7 @@ internal struct WKRPageFetcher {
     // MARK: - Fetching
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
-    static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
+    public static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
         guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
             completionHandler(nil, false)
             return
@@ -98,20 +99,25 @@ internal struct WKRPageFetcher {
             session = WKRPageFetcher.noCacheSession
         }
 
-        let taskUUID = UUID()
-        let task = session.dataTask(with: url) { (data, _, error) in
-            observations[taskUUID] = nil
-            if let data = data, let string = String(data: data, encoding: .utf8) {
-                completionHandler(string, nil)
-            } else {
-                completionHandler(nil, error)
+        observationsQueue.async {
+            let taskUUID = UUID()
+            let task = session.dataTask(with: url) { (data, _, error) in
+                observationsQueue.async {
+                    self.observations[taskUUID] = nil
+                }
+                if let data = data, let string = String(data: data, encoding: .utf8) {
+                    completionHandler(string, nil)
+                } else {
+                    completionHandler(nil, error)
+                }
             }
-        }
-        observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
-            progressHandler(Float(progress.fractionCompleted))
-        }
 
-        task.resume()
+            self.observations[taskUUID] = task.progress.observe(\.fractionCompleted) { progress, _ in
+                progressHandler(Float(progress.fractionCompleted))
+            }
+
+            task.resume()
+        }
     }
 
 }

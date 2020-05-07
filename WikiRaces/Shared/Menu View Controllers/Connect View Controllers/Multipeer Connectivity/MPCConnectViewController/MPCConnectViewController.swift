@@ -15,6 +15,7 @@ import WKRUIKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
+import FirebaseAnalytics
 import Crashlytics
 #endif
 
@@ -41,7 +42,7 @@ final internal class MPCConnectViewController: ConnectViewController {
     var activeInvite: ((Bool, MCSession) -> Void)?
     var activeInviteTimeoutTimer: Timer?
 
-    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext?)]()
+    var invites = [(handler: ((Bool, MCSession) -> Void)?, host: MCPeerID, context: MPCHostContext)]()
 
     var peerID: MCPeerID!
     var hostPeerID: MCPeerID?
@@ -131,8 +132,8 @@ final internal class MPCConnectViewController: ConnectViewController {
                     self.toggleCoreInterface(isHidden: true,
                                         duration: 0.25,
                                         and: [self.inviteView],
-                                        completion: {
-                                            self.presentHostInterface()
+                                        completion: { [weak self] in
+                                            self?.presentHostInterface()
                     })
                 } else {
                     self.startAdvertising()
@@ -189,7 +190,7 @@ final internal class MPCConnectViewController: ConnectViewController {
                                              session: self.session,
                                              isHost: self.isPlayerHost)
                     }
-                    self.showMatch(for: networkConfig, andHide: [])
+                    self.showMatch(for: networkConfig, settings: controller.gameSettings, andHide: [])
                 })
             case .cancel:
                 self.dismiss(animated: true, completion: {
@@ -200,10 +201,14 @@ final internal class MPCConnectViewController: ConnectViewController {
 
         let nav = WKRUINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-        if #available(iOS 13.0, *) {
-            nav.isModalInPresentation = true
-        }
+        nav.isModalInPresentation = true
         present(nav, animated: true, completion: nil)
+    }
+
+    override func showError(title: String, message: String, showSettingsButton: Bool = false) {
+        activeInvite?(false, session)
+        invites.forEach { $0.handler?(false, session) }
+        super.showError(title: title, message: message, showSettingsButton: showSettingsButton)
     }
 
 }

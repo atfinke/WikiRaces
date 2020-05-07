@@ -32,7 +32,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     // MARK: - Initalization -
 
     public override init() {
-        guard let window = UIApplication.shared.keyWindow else {
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
             fatalError("Couldn't get key window")
         }
         alertWindow = window

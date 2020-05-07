@@ -20,9 +20,27 @@ internal class ViewController: UIViewController {
 
     var rendered = false
 
-    //swiftlint:disable:next function_body_length
     override func viewDidLoad() {
         super.viewDidLoad()
+
+//        let controller = VotingViewController()
+//        let nav = UINavigationController(rootViewController: controller)
+//
+//        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//            guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
+//                let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States."),
+//                let waltURL = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney") else {
+//                    fatalError()
+//            }
+//
+//            controller.voteInfo = WKRVoteInfo(pages: [
+//                WKRPage(title: "Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc Apple Inc", url: appleURL),
+//                WKRPage(title: "United States", url: usaURL),
+//                WKRPage(title: "Walt Disney", url: waltURL)
+//            ])
+//        }
 
         let controller = ResultsViewController()
         let nav = UINavigationController(rootViewController: controller)

@@ -10,12 +10,17 @@ import UIKit
 import WKRKit
 import WKRUIKit
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebasePerformance
+#endif
+
 class ConnectViewController: UIViewController {
 
     // MARK: - Types -
 
     struct StartMessage: Codable {
         let hostName: String
+        let gameSettings: WKRGameSettings
     }
 
     // MARK: - Interface Elements -
@@ -23,13 +28,14 @@ class ConnectViewController: UIViewController {
     /// General status label
     final let descriptionLabel = UILabel()
     /// Activity spinner
-    final let activityIndicatorView = UIActivityIndicatorView(style: .whiteLarge)
+    final let activityIndicatorView = UIActivityIndicatorView(style: .large)
     /// The button to cancel joining/creating a race
     final let cancelButton = UIButton()
 
     final var isFirstAppear = true
     final var isShowingMatch = false
     final var onQuit: (() -> Void)?
+    final var isShowingError = false
 
     // MARK: - Connection -
 
@@ -148,7 +154,10 @@ class ConnectViewController: UIViewController {
     ///   - title: The title of the error message
     ///   - message: The message body of the error
     @objc
-    final func showError(title: String, message: String, showSettingsButton: Bool = false) {
+    func showError(title: String, message: String, showSettingsButton: Bool = false) {
+        guard !isShowingError else { return }
+        isShowingError = true
+
         onQuit?()
 
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -183,25 +192,27 @@ class ConnectViewController: UIViewController {
     }
 
     final func showMatch(for networkConfig: WKRPeerNetworkConfig,
+                         settings: WKRGameSettings,
                          andHide views: [UIView]) {
+
+        guard !isShowingError else { return }
+        isShowingError = true
 
         guard !isShowingMatch else { return }
         isShowingMatch = true
 
         DispatchQueue.main.async {
-            self.toggleCoreInterface(isHidden: true,
-                                     duration: 0.25,
-                                     and: views,
-                                     completion: {
-                                        let controller = GameViewController()
-                                        controller.networkConfig = networkConfig
-                                        let nav = WKRUINavigationController(rootViewController: controller)
-                                        nav.modalPresentationStyle = .fullScreen
-                                        nav.modalTransitionStyle = .crossDissolve
-                                        if #available(iOS 13.0, *) {
-                                            nav.isModalInPresentation = true
-                                        }
-                                        self.present(nav, animated: true, completion: nil)
+            self.toggleCoreInterface(
+                isHidden: true,
+                duration: 0.25,
+                and: views,
+                completion: {
+                    let controller = GameViewController(network: networkConfig, settings: settings)
+                    let nav = WKRUINavigationController(rootViewController: controller)
+                    nav.modalPresentationStyle = .fullScreen
+                    nav.modalTransitionStyle = .crossDissolve
+                    nav.isModalInPresentation = true
+                    self.present(nav, animated: true, completion: nil)
             })
         }
     }

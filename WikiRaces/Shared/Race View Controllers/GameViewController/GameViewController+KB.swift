@@ -13,33 +13,32 @@ extension GameViewController {
     // MARK: - Keyboard Support
 
     override var keyCommands: [UIKeyCommand]? {
-        // swiftlint:disable line_length
         var commands = [
-            UIKeyCommand(input: "?", modifierFlags: .command, action: #selector(keyboardHelp), discoverabilityTitle: "Help"),
-            UIKeyCommand(input: "r", modifierFlags: .command, action: #selector(keyboardReload), discoverabilityTitle: "Reload Page"),
-            UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(keyboardAttemptForfeit), discoverabilityTitle: "Forfiet Race"),
-            UIKeyCommand(input: "q", modifierFlags: .command, action: #selector(keyboardAttemptQuit), discoverabilityTitle: "Return to Menu"),
-            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .alternate, action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Page Up"),
-            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .alternate, action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Page Down"),
-            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: .command, action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Top of Page"),
-            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: .command, action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Bottom of Page"),
-            UIKeyCommand(input: UIKeyCommand.inputUpArrow, modifierFlags: [], action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Move Up Page"),
-            UIKeyCommand(input: UIKeyCommand.inputDownArrow, modifierFlags: [], action: #selector(discoverabilityEmptyFunction), discoverabilityTitle: "Move Down Page")
+            UIKeyCommand(title: "Help", action: #selector(keyboardHelp), input: "?", modifierFlags: .command),
+            UIKeyCommand(title: "Reload Page", action: #selector(keyboardReload), input: "r", modifierFlags: .command),
+            UIKeyCommand(title: "Forfiet Race", action: #selector(keyboardAttemptForfeit), input: "f", modifierFlags: .command),
+            UIKeyCommand(title: "Return to Menu", action: #selector(keyboardAttemptQuit), input: "q", modifierFlags: .command),
+            UIKeyCommand(title: "Page Up", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputUpArrow, modifierFlags: .alternate),
+            UIKeyCommand(title: "Page Down", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputDownArrow, modifierFlags: .alternate),
+            UIKeyCommand(title: "Top of Page", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputUpArrow, modifierFlags: .command),
+            UIKeyCommand(title: "Bottom of Page", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputDownArrow, modifierFlags: .command),
+            UIKeyCommand(title: "Move Up Page", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputUpArrow, modifierFlags: []),
+            UIKeyCommand(title: "Move Down Page", action: #selector(discoverabilityEmptyFunction), input: UIKeyCommand.inputDownArrow, modifierFlags: [])
         ]
 
         if navigationItem.rightBarButtonItem?.isEnabled ?? false {
-            let command = UIKeyCommand(input: "q",
-                                       modifierFlags: .command,
+            let command = UIKeyCommand(title: "Return to Menu",
                                        action: #selector(keyboardAttemptQuit),
-                                       discoverabilityTitle: "Return to Menu")
+                                       input: "q",
+                                       modifierFlags: .command)
             commands.append(command)
         }
 
         let headerCommands = (1..<10).map { index in
-            return UIKeyCommand(input: index.description,
-                                modifierFlags: .command,
-                                action: #selector(keyboardAttemptToggleSection(_:)),
-                                discoverabilityTitle: "Toggle Section \(index)")
+            return UIKeyCommand(title: "Toggle Section \(index)",
+                action: #selector(keyboardAttemptToggleSection(_:)),
+                input: index.description,
+                modifierFlags: .command)
         }
         commands.append(contentsOf: headerCommands)
 

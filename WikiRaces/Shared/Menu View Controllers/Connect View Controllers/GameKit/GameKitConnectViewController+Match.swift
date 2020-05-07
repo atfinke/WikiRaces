@@ -9,6 +9,10 @@
 import GameKit
 import WKRKit
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebasePerformance
+#endif
+
 extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControllerDelegate {
 
     // MARK: - Helpers -
@@ -59,13 +63,15 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             return
         }
 
-        let message = StartMessage(hostName: GKLocalPlayer.local.alias)
+        let settings = WKRGameSettings()
+        let message = StartMessage(hostName: GKLocalPlayer.local.alias, gameSettings: settings)
         do {
             let data = try JSONEncoder().encode(message)
             try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.showMatch(for: .gameKit(match: match,
                                              isHost: true),
+                               settings: settings,
                                andHide: [])
             }
         } catch {
@@ -94,6 +100,7 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
             }
             showMatch(for: .gameKit(match: match,
                                     isHost: isPlayerHost),
+                      settings: object.gameSettings,
                       andHide: [])
         }
     }
@@ -121,10 +128,12 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
     }
 
     func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
-                PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind"))
 
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        findTrace?.stop()
+        DispatchQueue.global().async {
+            self.findTrace?.stop()
+        }
         #endif
         updateDescriptionLabel(to: "Finding best host")
 
@@ -135,12 +144,14 @@ extension GameKitConnectViewController: GKMatchDelegate, GKMatchmakerViewControl
         match.delegate = self
         self.match = match
 
+        PlayerAnonymousMetrics.log(event: .userAction("issue#119: didFind match set"))
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             var players = match.players
             players.append(GKLocalPlayer.local)
-            if let hostPlayer = players.sorted(by: { $0.playerID > $1.playerID }).first {
+            if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
                 self.hostPlayerAlias = hostPlayer.alias
-                if hostPlayer.playerID == GKLocalPlayer.local.playerID {
+                if hostPlayer.alias == GKLocalPlayer.local.alias {
                     self.isPlayerHost = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
                         self.sendStartMessageToPlayers()

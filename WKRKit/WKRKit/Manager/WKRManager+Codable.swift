@@ -89,6 +89,19 @@ extension WKRGameManager {
                 return
             }
 
+            switch message {
+            case .linkOnPage:
+                if !settings.notifications.linkOnPage { return }
+            case .missedLink:
+                if !settings.notifications.missedLink { return }
+            case .neededHelp:
+                if !settings.notifications.neededHelp { return }
+            case .onUSA:
+                if !settings.notifications.isOnUSA { return }
+            default:
+                break
+            }
+
             enqueue(message: message.text(for: player),
                     duration: 3.0,
                     isRaceSpecific: isRaceSpecific,
@@ -137,8 +150,8 @@ extension WKRGameManager {
         if localPlayer.state == .racing {
             localPlayer.state = .forcedEnd
         }
-        if localPlayer.shouldGetPoints {
-            localPlayer.shouldGetPoints = false
+        if !localPlayer.hasReceivedPointsForCurrentRace {
+            localPlayer.hasReceivedPointsForCurrentRace = true
 
             let points = resultsInfo.raceRewardPoints(for: localPlayer)
             var place: Int?
@@ -149,9 +162,11 @@ extension WKRGameManager {
                 }
             }
             let webViewPixelsScrolled = webView?.pixelsScrolled ?? 0
+            let pages = resultsInfo.pagesViewed(for: localPlayer)
             gameUpdate(.playerStatsForLastRace(points: points,
                                                place: place,
-                                               webViewPixelsScrolled: webViewPixelsScrolled))
+                                               webViewPixelsScrolled: webViewPixelsScrolled,
+                                               pages: pages))
         }
 
         peerNetwork.send(object: WKRCodable(localPlayer))
@@ -165,7 +180,7 @@ extension WKRGameManager {
             hostResultsInfo = nil
             localPlayer.state = .voting
             localPlayer.raceHistory = nil
-            localPlayer.shouldGetPoints = true
+            localPlayer.hasReceivedPointsForCurrentRace = false
             if localPlayer.isHost {
                 fetchPreRaceConfig()
             }

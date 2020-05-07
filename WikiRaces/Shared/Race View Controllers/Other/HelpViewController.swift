@@ -50,15 +50,16 @@ final internal class HelpViewController: UIViewController, WKNavigationDelegate 
         NSLayoutConstraint.activate(constraints)
 
         guard let url = url else {
-           return // When would this happen?
+            return // When would this happen?
         }
 
         webView.startedPageLoad()
         webView.load(URLRequest(url: url))
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     override func viewWillLayoutSubviews() {

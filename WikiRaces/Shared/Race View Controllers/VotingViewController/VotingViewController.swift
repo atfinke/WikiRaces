@@ -37,6 +37,9 @@ final internal class VotingViewController: CenteredTableViewController {
                     self.tableView.alpha = 1.0
                 })
             }
+            if voteInfo?.pageCount == 1 {
+                guideLabel.text = "HOST SELECTED PAGE"
+            }
         }
     }
 
@@ -45,11 +48,12 @@ final internal class VotingViewController: CenteredTableViewController {
             if isShowingVoteCountdown {
                 let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
                 if !isShowingGuide {
-                    UIView.animateFlash(withDuration: WKRAnimationDurationConstants.votingLabelsFlash,
-                                        items: [guideLabel, descriptionLabel],
-                                        whenHidden: {
-                        self.descriptionLabel.text = timeString
-                        self.isShowingGuide = true
+                    UIView.animateFlash(
+                        withDuration: WKRAnimationDurationConstants.votingLabelsFlash,
+                        items: [guideLabel, descriptionLabel],
+                        whenHidden: {
+                            self.descriptionLabel.text = timeString
+                            self.isShowingGuide = true
                     }, completion: nil)
                     tableView.isUserInteractionEnabled = true
                 } else if voteTimeRemaing == 0 {
@@ -82,14 +86,22 @@ final internal class VotingViewController: CenteredTableViewController {
 
         guideLabel.alpha = 0.0
         guideLabel.text = "TAP ARTICLE TO VOTE"
+        if voteInfo?.pageCount == 1 {
+            guideLabel.text = "HOST SELECTED PAGE"
+        }
+
         descriptionLabel.text = "VOTING STARTS SOON"
+
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
 
         tableView.register(VotingTableViewCell.self,
                            forCellReuseIdentifier: reuseIdentifier)
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop,
-                                                            target: self,
-                                                            action: #selector(doneButtonPressed))
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     override func viewDidAppear(_ animated: Bool) {

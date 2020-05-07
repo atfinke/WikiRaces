@@ -14,22 +14,22 @@ extension MPCConnectViewController {
 
     override var keyCommands: [UIKeyCommand]? {
         var commands = [
-            UIKeyCommand(input: UIKeyCommand.inputEscape,
-                         modifierFlags: [],
+            UIKeyCommand(title: "Return to Menu",
                          action: #selector(keyboardQuit),
-                         discoverabilityTitle: "Return to Menu")
+                         input: UIKeyCommand.inputEscape,
+                         modifierFlags: [])
         ]
 
         if isShowingInvite {
             let inviteCommands = [
-                UIKeyCommand(input: "a",
-                             modifierFlags: .command,
+                UIKeyCommand(title: "Accept Invite",
                              action: #selector(keyboardAttemptAcceptInvite),
-                             discoverabilityTitle: "Accpet Invite"),
-                UIKeyCommand(input: "d",
-                             modifierFlags: .command,
+                             input: "a",
+                             modifierFlags: .command),
+                UIKeyCommand(title: "Decline Invite",
                              action: #selector(keyboardAttemptDeclineInvite),
-                             discoverabilityTitle: "Decline Invite")
+                             input: "d",
+                             modifierFlags: .command)
             ]
             commands.append(contentsOf: inviteCommands)
         }

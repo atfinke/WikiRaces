@@ -35,7 +35,6 @@ final internal class MenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //swiftlint:disable:next discarded_notification_center_observer
         NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
                                                object: nil,
                                                queue: nil) { _ in
@@ -61,6 +60,15 @@ final internal class MenuViewController: UIViewController {
                 controller.viewState = .leaderboards
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
+            case .presentStats:
+                let nav = WKRUINavigationController(rootViewController: StatsViewController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            case.presentSubscription:
+                PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
+                let controller = PlusViewController()
+                controller.modalPresentationStyle = .overCurrentContext
+                self.present(controller, animated: false, completion: nil)
             }
 
         }
@@ -92,11 +100,11 @@ final internal class MenuViewController: UIViewController {
         })
 
         #if MULTIWINDOWDEBUG
-        let controller = GameViewController()
-        let nav = WKRUINavigationController(rootViewController: controller)
         let name = (view.window as? DebugWindow)?.playerName ?? ""
-        controller.networkConfig = .multiwindow(windowName: name,
-                                                isHost: view.window!.frame.origin == .zero)
+        let controller = GameViewController(
+            network: .multiwindow(windowName: name, isHost: view.window!.frame.origin == .zero),
+            settings: WKRGameSettings())
+        let nav = WKRUINavigationController(rootViewController: controller)
         present(nav, animated: false, completion: nil)
         #else
         if isFirstAppearence {
@@ -135,7 +143,6 @@ final internal class MenuViewController: UIViewController {
         }
         UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
 
-        //swiftlint:disable:next line_length
         let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
         let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
 
@@ -165,7 +172,7 @@ final internal class MenuViewController: UIViewController {
 
     func presentGlobalConnect() {
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            let controller = GameViewController()
+            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
             let nav = WKRUINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)

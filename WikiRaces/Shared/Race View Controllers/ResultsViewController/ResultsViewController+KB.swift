@@ -15,17 +15,17 @@ extension ResultsViewController {
     override var keyCommands: [UIKeyCommand]? {
         var commands = [UIKeyCommand]()
         if !isOverlayButtonHidden {
-            let command = UIKeyCommand(input: " ",
-                                       modifierFlags: [],
+            let command = UIKeyCommand(title: "Ready Up",
                                        action: #selector(keyboardAttemptReadyUp),
-                                       discoverabilityTitle: "Ready Up")
+                                       input: " ",
+                                       modifierFlags: [])
             commands.append(command)
         }
         if navigationItem.rightBarButtonItem?.isEnabled ?? false {
-            let command = UIKeyCommand(input: "q",
-                                       modifierFlags: .command,
+            let command = UIKeyCommand(title: "Return to Menu",
                                        action: #selector(keyboardAttemptQuit),
-                                       discoverabilityTitle: "Return to Menu")
+                                       input: "q",
+                                       modifierFlags: .command)
             commands.append(command)
         }
         return commands
