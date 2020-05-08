@@ -15,7 +15,7 @@ internal class AppDelegate: WKRAppDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureConstants()
 
-        window = WKRWindow(frame: UIScreen.main.bounds)
+        window = WKRUIWindow(frame: UIScreen.main.bounds)
         let controller = ViewController()
         let nav = WKRUINavigationController(rootViewController: controller)
         nav.setNavigationBarHidden(true, animated: false)
