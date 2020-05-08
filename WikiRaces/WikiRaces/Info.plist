@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>7002</string>
+	<string>7028</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

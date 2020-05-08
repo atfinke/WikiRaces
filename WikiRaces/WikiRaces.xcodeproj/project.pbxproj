@@ -136,6 +136,7 @@
 		145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
 		145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */; };
 		1473E2A0210DAD7C00726377 /* HelpViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473E29F210DAD7C00726377 /* HelpViewController+KB.swift */; };
+		1473F38D24650B6800F939B0 /* MPCHostAutoInviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141854DE2373666A008C988A /* MPCHostAutoInviteCell.swift */; };
 		147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147593D01F609911005DFC90 /* SnapshotHelper.swift */; };
 		1478B1B122095360009F2F3F /* ResultRenderer+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478B1B022095360009F2F3F /* ResultRenderer+Creation.swift */; };
 		1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1478B1B022095360009F2F3F /* ResultRenderer+Creation.swift */; };
@@ -1405,7 +1406,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Shared/Frameworks/Analytics/Fabric.framework/upload-symbols\" -a 80c3b2d37f1bca4e182e7fbf7976e6f069340b4d -p ios \"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}\"\n";
+			shellScript = "
+";
 		};
 		149FDEC61F4F490C003A71D0 /* Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1548,6 +1550,7 @@
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14B4DB662224F1B9007D4B54 /* GameKitConnectViewController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
+				1473F38D24650B6800F939B0 /* MPCHostAutoInviteCell.swift in Sources */,
 				14DD97282202294D00AAB389 /* PlayerDatabaseMetrics.swift in Sources */,
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				142ABE0724600A74008E7F77 /* PlusStore.swift in Sources */,
@@ -1918,7 +1921,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.05;
+				MARKETING_VERSION = 2020.05.2;
 				OTHER_LDFLAGS = " -ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -1953,7 +1956,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.05;
+				MARKETING_VERSION = 2020.05.2;
 				OTHER_LDFLAGS = " -ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";

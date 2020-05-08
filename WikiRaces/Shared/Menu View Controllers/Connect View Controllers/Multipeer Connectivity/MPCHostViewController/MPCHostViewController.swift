@@ -29,7 +29,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
     }
 
     enum ListenerUpdate {
-        case startMatch(isSolo: Bool)
+        case startMatch(isSolo: Bool, settings: WKRGameSettings)
         case cancel
     }
     // MARK: - Properties -
@@ -168,7 +168,7 @@ final internal class MPCHostViewController: UITableViewController, MCSessionDele
             try session.send(data, toPeers: session.connectedPeers, with: .reliable)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.listenerUpdate?(.startMatch(isSolo: false))
+                self.listenerUpdate?(.startMatch(isSolo: false, settings: self.gameSettings))
             }
         } catch {
             let info = "startMatch: " + error.localizedDescription
