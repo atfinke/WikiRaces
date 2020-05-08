@@ -181,7 +181,7 @@ final internal class MPCConnectViewController: ConnectViewController {
         controller.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {
-            case .startMatch(let isSolo):
+            case .startMatch(let isSolo, let settings):
                 self.isSolo = isSolo
                 self.dismiss(animated: true, completion: {
                     var networkConfig: WKRPeerNetworkConfig = .solo(name: self.playerName)
@@ -190,7 +190,7 @@ final internal class MPCConnectViewController: ConnectViewController {
                                              session: self.session,
                                              isHost: self.isPlayerHost)
                     }
-                    self.showMatch(for: networkConfig, settings: controller.gameSettings, andHide: [])
+                    self.showMatch(for: networkConfig, settings: settings, andHide: [])
                 })
             case .cancel:
                 self.dismiss(animated: true, completion: {

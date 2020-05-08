@@ -117,7 +117,7 @@ extension MPCHostViewController {
             PlayerAnonymousMetrics.log(event: .hostStartedSoloMatch)
 
             session?.disconnect()
-            listenerUpdate?(.startMatch(isSolo: true))
+            listenerUpdate?(.startMatch(isSolo: true, settings: gameSettings))
             tableView.isUserInteractionEnabled = false
             return
         }
