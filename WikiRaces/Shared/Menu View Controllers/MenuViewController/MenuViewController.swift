@@ -115,6 +115,7 @@ final internal class MenuViewController: UIViewController {
 
         let metrics = PlayerDatabaseMetrics.shared
         metrics.log(value: UIDevice.current.name, for: "DeviceNames")
+        metrics.log(value: PlusStore.shared.isPlus, for: "isPlus")
         if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
             metrics.log(value: name, for: "CustomNames")
         }
