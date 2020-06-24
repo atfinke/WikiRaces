@@ -15,12 +15,13 @@ final class MenuView: UIView {
     // MARK: Types
 
     enum InterfaceState {
-        case raceTypeOptions, noOptions, localOptions, plusOptions, noInterface
+        case joinOrCreate, noOptions, joinOptions, plusOptions, noInterface
     }
 
     enum ListenerUpdate {
-        case presentDebug, presentGlobalConnect, presentLeaderboard, presentGlobalAuth
-        case presentMPCConnect(isHost: Bool)
+        case presentDebug, presentLeaderboard, presentGKAuth
+        case presentJoinPublicRace, presentJoinPrivateRace
+        case presentCreateRace
         case presentAlert(UIAlertController)
         case presentStats, presentSubscription
     }
@@ -46,17 +47,17 @@ final class MenuView: UIView {
     /// The "Conquer..." label
     let subtitleLabel = UILabel()
 
-    let localRaceTypeButton = WKRUIButton()
-    let globalRaceTypeButton = WKRUIButton()
-    let joinLocalRaceButton = WKRUIButton()
-    let createLocalRaceButton = WKRUIButton()
-    let localOptionsBackButton = UIButton()
-
+    let joinButton = WKRUIButton()
+    let createButton = WKRUIButton()
+    
+    let publicButton = WKRUIButton()
+    let privateButton = WKRUIButton()
+    
+    let backButton = UIButton()
     let plusButton = UIButton()
 
     let statsButton = WKRUIButton()
-    let plusOptionsBackButton = UIButton()
-
+    
     /// The Wiki Points tile
     var leftMenuTile: MenuTile?
     /// The average points tile
@@ -86,15 +87,18 @@ final class MenuView: UIView {
 
     /// Used for adjusting button widths and heights based on screen width
 
-    var localRaceTypeButtonLeftConstraint: NSLayoutConstraint!
-    var localRaceTypeButtonWidthConstraint: NSLayoutConstraint!
-    var localRaceTypeButtonHeightConstraint: NSLayoutConstraint!
-    var globalRaceTypeButtonWidthConstraint: NSLayoutConstraint!
+    var joinButtonLeftConstraint: NSLayoutConstraint!
+    var joinButtonWidthConstraint: NSLayoutConstraint!
+    var joinButtonHeightConstraint: NSLayoutConstraint!
+    var createButtonWidthConstraint: NSLayoutConstraint!
 
-    var joinLocalRaceButtonLeftConstraint: NSLayoutConstraint!
-    var joinLocalRaceButtonWidthConstraint: NSLayoutConstraint!
-    var createLocalRaceButtonWidthConstraint: NSLayoutConstraint!
-    var localOptionsBackButtonWidth: NSLayoutConstraint!
+    var publicButtonWidthConstraint: NSLayoutConstraint!
+    var privateButtonLeftConstraint: NSLayoutConstraint!
+    var privateButtonWidthConstraint: NSLayoutConstraint!
+    
+    var backButtonLeftConstraintForJoinOptions: NSLayoutConstraint!
+    var backButtonLeftConstraintForStats: NSLayoutConstraint!
+    var backButtonWidth: NSLayoutConstraint!
 
     var statsButtonLeftConstraint: NSLayoutConstraint!
     var statsButtonWidthConstraint: NSLayoutConstraint!
@@ -161,17 +165,14 @@ final class MenuView: UIView {
         let textColor: UIColor = .wkrTextColor(for: traitCollection)
         titleLabel.textColor = textColor
         subtitleLabel.textColor = textColor
-        localOptionsBackButton.tintColor = textColor
-        localOptionsBackButton.layer.borderColor = textColor.cgColor
-        localOptionsBackButton.layer.borderWidth = 1.7
+        backButton.tintColor = textColor
+        backButton.layer.borderColor = textColor.cgColor
+        backButton.layer.borderWidth = 1.7
 
-        plusOptionsBackButton.tintColor = localOptionsBackButton.tintColor
-        plusOptionsBackButton.layer.borderColor = localOptionsBackButton.layer.borderColor
-        plusOptionsBackButton.layer.borderWidth = localOptionsBackButton.layer.borderWidth
-
-        plusButton.tintColor = localOptionsBackButton.tintColor
-        plusButton.layer.borderColor = localOptionsBackButton.layer.borderColor
-        plusButton.layer.borderWidth = localOptionsBackButton.layer.borderWidth
+       
+        plusButton.tintColor = backButton.tintColor
+        plusButton.layer.borderColor = backButton.layer.borderColor
+        plusButton.layer.borderWidth = backButton.layer.borderWidth
 
         // Button Styles
         let buttonStyle: WKRUIButtonStyle
@@ -183,7 +184,7 @@ final class MenuView: UIView {
             buttonHeight = 50
         } else {
             buttonStyle = .normal
-            buttonWidth = 175
+            buttonWidth = 100
             buttonHeight = 40
         }
 
@@ -197,10 +198,10 @@ final class MenuView: UIView {
             rightMenuTile?.title = "RACES PLAYED"
         }
 
-        localRaceTypeButton.style = buttonStyle
-        globalRaceTypeButton.style = buttonStyle
-        joinLocalRaceButton.style = buttonStyle
-        createLocalRaceButton.style = buttonStyle
+        joinButton.style = buttonStyle
+        createButton.style = buttonStyle
+        publicButton.style = buttonStyle
+        privateButton.style = buttonStyle
         statsButton.style = buttonStyle
 
         // Label Fonts
@@ -215,9 +216,10 @@ final class MenuView: UIView {
         }
 
         switch state {
-        case .raceTypeOptions:
-            localRaceTypeButtonLeftConstraint.constant = 30
-            joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
+        case .joinOrCreate:
+            joinButtonLeftConstraint.constant = 30
+            privateButtonLeftConstraint.constant = -privateButton.frame.width * 2
+            
             statsButtonLeftConstraint.constant = -statsButton.frame.width
 
             topViewLeftConstraint.constant = 0
@@ -227,81 +229,57 @@ final class MenuView: UIView {
                 bottomViewAnchorConstraint.constant = 75
             }
         case .noOptions:
-            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
-            joinLocalRaceButtonLeftConstraint.constant = -createLocalRaceButton.frame.width
+            joinButtonLeftConstraint.constant = -createButton.frame.width
+            privateButtonLeftConstraint.constant = -privateButton.frame.width
             statsButtonLeftConstraint.constant = -statsButton.frame.width
-        case .localOptions:
-            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
-            joinLocalRaceButtonLeftConstraint.constant = 30
+        case .joinOptions:
+            joinButtonLeftConstraint.constant = -createButton.frame.width
+            privateButtonLeftConstraint.constant = 30
+            
+            backButtonLeftConstraintForStats.isActive = false
+            backButtonLeftConstraintForJoinOptions.isActive = true
         case .noInterface:
             topViewLeftConstraint.constant = -topView.frame.width
             bottomViewAnchorConstraint.constant = bottomView.frame.height
-            localRaceTypeButtonLeftConstraint.constant = 30
-            joinLocalRaceButtonLeftConstraint.constant = 30
+            joinButtonLeftConstraint.constant = 30
+            privateButtonLeftConstraint.constant = 30
         case .plusOptions:
-            localRaceTypeButtonLeftConstraint.constant = -globalRaceTypeButton.frame.width
+            joinButtonLeftConstraint.constant = -createButton.frame.width
             statsButtonLeftConstraint.constant = 30
+            
+            backButtonLeftConstraintForJoinOptions.isActive = false
+            backButtonLeftConstraintForStats.isActive = true
         }
 
-        localRaceTypeButtonHeightConstraint.constant = buttonHeight
-        localRaceTypeButtonWidthConstraint.constant = buttonWidth + 18
-        globalRaceTypeButtonWidthConstraint.constant = buttonWidth + 32
+        joinButtonHeightConstraint.constant = buttonHeight
+        joinButtonWidthConstraint.constant = buttonWidth + 10
+        createButtonWidthConstraint.constant = buttonWidth + 40
 
-        joinLocalRaceButtonWidthConstraint.constant = buttonWidth
-        createLocalRaceButtonWidthConstraint.constant = buttonWidth + 30
-        localOptionsBackButtonWidth.constant = buttonHeight - 10
+        publicButtonWidthConstraint.constant = buttonWidth + 34
+        privateButtonWidthConstraint.constant = buttonWidth + 46
+        statsButtonWidthConstraint.constant = buttonWidth + 20
 
-        statsButtonWidthConstraint.constant = buttonWidth + 13
-
-        localOptionsBackButton.layer.cornerRadius = localOptionsBackButtonWidth.constant / 2
-        plusOptionsBackButton.layer.cornerRadius = localOptionsBackButton.layer.cornerRadius
-        plusButton.layer.cornerRadius = localOptionsBackButton.layer.cornerRadius
+        
+        backButtonWidth.constant = buttonHeight - 10
+        
+        backButton.layer.cornerRadius = backButtonWidth.constant / 2
+        plusButton.layer.cornerRadius = backButton.layer.cornerRadius
     }
 
-    func promptForCustomName(isHost: Bool) -> Bool {
-        guard !UserDefaults.standard.bool(forKey: "PromptedCustomName") else {
-            return false
-        }
-        UserDefaults.standard.set(true, forKey: "PromptedCustomName")
-
-        let message = "Would you like to set a custom player name for local races?"
-        let alertController = UIAlertController(title: "Set Name?", message: message, preferredStyle: .alert)
-
-        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerAnonymousMetrics.log(event: .userAction("promptForCustomNamePrompt:rejected"))
-            PlayerAnonymousMetrics.log(event: .namePromptResult, attributes: ["Result": "Cancelled"])
-            if isHost {
-                self.createLocalRace()
-            } else {
-                self.joinLocalRace()
-            }
-        })
-        alertController.addAction(laterAction)
-
-        let settingsAction = UIAlertAction(title: "Open Settings", style: .default, handler: { _ in
-            PlayerAnonymousMetrics.log(event: .userAction("promptForCustomNamePrompt:accepted"))
-            PlayerAnonymousMetrics.log(event: .namePromptResult, attributes: ["Result": "Accepted"])
-            UIApplication.shared.openSettings()
-        })
-        alertController.addAction(settingsAction)
-
-        listenerUpdate?(.presentAlert(alertController))
-        return true
-    }
 
     func promptGlobalRacesPopularity() -> Bool {
-        guard !UserDefaults.standard.bool(forKey: "PromptedGlobalRacesPopularity") else {
+        guard !Defaults.promptedGlobalRacesPopularity else {
             return false
         }
-        UserDefaults.standard.set(true, forKey: "PromptedGlobalRacesPopularity")
+        Defaults.promptedGlobalRacesPopularity = true
 
-        let message = "Most global races are started with invited friends. Invite a friend for the best chance at joining a race."
-        let alertController = UIAlertController(title: "Global Races", message: message, preferredStyle: .alert)
+        let message = "Most racers use private races to play friends. Invite a friend for the best chance at joining a race."
+        let alertController = UIAlertController(title: "Public Races", message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
             PlayerAnonymousMetrics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
             self.animateMenuOut {
-                self.listenerUpdate?(.presentGlobalConnect)
+                self.listenerUpdate?(.presentJoinPublicRace)
             }
         })
         alertController.addAction(action)

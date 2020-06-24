@@ -29,6 +29,8 @@ final internal class MenuViewController: UIViewController {
 
     private var isFirstAppearence = true
     override var canBecomeFirstResponder: Bool { return true }
+    
+    private let browser = NearbyRaceBrowser()
 
     // MARK: - View Life Cycle -
 
@@ -48,23 +50,54 @@ final internal class MenuViewController: UIViewController {
         menuView.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {
-            case .presentDebug: self.presentDebugController()
-            case .presentGlobalConnect: self.presentGlobalConnect()
-            case .presentGlobalAuth: self.attemptGlobalAuthentication()
-            case .presentMPCConnect(let isHost): self.presentMPCConnect(isHost: isHost)
-            case .presentAlert(let alertController):
-                self.present(alertController, animated: true, completion: nil)
+//            case .presentDebug:
+//            case .presentGlobalConnect: self.presentGlobalConnect()
+//            case .presentGlobalAuth:
+//            case .joinPublicRace(let isHost): self.presentMPCConnect(isHost: isHost)
+//            case .presentAlert(let alertController):
+//
+//            case .presentLeaderboard:
+               
+//            case .presentStats:
+                
+//            case.presentSubscription:
+                
+            case .presentDebug:
+                self.presentDebugController()
             case .presentLeaderboard:
                 let controller = GKGameCenterViewController()
                 controller.gameCenterDelegate = self
                 controller.viewState = .leaderboards
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
+            case .presentGKAuth:
+                break
+            case .presentJoinPublicRace:
+                self.joinRace(raceCode: nil)
+            case .presentJoinPrivateRace:
+                let controller = UIAlertController(
+                    title: "Join Private Race",
+                    message: "Enter the race code from the host",
+                    preferredStyle: .alert)
+                controller.addTextField { textField in
+                    textField.placeholder = "Race Code"
+                }
+                let action = UIAlertAction(title: "Join", style: .default) { [weak controller, weak self] _ in
+                    guard let controller = controller, let code = controller.textFields?.first?.text else { return }
+                    self?.joinRace(raceCode: code)
+                }
+                controller.addAction(action)
+                controller.addCancelAction(title: "Cancel")
+                self.present(controller, animated: true, completion: nil)
+            case .presentCreateRace:
+                self.createRace()
+            case .presentAlert(let alert):
+                self.present(alert, animated: true, completion: nil)
             case .presentStats:
                 let nav = WKRUINavigationController(rootViewController: StatsViewController())
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
-            case.presentSubscription:
+            case .presentSubscription:
                 PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
                 let controller = PlusViewController()
                 controller.modalPresentationStyle = .overCurrentContext
@@ -73,12 +106,6 @@ final internal class MenuViewController: UIViewController {
 
         }
 
-        GlobalRaceHelper.shared.didReceiveInvite = {
-            DispatchQueue.main.async {
-                guard self.presentedViewController == nil else { return }
-                self.menuView.joinGlobalRace()
-            }
-        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -92,7 +119,7 @@ final internal class MenuViewController: UIViewController {
         menuView.layoutIfNeeded()
 
         menuView.animateMenuIn(completion: {
-            if SKStoreReviewController.shouldPromptForRating {
+            if Defaults.shouldPromptForRating {
                 #if !DEBUG
                 SKStoreReviewController.requestReview()
                 #endif
@@ -109,18 +136,31 @@ final internal class MenuViewController: UIViewController {
         #else
         if isFirstAppearence {
             isFirstAppearence = false
-            attemptGlobalAuthentication()
+            setupGKAuthHandler()
+            setupInviteHandler()
         }
         #endif
 
         let metrics = PlayerDatabaseMetrics.shared
         metrics.log(value: UIDevice.current.name, for: "DeviceNames")
         metrics.log(value: PlusStore.shared.isPlus ? 1 : 0, for: "isPlus")
-        if let name = UserDefaults.standard.object(forKey: "name_preference") as? String {
-            metrics.log(value: name, for: "CustomNames")
+        
+        browser.start { host, raceCode in
+            let controller = UIAlertController(
+                title: "Nearby Race",
+                message: "\(host) is starting a race nearby. Would you like to join?",
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "Join", style: .default) { [weak self] _ in
+                DispatchQueue.main.async {
+                    self?.joinRace(raceCode: raceCode)
+                }
+            }
+            controller.addAction(action)
+            controller.addCancelAction(title: "No")
+            DispatchQueue.main.async {
+                self.present(controller, animated: true, completion: nil)
+            }
         }
-
-        promptForInvalidName()
         becomeFirstResponder()
     }
 
@@ -136,53 +176,36 @@ final internal class MenuViewController: UIViewController {
         }
     }
 
-    // MARK: - Name Checking -
-
-    func promptForInvalidName() {
-        guard UserDefaults.standard.bool(forKey: "AttemptingMCPeerIDCreation") else {
-            return
-        }
-        UserDefaults.standard.set(false, forKey: "AttemptingMCPeerIDCreation")
-
-        let message = "There was an unexpected issue starting a race with your player name. This can often occur when your name has too many emojis or too many letters. Please set a new custom player name before racing."
-        let alertController = UIAlertController(title: "Player Name Issue", message: message, preferredStyle: .alert)
-
-        let laterAction = UIAlertAction(title: "Maybe Later", style: .cancel, handler: { _ in
-            PlayerAnonymousMetrics.log(event: .userAction("promptForInvalidName:rejected"))
-        })
-        alertController.addAction(laterAction)
-
-        let settingsAction = UIAlertAction(title: "Change Name", style: .default, handler: { _ in
-            PlayerAnonymousMetrics.log(event: .userAction("promptForInvalidName:accepted"))
-            UIApplication.shared.openSettings()
-        })
-        alertController.addAction(settingsAction)
-
-        present(alertController, animated: true, completion: nil)
-    }
-
     // MARK: - Other -
-
-    func presentMPCConnect(isHost: Bool) {
+    
+    func prepareForRace() {
         UIApplication.shared.isIdleTimerDisabled = true
-
-        let controller = MPCConnectViewController()
-        controller.isPlayerHost = isHost
+        browser.stop()
+        resignFirstResponder()
+        
+        if presentedViewController != nil {
+            navigationController?.popToRootViewController(animated: false)
+        }
+    }
+    
+    func joinRace(raceCode: String?) {
+        prepareForRace()
+        let controller = GKConnectViewController(raceCode: raceCode, isPlayerHost: false)
         navigationController?.pushViewController(controller, animated: false)
     }
-
-    func presentGlobalConnect() {
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+    
+    func createRace() {
+        if Defaults.isFastlaneSnapshotInstance {
             let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
             let nav = WKRUINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)
         } else if GKLocalPlayer.local.isAuthenticated {
-            UIApplication.shared.isIdleTimerDisabled = true
-            let controller = GameKitConnectViewController()
+            prepareForRace()
+            let controller = GKConnectViewController(raceCode: nil, isPlayerHost: true)
             navigationController?.pushViewController(controller, animated: false)
         } else {
-            presentGameKitAuthAlert()
+            fatalError()
         }
     }
 

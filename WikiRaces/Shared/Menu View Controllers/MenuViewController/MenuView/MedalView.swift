@@ -40,7 +40,7 @@ final class MedalView: SKView {
     }
 
     func showMedals() {
-        guard !medalScene.isActive else { return }
+        guard medalScene.isPaused else { return }
         let firstMedals = PlayerDatabaseStat.mpcRaceFinishFirst.value() +
             PlayerDatabaseStat.gkRaceFinishFirst.value()
         let secondMedals = PlayerDatabaseStat.mpcRaceFinishSecond.value() +
@@ -60,7 +60,7 @@ final class MedalView: SKView {
                               bronze: Int(thirdMedals),
                               dnf: Int(dnfCount))
 
-        medalScene.isActive = true
+        medalScene.isPaused = false
         UIImpactFeedbackGenerator().impactOccurred()
     }
 }

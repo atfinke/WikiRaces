@@ -11,29 +11,31 @@ import GameKit
 extension MenuViewController: GKGameCenterControllerDelegate {
 
     // MARK: - Game Center -
-
-    /// Attempts Game Center login
-    func attemptGlobalAuthentication() {
-        // seperated due to long type-checking time as closure
-        func auth(_ controller: UIViewController?, _ error: Error?, _ forceShowError: Bool) {
-            if let controller = controller, self.menuView.state != .noInterface {
-                if self.presentedViewController == nil {
-                    self.present(controller, animated: true, completion: nil)
-                }
-            } else if GKLocalPlayer.local.isAuthenticated {
-                let metrics = PlayerDatabaseMetrics.shared
-                metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
-            } else if !GKLocalPlayer.local.isAuthenticated {
-                if error != nil || forceShowError {
-                    self.presentGameKitAuthAlert()
-                }
-            }
-            if let error = error {
+    
+    func setupGKAuthHandler() {
+        func auth(result: GKHelper.AuthResult) {
+            switch result {
+            case .error(let error):
                 let info = "attemptGlobalAuthentication: " + error.localizedDescription
                 PlayerAnonymousMetrics.log(event: .error(info))
+            case .controller(let controller):
+                if self.presentedViewController == nil, self.menuView.state != .noInterface {
+                    self.present(controller, animated: true, completion: nil)
+                }
+            case .isAuthenticated:
+                let metrics = PlayerDatabaseMetrics.shared
+                metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
             }
         }
-        GlobalRaceHelper.shared.authenticate(completion: auth)
+        
+        GKHelper.shared.authHandler = auth
+    }
+    
+    func setupInviteHandler() {
+        GKHelper.shared.inviteHandler = { code in
+            self.joinRace(raceCode: code)
+            self.menuView.animateOptionsOutAndTransition(to: .noInterface)
+        }
     }
 
     // MARK: - GKGameCenterControllerDelegate -

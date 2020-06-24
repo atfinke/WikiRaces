@@ -17,12 +17,6 @@ final class MedalScene: SKScene {
     private let bronzeNode: SKNode
     private let dnfNode: SKNode
 
-    public var isActive = false {
-        didSet {
-            isPaused = !isActive
-        }
-    }
-
     // MARK: - Initalization -
 
     override init(size: CGSize) {
@@ -76,7 +70,7 @@ final class MedalScene: SKScene {
             node.removeFromParent()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.isActive = !self.children.isEmpty
+            self.isPaused = self.children.isEmpty
         }
     }
 

@@ -14,36 +14,16 @@ extension MenuViewController {
 
     override var keyCommands: [UIKeyCommand]? {
         return [
-            UIKeyCommand(title: "Create Local Race",
-                         action: #selector(keyboardCreateLocalRace),
+            UIKeyCommand(title: "Create",
+                         action: #selector(keyboardCreateRace),
                          input: "n",
-                         modifierFlags: .command),
-            UIKeyCommand(title: "Join Local Race",
-                         action: #selector(keyboardJoinLocalRace),
-                         input: "j",
-                         modifierFlags: .command),
-            UIKeyCommand(title: "Join Global Race",
-                         action: #selector(keyboardJoinGlobalRace),
-                         input: "g",
                          modifierFlags: .command)
         ]
     }
 
-    @objc private func keyboardJoinLocalRace() {
-        PlayerAnonymousMetrics.log(event: .pressedJoin)
-        PlayerDatabaseStat.mpcPressedJoin.increment()
-        presentMPCConnect(isHost: false)
-    }
-
-    @objc private func keyboardCreateLocalRace() {
+    @objc private func keyboardCreateRace() {
         PlayerAnonymousMetrics.log(event: .pressedHost)
-        PlayerDatabaseStat.mpcPressedHost.increment()
-        presentMPCConnect(isHost: true)
+        createRace()
     }
-
-    @objc private func keyboardJoinGlobalRace() {
-        PlayerAnonymousMetrics.log(event: .pressedGlobalJoin)
-        PlayerDatabaseStat.gkPressedJoin.increment()
-        presentGlobalConnect()
-    }
+    
 }
