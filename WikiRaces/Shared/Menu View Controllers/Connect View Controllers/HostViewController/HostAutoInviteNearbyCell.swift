@@ -9,7 +9,7 @@
 import UIKit
 import WKRUIKit
 
-final internal class MPCHostAutoInviteCell: UITableViewCell {
+final internal class HostAutoInviteNearbyCell: UITableViewCell {
 
     // MARK: - Properties
 
@@ -33,7 +33,7 @@ final internal class MPCHostAutoInviteCell: UITableViewCell {
 
         selectionStyle = .none
 
-        detailLabel.text = "Auto-Invite"
+        detailLabel.text = "Invite Nearby Racers"
         detailLabel.textAlignment = .left
         detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         detailLabel.numberOfLines = 0
@@ -62,10 +62,10 @@ final internal class MPCHostAutoInviteCell: UITableViewCell {
 
         let constraints = [
             leftMarginConstraint,
-            detailLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            detailLabel.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor),
             detailLabel.rightAnchor.constraint(lessThanOrEqualTo: toggle.leftAnchor,
                                              constant: -10),
-            detailLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            detailLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
 
             rightMarginConstraint,
             toggle.centerYAnchor.constraint(equalTo: centerYAnchor)
@@ -82,7 +82,7 @@ final internal class MPCHostAutoInviteCell: UITableViewCell {
     public override func layoutSubviews() {
         super.layoutSubviews()
         let textColor = UIColor.wkrTextColor(for: traitCollection)
-        toggle.onTintColor = textColor
+        toggle.onTintColor = tintColor
         detailLabel.textColor = textColor
     }
 

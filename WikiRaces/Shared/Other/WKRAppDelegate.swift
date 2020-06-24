@@ -21,7 +21,7 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         WKRUIKitConstants.updateConstants()
 
         // Don't be that app that prompts people when they first open it
-        SKStoreReviewController.shouldPromptForRating = false
+        Defaults.shouldPromptForRating = false
     }
 
     final func cleanTempDirectory() {
@@ -42,6 +42,16 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print(error)
         }
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        guard let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
+              let code = items.first(where: { $0.name == "code" })?.value else {
+            
+            return false
+        }
+        GKHelper.shared.acceptedInvite(code: code)
+        return true
     }
 
 }

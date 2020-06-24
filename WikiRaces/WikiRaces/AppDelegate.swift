@@ -28,6 +28,7 @@ final internal class AppDelegate: WKRAppDelegate {
         Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
         #endif
 
+        GKHelper.shared.start()
         PlusStore.shared.sync()
         configureConstants()
 
@@ -44,7 +45,7 @@ final internal class AppDelegate: WKRAppDelegate {
 
         cleanTempDirectory()
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             UIView.setAnimationsEnabled(false)
         }
 

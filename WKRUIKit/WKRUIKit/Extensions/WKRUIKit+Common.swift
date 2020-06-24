@@ -74,19 +74,6 @@ extension UIView {
     }
 }
 
-extension SKStoreReviewController {
-    private static let shouldPromptForRatingKey = "ShouldPromptForRating"
-
-    static public var shouldPromptForRating: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: shouldPromptForRatingKey)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: shouldPromptForRatingKey)
-        }
-    }
-}
-
 extension UIApplication {
     final public func openSettings() {
         guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {

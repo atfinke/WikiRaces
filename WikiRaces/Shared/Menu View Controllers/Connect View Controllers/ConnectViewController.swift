@@ -22,6 +22,10 @@ class ConnectViewController: UIViewController {
         let hostName: String
         let gameSettings: WKRGameSettings
     }
+    
+    struct CancelMessage: Codable {
+        let uuid: UUID
+    }
 
     // MARK: - Interface Elements -
 
