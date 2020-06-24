@@ -93,7 +93,7 @@ final internal class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             setupInterface()
             let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World_Monorail_System")!
             prepareForScreenshots(for: url)
@@ -106,7 +106,7 @@ final internal class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             webView?.alpha = 1.0
             return
         }

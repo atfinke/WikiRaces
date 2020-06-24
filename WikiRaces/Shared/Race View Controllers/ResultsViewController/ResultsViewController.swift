@@ -222,7 +222,7 @@ final internal class ResultsViewController: CenteredTableViewController {
     // MARK: - Helpers -
 
     private func updatedResultsImage() {
-        guard let image = resultImage, UserDefaults.standard.bool(forKey: "force_save_result_image") else { return }
+        guard let image = resultImage, Defaults.shouldAutoSaveResultImage else { return }
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
         PlayerAnonymousMetrics.log(event: .automaticResultsImageSave)
     }

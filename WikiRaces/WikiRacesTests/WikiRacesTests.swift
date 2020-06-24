@@ -44,7 +44,7 @@ class WikiRacesTests: XCTestCase {
 
         stat = PlayerDatabaseStat.gkPressedJoin
         value = stat.value()
-        menuView.joinGlobalRace()
+        menuView.createRace()
         XCTAssertEqual(value + 1, stat.value())
     }
 

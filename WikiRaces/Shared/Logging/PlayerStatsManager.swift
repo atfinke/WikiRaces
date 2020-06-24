@@ -236,10 +236,10 @@ final internal class PlayerStatsManager {
                     fastestTimeStat.set(value: Double(timeRaced))
                 }
             }
-            SKStoreReviewController.shouldPromptForRating = true
+            Defaults.shouldPromptForRating = true
         } else {
             finishDNFStat.increment()
-            SKStoreReviewController.shouldPromptForRating = false
+            Defaults.shouldPromptForRating = false
         }
 
         ubiquitousStoreSync()

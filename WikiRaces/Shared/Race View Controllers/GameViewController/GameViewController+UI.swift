@@ -39,7 +39,7 @@ extension GameViewController {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             navigationItem.leftBarButtonItem = helpBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
         } else {
@@ -119,7 +119,7 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if !Defaults.isFastlaneSnapshotInstance {
             webView.alpha = 0.0
             gameManager.webView = webView
         }
