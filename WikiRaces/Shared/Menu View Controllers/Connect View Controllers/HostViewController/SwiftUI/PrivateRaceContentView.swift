@@ -12,12 +12,15 @@ import GameKit
 
 struct PrivateRaceContentView: View {
     
+    enum Modal {
+        case activity, settings
+    }
+    
     @ObservedObject var model: PrivateRaceContentViewModel
-    @State private var isShareCodePresented: Bool = false
-    @State private var isSettingsPresented: Bool = false
     
     let cancelAction: () -> Void
     let startMatch: () -> Void
+    let presentModal: (Modal) -> Void
     
     var body: some View {
         VStack {
@@ -47,29 +50,36 @@ struct PrivateRaceContentView: View {
                 effectSize: 5)
                 .padding(.bottom, 20)
             
+            if !PlayerImageDatabase.shared.hasValidLocalPlayerImage {
+                HStack {
+                    Spacer()
+                    Text("Set a profile photo\nin the Game Center settings")
+                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .multilineTextAlignment(.center)
+                        .offset(y: -5)
+                    Spacer()
+                }
+            }
+            
             VStack {
                 PrivateRaceSectionView(
                     header: "CODE",
                     title: model.raceCode?.uppercased() ?? "-",
                     imageName: "square.and.arrow.up",
                     disabled: model.raceCode == nil) {
-                        self.isShareCodePresented = true
+                        self.presentModal(.activity)
                 }
                 .padding(.vertical, 16)
-                .sheet(isPresented: $isShareCodePresented, content: {
-                    ShareCodeView(raceCode: self.model.raceCode ?? "-")
-                })
+            
+                   
                 
                 PrivateRaceSectionView(
                     header: "TYPE",
                     title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
                     imageName: "gear",
                     disabled: false) {
-                        self.isSettingsPresented = true
+                        self.presentModal(.settings)
                 }
-                .sheet(isPresented: $isSettingsPresented, content: {
-                    RaceSettingsView(model: self.model)
-                })
             }.frame(width: 220)
             
             Color.clear.frame(height: 50)
@@ -96,7 +106,7 @@ struct PrivateRaceContentView: View {
             }
             .padding(.bottom, 20)
         }
-        .overlay(Color.black.opacity(isShareCodePresented || isSettingsPresented ? 0.5 : 0).allowsHitTesting(false))
+//        .overlay(Color.black.opacity(isShareCodePresented || isSettingsPresented ? 0.5 : 0).allowsHitTesting(false))
         .animation(.spring())
     }
 }

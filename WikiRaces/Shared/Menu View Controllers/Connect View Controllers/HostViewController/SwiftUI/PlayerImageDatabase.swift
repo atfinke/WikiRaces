@@ -14,6 +14,8 @@ class PlayerImageDatabase {
     static var shared = PlayerImageDatabase()
     private var dict = [String: Image]()
     
+    private(set) var hasValidLocalPlayerImage = false
+    
     private init() {}
     
     func connected(to player: GKPlayer, completion: (() -> Void)?) {
@@ -24,6 +26,9 @@ class PlayerImageDatabase {
                 completion?()
                 return
                 
+            }
+            if player.alias == GKLocalPlayer.local.alias {
+                self.hasValidLocalPlayerImage = true
             }
             self.dict[player.alias] = Image(uiImage: photo)
             completion?()

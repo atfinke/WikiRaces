@@ -76,7 +76,9 @@ class GKHelper {
                         self.pendingResult = .controller(controller)
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
-                        PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+                            PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
+                        }
                         
                         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                         let playerName = GKLocalPlayer.local.alias

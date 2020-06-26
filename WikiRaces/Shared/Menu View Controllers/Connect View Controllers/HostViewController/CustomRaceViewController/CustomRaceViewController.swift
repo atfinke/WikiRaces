@@ -8,6 +8,7 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 final class CustomRaceViewController: CustomRaceController {
 
@@ -37,11 +38,19 @@ final class CustomRaceViewController: CustomRaceController {
         self.finalPagesCallback = finalPages
         super.init(style: .grouped)
         title = "Customize Race".uppercased()
+        
+         navigationItem.leftBarButtonItem = nil
+         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+                   systemName: "xmark",
+                   target: self,
+                   action: #selector(doneButtonPressed))
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - View Life Cycle -
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -258,5 +267,9 @@ final class CustomRaceViewController: CustomRaceController {
         case .other:
             return ""
         }
+    }
+    
+    @objc func doneButtonPressed() {
+        dismiss(animated: true, completion: nil)
     }
 }

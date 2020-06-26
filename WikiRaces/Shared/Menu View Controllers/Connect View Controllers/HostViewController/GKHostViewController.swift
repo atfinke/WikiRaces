@@ -20,6 +20,7 @@ final internal class GKHostViewController: VisualEffectViewController {
     
     private let raceCodeGenerator = RaceCodeGenerator()
     private let advertiser = NearbyRaceAdvertiser()
+    private let sourceView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
     
     var match: GKMatch?
     var isMatchmakingEnabled = true {
@@ -38,7 +39,8 @@ final internal class GKHostViewController: VisualEffectViewController {
         rootView: PrivateRaceContentView(
             model: model,
             cancelAction: cancelMatch,
-            startMatch: startMatch))
+            startMatch: startMatch,
+            presentModal: presentModal))
     
     // MARK: - Initalization -
     
@@ -58,6 +60,8 @@ final internal class GKHostViewController: VisualEffectViewController {
         }
         
         view.alpha = 0
+        sourceView.alpha = 0
+        contentView.addSubview(sourceView)
     }
     
     required init?(coder: NSCoder) {
@@ -69,6 +73,7 @@ final internal class GKHostViewController: VisualEffectViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure(hostingView: contentViewHosting.view)
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,7 +82,12 @@ final internal class GKHostViewController: VisualEffectViewController {
             self?.view.alpha = 1
         }
     }
-
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        sourceView.center = CGPoint(x: contentView.center.x, y: contentView.center.y - 150)
+    }
+    
     // MARK: - Actions -
     
     func cancelMatch() {
@@ -92,8 +102,8 @@ final internal class GKHostViewController: VisualEffectViewController {
         
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.view.alpha = 0
-        }, completion: { [weak self] _ in
-            self?.navigationController?.popToRootViewController(animated: false)
+            }, completion: { [weak self] _ in
+                self?.navigationController?.popToRootViewController(animated: false)
         })
     }
     
@@ -135,8 +145,7 @@ final internal class GKHostViewController: VisualEffectViewController {
         func startSolo() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 showMatch(for: .solo(name: GKLocalPlayer.local.alias), settings: self.gameSettings)
-                           }
-            
+            }
         }
         
         if match == nil || match?.players.count == 0 {
@@ -158,6 +167,26 @@ final internal class GKHostViewController: VisualEffectViewController {
     }
     
     // MARK: - Other -
+    
+    private func presentModal(modal: PrivateRaceContentView.Modal) {
+        let controller: UIViewController
+        switch modal {
+            
+        case .activity:
+            guard  let code = model.raceCode, let url = URL(string: "wikiraces://invite?code=\(code)") else {
+                fatalError()
+            }
+            controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        case .settings:
+            controller = CustomRaceViewController(settings: model.settings, pages: model.customPages) { pages in
+                self.model.customPages = pages
+            }
+        }
+        let nav = WKRUINavigationController(rootViewController: controller)
+        nav.modalPresentationStyle = .formSheet
+        nav.popoverPresentationController?.sourceView = sourceView
+        present(nav, animated: true, completion: nil)
+    }
     
     private func startNearbyAdvertising() {
         guard Defaults.isAutoInviteOn, let code = model.raceCode else {

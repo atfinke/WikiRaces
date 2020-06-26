@@ -13,7 +13,7 @@ internal class VisualEffectViewController: UIViewController {
 
     // MARK: - Properties
 
-    final private var contentView: UIView!
+    final var contentView: UIView!
     
     // MARK: - View Life Cycle
 

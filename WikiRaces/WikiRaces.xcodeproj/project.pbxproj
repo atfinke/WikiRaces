@@ -446,16 +446,6 @@
 		14EBF58924A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
 		14EBF58A24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
 		14EBF58B24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
-		14EBF58D24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */; };
-		14EBF58E24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */; };
-		14EBF58F24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */; };
-		14EBF59024A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */; };
-		14EBF59124A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */; };
-		14EBF59324A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */; };
-		14EBF59424A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */; };
-		14EBF59524A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */; };
-		14EBF59624A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */; };
-		14EBF59724A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */; };
 		14EBF59924A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59A24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59B24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
@@ -769,8 +759,6 @@
 		14EBF50424A49BE20040A7C0 /* VotingItemContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingItemContentView.swift; sourceTree = "<group>"; };
 		14EBF50A24A49BF20040A7C0 /* VotingContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingContentViewModel.swift; sourceTree = "<group>"; };
 		14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRaceContentView.swift; sourceTree = "<group>"; };
-		14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareCodeView.swift; sourceTree = "<group>"; };
-		14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceSettingsView.swift; sourceTree = "<group>"; };
 		14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRaceContentViewModel.swift; sourceTree = "<group>"; };
 		14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageView.swift; sourceTree = "<group>"; };
@@ -1284,8 +1272,6 @@
 				14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */,
 				14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */,
 				14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */,
-				14EBF59224A4F3CF0040A7C0 /* RaceSettingsView.swift */,
-				14EBF58C24A4F3BF0040A7C0 /* ShareCodeView.swift */,
 				14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */,
 			);
 			path = SwiftUI;
@@ -1670,7 +1656,6 @@
 				1414280721FC394600C48788 /* ConnectViewController.swift in Sources */,
 				148CCBCD24A3410700538F18 /* GKHelper.swift in Sources */,
 				1478B1B122095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
-				14EBF59324A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */,
 				14F2EC9524A64A8F007A4C97 /* GKMatchRequest+WKR.swift in Sources */,
 				145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				148E5C4824A293EB00DD43E4 /* NearbyRaceListener.swift in Sources */,
@@ -1689,7 +1674,6 @@
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14B2DD4522212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
-				14EBF58D24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */,
 				14EBF59F24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141E4CF122012B2F000A0A15 /* PlayerDatabaseMetrics.swift in Sources */,
@@ -1732,7 +1716,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14EBF59424A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */,
 				14C4AB331F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				142ABE1324600AF0008E7F77 /* OSLog+Magic.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
@@ -1781,7 +1764,6 @@
 				142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				14C6DA782462900300EC9817 /* CustomRaceController.swift in Sources */,
 				14E1B19B1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
-				14EBF58E24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */,
 				1475C17024A655DC00882F1F /* MenuViewController+KB.swift in Sources */,
 				148E5C5524A2967600DD43E4 /* GKHostViewController.swift in Sources */,
 				14EBF5A724A4F4680040A7C0 /* PlayerImageView.swift in Sources */,
@@ -1859,7 +1841,6 @@
 				14EBF58924A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
 				1475C15C24A655D800882F1F /* MenuTile.swift in Sources */,
 				1475C15E24A655D800882F1F /* MenuView+Setup.swift in Sources */,
-				14EBF58F24A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */,
 				1475C16224A655D800882F1F /* MovingPuzzleView.swift in Sources */,
 				1475C15024A655C800882F1F /* HelpViewController.swift in Sources */,
 				1475C14924A655B100882F1F /* GameViewController+KB.swift in Sources */,
@@ -1881,7 +1862,6 @@
 				1475C18024A655F100882F1F /* StatsPlayersViewController.swift in Sources */,
 				1475C13D24A6556A00882F1F /* PlayerAnonymousMetrics.swift in Sources */,
 				1475C1AB24A6560E00882F1F /* HistoryTableViewCell.swift in Sources */,
-				14EBF59524A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */,
 				1475C1B824A6571200882F1F /* GKHelper.swift in Sources */,
 				1475C17C24A655EC00882F1F /* CustomRacePageViewController.swift in Sources */,
 				1475C13424A6554000882F1F /* ResultsContentViewModel.swift in Sources */,
@@ -1911,7 +1891,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14EBF59624A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */,
 				14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */,
 				14D18CE22460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
@@ -1959,7 +1938,6 @@
 				14EBF50E24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
 				14B2DD3D22212298009B8AB3 /* MenuView.swift in Sources */,
 				1480F6C621FB77DE00081F58 /* DebugInfoTableViewCell.swift in Sources */,
-				14EBF59024A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */,
 				1475C16B24A655DC00882F1F /* MenuViewController+KB.swift in Sources */,
 				1480F6C321FB77D300081F58 /* DebugInfoTableViewController.swift in Sources */,
 				1475C1A424A6560D00882F1F /* HistoryTableViewStatsCell.swift in Sources */,
@@ -2060,7 +2038,6 @@
 				1475C16624A655DB00882F1F /* MenuViewController+KB.swift in Sources */,
 				1475C1A824A6560D00882F1F /* HistoryTableViewStatsCell.swift in Sources */,
 				1475C1B724A6561B00882F1F /* PlayerDatabaseMetrics.swift in Sources */,
-				14EBF59124A4F3BF0040A7C0 /* ShareCodeView.swift in Sources */,
 				1475C12824A6551F00882F1F /* CustomRaceController.swift in Sources */,
 				1475C18E24A655FB00882F1F /* DebugInfoTableViewCell.swift in Sources */,
 				1475C12B24A6551F00882F1F /* CustomRaceNumericalViewController.swift in Sources */,
@@ -2070,7 +2047,6 @@
 				1475C18724A655F500882F1F /* OSLog+Magic.swift in Sources */,
 				1475C18424A655F500882F1F /* PlusStore.swift in Sources */,
 				14EBF5B024A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
-				14EBF59724A4F3CF0040A7C0 /* RaceSettingsView.swift in Sources */,
 				1475C15724A655D700882F1F /* MenuView+Setup.swift in Sources */,
 				1475C15424A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
 				1475C13324A6553F00882F1F /* ListFooterView.swift in Sources */,
