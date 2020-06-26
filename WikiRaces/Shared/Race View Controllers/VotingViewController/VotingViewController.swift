@@ -26,7 +26,7 @@ final internal class VotingViewController: VisualEffectViewController {
     
     // MARK: - Properties -
     
-    private var model = VotingContentViewModel()
+    private(set) var model = VotingContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: VotingContentView(model: model, tapped: { [weak self] item in
             self?.listenerUpdate?(.voted(item.page))

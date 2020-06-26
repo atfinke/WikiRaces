@@ -56,7 +56,7 @@ extension ResultsViewController {
     func tapped(playerID: String) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
-        guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID) else {
+        guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID), state != .points else {
             return
         }
 

@@ -18,32 +18,6 @@ import FirebaseAnalytics
 import Crashlytics
 #endif
 
-extension GKMatchRequest {
-    
-
-    static func hostRequest(raceCode: String, isInital: Bool) -> GKMatchRequest {
-        let request = GKMatchRequest()
-        request.minPlayers = 2
-        request.maxPlayers = isInital ? 2 : GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
-        request.playerGroup = raceCode.hash
-        request.playerAttributes = 0xFFFF0000
-        return request
-    }
-    
-    static func joinRequest(raceCode: String?) -> GKMatchRequest {
-        let request = GKMatchRequest()
-        request.minPlayers = 2
-        request.maxPlayers = GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
-        request.playerGroup = (raceCode ?? "<GLOBAL>").hash
-        if raceCode != nil {
-            request.playerAttributes = 0x0000FFFF
-        }
-        return request
-    }
-    
-}
-
-
 final class GKConnectViewController: ConnectViewController {
 
     // MARK: - Properties -
@@ -53,11 +27,8 @@ final class GKConnectViewController: ConnectViewController {
     let raceCode: String?
     let isPublicRace: Bool
     
-    
-    
     var isPlayerHost: Bool
     var publicRaceHostAlias: String?
-    
     
     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var findTrace: Trace?
@@ -122,6 +93,12 @@ final class GKConnectViewController: ConnectViewController {
         }
 
         toggleCoreInterface(isHidden: false, duration: 0.5)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        GKMatchmaker.shared().cancel()
     }
     
     func presentHostInterface() {

@@ -29,25 +29,6 @@ class WikiRacesTests: XCTestCase {
         }
     }
 
-    func testMenuStats() {
-        let menuView = MenuView()
-
-        var stat = PlayerDatabaseStat.mpcPressedJoin
-        var value = stat.value()
-        menuView.joinLocalRace()
-        XCTAssertEqual(value + 1, stat.value())
-
-        stat = PlayerDatabaseStat.mpcPressedHost
-        value = stat.value()
-        menuView.createLocalRace()
-        XCTAssertEqual(value + 1, stat.value())
-
-        stat = PlayerDatabaseStat.gkPressedJoin
-        value = stat.value()
-        menuView.createRace()
-        XCTAssertEqual(value + 1, stat.value())
-    }
-
     func testViewedPage() {
         for raceIndex in 1...90 {
             guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {

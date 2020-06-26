@@ -112,9 +112,6 @@ final internal class ResultsViewController: VisualEffectViewController {
         }
         
         model.footerOpacity = 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            self.model.footerOpacity = 1
-        }
         
         if isPlayerHost, let results = resultsInfo {
             DispatchQueue.global().async {
@@ -154,6 +151,7 @@ final internal class ResultsViewController: VisualEffectViewController {
         } else {
             model.footerBottomText = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                guard self.state != .points else { return }
                 self.model.footerOpacity = 1
             }
         }
@@ -168,7 +166,7 @@ final internal class ResultsViewController: VisualEffectViewController {
     }
 
     private func checkIfOtherPlayersReady() {
-        guard state == .points,
+        guard state == .hostResults,
               !isPulsingReadyButton,
             let resultsInfo = resultsInfo,
             let readyStates = readyStates else {

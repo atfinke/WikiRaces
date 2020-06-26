@@ -18,8 +18,8 @@ struct VotingContentView: View {
                 Spacer()
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(self.model.items) { item in
-                        VotingItemContentView(item: item, isFinalArticleSelected: model.isFinalArticleSelected) {
-                            tapped(item)
+                        VotingItemContentView(item: item, isFinalArticleSelected: self.model.isFinalArticleSelected) {
+                            self.tapped(item)
                         }
                     }
                 }

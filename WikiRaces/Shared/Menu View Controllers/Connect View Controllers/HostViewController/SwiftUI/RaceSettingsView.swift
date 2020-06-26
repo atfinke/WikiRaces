@@ -14,7 +14,7 @@ struct RaceSettingsView: UIViewControllerRepresentable {
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<RaceSettingsView>) -> UINavigationController {
         let controller = CustomRaceViewController(settings: model.settings, pages: model.customPages) { pages in
-            model.customPages = pages
+            self.model.customPages = pages
         }
         return UINavigationController(rootViewController: controller)
     }

@@ -21,6 +21,6 @@ struct PlayerImageView: View {
             .frame(width: size, height: size)
             .clipShape(Circle())
             .shadow(radius: effectSize)
-            .overlay(Circle().stroke(Color(UIColor.tertiarySystemBackground), lineWidth: effectSize))
+//            .overlay(Circle().stroke(Color(UIColor.tertiarySystemBackground), lineWidth: effectSize))
     }
 }

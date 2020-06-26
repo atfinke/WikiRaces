@@ -23,7 +23,7 @@ struct ResultsContentView: View {
             VStack() {
                 ForEach(model.items) { item  in
                     ResultsItemContentView(item: item) {
-                        tapped(item.player.id)
+                        self.tapped(item.player.id)
                     }
                 }
             }

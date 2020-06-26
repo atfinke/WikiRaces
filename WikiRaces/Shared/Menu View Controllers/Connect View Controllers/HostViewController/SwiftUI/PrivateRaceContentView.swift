@@ -10,6 +10,8 @@ import SwiftUI
 import WKRKit
 import GameKit
 
+
+
 struct PrivateRaceContentView: View {
     
     @ObservedObject var model: PrivateRaceContentViewModel
@@ -21,30 +23,31 @@ struct PrivateRaceContentView: View {
             Spacer()
             PlayerImageView(playerID: GKLocalPlayer.local.alias, size: 100, effectSize: 5)
                 .padding(.bottom, 20)
-            VStack {
-                PrivateRaceSectionView(
-                    header: "CODE",
-                    title: model.raceCode?.uppercased() ?? "-",
-                    imageName: "square.and.arrow.up",
-                    disabled: model.raceCode == nil) {
-                    self.isShareCodePresented = true
-                }
-                .padding(.vertical, 16)
-                .sheet(isPresented: $isShareCodePresented, content: {
-                    ShareCodeView(raceCode: model.raceCode ?? "-")
-                })
-                
-                PrivateRaceSectionView(
-                    header: "TYPE",
-                    title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
-                    imageName: "gear",
-                    disabled: false) {
-                    self.isSettingsPresented = true
-                }
-                .sheet(isPresented: $isSettingsPresented, content: {
-                    RaceSettingsView(model: model)
-                })
-            }.frame(width: 220)
+            
+             VStack {
+                       PrivateRaceSectionView(
+                           header: "CODE",
+                           title: model.raceCode?.uppercased() ?? "-",
+                           imageName: "square.and.arrow.up",
+                           disabled: model.raceCode == nil) {
+                           self.isShareCodePresented = true
+                       }
+                       .padding(.vertical, 16)
+                       .sheet(isPresented: $isShareCodePresented, content: {
+                           ShareCodeView(raceCode: self.model.raceCode ?? "-")
+                       })
+                       
+                       PrivateRaceSectionView(
+                           header: "TYPE",
+                           title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
+                           imageName: "gear",
+                           disabled: false) {
+                           self.isSettingsPresented = true
+                       }
+                       .sheet(isPresented: $isSettingsPresented, content: {
+                           RaceSettingsView(model: self.model)
+                       })
+                   }.frame(width: 220)
             
             Color.clear.frame(height: 50)
             Spacer()

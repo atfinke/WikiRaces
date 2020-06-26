@@ -21,9 +21,9 @@ extension VotingViewController {
                                        modifierFlags: .command)
             commands.append(command)
         }
-        if let info = votingState, tableView.isUserInteractionEnabled {
-            let voteCommands = (0..<info.pageCount).map { index in
-                return UIKeyCommand(title: info.page(for: index)?.page.title ?? "Unknown",
+        if let info = votingState, model.isVotingEnabled {
+            let voteCommands = info.current.enumerated().map { index, item in
+                return UIKeyCommand(title: item.page.title ?? "Unknown",
                                     action: #selector(keyboardAttemptSelectArticle(_:)),
                                     input: (index + 1).description,
                                     modifierFlags: .command)
@@ -37,22 +37,12 @@ extension VotingViewController {
     private func keyboardAttemptSelectArticle(_ keyCommand: UIKeyCommand) {
         guard let input = keyCommand.input,
             let index = Int(input),
-            let info = votingState,
-            index <= info.pageCount,
-            tableView.isUserInteractionEnabled else {
+            let items = votingState?.current,
+            index <= items.count,
+            model.isVotingEnabled else {
                 return
         }
-
-        let indexPath = IndexPath(row: index - 1)
-        if let selectedIndexPath = tableView.indexPathForSelectedRow, selectedIndexPath == indexPath {
-            return
-        }
-
-        _ = tableView(tableView, willSelectRowAt: indexPath)
-        tableView.selectRow(at: indexPath,
-                            animated: true,
-                            scrollPosition: UITableView.ScrollPosition.none)
-        tableView(tableView, didSelectRowAt: indexPath)
+        listenerUpdate?(.voted(items[index + 1].page))
     }
 
     @objc
