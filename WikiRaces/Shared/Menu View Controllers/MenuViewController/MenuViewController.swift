@@ -36,17 +36,21 @@ final internal class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.localPlayerQuit,
-                                               object: nil,
-                                               queue: nil) { _ in
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: {
-                    self.navigationController?.popToRootViewController(animated: false)
+        
+        NotificationCenter.default.addObserver(
+            forName: NSNotification.Name.localPlayerQuit,
+            object: nil,
+            queue: nil) { _ in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.presentedViewController?.view.alpha = 0
+                    self.presentedViewController?.presentedViewController?.view.alpha = 0
+                }, completion: { [weak self] _ in
+                    self?.dismiss(animated: false) {
+                        self?.navigationController?.popToRootViewController(animated: false)
+                    }
                 })
-            }
         }
-
+        
         menuView.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {
@@ -179,7 +183,7 @@ final internal class MenuViewController: UIViewController {
     func joinRace(raceCode: String?) {
         prepareForRace()
         menuView.animateMenuOut {
-            let controller = GKConnectViewController(raceCode: raceCode, isPlayerHost: false)
+            let controller = GKJoinViewController(raceCode: raceCode)
             self.navigationController?.pushViewController(controller, animated: false)
         }
     }
@@ -192,10 +196,10 @@ final internal class MenuViewController: UIViewController {
             present(nav, animated: true, completion: nil)
         } else if GKLocalPlayer.local.isAuthenticated {
             prepareForRace()
-            let controller = GKConnectViewController(raceCode: nil, isPlayerHost: true)
+            let controller = GKHostViewController()
             navigationController?.pushViewController(controller, animated: false)
         } else {
-            let controller = GKConnectViewController(raceCode: nil, isPlayerHost: true)
+            let controller = GKHostViewController()
             navigationController?.pushViewController(controller, animated: false)
 //            fatalError()
         }

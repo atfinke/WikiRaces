@@ -12,7 +12,6 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     
     // MARK: - Properties -
     
-    private lazy var peerID = MCPeerID(displayName: UUID().uuidString)
     private var advertiser: MCNearbyServiceAdvertiser?
     private var handler: ((_ hostName: String, _ raceCode: String) -> Void)?
     
@@ -21,7 +20,7 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     func start(nearbyRaces: @escaping ((_ hostName: String, _ raceCode: String) -> Void)) {
         self.handler = nearbyRaces
         
-        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: Nearby.serviceType)
+        advertiser = MCNearbyServiceAdvertiser(peer: Nearby.peerID, discoveryInfo: nil, serviceType: Nearby.serviceType)
         advertiser?.delegate = self
         advertiser?.startAdvertisingPeer()
     }

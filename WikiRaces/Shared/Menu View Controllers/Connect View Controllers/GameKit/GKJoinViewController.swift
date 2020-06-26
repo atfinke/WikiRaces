@@ -1,5 +1,5 @@
 //
-//  GameKitMatchmakingViewController.swift
+//  GKJoinViewController.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 1/25/19.
@@ -18,7 +18,7 @@ import FirebaseAnalytics
 import Crashlytics
 #endif
 
-final class GKConnectViewController: ConnectViewController {
+final class GKJoinViewController: ConnectViewController {
 
     // MARK: - Properties -
 
@@ -26,18 +26,17 @@ final class GKConnectViewController: ConnectViewController {
 
     let raceCode: String?
     let isPublicRace: Bool
-    
-    var isPlayerHost: Bool
     var publicRaceHostAlias: String?
+    
+    var isPlayerHost = false
     
     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
     var findTrace: Trace?
     #endif
     
-    init(raceCode: String?, isPlayerHost: Bool) {
+    init(raceCode: String?) {
         self.raceCode = raceCode
         self.isPublicRace = raceCode == nil
-        self.isPlayerHost = isPlayerHost
         
         Defaults.isAutoInviteOn = true
         
@@ -77,53 +76,16 @@ final class GKConnectViewController: ConnectViewController {
         runConnectionTest { [weak self] success in
             guard let self = self else { return }
             if success {
-                if self.isPlayerHost {
-                    self.toggleCoreInterface(
-                        isHidden: true,
-                                        duration: 0.25,
-                                        completion: { [weak self] in
-                                            self?.presentHostInterface()
-                    })
-                } else {
-                    self.findMatch()
-                }
+                self.findMatch()
             } else if !success {
                 self.showConnectionSpeedError()
             }
         }
-
         toggleCoreInterface(isHidden: false, duration: 0.5)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         GKMatchmaker.shared().cancel()
     }
-    
-    func presentHostInterface() {
-        let controller = HostViewController { [weak self] update in
-            guard let self = self else { return }
-            switch update {
-            case .start(match: let match, settings: let settings):
-                self.dismiss(animated: true, completion: { [weak self] in
-                    self?.showMatch(for: .gameKit(match: match, isHost: true), settings: settings, andHide: [])
-                })
-            case .startSolo(settings: let settings):
-                self.dismiss(animated: true, completion: { [weak self] in
-                    self?.showMatch(for: .solo(name: GKLocalPlayer.local.alias), settings: settings, andHide: [])
-                })
-            case .cancel:
-                self.dismiss(animated: true, completion: {
-                    self.navigationController?.popToRootViewController(animated: false)
-                })
-            }
-        }
-
-        let nav = WKRUINavigationController(rootViewController: controller)
-        nav.modalPresentationStyle = .fullScreen
-        nav.modalTransitionStyle = .crossDissolve
-        present(nav, animated: true, completion: nil)
-    }
-    
 }

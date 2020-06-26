@@ -1,5 +1,5 @@
 //
-//  GameKitConnectViewController+Match.swift
+//  GKJoinViewController+Match.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 1/26/19.
@@ -13,7 +13,7 @@ import WKRKit
 import FirebasePerformance
 #endif
 
-extension GKConnectViewController: GKMatchDelegate {
+extension GKJoinViewController: GKMatchDelegate {
 
     func findMatch() {
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)

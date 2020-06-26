@@ -9,7 +9,7 @@
 import GameKit
 import WKRKit
 
-extension GKConnectViewController {
+extension GKJoinViewController {
     
     // MARK: - Public Races -
     

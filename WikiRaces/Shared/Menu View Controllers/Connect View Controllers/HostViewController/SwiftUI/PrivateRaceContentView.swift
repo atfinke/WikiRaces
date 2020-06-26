@@ -16,8 +16,30 @@ struct PrivateRaceContentView: View {
     @State private var isShareCodePresented: Bool = false
     @State private var isSettingsPresented: Bool = false
     
+    let cancelAction: () -> Void
+    let startMatch: () -> Void
+    
     var body: some View {
         VStack {
+            HStack {
+                Button(action: cancelAction, label: {
+                    Image(systemName: "chevron.left")
+                })
+                    .opacity(model.matchStarting ? 0.2 : 1)
+                Spacer()
+                if model.matchStarting {
+                    ActivityIndicatorView()
+                } else {
+                    Button(action: startMatch, label: {
+                        Image(systemName: "play.fill")
+                    })
+                }
+            }
+            .foregroundColor(.black)
+            .padding()
+            .frame(height: 60)
+            .allowsHitTesting(!model.matchStarting)
+            
             Spacer()
             PlayerImageView(
                 player: SwiftUIPlayer(id: GKLocalPlayer.local.alias),
@@ -70,7 +92,7 @@ struct PrivateRaceContentView: View {
                     .foregroundColor(.secondary)
                     .transition(.opacity)
                     .id(model.status)
-                ActivityIndicatorView().offset(x: 0, y: -5)
+                ActivityIndicatorView().offset(x: 0, y: -5).opacity(model.matchStarting ? 0 : 1)
             }
             .padding(.bottom, 20)
         }

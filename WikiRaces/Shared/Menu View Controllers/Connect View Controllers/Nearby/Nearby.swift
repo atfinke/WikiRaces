@@ -6,10 +6,11 @@
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import MultipeerConnectivity
 
 struct Nearby {
     static let serviceType = "WKR-2020-07"
+    static let peerID = MCPeerID(displayName: UUID().uuidString)
     struct Invite: Codable {
         let hostName: String
         let raceCode: String

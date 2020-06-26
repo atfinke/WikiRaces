@@ -18,7 +18,9 @@ class PrivateRaceContentViewModel: ObservableObject {
     
     @Published var connectedPlayers = [SwiftUIPlayer]()
     var status: String {
-        if raceCode == nil {
+        if matchStarting {
+            return "RACE STARTING"
+        } else if raceCode == nil {
             return "GENERATING RACE CODE"
         } else if connectedPlayers.isEmpty {
             return "NO CONNECTED RACERS"
@@ -31,6 +33,8 @@ class PrivateRaceContentViewModel: ObservableObject {
     
     @Published var settings = WKRGameSettings()
     @Published var customPages = [WKRPage]()
+    
+    @Published var matchStarting = false
     
     init(settings: WKRGameSettings) {
         self.settings = settings

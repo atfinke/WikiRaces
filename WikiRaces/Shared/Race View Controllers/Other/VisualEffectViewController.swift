@@ -25,7 +25,7 @@ internal class VisualEffectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let nav = navigationController else { fatalError() }
+        guard let nav = navigationController else { return }
         nav.navigationBar.setBackgroundImage(UIImage(), for: .default)
         nav.navigationBar.shadowImage = UIImage()
         nav.navigationBar.isTranslucent = true

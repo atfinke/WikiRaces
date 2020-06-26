@@ -9,11 +9,10 @@
 import GameKit
 import WKRKit
 
-extension HostViewController: GKMatchDelegate {
+extension GKHostViewController: GKMatchDelegate {
     
     func startMatchmaking() {
-        print("bla " + #function)
-        guard let code = model.raceCode, !isQuitting else { return }
+        guard let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
             if let error = error {
                 print(error)
@@ -29,8 +28,7 @@ extension HostViewController: GKMatchDelegate {
     }
     
     private func addPlayers() {
-        print("bla " + #function)
-        guard let match = self.match, let code = model.raceCode, !isQuitting else { return }
+        guard let match = self.match, let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().addPlayers(to: match, matchRequest: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] error in
             if let error = error {
                 print(error)
@@ -41,7 +39,6 @@ extension HostViewController: GKMatchDelegate {
     }
     
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
-        print("bla " + #function)
         if state == .connected {
             PlayerImageDatabase.shared.connected(to: player, completion: { [weak self] in
                 DispatchQueue.main.async {
@@ -53,12 +50,10 @@ extension HostViewController: GKMatchDelegate {
     }
     
     func match(_ match: GKMatch, didFailWithError error: Error?) {
-        print("bla " + #function)
         cancelMatch()
     }
     
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        print("bla " + #function)
         guard WKRSeenFinalArticlesStore.isRemoteTransferData(data) else { return }
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }
