@@ -35,8 +35,6 @@ final internal class HostViewController: VisualEffectViewController {
     var isQuitting = false
      
     var gameSettings = WKRGameSettings()
-    var allCustomPages = [WKRPage]()
-    weak var gameSettingsController: CustomRaceViewController?
     
     lazy var model = PrivateRaceContentViewModel(settings: gameSettings)
     lazy var contentViewHosting = UIHostingController(

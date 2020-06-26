@@ -100,7 +100,7 @@ final internal class VotingViewController: VisualEffectViewController {
 
     // MARK: - Actions -
 
-    @objc func doneButtonPressed(_ sender: Any) {
+    @objc func doneButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             PlayerAnonymousMetrics.log(event: .backupQuit,

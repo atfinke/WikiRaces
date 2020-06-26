@@ -102,7 +102,7 @@ extension MenuView {
     ///
     /// - Parameter sender: The pressed tile
     @objc
-    func menuTilePressed(sender: MenuTile) {
+    func menuTilePressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         
         guard GKLocalPlayer.local.isAuthenticated else {

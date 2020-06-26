@@ -210,9 +210,9 @@ extension MenuView {
         ]
         NSLayoutConstraint.activate(constraints)
         
-        leftMenuTile.addTarget(self, action: #selector(menuTilePressed(sender:)), for: .touchUpInside)
-        middleMenuTile.addTarget(self, action: #selector(menuTilePressed(sender:)), for: .touchUpInside)
-        rightMenuTile.addTarget(self, action: #selector(menuTilePressed(sender:)), for: .touchUpInside)
+        leftMenuTile.addTarget(self, action: #selector(menuTilePressed), for: .touchUpInside)
+        middleMenuTile.addTarget(self, action: #selector(menuTilePressed), for: .touchUpInside)
+        rightMenuTile.addTarget(self, action: #selector(menuTilePressed), for: .touchUpInside)
         
         self.leftMenuTile = leftMenuTile
         self.middleMenuTile = middleMenuTile

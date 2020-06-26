@@ -17,10 +17,8 @@ struct ResultsItemContentView: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                PlayerImageView(playerID: item.id, size: 44, effectSize: 3)
+                PlayerImageView(player: item.player, size: 44, effectSize: 3)
                     .padding(.trailing, 6)
-//                    .animation(nil)
-//                    .id("Text")
                 VStack(alignment: .leading) {
                     Text(item.subtitle)
                         .font(.system(size: 14, weight: .medium, design: .rounded))

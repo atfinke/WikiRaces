@@ -10,12 +10,12 @@ import SwiftUI
 
 struct PlayerImageView: View {
     
-    let playerID: String
+    let player: SwiftUIPlayer
     let size: CGFloat
     let effectSize: CGFloat
     
     var body: some View {
-        PlayerImageDatabase.shared.image(for: playerID)
+        PlayerImageDatabase.shared.image(for: player.id)
             .renderingMode(.original)
             .resizable()
             .frame(width: size, height: size)

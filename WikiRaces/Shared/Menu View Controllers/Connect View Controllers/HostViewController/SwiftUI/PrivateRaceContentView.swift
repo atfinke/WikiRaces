@@ -10,8 +10,6 @@ import SwiftUI
 import WKRKit
 import GameKit
 
-
-
 struct PrivateRaceContentView: View {
     
     @ObservedObject var model: PrivateRaceContentViewModel
@@ -21,33 +19,36 @@ struct PrivateRaceContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            PlayerImageView(playerID: GKLocalPlayer.local.alias, size: 100, effectSize: 5)
+            PlayerImageView(
+                player: SwiftUIPlayer(id: GKLocalPlayer.local.alias),
+                size: 100,
+                effectSize: 5)
                 .padding(.bottom, 20)
             
-             VStack {
-                       PrivateRaceSectionView(
-                           header: "CODE",
-                           title: model.raceCode?.uppercased() ?? "-",
-                           imageName: "square.and.arrow.up",
-                           disabled: model.raceCode == nil) {
-                           self.isShareCodePresented = true
-                       }
-                       .padding(.vertical, 16)
-                       .sheet(isPresented: $isShareCodePresented, content: {
-                           ShareCodeView(raceCode: self.model.raceCode ?? "-")
-                       })
-                       
-                       PrivateRaceSectionView(
-                           header: "TYPE",
-                           title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
-                           imageName: "gear",
-                           disabled: false) {
-                           self.isSettingsPresented = true
-                       }
-                       .sheet(isPresented: $isSettingsPresented, content: {
-                           RaceSettingsView(model: self.model)
-                       })
-                   }.frame(width: 220)
+            VStack {
+                PrivateRaceSectionView(
+                    header: "CODE",
+                    title: model.raceCode?.uppercased() ?? "-",
+                    imageName: "square.and.arrow.up",
+                    disabled: model.raceCode == nil) {
+                        self.isShareCodePresented = true
+                }
+                .padding(.vertical, 16)
+                .sheet(isPresented: $isShareCodePresented, content: {
+                    ShareCodeView(raceCode: self.model.raceCode ?? "-")
+                })
+                
+                PrivateRaceSectionView(
+                    header: "TYPE",
+                    title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
+                    imageName: "gear",
+                    disabled: false) {
+                        self.isSettingsPresented = true
+                }
+                .sheet(isPresented: $isSettingsPresented, content: {
+                    RaceSettingsView(model: self.model)
+                })
+            }.frame(width: 220)
             
             Color.clear.frame(height: 50)
             Spacer()
@@ -55,7 +56,7 @@ struct PrivateRaceContentView: View {
             HStack {
                 Color.clear.frame(width: 1)
                 ForEach(model.connectedPlayers) { player in
-                    PlayerImageView(playerID: player.id, size: 44, effectSize: 3)
+                    PlayerImageView(player: player, size: 44, effectSize: 3)
                         .padding(.all, 2)
                 }
                 .transition(.opacity)
@@ -75,11 +76,5 @@ struct PrivateRaceContentView: View {
         }
         .overlay(Color.black.opacity(isShareCodePresented || isSettingsPresented ? 0.5 : 0).allowsHitTesting(false))
         .animation(.spring())
-    }
-}
-
-struct PrivateRaceContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        PrivateRaceContentView(model: PrivateRaceContentViewModel(settings: WKRGameSettings()))
     }
 }

@@ -49,8 +49,7 @@ extension VotingViewController {
     private func keyboardAttemptQuit(_ keyCommand: UIKeyCommand) {
         guard presentedViewController == nil,
             navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
-
-        doneButtonPressed(keyCommand)
+        doneButtonPressed()
     }
 
 }

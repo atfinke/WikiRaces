@@ -17,8 +17,6 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     enum MagicError: Error {
         case unableToMakePayments
         case noProduct
-        case networkError(Error)
-        case serverError
     }
 
     enum PlusType {
