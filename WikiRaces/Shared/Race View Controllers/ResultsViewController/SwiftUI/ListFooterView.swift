@@ -26,7 +26,6 @@ struct ListFooterView: View {
                 .opacity(textOpacity)
                 .animation(nil, value: topText)
                 .animation(.easeInOut(duration: 0.4), value: textOpacity)
-            
             Spacer()
             Text(bottomText)
                 .font(Font(UIFont(monospaceSize: 16, weight: .medium)))
@@ -37,7 +36,7 @@ struct ListFooterView: View {
             
         }
         .frame(minHeight: 55, maxHeight: 55)
-        .padding(.bottom, 10)
+        .padding(.bottom, 20)
     }
     
 }

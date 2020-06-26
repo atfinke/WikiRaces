@@ -49,7 +49,7 @@ struct ResultsContentView: View {
                     .animation(.easeInOut(duration: 1), value: model.buttonFlashOpacity)
                 }
             }
-            .frame(height: 100)
+            .frame(height: 50)
             .animation(.easeInOut)
             ListFooterView(topText: model.footerTopText, bottomText: model.footerBottomText, textOpacity: model.footerOpacity)
         }

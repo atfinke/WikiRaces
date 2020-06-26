@@ -47,6 +47,7 @@ final internal class MenuViewController: UIViewController {
                 }, completion: { [weak self] _ in
                     self?.dismiss(animated: false) {
                         self?.navigationController?.popToRootViewController(animated: false)
+//                        GKMatchmaker.shared().cancel()
                     }
                 })
         }
