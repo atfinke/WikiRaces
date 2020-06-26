@@ -61,7 +61,7 @@
 		14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F691F36834E00FF1A9E /* WKRPageNavigation.swift */; };
 		14EB9F6C1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */; };
 		14EB9F711F36850800FF1A9E /* WKRInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F701F36850800FF1A9E /* WKRInt.swift */; };
-		14EB9F731F36854700FF1A9E /* WKRVoteInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */; };
+		14EB9F731F36854700FF1A9E /* WKRVotingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F721F36854700FF1A9E /* WKRVotingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +132,7 @@
 		14EB9F691F36834E00FF1A9E /* WKRPageNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPageNavigation.swift; sourceTree = "<group>"; };
 		14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRLinkedPagesFetcher.swift; sourceTree = "<group>"; };
 		14EB9F701F36850800FF1A9E /* WKRInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRInt.swift; sourceTree = "<group>"; };
-		14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRVoteInfo.swift; sourceTree = "<group>"; };
+		14EB9F721F36854700FF1A9E /* WKRVotingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRVotingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,7 +254,7 @@
 				14EB9F4F1F3682CA00FF1A9E /* WKRGame.swift */,
 				1497F3191F588EBE001653DE /* WKRReadyStates.swift */,
 				14EB9F491F3682A000FF1A9E /* WKRGameState.swift */,
-				14EB9F721F36854700FF1A9E /* WKRVoteInfo.swift */,
+				14EB9F721F36854700FF1A9E /* WKRVotingState.swift */,
 				14EB9F4D1F3682C500FF1A9E /* WKRRace.swift */,
 				14EB9F4B1F3682BE00FF1A9E /* WKRRaceConfig.swift */,
 				14E6DFAD1F3685B8002755C3 /* WKRPreRaceConfig.swift */,
@@ -493,7 +493,7 @@
 				1452B3781F3653AD00E81FD8 /* WKRPageFetcher.swift in Sources */,
 				14EB9F461F36825100FF1A9E /* WKRPlayerMessage.swift in Sources */,
 				14E9E16D1F63462500D2CAB4 /* WKRFatalError.swift in Sources */,
-				14EB9F731F36854700FF1A9E /* WKRVoteInfo.swift in Sources */,
+				14EB9F731F36854700FF1A9E /* WKRVotingState.swift in Sources */,
 				14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */,
 				1499606C2226FA7A00259B68 /* WKRPlayerRaceStats.swift in Sources */,
 				140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */,

@@ -24,19 +24,28 @@ final class CustomRaceViewController: CustomRaceController {
     // MARK: - Properties -
 
     private let settingOptions = Setting.allCases
-    var allCustomPages = [WKRPage]()
     let settings: WKRGameSettings
 
+    var allCustomPages: [WKRPage]
+    var finalPagesCallback: ([WKRPage]) -> Void
+    
     // MARK: - Initalization -
 
-    init(settings: WKRGameSettings) {
+    init(settings: WKRGameSettings, pages: [WKRPage], finalPages: @escaping (([WKRPage]) -> Void)) {
         self.settings = settings
+        self.allCustomPages = pages
+        self.finalPagesCallback = finalPages
         super.init(style: .grouped)
         title = "Customize Race".uppercased()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        finalPagesCallback(allCustomPages)
     }
 
     // MARK: - UITableViewDataSource -

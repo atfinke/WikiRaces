@@ -6,35 +6,36 @@
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
-import Network
+import MultipeerConnectivity
 
-class NearbyRaceBrowser {
+class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     
     // MARK: - Properties -
     
-    private var browser: NWBrowser?
+    private lazy var peerID = MCPeerID(displayName: UUID().uuidString)
+    private var advertiser: MCNearbyServiceAdvertiser?
+    private var handler: ((_ hostName: String, _ raceCode: String) -> Void)?
     
     // MARK: - Helpers -
 
     func start(nearbyRaces: @escaping ((_ hostName: String, _ raceCode: String) -> Void)) {
-        let parameters = NWParameters()
-        parameters.includePeerToPeer = true
-        browser = NWBrowser(for: .bonjour(type: Nearby.serviceType, domain: nil), using: parameters)
+        self.handler = nearbyRaces
         
-        browser?.browseResultsChangedHandler = { results, changes in
-            for change in changes {
-                guard case let NWBrowser.Result.Change.added(result) = change,
-                      case let NWEndpoint.service(name: name, type: _, domain: _, interface: _) = result.endpoint,
-                      let metadata = NearbyServiceName.metadata(from: name) else {
-                    continue
-                }
-                nearbyRaces(metadata.hostName, metadata.raceCode)
-            }
-        }
-        browser?.start(queue: .main)
+        advertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: Nearby.serviceType)
+        advertiser?.delegate = self
+        advertiser?.startAdvertisingPeer()
     }
     
     func stop() {
-        browser?.cancel()
+        advertiser?.stopAdvertisingPeer()
+    }
+    
+    // MARK: - MCNearbyServiceAdvertiserDelegate -
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
+        if let data = context, let invite = try? JSONDecoder().decode(Nearby.Invite.self, from: data) {
+            handler?(invite.hostName, invite.raceCode)
+        }
+        invitationHandler(false, nil)
     }
 }

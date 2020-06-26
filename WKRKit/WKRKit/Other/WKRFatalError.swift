@@ -26,7 +26,7 @@ public enum WKRFatalError: Int {
     public var message: String {
         switch self {
         case .disconnected: return "You are no longer connected to the host of the race."
-        case .noPeers: return "There are no other players left in the game."
+        case .noPeers: return "There are no other racers left in the game."
         case .internetSpeed: return "A fast internet connection is required to play WikiRaces."
         case .configCreationFailed: return "The host's internet connection was too slow to start the race."
         }

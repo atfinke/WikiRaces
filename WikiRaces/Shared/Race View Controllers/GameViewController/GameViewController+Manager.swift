@@ -101,8 +101,8 @@ extension GameViewController {
             if time == 0 {
                 logFinalVotes()
             }
-        case .voteInfo(let voteInfo):
-            votingViewController?.voteInfo = voteInfo
+        case .votingState(let votingState):
+            votingViewController?.votingState = votingState
         case .finalPage(let page):
             finalPage = page
             votingViewController?.finalPageSelected(page)
@@ -236,7 +236,7 @@ extension GameViewController {
 
     private func showVotingController(completion: @escaping () -> Void) {
         let controller = VotingViewController()
-        controller.voteInfo = gameManager.voteInfo
+        controller.votingState = gameManager.votingState
         controller.quitAlertController = quitAlertController(raceStarted: false)
         controller.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
@@ -305,7 +305,6 @@ extension GameViewController {
     private func showResultsController(completion: @escaping () -> Void) {
         let controller = ResultsViewController()
         controller.localPlayer = gameManager.localPlayer
-        controller.addPlayersViewController = gameManager.hostNetworkInterface()
         controller.state = gameManager.gameState
         controller.resultsInfo = gameManager.hostResultsInfo
         controller.isPlayerHost = networkConfig.isHost
@@ -365,14 +364,12 @@ extension GameViewController {
     // MARK: - Log Final Votes -
 
     private func logFinalVotes() {
-        guard networkConfig.isHost, let votingInfo = gameManager.voteInfo else { return }
-        for index in 0..<votingInfo.pageCount {
-            if let info = votingInfo.page(for: index) {
-                for _ in 0..<info.votes {
-                    // capitalized to keep consistent with past analytics
-                    PlayerAnonymousMetrics.log(event: .finalVotes,
-                                      attributes: ["Page": info.page.title?.capitalized as Any])
-                }
+        guard networkConfig.isHost, let votingState = gameManager.votingState else { return }
+        for item in votingState.current {
+            for _ in 0..<item.voters.count {
+                // capitalized to keep consistent with past analytics
+                PlayerAnonymousMetrics.log(event: .finalVotes,
+                                           attributes: ["Page": item.page.title?.capitalized as Any])
             }
         }
     }

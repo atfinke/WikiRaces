@@ -20,19 +20,24 @@ import Crashlytics
 
 extension GKMatchRequest {
     
-    static func initalRequest(raceCode: String) -> GKMatchRequest {
+
+    static func hostRequest(raceCode: String, isInital: Bool) -> GKMatchRequest {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = 2
+        request.maxPlayers = isInital ? 2 : GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
         request.playerGroup = raceCode.hash
+        request.playerAttributes = 0xFFFF0000
         return request
     }
     
-    static func standardRequest(raceCode: String?) -> GKMatchRequest {
+    static func joinRequest(raceCode: String?) -> GKMatchRequest {
         let request = GKMatchRequest()
         request.minPlayers = 2
         request.maxPlayers = GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
         request.playerGroup = (raceCode ?? "<GLOBAL>").hash
+        if raceCode != nil {
+            request.playerAttributes = 0x0000FFFF
+        }
         return request
     }
     
@@ -49,6 +54,7 @@ final class GKConnectViewController: ConnectViewController {
     let isPublicRace: Bool
     
     
+    
     var isPlayerHost: Bool
     var publicRaceHostAlias: String?
     
@@ -61,6 +67,8 @@ final class GKConnectViewController: ConnectViewController {
         self.raceCode = raceCode
         self.isPublicRace = raceCode == nil
         self.isPlayerHost = isPlayerHost
+        
+        Defaults.isAutoInviteOn = true
         
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         let playerName = GKLocalPlayer.local.alias
@@ -99,7 +107,8 @@ final class GKConnectViewController: ConnectViewController {
             guard let self = self else { return }
             if success {
                 if self.isPlayerHost {
-                    self.toggleCoreInterface(isHidden: true,
+                    self.toggleCoreInterface(
+                        isHidden: true,
                                         duration: 0.25,
                                         completion: { [weak self] in
                                             self?.presentHostInterface()
@@ -136,7 +145,7 @@ final class GKConnectViewController: ConnectViewController {
 
         let nav = WKRUINavigationController(rootViewController: controller)
         nav.modalPresentationStyle = .fullScreen
-        nav.isModalInPresentation = true
+        nav.modalTransitionStyle = .crossDissolve
         present(nav, animated: true, completion: nil)
     }
     

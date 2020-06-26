@@ -71,6 +71,7 @@ class GKHelper {
                         self.pendingResult = .controller(controller)
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
+                        PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
                     } else {
                         fatalError()
                     }

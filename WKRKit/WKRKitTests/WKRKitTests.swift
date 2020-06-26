@@ -295,7 +295,7 @@ class WKRKitTests: WKRKitTestCase {
         XCTAssertNotEqual(entryWithDifPage, entryNoDuration)
     }
 
-    // MARK: - WKRVoteInfo
+    // MARK: - WKRVotingState
 
     func testVotingObject() {
         let page1 = WKRPage.mockApple()
@@ -303,7 +303,7 @@ class WKRKitTests: WKRKitTestCase {
 
         let player = WKRPlayerProfile.mock()
 
-        var votingObject = WKRVoteInfo(pages: [page1, page2])
+        var votingObject = WKRVotingState(pages: [page1, page2])
 
         var firstPageVotes = votingObject.page(for: 0)
 
@@ -443,7 +443,7 @@ class WKRKitTests: WKRKitTestCase {
     func testTiebreakVoting() {
         let pageOne = WKRPage.mockApple(withSuffix: "One")
         let pageTwo = WKRPage.mockApple(withSuffix: "Two")
-        var vote = WKRVoteInfo(pages: [pageOne, pageTwo])
+        var vote = WKRVotingState(pages: [pageOne, pageTwo])
 
         let playerOne = WKRPlayerProfile.mock(named: "Andrew")
         let playerTwo = WKRPlayerProfile.mock(named: "Carol")

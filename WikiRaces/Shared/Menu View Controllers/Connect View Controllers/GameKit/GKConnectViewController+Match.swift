@@ -17,8 +17,9 @@ extension GKConnectViewController: GKMatchDelegate {
 
     func findMatch() {
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let type = raceCode == nil ? "Public" : "Private"
-        findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
+        // TODO: fix
+//        let type = raceCode == nil ? "Public" : "Private"
+//        findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
         #endif
         
         DispatchQueue.main.async {
@@ -29,7 +30,7 @@ extension GKConnectViewController: GKMatchDelegate {
             }
         }
         
-        GKMatchmaker.shared().findMatch(for: GKMatchRequest.standardRequest(raceCode: raceCode)) { [weak self] match, error in
+        GKMatchmaker.shared().findMatch(for: GKMatchRequest.joinRequest(raceCode: raceCode)) { [weak self] match, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 if let error = error {
@@ -45,8 +46,6 @@ extension GKConnectViewController: GKMatchDelegate {
                     
                     if self.isPublicRace {
                         self.publicRaceDetermineHost(match: match)
-                    } else {
-                        self.updateDescriptionLabel(to: "Waiting for host")
                     }
                 } else {
                     fatalError()
@@ -63,8 +62,15 @@ extension GKConnectViewController: GKMatchDelegate {
         } else {
             if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
                 showMatch(for: .gameKit(match: match, isHost: false), settings: object.gameSettings, andHide: [])
-            } else if let _ = try? JSONDecoder().decode(CancelMessage.self, from: data) {
-                showError(title: "Host cancelled race", message: "")
+            } else if let message = try? JSONDecoder().decode(MiniMessage.self, from: data) {
+                DispatchQueue.main.async {
+                    switch message.info {
+                    case .connected:
+                        self.updateDescriptionLabel(to: "Waiting for host")
+                    case .cancelled:
+                        self.showError(title: "Host cancelled race", message: "")
+                    }
+                }
             }
         }
         
@@ -74,6 +80,9 @@ extension GKConnectViewController: GKMatchDelegate {
         guard !isPublicRace else { return }
         
         guard state == .connected, let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() else { return }
+        if state == .connected {
+            PlayerImageDatabase.shared.connected(to: player, completion: nil)
+        }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             try? match.send(data, to: [player], dataMode: .reliable)
         }

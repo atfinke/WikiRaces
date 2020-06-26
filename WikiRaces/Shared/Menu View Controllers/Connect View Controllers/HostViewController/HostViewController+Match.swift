@@ -12,8 +12,9 @@ import WKRKit
 extension HostViewController: GKMatchDelegate {
     
     func startMatchmaking() {
-        guard let code = raceCode else { fatalError() }
-        GKMatchmaker.shared().findMatch(for: GKMatchRequest.initalRequest(raceCode: code)) { [weak self] match, error in
+        print("bla " + #function)
+        guard let code = model.raceCode, !isQuitting else { return }
+        GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
             if let error = error {
                 print(error)
                 self?.startMatchmaking()
@@ -28,8 +29,9 @@ extension HostViewController: GKMatchDelegate {
     }
     
     private func addPlayers() {
-        guard let match = self.match, let code = raceCode else { fatalError() }
-        GKMatchmaker.shared().addPlayers(to: match, matchRequest: GKMatchRequest.standardRequest(raceCode: code)) { [weak self] error in
+        print("bla " + #function)
+        guard let match = self.match, let code = model.raceCode, !isQuitting else { return }
+        GKMatchmaker.shared().addPlayers(to: match, matchRequest: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] error in
             if let error = error {
                 print(error)
             } else {
@@ -39,19 +41,24 @@ extension HostViewController: GKMatchDelegate {
     }
     
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
-        print(#function)
-        players = match.players
-        DispatchQueue.main.async {
-            self.tableView.reloadSections(IndexSet([Section.players.rawValue]), with: .automatic)
+        print("bla " + #function)
+        if state == .connected {
+            PlayerImageDatabase.shared.connected(to: player, completion: { [weak self] in
+                DispatchQueue.main.async {
+                    self?.model.connectedPlayers.append(SwiftUIPlayer(id: player.alias ))
+                }
+                self?.sendMiniMessage(info: .connected)
+            })
         }
     }
     
     func match(_ match: GKMatch, didFailWithError error: Error?) {
-        print(#function)
+        print("bla " + #function)
         cancelMatch()
     }
     
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
+        print("bla " + #function)
         guard WKRSeenFinalArticlesStore.isRemoteTransferData(data) else { return }
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }

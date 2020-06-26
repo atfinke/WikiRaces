@@ -12,17 +12,13 @@ import UIKit
 
 import WKRKit
 import WKRUIKit
+import SwiftUI
 
-final internal class HostViewController: UITableViewController {
+
+final internal class HostViewController: VisualEffectViewController {
     
     // MARK: - Types -
     
-    enum Section: Int, CaseIterable {
-        case customizeRace
-        case raceCode
-        case autoInvite
-        case players
-    }
 
     enum ListenerUpdate {
         case start(match: GKMatch, settings: WKRGameSettings)
@@ -32,17 +28,20 @@ final internal class HostViewController: UITableViewController {
     
     // MARK: - Properties -
     
-    private(set) var raceCode: String?
-    var raceCodeLabel: UILabel?
     private let raceCodeGenerator = RaceCodeGenerator()
     private let advertiser = NearbyRaceAdvertiser()
 
     var match: GKMatch?
-    var players = [GKPlayer]()
+    var isQuitting = false
      
     var gameSettings = WKRGameSettings()
     var allCustomPages = [WKRPage]()
     weak var gameSettingsController: CustomRaceViewController?
+    
+    lazy var model = PrivateRaceContentViewModel(settings: gameSettings)
+    lazy var contentViewHosting = UIHostingController(
+        rootView: PrivateRaceContentView(model: model))
+    
     
     private let activityView = UIActivityIndicatorView(style: .medium)
     let listenerUpdate: (ListenerUpdate) -> Void
@@ -51,18 +50,19 @@ final internal class HostViewController: UITableViewController {
     
     init(listenerUpdate: @escaping ((ListenerUpdate) -> Void)) {
         self.listenerUpdate = listenerUpdate
-        super.init(style: .grouped)
+        super.init(nibName: nil, bundle: nil)
         
         let date = Date()
         raceCodeGenerator.new { [weak self] code in
             print(date.timeIntervalSinceNow)
             
             guard let self = self else { return }
-            self.raceCode = code
-            self.raceCodeLabel?.text = code
-            
-            self.startNearbyAdvertising()
-            self.startMatchmaking()
+          
+            DispatchQueue.main.async {
+                self.model.raceCode = code
+                self.startNearbyAdvertising()
+                self.startMatchmaking()
+            }
         }
         
        
@@ -77,25 +77,36 @@ final internal class HostViewController: UITableViewController {
         navigationItem.rightBarButtonItem = startButton
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configure(hostingView: contentViewHosting.view)
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - Actions -
+    
+    func sendMiniMessage(info: ConnectViewController.MiniMessage.Info) {
+        let message = ConnectViewController.MiniMessage(info: info, uuid: UUID())
+        guard let data = try? JSONEncoder().encode(message) else {
+            fatalError()
+        }
+        try? match?.sendData(toAllPlayers: data, with: .reliable)
+    }
 
     @objc
     func cancelMatch() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
 
+        isQuitting = true
+        GKMatchmaker.shared().cancel()
+        
         advertiser.stop()
         match?.delegate = nil
-        
-        let message = ConnectViewController.CancelMessage(uuid: UUID())
-        guard let data = try? JSONEncoder().encode(message) else {
-            fatalError()
-        }
-        try? match?.sendData(toAllPlayers: data, with: .reliable)
+        sendMiniMessage(info: .cancelled)
         match?.disconnect()
         
         listenerUpdate(.cancel)
@@ -106,7 +117,7 @@ final internal class HostViewController: UITableViewController {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         advertiser.stop()
-        tableView.isUserInteractionEnabled = false
+//        tableView.isUserInteractionEnabled = false
 
         activityView.sizeToFit()
         activityView.startAnimating()
@@ -116,6 +127,8 @@ final internal class HostViewController: UITableViewController {
         
         func sendStartMessage() {
             guard let match = match else { fatalError("match is nil") }
+            GKMatchmaker.shared().finishMatchmaking(for: match)
+            
             let message = ConnectViewController.StartMessage(hostName: GKLocalPlayer.local.alias, gameSettings: gameSettings)
             do {
                 let data = try JSONEncoder().encode(message)
@@ -148,7 +161,7 @@ final internal class HostViewController: UITableViewController {
     }
     
     private func startNearbyAdvertising() {
-        guard Defaults.isAutoInviteOn, let code = raceCode else {
+        guard Defaults.isAutoInviteOn, let code = model.raceCode else {
             advertiser.stop()
             return
         }

@@ -7,10 +7,19 @@
 //
 
 import UIKit
+import SwiftUI
 
 final public class WKRUIStyle {
     public static func isDark(_ traitCollection: UITraitCollection) -> Bool {
         if traitCollection.userInterfaceStyle == .dark {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    public static func isDark(_ colorScheme: ColorScheme) -> Bool {
+        if colorScheme == .dark {
             return true
         } else {
             return false

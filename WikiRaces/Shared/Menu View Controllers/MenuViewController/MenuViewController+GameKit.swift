@@ -34,7 +34,6 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     func setupInviteHandler() {
         GKHelper.shared.inviteHandler = { code in
             self.joinRace(raceCode: code)
-            self.menuView.animateOptionsOutAndTransition(to: .noInterface)
         }
     }
 

@@ -15,13 +15,13 @@ extension WKRGameManager {
     internal func receivedRaw(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
             game.preRaceConfig = preRaceConfig
-            votingUpdate(.voteInfo(preRaceConfig.voteInfo))
+            votingUpdate(.votingState(preRaceConfig.votingState))
 
             if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
             }
 
-            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.voteInfo.pages)
+            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.votingState.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
             votingUpdate(.finalPage(raceConfig.endingPage))
@@ -155,12 +155,13 @@ extension WKRGameManager {
 
             let points = resultsInfo.raceRewardPoints(for: localPlayer)
             var place: Int?
-            for playerIndex in 0..<resultsInfo.playerCount {
-                let player = resultsInfo.raceRankingsPlayer(at: playerIndex)
+            
+            for (index, player) in resultsInfo.raceRankings().enumerated() {
                 if player == localPlayer && player.state == .foundPage {
-                    place = playerIndex + 1
+                    place = index + 1
                 }
             }
+            
             let webViewPixelsScrolled = webView?.pixelsScrolled ?? 0
             let pages = resultsInfo.pagesViewed(for: localPlayer)
             gameUpdate(.playerStatsForLastRace(points: points,

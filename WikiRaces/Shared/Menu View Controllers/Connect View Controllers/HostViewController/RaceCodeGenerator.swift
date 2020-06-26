@@ -10,7 +10,7 @@ import GameKit
 
 class RaceCodeGenerator {
     
-    private static let _codes = ["Andrew", "Hello"]
+    private static let _codes = ["Andrew", "Hello2"]
     private var callback: ((String) -> Void)?
     
     func new(code: @escaping ((String) -> Void)) {

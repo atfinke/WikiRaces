@@ -93,7 +93,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
                 .typeIdentifier: kMonospacedNumbersSelector
             ]
         ]
-        let fontDescriptor = UIFont.systemFont(ofSize: 100, weight: .semibold).fontDescriptor.addingAttributes(
+        let fontDescriptor = UIFont.systemRoundedFont(ofSize: 100, weight: .semibold).fontDescriptor.addingAttributes(
             [UIFontDescriptor.AttributeName.featureSettings: features]
         )
 
@@ -118,7 +118,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         slowConnectionLabel.numberOfLines = 0
 
         slowConnectionLabel.adjustsFontSizeToFitWidth = true
-        slowConnectionLabel.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        slowConnectionLabel.font = UIFont.systemRoundedFont(ofSize: 24, weight: .bold)
         slowConnectionLabel.translatesAutoresizingMaskIntoConstraints = false
         loadingView.addSubview(slowConnectionLabel)
 

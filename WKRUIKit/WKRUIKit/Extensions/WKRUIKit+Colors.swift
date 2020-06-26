@@ -7,6 +7,18 @@
 //
 
 import UIKit
+import SwiftUI
+
+extension Color {
+    
+    public static func wkrTextColor(for colorScheme: ColorScheme) -> Color {
+        return Color(WKRUIStyle.isDark(colorScheme) ? .white : #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0))
+    }
+
+    public static func wkrSubtitleTextColor(for colorScheme: ColorScheme) -> Color {
+        return Color(WKRUIStyle.isDark(colorScheme) ? #colorLiteral(red: 210.0/255.0, green: 210.0/255.0, blue: 210.0/255.0, alpha: 1.0)  : #colorLiteral(red: 136.0/255.0, green: 136.0/255.0, blue: 136.0/255.0, alpha: 1.0))
+    }
+}
 
 extension UIColor {
 

@@ -45,7 +45,7 @@ final internal class HistoryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         pageLabel.textAlignment = .left
-        pageLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        pageLabel.font = UIFont.systemRoundedFont(ofSize: 17, weight: .regular)
         pageLabel.numberOfLines = 0
         pageLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(pageLabel)
@@ -53,7 +53,7 @@ final internal class HistoryTableViewCell: UITableViewCell {
         linkHereLabel.text = "Link Here"
         linkHereLabel.textColor = .lightGray
         linkHereLabel.textAlignment = .left
-        linkHereLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        linkHereLabel.font = UIFont.systemRoundedFont(ofSize: 16, weight: .medium)
         linkHereLabel.numberOfLines = 1
         linkHereLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(linkHereLabel)

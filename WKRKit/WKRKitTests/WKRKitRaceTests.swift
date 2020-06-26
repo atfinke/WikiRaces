@@ -15,7 +15,7 @@ class WKRKitRaceTests: WKRKitTestCase {
         let testExpectation = expectation(description: "finalPage")
         WKRPreRaceConfig.new(settings: WKRGameSettings()) { preRaceConfig, _  in
             XCTAssertNotNil(preRaceConfig)
-            XCTAssert(preRaceConfig?.voteInfo.pageCount == WKRKitConstants.current.votingArticlesCount)
+            XCTAssert(preRaceConfig?.votingState.pageCount == WKRKitConstants.current.votingArticlesCount)
 
             if let config = preRaceConfig {
                 self.testEncoding(for: config)

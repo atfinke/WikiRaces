@@ -30,7 +30,7 @@ final internal class MenuViewController: UIViewController {
     private var isFirstAppearence = true
     override var canBecomeFirstResponder: Bool { return true }
     
-    private let browser = NearbyRaceBrowser()
+    private let nearbyRaceListener = NearbyRaceListener()
 
     // MARK: - View Life Cycle -
 
@@ -50,18 +50,6 @@ final internal class MenuViewController: UIViewController {
         menuView.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {
-//            case .presentDebug:
-//            case .presentGlobalConnect: self.presentGlobalConnect()
-//            case .presentGlobalAuth:
-//            case .joinPublicRace(let isHost): self.presentMPCConnect(isHost: isHost)
-//            case .presentAlert(let alertController):
-//
-//            case .presentLeaderboard:
-               
-//            case .presentStats:
-                
-//            case.presentSubscription:
-                
             case .presentDebug:
                 self.presentDebugController()
             case .presentLeaderboard:
@@ -145,7 +133,7 @@ final internal class MenuViewController: UIViewController {
         metrics.log(value: UIDevice.current.name, for: "DeviceNames")
         metrics.log(value: PlusStore.shared.isPlus ? 1 : 0, for: "isPlus")
         
-        browser.start { host, raceCode in
+        nearbyRaceListener.start { host, raceCode in
             let controller = UIAlertController(
                 title: "Nearby Race",
                 message: "\(host) is starting a race nearby. Would you like to join?",
@@ -180,7 +168,7 @@ final internal class MenuViewController: UIViewController {
     
     func prepareForRace() {
         UIApplication.shared.isIdleTimerDisabled = true
-        browser.stop()
+        nearbyRaceListener.stop()
         resignFirstResponder()
         
         if presentedViewController != nil {
@@ -190,8 +178,10 @@ final internal class MenuViewController: UIViewController {
     
     func joinRace(raceCode: String?) {
         prepareForRace()
-        let controller = GKConnectViewController(raceCode: raceCode, isPlayerHost: false)
-        navigationController?.pushViewController(controller, animated: false)
+        menuView.animateMenuOut {
+            let controller = GKConnectViewController(raceCode: raceCode, isPlayerHost: false)
+            self.navigationController?.pushViewController(controller, animated: false)
+        }
     }
     
     func createRace() {
@@ -205,7 +195,9 @@ final internal class MenuViewController: UIViewController {
             let controller = GKConnectViewController(raceCode: nil, isPlayerHost: true)
             navigationController?.pushViewController(controller, animated: false)
         } else {
-            fatalError()
+            let controller = GKConnectViewController(raceCode: nil, isPlayerHost: true)
+            navigationController?.pushViewController(controller, animated: false)
+//            fatalError()
         }
     }
 

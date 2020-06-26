@@ -9,5 +9,9 @@
 import Foundation
 
 struct Nearby {
-    static let serviceType = "WikiRaces.2020.07"
+    static let serviceType = "WKR-2020-07"
+    struct Invite: Codable {
+        let hostName: String
+        let raceCode: String
+    }
 }

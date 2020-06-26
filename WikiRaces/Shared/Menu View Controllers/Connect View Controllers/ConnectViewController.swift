@@ -23,7 +23,11 @@ class ConnectViewController: UIViewController {
         let gameSettings: WKRGameSettings
     }
     
-    struct CancelMessage: Codable {
+    struct MiniMessage: Codable {
+        enum Info: String, Codable {
+            case connected, cancelled
+        }
+        let info: Info
         let uuid: UUID
     }
 
@@ -45,7 +49,8 @@ class ConnectViewController: UIViewController {
 
     final func runConnectionTest(completion: @escaping (Bool) -> Void) {
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let trace = Performance.startTrace(name: "Connection Test Trace")
+        // TODO: fix
+//        let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
 
         let startDate = Date()
@@ -53,7 +58,7 @@ class ConnectViewController: UIViewController {
             DispatchQueue.main.async {
                 if success {
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                    trace?.stop()
+//                    trace?.stop()
                     #endif
                 }
                 PlayerAnonymousMetrics.log(event: .connectionTestResult,
@@ -98,7 +103,7 @@ class ConnectViewController: UIViewController {
         cancelButton.setAttributedTitle(NSAttributedString(string: "CANCEL",
                                                            spacing: 1.5), for: .normal)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        cancelButton.titleLabel?.font = UIFont.systemRoundedFont(ofSize: 17, weight: .medium)
         cancelButton.alpha = 0.0
         cancelButton.addTarget(self, action: #selector(pressedCancelButton), for: .touchUpInside)
         view.addSubview(cancelButton)
@@ -106,7 +111,7 @@ class ConnectViewController: UIViewController {
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.alpha = 0.0
         descriptionLabel.textAlignment = .center
-        descriptionLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        descriptionLabel.font = UIFont.systemRoundedFont(ofSize: 17, weight: .medium)
         view.addSubview(descriptionLabel)
         updateDescriptionLabel(to: "CHECKING CONNECTION")
 
@@ -144,7 +149,7 @@ class ConnectViewController: UIViewController {
     final func updateDescriptionLabel(to text: String) {
         descriptionLabel.attributedText = NSAttributedString(string: text.uppercased(),
                                                              spacing: 2.0,
-                                                             font: UIFont.systemFont(ofSize: 20.0, weight: .semibold))
+                                                             font: UIFont.systemRoundedFont(ofSize: 20.0, weight: .semibold))
     }
 
     final func showConnectionSpeedError() {

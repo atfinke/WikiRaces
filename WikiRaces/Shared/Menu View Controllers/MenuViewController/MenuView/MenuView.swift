@@ -205,8 +205,9 @@ final class MenuView: UIView {
         statsButton.style = buttonStyle
 
         // Label Fonts
-        titleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 10.0, 55), weight: .semibold)
-        subtitleLabel.font = UIFont.systemFont(ofSize: min(frame.size.width / 18.0, 30), weight: .medium)
+//        UIFont.systemRoundedFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
+        titleLabel.font = UIFont.systemRoundedFont(ofSize: min(frame.size.width / 10.0, 55), weight: .semibold)
+        subtitleLabel.font = UIFont.systemRoundedFont(ofSize: min(frame.size.width / 18.0, 30), weight: .medium)
 
         // Constraints
         if UIDevice.current.userInterfaceIdiom == .pad {

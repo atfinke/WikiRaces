@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WKRUIKit
 
 extension ResultsViewController {
 
@@ -21,13 +22,6 @@ extension ResultsViewController {
             return
         }
         present(alertController, animated: true, completion: nil)
-    }
-
-    @objc func addPlayersBarButtonItemPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        guard let controller = addPlayersViewController else { return }
-        present(controller, animated: true, completion: nil)
-        PlayerAnonymousMetrics.log(event: .hostStartMidMatchInviting)
     }
 
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
@@ -57,5 +51,24 @@ extension ResultsViewController {
             hack.present(controller, animated: true, completion: nil)
         })
         PlayerAnonymousMetrics.log(event: .openedShare)
+    }
+    
+    func tapped(playerID: String) {
+        PlayerAnonymousMetrics.log(event: .userAction(#function))
+
+        guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID) else {
+            return
+        }
+
+        let controller = HistoryViewController(style: .grouped)
+        historyViewController = controller
+        controller.player = player
+
+        let navController = WKRUINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerAnonymousMetrics.log(event: .openedHistory,
+                          attributes: ["GameState": state.rawValue.description as Any])
     }
 }

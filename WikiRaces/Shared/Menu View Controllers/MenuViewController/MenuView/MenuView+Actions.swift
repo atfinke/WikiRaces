@@ -31,11 +31,11 @@ extension MenuView {
         
         UISelectionFeedbackGenerator().selectionChanged()
         
-        guard GKLocalPlayer.local.isAuthenticated || Defaults.isFastlaneSnapshotInstance else {
-            self.listenerUpdate?(.presentGKAuth)
-            return
-        }
-        
+//        guard GKLocalPlayer.local.isAuthenticated || Defaults.isFastlaneSnapshotInstance else {
+//            self.listenerUpdate?(.presentGKAuth)
+//            return
+//        }
+//        
         animateMenuOut {
             self.listenerUpdate?(.presentCreateRace)
         }
@@ -145,6 +145,11 @@ extension MenuView {
     ///
     /// - Parameter completion: The completion handler
     func animateMenuOut(completion: (() -> Void)?) {
+        if state == .noInterface {
+            completion?()
+            return
+        }
+        
         isUserInteractionEnabled = false
         
         state = .noInterface

@@ -34,7 +34,7 @@ final class MedalScene: SKScene {
                 context.fill(emojiRect)
                 let text = text
                 let attributes = [
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: width - 5)
+                    NSAttributedString.Key.font: UIFont.systemRoundedFont(ofSize: width - 5)
                 ]
                 text.draw(in: emojiRect, withAttributes: attributes)
             })

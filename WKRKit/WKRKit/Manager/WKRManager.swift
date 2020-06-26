@@ -23,7 +23,7 @@ final public class WKRGameManager {
 
     public enum VotingUpdate {
         case remainingTime(Int)
-        case voteInfo(WKRVoteInfo)
+        case votingState(WKRVotingState)
         case finalPage(WKRPage)
     }
 
@@ -41,8 +41,8 @@ final public class WKRGameManager {
         return game.raceConfig?.endingPage.url
     }
 
-    public var voteInfo: WKRVoteInfo? {
-        return game.preRaceConfig?.voteInfo
+    public var votingState: WKRVotingState? {
+        return game.preRaceConfig?.votingState
     }
 
     public var gameState: WKRGameState {

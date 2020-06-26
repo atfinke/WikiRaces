@@ -18,14 +18,14 @@ extension UIFont {
             ]
         ]
 
-        let fontDescriptor = UIFont.systemFont(ofSize: monospaceSize, weight: weight).fontDescriptor.addingAttributes(
+        let fontDescriptor = UIFont.systemRoundedFont(ofSize: monospaceSize, weight: weight).fontDescriptor.addingAttributes(
             [.featureSettings: features]
         )
 
         self.init(descriptor: fontDescriptor, size: monospaceSize)
     }
 
-    static public func systemRoundedFont(ofSize size: CGFloat, weight: UIFont.Weight) -> UIFont {
+    static public func systemRoundedFont(ofSize size: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
         let font = UIFont.systemFont(ofSize: size, weight: weight)
         guard let descriptor = font.fontDescriptor.withDesign(.rounded) else {
             fatalError()

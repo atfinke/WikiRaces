@@ -30,12 +30,12 @@ final internal class HistoryTableViewStatsCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         statLabel.textAlignment = .left
-        statLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        statLabel.font = UIFont.systemRoundedFont(ofSize: 17, weight: .regular)
         statLabel.numberOfLines = 0
         statLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(statLabel)
 
-        detailLabel.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        detailLabel.font = UIFont.systemRoundedFont(ofSize: 17, weight: .medium)
         detailLabel.textAlignment = .right
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false

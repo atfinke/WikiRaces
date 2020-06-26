@@ -56,7 +56,11 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
             UserDefaults.standard.set(newValue, forKey: "isPlus")
         }
         get {
-            UserDefaults.standard.bool(forKey: "isPlus")
+            #if targetEnvironment(simulator)
+            return true
+            #else
+            return UserDefaults.standard.bool(forKey: "isPlus")
+            #endif
         }
     }
 

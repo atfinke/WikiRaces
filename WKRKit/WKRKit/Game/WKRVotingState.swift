@@ -1,5 +1,5 @@
 //
-//  WKRVoteInfo.swift
+//  WKRvotingState.swift
 //  WKRKit
 //
 //  Created by Andrew Finke on 8/5/17.
@@ -8,49 +8,39 @@
 
 import Foundation
 
-public struct WKRVoteInfo: Codable, Equatable {
+public struct WKRVotingState: Codable, Equatable {
 
     // MARK: - Properties
 
-    internal let pages: [WKRPage]
-    private var playerVotes = [WKRPlayerProfile: WKRPage]()
-
-    public var pageCount: Int {
-        return pages.count
+    internal var pages: [WKRPage] {
+        return Array(playerVotes.keys)
     }
+    private var playerVotes = [WKRPage: [WKRPlayerProfile]]()
 
     // MARK: - Initialization
 
     internal init(pages: [WKRPage]) {
-        let sortedPages = pages.sorted { (pageOne, pageTwo) -> Bool in
-            return pageOne.title?.lowercased() ?? "" < pageTwo.title?.lowercased() ?? ""
-        }
-        self.pages = sortedPages
+        pages.forEach { playerVotes[$0] = [] }
     }
 
     // MARK: - Helpers
 
-    internal mutating func player(_ profile: WKRPlayerProfile, votedFor page: WKRPage) {
-        playerVotes[profile] = page
+    public mutating func player(_ profile: WKRPlayerProfile, votedFor page: WKRPage) {
+        playerVotes.keys.forEach { page in
+            guard let index = playerVotes[page]?.firstIndex(of: profile) else { return }
+            playerVotes[page]?.remove(at: index)
+        }
+        playerVotes[page]?.append(profile)
     }
 
     internal func selectFinalPage(with weights: [WKRPlayerProfile: Int]) -> (WKRPage?, WKRLogEvent?) {
-        var votes = [WKRPage: Int]()
-        pages.forEach { votes[$0] = 0 }
-
-        for page in playerVotes.values {
-            let pageVotes = votes[page] ?? 0
-            votes[page] = pageVotes + 1
-        }
-
         var pagesWithMostVotes = [WKRPage]()
         var mostVotes = 0
-
-        for (page, votes) in votes {
-            if votes > mostVotes {
+        for (page, voters) in playerVotes {
+            if voters.count > mostVotes {
                 pagesWithMostVotes = [page]
-                mostVotes = votes
-            } else if votes == mostVotes {
+                mostVotes = voters.count
+            } else if voters.count == mostVotes {
                 pagesWithMostVotes.append(page)
             }
         }
@@ -68,8 +58,7 @@ public struct WKRVoteInfo: Codable, Equatable {
             totalPoints > 4,
             lowestScoringPlayers.count > 1,
             let player = lowestScoringPlayers.first,
-            let page = playerVotes[player.key],
-            pagesWithMostVotes.contains(page) {
+            let page = pagesWithMostVotes.first(where: { playerVotes[$0]?.contains(player.key) ?? false }) {
 
             let lowestScore = player.value
             let secondLowestScore = lowestScoringPlayers[1].value
@@ -103,18 +92,16 @@ public struct WKRVoteInfo: Codable, Equatable {
     }
 
     // MARK: - Public Accessors
-
-    public func page(for index: Int) -> (page: WKRPage, votes: Int)? {
-        guard index < pages.count else { return nil }
-
-        let page = pages[index]
-        let votes = Array(playerVotes.values).filter({ $0 == page }).count
-
-        return (page, votes)
+    
+    public var current: [(page: WKRPage, voters: [WKRPlayerProfile])] {
+        let sortedPages = playerVotes.keys.sorted { (pageOne, pageTwo) -> Bool in
+            return pageOne.title?.lowercased() ?? "" < pageTwo.title?.lowercased() ?? ""
+        }
+        
+        return sortedPages.map { page in
+            return (page, playerVotes[page] ?? [])
+        }
     }
 
-    public func index(of page: WKRPage) -> Int? {
-        return pages.firstIndex(of: page)
-    }
 
 }

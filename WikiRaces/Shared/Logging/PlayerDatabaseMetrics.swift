@@ -250,12 +250,9 @@ final class PlayerDatabaseMetrics: NSObject {
         var totalPlayerTime = 0
 
         var csvString = "Name,State,Duration,Pages\n"
-        for index in 0..<results.playerCount {
-            let player = results.raceRankingsPlayer(at: index)
-
+        for player in results.raceRankings() {
             links += player.raceHistory?.entries.count ?? 0
             totalPlayerTime += player.raceHistory?.duration ?? 0
-
             csvString += csvRow(for: player, state: player.state) + "\n"
         }
 
@@ -270,7 +267,7 @@ final class PlayerDatabaseMetrics: NSObject {
         do {
             try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)
             return ProcessedResults(csvURL: URL(fileURLWithPath: filePath),
-                                    playerCount: results.playerCount,
+                                    playerCount: results.raceRankings().count,
                                     totalPlayerTime: totalPlayerTime,
                                     links: links)
         } catch {

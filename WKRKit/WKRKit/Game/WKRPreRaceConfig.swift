@@ -14,7 +14,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     // MARK: - Properties
 
     /// The voting info
-    internal var voteInfo: WKRVoteInfo
+    internal var votingState: WKRVotingState
     /// The starting page
     internal let startingPage: WKRPage
 
@@ -24,9 +24,9 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     ///
     /// - Parameters:
     ///   - startingPage: The starting page
-    ///   - voteInfo: The voting info
-    private init(startingPage: WKRPage, voteInfo: WKRVoteInfo) {
-        self.voteInfo = voteInfo
+    ///   - votingState: The voting info
+    private init(startingPage: WKRPage, votingState: WKRVotingState) {
+        self.votingState = votingState
         self.startingPage = startingPage
     }
 
@@ -36,7 +36,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
     ///
     /// - Returns: The new race config
     internal func raceConfig(with weights: [WKRPlayerProfile: Int]) -> (WKRRaceConfig?, WKRLogEvent?) {
-        let (finalPage, logEvent) = voteInfo.selectFinalPage(with: weights)
+        let (finalPage, logEvent) = votingState.selectFinalPage(with: weights)
         guard let page = finalPage else {
             return (nil, logEvent)
         }
@@ -71,7 +71,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
 
             let events = logEvents.compactMap { $0 }
             if !finalPages.isEmpty, let page = startingPage {
-                let config = WKRPreRaceConfig(startingPage: page, voteInfo: WKRVoteInfo(pages: finalPages))
+                let config = WKRPreRaceConfig(startingPage: page, votingState: WKRVotingState(pages: finalPages))
                 completionHandler(config, events)
             } else {
                 completionHandler(nil, events)
