@@ -9,6 +9,11 @@
 import Foundation
 import GameKit
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebaseAnalytics
+import FirebaseCrashlytics
+#endif
+
 class GKHelper {
     
     enum AuthResult {
@@ -72,6 +77,12 @@ class GKHelper {
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
                         PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
+                        
+                        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+                        let playerName = GKLocalPlayer.local.alias
+                        Crashlytics.crashlytics().setUserID(playerName)
+                        Analytics.setUserProperty(playerName, forName: "playerName")
+                        #endif
                     } else {
                         fatalError()
                     }

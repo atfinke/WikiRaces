@@ -14,8 +14,6 @@ import WKRUIKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebasePerformance
-import FirebaseAnalytics
-import Crashlytics
 #endif
 
 final class GKJoinViewController: ConnectViewController {
@@ -39,12 +37,6 @@ final class GKJoinViewController: ConnectViewController {
         self.isPublicRace = raceCode == nil
         
         Defaults.isAutoInviteOn = true
-        
-        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let playerName = GKLocalPlayer.local.alias
-        Crashlytics.sharedInstance().setUserName(playerName)
-        Analytics.setUserProperty(playerName, forName: "playerName")
-        #endif
         
         super.init(nibName: nil, bundle: nil)
         

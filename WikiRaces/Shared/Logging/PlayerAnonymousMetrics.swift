@@ -10,8 +10,8 @@ import UIKit
 import WKRKit
 
 #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG
-import Crashlytics
 import FirebaseAnalytics
+import FirebaseCrashlytics
 #endif
 
 internal struct PlayerAnonymousMetrics {
@@ -92,11 +92,11 @@ internal struct PlayerAnonymousMetrics {
         #else
         switch event {
         case .userAction(let action):
-            CLSNSLogv("UserAction: %@", getVaList([action]))
+            Crashlytics.crashlytics().log("UserAction: \(action)")
         case .gameState(let description):
-            CLSNSLogv("GameState: %@", getVaList([description]))
+            Crashlytics.crashlytics().log("GameState: \(description)")
         case .error(let error):
-            CLSNSLogv("LoggedError: %@", getVaList([error]))
+            Crashlytics.crashlytics().log("LoggedError: \(error)")
         }
         #endif
     }
