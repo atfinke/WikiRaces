@@ -21,8 +21,8 @@ extension GameViewController {
 
     func setupInterface() {
         guard let navigationController = navigationController,
-            let navigationView = navigationController.view else {
-                fatalError("No navigation controller view")
+              let navigationView = navigationController.view else {
+            fatalError("No navigation controller view")
         }
 
         helpBarButtonItem = WKRUIBarButtonItem(

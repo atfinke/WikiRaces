@@ -14,7 +14,7 @@ internal class VisualEffectViewController: UIViewController {
     // MARK: - Properties
 
     final var contentView: UIView!
-    
+
     // MARK: - View Life Cycle
 
     override func loadView() {
@@ -22,7 +22,7 @@ internal class VisualEffectViewController: UIViewController {
         contentView = visualEffectView.contentView
         self.view = visualEffectView
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let nav = navigationController else { return }
@@ -33,7 +33,7 @@ internal class VisualEffectViewController: UIViewController {
     }
 
     // MARK: - Interface
-    
+
     func configure(hostingView: UIView) {
         hostingView.backgroundColor = .clear
         hostingView.translatesAutoresizingMaskIntoConstraints = false

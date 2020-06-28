@@ -19,7 +19,7 @@ extension GKMatchRequest {
         request.playerAttributes = 0xFFFF0000
         return request
     }
-    
+
     static func joinRequest(raceCode: String?) -> GKMatchRequest {
         let request = GKMatchRequest()
         request.minPlayers = 2
@@ -30,5 +30,5 @@ extension GKMatchRequest {
         }
         return request
     }
-    
+
 }

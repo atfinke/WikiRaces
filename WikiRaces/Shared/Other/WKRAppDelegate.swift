@@ -43,11 +43,11 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
             print(error)
         }
     }
-    
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
               let code = items.first(where: { $0.name == "code" })?.value else {
-            
+
             return false
         }
         GKHelper.shared.acceptedInvite(code: code)

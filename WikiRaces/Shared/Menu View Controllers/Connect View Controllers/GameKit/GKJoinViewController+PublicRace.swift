@@ -10,12 +10,12 @@ import GameKit
 import WKRKit
 
 extension GKJoinViewController {
-    
+
     // MARK: - Public Races -
-    
+
     func publicRaceProcess(data: Data, from player: GKPlayer) {
         guard let match = match else { fatalError() }
-        
+
         if isPlayerHost, WKRSeenFinalArticlesStore.isRemoteTransferData(data) {
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
@@ -32,7 +32,7 @@ extension GKJoinViewController {
             transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings)
         }
     }
-    
+
     func publicRaceSendStartMessage() {
         func fail() {
             showError(title: "Unable To Start Race", message: "Please try again later.")
@@ -44,7 +44,7 @@ extension GKJoinViewController {
             PlayerAnonymousMetrics.log(event: .error(info))
             return
         }
-        
+
         let settings = WKRGameSettings()
         let message = StartMessage(hostName: GKLocalPlayer.local.alias, gameSettings: settings)
         do {
@@ -59,7 +59,7 @@ extension GKJoinViewController {
             PlayerAnonymousMetrics.log(event: .error(info))
         }
     }
-    
+
     func publicRaceDetermineHost(match: GKMatch) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.model.title = "Finding best host"
@@ -82,5 +82,5 @@ extension GKJoinViewController {
             }
         }
     }
-    
+
 }

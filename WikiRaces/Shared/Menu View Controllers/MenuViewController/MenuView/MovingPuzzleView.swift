@@ -10,9 +10,13 @@ import UIKit
 
 final class MovingPuzzleView: UIView, UIScrollViewDelegate {
 
+    // MARK: - Properties -
+
     private var puzzleTimer: Timer?
     /// The puzzle piece view
     private let innerPuzzleView = UIScrollView()
+
+    // MARK: - Initalization -
 
     init() {
         super.init(frame: .zero)
@@ -51,10 +55,10 @@ final class MovingPuzzleView: UIView, UIScrollViewDelegate {
 
     // MARK: - View Life Cycle -
 
-       public override func layoutSubviews() {
-           super.layoutSubviews()
-           backgroundColor = .wkrMenuPuzzleViewColor(for: traitCollection)
-       }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = .wkrMenuPuzzleViewColor(for: traitCollection)
+    }
 
     // MARK: - UIScrollViewDelegate -
 
@@ -72,14 +76,14 @@ final class MovingPuzzleView: UIView, UIScrollViewDelegate {
         UIView.animate(withDuration: 0.25,
                        animations: {
                         self.innerPuzzleView.alpha = 0.0
-        }, completion: { _ in
-            self.stop()
-            self.start()
-            UIView.animate(withDuration: 0.25,
-                           animations: {
-                            self.innerPuzzleView.alpha = 1.0
-            })
-        })
+                       }, completion: { _ in
+                        self.stop()
+                        self.start()
+                        UIView.animate(withDuration: 0.25,
+                                       animations: {
+                                        self.innerPuzzleView.alpha = 1.0
+                                       })
+                       })
     }
 
     @objc
@@ -105,7 +109,7 @@ final class MovingPuzzleView: UIView, UIScrollViewDelegate {
                            options: options,
                            animations: {
                             self.innerPuzzleView.contentOffset = CGPoint(x: xOffset, y: 0)
-            }, completion: nil)
+                           }, completion: nil)
         }
 
         puzzleTimer?.invalidate()

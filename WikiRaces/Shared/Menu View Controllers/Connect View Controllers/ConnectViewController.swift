@@ -22,7 +22,7 @@ class GKConnectViewController: VisualEffectViewController {
         let hostName: String
         let gameSettings: WKRGameSettings
     }
-    
+
     struct MiniMessage: Codable {
         enum Info: String, Codable {
             case connected, cancelled
@@ -225,6 +225,5 @@ class GKConnectViewController: VisualEffectViewController {
             })
         }
     }
-    
-    
+
 }

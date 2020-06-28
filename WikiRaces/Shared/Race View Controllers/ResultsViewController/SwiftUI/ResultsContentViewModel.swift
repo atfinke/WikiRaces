@@ -10,32 +10,32 @@ import SwiftUI
 import WKRKit
 
 class ResultsContentViewModel: ObservableObject {
-    
+
     // MARK: - Types -
 
     struct Item: Identifiable, Equatable {
         var id: String { return player.id }
         let player: SwiftUIPlayer
-        
+
         let subtitle: String
         let title: String
         let detail: String
         let isRacing: Bool
         let isReady: Bool
     }
-    
+
     // MARK: - Properties -
-    
+
     @Published var items = [Item]()
     @Published var footerTopText: String = ""
     @Published var footerBottomText: String = ""
     @Published var footerOpacity: Double = 1.0
-    
+
     @Published var buttonFlashOpacity: Double = 1
     @Published var buttonEnabled: Bool = false
-    
+
     // MARK: - Helpers -
-    
+
     func startPulsingButton() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self = self, self.buttonEnabled else { return }
@@ -44,20 +44,20 @@ class ResultsContentViewModel: ObservableObject {
             }
         }
     }
-    
+
     func update(to results: WKRResultsInfo?, readyStates: WKRReadyStates?, for state: WKRGameState) {
         guard let results = results else {
             items = []
             return
         }
-        
+
         var newItems = [Item]()
-        
+
         if state == .points {
             for playerResult in results.sessionResults() {
                 var subtitleString = positionString(for: playerResult.ranking)
                 subtitleString += playerResult.isTied ? " (Tied)" : ""
-                
+
                 let pointsSuffix = playerResult.points == 1 ? "" : "s"
                 let item = Item(
                     player: SwiftUIPlayer(id: playerResult.profile.playerID),
@@ -74,8 +74,8 @@ class ResultsContentViewModel: ObservableObject {
                     var subtitle: String = ""
                     var title: String = ""
                     var detail: String = "-"
-      
-                    if let history = player.raceHistory, let entry = history.entries.last  {
+
+                    if let history = player.raceHistory, let entry = history.entries.last {
                         title = entry.page.title ?? "-"
                         subtitle = player.state.text
                         if player.state == .foundPage, let duration = WKRDurationFormatter.string(for: history.duration) {
@@ -86,7 +86,7 @@ class ResultsContentViewModel: ObservableObject {
                         } else if player.state == .forcedEnd || player.state == .forfeited {
                             subtitle = "Did Not Finish"
                         }
-                        
+
                     } else {
                         subtitle = "-"
                         title = "-"
@@ -96,7 +96,7 @@ class ResultsContentViewModel: ObservableObject {
                             subtitle = "Quit"
                         }
                     }
-                    
+
                     let item = Item(
                         player: SwiftUIPlayer(id: player.profile.playerID),
                         subtitle: subtitle,
@@ -110,7 +110,7 @@ class ResultsContentViewModel: ObservableObject {
         }
         items = newItems
     }
-    
+
     private func positionString(for position: Int) -> String {
         if position == 1 {
             return "1st Place"

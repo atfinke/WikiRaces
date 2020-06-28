@@ -12,28 +12,27 @@ import UIKit
 @testable import WKRUIKit
 
 internal class ViewController: UIViewController {
-    
+
     // MARK: - ResultsViewController Testing
-    
+
     var players = [WKRPlayer]()
     let res = ResultRenderer()
-    
+
     var rendered = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //        voting()
         results()
     }
-    
+
     func voting() {
-        
+
         let controller = VotingViewController()
         let nav = UINavigationController(rootViewController: controller)
-        
+
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
-        
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
                   let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States."),
@@ -45,9 +44,9 @@ internal class ViewController: UIViewController {
                 WKRPage(title: "United States", url: usaURL),
                 WKRPage(title: "Walt Disney", url: waltURL)
             ])
-            
+
             controller.votingState = state
-            
+
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 state.player(WKRPlayerProfile(name: "", playerID: ""), votedFor: WKRPage(title: "Walt Disney", url: waltURL))
                 controller.votingState = state
@@ -55,22 +54,22 @@ internal class ViewController: UIViewController {
             }
         }
     }
-    
+
     func results() {
         let controller = ResultsViewController()
         let nav = UINavigationController(rootViewController: controller)
-        
+
         (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
-        
+
         //        let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
         let names = ["Andrew", "Carol", "Tom", "Lisa"]
-        
+
         for var index in 0..<names.count {
             let profile = WKRPlayerProfile(name: names[index], playerID: names[index])
             let player = WKRPlayer(profile: profile, isHost: false)
             let page = WKRPage(title: "Apple Inc.", url: URL(string: "apple.com")!)
             player.startedNewRace(on: page)
-            
+
             players.append(player)
         }
         var stop = false
@@ -78,16 +77,16 @@ internal class ViewController: UIViewController {
 //            stop = true
             controller.showReadyUpButton(true)
         }
-        
+
         //
-        
+
         func random() {
             guard !stop else { return }
             for player in players where player.state == .racing {
                 WKRPageFetcher.fetchRandom { (page) in
                     guard let page = page else { return }
                     DispatchQueue.main.async {
-                        
+
                         if player.state == .racing {
                             if arc4random() % 20 == 0, player.raceHistory?.entries.count ?? 0 > 4 {
                                 player.state = .foundPage
@@ -101,21 +100,19 @@ internal class ViewController: UIViewController {
                                 player.finishedViewingLastPage(pixelsScrolled: 5)
                                 player.nowViewing(page: page, linkHere: arc4random() % 5 == 0)
                             }
-                            
+
                         }
                         guard !stop else { return }
                         //                        controller.player = self.players[0]
                         controller.resultsInfo = WKRResultsInfo(racePlayers: self.players,
                                                                 racePoints: [:],
                                                                 sessionPoints: [:])
-                        
-                       
-                        
+
                     }
-                    
+
                 }
             }
-            
+
             let time: DispatchTimeInterval = .seconds(Int.random(in: 1...5))
             DispatchQueue.main.asyncAfter(deadline: .now() + time) {
                 if arc4random() % 3 == 0 {
@@ -124,7 +121,7 @@ internal class ViewController: UIViewController {
                 } else {
                     random()
                 }
-                
+
                 //                if self.players.filter({$0.state == .racing }).isEmpty && !self.rendered {
                 //                    self.rendered = true
                 //                    for player in self.players {
@@ -137,10 +134,10 @@ internal class ViewController: UIViewController {
                 //                }
             }
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             random()
         }
     }
-    
+
 }

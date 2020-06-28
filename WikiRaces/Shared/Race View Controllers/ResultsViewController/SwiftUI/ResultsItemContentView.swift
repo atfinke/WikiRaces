@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ResultsItemContentView: View {
-    
+
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let item: ResultsContentViewModel.Item
     let action: () -> Void
-    
+
     var body: some View {
         Button(action: action) {
             HStack {
@@ -32,7 +32,7 @@ struct ResultsItemContentView: View {
                         .transition(.opacity)
                         .id("Text(item.title)" + item.title)
                 }
-                
+
                 Spacer()
                 Color.clear.frame(width: 1, height: 1)
                 if item.isReady {
@@ -49,7 +49,7 @@ struct ResultsItemContentView: View {
                 }
             }
             .frame(minHeight: 50)
-            
+
         }
     }
 }

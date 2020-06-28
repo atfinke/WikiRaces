@@ -14,7 +14,7 @@ import FirebasePerformance
 #endif
 
 extension GKJoinViewController: GKMatchDelegate {
-    
+
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         if isPublicRace {
             publicRaceProcess(data: data, from: player)
@@ -35,10 +35,10 @@ extension GKJoinViewController: GKMatchDelegate {
             }
         }
     }
-    
+
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         guard !isPublicRace else { return }
-        
+
         guard state == .connected, let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() else { return }
         if state == .connected {
             PlayerImageDatabase.shared.connected(to: player, completion: nil)
@@ -47,11 +47,11 @@ extension GKJoinViewController: GKMatchDelegate {
             try? match.send(data, to: [player], dataMode: .reliable)
         }
     }
-    
+
     func match(_ match: GKMatch, didFailWithError error: Error?) {
         showError(title: "Unable To Connect", message: "Please try again later.")
         self.model.title = "Race Error"
         self.model.activityOpacity = 0
     }
-    
+
 }

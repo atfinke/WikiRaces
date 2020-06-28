@@ -19,7 +19,7 @@ class GKConnectViewController: VisualEffectViewController {
         let hostName: String
         let gameSettings: WKRGameSettings
     }
-    
+
     struct MiniMessage: Codable {
         enum Info: String, Codable {
             case connected, cancelled
@@ -30,21 +30,21 @@ class GKConnectViewController: VisualEffectViewController {
 
     // MARK: - Interface Elements -
 
-    var match: GKMatch?
-    var isPlayerHost: Bool
+    final var match: GKMatch?
+    final var isPlayerHost: Bool
     private var isShowingError = false
-    
+
     // MARK: - Initalization -
-    
+
     init(isPlayerHost: Bool) {
         self.isPlayerHost = isPlayerHost
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
@@ -53,8 +53,8 @@ class GKConnectViewController: VisualEffectViewController {
     }
 
     // MARK: - Helpers -
-    
-    func disconnectFromMatch() {
+
+    final func disconnectFromMatch() {
         match?.delegate = nil
         if isPlayerHost {
             sendMiniMessage(info: .cancelled)
@@ -62,33 +62,33 @@ class GKConnectViewController: VisualEffectViewController {
         match?.disconnect()
         GKMatchmaker.shared().cancel()
     }
-    
-    func showError(title: String, message: String) {
+
+    final func showError(title: String, message: String) {
         guard !isShowingError else { return }
         isShowingError = true
-        
+
         disconnectFromMatch()
-        
+
         GKNotificationBanner.show(withTitle: title, message: message, completionHandler: nil)
     }
-    
-    func sendMiniMessage(info: GKConnectViewController.MiniMessage.Info) {
+
+    final func sendMiniMessage(info: GKConnectViewController.MiniMessage.Info) {
         let message = GKConnectViewController.MiniMessage(info: info, uuid: UUID())
         guard let data = try? JSONEncoder().encode(message) else {
             fatalError()
         }
         try? match?.sendData(toAllPlayers: data, with: .reliable)
     }
-    
+
     // MARK: - Match States -
 
     /// Cancels the join/create a race action and sends player back to main menu
     @objc
     final func cancelMatch() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-       
+
         disconnectFromMatch()
-        
+
         UIView.animate(withDuration: 0.25, animations: {
             self.view.alpha = 0.0
         }, completion: { _ in

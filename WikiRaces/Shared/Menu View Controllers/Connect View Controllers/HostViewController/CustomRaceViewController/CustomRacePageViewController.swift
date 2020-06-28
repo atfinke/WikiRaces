@@ -42,9 +42,9 @@ final class CustomRacePageViewController: CustomRaceController {
 
         if customPages.isEmpty {
             guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
-                let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States"),
-                let disURL = URL(string: "https://en.m.wikipedia.org/wiki/Magic_Kingdom") else {
-                    fatalError()
+                  let usaURL = URL(string: "https://en.m.wikipedia.org/wiki/United_States"),
+                  let disURL = URL(string: "https://en.m.wikipedia.org/wiki/Magic_Kingdom") else {
+                fatalError()
             }
             self.customPages.append(contentsOf: [
                 WKRPage(title: "Apple Inc", url: appleURL),

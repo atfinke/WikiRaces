@@ -10,17 +10,17 @@ import UIKit
 import WKRUIKit
 
 struct ResultsContentView: View {
-    
+
     @ObservedObject var model: ResultsContentViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let readyUpButtonPressed: () -> Void
     let tappedPlayerID: (_ playerID: String) -> Void
 
     var body: some View {
         VStack {
             Spacer()
-            VStack() {
+            VStack {
                 ForEach(model.items) { item  in
                     ResultsItemContentView(item: item) {
                         self.tappedPlayerID(item.player.id)
@@ -31,7 +31,7 @@ struct ResultsContentView: View {
             .animation(.spring())
             .frame(maxWidth: 500)
             Spacer()
-            
+
             ZStack {
                 if model.buttonEnabled {
                     Button(action: readyUpButtonPressed) {

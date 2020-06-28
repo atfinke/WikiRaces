@@ -14,46 +14,46 @@ import WKRKit
 import FirebasePerformance
 #endif
 
-class SpeedTestViewController: VisualEffectViewController {
-    
+final class SpeedTestViewController: VisualEffectViewController {
+
     // MARK: - Types -
-    
+
     enum Destination {
         case joinPrivate(raceCode: String), joinPublic, hostPrivate
     }
-    
+
     // MARK: - Properties -
-    
+
     let startDate = Date()
     let destination: Destination
-    var model = LoadingContentViewModel()
-    lazy var contentViewHosting = UIHostingController(
+    final var model = LoadingContentViewModel()
+    final lazy var contentViewHosting = UIHostingController(
         rootView: LoadingContentView(model: model, cancel: { [weak self] in
             self?.cancel()
         }))
-    
+
     // MARK: - Initalization -
-    
+
     init(destination: Destination) {
         self.destination = destination
         super.init(nibName: nil, bundle: nil)
         model.title = "Checking Connection"
         view.alpha = 0
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View Life Cycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure(hostingView: contentViewHosting.view)
-        
+
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         // TODO: fix
-    //        let trace = Performance.startTrace(name: "Connection Test Trace")
+        //        let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
 
         let startDate = Date()
@@ -62,7 +62,7 @@ class SpeedTestViewController: VisualEffectViewController {
             DispatchQueue.main.async {
                 if success {
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-    //                    trace?.stop()
+                    //                    trace?.stop()
                     #endif
                     self.success()
                 } else {
@@ -77,34 +77,34 @@ class SpeedTestViewController: VisualEffectViewController {
                                            attributes: [
                                             "Result": NSNumber(value: success).intValue,
                                             "Duration": -startDate.timeIntervalSinceNow
-                ])
+                                           ])
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) { [weak self] in
             self?.view.alpha = 1
         }
     }
-    
+
     // MARK: - Helpers -
-    
-    func cancel() {
-        UIView.animate(withDuration: 0.5) { [weak self] in
+
+    final func cancel() {
+        UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.view.alpha = 0
-        } completion: { [weak self] _ in
+        }, completion: { [weak self] _ in
             self?.navigationController?.popToRootViewController(animated: false)
-        }
+        })
     }
-    
-    func success() {
+
+    final func success() {
         let delay = max(0, 2 - (-startDate.timeIntervalSinceNow))
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(Int(delay * 1000))) {
-            UIView.animate(withDuration: 0.5) { [weak self] in
+            UIView.animate(withDuration: 0.5, animations: { [weak self] in
                 self?.contentViewHosting.view.alpha = 0
-            } completion: { [weak self] _ in
+            }, completion: { [weak self] _ in
                 guard let self = self else { return }
                 switch self.destination {
                 case .joinPrivate(let raceCode):
@@ -114,10 +114,8 @@ class SpeedTestViewController: VisualEffectViewController {
                 case .hostPrivate:
                     self.navigationController?.pushViewController(GKHostViewController(), animated: false)
                 }
-            }
+            })
         }
     }
-    
+
 }
-
-

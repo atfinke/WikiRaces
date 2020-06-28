@@ -255,7 +255,7 @@ final internal class PlayerStatsManager {
             let totalsFileURL = pagesViewedDir.appendingPathComponent("Totals.txt")
             var seenPages: [WKRPage: Int]
             if let data = try? Data(contentsOf: totalsFileURL),
-                let diskPages = try? JSONDecoder().decode([WKRPage: Int].self, from: data) {
+               let diskPages = try? JSONDecoder().decode([WKRPage: Int].self, from: data) {
                 seenPages = diskPages
             } else {
                 seenPages = [:]
@@ -287,9 +287,9 @@ final internal class PlayerStatsManager {
     @objc
     private func keyValueStoreChanged(_ notification: NSNotification) {
         guard let userInfo = notification.userInfo,
-            let changedKeys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
-            let reasonForChange = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as? NSNumber  else {
-                return
+              let changedKeys = userInfo[NSUbiquitousKeyValueStoreChangedKeysKey] as? [String],
+              let reasonForChange = userInfo[NSUbiquitousKeyValueStoreChangeReasonKey] as? NSNumber  else {
+            return
         }
 
         let reason = reasonForChange.intValue

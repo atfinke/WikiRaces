@@ -22,7 +22,7 @@ final internal class ResultsViewController: VisualEffectViewController {
     }
 
     // MARK: - Properties -
-    
+
     let model = ResultsContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: ResultsContentView(
@@ -86,11 +86,11 @@ final internal class ResultsViewController: VisualEffectViewController {
         super.viewDidLoad()
 
         title = "RESULTS"
-        
+
         addChild(contentViewHosting)
         configure(hostingView: contentViewHosting.view)
         contentViewHosting.didMove(toParent: self)
-        
+
         model.footerTopText = "TAP PLAYER TO VIEW HISTORY"
         model.footerBottomText = "WAITING FOR PLAYERS TO FINISH"
 
@@ -104,7 +104,7 @@ final internal class ResultsViewController: VisualEffectViewController {
             systemName: "xmark",
             target: self,
             action: #selector(doneButtonPressed))
-        
+
         becomeFirstResponder()
     }
 
@@ -114,15 +114,15 @@ final internal class ResultsViewController: VisualEffectViewController {
         guard state == .points && oldState != .points else {
             return
         }
-        
+
         model.footerOpacity = 0
-        
+
         if isPlayerHost, let results = resultsInfo {
             DispatchQueue.global().async {
                 PlayerDatabaseMetrics.shared.record(results: results)
             }
         }
-        
+
         if let hack = presentedViewController, hack.title == "Hack" {
             hack.dismiss(animated: true) { [weak self] in
                 self?.dismiss(animated: false, completion: nil)

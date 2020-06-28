@@ -10,7 +10,7 @@ import GameKit
 import WKRKit
 
 class RaceCodeGenerator {
-    
+
     private static var codes: [String] = {
         let invalidCharacters = CharacterSet.alphanumerics.inverted
         return WKRKitConstants.current.finalArticles
@@ -19,12 +19,12 @@ class RaceCodeGenerator {
             .filter { $0.rangeOfCharacter(from: invalidCharacters) == nil }
     }()
     private var callback: ((String) -> Void)?
-    
+
     func new(code: @escaping ((String) -> Void)) {
         callback = code
         generate()
     }
-    
+
     // TODO: Switch to CloudKit
     private func generate() {
         print(#function)

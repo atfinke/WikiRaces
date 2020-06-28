@@ -49,15 +49,15 @@ final class MenuView: UIView {
 
     let joinButton = WKRUIButton()
     let createButton = WKRUIButton()
-    
+
     let publicButton = WKRUIButton()
     let privateButton = WKRUIButton()
-    
+
     let backButton = UIButton()
     let plusButton = UIButton()
 
     let statsButton = WKRUIButton()
-    
+
     /// The Wiki Points tile
     var leftMenuTile: MenuTile?
     /// The average points tile
@@ -95,7 +95,7 @@ final class MenuView: UIView {
     var publicButtonWidthConstraint: NSLayoutConstraint!
     var privateButtonLeftConstraint: NSLayoutConstraint!
     var privateButtonWidthConstraint: NSLayoutConstraint!
-    
+
     var backButtonLeftConstraintForJoinOptions: NSLayoutConstraint!
     var backButtonLeftConstraintForStats: NSLayoutConstraint!
     var backButtonWidth: NSLayoutConstraint!
@@ -169,7 +169,6 @@ final class MenuView: UIView {
         backButton.layer.borderColor = textColor.cgColor
         backButton.layer.borderWidth = 1.7
 
-       
         plusButton.tintColor = backButton.tintColor
         plusButton.layer.borderColor = backButton.layer.borderColor
         plusButton.layer.borderWidth = backButton.layer.borderWidth
@@ -205,7 +204,7 @@ final class MenuView: UIView {
         statsButton.style = buttonStyle
 
         // Label Fonts
-//        UIFont.systemRoundedFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
+        //        UIFont.systemRoundedFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
         titleLabel.font = UIFont.systemRoundedFont(ofSize: min(frame.size.width / 10.0, 55), weight: .semibold)
         subtitleLabel.font = UIFont.systemRoundedFont(ofSize: min(frame.size.width / 18.0, 30), weight: .medium)
 
@@ -220,7 +219,7 @@ final class MenuView: UIView {
         case .joinOrCreate:
             joinButtonLeftConstraint.constant = 30
             privateButtonLeftConstraint.constant = -privateButton.frame.width * 2
-            
+
             statsButtonLeftConstraint.constant = -statsButton.frame.width
 
             topViewLeftConstraint.constant = 0
@@ -236,7 +235,7 @@ final class MenuView: UIView {
         case .joinOptions:
             joinButtonLeftConstraint.constant = -createButton.frame.width
             privateButtonLeftConstraint.constant = 30
-            
+
             backButtonLeftConstraintForStats.isActive = false
             backButtonLeftConstraintForJoinOptions.isActive = true
         case .noInterface:
@@ -247,7 +246,7 @@ final class MenuView: UIView {
         case .plusOptions:
             joinButtonLeftConstraint.constant = -createButton.frame.width
             statsButtonLeftConstraint.constant = 30
-            
+
             backButtonLeftConstraintForJoinOptions.isActive = false
             backButtonLeftConstraintForStats.isActive = true
         }
@@ -260,13 +259,11 @@ final class MenuView: UIView {
         privateButtonWidthConstraint.constant = buttonWidth + 46
         statsButtonWidthConstraint.constant = buttonWidth + 20
 
-        
         backButtonWidth.constant = buttonHeight - 10
-        
+
         backButton.layer.cornerRadius = backButtonWidth.constant / 2
         plusButton.layer.cornerRadius = backButton.layer.cornerRadius
     }
-
 
     func promptGlobalRacesPopularity() -> Bool {
         guard !Defaults.promptedGlobalRacesPopularity else {

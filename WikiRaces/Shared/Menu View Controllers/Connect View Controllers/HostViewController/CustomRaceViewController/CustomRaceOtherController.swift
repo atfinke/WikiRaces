@@ -78,7 +78,7 @@ final class CustomRaceOtherController: CustomRaceController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.reuseIdentifier,
                                                        for: indexPath) as? Cell else {
-                                                        fatalError()
+            fatalError()
         }
         cell.toggle.tag = indexPath.row
         cell.toggle.addTarget(self, action: #selector(switchChanged(updatedSwitch:)), for: .valueChanged)

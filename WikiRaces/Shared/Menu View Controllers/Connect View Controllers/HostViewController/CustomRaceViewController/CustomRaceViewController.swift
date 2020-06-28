@@ -29,7 +29,7 @@ final class CustomRaceViewController: CustomRaceController {
 
     var allCustomPages: [WKRPage]
     var finalPagesCallback: ([WKRPage]) -> Void
-    
+
     // MARK: - Initalization -
 
     init(settings: WKRGameSettings, pages: [WKRPage], finalPages: @escaping (([WKRPage]) -> Void)) {
@@ -38,20 +38,20 @@ final class CustomRaceViewController: CustomRaceController {
         self.finalPagesCallback = finalPages
         super.init(style: .grouped)
         title = "Customize Race".uppercased()
-        
-         navigationItem.leftBarButtonItem = nil
-         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
-                   systemName: "xmark",
-                   target: self,
-                   action: #selector(doneButtonPressed))
+
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
+            systemName: "xmark",
+            target: self,
+            action: #selector(doneButtonPressed))
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View Life Cycle -
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         finalPagesCallback(allCustomPages)
@@ -268,7 +268,7 @@ final class CustomRaceViewController: CustomRaceController {
             return ""
         }
     }
-    
+
     @objc func doneButtonPressed() {
         dismiss(animated: true, completion: nil)
     }

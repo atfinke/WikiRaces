@@ -9,17 +9,21 @@
 import SwiftUI
 
 struct VotingItemContentView: View {
-    
+
+    // MARK: - Properties -
+
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let item: VotingContentViewModel.Item
     let isFinalArticleSelected: Bool
     let action: () -> Void
-    
+
+    // MARK: - Body -
+
     var body: some View {
         let isFinal = isFinalArticleSelected && item.isFinal
         let opacity = isFinal || !isFinalArticleSelected ? 1 : 0.2
-        
+
         return Button(action: action) {
             HStack {
                 Text(item.page.title ?? "-")

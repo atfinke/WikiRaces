@@ -36,11 +36,11 @@ extension VotingViewController {
     @objc
     private func keyboardAttemptSelectArticle(_ keyCommand: UIKeyCommand) {
         guard let input = keyCommand.input,
-            let index = Int(input),
-            let items = votingState?.current,
-            index <= items.count,
-            model.isVotingEnabled else {
-                return
+              let index = Int(input),
+              let items = votingState?.current,
+              index <= items.count,
+              model.isVotingEnabled else {
+            return
         }
         listenerUpdate?(.voted(items[index + 1].page))
     }
@@ -48,7 +48,7 @@ extension VotingViewController {
     @objc
     private func keyboardAttemptQuit(_ keyCommand: UIKeyCommand) {
         guard presentedViewController == nil,
-            navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
+              navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
         doneButtonPressed()
     }
 

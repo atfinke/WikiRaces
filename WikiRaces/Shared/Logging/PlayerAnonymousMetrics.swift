@@ -58,7 +58,7 @@ internal struct PlayerAnonymousMetrics {
         case automaticResultsImageSave
         case forcedIntoStoreFromCustomize
         case forcedIntoStoreFromStats
-        
+
         case revampRaceCodeGenerated
         case revampRaceCodeFailure
         case revampRaceCodeShared
@@ -109,12 +109,12 @@ internal struct PlayerAnonymousMetrics {
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG && !DEBUG
-            Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
+        Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
         if !(attributes?.values.compactMap { $0 }.isEmpty ?? true) {
-                Analytics.logEvent(event.rawValue, parameters: attributes)
-            } else {
-                Analytics.logEvent(event.rawValue, parameters: nil)
-            }
+            Analytics.logEvent(event.rawValue, parameters: attributes)
+        } else {
+            Analytics.logEvent(event.rawValue, parameters: nil)
+        }
         #endif
     }
 }

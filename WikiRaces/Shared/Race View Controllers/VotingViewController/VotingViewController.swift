@@ -12,20 +12,20 @@ import WKRUIKit
 import SwiftUI
 
 final internal class VotingViewController: VisualEffectViewController {
-    
+
     // MARK: - Types -
-    
+
     enum ListenerUpdate {
         case voted(WKRPage)
         case quit
     }
-    
+
     private enum ViewState {
         case pre, voting, post
     }
-    
+
     // MARK: - Properties -
-    
+
     private(set) var model = VotingContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: VotingContentView(
@@ -33,11 +33,11 @@ final internal class VotingViewController: VisualEffectViewController {
             tappedVotingItem: { [weak self] item in
                 self?.listenerUpdate?(.voted(item.page))
                 UISelectionFeedbackGenerator().selectionChanged()
-        }))
-    
+            }))
+
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     var quitAlertController: UIAlertController?
-    
+
     private var state: ViewState = .pre
     private var isFinalTextVisible = false
     var votingState: WKRVotingState? {
@@ -45,7 +45,7 @@ final internal class VotingViewController: VisualEffectViewController {
             model.update(votingState: votingState)
         }
     }
-    
+
     var voteTimeRemaing = 100 {
         didSet {
             let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
@@ -79,29 +79,29 @@ final internal class VotingViewController: VisualEffectViewController {
             }
         }
     }
-    
+
     // MARK: - View Life Cycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         title = "VOTING"
-        
+
         addChild(contentViewHosting)
         configure(hostingView: contentViewHosting.view)
         contentViewHosting.didMove(toParent: self)
-        
+
         model.footerTopText = "PREPARING"
         model.footerBottomText = "VOTING STARTS SOON"
-        
+
         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
             systemName: "xmark",
             target: self,
             action: #selector(doneButtonPressed))
     }
-    
+
     // MARK: - Actions -
-    
+
     @objc func doneButtonPressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
@@ -112,12 +112,12 @@ final internal class VotingViewController: VisualEffectViewController {
         }
         present(alertController, animated: true, completion: nil)
     }
-    
+
     // MARK: - Helpers -
-    
+
     func finalPageSelected(_ page: WKRPage) {
         model.selected(finalPage: page)
         state = .post
     }
-    
+
 }

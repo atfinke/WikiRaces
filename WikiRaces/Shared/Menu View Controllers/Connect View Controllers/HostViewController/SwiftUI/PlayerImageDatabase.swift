@@ -10,22 +10,28 @@ import GameKit
 import SwiftUI
 
 class PlayerImageDatabase {
-    
+
+    // MARK: - Properties -
+
     static var shared = PlayerImageDatabase()
     private var dict = [String: Image]()
-    
+
     private(set) var hasValidLocalPlayerImage = false
-    
+
+    // MARK: - Initalization -
+
     private init() {}
-    
+
+    // MARK: - Helpers -
+
     func connected(to player: GKPlayer, completion: (() -> Void)?) {
         dict[player.alias] = Image("temp")
-        
-        player.loadPhoto(for: .small) { photo, error in
+
+        player.loadPhoto(for: .small) { photo, _ in
             guard let photo = photo else {
                 completion?()
                 return
-                
+
             }
             if player.alias == GKLocalPlayer.local.alias {
                 self.hasValidLocalPlayerImage = true
@@ -39,7 +45,7 @@ class PlayerImageDatabase {
         guard let image = dict[playerID] else {
             return Image("temp")
             // TODO: fix
-//            fatalError()
+            //            fatalError()
         }
         print("PlayerImageDatabase: \(playerID)")
         return image

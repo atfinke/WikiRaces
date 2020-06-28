@@ -15,35 +15,35 @@ import FirebaseCrashlytics
 #endif
 
 class GKHelper {
-    
+
     enum AuthResult {
         case controller(UIViewController)
         case error(Error)
         case isAuthenticated
     }
-    
+
     static let shared = GKHelper()
-    
+
     private var pendingInvite: String?
     var inviteHandler: ((String) -> Void)? {
         didSet {
             pushInviteToHandler()
         }
     }
-    
+
     private var pendingResult: AuthResult?
     var authHandler: ((AuthResult) -> Void)? {
         didSet {
             pushResultToHandler()
         }
     }
-    
+
     // MARK: - Initalization -
-    
+
     private init() {}
-    
+
     // MARK: - Handlers -
-    
+
     private func pushResultToHandler() {
         guard let result = pendingResult, let handler = authHandler else { return }
         DispatchQueue.main.async {
@@ -51,7 +51,7 @@ class GKHelper {
         }
         pendingResult = nil
     }
-    
+
     private func pushInviteToHandler() {
         guard let invite = pendingInvite, let handler = inviteHandler else { return }
         DispatchQueue.main.async {
@@ -59,14 +59,14 @@ class GKHelper {
         }
         pendingInvite = nil
     }
-    
+
     // MARK: - Helpers -
-    
+
     func start() {
         guard !Defaults.isFastlaneSnapshotInstance else {
             return
         }
-        
+
         DispatchQueue.global().async {
             GKLocalPlayer.local.authenticateHandler = { controller, error in
                 DispatchQueue.main.async {
@@ -79,7 +79,7 @@ class GKHelper {
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
                             PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
                         }
-                        
+
                         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                         let playerName = GKLocalPlayer.local.alias
                         Crashlytics.crashlytics().setUserID(playerName)
@@ -93,10 +93,10 @@ class GKHelper {
             }
         }
     }
-    
+
     func acceptedInvite(code: String) {
         pendingInvite = code
         pushInviteToHandler()
     }
-    
+
 }

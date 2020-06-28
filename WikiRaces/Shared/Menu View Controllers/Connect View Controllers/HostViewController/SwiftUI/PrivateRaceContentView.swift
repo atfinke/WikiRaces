@@ -11,18 +11,24 @@ import WKRKit
 import GameKit
 
 struct PrivateRaceContentView: View {
-    
+
+    // MARK: - Types -
+
     enum Modal {
         case activity, settings
     }
-    
+
+    // MARK: - Properties -
+
     @ObservedObject var model: PrivateRaceContentViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let cancelAction: () -> Void
     let startMatch: () -> Void
     let presentModal: (Modal) -> Void
-    
+
+    // MARK: - Body -
+
     var body: some View {
         VStack {
             HStack {
@@ -30,7 +36,7 @@ struct PrivateRaceContentView: View {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 22))
                 })
-                    .opacity(model.matchStarting ? 0.2 : 1)
+                .opacity(model.matchStarting ? 0.2 : 1)
                 Spacer()
                 if model.matchStarting {
                     ActivityIndicatorView()
@@ -46,49 +52,47 @@ struct PrivateRaceContentView: View {
             .padding(.horizontal)
             .frame(height: 60)
             .allowsHitTesting(!model.matchStarting)
-            
+
             Spacer()
             PlayerImageView(
                 player: SwiftUIPlayer(id: GKLocalPlayer.local.alias),
                 size: 100,
                 effectSize: 5)
                 .padding(.bottom, 20)
-            
+
             if !PlayerImageDatabase.shared.hasValidLocalPlayerImage {
                 HStack {
                     Spacer()
                     Text("Set a custom profile photo\nin the Game Center settings")
-                    .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.system(size: 12, weight: .regular, design: .rounded))
                         .multilineTextAlignment(.center)
                         .offset(y: -5)
                     Spacer()
                 }
             }
-            
+
             VStack {
                 PrivateRaceSectionView(
                     header: "RACE CODE",
                     title: model.raceCode?.uppercased() ?? "-",
                     imageName: "square.and.arrow.up",
                     disabled: model.raceCode == nil) {
-                        self.presentModal(.activity)
+                    self.presentModal(.activity)
                 }
                 .padding(.vertical, 16)
-            
-                   
-                
+
                 PrivateRaceSectionView(
                     header: "TYPE",
                     title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
                     imageName: "gear",
                     disabled: false) {
-                        self.presentModal(.settings)
+                    self.presentModal(.settings)
                 }
             }.frame(width: 220)
-            
+
             Color.clear.frame(height: 50)
             Spacer()
-            
+
             HStack {
                 Color.clear.frame(width: 1)
                 ForEach(model.connectedPlayers) { player in

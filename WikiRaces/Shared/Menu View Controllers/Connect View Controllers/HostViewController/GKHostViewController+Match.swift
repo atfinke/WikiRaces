@@ -10,7 +10,7 @@ import GameKit
 import WKRKit
 
 extension GKHostViewController: GKMatchDelegate {
-    
+
     func startMatchmaking() {
         guard let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
@@ -26,7 +26,7 @@ extension GKHostViewController: GKMatchDelegate {
             }
         }
     }
-    
+
     private func addPlayers() {
         guard let match = self.match, let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().addPlayers(to: match, matchRequest: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] error in
@@ -37,7 +37,7 @@ extension GKHostViewController: GKMatchDelegate {
             }
         }
     }
-    
+
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         if state == .connected {
             PlayerImageDatabase.shared.connected(to: player, completion: { [weak self] in
@@ -48,14 +48,14 @@ extension GKHostViewController: GKMatchDelegate {
             })
         }
     }
-    
+
     func match(_ match: GKMatch, didFailWithError error: Error?) {
         cancelMatch()
     }
-    
+
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         guard WKRSeenFinalArticlesStore.isRemoteTransferData(data) else { return }
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }
-    
+
 }

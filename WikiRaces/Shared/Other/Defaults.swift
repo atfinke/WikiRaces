@@ -9,9 +9,9 @@
 import Foundation
 
 struct Defaults {
-    
+
     private static let defaults = UserDefaults.standard
-    
+
     private static let promptedGlobalRacesPopularityKey = "PromptedGlobalRacesPopularity"
     static var promptedGlobalRacesPopularity: Bool {
         get {
@@ -21,14 +21,14 @@ struct Defaults {
             defaults.set(newValue, forKey: promptedGlobalRacesPopularityKey)
         }
     }
-    
+
     private static let fastlaneKey = "FASTLANE_SNAPSHOT"
     static var isFastlaneSnapshotInstance: Bool {
         get {
             return defaults.bool(forKey: fastlaneKey)
         }
     }
-    
+
     private static let isAutoInviteOnKey = "isAutoInviteOnKey"
     static var isAutoInviteOn: Bool {
         get {
@@ -38,7 +38,7 @@ struct Defaults {
             defaults.set(newValue, forKey: isAutoInviteOnKey)
         }
     }
-    
+
     private static let promptedAutoInviteKey = "PromptedAutoInviteKey"
     static var promptedAutoInvite: Bool {
         get {
@@ -48,7 +48,7 @@ struct Defaults {
             defaults.set(newValue, forKey: promptedAutoInviteKey)
         }
     }
-    
+
     private static let shouldPromptForRatingKey = "ShouldPromptForRating"
     static var shouldPromptForRating: Bool {
         get {
@@ -58,7 +58,7 @@ struct Defaults {
             defaults.setValue(newValue, forKey: shouldPromptForRatingKey)
         }
     }
-    
+
     private static let shouldAutoSaveResultImageKey = "force_save_result_image"
     static var shouldAutoSaveResultImage: Bool {
         get {
@@ -68,7 +68,7 @@ struct Defaults {
             defaults.setValue(newValue, forKey: shouldAutoSaveResultImageKey)
         }
     }
-    
+
     private static let promptedSoloRacesStatsKey = "PromptedSoloRacesStatsKey"
     static var promptedSoloRacesStats: Bool {
         get {
@@ -78,6 +78,5 @@ struct Defaults {
             defaults.set(newValue, forKey: promptedSoloRacesStatsKey)
         }
     }
-    
-    
+
 }

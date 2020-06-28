@@ -52,7 +52,7 @@ extension ResultsViewController {
         })
         PlayerAnonymousMetrics.log(event: .openedShare)
     }
-    
+
     func tapped(playerID: String) {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 

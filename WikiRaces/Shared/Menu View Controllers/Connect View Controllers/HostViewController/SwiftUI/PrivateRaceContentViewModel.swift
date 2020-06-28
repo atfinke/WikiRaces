@@ -15,7 +15,7 @@ struct SwiftUIPlayer: Identifiable, Equatable {
 }
 
 class PrivateRaceContentViewModel: ObservableObject {
-    
+
     @Published var connectedPlayers = [SwiftUIPlayer]()
     var status: String {
         if matchStarting {
@@ -28,11 +28,11 @@ class PrivateRaceContentViewModel: ObservableObject {
             return "\(connectedPlayers.count) CONNECTED RACER" + (connectedPlayers.count == 1 ? "" : "S")
         }
     }
-    
+
     @Published var raceCode: String?
-    
+
     @Published var settings = WKRGameSettings()
     @Published var customPages = [WKRPage]()
-    
+
     @Published var matchStarting = false
 }

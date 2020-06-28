@@ -53,7 +53,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Pages Viewed",
                     detail: formatted(for: [.soloPages, .mpcPages, .gkPages], suffix: "Page"))
-        ]),
+            ]),
         Section(
             name: "Solo",
             items: [
@@ -63,7 +63,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Total Time",
                     detail: formatted(for: .soloTotalTime, suffix: "S", checkPlural: false))
-        ]),
+            ]),
         Section(
             name: "Private Races",
             items: [
@@ -82,7 +82,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Players Raced",
                     detail: nil)
-        ]),
+            ]),
         Section(
             name: "Public Races",
             items: [
@@ -101,7 +101,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Players Raced",
                     detail: nil)
-        ]),
+            ]),
         Section(
             name: "Other",
             items: [
@@ -114,7 +114,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Needed Help",
                     detail: formatted(for: [.soloHelp, .mpcHelp, .gkHelp], suffix: "Time"))
-        ])
+            ])
     ]
 
     // MARK: - Initalization -

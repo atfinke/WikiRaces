@@ -70,10 +70,10 @@ final class PlayerDatabaseMetrics: NSObject {
 
             // Get user stats record, or create new one.
             guard let statsRecordName = userRecord.object(forKey: "UserStatsNamev3") as? NSString,
-                statsRecordName.length > 5 else {
-                    self.createUserStatsRecord()
-                    self.isConnecting = false
-                    return
+                  statsRecordName.length > 5 else {
+                self.createUserStatsRecord()
+                self.isConnecting = false
+                return
             }
             let userStatsRecordID = CKRecord.ID(recordName: statsRecordName as String)
             self.publicDB.fetch(withRecordID: userStatsRecordID, completionHandler: { userStatsRecord, error in
@@ -145,10 +145,10 @@ final class PlayerDatabaseMetrics: NSObject {
 
     private func saveKeyValues() {
         guard !queuedKeyValues.isEmpty,
-               !isConnecting,
-                !isCreatingStatsRecord,
-                 !isSyncing,
-                  let record = userStatsRecord else { return }
+              !isConnecting,
+              !isCreatingStatsRecord,
+              !isSyncing,
+              let record = userStatsRecord else { return }
 
         isSyncing = true
         let keyValues = queuedKeyValues
@@ -257,12 +257,12 @@ final class PlayerDatabaseMetrics: NSObject {
         }
 
         guard let filePath = FileManager
-            .default
-            .urls(for: .documentDirectory, in: .userDomainMask)
-            .last?
-            .path
-            .appendingFormat("/\(Date()).csv") else {
-                return nil
+                .default
+                .urls(for: .documentDirectory, in: .userDomainMask)
+                .last?
+                .path
+                .appendingFormat("/\(Date()).csv") else {
+            return nil
         }
         do {
             try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)

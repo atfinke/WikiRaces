@@ -9,11 +9,15 @@
 import SwiftUI
 
 struct PlayerImageView: View {
-    
+
+    // MARK: - Properties -
+
     let player: SwiftUIPlayer
     let size: CGFloat
     let effectSize: CGFloat
-    
+
+    // MARK: - Body -
+
     var body: some View {
         PlayerImageDatabase.shared.image(for: player.id)
             .renderingMode(.original)

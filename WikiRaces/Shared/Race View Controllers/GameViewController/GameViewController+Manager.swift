@@ -19,11 +19,11 @@ extension GameViewController {
                                      settings: gameSettings,
                                      gameUpdate: { [weak self] gameUpdate in
                                         self?.gameUpdate(gameUpdate)
-            }, votingUpdate: { [weak self] votingUpdate in
-                self?.votingUpdate(votingUpdate)
-            }, resultsUpdate: { [weak self] resultsUpdate in
-                self?.resultsUpdate(resultsUpdate)
-        })
+                                     }, votingUpdate: { [weak self] votingUpdate in
+                                        self?.votingUpdate(votingUpdate)
+                                     }, resultsUpdate: { [weak self] resultsUpdate in
+                                        self?.resultsUpdate(resultsUpdate)
+                                     })
     }
 
     private func gameUpdate(_ gameUpdate: WKRGameManager.GameUpdate) {
@@ -91,7 +91,7 @@ extension GameViewController {
                                     "Time": timeRaced,
                                     "Points": points,
                                     "WebViewScrolled": webViewPixelsScrolled
-            ])
+                                   ])
     }
 
     private func votingUpdate(_ votingUpdate: WKRGameManager.VotingUpdate) {
@@ -111,7 +111,7 @@ extension GameViewController {
                            delay: WKRAnimationDurationConstants.gameFadeInDelay,
                            animations: {
                             self.webView?.alpha = 1.0
-            }, completion: nil)
+                           }, completion: nil)
         }
     }
 
@@ -158,14 +158,14 @@ extension GameViewController {
         PlayerAnonymousMetrics.log(event: .error(info))
 
         PlayerAnonymousMetrics.log(event: .fatalError,
-                          attributes: ["Error": error.title as Any])
+                                   attributes: ["Error": error.title as Any])
     }
 
     func logEvent(_ logEvent: WKRLogEvent) {
         #if !MULTIWINDOWDEBUG
         let metric = PlayerAnonymousMetrics.Event(event: logEvent)
         if metric == .pageView,
-            let raceType = PlayerStatsManager.RaceType(networkConfig) {
+           let raceType = PlayerStatsManager.RaceType(networkConfig) {
             PlayerStatsManager.shared.viewedPage(raceType: raceType)
         }
         PlayerAnonymousMetrics.log(event: metric, attributes: logEvent.attributes)
@@ -285,10 +285,10 @@ extension GameViewController {
                                options: .beginFromCurrentState,
                                animations: {
                                 self?.webView?.alpha = 0.0
-                }, completion: { [weak self] _ in
-                    self?.title = nil
-                    self?.navigationController?.setNavigationBarHidden(true, animated: false)
-                })
+                               }, completion: { [weak self] _ in
+                                self?.title = nil
+                                self?.navigationController?.setNavigationBarHidden(true, animated: false)
+                               })
             })
         } else {
             resultsViewController?.state = gameState
@@ -357,7 +357,7 @@ extension GameViewController {
                 attributes: [
                     "Page": finalPage?.title as Any,
                     "Custom": gameSettings.isCustom ? 1 : 0
-            ])
+                ])
         }
     }
 

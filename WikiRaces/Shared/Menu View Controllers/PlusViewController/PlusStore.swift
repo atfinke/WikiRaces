@@ -183,10 +183,10 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         os_log("%{public}s: called", log: .store, type: .info, #function)
         verifyReceiptTimer?.invalidate()
         verifyReceiptTimer = Timer.scheduledTimer(timeInterval: 0.5,
-                                                 target: self,
-                                                 selector: #selector(processPaymentQueueTransactions),
-                                                 userInfo: nil,
-                                                 repeats: false)
+                                                  target: self,
+                                                  selector: #selector(processPaymentQueueTransactions),
+                                                  userInfo: nil,
+                                                  repeats: false)
     }
 
     @objc

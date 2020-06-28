@@ -10,20 +10,20 @@ import UIKit
 
 extension MenuViewController {
 
-//    // MARK: - Keyboard Support -
-//
-//    override var keyCommands: [UIKeyCommand]? {
-//        return [
-//            UIKeyCommand(title: "Create",
-//                         action: #selector(keyboardCreateRace),
-//                         input: "n",
-//                         modifierFlags: .command)
-//        ]
-//    }
-//
-//    @objc private func keyboardCreateRace() {
-//        PlayerAnonymousMetrics.log(event: .pressedHost)
-//        createRace()
-//    }
-//    
+    //    // MARK: - Keyboard Support -
+    //
+    //    override var keyCommands: [UIKeyCommand]? {
+    //        return [
+    //            UIKeyCommand(title: "Create",
+    //                         action: #selector(keyboardCreateRace),
+    //                         input: "n",
+    //                         modifierFlags: .command)
+    //        ]
+    //    }
+    //
+    //    @objc private func keyboardCreateRace() {
+    //        PlayerAnonymousMetrics.log(event: .pressedHost)
+    //        createRace()
+    //    }
+    //    
 }

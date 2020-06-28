@@ -29,29 +29,29 @@ final internal class MenuViewController: UIViewController {
 
     private var isFirstAppearence = true
     override var canBecomeFirstResponder: Bool { return true }
-    
+
     private let nearbyRaceListener = NearbyRaceListener()
 
     // MARK: - View Life Cycle -
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.localPlayerQuit,
             object: nil,
             queue: nil) { _ in
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.presentedViewController?.view.alpha = 0
-                    self.presentedViewController?.presentedViewController?.view.alpha = 0
-                }, completion: { [weak self] _ in
-                    self?.dismiss(animated: false) {
-                        self?.navigationController?.popToRootViewController(animated: false)
-//                        GKMatchmaker.shared().cancel()
-                    }
-                })
+            UIView.animate(withDuration: 0.5, animations: {
+                self.presentedViewController?.view.alpha = 0
+                self.presentedViewController?.presentedViewController?.view.alpha = 0
+            }, completion: { [weak self] _ in
+                self?.dismiss(animated: false) {
+                    self?.navigationController?.popToRootViewController(animated: false)
+                    //                        GKMatchmaker.shared().cancel()
+                }
+            })
         }
-        
+
         menuView.listenerUpdate = { [weak self] update in
             guard let self = self else { return }
             switch update {
@@ -137,7 +137,7 @@ final internal class MenuViewController: UIViewController {
         let metrics = PlayerDatabaseMetrics.shared
         metrics.log(value: UIDevice.current.name, for: "DeviceNames")
         metrics.log(value: PlusStore.shared.isPlus ? 1 : 0, for: "isPlus")
-        
+
         nearbyRaceListener.start { host, raceCode in
             let controller = UIAlertController(
                 title: "Nearby Race",
@@ -170,42 +170,44 @@ final internal class MenuViewController: UIViewController {
     }
 
     // MARK: - Other -
-    
+
     func prepareForRace() {
         UIApplication.shared.isIdleTimerDisabled = true
         nearbyRaceListener.stop()
         resignFirstResponder()
-        
+
         if presentedViewController != nil {
             navigationController?.popToRootViewController(animated: false)
         }
     }
-    
+
     func joinRace(raceCode: String?) {
         prepareForRace()
         menuView.animateMenuOut {
-            let controller = GKJoinViewController(raceCode: raceCode)
+            let destination: SpeedTestViewController.Destination
+            if let code = raceCode {
+                destination = .joinPrivate(raceCode: code)
+            } else {
+                destination = .joinPublic
+            }
+            let controller = SpeedTestViewController(destination: destination)
             self.navigationController?.pushViewController(controller, animated: false)
         }
     }
-    
+
     func createRace() {
-        let controller = SpeedTestViewController(destination: .hostPrivate)
-        navigationController?.pushViewController(controller, animated: false)
-//        if Defaults.isFastlaneSnapshotInstance {
-//            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
-//            let nav = WKRUINavigationController(rootViewController: controller)
-//            nav.modalPresentationStyle = .overCurrentContext
-//            present(nav, animated: true, completion: nil)
-//        } else if GKLocalPlayer.local.isAuthenticated {
-//            prepareForRace()
-//            let controller = GKHostViewController()
-//            navigationController?.pushViewController(controller, animated: false)
-//        } else {
-//            let controller = GKHostViewController()
-//            navigationController?.pushViewController(controller, animated: false)
-////            fatalError()
-//        }
+        if Defaults.isFastlaneSnapshotInstance {
+            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
+            let nav = WKRUINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .overCurrentContext
+            present(nav, animated: true, completion: nil)
+        } else if GKLocalPlayer.local.isAuthenticated {
+            prepareForRace()
+            let controller = SpeedTestViewController(destination: .hostPrivate)
+            navigationController?.pushViewController(controller, animated: false)
+        } else {
+            fatalError()
+        }
     }
 
 }

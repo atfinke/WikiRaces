@@ -9,17 +9,21 @@
 import SwiftUI
 
 struct PrivateRaceSectionView: View {
-    
+
+    // MARK: - Properties -
+
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let header: String
     let title: String
-    
+
     let imageName: String
-    
+
     let disabled: Bool
     let action: () -> Void
-    
+
+    // MARK: - Body -
+
     var body: some View {
         HStack {
             VStack(alignment: .leading) {

@@ -151,7 +151,6 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
             }
         }
 
-
         tableView.performBatchUpdates({
             tableView.reloadRows(at: rowsToReload, with: .none)
             tableView.insertRows(at: rowsToInsert, with: .fade)
@@ -211,7 +210,7 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewStatsCell.reuseIdentifier,
                                                            for: indexPath) as? HistoryTableViewStatsCell else {
-                                                            fatalError("Unable to create cell")
+                fatalError("Unable to create cell")
             }
 
             cell.stat = stats?.raw[indexPath.row]
@@ -219,7 +218,7 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         }
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HistoryTableViewCell.reuseIdentifier,
                                                        for: indexPath) as? HistoryTableViewCell else {
-                                                        fatalError("Unable to create cell")
+            fatalError("Unable to create cell")
         }
 
         let playerState = player?.state ?? .connecting

@@ -9,30 +9,30 @@
 import SwiftUI
 
 struct LoadingContentView: View {
-    
+
     @ObservedObject var model = LoadingContentViewModel()
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let cancel: () -> Void
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack {
                 Spacer()
-                Text(model.title.uppercased())
+                Text(self.model.title.uppercased())
                     .font(.system(size: 20, weight: .medium, design: .rounded))
                     .padding()
                 ActivityIndicatorView()
-                    .opacity(model.activityOpacity)
-                    .animation(.easeInOut(duration: 0.5), value: model.activityOpacity)
+                    .opacity(self.model.activityOpacity)
+                    .animation(.easeInOut(duration: 0.5), value: self.model.activityOpacity)
                 Color.clear.frame(height: geometry.size.height * 0.6)
-                Button(action: cancel, label: {
+                Button(action: self.cancel, label: {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 22))
                         .padding()
                         .padding()
                 })
-                .foregroundColor(.wkrTextColor(for: colorScheme))
+                .foregroundColor(.wkrTextColor(for: self.colorScheme))
                 Spacer()
             }
         }

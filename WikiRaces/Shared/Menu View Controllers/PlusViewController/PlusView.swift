@@ -142,15 +142,15 @@ class PlusView: UIView {
             forName: PlusStore.productsUpdatedNotificationName,
             object: nil,
             queue: nil) { [weak self] _ in
-                DispatchQueue.main.async {
-                    guard let products = PlusStore.shared.products else {
-                        self?.toggleProductButtons(on: false)
-                        return
-                    }
-                    self?.standardOptionButton.label.text = products.standard.displayString
-                    self?.ultimateOptionButton.label.text = products.ultimate.displayString
-                    self?.toggleProductButtons(on: true)
+            DispatchQueue.main.async {
+                guard let products = PlusStore.shared.products else {
+                    self?.toggleProductButtons(on: false)
+                    return
                 }
+                self?.standardOptionButton.label.text = products.standard.displayString
+                self?.ultimateOptionButton.label.text = products.ultimate.displayString
+                self?.toggleProductButtons(on: true)
+            }
         }
 
         toggleProductButtons(on: PlusStore.shared.products != nil)

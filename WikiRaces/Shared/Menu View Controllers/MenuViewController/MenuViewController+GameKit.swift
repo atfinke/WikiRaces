@@ -11,7 +11,7 @@ import GameKit
 extension MenuViewController: GKGameCenterControllerDelegate {
 
     // MARK: - Game Center -
-    
+
     func setupGKAuthHandler() {
         func auth(result: GKHelper.AuthResult) {
             switch result {
@@ -27,10 +27,10 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                 metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
             }
         }
-        
+
         GKHelper.shared.authHandler = auth
     }
-    
+
     func setupInviteHandler() {
         GKHelper.shared.inviteHandler = { code in
             self.joinRace(raceCode: code)
