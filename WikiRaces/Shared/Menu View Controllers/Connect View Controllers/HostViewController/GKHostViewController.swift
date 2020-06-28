@@ -14,7 +14,7 @@ import WKRKit
 import WKRUIKit
 import SwiftUI
 
-final internal class GKHostViewController: VisualEffectViewController {
+final internal class GKHostViewController: GKConnectViewController {
     
     // MARK: - Properties -
     
@@ -22,30 +22,36 @@ final internal class GKHostViewController: VisualEffectViewController {
     private let advertiser = NearbyRaceAdvertiser()
     private let sourceView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
     
-    var match: GKMatch?
     var isMatchmakingEnabled = true {
         didSet {
             if !isMatchmakingEnabled {
                 advertiser.stop()
-                GKMatchmaker.shared().cancel()
+                self.disconnectFromMatch()
             }
         }
     }
     
-    var gameSettings = WKRGameSettings()
-    
-    lazy var model = PrivateRaceContentViewModel(settings: gameSettings)
+    var model = PrivateRaceContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: PrivateRaceContentView(
             model: model,
-            cancelAction: cancelMatch,
-            startMatch: startMatch,
-            presentModal: presentModal))
+            cancelAction: { [weak self] in
+                PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
+                self?.isMatchmakingEnabled = false
+                self?.cancelMatch()
+            },
+            startMatch: { [weak self] in
+                self?.isMatchmakingEnabled = false
+                self?.startMatch()
+            },
+            presentModal: { [weak self] modal in
+                self?.presentModal(modal: modal)
+            }))
     
     // MARK: - Initalization -
     
     init() {
-        super.init(nibName: nil, bundle: nil)
+        super.init(isPlayerHost: true)
         
         let date = Date()
         raceCodeGenerator.new { [weak self] code in
@@ -59,9 +65,7 @@ final internal class GKHostViewController: VisualEffectViewController {
             }
         }
         
-        view.alpha = 0
-        sourceView.alpha = 0
-        contentView.addSubview(sourceView)
+        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
     }
     
     required init?(coder: NSCoder) {
@@ -72,15 +76,39 @@ final internal class GKHostViewController: VisualEffectViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        sourceView.alpha = 0
+        contentView.addSubview(sourceView)
+        contentViewHosting.view.alpha = 0
         configure(hostingView: contentViewHosting.view)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.view.alpha = 1
+            self?.contentViewHosting.view.alpha = 1
         }
+        
+        guard !Defaults.promptedAutoInvite else {
+            return
+        }
+        
+        let controller = UIAlertController(
+            title: "Invite Nearby Racers?",
+            message: "Would you like to automatically invite nearby racers? This preference can be changed later in the settings app.",
+            preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            Defaults.promptedAutoInvite = true
+            Defaults.isAutoInviteOn = true
+            self?.startMatchmaking()
+        }
+        controller.addAction(action)
+        
+        let cancelAction = UIAlertAction(title: "Not Now", style: .cancel) { _ in
+            Defaults.promptedAutoInvite = true
+        }
+        controller.addAction(cancelAction)
+        present(controller, animated: true, completion: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,23 +118,6 @@ final internal class GKHostViewController: VisualEffectViewController {
     
     // MARK: - Actions -
     
-    func cancelMatch() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
-        
-        isMatchmakingEnabled = false
-        
-        match?.delegate = nil
-        sendMiniMessage(info: .cancelled)
-        match?.disconnect()
-        
-        UIView.animate(withDuration: 0.5, animations: { [weak self] in
-            self?.view.alpha = 0
-            }, completion: { [weak self] _ in
-                self?.navigationController?.popToRootViewController(animated: false)
-        })
-    }
-    
     func startMatch() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
         
@@ -115,27 +126,20 @@ final internal class GKHostViewController: VisualEffectViewController {
         advertiser.stop()
         contentViewHosting.view.isUserInteractionEnabled = false
         
-        func showMatch(for networkConfig: WKRPeerNetworkConfig, settings: WKRGameSettings) {
-            let controller = GameViewController(network: networkConfig, settings: settings)
-            let nav = WKRUINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .fullScreen
-            nav.modalTransitionStyle = .crossDissolve
-            nav.isModalInPresentation = true
-            present(nav, animated: true) { [weak self] in
-                self?.view.alpha = 0
-            }
-        }
-        
         func sendStartMessage() {
             guard let match = match else { fatalError("match is nil") }
             GKMatchmaker.shared().finishMatchmaking(for: match)
             
-            let message = ConnectViewController.StartMessage(hostName: GKLocalPlayer.local.alias, gameSettings: gameSettings)
+            let message = GKConnectViewController.StartMessage(
+                hostName: GKLocalPlayer.local.alias,
+                gameSettings: model.settings)
             do {
                 let data = try JSONEncoder().encode(message)
                 try match.sendData(toAllPlayers: data, with: .reliable)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                    showMatch(for: .gameKit(match: match, isHost: true), settings: self.gameSettings)
+                    self.transitionToGame(
+                        for: .gameKitPrivate(match: match, isHost: true),
+                        settings: self.model.settings)
                 }
             } catch {
                 self.cancelMatch()
@@ -144,7 +148,9 @@ final internal class GKHostViewController: VisualEffectViewController {
         
         func startSolo() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                showMatch(for: .solo(name: GKLocalPlayer.local.alias), settings: self.gameSettings)
+                self.transitionToGame(for:
+                                        .solo(name: GKLocalPlayer.local.alias),
+                                      settings: self.model.settings)
             }
         }
         
@@ -152,7 +158,7 @@ final internal class GKHostViewController: VisualEffectViewController {
             if Defaults.promptedSoloRacesStats {
                 startSolo()
             } else {
-                let controller = UIAlertController(title: "Solo Race", message: "Solo races will not count towards your stats.", preferredStyle: .alert)
+                let controller = UIAlertController(title: "Solo Race", message: "Solo races will not impact your leaderboard stats.", preferredStyle: .alert)
                 let startAction = UIAlertAction(title: "Ok", style: .default) { _ in
                     startSolo()
                 }
@@ -171,12 +177,12 @@ final internal class GKHostViewController: VisualEffectViewController {
     private func presentModal(modal: PrivateRaceContentView.Modal) {
         let controller: UIViewController
         switch modal {
-            
         case .activity:
-            guard  let code = model.raceCode, let url = URL(string: "wikiraces://invite?code=\(code)") else {
+            guard  let code = model.raceCode, let url = URL(string: "WikiRaces://Invite?Code=\(code)") else {
                 fatalError()
             }
             controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            PlayerAnonymousMetrics.log(event: .revampRaceCodeShared)
         case .settings:
             controller = CustomRaceViewController(settings: model.settings, pages: model.customPages) { pages in
                 self.model.customPages = pages
@@ -189,19 +195,13 @@ final internal class GKHostViewController: VisualEffectViewController {
     }
     
     private func startNearbyAdvertising() {
-        guard Defaults.isAutoInviteOn, let code = model.raceCode else {
+        guard Defaults.isAutoInviteOn, Defaults.promptedAutoInvite, let code = model.raceCode else {
             advertiser.stop()
             return
         }
         advertiser.start(hostName: GKLocalPlayer.local.alias, raceCode: code)
     }
     
-    func sendMiniMessage(info: ConnectViewController.MiniMessage.Info) {
-        let message = ConnectViewController.MiniMessage(info: info, uuid: UUID())
-        guard let data = try? JSONEncoder().encode(message) else {
-            fatalError()
-        }
-        try? match?.sendData(toAllPlayers: data, with: .reliable)
-    }
+    
 }
 

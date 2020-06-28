@@ -7,13 +7,14 @@
 //
 
 import GameKit
+import WKRKit
 
 extension GKMatchRequest {
 
     static func hostRequest(raceCode: String, isInital: Bool) -> GKMatchRequest {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = isInital ? 2 : GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
+        request.maxPlayers = isInital ? 2 : min(GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer), WKRKitConstants.current.maxGlobalRacePlayers)
         request.playerGroup = raceCode.hash
         request.playerAttributes = 0xFFFF0000
         return request
@@ -22,7 +23,7 @@ extension GKMatchRequest {
     static func joinRequest(raceCode: String?) -> GKMatchRequest {
         let request = GKMatchRequest()
         request.minPlayers = 2
-        request.maxPlayers = GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer) //WKRKitConstants.current.maxGlobalRacePlayers
+        request.maxPlayers = min(GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer), WKRKitConstants.current.maxGlobalRacePlayers)
         request.playerGroup = (raceCode ?? "<GLOBAL>").hash
         if raceCode != nil {
             request.playerAttributes = 0x0000FFFF

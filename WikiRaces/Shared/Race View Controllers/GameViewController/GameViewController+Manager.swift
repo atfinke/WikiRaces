@@ -79,9 +79,9 @@ extension GameViewController {
 
         let event: PlayerAnonymousMetrics.Event
         switch raceType {
-        case .mpc:
+        case .private:
             event = .mpcRaceCompleted
-        case .gameKit:
+        case .public:
             event = .gkRaceCompleted
         case .solo:
             event = .soloRaceCompleted
@@ -250,8 +250,8 @@ extension GameViewController {
                 if let raceType = self.statRaceType {
                     var stat = PlayerDatabaseStat.mpcVotes
                     switch raceType {
-                    case .mpc: stat = .mpcVotes
-                    case .gameKit: stat = .gkVotes
+                    case .private: stat = .mpcVotes
+                    case .public: stat = .gkVotes
                     case .solo: stat = .soloVotes
                     }
                     stat.increment()

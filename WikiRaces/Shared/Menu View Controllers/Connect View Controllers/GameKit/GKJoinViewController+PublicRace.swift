@@ -23,19 +23,20 @@ extension GKJoinViewController {
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
                 let message = "Please try again later."
                 showError(title: "Unable To Find Best Host", message: message)
+                model.title = "Race Error"
                 return
             }
             if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
                 try? match.send(data, to: [player], dataMode: .reliable)
             }
-            showMatch(for: .gameKit(match: match, isHost: isPlayerHost), settings: object.gameSettings, andHide: [])
+            transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings)
         }
     }
     
     func publicRaceSendStartMessage() {
         func fail() {
-            showError(title: "Unable To Start Match",
-                      message: "Please try again later.")
+            showError(title: "Unable To Start Race", message: "Please try again later.")
+            model.title = "Race Error"
         }
         guard let match = match else {
             fail()
@@ -50,10 +51,7 @@ extension GKJoinViewController {
             let data = try JSONEncoder().encode(message)
             try match.sendData(toAllPlayers: data, with: .reliable)
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                self.showMatch(for: .gameKit(match: match,
-                                             isHost: true),
-                               settings: settings,
-                               andHide: [])
+                self.transitionToGame(for: .gameKitPublic(match: match, isHost: true), settings: settings)
             }
         } catch {
             fail()
@@ -64,7 +62,7 @@ extension GKJoinViewController {
     
     func publicRaceDetermineHost(match: GKMatch) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.updateDescriptionLabel(to: "Finding best host")
+            self.model.title = "Finding best host"
             var players = match.players
             players.append(GKLocalPlayer.local)
             if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
@@ -79,8 +77,8 @@ extension GKJoinViewController {
                 let info = "matchmaker...didFind: No host player"
                 PlayerAnonymousMetrics.log(event: .error(info))
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
-                self.showError(title: "Unable To Find Best Host",
-                               message: "Please try again later.")
+                self.showError(title: "Unable To Find Best Host", message: "Please try again later.")
+                self.model.title = "Race Error"
             }
         }
     }

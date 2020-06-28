@@ -35,8 +35,4 @@ class PrivateRaceContentViewModel: ObservableObject {
     @Published var customPages = [WKRPage]()
     
     @Published var matchStarting = false
-    
-    init(settings: WKRGameSettings) {
-        self.settings = settings
-    }
 }

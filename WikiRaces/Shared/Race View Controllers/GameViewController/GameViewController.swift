@@ -121,7 +121,7 @@ final internal class GameViewController: UIViewController {
             switch networkConfig {
             case .solo:
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
-            case .gameKit(let match, _):
+            case .gameKitPrivate(let match, _), .gameKitPublic(let match, _):
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch,
                                            attributes: ["ConnectedPeers": match.players.count - 1])
             case .mpc(_, let session, _):
@@ -161,17 +161,22 @@ final internal class GameViewController: UIViewController {
         switch networkConfig {
         case .solo:
             PlayerStatsManager.shared.connected(to: [], raceType: .solo)
-        case .gameKit(let match, _):
+        case .gameKitPrivate(let match, _):
             let playerNames = match.players.map { player -> String in
                 return player.alias
             }
-            PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .private)
+        case .gameKitPublic(let match, _):
+            let playerNames = match.players.map { player -> String in
+                return player.alias
+            }
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .public)
         case .mpc(_, let session, _):
             // Due to low usage, not accounting for players joining mid session
             let playerNames = session.connectedPeers.map { peerID -> String in
                 return peerID.displayName
             }
-            PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .private)
         default:
             break
         }
@@ -234,8 +239,8 @@ final internal class GameViewController: UIViewController {
         if let raceType = statRaceType {
             let stat: PlayerDatabaseStat
             switch raceType {
-            case .mpc: stat = .mpcHelp
-            case .gameKit: stat = .gkHelp
+            case .private: stat = .mpcHelp
+            case .public: stat = .gkHelp
             case .solo: stat = .soloHelp
             }
             stat.increment()

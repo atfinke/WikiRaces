@@ -39,6 +39,16 @@ struct Defaults {
         }
     }
     
+    private static let promptedAutoInviteKey = "PromptedAutoInviteKey"
+    static var promptedAutoInvite: Bool {
+        get {
+            return defaults.bool(forKey: promptedAutoInviteKey)
+        }
+        set {
+            defaults.set(newValue, forKey: promptedAutoInviteKey)
+        }
+    }
+    
     private static let shouldPromptForRatingKey = "ShouldPromptForRating"
     static var shouldPromptForRating: Bool {
         get {

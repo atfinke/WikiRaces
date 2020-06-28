@@ -17,6 +17,7 @@ struct PrivateRaceContentView: View {
     }
     
     @ObservedObject var model: PrivateRaceContentViewModel
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     let cancelAction: () -> Void
     let startMatch: () -> Void
@@ -27,6 +28,7 @@ struct PrivateRaceContentView: View {
             HStack {
                 Button(action: cancelAction, label: {
                     Image(systemName: "chevron.left")
+                        .font(.system(size: 22))
                 })
                     .opacity(model.matchStarting ? 0.2 : 1)
                 Spacer()
@@ -35,11 +37,13 @@ struct PrivateRaceContentView: View {
                 } else {
                     Button(action: startMatch, label: {
                         Image(systemName: "play.fill")
+                            .font(.system(size: 22))
                     })
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(.wkrTextColor(for: colorScheme))
             .padding()
+            .padding(.horizontal)
             .frame(height: 60)
             .allowsHitTesting(!model.matchStarting)
             
@@ -53,7 +57,7 @@ struct PrivateRaceContentView: View {
             if !PlayerImageDatabase.shared.hasValidLocalPlayerImage {
                 HStack {
                     Spacer()
-                    Text("Set a profile photo\nin the Game Center settings")
+                    Text("Set a custom profile photo\nin the Game Center settings")
                     .font(.system(size: 12, weight: .regular, design: .rounded))
                         .multilineTextAlignment(.center)
                         .offset(y: -5)
@@ -63,7 +67,7 @@ struct PrivateRaceContentView: View {
             
             VStack {
                 PrivateRaceSectionView(
-                    header: "CODE",
+                    header: "RACE CODE",
                     title: model.raceCode?.uppercased() ?? "-",
                     imageName: "square.and.arrow.up",
                     disabled: model.raceCode == nil) {
@@ -106,7 +110,6 @@ struct PrivateRaceContentView: View {
             }
             .padding(.bottom, 20)
         }
-//        .overlay(Color.black.opacity(isShareCodePresented || isSettingsPresented ? 0.5 : 0).allowsHitTesting(false))
         .animation(.spring())
     }
 }
