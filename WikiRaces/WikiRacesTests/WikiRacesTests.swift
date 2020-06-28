@@ -38,9 +38,9 @@ class WikiRacesTests: XCTestCase {
             let pageStat: PlayerDatabaseStat
 
             switch raceType {
-            case .mpc:
+            case .private:
                 pageStat = .mpcPages
-            case .gameKit:
+            case .public:
                 pageStat = .gkPages
             case .solo:
                 pageStat = .soloPages
@@ -63,11 +63,11 @@ class WikiRacesTests: XCTestCase {
             var uniqueStat: PlayerDatabaseStat
             var totalStat: PlayerDatabaseStat
             switch raceType {
-            case .mpc:
+            case .private:
                 playersKey = "PlayersArray"
                 uniqueStat = .mpcUniquePlayers
                 totalStat = .mpcTotalPlayers
-            case .gameKit:
+            case .public:
                 playersKey = "GKPlayersArray"
                 uniqueStat = .gkUniquePlayers
                 totalStat = .gkTotalPlayers
@@ -95,9 +95,9 @@ class WikiRacesTests: XCTestCase {
             let raceFastestTimeStat: PlayerDatabaseStat
 
             switch raceType {
-            case .mpc:
+            case .private:
                 raceFastestTimeStat = .mpcFastestTime
-            case .gameKit:
+            case .public:
                 raceFastestTimeStat = .gkFastestTime
             case .solo:
                 raceFastestTimeStat = .soloFastestTime
@@ -144,7 +144,7 @@ class WikiRacesTests: XCTestCase {
 
             switch raceType {
 
-            case .mpc:
+            case .private:
                 raceCountStat = .mpcRaces
                 racePointsStat = .mpcPoints
                 raceTimeStat = .mpcTotalTime
@@ -158,7 +158,7 @@ class WikiRacesTests: XCTestCase {
                 } else {
                     racePlaceStat = .mpcRaceDNF
                 }
-            case .gameKit:
+            case .public:
                 raceCountStat = .gkRaces
                 racePointsStat = .gkPoints
                 raceTimeStat = .gkTotalTime

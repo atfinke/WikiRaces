@@ -305,30 +305,8 @@ class WKRKitTests: WKRKitTestCase {
 
         var votingObject = WKRVotingState(pages: [page1, page2])
 
-        var firstPageVotes = votingObject.current.first
-
-        XCTAssertEqual(firstPageVotes?.page, page1)
-        XCTAssertEqual(firstPageVotes?.voters.count, 0)
-
         votingObject.player(player, votedFor: page1)
-
-        firstPageVotes = votingObject.current.first
-
-        XCTAssertEqual(firstPageVotes?.page, page1)
-        XCTAssertEqual(firstPageVotes?.voters.count, 1)
-
         votingObject.player(player, votedFor: page2)
-
-        firstPageVotes = votingObject.current.first
-
-        XCTAssertEqual(firstPageVotes?.page, page1)
-        XCTAssertEqual(firstPageVotes?.voters.count, 0)
-
-        let secondPageVotes = votingObject.current[1]
-
-        XCTAssertEqual(secondPageVotes.page, page2)
-        XCTAssertEqual(secondPageVotes.voters.count, 1)
-
         testEncoding(for: votingObject)
     }
 
