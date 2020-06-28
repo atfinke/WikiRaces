@@ -10,8 +10,6 @@
 #endif
 #endif
 
-#import "GPBAny.pbobjc.h"
-#import "GPBApi.pbobjc.h"
 #import "GPBArray.h"
 #import "GPBArray_PackagePrivate.h"
 #import "GPBBootstrap.h"
@@ -23,11 +21,8 @@
 #import "GPBDescriptor_PackagePrivate.h"
 #import "GPBDictionary.h"
 #import "GPBDictionary_PackagePrivate.h"
-#import "GPBDuration.pbobjc.h"
-#import "GPBEmpty.pbobjc.h"
 #import "GPBExtensionInternals.h"
 #import "GPBExtensionRegistry.h"
-#import "GPBFieldMask.pbobjc.h"
 #import "GPBMessage.h"
 #import "GPBMessage_PackagePrivate.h"
 #import "GPBProtocolBuffers.h"
@@ -35,10 +30,6 @@
 #import "GPBRootObject.h"
 #import "GPBRootObject_PackagePrivate.h"
 #import "GPBRuntimeTypes.h"
-#import "GPBSourceContext.pbobjc.h"
-#import "GPBStruct.pbobjc.h"
-#import "GPBTimestamp.pbobjc.h"
-#import "GPBType.pbobjc.h"
 #import "GPBUnknownField.h"
 #import "GPBUnknownFieldSet.h"
 #import "GPBUnknownFieldSet_PackagePrivate.h"
@@ -47,7 +38,6 @@
 #import "GPBUtilities_PackagePrivate.h"
 #import "GPBWellKnownTypes.h"
 #import "GPBWireFormat.h"
-#import "GPBWrappers.pbobjc.h"
 #import "Any.pbobjc.h"
 #import "Api.pbobjc.h"
 #import "Duration.pbobjc.h"
@@ -59,6 +49,6 @@
 #import "Type.pbobjc.h"
 #import "Wrappers.pbobjc.h"
 
-FOUNDATION_EXPORT double ProtobufVersionNumber;
-FOUNDATION_EXPORT const unsigned char ProtobufVersionString[];
+FOUNDATION_EXPORT double protobufVersionNumber;
+FOUNDATION_EXPORT const unsigned char protobufVersionString[];
 

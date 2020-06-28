@@ -62,7 +62,10 @@
  * @param target The target/destination of this package.
  * @return An instance of this class.
  */
-- (instancetype)initWithTarget:(GDTCORTarget)target;
+- (instancetype)initWithTarget:(GDTCORTarget)target NS_DESIGNATED_INITIALIZER;
+
+// Please use the designated initializer.
+- (instancetype)init NS_UNAVAILABLE;
 
 /** Completes delivery of the package.
  *
