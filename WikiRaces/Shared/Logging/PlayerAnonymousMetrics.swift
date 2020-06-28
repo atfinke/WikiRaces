@@ -29,7 +29,7 @@ internal struct PlayerAnonymousMetrics {
     enum Event: String {
         // Non Game
         case leaderboard, versionInfo
-        case pressedJoin, pressedHost, pressedGlobalJoin, pressedLocalOptions
+        case revampPressedHost, revampPressedJoinPublic, revampPressedJoinPrivate
         case namePromptResult, nameType
         case cloudStatus, interfaceMode, autoInviteToggled, autoInviteState
 
@@ -58,6 +58,10 @@ internal struct PlayerAnonymousMetrics {
         case automaticResultsImageSave
         case forcedIntoStoreFromCustomize
         case forcedIntoStoreFromStats
+        
+        case revampRaceCodeGenerated
+        case revampRaceCodeFailure
+        case revampRaceCodeShared
 
         init(event: WKRLogEvent) {
             switch event.type {

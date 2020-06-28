@@ -10,7 +10,17 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Always save result image</string>
+			<string>Invite Nearby Racers</string>
+			<key>Key</key>
+			<string>isAutoInviteOnKey</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Always Save Result Image</string>
 			<key>Key</key>
 			<string>force_save_result_image</string>
 			<key>DefaultValue</key>

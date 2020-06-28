@@ -7,3 +7,8 @@
 //
 
 import Foundation
+
+class LoadingContentViewModel: ObservableObject {
+    @Published var title: String = ""
+    @Published var activityOpacity: Double = 1
+}

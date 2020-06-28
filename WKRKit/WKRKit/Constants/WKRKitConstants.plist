@@ -28,7 +28,7 @@
 	<key>RandomURLString</key>
 	<string>https://en.m.wikipedia.org/wiki/Special:Random</string>
 	<key>Version</key>
-	<integer>26</integer>
+	<integer>28</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
 	<key>MaxFoundPagePlayers</key>
@@ -40,7 +40,7 @@
 	<key>BonusPointsInterval</key>
 	<integer>120</integer>
 	<key>MaxGlobalRacePlayers</key>
-	<integer>4</integer>
+	<integer>8</integer>
 	<key>MaxLocalRacePlayers</key>
 	<integer>8</integer>
 </dict>

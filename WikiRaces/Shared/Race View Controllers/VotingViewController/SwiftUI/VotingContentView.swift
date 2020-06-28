@@ -11,7 +11,7 @@ import SwiftUI
 struct VotingContentView: View {
     
     @ObservedObject var model: VotingContentViewModel
-    let tapped: (VotingContentViewModel.Item) -> Void
+    let tappedVotingItem: (VotingContentViewModel.Item) -> Void
     
     var body: some View {
         VStack {
@@ -19,7 +19,7 @@ struct VotingContentView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(self.model.items) { item in
                         VotingItemContentView(item: item, isFinalArticleSelected: self.model.isFinalArticleSelected) {
-                            self.tapped(item)
+                            self.tappedVotingItem(item)
                         }
                     }
                 }

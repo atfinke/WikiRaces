@@ -15,7 +15,7 @@ struct ResultsContentView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     let readyUpButtonPressed: () -> Void
-    let tapped: (_ playerID: String) -> Void
+    let tappedPlayerID: (_ playerID: String) -> Void
 
     var body: some View {
         VStack {
@@ -23,7 +23,7 @@ struct ResultsContentView: View {
             VStack() {
                 ForEach(model.items) { item  in
                     ResultsItemContentView(item: item) {
-                        self.tapped(item.player.id)
+                        self.tappedPlayerID(item.player.id)
                     }
                 }
             }

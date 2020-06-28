@@ -190,20 +190,22 @@ final internal class MenuViewController: UIViewController {
     }
     
     func createRace() {
-        if Defaults.isFastlaneSnapshotInstance {
-            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
-            let nav = WKRUINavigationController(rootViewController: controller)
-            nav.modalPresentationStyle = .overCurrentContext
-            present(nav, animated: true, completion: nil)
-        } else if GKLocalPlayer.local.isAuthenticated {
-            prepareForRace()
-            let controller = GKHostViewController()
-            navigationController?.pushViewController(controller, animated: false)
-        } else {
-            let controller = GKHostViewController()
-            navigationController?.pushViewController(controller, animated: false)
-//            fatalError()
-        }
+        let controller = SpeedTestViewController(destination: .hostPrivate)
+        navigationController?.pushViewController(controller, animated: false)
+//        if Defaults.isFastlaneSnapshotInstance {
+//            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
+//            let nav = WKRUINavigationController(rootViewController: controller)
+//            nav.modalPresentationStyle = .overCurrentContext
+//            present(nav, animated: true, completion: nil)
+//        } else if GKLocalPlayer.local.isAuthenticated {
+//            prepareForRace()
+//            let controller = GKHostViewController()
+//            navigationController?.pushViewController(controller, animated: false)
+//        } else {
+//            let controller = GKHostViewController()
+//            navigationController?.pushViewController(controller, animated: false)
+////            fatalError()
+//        }
     }
 
 }

@@ -240,7 +240,7 @@ public struct WKRKitConstants {
                     newGetLinksScriptFileURL: bundledGetLinksScriptURL)
     }
 
-    lazy private(set) var finalArticles: [String] = {
+    lazy public private(set) var finalArticles: [String] = {
         guard let documentsArticlesURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRArticlesData.plist"),
             let arrayFromURL = NSArray(contentsOf: documentsArticlesURL),
             let array = arrayFromURL as? [String] else {

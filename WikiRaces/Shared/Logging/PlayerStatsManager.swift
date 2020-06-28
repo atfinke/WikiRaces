@@ -17,16 +17,16 @@ final internal class PlayerStatsManager {
     // MARK: - Types
 
     enum RaceType: Int {
-        case mpc = 1, gameKit = 2, solo = 3
+        case `private` = 1, `public` = 2, solo = 3
 
         init?(_ config: WKRPeerNetworkConfig) {
             switch config {
             case .solo:
                 self = .solo
-            case .gameKit:
-                self = .gameKit
-            case .mpc:
-                self = .mpc
+            case .gameKitPublic:
+                self = .public
+            case .mpc, .gameKitPrivate:
+                self = .private
             default :
                 return nil
             }
@@ -106,9 +106,9 @@ final internal class PlayerStatsManager {
     func viewedPage(raceType: RaceType) {
         var stat: PlayerDatabaseStat
         switch raceType {
-        case .mpc:
+        case .private:
             stat = PlayerDatabaseStat.mpcPages
-        case .gameKit:
+        case .public:
             stat = PlayerDatabaseStat.gkPages
         case .solo:
             stat = PlayerDatabaseStat.soloPages
@@ -122,12 +122,12 @@ final internal class PlayerStatsManager {
         var totalStat = PlayerDatabaseStat.mpcTotalPlayers
         let matchStat: PlayerDatabaseStat
         switch raceType {
-        case .mpc:
+        case .private:
             playersKey = "PlayersArray"
             uniqueStat = PlayerDatabaseStat.mpcUniquePlayers
             totalStat = PlayerDatabaseStat.mpcTotalPlayers
             matchStat = .mpcMatch
-        case .gameKit:
+        case .public:
             playersKey = "GKPlayersArray"
             uniqueStat = PlayerDatabaseStat.gkUniquePlayers
             totalStat = PlayerDatabaseStat.gkTotalPlayers
@@ -178,7 +178,7 @@ final internal class PlayerStatsManager {
         let finishDNFStat: PlayerDatabaseStat
 
         switch type {
-        case .mpc:
+        case .private:
             pointsStat = .mpcPoints
             racesStat = .mpcRaces
             totalTimeStat = .mpcTotalTime
@@ -189,7 +189,7 @@ final internal class PlayerStatsManager {
             finishSecondStat = .mpcRaceFinishSecond
             finishThirdStat = .mpcRaceFinishThird
             finishDNFStat = .mpcRaceDNF
-        case .gameKit:
+        case .public:
             pointsStat = .gkPoints
             racesStat = .gkRaces
             totalTimeStat = .gkTotalTime
@@ -322,9 +322,9 @@ final internal class PlayerStatsManager {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             }
         } else if stat == .mpcTotalPlayers {
-            syncPlayerNamesStat(raceType: .mpc)
+            syncPlayerNamesStat(raceType: .private)
         } else if stat == .gkTotalPlayers {
-            syncPlayerNamesStat(raceType: .gameKit)
+            syncPlayerNamesStat(raceType: .public)
         }
     }
 
@@ -348,15 +348,15 @@ final internal class PlayerStatsManager {
             }
         }
 
-        syncPlayerNamesStat(raceType: .mpc)
-        syncPlayerNamesStat(raceType: .gameKit)
+        syncPlayerNamesStat(raceType: .private)
+        syncPlayerNamesStat(raceType: .public)
     }
 
     private func syncPlayerNamesStat(raceType: RaceType) {
         var stat = ""
-        if raceType == .mpc {
+        if raceType == .private {
             stat = "PlayersArray"
-        } else if raceType == .gameKit {
+        } else if raceType == .public {
             stat = "GKPlayersArray"
         } else {
             return

@@ -24,7 +24,7 @@ final internal class AppDelegate: WKRAppDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         #if !targetEnvironment(macCatalyst)
-//        FirebaseApp.configure()
+        FirebaseApp.configure()
         #endif
 
         GKHelper.shared.start()

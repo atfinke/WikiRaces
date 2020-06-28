@@ -25,9 +25,13 @@ final internal class ResultsViewController: VisualEffectViewController {
     
     let model = ResultsContentViewModel()
     lazy var contentViewHosting = UIHostingController(
-        rootView: ResultsContentView(model: model, readyUpButtonPressed: readyUpButtonPressed) { [weak self] tappedPlayerID in
-            self?.tapped(playerID: tappedPlayerID)
-        })
+        rootView: ResultsContentView(
+            model: model,
+            readyUpButtonPressed: { [weak self] in
+                self?.readyUpButtonPressed()
+            }, tappedPlayerID: { [weak self] playerID in
+                self?.tapped(playerID: playerID)
+        }))
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     var historyViewController: HistoryViewController?

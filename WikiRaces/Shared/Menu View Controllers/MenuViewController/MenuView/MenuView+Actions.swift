@@ -17,7 +17,6 @@ extension MenuView {
     @objc
     func showJoinOptions() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-        //        PlayerAnonymousMetrics.log(event: .pressedLocalOptions)
         
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .joinOptions)
@@ -26,16 +25,15 @@ extension MenuView {
     @objc
     func createRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-        //        PlayerAnonymousMetrics.log(event: .pressedGlobalJoin)
-        //        PlayerDatabaseStat.gkPressedJoin.increment()
+        PlayerAnonymousMetrics.log(event: .revampPressedHost)
         
         UISelectionFeedbackGenerator().selectionChanged()
         
-//        guard GKLocalPlayer.local.isAuthenticated || Defaults.isFastlaneSnapshotInstance else {
-//            self.listenerUpdate?(.presentGKAuth)
-//            return
-//        }
-//        
+        //        guard GKLocalPlayer.local.isAuthenticated || Defaults.isFastlaneSnapshotInstance else {
+        //            self.listenerUpdate?(.presentGKAuth)
+        //            return
+        //        }
+        //
         animateMenuOut {
             self.listenerUpdate?(.presentCreateRace)
         }
@@ -44,8 +42,8 @@ extension MenuView {
     @objc
     func joinPublicRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-        //        PlayerAnonymousMetrics.log(event: .pressedJoin)
-        //        PlayerDatabaseStat.mpcPressedJoin.increment()
+        PlayerAnonymousMetrics.log(event: .revampPressedJoinPublic)
+        PlayerDatabaseStat.gkPressedJoin.increment()
         
         UISelectionFeedbackGenerator().selectionChanged()
         
@@ -61,8 +59,8 @@ extension MenuView {
     @objc
     func joinPrivateRace() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
-        //        PlayerAnonymousMetrics.log(event: .pressedHost)
-        //        PlayerDatabaseStat.mpcPressedHost.increment()
+        PlayerAnonymousMetrics.log(event: .revampPressedJoinPrivate)
+        PlayerDatabaseStat.mpcPressedJoin.increment()
         
         UISelectionFeedbackGenerator().selectionChanged()
         

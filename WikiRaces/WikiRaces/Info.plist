@@ -19,16 +19,18 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLName</key>
 			<string>com.andrewfinke.WikiRaces</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wikiraces</string>
+				<string>WikiRaces</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>7994</string>
+	<string>8104</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
