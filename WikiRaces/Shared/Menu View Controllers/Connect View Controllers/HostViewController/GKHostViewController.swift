@@ -30,9 +30,9 @@ final internal class GKHostViewController: GKConnectViewController {
         }
     }
 
-    var model = PrivateRaceContentViewModel()
+    var model = HostContentViewModel()
     lazy var contentViewHosting = UIHostingController(
-        rootView: PrivateRaceContentView(
+        rootView: HostContentView(
             model: model,
             cancelAction: { [weak self] in
                 PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
@@ -173,7 +173,7 @@ final internal class GKHostViewController: GKConnectViewController {
 
     // MARK: - Other -
 
-    private func presentModal(modal: PrivateRaceContentView.Modal) {
+    private func presentModal(modal: HostContentView.Modal) {
         let controller: UIViewController
         switch modal {
         case .activity:

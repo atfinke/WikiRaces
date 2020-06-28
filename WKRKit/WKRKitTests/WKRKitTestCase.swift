@@ -14,7 +14,7 @@ class WKRKitTestCase: XCTestCase {
     override func setUp() {
         super.setUp()
         WKRKitConstants.updateConstants()
-        let expectedVersion = 26
+        let expectedVersion = 28
         XCTAssertEqual(WKRKitConstants.current.version,
                        expectedVersion,
                        "Installed WKRKitConstants not version \(expectedVersion)")

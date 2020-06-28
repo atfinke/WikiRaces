@@ -388,31 +388,31 @@
 		14EBF50D24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF50A24A49BF20040A7C0 /* VotingContentViewModel.swift */; };
 		14EBF50E24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF50A24A49BF20040A7C0 /* VotingContentViewModel.swift */; };
 		14EBF50F24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF50A24A49BF20040A7C0 /* VotingContentViewModel.swift */; };
-		14EBF58724A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
-		14EBF58824A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
-		14EBF58924A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
-		14EBF58A24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
-		14EBF58B24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */; };
+		14EBF58724A4D8260040A7C0 /* HostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* HostContentView.swift */; };
+		14EBF58824A4D8260040A7C0 /* HostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* HostContentView.swift */; };
+		14EBF58924A4D8260040A7C0 /* HostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* HostContentView.swift */; };
+		14EBF58A24A4D8260040A7C0 /* HostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* HostContentView.swift */; };
+		14EBF58B24A4D8260040A7C0 /* HostContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF58624A4D8260040A7C0 /* HostContentView.swift */; };
 		14EBF59924A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59A24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59B24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59C24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
 		14EBF59D24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */; };
-		14EBF59F24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */; };
-		14EBF5A024A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */; };
-		14EBF5A124A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */; };
-		14EBF5A224A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */; };
-		14EBF5A324A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */; };
+		14EBF59F24A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */; };
+		14EBF5A024A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */; };
+		14EBF5A124A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */; };
+		14EBF5A224A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */; };
+		14EBF5A324A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */; };
 		14EBF5A624A4F4680040A7C0 /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */; };
 		14EBF5A724A4F4680040A7C0 /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */; };
 		14EBF5A824A4F4680040A7C0 /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */; };
 		14EBF5A924A4F4680040A7C0 /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */; };
 		14EBF5AA24A4F4680040A7C0 /* PlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */; };
-		14EBF5AC24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */; };
-		14EBF5AD24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */; };
-		14EBF5AE24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */; };
-		14EBF5AF24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */; };
-		14EBF5B024A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */; };
+		14EBF5AC24A4F4780040A7C0 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */; };
+		14EBF5AD24A4F4780040A7C0 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */; };
+		14EBF5AE24A4F4780040A7C0 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */; };
+		14EBF5AF24A4F4780040A7C0 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */; };
+		14EBF5B024A4F4780040A7C0 /* HostSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */; };
 		14EBF5B224A50DEC0040A7C0 /* PlayerImageDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */; };
 		14EBF5B324A50DEC0040A7C0 /* PlayerImageDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */; };
 		14EBF5B424A50DEC0040A7C0 /* PlayerImageDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */; };
@@ -757,11 +757,11 @@
 		14EBF4FC24A49BD10040A7C0 /* VotingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingContentView.swift; sourceTree = "<group>"; };
 		14EBF50424A49BE20040A7C0 /* VotingItemContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingItemContentView.swift; sourceTree = "<group>"; };
 		14EBF50A24A49BF20040A7C0 /* VotingContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotingContentViewModel.swift; sourceTree = "<group>"; };
-		14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRaceContentView.swift; sourceTree = "<group>"; };
+		14EBF58624A4D8260040A7C0 /* HostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostContentView.swift; sourceTree = "<group>"; };
 		14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRaceContentViewModel.swift; sourceTree = "<group>"; };
+		14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostContentViewModel.swift; sourceTree = "<group>"; };
 		14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageView.swift; sourceTree = "<group>"; };
-		14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateRaceSectionView.swift; sourceTree = "<group>"; };
+		14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSectionView.swift; sourceTree = "<group>"; };
 		14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageDatabase.swift; sourceTree = "<group>"; };
 		14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceOtherController.swift; sourceTree = "<group>"; };
 		14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRacePageViewController.swift; sourceTree = "<group>"; };
@@ -1096,11 +1096,11 @@
 		14A778251F6133C700823DE8 /* Race View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				144A1024202FC786003DB51A /* Other */,
 				14B55C931F3A49820090E092 /* GameViewController */,
+				14B55C921F3A497B0090E092 /* VotingViewController */,
 				14B55C8F1F3A495C0090E092 /* ResultsViewController */,
 				14B55C911F3A496D0090E092 /* HistoryViewController */,
-				14B55C921F3A497B0090E092 /* VotingViewController */,
+				144A1024202FC786003DB51A /* Other */,
 			);
 			path = "Race View Controllers";
 			sourceTree = "<group>";
@@ -1298,9 +1298,9 @@
 		14EBF5A424A4F4470040A7C0 /* SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				14EBF59E24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift */,
-				14EBF58624A4D8260040A7C0 /* PrivateRaceContentView.swift */,
-				14EBF5AB24A4F4780040A7C0 /* PrivateRaceSectionView.swift */,
+				14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */,
+				14EBF58624A4D8260040A7C0 /* HostContentView.swift */,
+				14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */,
 				14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */,
 				14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */,
 				14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */,
@@ -1668,7 +1668,7 @@
 				142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */,
 				141B3ED824A3C08000BD18C7 /* ResultsItemContentView.swift in Sources */,
 				143948BD2144CC0F00992850 /* DebugInfoTableViewController.swift in Sources */,
-				14EBF58724A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
+				14EBF58724A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				14C4AB311F36899B0086B77F /* ResultsViewController+TableView.swift in Sources */,
 				144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
 				14E1B19A1F7981C70082F4FA /* PlayerAnonymousMetrics.swift in Sources */,
@@ -1708,7 +1708,7 @@
 				149FF84D1F362B83000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14B2DD4522212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
-				14EBF59F24A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
+				14EBF59F24A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141E4CF122012B2F000A0A15 /* PlayerDatabaseMetrics.swift in Sources */,
 				14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
@@ -1723,7 +1723,7 @@
 				148E5C6024A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				14EF51D5245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
-				14EBF5AC24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
+				14EBF5AC24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1485B67D223072AB00D6800B /* MedalView.swift in Sources */,
 				14E0F19F22303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
@@ -1764,14 +1764,14 @@
 				141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				143BB7151F60AEC900D00541 /* PlayerStatsManager.swift in Sources */,
 				143BB7191F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */,
-				14EBF5AD24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
+				14EBF5AD24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				14EF51D9245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				148E5C4324A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				148E5C6124A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				14DF31A9211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
-				14EBF5A024A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
+				14EBF5A024A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				1485B6782230724A00D6800B /* MedalScene.swift in Sources */,
 				142ABE032460057C008E7F77 /* ActivityButton.swift in Sources */,
 				14EF51DF245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
@@ -1805,7 +1805,7 @@
 				14EBF5A724A4F4680040A7C0 /* PlayerImageView.swift in Sources */,
 				14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */,
 				1478B1B222095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
-				14EBF58824A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
+				14EBF58824A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				14EF51D3245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				1437C52022285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				14F034AE24A8480D006A908E /* LoadingContentView.swift in Sources */,
@@ -1845,7 +1845,7 @@
 				1446C1DB24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14EBF5B424A50DEC0040A7C0 /* PlayerImageDatabase.swift in Sources */,
 				1475C19224A6560000882F1F /* HelpViewController+KB.swift in Sources */,
-				14EBF5AE24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
+				14EBF5AE24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1475C17424A655E900882F1F /* GKJoinViewController.swift in Sources */,
 				1475C15D24A655D800882F1F /* MenuView.swift in Sources */,
 				148E5C5624A2967600DD43E4 /* GKHostViewController.swift in Sources */,
@@ -1875,8 +1875,8 @@
 				1475C16C24A655DC00882F1F /* MenuViewController.swift in Sources */,
 				1475C17524A655E900882F1F /* GKJoinViewController+Match.swift in Sources */,
 				1475C18A24A655F600882F1F /* ActivityButton.swift in Sources */,
-				14EBF5A124A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
-				14EBF58924A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
+				14EBF5A124A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
+				14EBF58924A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				1475C15C24A655D800882F1F /* MenuTile.swift in Sources */,
 				1475C15E24A655D800882F1F /* MenuView+Setup.swift in Sources */,
 				1475C16224A655D800882F1F /* MovingPuzzleView.swift in Sources */,
@@ -1945,14 +1945,14 @@
 				14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */,
 				14C25FF11F6F028100CD7373 /* MenuTile.swift in Sources */,
 				14C25FFE1F6F02A500CD7373 /* GameViewController+Manager.swift in Sources */,
-				14EBF5AF24A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
+				14EBF5AF24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				14495D8A21FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14C260071F6F02A500CD7373 /* PlayerStatsManager.swift in Sources */,
 				148E5C4524A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				148E5C6324A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				1485B6792230724A00D6800B /* MedalScene.swift in Sources */,
 				14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */,
-				14EBF5A224A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
+				14EBF5A224A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				1475C1A124A6560D00882F1F /* HistoryViewController.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
@@ -1987,7 +1987,7 @@
 				14EBF5A924A4F4680040A7C0 /* PlayerImageView.swift in Sources */,
 				148E5C5724A2967600DD43E4 /* GKHostViewController.swift in Sources */,
 				142ABE1024600ABE008E7F77 /* MagicSubscription.swift in Sources */,
-				14EBF58A24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
+				14EBF58A24A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				1478B1B322095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
 				14F034B024A8480D006A908E /* LoadingContentView.swift in Sources */,
 				14EF51D4245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
@@ -2038,7 +2038,7 @@
 				1475C18524A655F500882F1F /* ActivityButton.swift in Sources */,
 				1475C18324A655F500882F1F /* PlusView.swift in Sources */,
 				1475C19524A6560700882F1F /* ResultsViewController.swift in Sources */,
-				14EBF58B24A4D8260040A7C0 /* PrivateRaceContentView.swift in Sources */,
+				14EBF58B24A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				1475C1B624A6561B00882F1F /* PlayerDatabaseStat.swift in Sources */,
 				1475C13C24A6556900882F1F /* PlayerAnonymousMetrics.swift in Sources */,
 				1475C1A524A6560D00882F1F /* HistoryViewController.swift in Sources */,
@@ -2068,7 +2068,7 @@
 				1475C15124A655C900882F1F /* HelpViewController.swift in Sources */,
 				1475C15924A655D700882F1F /* MedalView.swift in Sources */,
 				1475C19A24A6560700882F1F /* ResultRenderer+Creation.swift in Sources */,
-				14EBF5A324A4F43A0040A7C0 /* PrivateRaceContentViewModel.swift in Sources */,
+				14EBF5A324A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				14F034AB24A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				1475C19824A6560700882F1F /* ResultsViewController+KB.swift in Sources */,
 				1475C13024A6553F00882F1F /* ResultsContentViewModel.swift in Sources */,
@@ -2092,7 +2092,7 @@
 				1475C12A24A6551F00882F1F /* CustomRaceNotificationsController.swift in Sources */,
 				1475C18724A655F500882F1F /* OSLog+Magic.swift in Sources */,
 				1475C18424A655F500882F1F /* PlusStore.swift in Sources */,
-				14EBF5B024A4F4780040A7C0 /* PrivateRaceSectionView.swift in Sources */,
+				14EBF5B024A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1475C15724A655D700882F1F /* MenuView+Setup.swift in Sources */,
 				1475C15424A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
 				1475C13324A6553F00882F1F /* ListFooterView.swift in Sources */,

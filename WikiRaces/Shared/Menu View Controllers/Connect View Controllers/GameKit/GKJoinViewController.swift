@@ -31,11 +31,7 @@ final class GKJoinViewController: GKConnectViewController {
         rootView: LoadingContentView(model: model, cancel: { [weak self] in
             self?.cancelMatch()
         }))
-
-    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-    var findTrace: Trace?
-    #endif
-
+    
     // MARK: - Initalization -
 
     init(raceCode: String?) {
@@ -69,9 +65,8 @@ final class GKJoinViewController: GKConnectViewController {
 
     func findMatch() {
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        // TODO: fix
-        //        let type = raceCode == nil ? "Public" : "Private"
-        //        findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
+                let type = raceCode == nil ? "Public" : "Private"
+               let findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
         #endif
 
         DispatchQueue.main.async {
@@ -93,7 +88,7 @@ final class GKJoinViewController: GKConnectViewController {
                     self.model.activityOpacity = 0
                 } else if let match = match {
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                    self.findTrace?.stop()
+                    findTrace?.stop()
                     #endif
                     self.match = match
                     match.delegate = self

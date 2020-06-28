@@ -52,8 +52,7 @@ final class SpeedTestViewController: VisualEffectViewController {
         configure(hostingView: contentViewHosting.view)
 
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        // TODO: fix
-        //        let trace = Performance.startTrace(name: "Connection Test Trace")
+        let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
 
         let startDate = Date()
@@ -62,7 +61,7 @@ final class SpeedTestViewController: VisualEffectViewController {
             DispatchQueue.main.async {
                 if success {
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                    //                    trace?.stop()
+                    trace?.stop()
                     #endif
                     self.success()
                 } else {

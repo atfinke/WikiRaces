@@ -1,5 +1,5 @@
 //
-//  PrivateRaceSectionView.swift
+//  HostSectionView.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 6/25/20.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct PrivateRaceSectionView: View {
+struct HostSectionView: View {
 
     // MARK: - Properties -
 

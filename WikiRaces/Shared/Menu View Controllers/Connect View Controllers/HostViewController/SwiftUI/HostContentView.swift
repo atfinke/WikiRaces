@@ -1,5 +1,5 @@
 //
-//  PrivateRaceContentView.swift
+//  HostContentView.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 6/25/20.
@@ -10,7 +10,7 @@ import SwiftUI
 import WKRKit
 import GameKit
 
-struct PrivateRaceContentView: View {
+struct HostContentView: View {
 
     // MARK: - Types -
 
@@ -20,7 +20,7 @@ struct PrivateRaceContentView: View {
 
     // MARK: - Properties -
 
-    @ObservedObject var model: PrivateRaceContentViewModel
+    @ObservedObject var model: HostContentViewModel
     @Environment(\.colorScheme) var colorScheme: ColorScheme
 
     let cancelAction: () -> Void
@@ -72,7 +72,7 @@ struct PrivateRaceContentView: View {
             }
 
             VStack {
-                PrivateRaceSectionView(
+                HostSectionView(
                     header: "RACE CODE",
                     title: model.raceCode?.uppercased() ?? "-",
                     imageName: "square.and.arrow.up",
@@ -81,7 +81,7 @@ struct PrivateRaceContentView: View {
                 }
                 .padding(.vertical, 16)
 
-                PrivateRaceSectionView(
+                HostSectionView(
                     header: "TYPE",
                     title: model.settings.isCustom ? "CUSTOM" : "STANDARD",
                     imageName: "gear",

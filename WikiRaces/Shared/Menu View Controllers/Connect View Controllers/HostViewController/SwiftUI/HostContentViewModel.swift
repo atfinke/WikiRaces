@@ -1,5 +1,5 @@
 //
-//  PrivateRaceContentViewModel.swift
+//  HostContentViewModel.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 6/25/20.
@@ -14,7 +14,7 @@ struct SwiftUIPlayer: Identifiable, Equatable {
     var image: Image { PlayerImageDatabase.shared.image(for: id) }
 }
 
-class PrivateRaceContentViewModel: ObservableObject {
+class HostContentViewModel: ObservableObject {
 
     @Published var connectedPlayers = [SwiftUIPlayer]()
     var status: String {
