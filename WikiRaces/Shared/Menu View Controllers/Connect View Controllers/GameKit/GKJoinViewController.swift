@@ -31,7 +31,7 @@ final class GKJoinViewController: GKConnectViewController {
         rootView: LoadingContentView(model: model, cancel: { [weak self] in
             self?.cancelMatch()
         }))
-    
+
     // MARK: - Initalization -
 
     init(raceCode: String?) {

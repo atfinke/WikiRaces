@@ -25,29 +25,34 @@ class PlayerImageDatabase {
     // MARK: - Helpers -
 
     func connected(to player: GKPlayer, completion: (() -> Void)?) {
-        dict[player.alias] = Image("temp")
+        DispatchQueue.main.async {
+            let placeholder = PlayerPlaceholderImageRenderer.render(name: player.displayName)
+            self.dict[player.alias] = Image(uiImage: placeholder)
 
-        player.loadPhoto(for: .small) { photo, _ in
-            guard let photo = photo else {
+            player.loadPhoto(for: .small) { photo, _ in
+                PlayerAnonymousMetrics.log(
+                    event: .finishedProfilePhotoFetch,
+                    attributes: [
+                        "Success": photo != nil ? 1 : 0
+                    ])
+
+                guard let photo = photo else {
+                    completion?()
+                    return
+                }
+                if player.alias == GKLocalPlayer.local.alias {
+                    self.hasValidLocalPlayerImage = true
+                }
+                self.dict[player.alias] = Image(uiImage: photo)
                 completion?()
-                return
-
             }
-            if player.alias == GKLocalPlayer.local.alias {
-                self.hasValidLocalPlayerImage = true
-            }
-            self.dict[player.alias] = Image(uiImage: photo)
-            completion?()
         }
     }
 
     func image(for playerID: String) -> Image {
         guard let image = dict[playerID] else {
-            return Image("temp")
-            // TODO: fix
-            //            fatalError()
+            fatalError()
         }
-        print("PlayerImageDatabase: \(playerID)")
         return image
     }
 }

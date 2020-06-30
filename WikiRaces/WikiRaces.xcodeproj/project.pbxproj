@@ -285,6 +285,11 @@
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
 		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
+		14ACB79824ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
+		14ACB79924ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
+		14ACB79A24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
+		14ACB79B24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
+		14ACB79C24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
 		14B2DD3B22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
 		14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
 		14B2DD3D22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
@@ -719,6 +724,7 @@
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
+		14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPlaceholderImageRenderer.swift; sourceTree = "<group>"; };
 		14B2DD3A22212298009B8AB3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Actions.swift"; sourceTree = "<group>"; };
 		14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Setup.swift"; sourceTree = "<group>"; };
@@ -1303,6 +1309,7 @@
 				14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */,
 				14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */,
 				14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */,
+				14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */,
 				14EBF5B124A50DEC0040A7C0 /* PlayerImageDatabase.swift */,
 			);
 			path = SwiftUI;
@@ -1741,6 +1748,7 @@
 				14EBF5A624A4F4680040A7C0 /* PlayerImageView.swift in Sources */,
 				141B3ED524A3C08000BD18C7 /* ListFooterView.swift in Sources */,
 				14C2AEFF24A3CE9000D2378C /* ResultsContentViewModel.swift in Sources */,
+				14ACB79824ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				1446C1E024A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
 				14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
 			);
@@ -1759,6 +1767,7 @@
 				14EBF59A24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				14E0F1A022303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
+				14ACB79924ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				1429327D242AE29000D64834 /* PointerInteractionTableViewCell.swift in Sources */,
 				14F2EC9624A64A8F007A4C97 /* GKMatchRequest+WKR.swift in Sources */,
 				141E4CE82200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
@@ -1845,6 +1854,7 @@
 				1446C1DB24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14EBF5B424A50DEC0040A7C0 /* PlayerImageDatabase.swift in Sources */,
 				1475C19224A6560000882F1F /* HelpViewController+KB.swift in Sources */,
+				14ACB79A24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				14EBF5AE24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1475C17424A655E900882F1F /* GKJoinViewController.swift in Sources */,
 				1475C15D24A655D800882F1F /* MenuView.swift in Sources */,
@@ -1940,6 +1950,7 @@
 				1475C16824A655DC00882F1F /* MenuViewController.swift in Sources */,
 				142ABDFC2460055C008E7F77 /* PlusViewController.swift in Sources */,
 				14E0F1A122303A8F00BFF1E9 /* PlayerDatabaseStat.swift in Sources */,
+				14ACB79B24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				1475C15324A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
 				14F2EC9724A64A8F007A4C97 /* GKMatchRequest+WKR.swift in Sources */,
 				14C25FFC1F6F02A500CD7373 /* GameViewController+UI.swift in Sources */,
@@ -2094,6 +2105,7 @@
 				1475C18424A655F500882F1F /* PlusStore.swift in Sources */,
 				14EBF5B024A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1475C15724A655D700882F1F /* MenuView+Setup.swift in Sources */,
+				14ACB79C24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				1475C15424A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
 				1475C13324A6553F00882F1F /* ListFooterView.swift in Sources */,
 				1475C16424A655DB00882F1F /* MenuViewController+Debug.swift in Sources */,

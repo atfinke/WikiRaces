@@ -63,7 +63,7 @@ struct HostContentView: View {
             if !PlayerImageDatabase.shared.hasValidLocalPlayerImage {
                 HStack {
                     Spacer()
-                    Text("Set a custom profile photo\nin the Game Center settings")
+                    Text("Set a custom racer photo\nin the Game Center settings")
                         .font(.system(size: 12, weight: .regular, design: .rounded))
                         .multilineTextAlignment(.center)
                         .offset(y: -5)

@@ -39,6 +39,7 @@ internal struct PlayerAnonymousMetrics {
         case openedHistory, openedHistorySF, openedShare, pressedReadyButton, voted
         case finalVotes
         case linkOnPage, missedLink, foundPage, pageLoadingError
+        case finishedProfilePhotoFetch
 
         // Game Host
         case hostStartedMatch, hostStartedRace, hostEndedRace
