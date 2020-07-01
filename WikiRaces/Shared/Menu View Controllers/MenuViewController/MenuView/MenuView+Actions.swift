@@ -103,11 +103,6 @@ extension MenuView {
     func menuTilePressed() {
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
-        guard GKLocalPlayer.local.isAuthenticated else {
-            self.listenerUpdate?(.presentGKAuth)
-            return
-        }
-
         animateMenuOut {
             self.listenerUpdate?(.presentLeaderboard)
         }

@@ -19,7 +19,7 @@ final class MenuView: UIView {
     }
 
     enum ListenerUpdate {
-        case presentDebug, presentLeaderboard, presentGKAuth
+        case presentDebug, presentLeaderboard
         case presentJoinPublicRace, presentJoinPrivateRace
         case presentCreateRace
         case presentAlert(UIAlertController)
@@ -179,7 +179,7 @@ final class MenuView: UIView {
         let buttonHeight: CGFloat
         if frame.size.width > 420 {
             buttonStyle = .large
-            buttonWidth = 210
+            buttonWidth = 150
             buttonHeight = 50
         } else {
             buttonStyle = .normal
@@ -256,7 +256,7 @@ final class MenuView: UIView {
         createButtonWidthConstraint.constant = buttonWidth + 40
 
         publicButtonWidthConstraint.constant = buttonWidth + 34
-        privateButtonWidthConstraint.constant = buttonWidth + 46
+        privateButtonWidthConstraint.constant = buttonWidth + 44
         statsButtonWidthConstraint.constant = buttonWidth + 20
 
         backButtonWidth.constant = buttonHeight - 10

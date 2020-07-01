@@ -63,8 +63,6 @@ final internal class MenuViewController: UIViewController {
                 controller.viewState = .leaderboards
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
-            case .presentGKAuth:
-                break
             case .presentJoinPublicRace:
                 self.joinRace(raceCode: nil)
             case .presentJoinPrivateRace:
@@ -80,7 +78,11 @@ final internal class MenuViewController: UIViewController {
                     self?.joinRace(raceCode: code)
                 }
                 controller.addAction(action)
-                controller.addCancelAction(title: "Cancel")
+                
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+                    self?.menuView.animateMenuIn()
+                }
+                controller.addAction(cancelAction)
                 self.present(controller, animated: true, completion: nil)
             case .presentCreateRace:
                 self.createRace()
@@ -151,7 +153,9 @@ final internal class MenuViewController: UIViewController {
             controller.addAction(action)
             controller.addCancelAction(title: "No")
             DispatchQueue.main.async {
-                self.present(controller, animated: true, completion: nil)
+                if self.presentedViewController == nil {
+                    self.present(controller, animated: true, completion: nil)
+                }
             }
         }
         becomeFirstResponder()
@@ -184,13 +188,13 @@ final internal class MenuViewController: UIViewController {
     func joinRace(raceCode: String?) {
         prepareForRace()
         menuView.animateMenuOut {
-            let destination: SpeedTestViewController.Destination
+            let destination: RaceChecksViewController.Destination
             if let code = raceCode {
                 destination = .joinPrivate(raceCode: code)
             } else {
                 destination = .joinPublic
             }
-            let controller = SpeedTestViewController(destination: destination)
+            let controller = RaceChecksViewController(destination: destination)
             self.navigationController?.pushViewController(controller, animated: false)
         }
     }
@@ -201,12 +205,10 @@ final internal class MenuViewController: UIViewController {
             let nav = WKRUINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)
-        } else if GKLocalPlayer.local.isAuthenticated {
-            prepareForRace()
-            let controller = SpeedTestViewController(destination: .hostPrivate)
-            navigationController?.pushViewController(controller, animated: false)
         } else {
-            fatalError()
+            prepareForRace()
+            let controller = RaceChecksViewController(destination: .hostPrivate)
+            navigationController?.pushViewController(controller, animated: false)
         }
     }
 
