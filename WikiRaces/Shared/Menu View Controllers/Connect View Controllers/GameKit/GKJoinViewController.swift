@@ -9,6 +9,7 @@
 import UIKit
 import GameKit
 import SwiftUI
+import os.log
 
 import WKRKit
 import WKRUIKit
@@ -29,15 +30,18 @@ final class GKJoinViewController: GKConnectViewController {
     var model = LoadingContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: LoadingContentView(model: model, cancel: { [weak self] in
+            self?.isShowingError = true
             self?.cancelMatch()
-        }))
-
+        }, disclaimerButton: nil))
+    
     // MARK: - Initalization -
 
     init(raceCode: String?) {
         self.raceCode = raceCode
         self.isPublicRace = raceCode == nil
         super.init(isPlayerHost: false)
+        
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
 
         findMatch()
     }
@@ -50,20 +54,13 @@ final class GKJoinViewController: GKConnectViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentViewHosting.view.alpha = 0
         configure(hostingView: contentViewHosting.view)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.contentViewHosting.view.alpha = 1
-        }
     }
 
     // MARK: - Helpers -
 
     func findMatch() {
+        os_log("%{public}s: race code: %{public}s", log: .gameKit, type: .info, #function, raceCode ?? "-")
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                 let type = raceCode == nil ? "Public" : "Private"
                let findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
@@ -81,12 +78,23 @@ final class GKJoinViewController: GKConnectViewController {
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 if let error = error {
-                    print(error)
-                    let title = self.raceCode == nil ? "Unable To Find Race" : "Unable To Join Race"
-                    self.showError(title: title, message: "Please try again later.")
-                    self.model.title = "MATCHMAKING ISSUE"
+                    os_log("%{public}s: result: error: %{public}s", log: .gameKit, type: .error, #function, error.localizedDescription)
+                    
+                    let bannerTitle: String
+                    let interfaceTitle: String
+                    if self.isPublicRace {
+                        bannerTitle = "Unable To Find Race"
+                        interfaceTitle = "NO OPEN RACES"
+                    } else {
+                        bannerTitle = "Unable To Join Race"
+                        interfaceTitle = "MATCHMAKING ISSUE"
+                    }
+                    self.showError(title: bannerTitle, message: "Please try again later.")
+                    self.model.title = interfaceTitle
                     self.model.activityOpacity = 0
                 } else if let match = match {
+                    os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
+                    
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                     findTrace?.stop()
                     #endif

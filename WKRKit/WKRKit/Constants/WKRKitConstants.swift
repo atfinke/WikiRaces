@@ -37,6 +37,8 @@ public struct WKRKitConstants {
 
     public let maxGlobalRacePlayers: Int
     public let maxLocalRacePlayers: Int
+    
+    public let manageGameCenterLink: URL
 
     // MARK: - Initalization
 
@@ -94,6 +96,11 @@ public struct WKRKitConstants {
         guard let maxLocalRacePlayers = documentsConstants["MaxLocalRacePlayers"] as? Int else {
             fatalError("WKRKitConstants: No MaxLocalRacePlayers value")
         }
+        
+        guard let manageGameCenterLinkString = documentsConstants["ManageGameCenterLink"] as? String,
+              let manageGameCenterLink = URL(string: manageGameCenterLinkString) else {
+            fatalError("WKRKitConstants: No ManageGameCenterLink value")
+        }
 
         self.version = version
         self.isQuickRaceMode = quickRace
@@ -116,6 +123,8 @@ public struct WKRKitConstants {
         self.bannedURLFragments = bannedURLFragments
         self.maxGlobalRacePlayers = maxGlobalRacePlayers
         self.maxLocalRacePlayers = maxLocalRacePlayers
+        
+        self.manageGameCenterLink = manageGameCenterLink
     }
 
     // MARK: - Helpers

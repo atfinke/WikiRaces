@@ -75,7 +75,7 @@ extension GameViewController {
 
         connectingLabel.translatesAutoresizingMaskIntoConstraints = false
         connectingLabel.alpha = 0.0
-        connectingLabel.text = "CONNECTING"
+        connectingLabel.text = "PREPARING"
         connectingLabel.textAlignment = .center
         connectingLabel.font = UIFont.systemRoundedFont(ofSize: 24, weight: .medium)
         view.addSubview(connectingLabel)

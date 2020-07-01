@@ -30,10 +30,6 @@ public struct WKRPageFetcher {
         return URLSession(configuration: config)
     }()
 
-    static private let queue = DispatchQueue(
-        label: "com.andrewfinke.wikiraces.pagefetcher",
-        qos: .utility)
-
     // MARK: - Helpers
 
     /// Returns the title from the raw HTML
@@ -100,22 +96,19 @@ public struct WKRPageFetcher {
             session = WKRPageFetcher.noCacheSession
         }
 
-        queue.async {
-            var observation: NSKeyValueObservation?
-            let task = session.dataTask(with: url) { (data, _, error) in
-                observation?.invalidate()
-                if let data = data, let string = String(data: data, encoding: .utf8) {
-                    completionHandler(string, nil)
-                } else {
-                    completionHandler(nil, error)
-                }
+        var observation: NSKeyValueObservation?
+        let task = session.dataTask(with: url) { (data, _, error) in
+            observation?.invalidate()
+            if let data = data, let string = String(data: data, encoding: .utf8) {
+                completionHandler(string, nil)
+            } else {
+                completionHandler(nil, error)
             }
-            observation = task.progress.observe(\.fractionCompleted) { progress, _ in
-                print("asdasd \(progress)")
-                progressHandler(Float(progress.fractionCompleted))
-            }
-            task.resume()
         }
+        observation = task.progress.observe(\.fractionCompleted) { progress, _ in
+            progressHandler(Float(progress.fractionCompleted))
+        }
+        task.resume()
     }
 
 }

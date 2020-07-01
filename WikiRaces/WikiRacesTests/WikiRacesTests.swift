@@ -28,6 +28,12 @@ class WikiRacesTests: XCTestCase {
             }
         }
     }
+    
+    func testRaceCodePlayerGroupGeneration() {
+        for code in RaceCodeGenerator.codes {
+            let _ = RaceCodeGenerator.playerGroup(for: code)
+        }
+    }
 
     func testViewedPage() {
         for raceIndex in 1...90 {

@@ -1,4 +1,4 @@
-var styleElement = document.createElement('style');
+var styleElement = document.createElement("style");
 document.documentElement.appendChild(styleElement);
 
 styleElement.textContent = `
@@ -46,5 +46,5 @@ a[href*=":"] {
 }
 `;
 
-document.documentElement.style.webkitTouchCallout='none';
-document.documentElement.style.webkitUserSelect='none';
+document.documentElement.style.webkitTouchCallout = "none";
+document.documentElement.style.webkitUserSelect = "none";
