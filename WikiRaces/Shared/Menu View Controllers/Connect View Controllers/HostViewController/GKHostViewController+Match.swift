@@ -8,6 +8,7 @@
 
 import GameKit
 import WKRKit
+import os.log
 
 extension GKHostViewController: GKMatchDelegate {
 
@@ -15,9 +16,11 @@ extension GKHostViewController: GKMatchDelegate {
         guard let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
             if let error = error {
+                os_log("%{public}s: error: %{public}s", log: .gameKit, type: .error, #function, error.localizedDescription)
                 print(error)
                 self?.startMatchmaking()
             } else if let match = match {
+                os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
                 self?.match = match
                 self?.match?.delegate = self
                 self?.addPlayers()
@@ -31,14 +34,16 @@ extension GKHostViewController: GKMatchDelegate {
         guard let match = self.match, let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().addPlayers(to: match, matchRequest: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] error in
             if let error = error {
-                print(error)
+                os_log("%{public}s: error: %{public}s", log: .gameKit, type: .info, #function, error.localizedDescription)
             } else {
+                os_log("%{public}s: success", log: .gameKit, type: .info, #function)
                 self?.addPlayers()
             }
         }
     }
 
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
+        os_log("%{public}s: player: %{public}s, state: %{public}ld", log: .gameKit, type: .info, #function, player.alias, state.rawValue)
         if state == .connected {
             PlayerImageDatabase.shared.connected(to: player, completion: { [weak self] in
                 DispatchQueue.main.async {
@@ -50,11 +55,18 @@ extension GKHostViewController: GKMatchDelegate {
     }
 
     func match(_ match: GKMatch, didFailWithError error: Error?) {
+        os_log("%{public}s", log: .gameKit, type: .error, #function, error?.localizedDescription ?? "-")
         cancelMatch()
     }
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
-        guard WKRSeenFinalArticlesStore.isRemoteTransferData(data) else { return }
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        guard WKRSeenFinalArticlesStore.isRemoteTransferData(data) else {
+            os_log("%{public}s: failed", log: .gameKit, type: .error, #function)
+            return
+        }
+        
+        os_log("%{public}s: success", log: .gameKit, type: .info, #function)
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }
 

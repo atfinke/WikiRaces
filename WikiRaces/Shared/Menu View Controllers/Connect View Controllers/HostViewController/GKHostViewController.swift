@@ -8,6 +8,7 @@
 
 import GameKit
 import UIKit
+import os.log
 
 import WKRKit
 import WKRUIKit
@@ -25,7 +26,6 @@ final internal class GKHostViewController: GKConnectViewController {
         didSet {
             if !isMatchmakingEnabled {
                 advertiser.stop()
-                self.disconnectFromMatch()
             }
         }
     }
@@ -52,10 +52,7 @@ final internal class GKHostViewController: GKConnectViewController {
     init() {
         super.init(isPlayerHost: true)
 
-        let date = Date()
         raceCodeGenerator.new { [weak self] code in
-            print(date.timeIntervalSinceNow)
-
             guard let self = self, self.isMatchmakingEnabled else { return }
             DispatchQueue.main.async {
                 self.model.raceCode = code
@@ -100,11 +97,13 @@ final internal class GKHostViewController: GKConnectViewController {
             Defaults.promptedAutoInvite = true
             Defaults.isAutoInviteOn = true
             self?.startMatchmaking()
+            os_log("%{public}s: enabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(action)
 
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel) { _ in
             Defaults.promptedAutoInvite = true
+            os_log("%{public}s: disabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
@@ -118,6 +117,7 @@ final internal class GKHostViewController: GKConnectViewController {
     // MARK: - Actions -
 
     func startMatch() {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         model.matchStarting = true
@@ -128,6 +128,7 @@ final internal class GKHostViewController: GKConnectViewController {
         func sendStartMessage() {
             guard let match = match else { fatalError("match is nil") }
             GKMatchmaker.shared().finishMatchmaking(for: match)
+            os_log("%{public}s: sending start message", log: .gameKit, type: .info, #function)
 
             let message = GKConnectViewController.StartMessage(
                 hostName: GKLocalPlayer.local.alias,
@@ -174,6 +175,8 @@ final internal class GKHostViewController: GKConnectViewController {
     // MARK: - Other -
 
     private func presentModal(modal: HostContentView.Modal) {
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, "\(modal)")
+        
         let controller: UIViewController
         switch modal {
         case .activity:
@@ -198,6 +201,7 @@ final internal class GKHostViewController: GKConnectViewController {
             advertiser.stop()
             return
         }
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
         advertiser.start(hostName: GKLocalPlayer.local.alias, raceCode: code)
     }
 

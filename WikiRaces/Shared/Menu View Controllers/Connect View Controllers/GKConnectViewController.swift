@@ -10,6 +10,7 @@ import GameKit
 import UIKit
 import WKRKit
 import WKRUIKit
+import os.log
 
 class GKConnectViewController: VisualEffectViewController {
 
@@ -32,7 +33,7 @@ class GKConnectViewController: VisualEffectViewController {
 
     final var match: GKMatch?
     final var isPlayerHost: Bool
-    private var isShowingError = false
+    final var isShowingError = false
 
     // MARK: - Initalization -
 
@@ -55,6 +56,8 @@ class GKConnectViewController: VisualEffectViewController {
     // MARK: - Helpers -
 
     final func disconnectFromMatch() {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
         match?.delegate = nil
         if isPlayerHost {
             sendMiniMessage(info: .cancelled)
@@ -64,6 +67,8 @@ class GKConnectViewController: VisualEffectViewController {
     }
 
     final func showError(title: String, message: String) {
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, title)
+        
         guard !isShowingError else { return }
         isShowingError = true
 
@@ -73,6 +78,7 @@ class GKConnectViewController: VisualEffectViewController {
     }
 
     final func sendMiniMessage(info: GKConnectViewController.MiniMessage.Info) {
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, "\(info)")
         let message = GKConnectViewController.MiniMessage(info: info, uuid: UUID())
         guard let data = try? JSONEncoder().encode(message) else {
             fatalError()
@@ -85,6 +91,7 @@ class GKConnectViewController: VisualEffectViewController {
     /// Cancels the join/create a race action and sends player back to main menu
     @objc
     final func cancelMatch() {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
         PlayerAnonymousMetrics.log(event: .userAction(#function))
 
         disconnectFromMatch()
@@ -97,6 +104,8 @@ class GKConnectViewController: VisualEffectViewController {
     }
 
     final func transitionToGame(for networkConfig: WKRPeerNetworkConfig, settings: WKRGameSettings) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
         guard !isShowingError else { return }
         isShowingError = true
 

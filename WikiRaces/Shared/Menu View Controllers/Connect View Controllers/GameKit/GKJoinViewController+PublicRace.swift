@@ -8,6 +8,7 @@
 
 import GameKit
 import WKRKit
+import os.log
 
 extension GKJoinViewController {
 
@@ -17,16 +18,21 @@ extension GKJoinViewController {
         guard let match = match else { fatalError() }
 
         if isPlayerHost, WKRSeenFinalArticlesStore.isRemoteTransferData(data) {
+            os_log("%{public}s: remote articles", log: .gameKit, type: .info, #function)
             WKRSeenFinalArticlesStore.addRemoteTransferData(data)
         } else if let object = try? JSONDecoder().decode(StartMessage.self, from: data) {
+            os_log("%{public}s: start message", log: .gameKit, type: .info, #function)
+            
             guard let hostAlias = self.publicRaceHostAlias, object.hostName == hostAlias else {
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
                 let message = "Please try again later."
                 showError(title: "Unable To Find Best Host", message: message)
                 model.title = "Race Error"
+                os_log("%{public}s: wrong host started match: %{public}s, expected: %{public}s", log: .gameKit, type: .info, #function, object.hostName, self.publicRaceHostAlias ?? "-")
                 return
             }
             if let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() {
+                os_log("%{public}s: encoded seen articles", log: .gameKit, type: .info, #function)
                 try? match.send(data, to: [player], dataMode: .reliable)
             }
             transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings)
@@ -34,6 +40,8 @@ extension GKJoinViewController {
     }
 
     func publicRaceSendStartMessage() {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
         func fail() {
             showError(title: "Unable To Start Race", message: "Please try again later.")
             model.title = "Race Error"
@@ -54,6 +62,7 @@ extension GKJoinViewController {
                 self.transitionToGame(for: .gameKitPublic(match: match, isHost: true), settings: settings)
             }
         } catch {
+            os_log("%{public}s: failed to send start message", log: .gameKit, type: .error, #function)
             fail()
             let info = "sendStartMessageToPlayers: " + error.localizedDescription
             PlayerAnonymousMetrics.log(event: .error(info))
@@ -61,12 +70,16 @@ extension GKJoinViewController {
     }
 
     func publicRaceDetermineHost(match: GKMatch) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.model.title = "Finding best host"
             var players = match.players
             players.append(GKLocalPlayer.local)
             if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
                 self.publicRaceHostAlias = hostPlayer.alias
+                os_log("%{public}s: determined host: %{public}s", log: .gameKit, type: .info, #function, hostPlayer.alias)
+                
                 if hostPlayer.alias == GKLocalPlayer.local.alias {
                     self.isPlayerHost = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
@@ -74,6 +87,8 @@ extension GKJoinViewController {
                     })
                 }
             } else {
+                os_log("%{public}s: no host", log: .gameKit, type: .error, #function)
+                
                 let info = "matchmaker...didFind: No host player"
                 PlayerAnonymousMetrics.log(event: .error(info))
                 PlayerAnonymousMetrics.log(event: .globalFailedToFindHost)
