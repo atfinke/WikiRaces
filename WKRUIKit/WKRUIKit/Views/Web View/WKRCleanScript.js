@@ -1,5 +1,16 @@
+var pixelsScrolled = 0;
+var lastPixelOffset = 0;
+
 window.onscroll = function () {
-    webkit.messageHandlers.scrollY.postMessage(window.scrollY);
+    let scrollY = window.scrollY
+    pixelsScrolled += Math.abs(scrollY - lastPixelOffset);
+    lastPixelOffset = scrollY;
+};
+
+document.body.onclick = function(e){
+    webkit.messageHandlers.scrollY.postMessage(pixelsScrolled);
+    pixelsScrolled = 0;
+    return true
 };
 
 function cleanPage() {

@@ -56,7 +56,6 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
     }
 
     public private(set) var pixelsScrolled = 0
-    private var lastPixelOffset = 0
 
     // network progress (fetch raw html) vs render progress (load html + images)
     private static let networkProgressWeight: Float = 0.7
@@ -182,7 +181,6 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
     public func startedPageLoad() {
         progressView?.show()
 
-        lastPixelOffset = 0
         isUserInteractionEnabled = false
 
         let duration = WKRUIKitConstants.webViewAnimateOutDuration
@@ -248,8 +246,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         guard let messageBody = message.body as? Int else { return }
         switch message.name {
         case "scrollY":
-            pixelsScrolled += abs(messageBody - lastPixelOffset)
-            lastPixelOffset = messageBody
+            pixelsScrolled += messageBody
         default: return
         }
     }
