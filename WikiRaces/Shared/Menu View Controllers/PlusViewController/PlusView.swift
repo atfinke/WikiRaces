@@ -334,13 +334,13 @@ class PlusView: UIView {
     func openPrivacy() {
         let urlString = "https://www.andrewfinke.com/privacy"
         guard let url = URL(string: urlString) else { fatalError() }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url)
     }
 
     @objc
     func openTerms() {
         let urlString = "https://www.andrewfinke.com/terms"
         guard let url = URL(string: urlString) else { fatalError() }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        UIApplication.shared.open(url)
     }
 }

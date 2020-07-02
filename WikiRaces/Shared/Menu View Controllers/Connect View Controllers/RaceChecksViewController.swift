@@ -31,7 +31,9 @@ final class RaceChecksViewController: VisualEffectViewController {
     final lazy var contentViewHosting = UIHostingController(
         rootView: LoadingContentView(model: model, cancel: { [weak self] in
             self?.cancel()
-        }, disclaimerButton: nil))
+        }, disclaimerButton: {
+            UIApplication.shared.open(WKRKitConstants.current.manageGameCenterLink)
+        }))
     
     // MARK: - Initalization -
     

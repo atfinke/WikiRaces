@@ -32,7 +32,7 @@ class ViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (_) in
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
             DispatchQueue.main.async {
                 self.title = self.webView.pixelsScrolled.description
             }

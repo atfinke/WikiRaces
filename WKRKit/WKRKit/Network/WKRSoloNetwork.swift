@@ -33,8 +33,4 @@ final internal class WKRSoloNetwork: WKRPeerNetwork {
     func disconnect() {
     }
 
-    func hostNetworkInterface() -> UIViewController? {
-        return nil
-    }
-
 }

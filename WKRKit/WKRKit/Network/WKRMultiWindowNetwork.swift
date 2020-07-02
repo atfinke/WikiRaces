@@ -85,8 +85,4 @@ final internal class WKRSplitViewNetwork: WKRPeerNetwork {
         print("Would Disconnect")
     }
 
-    func hostNetworkInterface() -> UIViewController? {
-        return nil
-    }
-
 }

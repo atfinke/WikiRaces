@@ -43,10 +43,6 @@ final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwor
         }
     }
 
-    internal func hostNetworkInterface() -> UIViewController? {
-        return nil
-    }
-
     // MARK: - MCSessionDelegate
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {

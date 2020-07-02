@@ -9,10 +9,10 @@
 import Foundation
 
 internal struct WKRAnimationDurationConstants {
-    static let menuToggle = 0.75
+    static let menuToggle: Double = 0.5
 
-    static let gameFadeIn = 1.0
-    static let gameFadeInDelay = 0.25
-    static let gameFadeOut = 4.0
-    static let gameFadeOutDelay = 2.0
+    static let gameFadeIn: Double = 2.5
+    static let gameFadeInDelay: Double = 3
+    static let gameFadeOut: Double = 2.5
+    static let gameFadeOutDelay: Double = 1
 }

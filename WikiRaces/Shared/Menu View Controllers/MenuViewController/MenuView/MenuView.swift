@@ -271,7 +271,7 @@ final class MenuView: UIView {
         }
         Defaults.promptedGlobalRacesPopularity = true
 
-        let message = "Most racers use private races to play friends. Invite a friend for the best chance at joining a race."
+        let message = "Most racers use private races to play with friends. Create a private race and invite a friend for the best chance at joining a race."
         let alertController = UIAlertController(title: "Public Races", message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in

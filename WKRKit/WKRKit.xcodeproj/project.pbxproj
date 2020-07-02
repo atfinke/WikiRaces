@@ -53,7 +53,6 @@
 		14EB9F581F3682F200FF1A9E /* WKRManager+PageNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F571F3682F200FF1A9E /* WKRManager+PageNavigation.swift */; };
 		14EB9F5A1F3682F900FF1A9E /* WKRManager+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F591F3682F900FF1A9E /* WKRManager+Codable.swift */; };
 		14EB9F5E1F36830800FF1A9E /* WKRPeerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */; };
-		14EB9F601F36831A00FF1A9E /* WKRMultipeerNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */; };
 		14EB9F621F36832C00FF1A9E /* WKRMultiWindowNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */; };
 		14EB9F641F36833400FF1A9E /* WKRCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F631F36833400FF1A9E /* WKRCodable.swift */; };
 		14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F651F36833A00FF1A9E /* WKROperation.swift */; };
@@ -124,7 +123,6 @@
 		14EB9F571F3682F200FF1A9E /* WKRManager+PageNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+PageNavigation.swift"; sourceTree = "<group>"; };
 		14EB9F591F3682F900FF1A9E /* WKRManager+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRManager+Codable.swift"; sourceTree = "<group>"; };
 		14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPeerNetwork.swift; sourceTree = "<group>"; };
-		14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRMultipeerNetwork.swift; sourceTree = "<group>"; };
 		14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRMultiWindowNetwork.swift; sourceTree = "<group>"; };
 		14EB9F631F36833400FF1A9E /* WKRCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRCodable.swift; sourceTree = "<group>"; };
 		14EB9F651F36833A00FF1A9E /* WKROperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKROperation.swift; sourceTree = "<group>"; };
@@ -332,7 +330,6 @@
 				14EB9F5D1F36830800FF1A9E /* WKRPeerNetwork.swift */,
 				142CB29D202EC42000BC6A33 /* WKRPeerNetworkConfig.swift */,
 				141427FE21FBB84600C48788 /* WKRGameKitNetwork.swift */,
-				14EB9F5F1F36831A00FF1A9E /* WKRMultipeerNetwork.swift */,
 				14EB9F611F36832C00FF1A9E /* WKRMultiWindowNetwork.swift */,
 				142CB299202EAC6B00BC6A33 /* WKRSoloNetwork.swift */,
 			);
@@ -497,7 +494,6 @@
 				14EB9F661F36833A00FF1A9E /* WKROperation.swift in Sources */,
 				1499606C2226FA7A00259B68 /* WKRPlayerRaceStats.swift in Sources */,
 				140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */,
-				14EB9F601F36831A00FF1A9E /* WKRMultipeerNetwork.swift in Sources */,
 				14EB9F6A1F36834E00FF1A9E /* WKRPageNavigation.swift in Sources */,
 				14EB9F521F3682D000FF1A9E /* WKRManager.swift in Sources */,
 				1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */,

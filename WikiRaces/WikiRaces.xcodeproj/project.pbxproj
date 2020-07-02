@@ -78,6 +78,11 @@
 		144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1028202FC79B003DB51A /* HelpViewController.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
+		144EC2A524ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
+		144EC2A624ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
+		144EC2A724ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
+		144EC2A824ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
+		144EC2A924ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
 		14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
 		14584BC3220B6BE700D63428 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
@@ -285,6 +290,11 @@
 		14ACB79A24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
 		14ACB79B24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
 		14ACB79C24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */; };
+		14B05D2524AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */; };
+		14B05D2624AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */; };
+		14B05D2724AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */; };
+		14B05D2824AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */; };
+		14B05D2924AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */; };
 		14B2DD3B22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
 		14B2DD3C22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
 		14B2DD3D22212298009B8AB3 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B2DD3A22212298009B8AB3 /* MenuView.swift */; };
@@ -689,6 +699,7 @@
 		144A1027202FC79B003DB51A /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 		144A1028202FC79B003DB51A /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
+		144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackingVisualEffectViewController.swift; sourceTree = "<group>"; };
 		145925DD210D555D00CCC8F0 /* ResultsViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ResultsViewController+KB.swift"; sourceTree = "<group>"; };
 		146B99F51F4F4B5600507B3F /* WKRKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRKit.xcodeproj; path = ../WKRKit/WKRKit.xcodeproj; sourceTree = SOURCE_ROOT; };
 		146B9A061F4F4B6100507B3F /* WKRUIKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = WKRUIKit.xcodeproj; path = ../WKRUIKit/WKRUIKit.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -724,6 +735,7 @@
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
 		14ACB79524ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerPlaceholderImageRenderer.swift; sourceTree = "<group>"; };
+		14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDatabaseLiveRace.swift; sourceTree = "<group>"; };
 		14B2DD3A22212298009B8AB3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Actions.swift"; sourceTree = "<group>"; };
 		14B2DD4422212B96009B8AB3 /* MenuView+Setup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Setup.swift"; sourceTree = "<group>"; };
@@ -995,6 +1007,7 @@
 			isa = PBXGroup;
 			children = (
 				144A1027202FC79B003DB51A /* VisualEffectViewController.swift */,
+				144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */,
 				144A1028202FC79B003DB51A /* HelpViewController.swift */,
 				1473E29F210DAD7C00726377 /* HelpViewController+KB.swift */,
 			);
@@ -1248,6 +1261,7 @@
 				14E1B1991F7981C70082F4FA /* PlayerAnonymousMetrics.swift */,
 				143A8BBB1F58746800580AA2 /* PlayerStatsManager.swift */,
 				14E0F19E22303A8F00BFF1E9 /* PlayerDatabaseStat.swift */,
+				14B05D2424AD542D0010FA07 /* PlayerDatabaseLiveRace.swift */,
 				141E4CF022012B2F000A0A15 /* PlayerDatabaseMetrics.swift */,
 			);
 			path = Logging;
@@ -1686,6 +1700,7 @@
 				14C4AB611F368A170086B77F /* GameViewController+Manager.swift in Sources */,
 				142ABDFE24600576008E7F77 /* PlusView.swift in Sources */,
 				141B3EDB24A3C08000BD18C7 /* ResultsContentView.swift in Sources */,
+				14B05D2524AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */,
 				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				1446C1D924A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14DF31A8211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
@@ -1701,6 +1716,7 @@
 				14F034A724A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				142ABE022460057C008E7F77 /* ActivityButton.swift in Sources */,
+				144EC2A524ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				148E5C5424A2967600DD43E4 /* GKHostViewController.swift in Sources */,
 				14D18CE02460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
@@ -1775,6 +1791,7 @@
 				14EBF5AD24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				14EF51D9245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				148E5C4324A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
+				144EC2A624ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				148E5C6124A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				14DF31A9211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
@@ -1799,6 +1816,7 @@
 				148E5C4F24A2943100DD43E4 /* Nearby.swift in Sources */,
 				14C2AF0024A3CE9000D2378C /* ResultsContentViewModel.swift in Sources */,
 				142ABDFB2460055B008E7F77 /* PlusViewController.swift in Sources */,
+				14B05D2624AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */,
 				14B4DB682224F1BC007D4B54 /* GKJoinViewController+Match.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14EF51DC245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
@@ -1886,6 +1904,7 @@
 				1475C17524A655E900882F1F /* GKJoinViewController+Match.swift in Sources */,
 				1475C18A24A655F600882F1F /* ActivityButton.swift in Sources */,
 				14EBF5A124A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
+				144EC2A724ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				14EBF58924A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				1475C15C24A655D800882F1F /* MenuTile.swift in Sources */,
 				1475C15E24A655D800882F1F /* MenuView+Setup.swift in Sources */,
@@ -1931,6 +1950,7 @@
 				1475C17824A655EC00882F1F /* CustomRaceViewController.swift in Sources */,
 				1475C19024A655FC00882F1F /* DebugInfoTableViewCell.swift in Sources */,
 				14F034AF24A8480D006A908E /* LoadingContentView.swift in Sources */,
+				14B05D2724AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */,
 				148E5C6224A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				1475C1A024A6560800882F1F /* ResultRenderer+Creation.swift in Sources */,
 				1475C1B124A6561400882F1F /* VotingViewController+KB.swift in Sources */,
@@ -1958,6 +1978,7 @@
 				14C25FFE1F6F02A500CD7373 /* GameViewController+Manager.swift in Sources */,
 				14EBF5AF24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				14495D8A21FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
+				144EC2A824ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				14C260071F6F02A500CD7373 /* PlayerStatsManager.swift in Sources */,
 				148E5C4524A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				148E5C6324A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
@@ -1982,6 +2003,7 @@
 				14EBF50824A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
 				14B4DB692224F1BD007D4B54 /* GKJoinViewController+Match.swift in Sources */,
 				14EF51DA245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
+				14B05D2824AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */,
 				148E5C5124A2943100DD43E4 /* Nearby.swift in Sources */,
 				14C2AF0124A3CE9000D2378C /* ResultsContentViewModel.swift in Sources */,
 				14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */,
@@ -2083,6 +2105,7 @@
 				14EBF5A324A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				14F034AB24A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				1475C19824A6560700882F1F /* ResultsViewController+KB.swift in Sources */,
+				144EC2A924ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				1475C13024A6553F00882F1F /* ResultsContentViewModel.swift in Sources */,
 				1475C19624A6560700882F1F /* ResultsViewController+Actions.swift in Sources */,
 				1475C17124A655E800882F1F /* GKJoinViewController.swift in Sources */,
@@ -2107,6 +2130,7 @@
 				1475C15724A655D700882F1F /* MenuView+Setup.swift in Sources */,
 				14ACB79C24ABB8A500BB5F89 /* PlayerPlaceholderImageRenderer.swift in Sources */,
 				1475C15424A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
+				14B05D2924AD542D0010FA07 /* PlayerDatabaseLiveRace.swift in Sources */,
 				1475C13324A6553F00882F1F /* ListFooterView.swift in Sources */,
 				1475C16424A655DB00882F1F /* MenuViewController+Debug.swift in Sources */,
 				1475C13224A6553F00882F1F /* ResultsItemContentView.swift in Sources */,

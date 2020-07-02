@@ -25,7 +25,7 @@ final internal class PlayerStatsManager {
                 self = .solo
             case .gameKitPublic:
                 self = .public
-            case .mpc, .gameKitPrivate:
+            case .gameKitPrivate:
                 self = .private
             default :
                 return nil

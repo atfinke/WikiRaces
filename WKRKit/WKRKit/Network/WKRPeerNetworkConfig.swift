@@ -16,13 +16,12 @@ public enum WKRPeerNetworkConfig {
     case gameKitPublic(match: GKMatch, isHost: Bool)
     case gameKitPrivate(match: GKMatch, isHost: Bool)
     case multiwindow(windowName: String, isHost: Bool)
-    case mpc(serviceType: String, session: MCSession, isHost: Bool)
 
     public var isHost: Bool {
         switch self {
         case .solo:
             return true
-        case .gameKitPublic(_, let isHost), .gameKitPrivate(_, let isHost), .mpc(_, _, let isHost), .multiwindow(_, let isHost):
+        case .gameKitPublic(_, let isHost), .gameKitPrivate(_, let isHost), .multiwindow(_, let isHost):
             return isHost
         }
     }
@@ -36,9 +35,6 @@ public enum WKRPeerNetworkConfig {
         case .gameKitPublic(let match, let isHost), .gameKitPrivate(let match, let isHost):
             let player = WKRPlayer(profile: GKLocalPlayer.local.wkrProfile(), isHost: isHost)
             return (player, WKRGameKitNetwork(match: match))
-        case .mpc(let serviceType, let session, let isHost):
-            let player = WKRPlayer(profile: session.myPeerID.wkrProfile(), isHost: isHost)
-            return (player, WKRMultipeerNetwork(serviceType: serviceType, session: session))
         case .multiwindow(let windowName, let isHost):
             let profile = WKRPlayerProfile(name: windowName, playerID: windowName)
             let player = WKRPlayer(profile: profile, isHost: isHost)

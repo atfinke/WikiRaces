@@ -129,10 +129,6 @@ final public class WKRGameManager {
 
     // MARK: - User Interface
 
-    public func hostNetworkInterface() -> UIViewController? {
-        return peerNetwork.hostNetworkInterface()
-    }
-
     public func enqueue(message: String, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
         alertView.enqueue(text: message,
                           duration: duration,

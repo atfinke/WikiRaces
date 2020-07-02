@@ -13,7 +13,6 @@ internal protocol WKRPeerNetwork: class {
 
     func disconnect()
     func send(object: WKRCodable)
-    func hostNetworkInterface() -> UIViewController?
 }
 
 enum WKRPeerNetworkUpdate {
