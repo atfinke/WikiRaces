@@ -143,7 +143,7 @@ public struct WKRKitConstants {
 
         guard let folderPath = fileManager.documentsDirectory?.path,
             let filePaths = try? fileManager.contentsOfDirectory(atPath: folderPath) else {
-                fatalError()
+                return
         }
         for filePath in filePaths {
             do {

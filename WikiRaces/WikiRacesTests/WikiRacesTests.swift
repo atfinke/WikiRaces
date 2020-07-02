@@ -41,7 +41,7 @@ class WikiRacesTests: XCTestCase {
                 XCTFail("race type nil")
                 return
             }
-            let pageStat: PlayerDatabaseStat
+            let pageStat: PlayerUserDefaultsStat
 
             switch raceType {
             case .private:
@@ -66,8 +66,8 @@ class WikiRacesTests: XCTestCase {
             }
 
             let playersKey: String
-            var uniqueStat: PlayerDatabaseStat
-            var totalStat: PlayerDatabaseStat
+            var uniqueStat: PlayerUserDefaultsStat
+            var totalStat: PlayerUserDefaultsStat
             switch raceType {
             case .private:
                 playersKey = "PlayersArray"
@@ -98,7 +98,7 @@ class WikiRacesTests: XCTestCase {
                 return
             }
 
-            let raceFastestTimeStat: PlayerDatabaseStat
+            let raceFastestTimeStat: PlayerUserDefaultsStat
 
             switch raceType {
             case .private:
@@ -130,7 +130,7 @@ class WikiRacesTests: XCTestCase {
     }
 
     func testRaceCompletionStats() {
-        var testedStats = Set<PlayerDatabaseStat>()
+        var testedStats = Set<PlayerUserDefaultsStat>()
         for raceIndex in 0..<600 {
             guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
@@ -142,11 +142,11 @@ class WikiRacesTests: XCTestCase {
             let newTimeRaced = Double(Int.random(in: 0...100))
             let newPixelsScrolled = Double(Int.random(in: 0...100000))
 
-            let raceCountStat: PlayerDatabaseStat
-            let racePointsStat: PlayerDatabaseStat
-            let racePlaceStat: PlayerDatabaseStat
-            let raceTimeStat: PlayerDatabaseStat
-            let racePixelsScrolledStat: PlayerDatabaseStat
+            let raceCountStat: PlayerUserDefaultsStat
+            let racePointsStat: PlayerUserDefaultsStat
+            let racePlaceStat: PlayerUserDefaultsStat
+            let raceTimeStat: PlayerUserDefaultsStat
+            let racePixelsScrolledStat: PlayerUserDefaultsStat
 
             switch raceType {
 
