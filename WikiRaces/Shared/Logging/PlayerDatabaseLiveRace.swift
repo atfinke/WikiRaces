@@ -27,6 +27,7 @@ class PlayerDatabaseLiveRace {
     
     private var activeRecord: CKRecord?
     private var activeRaceCode: String?
+    private var lastUpdateDate: Date?
     
     private var queuedResultsInfo: WKRResultsInfo?
     
@@ -34,6 +35,7 @@ class PlayerDatabaseLiveRace {
         activeRecord = nil
         activeRaceCode = nil
         queuedResultsInfo = nil
+        lastUpdateDate = nil
     }
     
     func updated(resultsInfo: WKRResultsInfo) {
@@ -56,22 +58,37 @@ class PlayerDatabaseLiveRace {
             record["ResultsInfo"] = CKAsset(fileURL: url)
             
             os_log("%{public}s: async check completed", log: .raceLiveDatabase, type: .info, #function)
-            self.save(record: record)
+            self.save(record: record, enforceRecentUpdateCheck: true)
         }
     }
     
     func updated(state: WKRGameState) {
         guard let record = activeRecord else { return }
         record["State"] = state.rawValue
-        save(record: record)
+        save(record: record, enforceRecentUpdateCheck: true)
     }
     
-    func save(record: CKRecord) {
+    func save(record: CKRecord, enforceRecentUpdateCheck: Bool) {
+        if enforceRecentUpdateCheck {
+            if let date = lastUpdateDate {
+                let timeIntervalSinceNow = -Int(date.timeIntervalSinceNow)
+                if timeIntervalSinceNow < WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate {
+                    os_log("%{public}s: passed enforce recent check: %{public}ld, max is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
+                } else {
+                    os_log("%{public}s: failed enforce recent check: %{public}ld, max is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
+                    return
+                }
+            } else {
+                os_log("%{public}s: no date", log: .raceLiveDatabase, type: .error, #function)
+                return
+            }
+        }
         CKContainer.default().publicCloudDatabase.save(record) { _, error in
             if let error = error {
-                os_log("%{public}s: error: %{public}s", log: .raceLiveDatabase, type: .error, #function, error.localizedDescription)
+                os_log("%{public}s: save error: %{public}s", log: .raceLiveDatabase, type: .error, #function, error.localizedDescription)
             } else {
-                os_log("%{public}s: successful", log: .raceLiveDatabase, type: .info, #function)
+                self.lastUpdateDate = Date()
+                os_log("%{public}s: save successful", log: .raceLiveDatabase, type: .info, #function)
             }
         }
     }
@@ -150,12 +167,12 @@ class PlayerDatabaseLiveRace {
                 existingRecord = record
                 
                 let timeIntervalSinceNow = -Int(date.timeIntervalSinceNow)
-                if timeIntervalSinceNow < WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceNow {
+                if timeIntervalSinceNow < WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate {
                     isRaceCodeValid = false
                     PlayerAnonymousMetrics.log(event: .revampRaceCodeRecordTooRecent)
-                    os_log("%{public}s: existing record too new: %{public}ld, min is  %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceNow)
+                    os_log("%{public}s: existing record too new: %{public}ld, min is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
                 } else {
-                    os_log("%{public}s: existing record is reusable: %{public}ld, min is  %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceNow)
+                    os_log("%{public}s: existing record is reusable: %{public}ld, min is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
                 }
             } else {
                 isRaceCodeValid = false
@@ -184,7 +201,7 @@ class PlayerDatabaseLiveRace {
         record["Host"] = host
         activeRaceCode = raceCode
         activeRecord = record
-        save(record: record)
+        save(record: record, enforceRecentUpdateCheck: false)
     }
     
 }

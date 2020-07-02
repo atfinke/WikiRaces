@@ -159,11 +159,17 @@ final internal class GKHostViewController: GKConnectViewController {
                 startSolo()
             } else {
                 let controller = UIAlertController(title: "Solo Race", message: "Solo races will not impact your leaderboard stats.", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Back", style: .default) { _ in
+                    self.model.matchStarting = false
+                    self.contentViewHosting.view.isUserInteractionEnabled = true
+                }
+                controller.addAction(cancelAction)
+                
                 let startAction = UIAlertAction(title: "Ok", style: .default) { _ in
                     startSolo()
                 }
                 controller.addAction(startAction)
-                controller.addCancelAction(title: "Back")
+                
                 present(controller, animated: true, completion: nil)
                 Defaults.promptedSoloRacesStats = true
             }

@@ -28,10 +28,4 @@ extension OSLog {
     static let matchSupport = OSLog(subsystem: subsystem, category: CustomCategory.matchSupport.rawValue)
     static let raceLiveDatabase = OSLog(subsystem: subsystem, category: CustomCategory.raceLiveDatabase.rawValue)
     
-//
-//    static let store = OSLog(subsystem: subsystem, category: CustomCategory.store.rawValue)
-//    static let notificationProcessing = OSLog(subsystem: subsystem, category: CustomCategory.notificationProcessing.rawValue)
-//    static let imageProcessing = OSLog(subsystem: subsystem, category: CustomCategory.imageProcessing.rawValue)
-//    static let watch = OSLog(subsystem: subsystem, category: CustomCategory.watch.rawValue)
-
 }

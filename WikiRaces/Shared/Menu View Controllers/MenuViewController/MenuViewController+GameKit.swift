@@ -19,8 +19,8 @@ extension MenuViewController: GKGameCenterControllerDelegate {
                 let info = "attemptGlobalAuthentication: " + error.localizedDescription
                 PlayerAnonymousMetrics.log(event: .error(info))
             case .controller(let controller):
-                if self.presentedViewController == nil, self.menuView.state != .noInterface {
-                    self.present(controller, animated: true, completion: nil)
+                if presentedViewController == nil, self.menuView.state != .noInterface {
+                    present(controller, animated: true, completion: nil)
                 }
             case .isAuthenticated:
                 let metrics = PlayerDatabaseMetrics.shared

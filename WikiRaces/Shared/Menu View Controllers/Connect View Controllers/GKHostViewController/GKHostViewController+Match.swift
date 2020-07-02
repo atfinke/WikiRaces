@@ -13,12 +13,21 @@ import os.log
 extension GKHostViewController: GKMatchDelegate {
 
     func startMatchmaking() {
+        let startDate = Date()
         guard let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
             if let error = error {
-                os_log("%{public}s: error: %{public}s", log: .gameKit, type: .error, #function, error.localizedDescription)
-                print(error)
-                self?.startMatchmaking()
+                os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 5)
+                if -startDate.timeIntervalSinceNow < 5 {
+                    os_log("%{public}s: quick fail, cancelling and waiting", log: .gameKit, type: .error, #function)
+                    
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+                        os_log("%{public}s: quick fail, restarting", log: .gameKit, type: .error, #function)
+                        self?.startMatchmaking()
+                    }
+                } else {
+                    self?.startMatchmaking()
+                }
             } else if let match = match {
                 os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
                 self?.match = match

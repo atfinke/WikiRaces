@@ -7,7 +7,7 @@
 //
 
 import CloudKit
-import Foundation
+import os.log
 
 public struct WKRKitConstants {
 
@@ -39,11 +39,13 @@ public struct WKRKitConstants {
     public let maxLocalRacePlayers: Int
     
     public let manageGameCenterLink: URL
-    public let raceCodeRecordMinReuseTimeSinceNow: Int
+    public let raceCodeRecordMinReuseTimeSinceLastUpdate: Int
 
     // MARK: - Initalization
 
     init() {
+        os_log("%{public}s", log: .constants, type: .info, #function)
+        
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String: Any] else {
                 fatalError("Failed to load constants")
@@ -102,8 +104,8 @@ public struct WKRKitConstants {
               let manageGameCenterLink = URL(string: manageGameCenterLinkString) else {
             fatalError("WKRKitConstants: No ManageGameCenterLink value")
         }
-        guard let raceCodeRecordMinReuseTimeSinceNow = documentsConstants["RaceCodeRecordMinReuseTimeSinceNow"] as? Int else {
-            fatalError("WKRKitConstants: No RaceCodeRecordMinReuseTimeSinceNow value")
+        guard let raceCodeRecordMinReuseTimeSinceLastUpdate = documentsConstants["RaceCodeRecordMinReuseTimeSinceLastUpdate"] as? Int else {
+            fatalError("WKRKitConstants: No RaceCodeRecordMinReuseTimeSinceLastUpdate value")
         }
 
         self.version = version
@@ -129,13 +131,14 @@ public struct WKRKitConstants {
         self.maxLocalRacePlayers = maxLocalRacePlayers
         
         self.manageGameCenterLink = manageGameCenterLink
-        self.raceCodeRecordMinReuseTimeSinceNow = raceCodeRecordMinReuseTimeSinceNow
+        self.raceCodeRecordMinReuseTimeSinceLastUpdate = raceCodeRecordMinReuseTimeSinceLastUpdate
     }
 
     // MARK: - Helpers
 
     @available(*, deprecated, message: "Only for testing")
     static public func removeConstants() {
+        os_log("%{public}s", log: .constants, type: .info, #function)
         let fileManager = FileManager.default
 
         guard let folderPath = fileManager.documentsDirectory?.path,
@@ -153,10 +156,12 @@ public struct WKRKitConstants {
 
     @available(*, deprecated, message: "Only for testing")
     static public func updateConstantsForTestingCharacterClipping() {
+        os_log("%{public}s", log: .constants, type: .info, #function)
         copyBundledResourcesToDocuments(constantsFileName: "WKRKitConstants-TESTING_ONLY")
     }
 
     static public func updateConstants() {
+        os_log("%{public}s", log: .constants, type: .info, #function)
         copyBundledResourcesToDocuments()
 
         guard ProcessInfo.processInfo.environment["Cloud_Disabled"] != "true" else {
@@ -168,12 +173,14 @@ public struct WKRKitConstants {
 
         publicDB.fetch(withRecordID: recordID) { record, _ in
             guard let record = record else {
+                os_log("%{public}s: no record", log: .constants, type: .error, #function)
                 return
             }
 
             guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
                 let recordArticlesAssetURL = (record["ArticlesFile"] as? CKAsset)?.fileURL,
                 let recordGetLinksScriptAssetURL = (record["GetLinksScriptFile"] as? CKAsset)?.fileURL else {
+                    os_log("%{public}s: invalid record assets", log: .constants, type: .error, #function)
                     return
             }
 
@@ -192,12 +199,14 @@ public struct WKRKitConstants {
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
             FileManager.default.fileExists(atPath: newArticlesFileURL.path),
             FileManager.default.fileExists(atPath: newGetLinksScriptFileURL.path) else {
+                os_log("%{public}s: files don't exist", log: .constants, type: .error, #function)
                 return
         }
 
         guard let newConstants = NSDictionary(contentsOf: newConstantsFileURL),
             let newConstantsVersion = newConstants["Version"] as? Int,
             let documentsDirectory = FileManager.default.documentsDirectory else {
+                os_log("%{public}s: version doesn't exist", log: .constants, type: .error, #function)
                 return
         }
 
@@ -218,6 +227,9 @@ public struct WKRKitConstants {
 
             if newConstantsVersion <= documentsConstantsVersions {
                 shouldReplaceExisitingConstants = false
+                os_log("%{public}s: don't replace: new: %{public}ld, existing: %{public}ld", log: .constants, type: .info, #function, newConstantsVersion, documentsConstantsVersions)
+            } else {
+                os_log("%{public}s: replace: new: %{public}ld, existing: %{public}ld", log: .constants, type: .info, #function, newConstantsVersion, documentsConstantsVersions)
             }
         }
 
@@ -241,6 +253,8 @@ public struct WKRKitConstants {
     }
 
     static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
+        os_log("%{public}s", log: .constants, type: .error, #function)
+        
         guard Thread.isMainThread,
             let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),
