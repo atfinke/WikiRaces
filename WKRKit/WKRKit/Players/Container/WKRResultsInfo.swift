@@ -109,7 +109,7 @@ public struct WKRResultsInfo: Codable {
     }
 
     // MARK: - Helpers
-    
+
     public mutating func minimize() {
         playersSortedByState = []
     }
@@ -130,7 +130,7 @@ public struct WKRResultsInfo: Codable {
         guard let updatedPlayerIndex = playersSortedByState.firstIndex(of: player) else { return nil }
         return playersSortedByState[updatedPlayerIndex]
     }
-    
+
     public func player(for playerID: String) -> WKRPlayer? {
         guard let updatedPlayerIndex = playersSortedByState.firstIndex(where: { $0.profile.playerID == playerID }) else { return nil }
         return playersSortedByState[updatedPlayerIndex]
@@ -165,7 +165,6 @@ public struct WKRResultsInfo: Codable {
         return results
     }
 }
-
 
 #if os(macOS)
 

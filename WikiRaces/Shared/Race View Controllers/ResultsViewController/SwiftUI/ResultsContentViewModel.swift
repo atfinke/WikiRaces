@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WKRKit
+import WKRUIKit
 
 class ResultsContentViewModel: ObservableObject {
 
@@ -15,7 +16,7 @@ class ResultsContentViewModel: ObservableObject {
 
     struct Item: Identifiable, Equatable {
         var id: String { return player.id }
-        let player: SwiftUIPlayer
+        let player: WKRUIPlayer
 
         let subtitle: String
         let title: String
@@ -60,7 +61,7 @@ class ResultsContentViewModel: ObservableObject {
 
                 let pointsSuffix = playerResult.points == 1 ? "" : "s"
                 let item = Item(
-                    player: SwiftUIPlayer(id: playerResult.profile.playerID),
+                    player: WKRUIPlayer(id: playerResult.profile.playerID),
                     subtitle: subtitleString,
                     title: playerResult.points.description + " Point" + pointsSuffix,
                     detail: "",
@@ -98,7 +99,7 @@ class ResultsContentViewModel: ObservableObject {
                     }
 
                     let item = Item(
-                        player: SwiftUIPlayer(id: player.profile.playerID),
+                        player: WKRUIPlayer(id: player.profile.playerID),
                         subtitle: subtitle,
                         title: title,
                         detail: detail,

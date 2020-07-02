@@ -275,7 +275,7 @@ final class MenuView: UIView {
         let alertController = UIAlertController(title: "Public Races", message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
-            PlayerAnonymousMetrics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
+            PlayerFirebaseAnalytics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
             self.animateMenuOut {
                 self.listenerUpdate?(.presentJoinPublicRace)
             }

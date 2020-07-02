@@ -28,10 +28,10 @@ class WikiRacesTests: XCTestCase {
             }
         }
     }
-    
+
     func testRaceCodePlayerGroupGeneration() {
         for code in RaceCodeGenerator.codes {
-            let _ = RaceCodeGenerator.playerGroup(for: code)
+            _ = RaceCodeGenerator.playerGroup(for: code)
         }
     }
 

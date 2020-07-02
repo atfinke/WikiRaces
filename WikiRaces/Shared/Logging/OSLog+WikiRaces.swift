@@ -27,5 +27,5 @@ extension OSLog {
     static let nearby = OSLog(subsystem: subsystem, category: CustomCategory.nearby.rawValue)
     static let matchSupport = OSLog(subsystem: subsystem, category: CustomCategory.matchSupport.rawValue)
     static let raceLiveDatabase = OSLog(subsystem: subsystem, category: CustomCategory.raceLiveDatabase.rawValue)
-    
+
 }

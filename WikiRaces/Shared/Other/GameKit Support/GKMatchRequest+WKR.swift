@@ -18,7 +18,7 @@ extension GKMatchRequest {
         request.maxPlayers = isInital ? 2 : min(GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer), WKRKitConstants.current.maxGlobalRacePlayers)
         request.playerGroup = RaceCodeGenerator.playerGroup(for: raceCode)
         request.playerAttributes = 0xFFFF0000
-        
+
         os_log("%{public}s: %{public}s, %{public}ld, %{public}ld-%{public}ld, %{public}ld, %{public}ld",
                log: .matchSupport,
                type: .info,
@@ -30,7 +30,7 @@ extension GKMatchRequest {
                request.playerGroup,
                request.playerAttributes
         )
-        
+
         return request
     }
 
@@ -45,7 +45,7 @@ extension GKMatchRequest {
             request.maxPlayers = 2
             request.playerGroup = "<GLOBAL>".hash
         }
-        
+
         os_log("%{public}s: %{public}s, %{public}ld-%{public}ld, %{public}ld, %{public}ld",
                log: .matchSupport,
                type: .info,
@@ -56,7 +56,7 @@ extension GKMatchRequest {
                request.playerGroup,
                request.playerAttributes
         )
-        
+
         return request
     }
 

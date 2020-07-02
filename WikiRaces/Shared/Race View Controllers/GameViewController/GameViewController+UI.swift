@@ -63,8 +63,8 @@ extension GameViewController {
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-        
-        view.alpha = 0
+
+//        view.alpha = 0
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
@@ -135,23 +135,23 @@ extension GameViewController {
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:forfeit"))
-                PlayerAnonymousMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
+                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:forfeit"))
+                PlayerFirebaseAnalytics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
                 self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
 
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
-                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:reload"))
-                PlayerAnonymousMetrics.log(event: .usedReload)
+                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:reload"))
+                PlayerFirebaseAnalytics.log(event: .usedReload)
                 self.webView?.reload()
             }
             alertController.addAction(reloadAction)
         }
 
         let quitAction = UIAlertAction(title: "Leave Match", style: .destructive) {  [weak self] _ in
-            PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
-            PlayerAnonymousMetrics.log(event: .quitRace, attributes: nil)
+            PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:quit"))
+            PlayerFirebaseAnalytics.log(event: .quitRace, attributes: nil)
             self?.attemptQuit()
         }
         alertController.addAction(quitAction)

@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    @ObservedObject var model = Model(raceCode: "barn")
-    
+
+    @ObservedObject var model = Model(raceCode: "buzzard")
+
     var body: some View {
         VStack {
             Text("\(model.host ?? "")").padding()

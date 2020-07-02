@@ -33,11 +33,11 @@ final internal class AppDelegate: WKRAppDelegate {
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showBanHammer),
-                                               name: PlayerDatabaseMetrics.banHammerNotification,
+                                               name: PlayerCloudKitStatsManager.banHammerNotification,
                                                object: nil)
 
         PlayerStatsManager.shared.start()
-        PlayerDatabaseMetrics.shared.connect()
+        PlayerCloudKitStatsManager.shared.connect()
 
         logCloudStatus()
         logBuild()
@@ -62,14 +62,14 @@ final internal class AppDelegate: WKRAppDelegate {
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
-            PlayerAnonymousMetrics.log(event: .cloudStatus,
+            PlayerFirebaseAnalytics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
     }
 
     private func logBuild() {
         let appInfo = Bundle.main.appInfo
-        let metrics = PlayerDatabaseMetrics.shared
+        let metrics = PlayerCloudKitStatsManager.shared
         metrics.log(value: appInfo.version, for: "coreVersion")
         metrics.log(value: appInfo.build.description, for: "coreBuild")
         metrics.log(value: WKRKitConstants.current.version.description,
@@ -90,7 +90,7 @@ final internal class AppDelegate: WKRAppDelegate {
                                             animated: true,
                                             completion: nil)
 
-        PlayerAnonymousMetrics.log(event: .banHammer)
+        PlayerFirebaseAnalytics.log(event: .banHammer)
     }
 
 }

@@ -37,7 +37,7 @@ public struct WKRKitConstants {
 
     public let maxGlobalRacePlayers: Int
     public let maxLocalRacePlayers: Int
-    
+
     public let manageGameCenterLink: URL
     public let raceCodeRecordMinReuseTimeSinceLastUpdate: Int
 
@@ -45,7 +45,7 @@ public struct WKRKitConstants {
 
     init() {
         os_log("%{public}s", log: .constants, type: .info, #function)
-        
+
         guard let documentsConstantsURL = FileManager.default.documentsDirectory?.appendingPathComponent("WKRKitConstants.plist"),
             let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL) as? [String: Any] else {
                 fatalError("Failed to load constants")
@@ -99,7 +99,7 @@ public struct WKRKitConstants {
         guard let maxLocalRacePlayers = documentsConstants["MaxLocalRacePlayers"] as? Int else {
             fatalError("WKRKitConstants: No MaxLocalRacePlayers value")
         }
-        
+
         guard let manageGameCenterLinkString = documentsConstants["ManageGameCenterLink"] as? String,
               let manageGameCenterLink = URL(string: manageGameCenterLinkString) else {
             fatalError("WKRKitConstants: No ManageGameCenterLink value")
@@ -129,7 +129,7 @@ public struct WKRKitConstants {
         self.bannedURLFragments = bannedURLFragments
         self.maxGlobalRacePlayers = maxGlobalRacePlayers
         self.maxLocalRacePlayers = maxLocalRacePlayers
-        
+
         self.manageGameCenterLink = manageGameCenterLink
         self.raceCodeRecordMinReuseTimeSinceLastUpdate = raceCodeRecordMinReuseTimeSinceLastUpdate
     }
@@ -254,7 +254,7 @@ public struct WKRKitConstants {
 
     static private func copyBundledResourcesToDocuments(constantsFileName: String = "WKRKitConstants") {
         os_log("%{public}s", log: .constants, type: .error, #function)
-        
+
         guard Thread.isMainThread,
             let bundle = Bundle(identifier: "com.andrewfinke.WKRKit"),
             let bundledPlistURL = bundle.url(forResource: constantsFileName, withExtension: "plist"),

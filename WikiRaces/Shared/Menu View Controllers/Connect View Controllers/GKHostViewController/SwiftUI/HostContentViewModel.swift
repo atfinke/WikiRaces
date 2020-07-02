@@ -8,15 +8,11 @@
 
 import SwiftUI
 import WKRKit
-
-struct SwiftUIPlayer: Identifiable, Equatable {
-    let id: String
-    var image: Image { PlayerImageDatabase.shared.image(for: id) }
-}
+import WKRUIKit
 
 class HostContentViewModel: ObservableObject {
 
-    @Published var connectedPlayers = [SwiftUIPlayer]()
+    @Published var connectedPlayers = [WKRUIPlayer]()
     var status: String {
         if matchStarting {
             return "RACE STARTING"

@@ -11,7 +11,7 @@ import Foundation
 class LoadingContentViewModel: ObservableObject {
     @Published var title: String = ""
     @Published var activityOpacity: Double = 1
-    
+
     @Published var disclaimerButtonTitle: String = " "
     @Published var disclaimerButtonOpacity: Double = 0
 }

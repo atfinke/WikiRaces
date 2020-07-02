@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WKRUIKit
 
 struct ResultsItemContentView: View {
 
@@ -17,7 +18,7 @@ struct ResultsItemContentView: View {
     var body: some View {
         Button(action: action) {
             HStack {
-                PlayerImageView(player: item.player, size: 44, effectSize: 3)
+                WKRUIPlayerImageView(player: item.player, size: 44, effectSize: 3)
                     .padding(.trailing, 6)
                 VStack(alignment: .leading) {
                     Text(item.subtitle)

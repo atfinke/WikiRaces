@@ -56,9 +56,9 @@ final internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         #else
         let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd)
         #endif
-        
+
         let messageDelegate = ScriptMessageDelegate(delegate: self)
-        
+
         let userContentController = WKUserContentController()
         userContentController.addUserScript(linksScript)
         userContentController.add(messageDelegate, name: "linkedPage")

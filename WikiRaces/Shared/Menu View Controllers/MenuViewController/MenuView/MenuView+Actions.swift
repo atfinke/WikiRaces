@@ -16,7 +16,7 @@ extension MenuView {
     /// Join button pressed
     @objc
     func showJoinOptions() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .joinOptions)
@@ -24,12 +24,12 @@ extension MenuView {
 
     @objc
     func createRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .revampPressedHost)
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedHost)
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        PlayerDatabaseLiveRace.shared.isCloudEnabled { isEnabled in
+        PlayerCloudKitLiveRaceManager.shared.isCloudEnabled { isEnabled in
             DispatchQueue.main.async {
                 if isEnabled {
                     self.animateMenuOut {
@@ -39,7 +39,7 @@ extension MenuView {
                     let message = "You must be logged into iCloud to create a private race."
                     let alertController = UIAlertController(title: "iCloud Issue", message: message, preferredStyle: .alert)
                     alertController.addCancelAction(title: "Ok")
-                    
+
                     #if targetEnvironment(simulator)
                     let action = UIAlertAction(title: "SIM BYPASS", style: .default) { _ in
                         self.animateMenuOut {
@@ -48,20 +48,20 @@ extension MenuView {
                     }
                     alertController.addAction(action)
                     #endif
-                    
+
                     self.listenerUpdate?(.presentAlert(alertController))
-                    PlayerAnonymousMetrics.log(event: .revampPressedHostiCloudIssue)
+                    PlayerFirebaseAnalytics.log(event: .revampPressedHostiCloudIssue)
                 }
-                
+
             }
         }
     }
 
     @objc
     func joinPublicRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .revampPressedJoinPublic)
-        PlayerDatabaseStat.gkPressedJoin.increment()
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPublic)
+        PlayerUserDefaultsStat.gkPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -76,9 +76,9 @@ extension MenuView {
 
     @objc
     func joinPrivateRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .revampPressedJoinPrivate)
-        PlayerDatabaseStat.mpcPressedJoin.increment()
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
+        PlayerUserDefaultsStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -89,21 +89,21 @@ extension MenuView {
 
     @objc
     func backButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .joinOrCreate)
     }
 
     @objc
     func plusButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .plusOptions)
     }
 
     @objc
     func statsButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         if PlusStore.shared.isPlus {
             animateMenuOut {
@@ -119,7 +119,7 @@ extension MenuView {
     /// - Parameter sender: The pressed tile
     @objc
     func menuTilePressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         animateMenuOut {
             self.listenerUpdate?(.presentLeaderboard)
@@ -127,7 +127,7 @@ extension MenuView {
     }
 
     func triggeredEasterEgg() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         medalView.showMedals()
     }
 

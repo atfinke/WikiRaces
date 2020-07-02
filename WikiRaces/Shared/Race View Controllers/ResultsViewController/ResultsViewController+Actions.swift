@@ -14,9 +14,9 @@ extension ResultsViewController {
     // MARK: - Actions
 
     @objc func doneButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerAnonymousMetrics.log(event: .backupQuit,
+            PlayerFirebaseAnalytics.log(event: .backupQuit,
                               attributes: ["RawGameState": state.rawValue])
             listenerUpdate?(.quit)
             return
@@ -25,7 +25,7 @@ extension ResultsViewController {
     }
 
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
 
         let hackTitle = "Hack"
@@ -50,11 +50,11 @@ extension ResultsViewController {
         present(hack, animated: false, completion: {
             hack.present(controller, animated: true, completion: nil)
         })
-        PlayerAnonymousMetrics.log(event: .openedShare)
+        PlayerFirebaseAnalytics.log(event: .openedShare)
     }
 
     func tapped(playerID: String) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID), state != .points else {
             return
@@ -68,7 +68,7 @@ extension ResultsViewController {
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerAnonymousMetrics.log(event: .openedHistory,
+        PlayerFirebaseAnalytics.log(event: .openedHistory,
                           attributes: ["GameState": state.rawValue.description as Any])
     }
 }

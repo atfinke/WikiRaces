@@ -17,13 +17,13 @@ extension MenuViewController: GKGameCenterControllerDelegate {
             switch result {
             case .error(let error):
                 let info = "attemptGlobalAuthentication: " + error.localizedDescription
-                PlayerAnonymousMetrics.log(event: .error(info))
+                PlayerFirebaseAnalytics.log(event: .error(info))
             case .controller(let controller):
                 if presentedViewController == nil, self.menuView.state != .noInterface {
                     present(controller, animated: true, completion: nil)
                 }
             case .isAuthenticated:
-                let metrics = PlayerDatabaseMetrics.shared
+                let metrics = PlayerCloudKitStatsManager.shared
                 metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
             }
         }
@@ -40,7 +40,7 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     // MARK: - GKGameCenterControllerDelegate -
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.menuView.animateMenuIn()
         }

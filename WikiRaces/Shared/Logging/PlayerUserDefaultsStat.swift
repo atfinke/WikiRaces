@@ -1,5 +1,5 @@
 //
-//  PlayerStat.swift
+//  PlayerUserDefaultsStat.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 3/6/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum PlayerDatabaseStat: String, CaseIterable {
+enum PlayerUserDefaultsStat: String, CaseIterable {
     case multiplayerAverage
 
     case mpcVotes
@@ -60,7 +60,7 @@ enum PlayerDatabaseStat: String, CaseIterable {
 
     case triggeredEasterEgg
 
-    static var numericHighStats: [PlayerDatabaseStat] = [
+    static var numericHighStats: [PlayerUserDefaultsStat] = [
         .mpcVotes,
         .mpcHelp,
         .mpcPoints,
@@ -104,7 +104,7 @@ enum PlayerDatabaseStat: String, CaseIterable {
         .triggeredEasterEgg
     ]
 
-    static var numericLowStats: [PlayerDatabaseStat] = [
+    static var numericLowStats: [PlayerUserDefaultsStat] = [
         .mpcFastestTime,
         .gkFastestTime,
         .soloFastestTime

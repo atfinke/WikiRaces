@@ -171,7 +171,7 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
     // MARK: - Actions -
 
     @IBAction func doneButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
@@ -257,7 +257,7 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         present(controller, animated: true, completion: nil)
         safariController = controller
 
-        PlayerAnonymousMetrics.log(event: .openedHistorySF)
+        PlayerFirebaseAnalytics.log(event: .openedHistorySF)
     }
 
     // MARK: - SFSafariViewControllerDelegate -

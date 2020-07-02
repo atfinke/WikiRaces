@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WKRKit
+import WKRUIKit
 
 class VotingContentViewModel: ObservableObject {
 
@@ -16,7 +17,7 @@ class VotingContentViewModel: ObservableObject {
     struct Item: Identifiable, Equatable {
         var id: String { return page.url.absoluteString }
         var page: WKRPage
-        var players: [SwiftUIPlayer]
+        var players: [WKRUIPlayer]
         var isFinal: Bool = false
     }
 
@@ -38,7 +39,7 @@ class VotingContentViewModel: ObservableObject {
             return
         }
         items = state.current.map { page, players in
-            let mappedPlayers = players.map { SwiftUIPlayer(id: $0.playerID) }
+            let mappedPlayers = players.map { WKRUIPlayer(id: $0.playerID) }
             return Item(page: page, players: mappedPlayers)
         }
     }

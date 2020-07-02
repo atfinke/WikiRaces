@@ -6,7 +6,6 @@
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
-
 import UIKit
 import WKRUIKit
 
@@ -18,7 +17,7 @@ internal class BackingVisualEffectViewController: UIViewController {
     final var contentView: UIView {
         return visualEffectView.contentView
     }
-    
+
     private var hostingView: UIView?
     private let backingAlphaView = UIView()
     var backingAlpha: CGFloat {
@@ -39,9 +38,9 @@ internal class BackingVisualEffectViewController: UIViewController {
         nav.navigationBar.shadowImage = UIImage()
         nav.navigationBar.isTranslucent = true
         nav.view.backgroundColor = .clear
-        
+
         backingAlphaView.backgroundColor = UIColor.systemBackground
-        
+
         view.addSubview(backingAlphaView)
         view.addSubview(visualEffectView)
     }
@@ -54,7 +53,7 @@ internal class BackingVisualEffectViewController: UIViewController {
         contentView.addSubview(hostingView)
         self.hostingView = hostingView
     }
-    
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         backingAlphaView.frame = view.frame

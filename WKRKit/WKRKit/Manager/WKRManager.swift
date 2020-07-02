@@ -129,8 +129,9 @@ final public class WKRGameManager {
 
     // MARK: - User Interface
 
-    public func enqueue(message: String, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
+    public func enqueue(message: String, for player: WKRUIPlayer?, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
         alertView.enqueue(text: message,
+                          for: player,
                           duration: duration,
                           isRaceSpecific: isRaceSpecific,
                           playHaptic: playHaptic)

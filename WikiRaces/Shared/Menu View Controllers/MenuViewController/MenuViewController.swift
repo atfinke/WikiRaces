@@ -78,7 +78,7 @@ final internal class MenuViewController: UIViewController {
                     self?.joinRace(raceCode: code)
                 }
                 controller.addAction(action)
-                
+
                 let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
                     self?.menuView.animateMenuIn()
                 }
@@ -93,7 +93,7 @@ final internal class MenuViewController: UIViewController {
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
             case .presentSubscription:
-                PlayerAnonymousMetrics.log(event: .forcedIntoStoreFromStats)
+                PlayerFirebaseAnalytics.log(event: .forcedIntoStoreFromStats)
                 let controller = PlusViewController()
                 controller.modalPresentationStyle = .overCurrentContext
                 self.present(controller, animated: false, completion: nil)
@@ -105,10 +105,10 @@ final internal class MenuViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        PlayerAnonymousMetrics.log(event: .userAction("issue#119: menu viewDidAppear"))
 
         UIApplication.shared.isIdleTimerDisabled = false
-        PlayerDatabaseLiveRace.shared.reset()
+        PlayerCloudKitLiveRaceManager.shared.reset()
+        WKRUIPlayerImageManager.shared.clearConnectedPlayers()
 
         // adjusts views before animation if rotation occured
         menuView.setNeedsLayout()
@@ -137,7 +137,7 @@ final internal class MenuViewController: UIViewController {
         }
         #endif
 
-        let metrics = PlayerDatabaseMetrics.shared
+        let metrics = PlayerCloudKitStatsManager.shared
         metrics.log(value: UIDevice.current.name, for: "DeviceNames")
         metrics.log(value: PlusStore.shared.isPlus ? 1 : 0, for: "isPlus")
 
@@ -165,7 +165,7 @@ final internal class MenuViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         let mode = WKRUIStyle.isDark(traitCollection) ? 1 : 0
-        PlayerAnonymousMetrics.log(event: .interfaceMode, attributes: ["Dark": mode])
+        PlayerFirebaseAnalytics.log(event: .interfaceMode, attributes: ["Dark": mode])
     }
 
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {

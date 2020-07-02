@@ -16,15 +16,15 @@ import FirebasePerformance
 #endif
 
 final class RaceChecksViewController: VisualEffectViewController {
-    
+
     // MARK: - Types -
-    
+
     enum Destination {
         case joinPrivate(raceCode: String), joinPublic, hostPrivate
     }
-    
+
     // MARK: - Properties -
-    
+
     let startDate = Date()
     let destination: Destination
     final var model = LoadingContentViewModel()
@@ -34,9 +34,9 @@ final class RaceChecksViewController: VisualEffectViewController {
         }, disclaimerButton: {
             UIApplication.shared.open(WKRKitConstants.current.manageGameCenterLink)
         }))
-    
+
     // MARK: - Initalization -
-    
+
     init(destination: Destination) {
         self.destination = destination
         super.init(nibName: nil, bundle: nil)
@@ -44,21 +44,21 @@ final class RaceChecksViewController: VisualEffectViewController {
         model.disclaimerButtonTitle = "Manage Game Center"
         view.alpha = 0
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - View Life Cycle -
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configure(hostingView: contentViewHosting.view)
-        
+
         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
         let trace = Performance.startTrace(name: "Connection Test Trace")
         #endif
-        
+
         let startDate = Date()
         WKRConnectionTester.start { [weak self] success in
             guard let self = self else { return }
@@ -78,7 +78,7 @@ final class RaceChecksViewController: VisualEffectViewController {
                     self.model.title = "connection issue"
                     self.model.activityOpacity = 0
                 }
-                PlayerAnonymousMetrics.log(
+                PlayerFirebaseAnalytics.log(
                     event: .connectionTestResult,
                     attributes: [
                         "Result": NSNumber(value: success).intValue,
@@ -87,16 +87,16 @@ final class RaceChecksViewController: VisualEffectViewController {
             }
         }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) { [weak self] in
             self?.view.alpha = 1
         }
     }
-    
+
     // MARK: - Helpers -
-    
+
     final func cancel() {
         UIView.animate(withDuration: 0.5, animations: { [weak self] in
             self?.view.alpha = 0
@@ -104,14 +104,14 @@ final class RaceChecksViewController: VisualEffectViewController {
             self?.navigationController?.popToRootViewController(animated: false)
         })
     }
-    
+
     final func connectionSuccess() {
         let startDate = Date()
         let isAuthenticated = GKLocalPlayer.local.isAuthenticated
         if !isAuthenticated {
             self.model.title = "WAITING FOR GAME CENTER"
         }
-        
+
         DispatchQueue.global(qos: .userInitiated).async {
             while !GKLocalPlayer.local.isAuthenticated {
                 if -startDate.timeIntervalSinceNow > 8 && self.model.disclaimerButtonOpacity == 0 {
@@ -121,22 +121,22 @@ final class RaceChecksViewController: VisualEffectViewController {
                 }
                 sleep(2)
             }
-            
+
             // Give Game Center more time to get its act together
             if !isAuthenticated {
                 sleep(2)
             }
-            
+
             DispatchQueue.main.async {
                 self.model.disclaimerButtonOpacity = 0
             }
-            
+
             DispatchQueue.main.async {
                 self.readyForNextMatchmakingStep()
             }
         }
     }
-    
+
     func readyForNextMatchmakingStep() {
         let shouldFadeAlpha: Bool
         let controller: UIViewController
@@ -151,7 +151,7 @@ final class RaceChecksViewController: VisualEffectViewController {
             shouldFadeAlpha = true
             controller = GKHostViewController()
         }
-        
+
         let delay = max(0, 2 - (-self.startDate.timeIntervalSinceNow))
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.milliseconds(Int(delay * 1000))) {
             UIView.animate(withDuration: 0.5, animations: { [weak self] in
@@ -162,5 +162,4 @@ final class RaceChecksViewController: VisualEffectViewController {
         }
     }
 
-    
 }

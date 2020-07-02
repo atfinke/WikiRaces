@@ -14,7 +14,7 @@ import FirebaseAnalytics
 import FirebaseCrashlytics
 #endif
 
-internal struct PlayerAnonymousMetrics {
+internal struct PlayerFirebaseAnalytics {
 
     // MARK: - Logging Event Types
 
@@ -60,13 +60,13 @@ internal struct PlayerAnonymousMetrics {
         case forcedIntoStoreFromCustomize
         case forcedIntoStoreFromStats
 
-        case revampRaceCodeGKSuccess
-        case revampRaceCodeGKFailed
-        case revampRaceCodeShared
-        
-        case revampRaceCodeRecordReused
-        case revampRaceCodeRecordTooRecent
-        case revampRaceCodeRecordCreated
+        case raceCodeGKSuccess
+        case raceCodeGKFailed
+        case raceCodeShared
+
+        case raceCodeRecordReused
+        case raceCodeRecordTooRecent
+        case raceCodeRecordCreated
 
         init(event: WKRLogEvent) {
             switch event.type {

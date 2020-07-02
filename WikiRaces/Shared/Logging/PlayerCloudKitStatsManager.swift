@@ -10,7 +10,7 @@ import CloudKit
 import UIKit
 import WKRKit
 
-final class PlayerDatabaseMetrics: NSObject {
+final class PlayerCloudKitStatsManager: NSObject {
 
     // MARK: - Types -
 
@@ -21,11 +21,11 @@ final class PlayerDatabaseMetrics: NSObject {
         let links: Int
     }
 
-    static let banHammerNotification = Notification.Name("banHammerNotification")
-
     // MARK: - Properties -
 
-    static var shared = PlayerDatabaseMetrics()
+    static let shared = PlayerCloudKitStatsManager()
+
+    static let banHammerNotification = Notification.Name("banHammerNotification")
 
     private let container = CKContainer.default()
     private let publicDB = CKContainer.default().publicCloudDatabase
@@ -38,6 +38,12 @@ final class PlayerDatabaseMetrics: NSObject {
     private var isSyncing = false
 
     private var queuedKeyValues = [String: CKRecordValueProtocol]()
+
+    // MARK: - Initalization -
+
+    private override init() {
+        super.init()
+    }
 
     // MARK: - Connecting -
 
@@ -62,7 +68,7 @@ final class PlayerDatabaseMetrics: NSObject {
             // negative races indicates ban
             if let raceCount = userRecord["Races"] as? NSNumber, raceCount.intValue == -1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                    let name = PlayerDatabaseMetrics.banHammerNotification
+                    let name = PlayerCloudKitStatsManager.banHammerNotification
                     NotificationCenter.default.post(name: name, object: nil)
                 })
                 return

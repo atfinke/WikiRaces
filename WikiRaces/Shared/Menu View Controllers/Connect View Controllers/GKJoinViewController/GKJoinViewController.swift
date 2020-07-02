@@ -33,14 +33,14 @@ final class GKJoinViewController: GKConnectViewController {
             self?.isShowingError = true
             self?.cancelMatch()
         }, disclaimerButton: nil))
-    
+
     // MARK: - Initalization -
 
     init(raceCode: String?) {
         self.raceCode = raceCode
         self.isPublicRace = raceCode == nil
         super.init(isPlayerHost: false)
-        
+
         os_log("%{public}s", log: .gameKit, type: .info, #function)
 
         findMatch()
@@ -79,7 +79,7 @@ final class GKJoinViewController: GKConnectViewController {
                 guard let self = self else { return }
                 if let error = error {
                     os_log("%{public}s: result: error: %{public}s", log: .gameKit, type: .error, #function, error.localizedDescription)
-                    
+
                     let bannerTitle: String
                     let interfaceTitle: String
                     if self.isPublicRace {
@@ -94,7 +94,7 @@ final class GKJoinViewController: GKConnectViewController {
                     self.model.activityOpacity = 0
                 } else if let match = match {
                     os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
-                    
+
                     #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                     findTrace?.stop()
                     #endif

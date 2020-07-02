@@ -9,13 +9,13 @@
 import SwiftUI
 
 struct LoadingContentView: View {
-    
+
     @ObservedObject var model = LoadingContentViewModel()
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    
+
     let cancel: () -> Void
     var disclaimerButton: (() -> Void)?
-    
+
     var body: some View {
         GeometryReader { geometry in
             VStack {
@@ -27,7 +27,7 @@ struct LoadingContentView: View {
                     .opacity(self.model.activityOpacity)
                     .animation(.easeInOut(duration: 0.5), value: self.model.activityOpacity)
                 Color.clear.frame(height: geometry.size.height * 0.5)
-                
+
                 Button(action: {
                     self.disclaimerButton?()
                 }, label: {

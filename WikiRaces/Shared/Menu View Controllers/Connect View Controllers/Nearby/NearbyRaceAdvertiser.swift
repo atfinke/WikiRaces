@@ -24,7 +24,7 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
 
     func start(hostName: String, raceCode: String) {
         os_log("%{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, hostName, raceCode)
-        
+
         let session = MCSession(peer: Nearby.peerID)
         browser = MCNearbyServiceBrowser(peer: Nearby.peerID, serviceType: Nearby.serviceType)
         browser?.delegate = self

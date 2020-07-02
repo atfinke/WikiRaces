@@ -8,6 +8,7 @@
 
 import GameKit
 import WKRKit
+import WKRUIKit
 import os.log
 
 extension GKHostViewController: GKMatchDelegate {
@@ -19,11 +20,8 @@ extension GKHostViewController: GKMatchDelegate {
             if let error = error {
                 os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 5)
                 if -startDate.timeIntervalSinceNow < 5 {
-                    os_log("%{public}s: quick fail, cancelling and waiting", log: .gameKit, type: .error, #function)
-                    
-                    DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
-                        os_log("%{public}s: quick fail, restarting", log: .gameKit, type: .error, #function)
-                        self?.startMatchmaking()
+                    DispatchQueue.main.async {
+                        self?.showError(title: "Failed to Create Race", message: "Please try again later.")
                     }
                 } else {
                     self?.startMatchmaking()
@@ -54,9 +52,9 @@ extension GKHostViewController: GKMatchDelegate {
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         os_log("%{public}s: player: %{public}s, state: %{public}ld", log: .gameKit, type: .info, #function, player.alias, state.rawValue)
         if state == .connected {
-            PlayerImageDatabase.shared.connected(to: player, completion: { [weak self] in
+            WKRUIPlayerImageManager.shared.connected(to: player, completion: { [weak self] in
                 DispatchQueue.main.async {
-                    self?.model.connectedPlayers.append(SwiftUIPlayer(id: player.alias ))
+                    self?.model.connectedPlayers.append(WKRUIPlayer(id: player.alias ))
                 }
                 self?.sendMiniMessage(info: .connected)
             })
@@ -74,7 +72,7 @@ extension GKHostViewController: GKMatchDelegate {
             os_log("%{public}s: failed", log: .gameKit, type: .error, #function)
             return
         }
-        
+
         os_log("%{public}s: success", log: .gameKit, type: .info, #function)
         WKRSeenFinalArticlesStore.addRemoteTransferData(data)
     }

@@ -46,7 +46,7 @@ class StatsViewController: UITableViewController {
                     detail: formatted(for: [.mpcPoints, .gkPoints], suffix: "Point")),
                 Item(
                     name: "Points Per Race",
-                    detail: String(format: "%.2f PPR", PlayerDatabaseStat.multiplayerAverage.value())),
+                    detail: String(format: "%.2f PPR", PlayerUserDefaultsStat.multiplayerAverage.value())),
                 Item(
                     name: "Total Time",
                     detail: formatted(for: [.soloTotalTime, .mpcTotalTime, .gkTotalTime], suffix: "S", checkPlural: false)),
@@ -191,11 +191,11 @@ class StatsViewController: UITableViewController {
 
     }
 
-    static func formatted(for item: PlayerDatabaseStat, suffix: String?, checkPlural: Bool = true) -> String {
+    static func formatted(for item: PlayerUserDefaultsStat, suffix: String?, checkPlural: Bool = true) -> String {
         return formatted(for: item.value(), suffix: suffix, checkPlural: checkPlural)
     }
 
-    static func formatted(for items: [PlayerDatabaseStat], suffix: String?, checkPlural: Bool = true) -> String {
+    static func formatted(for items: [PlayerUserDefaultsStat], suffix: String?, checkPlural: Bool = true) -> String {
         var value = Double()
         items.forEach { value += $0.value() }
         return formatted(for: value, suffix: suffix, checkPlural: checkPlural)

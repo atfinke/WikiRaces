@@ -1,14 +1,14 @@
 //
-//  PlayerPlaceholderImageRenderer.swift
-//  WikiRaces
+//  WKRUIPlayerPlaceholderImageRenderer.swift
+//  WKRUIKit
 //
-//  Created by Andrew Finke on 6/30/20.
+//  Created by Andrew Finke on 7/2/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
 import UIKit
 
-struct PlayerPlaceholderImageRenderer {
+struct WKRUIPlayerPlaceholderImageRenderer {
 
     static private let colors: [UIColor] = [
         .systemRed,

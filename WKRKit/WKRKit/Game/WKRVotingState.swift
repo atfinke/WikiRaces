@@ -92,16 +92,15 @@ public struct WKRVotingState: Codable, Equatable {
     }
 
     // MARK: - Public Accessors
-    
+
     public var current: [(page: WKRPage, voters: [WKRPlayerProfile])] {
         let sortedPages = playerVotes.keys.sorted { (pageOne, pageTwo) -> Bool in
             return pageOne.title?.lowercased() ?? "" < pageTwo.title?.lowercased() ?? ""
         }
-        
+
         return sortedPages.map { page in
             return (page, playerVotes[page] ?? [])
         }
     }
-
 
 }

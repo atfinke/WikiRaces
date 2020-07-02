@@ -8,6 +8,7 @@
 
 import Foundation
 import GameKit
+import WKRUIKit
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebaseAnalytics
@@ -77,7 +78,7 @@ class GKHelper {
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
-                            PlayerImageDatabase.shared.connected(to: GKLocalPlayer.local, completion: nil)
+                            WKRUIPlayerImageManager.shared.connected(to: GKLocalPlayer.local, completion: nil)
                         }
 
                         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)

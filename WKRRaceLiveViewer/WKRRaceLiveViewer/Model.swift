@@ -9,17 +9,17 @@ import CloudKit
 import WKRKitCore
 
 class Model: ObservableObject {
-    
+
     // MARK: - Properties -
-    
+
     private let raceCode: String
-    
+
     @Published var host: String?
     @Published var state: WKRGameState?
     @Published var resultsInfo: WKRResultsInfo?
-    
+
     // MARK: - Initalization -
-    
+
     init(raceCode: String) {
         self.raceCode = raceCode
         update()
@@ -27,15 +27,15 @@ class Model: ObservableObject {
             self.update()
         }
     }
-    
+
     // MARK: - Helpers -
-    
+
     func update() {
         let predicate = NSPredicate(format: "Code == %@", raceCode)
         let sort = NSSortDescriptor(key: "modificationDate", ascending: false)
         let query = CKQuery(recordType: "RaceActive", predicate: predicate)
         query.sortDescriptors = [sort]
-       
+
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = 1
         operation.recordFetchedBlock = { record in

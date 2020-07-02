@@ -17,7 +17,7 @@ final public class WKRUIStyle {
             return false
         }
     }
-    
+
     public static func isDark(_ colorScheme: ColorScheme) -> Bool {
         if colorScheme == .dark {
             return true

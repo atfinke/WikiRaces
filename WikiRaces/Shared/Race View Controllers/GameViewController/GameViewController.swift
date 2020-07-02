@@ -27,7 +27,7 @@ final internal class GameViewController: UIViewController {
 
     var transitionState = TransitionState.none {
         didSet {
-            PlayerAnonymousMetrics.log(event: .gameState("TransitionState: \(transitionState)"))
+            PlayerFirebaseAnalytics.log(event: .gameState("TransitionState: \(transitionState)"))
         }
     }
     var isErrorPresented = false
@@ -119,9 +119,9 @@ final internal class GameViewController: UIViewController {
             gameManager.player(.startedGame)
             switch networkConfig {
             case .solo:
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
+                PlayerFirebaseAnalytics.log(event: .hostStartedMatch, attributes: nil)
             case .gameKitPrivate(let match, _), .gameKitPublic(let match, _):
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
+                PlayerFirebaseAnalytics.log(event: .hostStartedMatch,
                                            attributes: ["ConnectedPeers": match.players.count - 1])
             default: break
             }
@@ -183,7 +183,7 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func helpButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         if gameSettings.other.isHelpEnabled {
             showHelp()
@@ -199,7 +199,7 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func quitButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
@@ -213,6 +213,7 @@ final internal class GameViewController: UIViewController {
         controller.url = gameManager.finalPageURL
         controller.linkTapped = { [weak self] in
             self?.gameManager.enqueue(message: "Links disabled in help",
+                                      for: nil,
                                       duration: 2.0,
                                       isRaceSpecific: true,
                                       playHaptic: true)
@@ -223,11 +224,11 @@ final internal class GameViewController: UIViewController {
         navController.modalPresentationStyle = .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:help"))
-        PlayerAnonymousMetrics.log(event: .usedHelp,
+        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerFirebaseAnalytics.log(event: .usedHelp,
                                    attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
-            let stat: PlayerDatabaseStat
+            let stat: PlayerUserDefaultsStat
             switch raceType {
             case .private: stat = .mpcHelp
             case .public: stat = .gkHelp
@@ -238,7 +239,7 @@ final internal class GameViewController: UIViewController {
     }
 
     func reloadPage() {
-        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:reload"))
+        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:reload"))
         self.webView?.reload()
     }
 

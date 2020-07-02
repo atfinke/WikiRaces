@@ -8,6 +8,8 @@
 
 import GameKit
 import WKRKit
+import WKRUIKit
+
 import os.log
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
@@ -18,7 +20,7 @@ extension GKJoinViewController: GKMatchDelegate {
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        
+
         if isPublicRace {
             publicRaceProcess(data: data, from: player)
         } else {
@@ -43,12 +45,12 @@ extension GKJoinViewController: GKMatchDelegate {
 
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         os_log("%{public}s: player: %{public}s, state: %{public}ld", log: .gameKit, type: .info, #function, player.alias, state.rawValue)
-        
+
         guard !isPublicRace else { return }
 
         guard state == .connected, let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() else { return }
         if state == .connected {
-            PlayerImageDatabase.shared.connected(to: player, completion: nil)
+            WKRUIPlayerImageManager.shared.connected(to: player, completion: nil)
         }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             try? match.send(data, to: [player], dataMode: .reliable)
@@ -57,7 +59,7 @@ extension GKJoinViewController: GKMatchDelegate {
 
     func match(_ match: GKMatch, didFailWithError error: Error?) {
         os_log("%{public}s", log: .gameKit, type: .error, #function, error?.localizedDescription ?? "-")
-        
+
         showError(title: "Unable To Connect", message: "Please try again later.")
         self.model.title = "Race Error"
         self.model.activityOpacity = 0

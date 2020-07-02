@@ -35,7 +35,7 @@ final internal class GKHostViewController: GKConnectViewController {
         rootView: HostContentView(
             model: model,
             cancelAction: { [weak self] in
-                PlayerAnonymousMetrics.log(event: .hostCancelledPreMatch)
+                PlayerFirebaseAnalytics.log(event: .hostCancelledPreMatch)
                 self?.isMatchmakingEnabled = false
                 self?.cancelMatch()
             },
@@ -118,7 +118,7 @@ final internal class GKHostViewController: GKConnectViewController {
 
     func startMatch() {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         model.matchStarting = true
 
@@ -164,25 +164,27 @@ final internal class GKHostViewController: GKConnectViewController {
                     self.contentViewHosting.view.isUserInteractionEnabled = true
                 }
                 controller.addAction(cancelAction)
-                
+
                 let startAction = UIAlertAction(title: "Ok", style: .default) { _ in
                     startSolo()
                 }
                 controller.addAction(startAction)
-                
+
                 present(controller, animated: true, completion: nil)
                 Defaults.promptedSoloRacesStats = true
             }
         } else {
             sendStartMessage()
         }
+
+        PlayerCloudKitLiveRaceManager.shared.savePlayerImages()
     }
 
     // MARK: - Other -
 
     private func presentModal(modal: HostContentView.Modal) {
         os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, "\(modal)")
-        
+
         let controller: UIViewController
         switch modal {
         case .activity:
@@ -190,7 +192,7 @@ final internal class GKHostViewController: GKConnectViewController {
                 fatalError()
             }
             controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)
-            PlayerAnonymousMetrics.log(event: .revampRaceCodeShared)
+            PlayerFirebaseAnalytics.log(event: .raceCodeShared)
         case .settings:
             controller = CustomRaceViewController(settings: model.settings, pages: model.customPages) { pages in
                 self.model.customPages = pages

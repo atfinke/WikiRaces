@@ -8,6 +8,7 @@
 
 import SwiftUI
 import WKRKit
+import WKRUIKit
 import GameKit
 
 struct HostContentView: View {
@@ -54,13 +55,13 @@ struct HostContentView: View {
             .allowsHitTesting(!model.matchStarting)
 
             Spacer()
-            PlayerImageView(
-                player: SwiftUIPlayer(id: GKLocalPlayer.local.alias),
+            WKRUIPlayerImageView(
+                player: WKRUIPlayer(id: GKLocalPlayer.local.alias),
                 size: 100,
                 effectSize: 5)
                 .padding(.bottom, 20)
 
-            if !PlayerImageDatabase.shared.hasValidLocalPlayerImage {
+            if !WKRUIPlayerImageManager.shared.isLocalPlayerImageSet {
                 HStack {
                     Spacer()
                     Text("Set a custom racer photo\nin the Game Center settings")
@@ -96,7 +97,7 @@ struct HostContentView: View {
             HStack {
                 Color.clear.frame(width: 1)
                 ForEach(model.connectedPlayers) { player in
-                    PlayerImageView(player: player, size: 44, effectSize: 3)
+                    WKRUIPlayerImageView(player: player, size: 44, effectSize: 3)
                         .padding(.all, 2)
                 }
                 .transition(.opacity)

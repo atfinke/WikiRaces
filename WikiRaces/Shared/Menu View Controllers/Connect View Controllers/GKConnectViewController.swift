@@ -57,7 +57,7 @@ class GKConnectViewController: VisualEffectViewController {
 
     final func disconnectFromMatch() {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        
+
         match?.delegate = nil
         if isPlayerHost {
             sendMiniMessage(info: .cancelled)
@@ -68,7 +68,7 @@ class GKConnectViewController: VisualEffectViewController {
 
     final func showError(title: String, message: String) {
         os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, title)
-        
+
         guard !isShowingError else { return }
         isShowingError = true
 
@@ -92,7 +92,7 @@ class GKConnectViewController: VisualEffectViewController {
     @objc
     final func cancelMatch() {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         disconnectFromMatch()
 
@@ -105,7 +105,7 @@ class GKConnectViewController: VisualEffectViewController {
 
     final func transitionToGame(for networkConfig: WKRPeerNetworkConfig, settings: WKRGameSettings) {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        
+
         guard !isShowingError else { return }
         isShowingError = true
 

@@ -32,11 +32,17 @@ class ViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-            DispatchQueue.main.async {
-                self.title = self.webView.pixelsScrolled.description
-            }
-        }
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+         let alertView = WKRUIAlertView()
+
+        Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { (_) in
+                   DispatchQueue.main.async {
+                    alertView.enqueue(text: "IS CLOSE" + Int.random(in: 0...100000000000).description, isRaceSpecific: true, playHaptic: false)
+                   }
+               }
+
     }
 
 }

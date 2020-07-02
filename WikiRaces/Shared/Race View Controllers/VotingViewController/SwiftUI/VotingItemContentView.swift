@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import WKRUIKit
 
 struct VotingItemContentView: View {
 
@@ -34,7 +35,7 @@ struct VotingItemContentView: View {
                 Spacer()
                 Color.clear.frame(width: 1, height: 26)
                 ForEach(item.players) { player in
-                    PlayerImageView(player: player, size: 24, effectSize: 1)
+                    WKRUIPlayerImageView(player: player, size: 24, effectSize: 1)
                 }
             }
         }

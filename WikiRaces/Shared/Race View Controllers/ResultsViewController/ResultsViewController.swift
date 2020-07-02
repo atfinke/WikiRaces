@@ -24,7 +24,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
     // MARK: - Properties -
 
     let model = ResultsContentViewModel()
-    lazy var contentViewHosting = UIHostingController(
+    private lazy var contentViewHosting = UIHostingController(
         rootView: ResultsContentView(
             model: model,
             readyUpButtonPressed: { [weak self] in
@@ -119,7 +119,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
 
         if isPlayerHost, let results = resultsInfo {
             DispatchQueue.global().async {
-                PlayerDatabaseMetrics.shared.record(results: results)
+                PlayerCloudKitStatsManager.shared.record(results: results)
             }
         }
 
@@ -166,7 +166,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
     private func updatedResultsImage() {
         guard let image = resultImage, Defaults.shouldAutoSaveResultImage else { return }
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        PlayerAnonymousMetrics.log(event: .automaticResultsImageSave)
+        PlayerFirebaseAnalytics.log(event: .automaticResultsImageSave)
     }
 
     private func checkIfOtherPlayersReady() {
@@ -210,7 +210,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
     }
 
     func readyUpButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         UISelectionFeedbackGenerator().selectionChanged()
 
@@ -218,7 +218,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
         listenerUpdate?(.readyButtonPressed)
         model.buttonEnabled = false
 
-        PlayerAnonymousMetrics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
+        PlayerFirebaseAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }
 
 }

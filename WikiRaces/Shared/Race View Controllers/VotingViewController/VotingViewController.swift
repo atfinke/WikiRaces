@@ -27,13 +27,13 @@ final internal class VotingViewController: BackingVisualEffectViewController {
     // MARK: - Properties -
 
     private(set) var model = VotingContentViewModel()
-    lazy var contentViewHosting = UIHostingController(
+    private lazy var contentViewHosting = UIHostingController(
         rootView: VotingContentView(
             model: model,
             tappedVotingItem: { [weak self] item in
                 self?.listenerUpdate?(.voted(item.page))
                 UISelectionFeedbackGenerator().selectionChanged()
-            }))
+        }))
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     var quitAlertController: UIAlertController?
@@ -103,10 +103,10 @@ final internal class VotingViewController: BackingVisualEffectViewController {
     // MARK: - Actions -
 
     @objc func doneButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerAnonymousMetrics.log(event: .backupQuit,
-                                       attributes: ["RawGameState": WKRGameState.voting.rawValue])
+            PlayerFirebaseAnalytics.log(event: .backupQuit,
+                                        attributes: ["RawGameState": WKRGameState.voting.rawValue])
             self.listenerUpdate?(.quit)
             return
         }

@@ -18,15 +18,15 @@ public enum WKRPlayerMessage: Int {
     case quit
     case onUSA
 
-    func text(for player: WKRPlayerProfile) -> String {
+    var text: String {
         switch self {
-        case .linkOnPage: return player.name + " is close"
-        case .foundPage: return player.name + " found the page"
-        case .neededHelp: return player.name + " needed help"
-        case .forfeited: return player.name + " forfeited"
-        case .quit: return player.name + " quit"
-        case .missedLink: return player.name + " missed the link"
-        case .onUSA: return player.name + " is on USA"
+        case .linkOnPage: return "is close"
+        case .foundPage: return "found the page"
+        case .neededHelp: return "needed help"
+        case .forfeited: return "forfeited"
+        case .quit: return "quit"
+        case .missedLink: return "missed the link"
+        case .onUSA: return "is on USA"
         }
     }
 

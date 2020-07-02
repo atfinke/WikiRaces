@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 extension Color {
-    
+
     public static func wkrTextColor(for colorScheme: ColorScheme) -> Color {
         return Color(WKRUIStyle.isDark(colorScheme) ? .white : #colorLiteral(red: 54.0/255.0, green: 54.0/255.0, blue: 54.0/255.0, alpha: 1.0))
     }

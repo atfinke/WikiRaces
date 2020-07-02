@@ -44,13 +44,13 @@ class RaceCodeGenerator {
         let traceGK = Performance.startTrace(name: "Race Code Trace: queryPlayerGroupActivity")
         let traceTotal = Performance.startTrace(name: "Race Code Trace: Total Success Time")
         #endif
-        
+
         let date = Date()
         GKMatchmaker.shared().queryPlayerGroupActivity(code.hash) { [weak self] count, error in
             if count == 0 && error == nil {
                 os_log("%{public}s: queryPlayerGroupActivity success in %{public}f", log: .matchSupport, type: .info, #function, -date.timeIntervalSinceNow)
-                PlayerAnonymousMetrics.log(event: .revampRaceCodeGKSuccess)
-                PlayerDatabaseLiveRace.shared.isRaceCodeValid(raceCode: code, host: GKLocalPlayer.local.alias) { result in
+                PlayerFirebaseAnalytics.log(event: .raceCodeGKSuccess)
+                PlayerCloudKitLiveRaceManager.shared.isRaceCodeValid(raceCode: code, host: GKLocalPlayer.local.alias) { result in
                     switch result {
                     case .valid:
                         self?.callback?(code)
@@ -69,14 +69,14 @@ class RaceCodeGenerator {
             } else {
                 os_log("%{public}s: queryPlayerGroupActivity failed, count: %{public}ld, error: %{public}s", log: .matchSupport, type: .info, #function, count, error?.localizedDescription ?? "-")
                 self?.generate()
-                PlayerAnonymousMetrics.log(event: .revampRaceCodeGKFailed)
+                PlayerFirebaseAnalytics.log(event: .raceCodeGKFailed)
             }
             #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
             traceGK?.stop()
             #endif
         }
     }
-    
+
     static func playerGroup(for raceCode: String) -> Int {
         assert(raceCode.count < 10)
         let formattedCode = raceCode.lowercased()
@@ -86,7 +86,7 @@ class RaceCodeGenerator {
             let offset = Int(pow(Double(10), Double(index * 2) + 1))
             playerGroup += offset * charValue
         }
-        
+
         os_log("%{public}s: %{public}s -> %{public}ld", log: .matchSupport, type: .info, #function, raceCode, playerGroup)
         return playerGroup
     }
