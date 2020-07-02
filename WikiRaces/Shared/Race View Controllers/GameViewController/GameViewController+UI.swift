@@ -42,8 +42,6 @@ extension GameViewController {
         if Defaults.isFastlaneSnapshotInstance {
             navigationItem.leftBarButtonItem = helpBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
-        } else {
-            navigationController.setNavigationBarHidden(true, animated: false)
         }
         navigationView.addSubview(navigationBarBottomLine)
 
@@ -65,6 +63,9 @@ extension GameViewController {
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+        
+        view.alpha = 0
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - Elements
@@ -103,9 +104,6 @@ extension GameViewController {
         webView?.removeFromSuperview()
 
         let webView = WKRUIWebView()
-        var contentInset = webView.scrollView.contentInset
-        contentInset.bottom = -20
-        webView.scrollView.contentInset = contentInset
 
         view.addSubview(webView)
         view.bringSubviewToFront(progressView)
@@ -120,7 +118,6 @@ extension GameViewController {
         NSLayoutConstraint.activate(constraints)
 
         if !Defaults.isFastlaneSnapshotInstance {
-            webView.alpha = 0.0
             gameManager.webView = webView
         }
         self.webView = webView

@@ -106,10 +106,9 @@ final internal class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if Defaults.isFastlaneSnapshotInstance {
-            webView?.alpha = 1.0
-            return
-        }
+//        if Defaults.isFastlaneSnapshotInstance {
+//            return
+//        }
 
         if !isConfigured {
             isConfigured = true
@@ -124,9 +123,6 @@ final internal class GameViewController: UIViewController {
             case .gameKitPrivate(let match, _), .gameKitPublic(let match, _):
                 PlayerAnonymousMetrics.log(event: .hostStartedMatch,
                                            attributes: ["ConnectedPeers": match.players.count - 1])
-            case .mpc(_, let session, _):
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
-                                           attributes: ["ConnectedPeers": session.connectedPeers.count])
             default: break
             }
         }
@@ -171,12 +167,6 @@ final internal class GameViewController: UIViewController {
                 return player.alias
             }
             PlayerStatsManager.shared.connected(to: playerNames, raceType: .public)
-        case .mpc(_, let session, _):
-            // Due to low usage, not accounting for players joining mid session
-            let playerNames = session.connectedPeers.map { peerID -> String in
-                return peerID.displayName
-            }
-            PlayerStatsManager.shared.connected(to: playerNames, raceType: .private)
         default:
             break
         }

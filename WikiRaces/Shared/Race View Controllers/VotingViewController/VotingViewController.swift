@@ -11,7 +11,7 @@ import WKRKit
 import WKRUIKit
 import SwiftUI
 
-final internal class VotingViewController: VisualEffectViewController {
+final internal class VotingViewController: BackingVisualEffectViewController {
 
     // MARK: - Types -
 

@@ -13,13 +13,14 @@ internal class VisualEffectViewController: UIViewController {
 
     // MARK: - Properties
 
-    final var contentView: UIView!
+    private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrBlurEffect)
+    final var contentView: UIView {
+        return visualEffectView.contentView
+    }
 
     // MARK: - View Life Cycle
 
     override func loadView() {
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrLightBlurEffect)
-        contentView = visualEffectView.contentView
         self.view = visualEffectView
     }
 

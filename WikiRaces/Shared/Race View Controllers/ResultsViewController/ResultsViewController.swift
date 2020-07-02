@@ -12,7 +12,7 @@ import WKRUIKit
 
 import SwiftUI
 
-final internal class ResultsViewController: VisualEffectViewController {
+final internal class ResultsViewController: BackingVisualEffectViewController {
 
     // MARK: - Types -
 
