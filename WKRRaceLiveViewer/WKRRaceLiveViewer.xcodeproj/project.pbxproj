@@ -1,0 +1,373 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		146E057B24AE40F0001E1917 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E057A24AE40F0001E1917 /* AppDelegate.swift */; };
+		146E057F24AE40F1001E1917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E057E24AE40F1001E1917 /* Assets.xcassets */; };
+		146E058224AE40F1001E1917 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E058124AE40F1001E1917 /* Preview Assets.xcassets */; };
+		146E058524AE40F1001E1917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146E058324AE40F1001E1917 /* Main.storyboard */; };
+		146E059124AE4108001E1917 /* WKRRaceLiveRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */; };
+		146E059224AE4108001E1917 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E058F24AE4108001E1917 /* ContentView.swift */; };
+		146E059324AE4108001E1917 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E059024AE4108001E1917 /* Model.swift */; };
+		146E059624AE427A001E1917 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E059524AE427A001E1917 /* CloudKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		146E057724AE40F0001E1917 /* WKRRaceLiveViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WKRRaceLiveViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		146E057A24AE40F0001E1917 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		146E057E24AE40F1001E1917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		146E058124AE40F1001E1917 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		146E058424AE40F1001E1917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		146E058624AE40F1001E1917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKRRaceLiveRecord.swift; sourceTree = "<group>"; };
+		146E058E24AE4108001E1917 /* WKRRaceLiveViewer.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WKRRaceLiveViewer.entitlements; sourceTree = "<group>"; };
+		146E058F24AE4108001E1917 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		146E059024AE4108001E1917 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		146E059524AE427A001E1917 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		146E057424AE40F0001E1917 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E059624AE427A001E1917 /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		146E056E24AE40F0001E1917 = {
+			isa = PBXGroup;
+			children = (
+				146E057924AE40F0001E1917 /* WKRRaceLiveViewer */,
+				146E057824AE40F0001E1917 /* Products */,
+				146E059424AE427A001E1917 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		146E057824AE40F0001E1917 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				146E057724AE40F0001E1917 /* WKRRaceLiveViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		146E057924AE40F0001E1917 /* WKRRaceLiveViewer */ = {
+			isa = PBXGroup;
+			children = (
+				146E057A24AE40F0001E1917 /* AppDelegate.swift */,
+				146E057E24AE40F1001E1917 /* Assets.xcassets */,
+				146E058324AE40F1001E1917 /* Main.storyboard */,
+				146E058624AE40F1001E1917 /* Info.plist */,
+				146E059024AE4108001E1917 /* Model.swift */,
+				146E058F24AE4108001E1917 /* ContentView.swift */,
+				146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */,
+				146E058E24AE4108001E1917 /* WKRRaceLiveViewer.entitlements */,
+				146E058024AE40F1001E1917 /* Preview Content */,
+			);
+			path = WKRRaceLiveViewer;
+			sourceTree = "<group>";
+		};
+		146E058024AE40F1001E1917 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				146E058124AE40F1001E1917 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		146E059424AE427A001E1917 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				146E059524AE427A001E1917 /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		146E057624AE40F0001E1917 /* WKRRaceLiveViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 146E058A24AE40F1001E1917 /* Build configuration list for PBXNativeTarget "WKRRaceLiveViewer" */;
+			buildPhases = (
+				146E057324AE40F0001E1917 /* Sources */,
+				146E057424AE40F0001E1917 /* Frameworks */,
+				146E057524AE40F0001E1917 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WKRRaceLiveViewer;
+			productName = WKRRaceLiveViewer;
+			productReference = 146E057724AE40F0001E1917 /* WKRRaceLiveViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		146E056F24AE40F0001E1917 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					146E057624AE40F0001E1917 = {
+						CreatedOnToolsVersion = 12.0;
+					};
+				};
+			};
+			buildConfigurationList = 146E057224AE40F0001E1917 /* Build configuration list for PBXProject "WKRRaceLiveViewer" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 146E056E24AE40F0001E1917;
+			productRefGroup = 146E057824AE40F0001E1917 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				146E057624AE40F0001E1917 /* WKRRaceLiveViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		146E057524AE40F0001E1917 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E058524AE40F1001E1917 /* Main.storyboard in Resources */,
+				146E058224AE40F1001E1917 /* Preview Assets.xcassets in Resources */,
+				146E057F24AE40F1001E1917 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		146E057324AE40F0001E1917 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				146E059324AE4108001E1917 /* Model.swift in Sources */,
+				146E059124AE4108001E1917 /* WKRRaceLiveRecord.swift in Sources */,
+				146E059224AE4108001E1917 /* ContentView.swift in Sources */,
+				146E057B24AE40F0001E1917 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		146E058324AE40F1001E1917 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146E058424AE40F1001E1917 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		146E058824AE40F1001E1917 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		146E058924AE40F1001E1917 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		146E058B24AE40F1001E1917 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WKRRaceLiveViewer/WKRRaceLiveViewer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"WKRRaceLiveViewer/Preview Content\"";
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WKRRaceLiveViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRRaceLiveViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		146E058C24AE40F1001E1917 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = WKRRaceLiveViewer/WKRRaceLiveViewer.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"WKRRaceLiveViewer/Preview Content\"";
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = WKRRaceLiveViewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRRaceLiveViewer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		146E057224AE40F0001E1917 /* Build configuration list for PBXProject "WKRRaceLiveViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146E058824AE40F1001E1917 /* Debug */,
+				146E058924AE40F1001E1917 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		146E058A24AE40F1001E1917 /* Build configuration list for PBXNativeTarget "WKRRaceLiveViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				146E058B24AE40F1001E1917 /* Debug */,
+				146E058C24AE40F1001E1917 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 146E056F24AE40F0001E1917 /* Project object */;
+}

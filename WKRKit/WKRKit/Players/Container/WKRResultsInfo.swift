@@ -165,3 +165,14 @@ public struct WKRResultsInfo: Codable {
         return results
     }
 }
+
+
+#if os(macOS)
+
+extension WKRResultsInfo {
+    public var _playersForLiveViewer: [WKRPlayer] {
+        return playersSortedByPoints
+    }
+}
+
+#endif
