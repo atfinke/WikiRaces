@@ -29,7 +29,7 @@ internal struct PlayerAnonymousMetrics {
     enum Event: String {
         // Non Game
         case leaderboard, versionInfo
-        case revampPressedHost, revampPressedJoinPublic, revampPressedJoinPrivate
+        case revampPressedHost, revampPressedJoinPublic, revampPressedJoinPrivate, revampPressedHostiCloudIssue
         case namePromptResult, nameType
         case cloudStatus, interfaceMode, autoInviteToggled, autoInviteState
 
@@ -60,9 +60,13 @@ internal struct PlayerAnonymousMetrics {
         case forcedIntoStoreFromCustomize
         case forcedIntoStoreFromStats
 
-        case revampRaceCodeGenerated
-        case revampRaceCodeFailure
+        case revampRaceCodeGKSuccess
+        case revampRaceCodeGKFailed
         case revampRaceCodeShared
+        
+        case revampRaceCodeRecordReused
+        case revampRaceCodeRecordTooRecent
+        case revampRaceCodeRecordCreated
 
         init(event: WKRLogEvent) {
             switch event.type {
@@ -110,7 +114,6 @@ internal struct PlayerAnonymousMetrics {
 
     public static func log(event: Event, attributes: [String: Any]? = nil) {
         #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG && !DEBUG
-        Answers.logCustomEvent(withName: event.rawValue, customAttributes: attributes)
         if !(attributes?.values.compactMap { $0 }.isEmpty ?? true) {
             Analytics.logEvent(event.rawValue, parameters: attributes)
         } else {

@@ -10,6 +10,10 @@ import GameKit
 import WKRKit
 import os.log
 
+#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+import FirebasePerformance
+#endif
+
 class RaceCodeGenerator {
 
     private static let validCharacters = "abcdefghijklmnopqrstuvwxyz"
@@ -35,18 +39,41 @@ class RaceCodeGenerator {
     private func generate() {
         guard let code = RaceCodeGenerator.codes.randomElement else { fatalError() }
         os_log("%{public}s: %{public}s", log: .matchSupport, type: .info, #function, code)
+
+        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+        let traceGK = Performance.startTrace(name: "Race Code Trace: queryPlayerGroupActivity")
+        let traceTotal = Performance.startTrace(name: "Race Code Trace: Total Success Time")
+        #endif
         
         let date = Date()
         GKMatchmaker.shared().queryPlayerGroupActivity(code.hash) { [weak self] count, error in
             if count == 0 && error == nil {
-                os_log("%{public}s: success %{public}f", log: .matchSupport, type: .info, #function, -date.timeIntervalSinceNow)
-                self?.callback?(code)
-                PlayerAnonymousMetrics.log(event: .revampRaceCodeGenerated)
+                os_log("%{public}s: queryPlayerGroupActivity success in %{public}f", log: .matchSupport, type: .info, #function, -date.timeIntervalSinceNow)
+                PlayerAnonymousMetrics.log(event: .revampRaceCodeGKSuccess)
+                PlayerDatabaseLiveRace.shared.isRaceCodeValid(raceCode: code, host: GKLocalPlayer.local.alias) { result in
+                    switch result {
+                    case .valid:
+                        self?.callback?(code)
+                        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+                        traceTotal?.stop()
+                        #endif
+                    case .invalid:
+                        self?.generate()
+                    case .noiCloudAccount:
+                        #if targetEnvironment(simulator)
+                        self?.callback?(code)
+                        #endif
+                        break
+                    }
+                }
             } else {
-                os_log("%{public}s: count: %{public}ld, error: %{public}s", log: .matchSupport, type: .info, #function, count, error?.localizedDescription ?? "-")
+                os_log("%{public}s: queryPlayerGroupActivity failed, count: %{public}ld, error: %{public}s", log: .matchSupport, type: .info, #function, count, error?.localizedDescription ?? "-")
                 self?.generate()
-                PlayerAnonymousMetrics.log(event: .revampRaceCodeFailure)
+                PlayerAnonymousMetrics.log(event: .revampRaceCodeGKFailed)
             }
+            #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+            traceGK?.stop()
+            #endif
         }
     }
     

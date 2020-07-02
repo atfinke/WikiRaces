@@ -108,6 +108,7 @@ final internal class MenuViewController: UIViewController {
         PlayerAnonymousMetrics.log(event: .userAction("issue#119: menu viewDidAppear"))
 
         UIApplication.shared.isIdleTimerDisabled = false
+        PlayerDatabaseLiveRace.shared.reset()
 
         // adjusts views before animation if rotation occured
         menuView.setNeedsLayout()

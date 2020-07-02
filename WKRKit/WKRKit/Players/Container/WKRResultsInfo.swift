@@ -109,6 +109,10 @@ public struct WKRResultsInfo: Codable {
     }
 
     // MARK: - Helpers
+    
+    public mutating func minimize() {
+        playersSortedByState = []
+    }
 
     internal func raceRewardPoints(for player: WKRPlayer) -> Int {
         return racePoints[player.profile] ?? 0

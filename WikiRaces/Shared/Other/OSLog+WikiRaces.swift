@@ -14,7 +14,7 @@ extension OSLog {
     // MARK: - Types -
 
     private enum CustomCategory: String {
-        case store, gameKit, nearby, matchSupport
+        case store, gameKit, nearby, matchSupport, raceLiveDatabase
     }
 
     private static let subsystem: String = {
@@ -26,6 +26,7 @@ extension OSLog {
     static let gameKit = OSLog(subsystem: subsystem, category: CustomCategory.gameKit.rawValue)
     static let nearby = OSLog(subsystem: subsystem, category: CustomCategory.nearby.rawValue)
     static let matchSupport = OSLog(subsystem: subsystem, category: CustomCategory.matchSupport.rawValue)
+    static let raceLiveDatabase = OSLog(subsystem: subsystem, category: CustomCategory.raceLiveDatabase.rawValue)
     
 //
 //    static let store = OSLog(subsystem: subsystem, category: CustomCategory.store.rawValue)

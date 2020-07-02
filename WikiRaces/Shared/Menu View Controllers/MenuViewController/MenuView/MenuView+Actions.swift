@@ -29,13 +29,31 @@ extension MenuView {
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        //        guard GKLocalPlayer.local.isAuthenticated || Defaults.isFastlaneSnapshotInstance else {
-        //            self.listenerUpdate?(.presentGKAuth)
-        //            return
-        //        }
-        //
-        animateMenuOut {
-            self.listenerUpdate?(.presentCreateRace)
+        PlayerDatabaseLiveRace.shared.isCloudEnabled { isEnabled in
+            DispatchQueue.main.async {
+                if isEnabled {
+                    self.animateMenuOut {
+                        self.listenerUpdate?(.presentCreateRace)
+                    }
+                } else {
+                    let message = "You must be logged into iCloud to create a private race."
+                    let alertController = UIAlertController(title: "iCloud Issue", message: message, preferredStyle: .alert)
+                    alertController.addCancelAction(title: "Ok")
+                    
+                    #if targetEnvironment(simulator)
+                    let action = UIAlertAction(title: "SIM BYPASS", style: .default) { _ in
+                        self.animateMenuOut {
+                            self.listenerUpdate?(.presentCreateRace)
+                        }
+                    }
+                    alertController.addAction(action)
+                    #endif
+                    
+                    self.listenerUpdate?(.presentAlert(alertController))
+                    PlayerAnonymousMetrics.log(event: .revampPressedHostiCloudIssue)
+                }
+                
+            }
         }
     }
 
