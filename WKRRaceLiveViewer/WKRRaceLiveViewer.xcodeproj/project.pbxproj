@@ -11,7 +11,7 @@
 		146E057F24AE40F1001E1917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E057E24AE40F1001E1917 /* Assets.xcassets */; };
 		146E058224AE40F1001E1917 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 146E058124AE40F1001E1917 /* Preview Assets.xcassets */; };
 		146E058524AE40F1001E1917 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146E058324AE40F1001E1917 /* Main.storyboard */; };
-		146E059124AE4108001E1917 /* WKRRaceLiveRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */; };
+		146E059124AE4108001E1917 /* WKRRaceActiveRecordWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E058D24AE4108001E1917 /* WKRRaceActiveRecordWrapper.swift */; };
 		146E059224AE4108001E1917 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E058F24AE4108001E1917 /* ContentView.swift */; };
 		146E059324AE4108001E1917 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146E059024AE4108001E1917 /* Model.swift */; };
 		146E059624AE427A001E1917 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146E059524AE427A001E1917 /* CloudKit.framework */; };
@@ -24,7 +24,7 @@
 		146E058124AE40F1001E1917 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		146E058424AE40F1001E1917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		146E058624AE40F1001E1917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKRRaceLiveRecord.swift; sourceTree = "<group>"; };
+		146E058D24AE4108001E1917 /* WKRRaceActiveRecordWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKRRaceActiveRecordWrapper.swift; sourceTree = "<group>"; };
 		146E058E24AE4108001E1917 /* WKRRaceLiveViewer.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = WKRRaceLiveViewer.entitlements; sourceTree = "<group>"; };
 		146E058F24AE4108001E1917 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		146E059024AE4108001E1917 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -69,7 +69,7 @@
 				146E058624AE40F1001E1917 /* Info.plist */,
 				146E059024AE4108001E1917 /* Model.swift */,
 				146E058F24AE4108001E1917 /* ContentView.swift */,
-				146E058D24AE4108001E1917 /* WKRRaceLiveRecord.swift */,
+				146E058D24AE4108001E1917 /* WKRRaceActiveRecordWrapper.swift */,
 				146E058E24AE4108001E1917 /* WKRRaceLiveViewer.entitlements */,
 				146E058024AE40F1001E1917 /* Preview Content */,
 			);
@@ -119,7 +119,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1150;
 				TargetAttributes = {
 					146E057624AE40F0001E1917 = {
 						CreatedOnToolsVersion = 12.0;
@@ -163,7 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				146E059324AE4108001E1917 /* Model.swift in Sources */,
-				146E059124AE4108001E1917 /* WKRRaceLiveRecord.swift in Sources */,
+				146E059124AE4108001E1917 /* WKRRaceActiveRecordWrapper.swift in Sources */,
 				146E059224AE4108001E1917 /* ContentView.swift in Sources */,
 				146E057B24AE40F0001E1917 /* AppDelegate.swift in Sources */,
 			);
@@ -304,6 +304,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WKRRaceLiveViewer/WKRRaceLiveViewer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WKRRaceLiveViewer/Preview Content\"";
@@ -328,6 +329,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WKRRaceLiveViewer/WKRRaceLiveViewer.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"WKRRaceLiveViewer/Preview Content\"";

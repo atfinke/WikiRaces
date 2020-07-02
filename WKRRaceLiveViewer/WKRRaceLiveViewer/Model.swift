@@ -39,7 +39,7 @@ class Model: ObservableObject {
         let operation = CKQueryOperation(query: query)
         operation.resultsLimit = 1
         operation.recordFetchedBlock = { record in
-            let wrapper = WKRRaceLiveRecord(record: record)
+            let wrapper = WKRRaceActiveRecordWrapper(record: record)
             DispatchQueue.main.async {
                 self.host = wrapper.host()
                 self.state = wrapper.state()

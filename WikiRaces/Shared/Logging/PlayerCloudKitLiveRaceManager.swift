@@ -47,15 +47,17 @@ class PlayerCloudKitLiveRaceManager {
     }
 
     func savePlayerImages() {
-        guard let record = self.activeRecord,
-            let data = try? JSONEncoder().encode(WKRUIPlayerImageManager.shared.container()),
-            let url = self.write(data: data, suffix: "ImageContainer") else {
-            os_log("%{public}s: exit early", log: .raceLiveDatabase, type: .error, #function)
-            return
-        }
+        writeQueue.async {
+            guard let record = self.activeRecord,
+                let data = try? JSONEncoder().encode(WKRUIPlayerImageManager.shared.container()),
+                let url = self.write(data: data, suffix: "ImageContainer") else {
+                os_log("%{public}s: exit early", log: .raceLiveDatabase, type: .error, #function)
+                return
+            }
 
-        record["ImageContainer"] = CKAsset(fileURL: url)
-        save(record: record, enforceRecentUpdateCheck: true)
+            record["ImageContainer"] = CKAsset(fileURL: url)
+            self.save(record: record, enforceRecentUpdateCheck: true)
+        }
     }
 
     func updated(resultsInfo: WKRResultsInfo) {

@@ -18,7 +18,7 @@ extension UIFont {
             ]
         ]
 
-        let fontDescriptor = UIFont.systemRoundedFont(ofSize: monospaceSize, weight: weight).fontDescriptor.addingAttributes(
+        let fontDescriptor = UIFont.systemFont(ofSize: monospaceSize, weight: weight).fontDescriptor.addingAttributes(
             [.featureSettings: features]
         )
 

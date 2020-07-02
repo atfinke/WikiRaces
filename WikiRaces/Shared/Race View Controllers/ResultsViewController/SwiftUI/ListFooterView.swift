@@ -21,7 +21,7 @@ struct ListFooterView: View {
             Divider().frame(height: 2)
                 .padding(.bottom, 10)
             Text(topText)
-                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .font(.system(size: 14, weight: .medium))
                 .foregroundColor(.wkrSubtitleTextColor(for: colorScheme))
                 .opacity(textOpacity)
                 .animation(nil, value: topText)

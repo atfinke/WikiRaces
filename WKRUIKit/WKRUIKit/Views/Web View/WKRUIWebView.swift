@@ -47,7 +47,6 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
     private let linkCountLabel = UILabel()
     private let loadingView = UIView()
-    private let slowConnectionLabel = UILabel()
 
     public var progressView: WKRUIProgressView? {
         didSet {
@@ -92,7 +91,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
                 .typeIdentifier: kMonospacedNumbersSelector
             ]
         ]
-        let fontDescriptor = UIFont.systemRoundedFont(ofSize: 100, weight: .medium)
+        let fontDescriptor = UIFont.systemFont(ofSize: 100, weight: .medium)
             .fontDescriptor
             .addingAttributes(
             [UIFontDescriptor.AttributeName.featureSettings: features]
@@ -113,18 +112,6 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
         linkCountLabel.translatesAutoresizingMaskIntoConstraints = false
         loadingView.addSubview(linkCountLabel)
 
-        slowConnectionLabel.text = "IF YOU SEE THIS FOR > 10 SECONDS, PLEASE LMK."
-        slowConnectionLabel.textColor = .white
-        slowConnectionLabel.textAlignment = .center
-        slowConnectionLabel.numberOfLines = 0
-
-        slowConnectionLabel.adjustsFontSizeToFitWidth = true
-        slowConnectionLabel.font = UIFont.systemRoundedFont(ofSize: 24, weight: .bold)
-        slowConnectionLabel.translatesAutoresizingMaskIntoConstraints = false
-        loadingView.addSubview(slowConnectionLabel)
-
-        slowConnectionLabel.isHidden = true // only show during development
-
         scrollView.decelerationRate = UIScrollView.DecelerationRate.normal
 
         let constraints = [
@@ -136,12 +123,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
             linkCountLabel.topAnchor.constraint(equalTo: loadingView.topAnchor),
             linkCountLabel.bottomAnchor.constraint(equalTo: loadingView.bottomAnchor),
             linkCountLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
-            linkCountLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor),
-
-            slowConnectionLabel.bottomAnchor.constraint(equalTo: loadingView.safeAreaLayoutGuide.bottomAnchor,
-                                                        constant: -20),
-            slowConnectionLabel.leftAnchor.constraint(equalTo: loadingView.leftAnchor),
-            slowConnectionLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor)
+            linkCountLabel.rightAnchor.constraint(equalTo: loadingView.rightAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
 

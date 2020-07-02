@@ -19,7 +19,7 @@ extension ResultRenderer {
 
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemRoundedFont(ofSize: 18, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.text = title.uppercased()
         label.textAlignment = .left
         label.textColor = tintColor
@@ -63,14 +63,14 @@ extension ResultRenderer {
 
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.font = UIFont.systemRoundedFont(ofSize: 28, weight: .semibold)
+        titleLabel.font = UIFont.systemFont(ofSize: 28, weight: .semibold)
         titleLabel.text = "WikiRaces"
         titleLabel.textColor = tintColor
         innerBannerView.addSubview(titleLabel)
 
         let detailLabel = UILabel()
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
-        detailLabel.font = UIFont.systemRoundedFont(ofSize: 18, weight: .medium)
+        detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         detailLabel.text = "RACE RESULTS"
         detailLabel.textColor = .darkGray
         innerBannerView.addSubview(detailLabel)
@@ -133,7 +133,7 @@ extension ResultRenderer {
             let nameString = placeString + player.name
 
             let weight: UIFont.Weight = player == localPlayer ? .medium : .medium
-            let nameFont = UIFont.systemRoundedFont(ofSize: 18, weight: weight)
+            let nameFont = UIFont.systemFont(ofSize: 18, weight: weight)
 
             let style = NSMutableParagraphStyle()
             style.headIndent = 35
@@ -158,7 +158,7 @@ extension ResultRenderer {
             let detailLabel = UILabel()
             detailLabel.translatesAutoresizingMaskIntoConstraints = false
 
-            detailLabel.font = UIFont.systemRoundedFont(ofSize: 16, weight: .medium)
+            detailLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
             if player.state == .foundPage {
                 detailLabel.font = UIFont(monospaceSize: 18, weight: .semibold)
             }
@@ -232,7 +232,7 @@ extension ResultRenderer {
             var fullString = indexString + (entry.page.title ?? "")
             var linkHereString = ""
 
-            let entryFont = UIFont.systemRoundedFont(ofSize: 18, weight: .medium)
+            let entryFont = UIFont.systemFont(ofSize: 18, weight: .medium)
             let style = NSMutableParagraphStyle()
             style.headIndent = 18
             if num >= 100 {
@@ -288,7 +288,7 @@ extension ResultRenderer {
             let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
             label.numberOfLines = 0
-            label.font = UIFont.systemRoundedFont(ofSize: 14, weight: .medium)
+            label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
             label.textColor = .darkGray
             label.text = "* Link Here"
             historyView.addSubview(label)

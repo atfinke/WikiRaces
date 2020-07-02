@@ -81,14 +81,14 @@ final internal class MenuTile: UIControl {
     override var bounds: CGRect {
         didSet {
             if bounds.width > 200 {
-                titleLabel.font = UIFont.systemRoundedFont(ofSize: 18, weight: .semibold)
-                valueLabel.font = UIFont.systemRoundedFont(ofSize: 46)
+                titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+                valueLabel.font = UIFont.systemFont(ofSize: 46)
             } else if bounds.width > 100 {
-                titleLabel.font = UIFont.systemRoundedFont(ofSize: 16, weight: .semibold)
-                valueLabel.font = UIFont.systemRoundedFont(ofSize: 38)
+                titleLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                valueLabel.font = UIFont.systemFont(ofSize: 38)
             } else {
-                titleLabel.font = UIFont.systemRoundedFont(ofSize: 11, weight: .bold)
-                valueLabel.font = UIFont.systemRoundedFont(ofSize: 30)
+                titleLabel.font = UIFont.systemFont(ofSize: 11, weight: .bold)
+                valueLabel.font = UIFont.systemFont(ofSize: 30)
             }
         }
     }

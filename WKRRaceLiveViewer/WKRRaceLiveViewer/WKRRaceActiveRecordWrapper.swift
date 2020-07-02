@@ -8,7 +8,7 @@
 import CloudKit
 import WKRKitCore
 
-struct WKRRaceLiveRecord {
+struct WKRRaceActiveRecordWrapper {
 
     // MARK: - Types -
 

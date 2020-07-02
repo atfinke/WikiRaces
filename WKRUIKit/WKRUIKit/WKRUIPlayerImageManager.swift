@@ -36,7 +36,7 @@ public class WKRUIPlayerImageManager {
     private var connectedPlayerImages = [String: UIImage]()
     private var localPlayerImage: UIImage?
 
-    public private(set) var isLocalPlayerImageSet = false
+    public private(set) var isLocalPlayerImageFromGameCenter = false
 
     // MARK: - Initalization -
 
@@ -58,6 +58,10 @@ public class WKRUIPlayerImageManager {
                     return
                 }
                 os_log("%{public}s: load photo success for %{public}s", log: .imageManager, type: .info, #function, player.alias)
+                
+                if player == GKLocalPlayer.local {
+                    self.isLocalPlayerImageFromGameCenter = true
+                }
 
                 self.update(image: photo, for: player.alias)
                 completion?()
@@ -68,7 +72,6 @@ public class WKRUIPlayerImageManager {
     private func update(image: UIImage, for playerID: String) {
         if playerID == GKLocalPlayer.local.alias {
             localPlayerImage = image
-            isLocalPlayerImageSet = true
         } else {
             connectedPlayerImages[playerID] = image
         }

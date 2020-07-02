@@ -21,7 +21,7 @@ struct LoadingContentView: View {
             VStack {
                 Spacer()
                 Text(self.model.title.uppercased())
-                    .font(.system(size: 20, weight: .medium, design: .rounded))
+                    .font(.system(size: 20, weight: .medium))
                     .padding()
                 ActivityIndicatorView()
                     .opacity(self.model.activityOpacity)
@@ -32,7 +32,7 @@ struct LoadingContentView: View {
                     self.disclaimerButton?()
                 }, label: {
                     Text(self.model.disclaimerButtonTitle)
-                        .font(.system(size: 16, weight: .regular, design: .rounded))
+                        .font(.system(size: 16, weight: .regular))
                         .foregroundColor(Color(.systemBlue))
                         .opacity(self.model.disclaimerButtonOpacity)
                         .animation(.easeInOut(duration: 0.5), value: self.model.disclaimerButtonOpacity)

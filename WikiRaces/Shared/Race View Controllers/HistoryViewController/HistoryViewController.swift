@@ -229,14 +229,14 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
 
         if let duration = WKRDurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
-            cell.detailLabel.font = UIFont.systemRoundedFont(ofSize: 18, weight: .regular)
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             cell.isShowingActivityIndicatorView = false
         } else if playerState == .racing {
             cell.detailLabel.text = ""
             cell.isShowingActivityIndicatorView = true
         } else {
             cell.detailLabel.text = playerState.text
-            cell.detailLabel.font = UIFont.systemRoundedFont(ofSize: 18, weight: .medium)
+            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             cell.isShowingActivityIndicatorView = false
         }
 

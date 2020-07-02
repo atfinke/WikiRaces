@@ -61,7 +61,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
             topConstraint,
             leftAnchor.constraint(equalTo: alertWindow.leftAnchor),
             rightAnchor.constraint(equalTo: alertWindow.rightAnchor),
-            heightAnchor.constraint(equalToConstant: 50)
+            heightAnchor.constraint(equalToConstant: WKRUIKitConstants.alertViewHeight + alertWindow.safeAreaInsets.bottom / 2)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -132,23 +132,24 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         label.frame = rect
 
+        let viewCenterY = frame.height / 2 - alertWindow.safeAreaInsets.bottom / 4
         let imageViewPadding = WKRUIKitConstants.alertViewImagePadding
         let imageViewWidth = WKRUIKitConstants.alertViewImageHeight
 
         if let player = message.player {
             imageView.isHidden = false
-            label.center = CGPoint(x: center.x + (imageViewWidth + imageViewPadding) / 2, y: frame.height / 2)
+            label.center = CGPoint(x: center.x + (imageViewWidth + imageViewPadding) / 2, y: viewCenterY)
             imageView.image = player.rawImage
 
             imageView.frame = CGRect(
                 x: label.frame.minX - imageViewWidth - imageViewPadding,
-                y: frame.height / 2 - imageViewWidth / 2,
+                y: viewCenterY - imageViewWidth / 2,
                 width: imageViewWidth,
                 height: imageViewWidth)
 
         } else {
             imageView.isHidden = true
-            label.center = CGPoint(x: center.x, y: frame.height / 2)
+            label.center = CGPoint(x: center.x, y: viewCenterY)
         }
 
         setNeedsLayout()

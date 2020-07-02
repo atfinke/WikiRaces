@@ -15,9 +15,9 @@ public enum WKRUIButtonStyle {
 
     var font: UIFont {
         switch self {
-        case .small:  return UIFont.systemRoundedFont(ofSize: 12.0, weight: .semibold)
-        case .normal: return UIFont.systemRoundedFont(ofSize: 16.0, weight: .semibold)
-        case .large: return UIFont.systemRoundedFont(ofSize: 20.0, weight: .semibold)
+        case .small:  return UIFont.systemFont(ofSize: 12.0, weight: .semibold)
+        case .normal: return UIFont.systemFont(ofSize: 16.0, weight: .semibold)
+        case .large: return UIFont.systemFont(ofSize: 20.0, weight: .semibold)
         }
     }
 

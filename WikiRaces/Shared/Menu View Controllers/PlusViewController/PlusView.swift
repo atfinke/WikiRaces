@@ -29,7 +29,7 @@ class PlusView: UIView {
         let label = UILabel()
         label.text = "Unlock WikiRaces+"
         label.textAlignment = .center
-        label.font = UIFont.systemRoundedFont(ofSize: 24, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         return label
     }()
 
@@ -38,7 +38,7 @@ class PlusView: UIView {
         label.text = "Thanks for playing WikiRaces!"
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemRoundedFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         return label
     }()
 
@@ -47,7 +47,7 @@ class PlusView: UIView {
         label.text = "Please consider supporting development costs to unlock exclusive features."
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemRoundedFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         return label
     }()
 
@@ -83,7 +83,7 @@ class PlusView: UIView {
         let label = UILabel()
         label.text = "Loading"
         label.textAlignment = .center
-        label.font = UIFont.systemRoundedFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
 

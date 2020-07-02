@@ -61,11 +61,11 @@ struct HostContentView: View {
                 effectSize: 5)
                 .padding(.bottom, 20)
 
-            if !WKRUIPlayerImageManager.shared.isLocalPlayerImageSet {
+            if !WKRUIPlayerImageManager.shared.isLocalPlayerImageFromGameCenter {
                 HStack {
                     Spacer()
                     Text("Set a custom racer photo\nin the Game Center settings")
-                        .font(.system(size: 12, weight: .regular, design: .rounded))
+                        .font(.system(size: 12, weight: .regular))
                         .multilineTextAlignment(.center)
                         .offset(y: -5)
                     Spacer()
@@ -107,7 +107,7 @@ struct HostContentView: View {
             .frame(maxHeight: 60)
             VStack {
                 Text(model.status)
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.secondary)
                     .transition(.opacity)
                     .id(model.status)

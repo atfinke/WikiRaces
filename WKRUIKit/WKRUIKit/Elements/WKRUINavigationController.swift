@@ -15,7 +15,7 @@ final public class WKRUINavigationController: UINavigationController {
         navigationBar.tintColor = color
         navigationBar.titleTextAttributes = [
             .foregroundColor: color,
-            .font: UIFont.systemRoundedFont(ofSize: 18, weight: .semibold)
+            .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
         ]
     }
 }

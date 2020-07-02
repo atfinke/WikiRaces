@@ -31,7 +31,7 @@ class ActivityButton: UIButton {
         let label = UILabel()
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemRoundedFont(ofSize: 14, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .medium)
         return label
     }()
 

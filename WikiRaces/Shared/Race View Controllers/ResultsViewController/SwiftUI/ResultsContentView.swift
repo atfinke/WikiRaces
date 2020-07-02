@@ -36,7 +36,7 @@ struct ResultsContentView: View {
                 if model.buttonEnabled {
                     Button(action: readyUpButtonPressed) {
                         Text("READY UP")
-                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .font(.system(size: 16, weight: .semibold))
                             .kerning(4.4)
                             .foregroundColor(Color.wkrTextColor(for: colorScheme))
                             .frame(width: 160, height: 36)

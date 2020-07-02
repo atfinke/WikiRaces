@@ -28,7 +28,7 @@ struct VotingItemContentView: View {
         return Button(action: action) {
             HStack {
                 Text(item.page.title ?? "-")
-                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                    .font(.system(size: 16, weight: .medium))
                     .foregroundColor(.wkrTextColor(for: colorScheme))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.vertical, 10)

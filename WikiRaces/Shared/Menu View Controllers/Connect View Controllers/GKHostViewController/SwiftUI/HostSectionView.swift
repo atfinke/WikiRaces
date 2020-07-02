@@ -28,11 +28,11 @@ struct HostSectionView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(header)
-                    .font(.system(size: 14, weight: .medium, design: .rounded))
+                    .font(.system(size: 14, weight: .medium))
                     .foregroundColor(.wkrSubtitleTextColor(for: colorScheme))
                     .multilineTextAlignment(.leading)
                 Text(title)
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
+                    .font(.system(size: 20, weight: .semibold))
                     .foregroundColor(.wkrTextColor(for: colorScheme))
                     .multilineTextAlignment(.leading)
                     .transition(.opacity)
