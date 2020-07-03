@@ -64,7 +64,9 @@ public class WKRUIPlayerImageManager {
                 }
 
                 self.update(image: photo, for: player.alias)
-                completion?()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    completion?()
+                }
             }
         }
     }

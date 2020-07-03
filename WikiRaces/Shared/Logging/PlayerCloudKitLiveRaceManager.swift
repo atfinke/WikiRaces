@@ -195,6 +195,7 @@ class PlayerCloudKitLiveRaceManager {
                     PlayerFirebaseAnalytics.log(event: .raceCodeRecordTooRecent)
                     os_log("%{public}s: existing record too new: %{public}ld, min is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
                 } else {
+                    PlayerFirebaseAnalytics.log(event: .raceCodeRecordReused)
                     os_log("%{public}s: existing record is reusable: %{public}ld, min is %{public}ld", log: .raceLiveDatabase, type: .info, #function, timeIntervalSinceNow, WKRKitConstants.current.raceCodeRecordMinReuseTimeSinceLastUpdate)
                 }
             } else {

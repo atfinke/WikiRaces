@@ -68,6 +68,10 @@ internal struct PlayerFirebaseAnalytics {
         case raceCodeRecordTooRecent
         case raceCodeRecordCreated
 
+        case raceCodeGenerationFinished
+
+        case raceCodeLinkOpened
+
         init(event: WKRLogEvent) {
             switch event.type {
             case .linkOnPage:       self = .linkOnPage

@@ -46,12 +46,10 @@ extension GKJoinViewController: GKMatchDelegate {
     func match(_ match: GKMatch, player: GKPlayer, didChange state: GKPlayerConnectionState) {
         os_log("%{public}s: player: %{public}s, state: %{public}ld", log: .gameKit, type: .info, #function, player.alias, state.rawValue)
 
-        guard !isPublicRace else { return }
+        guard state == .connected else { return }
+        WKRUIPlayerImageManager.shared.connected(to: player, completion: nil)
 
-        guard state == .connected, let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() else { return }
-        if state == .connected {
-            WKRUIPlayerImageManager.shared.connected(to: player, completion: nil)
-        }
+        guard let data = WKRSeenFinalArticlesStore.encodedLocalPlayerSeenFinalArticles() else { return }
         DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
             try? match.send(data, to: [player], dataMode: .reliable)
         }

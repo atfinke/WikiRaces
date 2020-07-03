@@ -72,7 +72,7 @@ extension GKJoinViewController {
     func publicRaceDetermineHost(match: GKMatch) {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.model.title = "Finding best host"
             var players = match.players
             players.append(GKLocalPlayer.local)

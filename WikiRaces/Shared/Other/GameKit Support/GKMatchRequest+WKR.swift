@@ -43,7 +43,7 @@ extension GKMatchRequest {
             request.playerAttributes = 0x0000FFFF
         } else {
             request.maxPlayers = 2
-            request.playerGroup = "<GLOBAL>".hash
+            request.playerGroup = publicRacePlayerGroup()
         }
 
         os_log("%{public}s: %{public}s, %{public}ld-%{public}ld, %{public}ld, %{public}ld",
@@ -60,4 +60,7 @@ extension GKMatchRequest {
         return request
     }
 
+    private static func publicRacePlayerGroup() -> Int {
+        return 10
+    }
 }

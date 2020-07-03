@@ -270,10 +270,10 @@ final class MenuView: UIView {
         }
         Defaults.promptedGlobalRacesPopularity = true
 
-        let message = "Most racers use private races to play with friends. Create a private race and invite a friend for the best chance at joining a race."
+        let message = "Most racers use private races to play with friends. Create a private race and invite a friend for the best chance at joining a race. You can also start a solo race at any time."
         let alertController = UIAlertController(title: "Public Races", message: message, preferredStyle: .alert)
 
-        let action = UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        let action = UIAlertAction(title: "Find Public Race", style: .default, handler: { _ in
             PlayerFirebaseAnalytics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
             self.animateMenuOut {
                 self.listenerUpdate?(.presentJoinPublicRace)

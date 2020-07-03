@@ -26,6 +26,7 @@ final internal class GKHostViewController: GKConnectViewController {
         didSet {
             if !isMatchmakingEnabled {
                 advertiser.stop()
+                raceCodeGenerator.cancel()
             }
         }
     }
@@ -87,6 +88,7 @@ final internal class GKHostViewController: GKConnectViewController {
         guard !Defaults.promptedAutoInvite else {
             return
         }
+        Defaults.promptedAutoInvite = true
 
         let controller = UIAlertController(
             title: "Invite Nearby Racers?",
@@ -94,7 +96,6 @@ final internal class GKHostViewController: GKConnectViewController {
             preferredStyle: .alert)
 
         let action = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
-            Defaults.promptedAutoInvite = true
             Defaults.isAutoInviteOn = true
             self?.startMatchmaking()
             os_log("%{public}s: enabled auto invite", log: .gameKit, type: .info, #function)
@@ -102,7 +103,6 @@ final internal class GKHostViewController: GKConnectViewController {
         controller.addAction(action)
 
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel) { _ in
-            Defaults.promptedAutoInvite = true
             os_log("%{public}s: disabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(cancelAction)
@@ -121,6 +121,7 @@ final internal class GKHostViewController: GKConnectViewController {
         PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         model.matchStarting = true
+        raceCodeGenerator.cancel()
 
         advertiser.stop()
         contentViewHosting.view.isUserInteractionEnabled = false

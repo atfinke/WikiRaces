@@ -18,8 +18,9 @@ extension GKHostViewController: GKMatchDelegate {
         guard let code = model.raceCode, isMatchmakingEnabled else { return }
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
             if let error = error {
-                os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 5)
-                if -startDate.timeIntervalSinceNow < 5 {
+                os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
+                if -startDate.timeIntervalSinceNow < 1 {
+                    self?.isMatchmakingEnabled = false
                     DispatchQueue.main.async {
                         self?.showError(title: "Failed to Create Race", message: "Please try again later.")
                     }

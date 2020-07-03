@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import os.log
 
 public struct WKRSeenFinalArticlesStore {
 
@@ -74,19 +75,25 @@ public struct WKRSeenFinalArticlesStore {
     }
 
     private static func resetLocalPlayerSeenFinalArticles() {
+        os_log("%{public}s", log: .seenArticlesStore, type: .info, #function)
         localPlayersSeenFinalArticles = []
     }
 
     // MARK: - Remote Players
 
     public static func addRemoteTransferData(_ data: Data) {
+        os_log("%{public}s", log: .seenArticlesStore, type: .info, #function)
         guard let tranfer = try? JSONDecoder().decode(RemoteTransfer.self, from: data) else { return }
+
+        os_log("%{public}s: got %{public}ld", log: .seenArticlesStore, type: .info, #function, tranfer.articles.count)
 
         // 1. Add new paths
         // 2. Remove copies from remote array that are already in local array
         uniqueRemotePlayersSeenFinalArticles = uniqueRemotePlayersSeenFinalArticles
             .union(tranfer.articles)
             .subtracting(localPlayersSeenFinalArticles)
+
+        os_log("%{public}s: total remote seen %{public}ld", log: .seenArticlesStore, type: .info, #function, uniqueRemotePlayersSeenFinalArticles.count)
     }
 
     public static func isRemoteTransferData(_ data: Data) -> Bool {
@@ -96,6 +103,7 @@ public struct WKRSeenFinalArticlesStore {
 
     public static func resetRemotePlayersSeenFinalArticles() {
         uniqueRemotePlayersSeenFinalArticles = []
+        os_log("%{public}s", log: .seenArticlesStore, type: .info, #function)
     }
 
     public static func hostLogEvents() -> [WKRLogEvent] {

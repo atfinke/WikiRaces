@@ -68,7 +68,7 @@ final internal class MenuViewController: UIViewController {
             case .presentJoinPrivateRace:
                 let controller = UIAlertController(
                     title: "Join Private Race",
-                    message: "Enter the race code from the host",
+                    message: "Enter the race code",
                     preferredStyle: .alert)
                 controller.addTextField { textField in
                     textField.placeholder = "Race Code"
@@ -98,7 +98,6 @@ final internal class MenuViewController: UIViewController {
                 controller.modalPresentationStyle = .overCurrentContext
                 self.present(controller, animated: false, completion: nil)
             }
-
         }
 
     }

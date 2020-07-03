@@ -51,6 +51,7 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         GKHelper.shared.acceptedInvite(code: code)
+        PlayerFirebaseAnalytics.log(event: .raceCodeLinkOpened)
         return true
     }
 
