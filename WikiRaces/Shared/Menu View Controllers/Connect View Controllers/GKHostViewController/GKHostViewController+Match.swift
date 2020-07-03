@@ -21,6 +21,7 @@ extension GKHostViewController: GKMatchDelegate {
                 os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
                 if -startDate.timeIntervalSinceNow < 1 {
                     self?.isMatchmakingEnabled = false
+                    PlayerFirebaseAnalytics.log(event: .matchmakingQuickFail)
                     DispatchQueue.main.async {
                         self?.showError(title: "Failed to Create Race", message: "Please try again later.")
                     }
@@ -55,10 +56,21 @@ extension GKHostViewController: GKMatchDelegate {
         if state == .connected {
             WKRUIPlayerImageManager.shared.connected(to: player, completion: { [weak self] in
                 DispatchQueue.main.async {
-                    self?.model.connectedPlayers.append(WKRPlayerProfile(player: player))
+                    guard let self = self else { return }
+                    let player = WKRPlayerProfile(player: player)
+                    if !self.model.connectedPlayers.contains(player) {
+                        self.model.connectedPlayers.append(player)
+                    }
                 }
                 self?.sendMiniMessage(info: .connected)
             })
+        } else if state == .disconnected {
+            DispatchQueue.main.async {
+                let player = WKRPlayerProfile(player: player)
+                if let index = self.model.connectedPlayers.firstIndex(of: player) {
+                    self.model.connectedPlayers.remove(at: index)
+                }
+            }
         }
     }
 

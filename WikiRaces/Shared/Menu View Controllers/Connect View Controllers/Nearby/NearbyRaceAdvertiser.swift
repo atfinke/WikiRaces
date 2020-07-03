@@ -23,7 +23,7 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
     // MARK: - Helpers -
 
     func start(hostName: String, raceCode: String) {
-        os_log("%{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, hostName, raceCode)
+        os_log("Advertiser: %{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, hostName, raceCode)
 
         let session = MCSession(peer: Nearby.peerID)
         browser = MCNearbyServiceBrowser(peer: Nearby.peerID, serviceType: Nearby.serviceType)
@@ -36,7 +36,7 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
     }
 
     func stop() {
-        os_log("%{public}s", log: .nearby, type: .info, #function)
+        os_log("Advertiser: %{public}s", log: .nearby, type: .info, #function)
         browser?.stopBrowsingForPeers()
     }
 
@@ -46,7 +46,7 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
               let data = try? JSONEncoder().encode(Nearby.Invite(hostName: GKLocalPlayer.local.alias, raceCode: raceCode)) else {
             return
         }
-        os_log("%{public}s: peer: %{public}s", log: .nearby, type: .info, #function, peerID.displayName)
+        os_log("Advertiser: %{public}s: peer: %{public}s", log: .nearby, type: .info, #function, peerID.displayName)
         browser.invitePeer(peerID, to: session, withContext: data, timeout: 600)
         invitedPeers.append(peerID)
     }

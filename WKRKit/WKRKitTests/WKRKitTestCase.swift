@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import WKRKit
+import WKRUIKit
 
 class WKRKitTestCase: XCTestCase {
 

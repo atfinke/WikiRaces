@@ -47,7 +47,6 @@ final internal class MenuViewController: UIViewController {
             }, completion: { [weak self] _ in
                 self?.dismiss(animated: false) {
                     self?.navigationController?.popToRootViewController(animated: false)
-                    //                        GKMatchmaker.shared().cancel()
                 }
             })
         }
@@ -175,28 +174,37 @@ final internal class MenuViewController: UIViewController {
 
     // MARK: - Other -
 
-    func prepareForRace() {
+    func prepareForRace(completion: @escaping () -> Void) {
         UIApplication.shared.isIdleTimerDisabled = true
         nearbyRaceListener.stop()
         resignFirstResponder()
 
-        if presentedViewController != nil {
-            navigationController?.popToRootViewController(animated: false)
+        if presentedViewController == nil {
+            completion()
+        } else {
+            dismiss(animated: false) {
+                self.navigationController?.popToRootViewController(animated: false)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    self.nearbyRaceListener.stop()
+                    completion()
+                }
+            }
         }
     }
 
     func joinRace(raceCode: String?) {
-        prepareForRace()
-        menuView.animateMenuOut {
-            let destination: RaceChecksViewController.Destination
-            if let code = raceCode {
-                destination = .joinPrivate(raceCode: code)
-            } else {
-                destination = .joinPublic
+        prepareForRace(completion: {
+            self.menuView.animateMenuOut {
+                let destination: RaceChecksViewController.Destination
+                if let code = raceCode {
+                    destination = .joinPrivate(raceCode: code)
+                } else {
+                    destination = .joinPublic
+                }
+                let controller = RaceChecksViewController(destination: destination)
+                self.navigationController?.pushViewController(controller, animated: false)
             }
-            let controller = RaceChecksViewController(destination: destination)
-            self.navigationController?.pushViewController(controller, animated: false)
-        }
+        })
     }
 
     func createRace() {
@@ -206,9 +214,10 @@ final internal class MenuViewController: UIViewController {
             nav.modalPresentationStyle = .overCurrentContext
             present(nav, animated: true, completion: nil)
         } else {
-            prepareForRace()
-            let controller = RaceChecksViewController(destination: .hostPrivate)
-            navigationController?.pushViewController(controller, animated: false)
+            prepareForRace(completion: {
+                let controller = RaceChecksViewController(destination: .hostPrivate)
+                self.navigationController?.pushViewController(controller, animated: false)
+            })
         }
     }
 

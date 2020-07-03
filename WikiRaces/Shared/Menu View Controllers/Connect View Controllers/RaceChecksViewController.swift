@@ -40,6 +40,8 @@ final class RaceChecksViewController: VisualEffectViewController {
     init(destination: Destination) {
         self.destination = destination
         super.init(nibName: nil, bundle: nil)
+        GKMatchmaker.shared().cancel()
+        
         model.title = "Checking Connection"
         model.disclaimerButtonTitle = "Manage Game Center"
         view.alpha = 0
@@ -123,16 +125,14 @@ final class RaceChecksViewController: VisualEffectViewController {
             }
 
             // Give Game Center more time to get its act together
-            if !isAuthenticated {
-                sleep(2)
-            }
+            sleep(3)
 
             DispatchQueue.main.async {
                 self.model.disclaimerButtonOpacity = 0
             }
 
-            DispatchQueue.main.async {
-                self.readyForNextMatchmakingStep()
+            DispatchQueue.main.async { [weak self] in
+                self?.readyForNextMatchmakingStep()
             }
         }
     }

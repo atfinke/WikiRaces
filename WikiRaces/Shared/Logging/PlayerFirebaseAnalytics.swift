@@ -71,6 +71,8 @@ internal struct PlayerFirebaseAnalytics {
         case raceCodeGenerationFinished
 
         case raceCodeLinkOpened
+        
+        case matchmakingQuickFail
 
         init(event: WKRLogEvent) {
             switch event.type {

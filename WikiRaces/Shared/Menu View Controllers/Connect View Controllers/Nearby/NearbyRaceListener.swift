@@ -19,7 +19,7 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     // MARK: - Helpers -
 
     func start(nearbyRaces: @escaping ((_ hostName: String, _ raceCode: String) -> Void)) {
-        os_log("%{public}s", log: .nearby, type: .info, #function)
+        os_log("Listener: %{public}s", log: .nearby, type: .info, #function)
         self.handler = nearbyRaces
 
         advertiser = MCNearbyServiceAdvertiser(peer: Nearby.peerID, discoveryInfo: nil, serviceType: Nearby.serviceType)
@@ -28,7 +28,7 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     }
 
     func stop() {
-        os_log("%{public}s", log: .nearby, type: .info, #function)
+        os_log("Listener: %{public}s", log: .nearby, type: .info, #function)
         advertiser?.stopAdvertisingPeer()
     }
 
@@ -36,7 +36,7 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         if let data = context, let invite = try? JSONDecoder().decode(Nearby.Invite.self, from: data) {
-            os_log("%{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, invite.hostName, invite.raceCode)
+            os_log("Listener: %{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, invite.hostName, invite.raceCode)
             handler?(invite.hostName, invite.raceCode)
         }
         invitationHandler(false, nil)

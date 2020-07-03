@@ -46,22 +46,4 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         }
     }
 
-    // MARK: - Other -
-
-    func presentGameKitAuthAlert() {
-        let title = "Global Races Unavailable"
-        let message = """
-        Please try logging into Game Center in the Settings app to join a Global Race.
-        """
-
-        let controller = UIAlertController(title: title,
-                                           message: message,
-                                           preferredStyle: .alert)
-        controller.addCancelAction(title: "Ok")
-
-        if presentedViewController == nil {
-            present(controller, animated: true, completion: nil)
-        }
-    }
-
 }
