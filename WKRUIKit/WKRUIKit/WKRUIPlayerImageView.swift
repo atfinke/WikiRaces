@@ -12,14 +12,14 @@ public struct WKRUIPlayerImageView: View {
 
     // MARK: - Properties -
 
-    let player: WKRUIPlayer
+    let player: WKRPlayerProfile
     let size: CGFloat
     let effectSize: CGFloat
 
     // MARK: - Body -
 
     public var body: some View {
-        Image(uiImage: WKRUIPlayerImageManager.shared.image(for: player.id))
+        Image(uiImage: WKRUIPlayerImageManager.shared.image(for: player.playerID))
             .renderingMode(.original)
             .resizable()
             .frame(width: size, height: size)
@@ -27,7 +27,7 @@ public struct WKRUIPlayerImageView: View {
             .shadow(radius: effectSize)
     }
 
-    public init(player: WKRUIPlayer, size: CGFloat, effectSize: CGFloat) {
+    public init(player: WKRPlayerProfile, size: CGFloat, effectSize: CGFloat) {
         self.player = player
         self.size = size
         self.effectSize = effectSize

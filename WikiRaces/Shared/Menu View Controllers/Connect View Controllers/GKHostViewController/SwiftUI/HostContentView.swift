@@ -56,7 +56,7 @@ struct HostContentView: View {
 
             Spacer()
             WKRUIPlayerImageView(
-                player: WKRUIPlayer(id: GKLocalPlayer.local.alias),
+                player: WKRPlayerProfile(player: GKLocalPlayer.local),
                 size: 100,
                 effectSize: 5)
                 .padding(.bottom, 20)

@@ -90,7 +90,7 @@ final internal class MenuViewController: UIViewController {
                 self.present(alert, animated: true, completion: nil)
             case .presentStats:
                 let nav = WKRUINavigationController(rootViewController: StatsViewController())
-                nav.modalPresentationStyle = .fullScreen
+                nav.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
                 self.present(nav, animated: true, completion: nil)
             case .presentSubscription:
                 PlayerFirebaseAnalytics.log(event: .forcedIntoStoreFromStats)

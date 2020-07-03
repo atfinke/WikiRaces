@@ -50,7 +50,7 @@ extension WKRGameManager {
             }
             if let message = samePageMessage {
                 enqueue(message: message,
-                        for: samePagePlayers.count == 1 ? WKRUIPlayer(id: samePagePlayers[0].playerID) : nil,
+                        for: samePagePlayers.count == 1 ? samePagePlayers[0] : nil,
                         duration: 2.0,
                         isRaceSpecific: true,
                         playHaptic: false)
@@ -104,7 +104,7 @@ extension WKRGameManager {
             }
 
             enqueue(message: message.text,
-                    for: WKRUIPlayer(id: player.playerID),
+                    for: player,
                     duration: 3.0,
                     isRaceSpecific: isRaceSpecific,
                     playHaptic: playHaptic)

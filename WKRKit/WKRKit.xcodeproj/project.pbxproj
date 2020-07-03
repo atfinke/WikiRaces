@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		140FCFC31F36547E00FFA84E /* WKRResultsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */; };
 		140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC41F36549900FFA84E /* WKRPlayer.swift */; };
-		140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */; };
 		140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
 		140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */; };
 		140FCFCF1F3654FC00FFA84E /* WKRHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */; };
@@ -53,7 +52,6 @@
 		146E054724AE3E9E001E1917 /* WKRPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC41F36549900FFA84E /* WKRPlayer.swift */; };
 		146E054824AE3E9E001E1917 /* WKRPlayerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */; };
 		146E054924AE3E9E001E1917 /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
-		146E054A24AE3E9E001E1917 /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */; };
 		146E054B24AE3EB2001E1917 /* WKRLinkedPagesFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F6B1F36835800FF1A9E /* WKRLinkedPagesFetcher.swift */; };
 		147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147EF6FD2202470700583D73 /* WKRSeenFinalArticlesStore.swift */; };
 		148164AF1F5C94E800AC7178 /* WKRKitRaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148164AE1F5C94E800AC7178 /* WKRKitRaceTests.swift */; };
@@ -110,7 +108,6 @@
 /* Begin PBXFileReference section */
 		140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRResultsInfo.swift; sourceTree = "<group>"; };
 		140FCFC41F36549900FFA84E /* WKRPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayer.swift; sourceTree = "<group>"; };
-		140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerProfile.swift; sourceTree = "<group>"; };
 		140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerState.swift; sourceTree = "<group>"; };
 		140FCFCC1F3654EB00FFA84E /* WKRHistoryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistoryEntry.swift; sourceTree = "<group>"; };
 		140FCFCE1F3654FC00FFA84E /* WKRHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRHistory.swift; sourceTree = "<group>"; };
@@ -364,7 +361,6 @@
 				14BA31011FF60E7B00B10C70 /* WKRPlayerAction.swift */,
 				14EB9F451F36825100FF1A9E /* WKRPlayerMessage.swift */,
 				140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */,
-				140FCFC61F3654A100FFA84E /* WKRPlayerProfile.swift */,
 				1499606B2226FA7A00259B68 /* WKRPlayerRaceStats.swift */,
 			);
 			path = Single;
@@ -594,7 +590,6 @@
 				146E053724AE3E85001E1917 /* WKRRaceSettings+Codable.swift in Sources */,
 				146E054024AE3E95001E1917 /* WKRPageFetcher.swift in Sources */,
 				146E054524AE3E9E001E1917 /* WKRResultsInfo.swift in Sources */,
-				146E054A24AE3E9E001E1917 /* WKRPlayerProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,7 +637,6 @@
 				142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */,
 				149960702226FCBF00259B68 /* WKRDurationFormatter.swift in Sources */,
 				147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */,
-				140FCFC71F3654A100FFA84E /* WKRPlayerProfile.swift in Sources */,
 				140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */,
 				141427FF21FBB84600C48788 /* WKRGameKitNetwork.swift in Sources */,
 				14EB9F621F36832C00FF1A9E /* WKRMultiWindowNetwork.swift in Sources */,

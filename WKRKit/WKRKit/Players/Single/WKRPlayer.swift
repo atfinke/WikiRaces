@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 final public class WKRPlayer: Codable, Hashable {
 
@@ -27,7 +27,6 @@ final public class WKRPlayer: Codable, Hashable {
     // MARK: - Stat Properties
 
     public private(set) var stats = WKRPlayerRaceStats()
-    public var isCreator: Bool = false
 
     // MARK: - Initialization
 

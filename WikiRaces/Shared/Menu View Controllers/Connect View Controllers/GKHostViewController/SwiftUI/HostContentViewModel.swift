@@ -12,7 +12,7 @@ import WKRUIKit
 
 class HostContentViewModel: ObservableObject {
 
-    @Published var connectedPlayers = [WKRUIPlayer]()
+    @Published var connectedPlayers = [WKRPlayerProfile]()
     var status: String {
         if matchStarting {
             return "RACE STARTING"

@@ -54,7 +54,7 @@ extension GKHostViewController: GKMatchDelegate {
         if state == .connected {
             WKRUIPlayerImageManager.shared.connected(to: player, completion: { [weak self] in
                 DispatchQueue.main.async {
-                    self?.model.connectedPlayers.append(WKRUIPlayer(id: player.alias ))
+                    self?.model.connectedPlayers.append(WKRPlayerProfile(player: player))
                 }
                 self?.sendMiniMessage(info: .connected)
             })

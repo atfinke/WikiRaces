@@ -9,6 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 import GameKit
+import WKRUIKit
 
 public enum WKRPeerNetworkConfig {
 

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 public struct WKRVotingState: Codable, Equatable {
 

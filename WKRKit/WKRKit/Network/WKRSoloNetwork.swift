@@ -6,7 +6,7 @@
 //  Copyright © 2018 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 final internal class WKRSoloNetwork: WKRPeerNetwork {
 

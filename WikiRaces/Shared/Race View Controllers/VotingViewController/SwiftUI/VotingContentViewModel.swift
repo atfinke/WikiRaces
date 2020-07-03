@@ -17,7 +17,7 @@ class VotingContentViewModel: ObservableObject {
     struct Item: Identifiable, Equatable {
         var id: String { return page.url.absoluteString }
         var page: WKRPage
-        var players: [WKRUIPlayer]
+        var players: [WKRPlayerProfile]
         var isFinal: Bool = false
     }
 
@@ -39,8 +39,7 @@ class VotingContentViewModel: ObservableObject {
             return
         }
         items = state.current.map { page, players in
-            let mappedPlayers = players.map { WKRUIPlayer(id: $0.playerID) }
-            return Item(page: page, players: mappedPlayers)
+            return Item(page: page, players: players)
         }
     }
 

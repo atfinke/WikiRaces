@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 /// Used to transmit voting data and starting page
 public struct WKRPreRaceConfig: Codable, Equatable {

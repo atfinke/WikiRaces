@@ -58,7 +58,7 @@ public class WKRUIPlayerImageManager {
                     return
                 }
                 os_log("%{public}s: load photo success for %{public}s", log: .imageManager, type: .info, #function, player.alias)
-                
+
                 if player == GKLocalPlayer.local {
                     self.isLocalPlayerImageFromGameCenter = true
                 }
@@ -83,15 +83,9 @@ public class WKRUIPlayerImageManager {
         } else if let image = connectedPlayerImages[playerID] {
             return image
         } else {
-            #if MULTIWINDOWDEBUG
-            let placeholder = PlayerPlaceholderImageRenderer.render(name: playerID)
-            self.dict[playerID] = Image(uiImage: placeholder)
-            return Image(uiImage: placeholder)
-            #endif
             fatalError()
         }
     }
-    
 
     public func clearConnectedPlayers() {
         connectedPlayerImages.removeAll()

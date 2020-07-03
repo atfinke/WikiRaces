@@ -31,7 +31,6 @@ extension ResultsViewController {
         let hackTitle = "Hack"
         let controller = UIActivityViewController(activityItems: [
             image,
-            "#WikiRaces3"
             ], applicationActivities: nil)
         controller.completionWithItemsHandler = { [weak self] activityType, completed, _, _ in
             if !(completed && activityType == UIActivity.ActivityType.saveToCameraRoll),
@@ -65,7 +64,7 @@ extension ResultsViewController {
         controller.player = player
 
         let navController = WKRUINavigationController(rootViewController: controller)
-        navController.modalPresentationStyle = .formSheet
+        navController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
         present(navController, animated: true, completion: nil)
 
         PlayerFirebaseAnalytics.log(event: .openedHistory,

@@ -15,7 +15,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     private struct WKRAlertMessage: Equatable {
         let text: String
-        let player: WKRUIPlayer?
+        let player: WKRPlayerProfile?
         let duration: Double
         let isRaceSpecific: Bool
         let playHaptic: Bool
@@ -80,7 +80,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     // MARK: - Enqueuing Messages -
 
     public func enqueue(text: String,
-                        for player: WKRUIPlayer?,
+                        for player: WKRPlayerProfile?,
                         duration: Double = WKRUIKitConstants.alertDefaultDuration,
                         isRaceSpecific: Bool,
                         playHaptic: Bool) {

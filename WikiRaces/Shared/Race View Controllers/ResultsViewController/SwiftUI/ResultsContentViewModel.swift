@@ -16,7 +16,7 @@ class ResultsContentViewModel: ObservableObject {
 
     struct Item: Identifiable, Equatable {
         var id: String { return player.id }
-        let player: WKRUIPlayer
+        let player: WKRPlayerProfile
 
         let subtitle: String
         let title: String
@@ -61,7 +61,7 @@ class ResultsContentViewModel: ObservableObject {
 
                 let pointsSuffix = playerResult.points == 1 ? "" : "s"
                 let item = Item(
-                    player: WKRUIPlayer(id: playerResult.profile.playerID),
+                    player: playerResult.profile,
                     subtitle: subtitleString,
                     title: playerResult.points.description + " Point" + pointsSuffix,
                     detail: "",
@@ -99,7 +99,7 @@ class ResultsContentViewModel: ObservableObject {
                     }
 
                     let item = Item(
-                        player: WKRUIPlayer(id: player.profile.playerID),
+                        player: player.profile,
                         subtitle: subtitle,
                         title: title,
                         detail: detail,

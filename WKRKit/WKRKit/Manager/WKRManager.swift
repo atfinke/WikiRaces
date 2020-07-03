@@ -91,7 +91,6 @@ final public class WKRGameManager {
 
         let setup = networkConfig.create()
         localPlayer = setup.player
-        localPlayer.isCreator = WKRPlayer.isLocalPlayerCreator
         peerNetwork = setup.network
 
         game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork, settings: settings)
@@ -129,7 +128,7 @@ final public class WKRGameManager {
 
     // MARK: - User Interface
 
-    public func enqueue(message: String, for player: WKRUIPlayer?, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
+    public func enqueue(message: String, for player: WKRPlayerProfile?, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
         alertView.enqueue(text: message,
                           for: player,
                           duration: duration,

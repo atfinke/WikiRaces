@@ -440,61 +440,61 @@
 		14F034AF24A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
 		14F034B024A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
 		14F034B124A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
-		14F23FF324A78DFA00820638 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */; };
+		14F23FF324A78DFA00820638 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */; platformFilter = ios; };
 		14F23FF424A78DFA00820638 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */; };
 		14F23FF524A78DFA00820638 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */; };
-		14F23FF624A78DFA00820638 /* FirebaseABTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */; };
+		14F23FF624A78DFA00820638 /* FirebaseABTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */; platformFilter = ios; };
 		14F23FF724A78DFA00820638 /* FirebaseABTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */; };
 		14F23FF824A78DFA00820638 /* FirebaseABTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */; };
-		14F23FF924A78DFA00820638 /* Protobuf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDE24A78DF900820638 /* Protobuf.xcframework */; };
+		14F23FF924A78DFA00820638 /* Protobuf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDE24A78DF900820638 /* Protobuf.xcframework */; platformFilter = ios; };
 		14F23FFA24A78DFA00820638 /* Protobuf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDE24A78DF900820638 /* Protobuf.xcframework */; };
 		14F23FFB24A78DFA00820638 /* Protobuf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDE24A78DF900820638 /* Protobuf.xcframework */; };
-		14F23FFC24A78DFA00820638 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */; };
+		14F23FFC24A78DFA00820638 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */; platformFilter = ios; };
 		14F23FFD24A78DFA00820638 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */; };
 		14F23FFE24A78DFA00820638 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */; };
-		14F23FFF24A78DFA00820638 /* FirebaseRemoteConfig.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */; };
+		14F23FFF24A78DFA00820638 /* FirebaseRemoteConfig.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */; platformFilter = ios; };
 		14F2400024A78DFA00820638 /* FirebaseRemoteConfig.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */; };
 		14F2400124A78DFA00820638 /* FirebaseRemoteConfig.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */; };
-		14F2400224A78DFA00820638 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */; };
+		14F2400224A78DFA00820638 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */; platformFilter = ios; };
 		14F2400324A78DFA00820638 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */; };
 		14F2400424A78DFA00820638 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */; };
-		14F2400524A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
+		14F2400524A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; platformFilter = ios; };
 		14F2400624A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
 		14F2400724A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
-		14F2400824A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */; };
+		14F2400824A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */; platformFilter = ios; };
 		14F2400924A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */; };
 		14F2400A24A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */; };
-		14F2400B24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE524A78DF900820638 /* FirebaseCore.xcframework */; };
+		14F2400B24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE524A78DF900820638 /* FirebaseCore.xcframework */; platformFilter = ios; };
 		14F2400C24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE524A78DF900820638 /* FirebaseCore.xcframework */; };
 		14F2400D24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE524A78DF900820638 /* FirebaseCore.xcframework */; };
-		14F2400E24A78DFA00820638 /* GoogleToolboxForMac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */; };
+		14F2400E24A78DFA00820638 /* GoogleToolboxForMac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */; platformFilter = ios; };
 		14F2400F24A78DFA00820638 /* GoogleToolboxForMac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */; };
 		14F2401024A78DFA00820638 /* GoogleToolboxForMac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */; };
-		14F2401124A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; };
+		14F2401124A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; platformFilter = ios; };
 		14F2401224A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; };
 		14F2401324A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; };
-		14F2401A24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
+		14F2401A24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; platformFilter = ios; };
 		14F2401B24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
 		14F2401C24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
-		14F2401D24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
+		14F2401D24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; platformFilter = ios; };
 		14F2401E24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
 		14F2401F24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
-		14F2402024A78DFA00820638 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FED24A78DFA00820638 /* FirebasePerformance.framework */; };
+		14F2402024A78DFA00820638 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FED24A78DFA00820638 /* FirebasePerformance.framework */; platformFilter = ios; };
 		14F2402124A78DFA00820638 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FED24A78DFA00820638 /* FirebasePerformance.framework */; };
 		14F2402224A78DFA00820638 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FED24A78DFA00820638 /* FirebasePerformance.framework */; };
-		14F2402324A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
+		14F2402324A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; platformFilter = ios; };
 		14F2402424A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
 		14F2402524A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
-		14F2402624A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
+		14F2402624A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; platformFilter = ios; };
 		14F2402724A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
 		14F2402824A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
-		14F2402924A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
+		14F2402924A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; platformFilter = ios; };
 		14F2402A24A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
 		14F2402B24A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
-		14F2402C24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
+		14F2402C24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; platformFilter = ios; };
 		14F2402D24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
 		14F2402E24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
-		14F2402F24A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
+		14F2402F24A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; platformFilter = ios; };
 		14F2403024A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
 		14F2403124A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
 		14F2EC9524A64A8F007A4C97 /* GKMatchRequest+WKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2EC9424A64A8F007A4C97 /* GKMatchRequest+WKR.swift */; };
@@ -2327,7 +2327,6 @@
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
 				CURRENT_PROJECT_VERSION = 6344;
 				DEFINES_MODULE = YES;
-				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -2347,6 +2346,7 @@
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -2362,7 +2362,6 @@
 				CODE_SIGN_ENTITLEMENTS = WikiRaces/WikiRaces.entitlements;
 				CURRENT_PROJECT_VERSION = 6344;
 				DEFINES_MODULE = YES;
-				DERIVE_UIKITFORMAC_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_BITCODE = NO;
 				"ENABLE_HARDENED_RUNTIME[sdk=macosx*]" = YES;
@@ -2381,6 +2380,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_UIKITFORMAC = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -2496,7 +2496,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2522,7 +2522,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

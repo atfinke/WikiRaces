@@ -29,6 +29,7 @@ struct VotingContentView: View {
             }
             .padding(.all, 20)
             .animation(.spring())
+            .frame(maxWidth: 500)
             Spacer()
             ListFooterView(topText: model.footerTopText, bottomText: model.footerBottomText, textOpacity: model.footerOpacity)
         }

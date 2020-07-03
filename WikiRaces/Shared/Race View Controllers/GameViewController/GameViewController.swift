@@ -221,7 +221,7 @@ final internal class GameViewController: UIViewController {
         self.activeViewController = controller
 
         let navController = WKRUINavigationController(rootViewController: controller)
-        navController.modalPresentationStyle = .formSheet
+        navController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
         present(navController, animated: true, completion: nil)
 
         PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:help"))
