@@ -88,12 +88,10 @@ class PlayerCloudKitLiveRaceManager {
         writeQueue.async {
             guard let record = self.activeRecord,
                 let data = try? JSONEncoder().encode(config),
-                let url = self.write(data: data, suffix: "ActiveConfig") else {
+                let url = self.write(data: data, suffix: "Config") else {
                 os_log("%{public}s: exit early", log: .raceLiveDatabase, type: .error, #function)
                 return
             }
-
-            record["ResultsInfo"] = nil
             record["Config"] = CKAsset(fileURL: url)
             self.save(record: record, enforceRecentUpdateCheck: true)
         }
@@ -101,6 +99,10 @@ class PlayerCloudKitLiveRaceManager {
 
     func updated(state: WKRGameState) {
         guard let record = activeRecord else { return }
+        if state == .voting {
+            record["ResultsInfo"] = nil
+            record["Config"] = nil
+        }
         record["State"] = state.rawValue
         save(record: record, enforceRecentUpdateCheck: true)
     }
