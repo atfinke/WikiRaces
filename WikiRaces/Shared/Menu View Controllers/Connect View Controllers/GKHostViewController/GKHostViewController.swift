@@ -18,7 +18,7 @@ final internal class GKHostViewController: GKConnectViewController {
 
     // MARK: - Properties -
 
-    private let raceCodeGenerator = RaceCodeGenerator()
+    let raceCodeGenerator = RaceCodeGenerator()
     private let advertiser = NearbyRaceAdvertiser()
     private let sourceView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
 
@@ -52,16 +52,7 @@ final internal class GKHostViewController: GKConnectViewController {
 
     init() {
         super.init(isPlayerHost: true)
-
-        raceCodeGenerator.new { [weak self] code in
-            guard let self = self, self.isMatchmakingEnabled else { return }
-            DispatchQueue.main.async {
-                self.model.raceCode = code
-                self.startNearbyAdvertising()
-                self.startMatchmaking()
-            }
-        }
-
+        startMatchmaking()
         WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
     }
 
@@ -120,7 +111,7 @@ final internal class GKHostViewController: GKConnectViewController {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
         PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
-        model.matchStarting = true
+        model.state = .raceStarting
         raceCodeGenerator.cancel()
 
         advertiser.stop()
@@ -200,7 +191,7 @@ final internal class GKHostViewController: GKConnectViewController {
         present(nav, animated: true, completion: nil)
     }
 
-    private func startNearbyAdvertising() {
+    func startNearbyAdvertising() {
         guard Defaults.isAutoInviteOn, Defaults.promptedAutoInvite, let code = model.raceCode else {
             advertiser.stop()
             return

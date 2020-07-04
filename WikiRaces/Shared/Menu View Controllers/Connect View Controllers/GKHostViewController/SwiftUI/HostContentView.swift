@@ -37,9 +37,9 @@ struct HostContentView: View {
                     Image(systemName: "chevron.left")
                         .font(.system(size: 22))
                 })
-                .opacity(model.matchStarting ? 0.2 : 1)
+                .opacity(model.state == .raceStarting ? 0.2 : 1)
                 Spacer()
-                if model.matchStarting {
+                if model.state == .raceStarting {
                     ActivityIndicatorView()
                 } else {
                     Button(action: startMatch, label: {
@@ -52,7 +52,7 @@ struct HostContentView: View {
             .padding()
             .padding(.horizontal)
             .frame(height: 60)
-            .allowsHitTesting(!model.matchStarting)
+            .allowsHitTesting(model.state != .raceStarting)
 
             Spacer()
             WKRUIPlayerImageView(
@@ -111,7 +111,8 @@ struct HostContentView: View {
                     .foregroundColor(.secondary)
                     .transition(.opacity)
                     .id(model.status)
-                ActivityIndicatorView().offset(x: 0, y: -5).opacity(model.matchStarting ? 0 : 1)
+                ActivityIndicatorView().offset(x: 0, y: -5)
+                    .opacity((model.state == .raceStarting || model.state == .soloRace) ? 0 : 1)
             }
             .padding(.bottom, 20)
         }

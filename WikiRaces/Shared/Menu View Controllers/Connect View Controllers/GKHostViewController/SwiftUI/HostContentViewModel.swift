@@ -11,24 +11,39 @@ import WKRKit
 import WKRUIKit
 
 class HostContentViewModel: ObservableObject {
-
-    @Published var connectedPlayers = [WKRPlayerProfile]()
-    var status: String {
-        if matchStarting {
-            return "RACE STARTING"
-        } else if raceCode == nil {
-            return "GENERATING RACE CODE"
-        } else if connectedPlayers.isEmpty {
-            return "NO CONNECTED RACERS"
-        } else {
-            return "\(connectedPlayers.count) CONNECTED RACER" + (connectedPlayers.count == 1 ? "" : "S")
-        }
+    
+    enum State {
+        case generatingRaceCode
+        case soloRace
+        case showingRacers
+        case raceStarting
+        
     }
-
+    
+    @Published var state: State = .generatingRaceCode
+    
     @Published var raceCode: String?
-
+    @Published var connectedPlayers = [WKRPlayerProfile]()
+    
     @Published var settings = WKRGameSettings()
     @Published var customPages = [WKRPage]()
-
-    @Published var matchStarting = false
+    
+    var status: String {
+        switch state {
+            
+        case .generatingRaceCode:
+            return "GENERATING RACE CODE"
+        case .soloRace:
+            return "SOLO RACE"
+        case .showingRacers:
+            if connectedPlayers.isEmpty {
+                return "NO CONNECTED RACERS"
+            } else {
+                return "\(connectedPlayers.count) CONNECTED RACER" + (connectedPlayers.count == 1 ? "" : "S")
+            }
+        case .raceStarting:
+            return "RACE STARTING"
+        }
+    }
+    
 }

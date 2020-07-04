@@ -224,7 +224,7 @@ class PlayerCloudKitLiveRaceManager {
         record["Version"] = 1
         record["Host"] = host
         record["State"] = WKRGameState.preMatch.rawValue
-        record["Images"] = nil
+        record["ImageContainer"] = nil
         activeRaceCode = raceCode
         activeRecord = record
         save(record: record, enforceRecentUpdateCheck: false)

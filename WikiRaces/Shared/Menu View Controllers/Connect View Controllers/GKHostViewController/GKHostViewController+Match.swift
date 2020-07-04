@@ -13,29 +13,71 @@ import os.log
 
 extension GKHostViewController: GKMatchDelegate {
 
-    func startMatchmaking() {
-        let startDate = Date()
-        guard let code = model.raceCode, isMatchmakingEnabled else { return }
-        GKMatchmaker.shared().findMatch(for: GKMatchRequest.hostRequest(raceCode: code, isInital: false)) { [weak self] match, error in
-            if let error = error {
-                os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
-                if -startDate.timeIntervalSinceNow < 1 {
-                    self?.isMatchmakingEnabled = false
-                    PlayerFirebaseAnalytics.log(event: .matchmakingQuickFail)
-                    DispatchQueue.main.async {
-                        self?.showError(title: "Failed to Create Race", message: "Please try again later.")
-                    }
-                } else {
-                    self?.startMatchmaking()
-                }
-            } else if let match = match {
-                os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
-                self?.match = match
-                self?.match?.delegate = self
-                self?.addPlayers()
-            } else {
-                fatalError()
+    func startMatchmaking(attempt: Int = 1) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
+        guard isMatchmakingEnabled else { return }
+        
+        if attempt >= 3 {
+            os_log("%{public}s: too many attempts", log: .gameKit, type: .error, #function)
+            DispatchQueue.main.async {
+                self.isMatchmakingEnabled = false
+                self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                self.model.state = .soloRace
             }
+            return
+        }
+        
+        func matchmake(raceCode: String) {
+            os_log("%{public}s: matchmake", log: .gameKit, type: .info, #function)
+            
+            var didFail = false
+            let startDate = Date()
+            let request = GKMatchRequest.hostRequest(raceCode: raceCode, isInital: true)
+            GKMatchmaker.shared().findMatch(for: request) { [weak self] match, error in
+                guard let self = self, self.isMatchmakingEnabled else { return }
+                
+                if let error = error {
+                    os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
+                    GKNotificationBanner.show(withTitle: "_failed", message: error.localizedDescription, completionHandler: nil)
+                    
+                    didFail = true
+                    if -startDate.timeIntervalSinceNow < 1 {
+                        os_log("%{public}s: error: (quick)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
+                        
+                        PlayerFirebaseAnalytics.log(event: .matchmakingQuickFail)
+                        DispatchQueue.global().asyncAfter(deadline: .now() + 4) {
+                            self.startMatchmaking(attempt: attempt + 1)
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.isMatchmakingEnabled = false
+                            self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                            self.model.state = .soloRace
+                        }
+                    }
+                } else if let match = match {
+                    os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
+                    self.match = match
+                    self.match?.delegate = self
+                    self.addPlayers()
+                } else {
+                    fatalError()
+                }
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                if !didFail && self.isMatchmakingEnabled {
+                    self.model.raceCode = raceCode
+                    self.model.state = .showingRacers
+                    self.startNearbyAdvertising()
+                }
+            })
+        }
+        
+        raceCodeGenerator.new { [weak self] code in
+            guard let self = self, self.isMatchmakingEnabled else { return }
+            matchmake(raceCode: code)
         }
     }
 
