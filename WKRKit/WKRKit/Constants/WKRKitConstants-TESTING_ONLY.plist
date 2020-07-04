@@ -45,5 +45,7 @@
 	<string>https://support.apple.com/en-us/HT210401</string>
 	<key>RaceCodeRecordMinReuseTimeSinceLastUpdate</key>
 	<integer>600</integer>
+	<key>RaceResultsSpectatorUpdateInterval</key>
+	<integer>4</integer>
 </dict>
 </plist>

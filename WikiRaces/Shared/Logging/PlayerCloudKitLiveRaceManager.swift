@@ -67,7 +67,7 @@ class PlayerCloudKitLiveRaceManager {
             self.queuedResultsInfo = adjusted
             os_log("%{public}s: queued results", log: .raceLiveDatabase, type: .info, #function)
         }
-        writeQueue.asyncAfter(deadline: .now() + 5) {
+        writeQueue.asyncAfter(deadline: .now() + .seconds(WKRKitConstants.current.raceResultsSpectatorUpdateInterval)) {
             os_log("%{public}s: async check started", log: .raceLiveDatabase, type: .info, #function)
             guard let resultsInfo = self.queuedResultsInfo,
                 let data = try? self.encoder.encode(resultsInfo),
@@ -80,6 +80,21 @@ class PlayerCloudKitLiveRaceManager {
             record["ResultsInfo"] = CKAsset(fileURL: url)
 
             os_log("%{public}s: async check completed", log: .raceLiveDatabase, type: .info, #function)
+            self.save(record: record, enforceRecentUpdateCheck: true)
+        }
+    }
+    
+    func updated(config: WKRRaceConfig) {
+        writeQueue.async {
+            guard let record = self.activeRecord,
+                let data = try? JSONEncoder().encode(config),
+                let url = self.write(data: data, suffix: "ActiveConfig") else {
+                os_log("%{public}s: exit early", log: .raceLiveDatabase, type: .error, #function)
+                return
+            }
+
+            record["ResultsInfo"] = nil
+            record["Config"] = CKAsset(fileURL: url)
             self.save(record: record, enforceRecentUpdateCheck: true)
         }
     }

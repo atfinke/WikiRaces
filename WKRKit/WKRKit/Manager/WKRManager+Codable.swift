@@ -24,7 +24,7 @@ extension WKRGameManager {
             WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.votingState.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
-            votingUpdate(.finalPage(raceConfig.endingPage))
+            votingUpdate(.raceConfig(raceConfig))
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
                 peerNetwork.send(object: WKRCodable(localPlayer))

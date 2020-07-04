@@ -40,6 +40,7 @@ public struct WKRKitConstants {
 
     public let manageGameCenterLink: URL
     public let raceCodeRecordMinReuseTimeSinceLastUpdate: Int
+    public let raceResultsSpectatorUpdateInterval: Int
 
     // MARK: - Initalization
 
@@ -107,6 +108,9 @@ public struct WKRKitConstants {
         guard let raceCodeRecordMinReuseTimeSinceLastUpdate = documentsConstants["RaceCodeRecordMinReuseTimeSinceLastUpdate"] as? Int else {
             fatalError("WKRKitConstants: No RaceCodeRecordMinReuseTimeSinceLastUpdate value")
         }
+        guard let raceResultsSpectatorUpdateInterval = documentsConstants["RaceResultsSpectatorUpdateInterval"] as? Int else {
+            fatalError("WKRKitConstants: No RaceResultsSpectatorUpdateInterval value")
+        }
 
         self.version = version
         self.isQuickRaceMode = quickRace
@@ -132,6 +136,7 @@ public struct WKRKitConstants {
 
         self.manageGameCenterLink = manageGameCenterLink
         self.raceCodeRecordMinReuseTimeSinceLastUpdate = raceCodeRecordMinReuseTimeSinceLastUpdate
+        self.raceResultsSpectatorUpdateInterval = raceResultsSpectatorUpdateInterval
     }
 
     // MARK: - Helpers

@@ -110,9 +110,9 @@ extension GameViewController {
             }
         case .votingState(let votingState):
             votingViewController?.votingState = votingState
-        case .finalPage(let page):
-            finalPage = page
-            votingViewController?.finalPageSelected(page)
+        case .raceConfig(let config):
+            finalPage = config.endingPage
+            votingViewController?.finalPageSelected(config.endingPage)
 
             votingViewController?.backingAlpha = 1
             view.alpha = 1
@@ -126,6 +126,8 @@ extension GameViewController {
             // Because web view is a pain, force relayout
             navigationController?.setNavigationBarHidden(true, animated: false)
             navigationController?.setNavigationBarHidden(false, animated: false)
+            
+            PlayerCloudKitLiveRaceManager.shared.updated(config: config)
         }
     }
 

@@ -28,7 +28,7 @@
 	<key>RandomURLString</key>
 	<string>https://en.m.wikipedia.org/wiki/Special:Random</string>
 	<key>Version</key>
-	<integer>31</integer>
+	<integer>32</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
 	<key>MaxFoundPagePlayers</key>
@@ -47,5 +47,7 @@
 	<string>https://support.apple.com/en-us/HT210401</string>
 	<key>RaceCodeRecordMinReuseTimeSinceLastUpdate</key>
 	<integer>600</integer>
+	<key>RaceResultsSpectatorUpdateInterval</key>
+	<integer>4</integer>
 </dict>
 </plist>

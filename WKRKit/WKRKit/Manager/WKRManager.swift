@@ -24,7 +24,7 @@ final public class WKRGameManager {
     public enum VotingUpdate {
         case remainingTime(Int)
         case votingState(WKRVotingState)
-        case finalPage(WKRPage)
+        case raceConfig(WKRRaceConfig)
     }
 
     public enum ResultsUpdate {
