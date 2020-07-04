@@ -15,13 +15,13 @@ import WKRUIKit
 import SwiftUI
 
 final internal class GKHostViewController: GKConnectViewController {
-
+    
     // MARK: - Properties -
-
+    
     let raceCodeGenerator = RaceCodeGenerator()
     private let advertiser = NearbyRaceAdvertiser()
     private let sourceView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
-
+    
     var isMatchmakingEnabled = true {
         didSet {
             if !isMatchmakingEnabled {
@@ -30,7 +30,7 @@ final internal class GKHostViewController: GKConnectViewController {
             }
         }
     }
-
+    
     var model = HostContentViewModel()
     lazy var contentViewHosting = UIHostingController(
         rootView: HostContentView(
@@ -46,22 +46,22 @@ final internal class GKHostViewController: GKConnectViewController {
             },
             presentModal: { [weak self] modal in
                 self?.presentModal(modal: modal)
-            }))
-
+        }))
+    
     // MARK: - Initalization -
-
+    
     init() {
         super.init(isPlayerHost: true)
         startMatchmaking()
         WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     // MARK: - View Life Cycle -
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         sourceView.alpha = 0
@@ -69,59 +69,59 @@ final internal class GKHostViewController: GKConnectViewController {
         contentViewHosting.view.alpha = 0
         configure(hostingView: contentViewHosting.view)
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5) { [weak self] in
             self?.contentViewHosting.view.alpha = 1
         }
-
+        
         guard !Defaults.promptedAutoInvite else {
             return
         }
         Defaults.promptedAutoInvite = true
-
+        
         let controller = UIAlertController(
             title: "Invite Nearby Racers?",
             message: "Would you like to automatically invite nearby racers? This preference can be changed later in the settings app.",
             preferredStyle: .alert)
-
+        
         let action = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
             Defaults.isAutoInviteOn = true
-            self?.startMatchmaking()
+            self?.startNearbyAdvertising()
             os_log("%{public}s: enabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(action)
-
+        
         let cancelAction = UIAlertAction(title: "Not Now", style: .cancel) { _ in
             os_log("%{public}s: disabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(cancelAction)
         present(controller, animated: true, completion: nil)
     }
-
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         sourceView.center = CGPoint(x: contentView.center.x, y: contentView.center.y - 150)
     }
-
+    
     // MARK: - Actions -
-
+    
     func startMatch() {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
         PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
+        
         model.state = .raceStarting
         raceCodeGenerator.cancel()
-
+        
         advertiser.stop()
         contentViewHosting.view.isUserInteractionEnabled = false
-
+        
         func sendStartMessage() {
             guard let match = match else { fatalError("match is nil") }
             GKMatchmaker.shared().finishMatchmaking(for: match)
             os_log("%{public}s: sending start message", log: .gameKit, type: .info, #function)
-
+            
             let message = GKConnectViewController.StartMessage(
                 hostName: GKLocalPlayer.local.alias,
                 gameSettings: model.settings)
@@ -137,41 +137,41 @@ final internal class GKHostViewController: GKConnectViewController {
                 self.cancelMatch()
             }
         }
-
+        
         func startSolo() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.transitionToGame(for:
-                                        .solo(name: GKLocalPlayer.local.alias),
+                    .solo(name: GKLocalPlayer.local.alias),
                                       settings: self.model.settings)
             }
         }
-
+        
         if match == nil || match?.players.count == 0 {
             if Defaults.promptedSoloRacesStats {
                 startSolo()
             } else {
                 let controller = UIAlertController(title: "Solo Race", message: "Solo races will not impact your leaderboard stats.", preferredStyle: .alert)
-
+                
                 let startAction = UIAlertAction(title: "Ok", style: .default) { _ in
                     startSolo()
                 }
                 controller.addAction(startAction)
-
+                
                 present(controller, animated: true, completion: nil)
                 Defaults.promptedSoloRacesStats = true
             }
         } else {
             sendStartMessage()
         }
-
+        
         PlayerCloudKitLiveRaceManager.shared.savePlayerImages()
     }
-
+    
     // MARK: - Other -
-
+    
     private func presentModal(modal: HostContentView.Modal) {
         os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, "\(modal)")
-
+        
         let controller: UIViewController
         switch modal {
         case .activity:
@@ -190,14 +190,13 @@ final internal class GKHostViewController: GKConnectViewController {
         nav.popoverPresentationController?.sourceView = sourceView
         present(nav, animated: true, completion: nil)
     }
-
+    
     func startNearbyAdvertising() {
         guard Defaults.isAutoInviteOn, Defaults.promptedAutoInvite, let code = model.raceCode else {
-            advertiser.stop()
             return
         }
         os_log("%{public}s", log: .gameKit, type: .info, #function)
         advertiser.start(hostName: GKLocalPlayer.local.alias, raceCode: code)
     }
-
+    
 }

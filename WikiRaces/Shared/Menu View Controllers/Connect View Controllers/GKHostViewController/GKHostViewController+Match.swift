@@ -14,11 +14,11 @@ import os.log
 extension GKHostViewController: GKMatchDelegate {
 
     func startMatchmaking(attempt: Int = 1) {
-        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        os_log("%{public}s: %{public}ld", log: .gameKit, type: .info, #function, attempt)
         
         guard isMatchmakingEnabled else { return }
         
-        if attempt >= 3 {
+        if attempt > 3 {
             os_log("%{public}s: too many attempts", log: .gameKit, type: .error, #function)
             DispatchQueue.main.async {
                 self.isMatchmakingEnabled = false
@@ -29,7 +29,7 @@ extension GKHostViewController: GKMatchDelegate {
         }
         
         func matchmake(raceCode: String) {
-            os_log("%{public}s: matchmake", log: .gameKit, type: .info, #function)
+            os_log("%{public}s-%{public}s", log: .gameKit, type: .info, #function, raceCode)
             
             var didFail = false
             let startDate = Date()
@@ -38,18 +38,18 @@ extension GKHostViewController: GKMatchDelegate {
                 guard let self = self, self.isMatchmakingEnabled else { return }
                 
                 if let error = error {
-                    os_log("%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
-                    GKNotificationBanner.show(withTitle: "_failed", message: error.localizedDescription, completionHandler: nil)
+                    os_log("%{public}s-%{public}s: error: %{public}s (%{public}f)", log: .gameKit, type: .error, #function, raceCode, error.localizedDescription, -startDate.timeIntervalSinceNow)
                     
                     didFail = true
                     if -startDate.timeIntervalSinceNow < 1 {
-                        os_log("%{public}s: error: (quick)", log: .gameKit, type: .error, #function, error.localizedDescription, -startDate.timeIntervalSinceNow < 1)
+                        os_log("%{public}s-%{public}s: error: (quick)", log: .gameKit, type: .error, #function, raceCode)
                         
                         PlayerFirebaseAnalytics.log(event: .matchmakingQuickFail)
                         DispatchQueue.global().asyncAfter(deadline: .now() + 4) {
                             self.startMatchmaking(attempt: attempt + 1)
                         }
                     } else {
+                        os_log("%{public}s-%{public}s: error (long)", log: .gameKit, type: .error, #function, raceCode)
                         DispatchQueue.main.async {
                             self.isMatchmakingEnabled = false
                             self.showError(title: "Failed to Create Race", message: "Please try again later.")
@@ -57,7 +57,7 @@ extension GKHostViewController: GKMatchDelegate {
                         }
                     }
                 } else if let match = match {
-                    os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
+                    os_log("%{public}s-%{public}s: found match", log: .gameKit, type: .info, #function, raceCode)
                     self.match = match
                     self.match?.delegate = self
                     self.addPlayers()
@@ -67,6 +67,7 @@ extension GKHostViewController: GKMatchDelegate {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                os_log("%{public}s-%{public}s: asyncAfter: %{public}ld (%{public}ld)", log: .gameKit, type: .info, #function, raceCode, didFail ? 1 : 0, self.isMatchmakingEnabled ? 1 : 0)
                 if !didFail && self.isMatchmakingEnabled {
                     self.model.raceCode = raceCode
                     self.model.state = .showingRacers
@@ -77,6 +78,7 @@ extension GKHostViewController: GKMatchDelegate {
         
         raceCodeGenerator.new { [weak self] code in
             guard let self = self, self.isMatchmakingEnabled else { return }
+            os_log("%{public}s: raceCodeGenerator callback", log: .gameKit, type: .info, #function)
             matchmake(raceCode: code)
         }
     }

@@ -125,8 +125,10 @@ final class RaceChecksViewController: VisualEffectViewController {
             }
 
             // Give Game Center more time to get its act together
-            sleep(3)
-
+            if !isAuthenticated {
+                sleep(3)
+            }
+            
             DispatchQueue.main.async {
                 self.model.disclaimerButtonOpacity = 0
             }
