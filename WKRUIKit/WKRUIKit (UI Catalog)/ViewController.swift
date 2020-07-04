@@ -39,7 +39,7 @@ class ViewController: UIViewController {
 
         Timer.scheduledTimer(withTimeInterval: 4, repeats: true) { (_) in
                    DispatchQueue.main.async {
-                    alertView.enqueue(text: "IS CLOSE" + Int.random(in: 0...100000000000).description, isRaceSpecific: true, playHaptic: false)
+                    alertView.enqueue(text: "IS CLOSE" + Int.random(in: 0...100000000000).description, for: nil, isRaceSpecific: true, playHaptic: false)
                    }
                }
 
