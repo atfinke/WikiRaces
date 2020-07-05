@@ -17,7 +17,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>13971</string>
+	<string>13977</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>

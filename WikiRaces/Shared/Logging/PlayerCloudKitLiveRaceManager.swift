@@ -28,7 +28,6 @@ class PlayerCloudKitLiveRaceManager {
     private let encoder = JSONEncoder()
 
     private var activeRecord: CKRecord?
-    private var activeRaceCode: String?
     private var lastUpdateDate: Date?
 
     private var queuedResultsInfo: WKRResultsInfo?
@@ -41,7 +40,6 @@ class PlayerCloudKitLiveRaceManager {
 
     func reset() {
         activeRecord = nil
-        activeRaceCode = nil
         queuedResultsInfo = nil
         lastUpdateDate = nil
     }
@@ -201,6 +199,7 @@ class PlayerCloudKitLiveRaceManager {
         var existingRecord: CKRecord?
 
         let operation = CKQueryOperation(query: query)
+        operation.desiredKeys = []
         operation.resultsLimit = 1
         operation.recordFetchedBlock = { record in
             if let date = record.modificationDate {
@@ -242,7 +241,8 @@ class PlayerCloudKitLiveRaceManager {
         record["Host"] = host
         record["State"] = WKRGameState.preMatch.rawValue
         record["ImageContainer"] = nil
-        activeRaceCode = raceCode
+        record["ResultsInfo"] = nil
+        record["Config"] = nil
         activeRecord = record
         save(record: record, enforceRecentUpdateCheck: false)
     }
