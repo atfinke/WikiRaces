@@ -1,0 +1,79 @@
+body {
+    background-color: #f3f3f3;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: -apple-system;
+    text-align: center;
+    display: block;
+}
+
+#header-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #a9a9a9;
+    padding: 20px;
+}
+
+.header-item {
+    width: 30%;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#race-info {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(54, 54, 54);
+}
+
+#header-icon {
+    width: 80px;
+    margin: 0 auto;
+    border: 2.5px solid #e8e8e8;
+    border-radius: 20px;
+}
+
+#players-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.player-image {
+    width: 40%;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.player-container {
+    width: 250px;
+    min-height: 220px;
+    text-align: center;
+    margin: 25px;
+    background-color: #ededed;
+    border-radius: 32px;
+}
+
+.player-inner-container {
+    margin: 10px;
+}
+.player-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+    color: rgb(54, 54, 54);
+}
+
+.player-page {
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(54, 54, 54);
+
+    margin-top: 10px;
+    padding: 0px;
+}
