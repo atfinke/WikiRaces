@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 extension WKRGameManager {
 
@@ -15,16 +15,16 @@ extension WKRGameManager {
     internal func receivedRaw(_ object: WKRCodable, from player: WKRPlayerProfile) {
         if let preRaceConfig = object.typeOf(WKRPreRaceConfig.self) {
             game.preRaceConfig = preRaceConfig
-            votingUpdate(.voteInfo(preRaceConfig.voteInfo))
+            votingUpdate(.votingState(preRaceConfig.votingState))
 
             if webView?.url != preRaceConfig.startingPage.url {
                 webView?.load(URLRequest(url: preRaceConfig.startingPage.url))
             }
 
-            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.voteInfo.pages)
+            WKRSeenFinalArticlesStore.addLocalPlayerSeenFinalPages(preRaceConfig.votingState.pages)
         } else if let raceConfig = object.typeOf(WKRRaceConfig.self) {
             game.startRace(with: raceConfig)
-            votingUpdate(.finalPage(raceConfig.endingPage))
+            votingUpdate(.raceConfig(raceConfig))
         } else if let playerObject = object.typeOf(WKRPlayer.self) {
             if !game.players.contains(playerObject) && playerObject != localPlayer {
                 peerNetwork.send(object: WKRCodable(localPlayer))
@@ -44,12 +44,13 @@ extension WKRGameManager {
 
             var samePageMessage: String?
             if samePagePlayers.count == 1 {
-                samePageMessage = "\(samePagePlayers[0].name) is on same page"
+                samePageMessage = "is on same page"
             } else if samePagePlayers.count > 1 {
                 samePageMessage = "\(samePagePlayers.count) players are on same page"
             }
             if let message = samePageMessage {
                 enqueue(message: message,
+                        for: samePagePlayers.count == 1 ? samePagePlayers[0] : nil,
                         duration: 2.0,
                         isRaceSpecific: true,
                         playHaptic: false)
@@ -102,7 +103,8 @@ extension WKRGameManager {
                 break
             }
 
-            enqueue(message: message.text(for: player),
+            enqueue(message: message.text,
+                    for: player,
                     duration: 3.0,
                     isRaceSpecific: isRaceSpecific,
                     playHaptic: playHaptic)
@@ -126,6 +128,7 @@ extension WKRGameManager {
             let string = int.value == 1 ? "Point" : "Points"
             let message = "Race Bonus Now \(int.value) " + string
             enqueue(message: message,
+                    for: nil,
                     duration: 2.0,
                     isRaceSpecific: true,
                     playHaptic: false)
@@ -155,12 +158,13 @@ extension WKRGameManager {
 
             let points = resultsInfo.raceRewardPoints(for: localPlayer)
             var place: Int?
-            for playerIndex in 0..<resultsInfo.playerCount {
-                let player = resultsInfo.raceRankingsPlayer(at: playerIndex)
+
+            for (index, player) in resultsInfo.raceRankings().enumerated() {
                 if player == localPlayer && player.state == .foundPage {
-                    place = playerIndex + 1
+                    place = index + 1
                 }
             }
+
             let webViewPixelsScrolled = webView?.pixelsScrolled ?? 0
             let pages = resultsInfo.pagesViewed(for: localPlayer)
             gameUpdate(.playerStatsForLastRace(points: points,

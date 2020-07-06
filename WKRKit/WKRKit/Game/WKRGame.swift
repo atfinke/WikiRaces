@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 final public class WKRGame {
 
@@ -99,7 +99,7 @@ final public class WKRGame {
     // MARK: - Player Voting
 
     internal func player(_ profile: WKRPlayerProfile, votedFor page: WKRPage) {
-        preRaceConfig?.voteInfo.player(profile, votedFor: page)
+        preRaceConfig?.votingState.player(profile, votedFor: page)
     }
 
     internal func playerDisconnected(_ profile: WKRPlayerProfile) {

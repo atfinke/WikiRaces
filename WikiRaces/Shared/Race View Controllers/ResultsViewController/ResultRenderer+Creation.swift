@@ -115,9 +115,7 @@ extension ResultRenderer {
         ]
 
         var lastDetailLabel: UILabel?
-        for index in 0..<results.playerCount {
-            let player = results.raceRankingsPlayer(at: index)
-
+        for (index, player) in results.raceRankings().enumerated() {
             let nameLabel = UILabel()
             nameLabel.translatesAutoresizingMaskIntoConstraints = false
             nameLabel.numberOfLines = 0

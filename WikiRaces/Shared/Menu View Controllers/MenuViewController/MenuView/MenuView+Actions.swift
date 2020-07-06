@@ -15,96 +15,96 @@ extension MenuView {
 
     /// Join button pressed
     @objc
-    func showLocalRaceOptions() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .pressedLocalOptions)
+    func showJoinOptions() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         UISelectionFeedbackGenerator().selectionChanged()
-        animateOptionsOutAndTransition(to: .localOptions)
+        animateOptionsOutAndTransition(to: .joinOptions)
     }
 
     @objc
-    func joinGlobalRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .pressedGlobalJoin)
-        PlayerDatabaseStat.gkPressedJoin.increment()
+    func createRace() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedHost)
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        guard GKLocalPlayer.local.isAuthenticated || UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") else {
-            self.listenerUpdate?(.presentGlobalAuth)
-            return
+        PlayerCloudKitLiveRaceManager.shared.isCloudEnabled { isEnabled in
+            DispatchQueue.main.async {
+                if isEnabled {
+                    self.animateMenuOut {
+                        self.listenerUpdate?(.presentCreateRace)
+                    }
+                } else {
+                    let message = "You must be logged into iCloud to create a private race."
+                    let alertController = UIAlertController(title: "iCloud Issue", message: message, preferredStyle: .alert)
+                    alertController.addCancelAction(title: "Ok")
+
+                    #if targetEnvironment(simulator)
+                    let action = UIAlertAction(title: "SIM BYPASS", style: .default) { _ in
+                        self.animateMenuOut {
+                            self.listenerUpdate?(.presentCreateRace)
+                        }
+                    }
+                    alertController.addAction(action)
+                    #endif
+
+                    self.listenerUpdate?(.presentAlert(alertController))
+                    PlayerFirebaseAnalytics.log(event: .revampPressedHostiCloudIssue)
+                }
+
+            }
         }
+    }
+
+    @objc
+    func joinPublicRace() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPublic)
+        PlayerUserDefaultsStat.gkPressedJoin.increment()
+
+        UISelectionFeedbackGenerator().selectionChanged()
 
         guard !promptGlobalRacesPopularity() else {
             return
         }
 
         animateMenuOut {
-            self.listenerUpdate?(.presentGlobalConnect)
+            self.listenerUpdate?(.presentJoinPublicRace)
         }
     }
 
-    /// Join button pressed
     @objc
-    func joinLocalRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .pressedJoin)
-        PlayerDatabaseStat.mpcPressedJoin.increment()
+    func joinPrivateRace() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
+        PlayerUserDefaultsStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
-        guard !promptForCustomName(isHost: false) else {
-            return
-        }
-
         animateMenuOut {
-            self.listenerUpdate?(.presentMPCConnect(isHost: false))
-        }
-    }
-
-    /// Create button pressed
-    @objc
-    func createLocalRace() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        PlayerAnonymousMetrics.log(event: .pressedHost)
-        PlayerDatabaseStat.mpcPressedHost.increment()
-
-        UISelectionFeedbackGenerator().selectionChanged()
-
-        guard !promptForCustomName(isHost: true) else {
-            return
-        }
-
-        animateMenuOut {
-            self.listenerUpdate?(.presentMPCConnect(isHost: true))
+            self.listenerUpdate?(.presentJoinPrivateRace)
         }
     }
 
     @objc
     func backButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
-
-        animateOptionsOutAndTransition(to: .raceTypeOptions)
+        animateOptionsOutAndTransition(to: .joinOrCreate)
     }
 
     @objc
     func plusButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
-
         animateOptionsOutAndTransition(to: .plusOptions)
     }
 
     @objc
     func statsButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
-
         if PlusStore.shared.isPlus {
             animateMenuOut {
                 self.listenerUpdate?(.presentStats)
@@ -118,13 +118,8 @@ extension MenuView {
     ///
     /// - Parameter sender: The pressed tile
     @objc
-    func menuTilePressed(sender: MenuTile) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-
-        guard GKLocalPlayer.local.isAuthenticated else {
-            self.listenerUpdate?(.presentGlobalAuth)
-            return
-        }
+    func menuTilePressed() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         animateMenuOut {
             self.listenerUpdate?(.presentLeaderboard)
@@ -132,7 +127,7 @@ extension MenuView {
     }
 
     func triggeredEasterEgg() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         medalView.showMedals()
     }
 
@@ -144,22 +139,28 @@ extension MenuView {
 
         movingPuzzleView.start()
 
-        state = .raceTypeOptions
+        state = .joinOrCreate
         setNeedsLayout()
 
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle,
-                       animations: {
-                        self.layoutIfNeeded()
-        }, completion: { _ in
-            self.isUserInteractionEnabled = true
-            completion?()
-        })
+        UIView.animate(
+            withDuration: WKRAnimationDurationConstants.menuToggle,
+            animations: {
+                self.layoutIfNeeded()
+            }, completion: { _ in
+                self.isUserInteractionEnabled = true
+                completion?()
+            })
     }
 
     /// Animates the views off screen
     ///
     /// - Parameter completion: The completion handler
     func animateMenuOut(completion: (() -> Void)?) {
+        if state == .noInterface {
+            completion?()
+            return
+        }
+
         isUserInteractionEnabled = false
 
         state = .noInterface
@@ -177,19 +178,21 @@ extension MenuView {
         self.state = .noOptions
         setNeedsLayout()
 
-        UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2,
-                       animations: {
-                        self.layoutIfNeeded()
-        }, completion: { _ in
-            self.state = state
-            self.setNeedsLayout()
+        UIView.animate(
+            withDuration: WKRAnimationDurationConstants.menuToggle / 2,
+            animations: {
+                self.layoutIfNeeded()
+            }, completion: { _ in
+                self.state = state
+                self.setNeedsLayout()
 
-            UIView.animate(withDuration: WKRAnimationDurationConstants.menuToggle / 2,
-                           delay: WKRAnimationDurationConstants.menuToggle /  4,
-                           animations: {
-                            self.layoutIfNeeded()
+                UIView.animate(
+                    withDuration: WKRAnimationDurationConstants.menuToggle / 2,
+                    delay: WKRAnimationDurationConstants.menuToggle /  4,
+                    animations: {
+                        self.layoutIfNeeded()
+                    })
             })
-        })
     }
 
 }

@@ -6,14 +6,13 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 internal protocol WKRPeerNetwork: class {
     var networkUpdate: ((WKRPeerNetworkUpdate) -> Void)? { get set }
 
     func disconnect()
     func send(object: WKRCodable)
-    func hostNetworkInterface() -> UIViewController?
 }
 
 enum WKRPeerNetworkUpdate {

@@ -23,8 +23,8 @@ final public class WKRGameManager {
 
     public enum VotingUpdate {
         case remainingTime(Int)
-        case voteInfo(WKRVoteInfo)
-        case finalPage(WKRPage)
+        case votingState(WKRVotingState)
+        case raceConfig(WKRRaceConfig)
     }
 
     public enum ResultsUpdate {
@@ -41,8 +41,8 @@ final public class WKRGameManager {
         return game.raceConfig?.endingPage.url
     }
 
-    public var voteInfo: WKRVoteInfo? {
-        return game.preRaceConfig?.voteInfo
+    public var votingState: WKRVotingState? {
+        return game.preRaceConfig?.votingState
     }
 
     public var gameState: WKRGameState {
@@ -91,7 +91,6 @@ final public class WKRGameManager {
 
         let setup = networkConfig.create()
         localPlayer = setup.player
-        localPlayer.isCreator = WKRPlayer.isLocalPlayerCreator
         peerNetwork = setup.network
 
         game = WKRGame(localPlayer: localPlayer, isSolo: peerNetwork is WKRSoloNetwork, settings: settings)
@@ -129,12 +128,9 @@ final public class WKRGameManager {
 
     // MARK: - User Interface
 
-    public func hostNetworkInterface() -> UIViewController? {
-        return peerNetwork.hostNetworkInterface()
-    }
-
-    public func enqueue(message: String, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
+    public func enqueue(message: String, for player: WKRPlayerProfile?, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
         alertView.enqueue(text: message,
+                          for: player,
                           duration: duration,
                           isRaceSpecific: isRaceSpecific,
                           playHaptic: playHaptic)

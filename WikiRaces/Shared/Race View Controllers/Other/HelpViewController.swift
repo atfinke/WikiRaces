@@ -70,7 +70,7 @@ final internal class HelpViewController: UIViewController, WKNavigationDelegate 
     // MARK: - Actions -
 
     @IBAction func doneButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

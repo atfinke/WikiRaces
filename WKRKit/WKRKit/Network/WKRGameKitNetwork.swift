@@ -8,6 +8,7 @@
 
 import Foundation
 import GameKit
+import WKRUIKit
 
 final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwork {
 
@@ -43,10 +44,6 @@ final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwor
         }
     }
 
-    internal func hostNetworkInterface() -> UIViewController? {
-        return nil
-    }
-
     // MARK: - MCSessionDelegate
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {
@@ -80,12 +77,6 @@ final internal class WKRGameKitNetwork: NSObject, GKMatchDelegate, WKRPeerNetwor
 extension GKPlayer {
     func wkrProfile() -> WKRPlayerProfile {
         // alias is unique, but teamPlayerID is different depending on local or remote player
-        return WKRPlayerProfile(name: alias, playerID: alias)
-    }
-}
-
-extension WKRPlayer {
-    static var isLocalPlayerCreator: Bool {
-        return GKLocalPlayer.local.isAuthenticated && GKLocalPlayer.local.alias == "J3D1 WARR10R"
+        return WKRPlayerProfile(name: displayName, playerID: alias)
     }
 }

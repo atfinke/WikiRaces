@@ -36,9 +36,9 @@ extension GameViewController {
 
         let headerCommands = (1..<10).map { index in
             return UIKeyCommand(title: "Toggle Section \(index)",
-                action: #selector(keyboardAttemptToggleSection(_:)),
-                input: index.description,
-                modifierFlags: .command)
+                                action: #selector(keyboardAttemptToggleSection(_:)),
+                                input: index.description,
+                                modifierFlags: .command)
         }
         commands.append(contentsOf: headerCommands)
 
@@ -73,10 +73,10 @@ extension GameViewController {
     @objc
     private func keyboardAttemptToggleSection(_ keyCommand: UIKeyCommand) {
         guard let webView = webView,
-            let input = keyCommand.input,
-            let index = Int(input),
-            gameState == .race else {
-                return
+              let input = keyCommand.input,
+              let index = Int(input),
+              gameState == .race else {
+            return
         }
 
         let script = "document.getElementsByClassName('section-heading')[\(index - 1)].click()"

@@ -14,7 +14,7 @@ extension ResultsViewController {
 
     override var keyCommands: [UIKeyCommand]? {
         var commands = [UIKeyCommand]()
-        if !isOverlayButtonHidden {
+        if model.buttonEnabled {
             let command = UIKeyCommand(title: "Ready Up",
                                        action: #selector(keyboardAttemptReadyUp),
                                        input: " ",
@@ -33,14 +33,14 @@ extension ResultsViewController {
 
     @objc
     private func keyboardAttemptReadyUp() {
-        guard !isOverlayButtonHidden else { return }
-        overlayButtonPressed()
+        guard model.buttonEnabled else { return }
+        readyUpButtonPressed()
     }
 
     @objc
     private func keyboardAttemptQuit(_ keyCommand: UIKeyCommand) {
         guard presentedViewController == nil, navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
-        doneButtonPressed(keyCommand)
+        doneButtonPressed()
     }
 
 }

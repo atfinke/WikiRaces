@@ -19,7 +19,9 @@ public struct WKRUIKitConstants {
     static let progessViewAnimateOutDelay     = 0.85
     static let progessViewAnimateOutDuration  = 0.4
 
-    static let alertLabelHeight: CGFloat   = 30.0
+    static let alertViewHeight: CGFloat = 50.0
+    static let alertViewImageHeight: CGFloat = 22
+    static let alertViewImagePadding: CGFloat = 5
     static let alertAnimateInDuration      = 0.2
     static let alertAnimateOutDuration     = 0.15
     public static let alertDefaultDuration = 3.0
@@ -58,10 +60,10 @@ public struct WKRUIKitConstants {
             }
 
             guard let recordConstantsAssetURL = (record["ConstantsFile"] as? CKAsset)?.fileURL,
-                let recordStyleScriptAssetURL = (record["StyleScriptFile"] as? CKAsset)?.fileURL,
-                let recordCleanScriptAssetURL = (record["CleanScriptFile"] as? CKAsset)?.fileURL,
-                let recordContentBlockerAssetURL = (record["ContentBlockerFile"] as? CKAsset)?.fileURL else {
-                    return
+                  let recordStyleScriptAssetURL = (record["StyleScriptFile"] as? CKAsset)?.fileURL,
+                  let recordCleanScriptAssetURL = (record["CleanScriptFile"] as? CKAsset)?.fileURL,
+                  let recordContentBlockerAssetURL = (record["ContentBlockerFile"] as? CKAsset)?.fileURL else {
+                return
             }
 
             DispatchQueue.main.async {
@@ -79,15 +81,15 @@ public struct WKRUIKitConstants {
                                     newContentBlockerFileURL: URL) {
 
         guard FileManager.default.fileExists(atPath: newConstantsFileURL.path),
-            FileManager.default.fileExists(atPath: newStyleScriptFileURL.path),
-            FileManager.default.fileExists(atPath: newCleanScriptFileURL.path),
-            FileManager.default.fileExists(atPath: newContentBlockerFileURL.path) else {
-                return
+              FileManager.default.fileExists(atPath: newStyleScriptFileURL.path),
+              FileManager.default.fileExists(atPath: newCleanScriptFileURL.path),
+              FileManager.default.fileExists(atPath: newContentBlockerFileURL.path) else {
+            return
         }
 
         guard let newConstants = NSDictionary(contentsOf: newConstantsFileURL),
-            let newConstantsVersion = newConstants["Version"] as? Int else {
-                return
+              let newConstantsVersion = newConstants["Version"] as? Int else {
+            return
         }
 
         let documentsConstantsURL = documentsPath(for: "WKRUIConstants.plist")
@@ -97,8 +99,8 @@ public struct WKRUIKitConstants {
 
         var shouldReplaceExisitingConstants = true
         if FileManager.default.fileExists(atPath: documentsConstantsURL.path),
-            let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL),
-            let documentsConstantsVersions = documentsConstants["Version"] as? Int {
+           let documentsConstants = NSDictionary(contentsOf: documentsConstantsURL),
+           let documentsConstantsVersions = documentsConstants["Version"] as? Int {
 
             if newConstantsVersion <= documentsConstantsVersions {
                 shouldReplaceExisitingConstants = false
@@ -133,12 +135,12 @@ public struct WKRUIKitConstants {
 
     static private func copyBundledResourcesToDocuments() {
         guard Thread.isMainThread,
-            let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit"),
-            let bundledPlistURL = bundle.url(forResource: "WKRUIConstants", withExtension: "plist"),
-            let bundledStyleScriptURL = bundle.url(forResource: "WKRStyleScript", withExtension: "js"),
-            let bundledCleanScriptURL = bundle.url(forResource: "WKRCleanScript", withExtension: "js"),
-            let bundledContentBlockerURL = bundle.url(forResource: "WKRContentBlocker", withExtension: "json") else {
-                fatalError("Failed to load bundled constants")
+              let bundle = Bundle(identifier: "com.andrewfinke.WKRUIKit"),
+              let bundledPlistURL = bundle.url(forResource: "WKRUIConstants", withExtension: "plist"),
+              let bundledStyleScriptURL = bundle.url(forResource: "WKRStyleScript", withExtension: "js"),
+              let bundledCleanScriptURL = bundle.url(forResource: "WKRCleanScript", withExtension: "js"),
+              let bundledContentBlockerURL = bundle.url(forResource: "WKRContentBlocker", withExtension: "json") else {
+            fatalError("Failed to load bundled constants")
         }
 
         copyIfNewer(newConstantsFileURL: bundledPlistURL,

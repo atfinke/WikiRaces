@@ -6,7 +6,7 @@
 //  Copyright © 2018 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 final internal class WKRSoloNetwork: WKRPeerNetwork {
 
@@ -31,10 +31,6 @@ final internal class WKRSoloNetwork: WKRPeerNetwork {
     }
 
     func disconnect() {
-    }
-
-    func hostNetworkInterface() -> UIViewController? {
-        return nil
     }
 
 }

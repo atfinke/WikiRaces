@@ -21,9 +21,9 @@ extension VotingViewController {
                                        modifierFlags: .command)
             commands.append(command)
         }
-        if let info = voteInfo, tableView.isUserInteractionEnabled {
-            let voteCommands = (0..<info.pageCount).map { index in
-                return UIKeyCommand(title: info.page(for: index)?.page.title ?? "Unknown",
+        if let info = votingState, model.isVotingEnabled {
+            let voteCommands = info.current.enumerated().map { index, item in
+                return UIKeyCommand(title: item.page.title ?? "Unknown",
                                     action: #selector(keyboardAttemptSelectArticle(_:)),
                                     input: (index + 1).description,
                                     modifierFlags: .command)
@@ -36,31 +36,20 @@ extension VotingViewController {
     @objc
     private func keyboardAttemptSelectArticle(_ keyCommand: UIKeyCommand) {
         guard let input = keyCommand.input,
-            let index = Int(input),
-            let info = voteInfo,
-            index <= info.pageCount,
-            tableView.isUserInteractionEnabled else {
-                return
-        }
-
-        let indexPath = IndexPath(row: index - 1)
-        if let selectedIndexPath = tableView.indexPathForSelectedRow, selectedIndexPath == indexPath {
+              let index = Int(input),
+              let items = votingState?.current,
+              index <= items.count,
+              model.isVotingEnabled else {
             return
         }
-
-        _ = tableView(tableView, willSelectRowAt: indexPath)
-        tableView.selectRow(at: indexPath,
-                            animated: true,
-                            scrollPosition: UITableView.ScrollPosition.none)
-        tableView(tableView, didSelectRowAt: indexPath)
+        listenerUpdate?(.voted(items[index + 1].page))
     }
 
     @objc
     private func keyboardAttemptQuit(_ keyCommand: UIKeyCommand) {
         guard presentedViewController == nil,
-            navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
-
-        doneButtonPressed(keyCommand)
+              navigationItem.rightBarButtonItem?.isEnabled ?? false else { return }
+        doneButtonPressed()
     }
 
 }

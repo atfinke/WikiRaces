@@ -29,23 +29,10 @@ class WikiRacesTests: XCTestCase {
         }
     }
 
-    func testMenuStats() {
-        let menuView = MenuView()
-
-        var stat = PlayerDatabaseStat.mpcPressedJoin
-        var value = stat.value()
-        menuView.joinLocalRace()
-        XCTAssertEqual(value + 1, stat.value())
-
-        stat = PlayerDatabaseStat.mpcPressedHost
-        value = stat.value()
-        menuView.createLocalRace()
-        XCTAssertEqual(value + 1, stat.value())
-
-        stat = PlayerDatabaseStat.gkPressedJoin
-        value = stat.value()
-        menuView.joinGlobalRace()
-        XCTAssertEqual(value + 1, stat.value())
+    func testRaceCodePlayerGroupGeneration() {
+        for code in RaceCodeGenerator.codes {
+            _ = RaceCodeGenerator.playerGroup(for: code)
+        }
     }
 
     func testViewedPage() {
@@ -54,12 +41,12 @@ class WikiRacesTests: XCTestCase {
                 XCTFail("race type nil")
                 return
             }
-            let pageStat: PlayerDatabaseStat
+            let pageStat: PlayerUserDefaultsStat
 
             switch raceType {
-            case .mpc:
+            case .private:
                 pageStat = .mpcPages
-            case .gameKit:
+            case .public:
                 pageStat = .gkPages
             case .solo:
                 pageStat = .soloPages
@@ -79,14 +66,14 @@ class WikiRacesTests: XCTestCase {
             }
 
             let playersKey: String
-            var uniqueStat: PlayerDatabaseStat
-            var totalStat: PlayerDatabaseStat
+            var uniqueStat: PlayerUserDefaultsStat
+            var totalStat: PlayerUserDefaultsStat
             switch raceType {
-            case .mpc:
+            case .private:
                 playersKey = "PlayersArray"
                 uniqueStat = .mpcUniquePlayers
                 totalStat = .mpcTotalPlayers
-            case .gameKit:
+            case .public:
                 playersKey = "GKPlayersArray"
                 uniqueStat = .gkUniquePlayers
                 totalStat = .gkTotalPlayers
@@ -111,12 +98,12 @@ class WikiRacesTests: XCTestCase {
                 return
             }
 
-            let raceFastestTimeStat: PlayerDatabaseStat
+            let raceFastestTimeStat: PlayerUserDefaultsStat
 
             switch raceType {
-            case .mpc:
+            case .private:
                 raceFastestTimeStat = .mpcFastestTime
-            case .gameKit:
+            case .public:
                 raceFastestTimeStat = .gkFastestTime
             case .solo:
                 raceFastestTimeStat = .soloFastestTime
@@ -143,7 +130,7 @@ class WikiRacesTests: XCTestCase {
     }
 
     func testRaceCompletionStats() {
-        var testedStats = Set<PlayerDatabaseStat>()
+        var testedStats = Set<PlayerUserDefaultsStat>()
         for raceIndex in 0..<600 {
             guard let raceType = PlayerStatsManager.RaceType(rawValue: (raceIndex % 3) + 1) else {
                 XCTFail("race type nil")
@@ -155,15 +142,15 @@ class WikiRacesTests: XCTestCase {
             let newTimeRaced = Double(Int.random(in: 0...100))
             let newPixelsScrolled = Double(Int.random(in: 0...100000))
 
-            let raceCountStat: PlayerDatabaseStat
-            let racePointsStat: PlayerDatabaseStat
-            let racePlaceStat: PlayerDatabaseStat
-            let raceTimeStat: PlayerDatabaseStat
-            let racePixelsScrolledStat: PlayerDatabaseStat
+            let raceCountStat: PlayerUserDefaultsStat
+            let racePointsStat: PlayerUserDefaultsStat
+            let racePlaceStat: PlayerUserDefaultsStat
+            let raceTimeStat: PlayerUserDefaultsStat
+            let racePixelsScrolledStat: PlayerUserDefaultsStat
 
             switch raceType {
 
-            case .mpc:
+            case .private:
                 raceCountStat = .mpcRaces
                 racePointsStat = .mpcPoints
                 raceTimeStat = .mpcTotalTime
@@ -177,7 +164,7 @@ class WikiRacesTests: XCTestCase {
                 } else {
                     racePlaceStat = .mpcRaceDNF
                 }
-            case .gameKit:
+            case .public:
                 raceCountStat = .gkRaces
                 racePointsStat = .gkPoints
                 raceTimeStat = .gkTotalTime

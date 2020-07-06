@@ -15,7 +15,7 @@ extension MenuViewController {
 
     @objc
     func presentDebugController() {
-        PlayerAnonymousMetrics.log(event: .versionInfo)
+        PlayerFirebaseAnalytics.log(event: .versionInfo)
 
         let message = "If your name isn't Andrew, you probably shouldn’t be here."
         let alertController = UIAlertController(title: "Debug Panel",
@@ -46,12 +46,12 @@ extension MenuViewController {
         let interfaceBundleInfo = Bundle(for: WKRUIWebView.self).infoDictionary
 
         guard let appBundleVersion = appBundleInfo?[versionKey] as? String,
-            let appBundleShortVersion = appBundleInfo?[shortVersionKey] as? String,
-            let kitBundleVersion = kitBundleInfo?[versionKey] as? String,
-            let kitBundleShortVersion = kitBundleInfo?[shortVersionKey] as? String,
-            let interfaceBundleVersion = interfaceBundleInfo?[versionKey] as? String,
-            let interfaceBundleShortVersion = interfaceBundleInfo?[shortVersionKey] as? String else {
-                fatalError("No bundle info dictionary")
+              let appBundleShortVersion = appBundleInfo?[shortVersionKey] as? String,
+              let kitBundleVersion = kitBundleInfo?[versionKey] as? String,
+              let kitBundleShortVersion = kitBundleInfo?[shortVersionKey] as? String,
+              let interfaceBundleVersion = interfaceBundleInfo?[versionKey] as? String,
+              let interfaceBundleShortVersion = interfaceBundleInfo?[shortVersionKey] as? String else {
+            fatalError("No bundle info dictionary")
         }
 
         let debugInfoController = DebugInfoTableViewController()
@@ -77,7 +77,7 @@ extension MenuViewController {
             .dictionaryRepresentation()
             .sorted { (lhs, rhs) -> Bool in
                 return lhs.key.lowercased() < rhs.key.lowercased()
-        }
+            }
 
         let navController = WKRUINavigationController(rootViewController: debugInfoController)
         present(navController, animated: true, completion: nil)

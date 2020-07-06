@@ -21,8 +21,8 @@ extension GameViewController {
 
     func setupInterface() {
         guard let navigationController = navigationController,
-            let navigationView = navigationController.view else {
-                fatalError("No navigation controller view")
+              let navigationView = navigationController.view else {
+            fatalError("No navigation controller view")
         }
 
         helpBarButtonItem = WKRUIBarButtonItem(
@@ -39,11 +39,9 @@ extension GameViewController {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             navigationItem.leftBarButtonItem = helpBarButtonItem
             navigationItem.rightBarButtonItem = quitBarButtonItem
-        } else {
-            navigationController.setNavigationBarHidden(true, animated: false)
         }
         navigationView.addSubview(navigationBarBottomLine)
 
@@ -65,6 +63,9 @@ extension GameViewController {
             activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
+
+//        view.alpha = 0
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     // MARK: - Elements
@@ -75,7 +76,7 @@ extension GameViewController {
 
         connectingLabel.translatesAutoresizingMaskIntoConstraints = false
         connectingLabel.alpha = 0.0
-        connectingLabel.text = "CONNECTING"
+        connectingLabel.text = "PREPARING"
         connectingLabel.textAlignment = .center
         connectingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
         view.addSubview(connectingLabel)
@@ -103,9 +104,6 @@ extension GameViewController {
         webView?.removeFromSuperview()
 
         let webView = WKRUIWebView()
-        var contentInset = webView.scrollView.contentInset
-        contentInset.bottom = -20
-        webView.scrollView.contentInset = contentInset
 
         view.addSubview(webView)
         view.bringSubviewToFront(progressView)
@@ -119,8 +117,7 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            webView.alpha = 0.0
+        if !Defaults.isFastlaneSnapshotInstance {
             gameManager.webView = webView
         }
         self.webView = webView
@@ -138,23 +135,23 @@ extension GameViewController {
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:forfeit"))
-                PlayerAnonymousMetrics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
+                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:forfeit"))
+                PlayerFirebaseAnalytics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
                 self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
 
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
-                PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:reload"))
-                PlayerAnonymousMetrics.log(event: .usedReload)
+                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:reload"))
+                PlayerFirebaseAnalytics.log(event: .usedReload)
                 self.webView?.reload()
             }
             alertController.addAction(reloadAction)
         }
 
         let quitAction = UIAlertAction(title: "Leave Match", style: .destructive) {  [weak self] _ in
-            PlayerAnonymousMetrics.log(event: .userAction("quitAlertController:quit"))
-            PlayerAnonymousMetrics.log(event: .quitRace, attributes: nil)
+            PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:quit"))
+            PlayerFirebaseAnalytics.log(event: .quitRace, attributes: nil)
             self?.attemptQuit()
         }
         alertController.addAction(quitAction)

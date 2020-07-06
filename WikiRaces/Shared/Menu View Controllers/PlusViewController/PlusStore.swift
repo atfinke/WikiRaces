@@ -17,8 +17,6 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     enum MagicError: Error {
         case unableToMakePayments
         case noProduct
-        case networkError(Error)
-        case serverError
     }
 
     enum PlusType {
@@ -56,7 +54,11 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
             UserDefaults.standard.set(newValue, forKey: "isPlus")
         }
         get {
-            UserDefaults.standard.bool(forKey: "isPlus")
+            #if targetEnvironment(simulator)
+            return true
+            #else
+            return UserDefaults.standard.bool(forKey: "isPlus")
+            #endif
         }
     }
 
@@ -181,10 +183,10 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         os_log("%{public}s: called", log: .store, type: .info, #function)
         verifyReceiptTimer?.invalidate()
         verifyReceiptTimer = Timer.scheduledTimer(timeInterval: 0.5,
-                                                 target: self,
-                                                 selector: #selector(processPaymentQueueTransactions),
-                                                 userInfo: nil,
-                                                 repeats: false)
+                                                  target: self,
+                                                  selector: #selector(processPaymentQueueTransactions),
+                                                  userInfo: nil,
+                                                  repeats: false)
     }
 
     @objc

@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 final internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
@@ -83,10 +83,6 @@ final internal class WKRSplitViewNetwork: WKRPeerNetwork {
 
     func disconnect() {
         print("Would Disconnect")
-    }
-
-    func hostNetworkInterface() -> UIViewController? {
-        return nil
     }
 
 }

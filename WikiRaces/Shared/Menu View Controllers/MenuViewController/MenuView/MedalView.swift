@@ -40,19 +40,19 @@ final class MedalView: SKView {
     }
 
     func showMedals() {
-        guard !medalScene.isActive else { return }
-        let firstMedals = PlayerDatabaseStat.mpcRaceFinishFirst.value() +
-            PlayerDatabaseStat.gkRaceFinishFirst.value()
-        let secondMedals = PlayerDatabaseStat.mpcRaceFinishSecond.value() +
-            PlayerDatabaseStat.gkRaceFinishSecond.value()
-        let thirdMedals = PlayerDatabaseStat.mpcRaceFinishThird.value() +
-            PlayerDatabaseStat.gkRaceFinishThird.value()
-        let dnfCount = PlayerDatabaseStat.mpcRaceDNF.value() +
-            PlayerDatabaseStat.gkRaceDNF.value()
+        guard medalScene.isPaused else { return }
+        let firstMedals = PlayerUserDefaultsStat.mpcRaceFinishFirst.value() +
+            PlayerUserDefaultsStat.gkRaceFinishFirst.value()
+        let secondMedals = PlayerUserDefaultsStat.mpcRaceFinishSecond.value() +
+            PlayerUserDefaultsStat.gkRaceFinishSecond.value()
+        let thirdMedals = PlayerUserDefaultsStat.mpcRaceFinishThird.value() +
+            PlayerUserDefaultsStat.gkRaceFinishThird.value()
+        let dnfCount = PlayerUserDefaultsStat.mpcRaceDNF.value() +
+            PlayerUserDefaultsStat.gkRaceDNF.value()
 
         let metalCount = Int(firstMedals + secondMedals + thirdMedals)
-        PlayerAnonymousMetrics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
-        PlayerDatabaseStat.triggeredEasterEgg.increment()
+        PlayerFirebaseAnalytics.log(event: .displayedMedals, attributes: ["Medals": metalCount])
+        PlayerUserDefaultsStat.triggeredEasterEgg.increment()
 
         guard metalCount > 0 else { return }
         medalScene.showMedals(gold: Int(firstMedals),
@@ -60,7 +60,7 @@ final class MedalView: SKView {
                               bronze: Int(thirdMedals),
                               dnf: Int(dnfCount))
 
-        medalScene.isActive = true
+        medalScene.isPaused = false
         UIImpactFeedbackGenerator().impactOccurred()
     }
 }

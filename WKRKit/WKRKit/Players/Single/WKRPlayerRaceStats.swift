@@ -36,23 +36,23 @@ public class WKRPlayerRaceStats: Codable, Equatable {
     func reset() {
         helpNeeded = 0
         update(history: nil, state: .connecting, pixels: 0)
-        statsDictionary["Help needed"] = "0 Times"
+        statsDictionary["Help Needed"] = "0 Times"
     }
 
     func update(history: WKRHistory?, state: WKRPlayerState, pixels: Int) {
-        statsDictionary["Links missed"] = linksMissed(history: history, state: state)
-        statsDictionary["Average time per page"] = avergeTimeSpent(history: history)
+        statsDictionary["Links Missed"] = linksMissed(history: history, state: state)
+        statsDictionary["Average Time Per Page"] = avergeTimeSpent(history: history)
 
         if let formatted = WKRPlayerRaceStats.pixelFormatter.string(from: NSNumber(value: pixels)) {
-            statsDictionary["Distance scrolled"] = formatted + " Pixels"
+            statsDictionary["Distance Scrolled"] = formatted + " Pixels"
         } else {
-            statsDictionary["Distance scrolled"] = "0 Pixels"
+            statsDictionary["Distance Scrolled"] = "0 Pixels"
         }
     }
 
     func neededHelp() {
         helpNeeded += 1
-        statsDictionary["Help needed"] = "\(helpNeeded) Time" + (helpNeeded == 1 ? "" : "s")
+        statsDictionary["Help Needed"] = "\(helpNeeded) Time" + (helpNeeded == 1 ? "" : "s")
     }
 
     // MARK: - Helpers -

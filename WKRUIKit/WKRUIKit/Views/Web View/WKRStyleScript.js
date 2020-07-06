@@ -1,4 +1,4 @@
-var styleElement = document.createElement('style');
+var styleElement = document.createElement("style");
 document.documentElement.appendChild(styleElement);
 
 styleElement.textContent = `
@@ -6,7 +6,7 @@ sup {
     display: none !important;
 }
 a[href^="/wiki/"] {
-    background-color: #f5f5f5; font-weight: 500;
+    background-color: #f5f5f5; font-weight: 500; padding: 1px; padding-right: 4px; padding-left: 4px; border-radius: 5px;
 }
 a[href*=":"] {
     background-color: clear; font-weight: 400;
@@ -37,7 +37,6 @@ a[href*=":"] {
     a[href^="/wiki/"] {
         background-color: rgba(0,0,0,0);
         color: #986400;
-        font-weight: 500;
     }
     body {
         filter: invert(1);
@@ -46,5 +45,5 @@ a[href*=":"] {
 }
 `;
 
-document.documentElement.style.webkitTouchCallout='none';
-document.documentElement.style.webkitUserSelect='none';
+document.documentElement.style.webkitTouchCallout = "none";
+document.documentElement.style.webkitUserSelect = "none";

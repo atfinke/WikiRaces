@@ -14,7 +14,7 @@ import WKRUIKit
 
 #if !targetEnvironment(macCatalyst)
 import FirebaseCore
-import Crashlytics
+import FirebaseCrashlytics
 #endif
 
 @UIApplicationMain
@@ -25,26 +25,26 @@ final internal class AppDelegate: WKRAppDelegate {
 
         #if !targetEnvironment(macCatalyst)
         FirebaseApp.configure()
-        Crashlytics.start(withAPIKey: "80c3b2d37f1bca4e182e7fbf7976e6f069340b4d")
         #endif
 
+        GKHelper.shared.start()
         PlusStore.shared.sync()
         configureConstants()
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(showBanHammer),
-                                               name: PlayerDatabaseMetrics.banHammerNotification,
+                                               name: PlayerCloudKitStatsManager.banHammerNotification,
                                                object: nil)
 
         PlayerStatsManager.shared.start()
-        PlayerDatabaseMetrics.shared.connect()
+        PlayerCloudKitStatsManager.shared.connect()
 
         logCloudStatus()
         logBuild()
 
         cleanTempDirectory()
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             UIView.setAnimationsEnabled(false)
         }
 
@@ -62,14 +62,14 @@ final internal class AppDelegate: WKRAppDelegate {
 
     private func logCloudStatus() {
         CKContainer.default().accountStatus { (status, _) in
-            PlayerAnonymousMetrics.log(event: .cloudStatus,
+            PlayerFirebaseAnalytics.log(event: .cloudStatus,
                                 attributes: ["CloudStatus": status.rawValue.description])
         }
     }
 
     private func logBuild() {
         let appInfo = Bundle.main.appInfo
-        let metrics = PlayerDatabaseMetrics.shared
+        let metrics = PlayerCloudKitStatsManager.shared
         metrics.log(value: appInfo.version, for: "coreVersion")
         metrics.log(value: appInfo.build.description, for: "coreBuild")
         metrics.log(value: WKRKitConstants.current.version.description,
@@ -90,7 +90,7 @@ final internal class AppDelegate: WKRAppDelegate {
                                             animated: true,
                                             completion: nil)
 
-        PlayerAnonymousMetrics.log(event: .banHammer)
+        PlayerFirebaseAnalytics.log(event: .banHammer)
     }
 
 }

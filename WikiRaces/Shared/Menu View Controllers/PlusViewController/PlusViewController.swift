@@ -68,7 +68,7 @@ class PlusViewController: UIViewController {
                     self.plusView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
                 }
                 self.alphaView.alpha = 0.5
-        }, completion: nil)
+            }, completion: nil)
     }
 
     // MARK: - Helpers -
@@ -84,11 +84,11 @@ class PlusViewController: UIViewController {
                 self.plusView.center = CGPoint(x: self.view.center.x,
                                                y: self.view.frame.height + self.plusView.bounds.height / 2)
                 self.alphaView.alpha = 0
-        }, completion: { _ in
-            self.dismiss(animated: false, completion: {
-                self.onCompletion?()
-            })
+            }, completion: { _ in
+                self.dismiss(animated: false, completion: {
+                    self.onCompletion?()
+                })
 
-        })
+            })
     }
 }

@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import WKRUIKit
 
 extension ResultsViewController {
 
     // MARK: - Actions
 
-    @objc func doneButtonPressed(_ sender: Any) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+    @objc func doneButtonPressed() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerAnonymousMetrics.log(event: .backupQuit,
+            PlayerFirebaseAnalytics.log(event: .backupQuit,
                               attributes: ["RawGameState": state.rawValue])
             listenerUpdate?(.quit)
             return
@@ -23,21 +24,13 @@ extension ResultsViewController {
         present(alertController, animated: true, completion: nil)
     }
 
-    @objc func addPlayersBarButtonItemPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
-        guard let controller = addPlayersViewController else { return }
-        present(controller, animated: true, completion: nil)
-        PlayerAnonymousMetrics.log(event: .hostStartMidMatchInviting)
-    }
-
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
 
         let hackTitle = "Hack"
         let controller = UIActivityViewController(activityItems: [
             image,
-            "#WikiRaces3"
             ], applicationActivities: nil)
         controller.completionWithItemsHandler = { [weak self] activityType, completed, _, _ in
             if !(completed && activityType == UIActivity.ActivityType.saveToCameraRoll),
@@ -56,6 +49,25 @@ extension ResultsViewController {
         present(hack, animated: false, completion: {
             hack.present(controller, animated: true, completion: nil)
         })
-        PlayerAnonymousMetrics.log(event: .openedShare)
+        PlayerFirebaseAnalytics.log(event: .openedShare)
+    }
+
+    func tapped(playerID: String) {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
+
+        guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID), state != .points else {
+            return
+        }
+
+        let controller = HistoryViewController(style: .grouped)
+        historyViewController = controller
+        controller.player = player
+
+        let navController = WKRUINavigationController(rootViewController: controller)
+        navController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
+        present(navController, animated: true, completion: nil)
+
+        PlayerFirebaseAnalytics.log(event: .openedHistory,
+                          attributes: ["GameState": state.rawValue.description as Any])
     }
 }

@@ -9,8 +9,9 @@
 import UIKit
 import WKRKit
 import WKRUIKit
+import SwiftUI
 
-final internal class VotingViewController: CenteredTableViewController {
+final internal class VotingViewController: BackingVisualEffectViewController {
 
     // MARK: - Types -
 
@@ -19,56 +20,61 @@ final internal class VotingViewController: CenteredTableViewController {
         case quit
     }
 
+    private enum ViewState {
+        case pre, voting, post
+    }
+
     // MARK: - Properties -
 
-    private var isShowingGuide = false
-    private var isShowingVoteCountdown = true
+    private(set) var model = VotingContentViewModel()
+    private lazy var contentViewHosting = UIHostingController(
+        rootView: VotingContentView(
+            model: model,
+            tappedVotingItem: { [weak self] item in
+                self?.listenerUpdate?(.voted(item.page))
+                UISelectionFeedbackGenerator().selectionChanged()
+        }))
 
     var listenerUpdate: ((ListenerUpdate) -> Void)?
     var quitAlertController: UIAlertController?
 
-    var voteInfo: WKRVoteInfo? {
+    private var state: ViewState = .pre
+    private var isFinalTextVisible = false
+    var votingState: WKRVotingState? {
         didSet {
-            let selectedPath = tableView.indexPathForSelectedRow
-            tableView.reloadData()
-            tableView.selectRow(at: selectedPath, animated: false, scrollPosition: .none)
-            if isViewLoaded && self.tableView.alpha != 1.0 {
-                UIView.animate(withDuration: WKRAnimationDurationConstants.votingTableAppear, animations: {
-                    self.tableView.alpha = 1.0
-                })
-            }
-            if voteInfo?.pageCount == 1 {
-                guideLabel.text = "HOST SELECTED PAGE"
-            }
+            model.update(votingState: votingState)
         }
     }
 
     var voteTimeRemaing = 100 {
         didSet {
-            if isShowingVoteCountdown {
-                let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
-                if !isShowingGuide {
-                    UIView.animateFlash(
-                        withDuration: WKRAnimationDurationConstants.votingLabelsFlash,
-                        items: [guideLabel, descriptionLabel],
-                        whenHidden: {
-                            self.descriptionLabel.text = timeString
-                            self.isShowingGuide = true
-                    }, completion: nil)
-                    tableView.isUserInteractionEnabled = true
-                } else if voteTimeRemaing == 0 {
-                    descriptionLabel.text = timeString
-                    votingEnded()
-                } else {
-                    descriptionLabel.text = timeString
-                    tableView.isUserInteractionEnabled = true
+            let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
+            switch state {
+            case .pre:
+                model.footerOpacity = 0
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.model.footerTopText = "TAP ARTICLE TO VOTE"
+                    self.model.footerBottomText = timeString
                 }
-            } else {
-                descriptionLabel.text = "RACE STARTS IN " + voteTimeRemaing.description + " S"
-                if descriptionLabel.alpha != 1.0 {
-                    UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
-                        self.descriptionLabel.alpha = 1.0
-                    })
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    self.model.footerOpacity = 1
+                }
+                model.isVotingEnabled = true
+                state = .voting
+            case .voting:
+                if voteTimeRemaing == 0 {
+                    model.footerOpacity = 0
+                } else {
+                    model.footerBottomText = timeString
+                }
+            case .post:
+                model.footerTopText = "GET READY"
+                model.footerBottomText = "RACE STARTS IN " + voteTimeRemaing.description + " S"
+                if !isFinalTextVisible {
+                    isFinalTextVisible = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        self.model.footerOpacity = 1
+                    }
                 }
             }
         }
@@ -79,24 +85,14 @@ final internal class VotingViewController: CenteredTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.alpha = 0.0
-        registerTableView(for: self)
-
         title = "VOTING"
 
-        guideLabel.alpha = 0.0
-        guideLabel.text = "TAP ARTICLE TO VOTE"
-        if voteInfo?.pageCount == 1 {
-            guideLabel.text = "HOST SELECTED PAGE"
-        }
+        addChild(contentViewHosting)
+        configure(hostingView: contentViewHosting.view)
+        contentViewHosting.didMove(toParent: self)
 
-        descriptionLabel.text = "VOTING STARTS SOON"
-
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 100
-
-        tableView.register(VotingTableViewCell.self,
-                           forCellReuseIdentifier: reuseIdentifier)
+        model.footerTopText = "PREPARING"
+        model.footerBottomText = "VOTING STARTS SOON"
 
         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
             systemName: "xmark",
@@ -104,22 +100,13 @@ final internal class VotingViewController: CenteredTableViewController {
             action: #selector(doneButtonPressed))
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if voteInfo != nil {
-            UIView.animate(withDuration: WKRAnimationDurationConstants.votingTableAppear, animations: {
-                self.tableView.alpha = 1.0
-            })
-        }
-    }
-
     // MARK: - Actions -
 
-    @objc func doneButtonPressed(_ sender: Any) {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+    @objc func doneButtonPressed() {
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
-            PlayerAnonymousMetrics.log(event: .backupQuit,
-                                       attributes: ["RawGameState": WKRGameState.voting.rawValue])
+            PlayerFirebaseAnalytics.log(event: .backupQuit,
+                                        attributes: ["RawGameState": WKRGameState.voting.rawValue])
             self.listenerUpdate?(.quit)
             return
         }
@@ -128,26 +115,9 @@ final internal class VotingViewController: CenteredTableViewController {
 
     // MARK: - Helpers -
 
-    func votingEnded() {
-        isShowingVoteCountdown = false
-        tableView.isUserInteractionEnabled = false
-        UIView.animate(withDuration: WKRAnimationDurationConstants.votingEndedStateTransition) {
-            self.guideLabel.alpha = 0.0
-            self.descriptionLabel.alpha = 0.0
-        }
-    }
-
     func finalPageSelected(_ page: WKRPage) {
-        guard let votingObject = voteInfo, let finalIndex = votingObject.index(of: page) else {
-            fatalError("Failed to select final page with \(String(describing: voteInfo))")
-        }
-
-        UIView.animate(withDuration: WKRAnimationDurationConstants.votingFinalPageStateTransition) {
-            for index in 0...votingObject.pageCount where index != finalIndex {
-                let indexPath = IndexPath(row: index)
-                self.tableView.cellForRow(at: indexPath)?.alpha = 0.2
-            }
-        }
+        model.selected(finalPage: page)
+        state = .post
     }
 
 }

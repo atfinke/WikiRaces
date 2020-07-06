@@ -6,7 +6,7 @@
 //  Copyright © 2017 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import WKRUIKit
 
 public struct WKRResultsInfo: Codable {
 
@@ -20,10 +20,6 @@ public struct WKRResultsInfo: Codable {
     }
 
     // MARK: - Properties
-
-    public var playerCount: Int {
-        return playersSortedByState.count
-    }
 
     private var playersSortedByState: [WKRPlayer]!
     private var playersSortedByPoints: [WKRPlayer]
@@ -114,6 +110,10 @@ public struct WKRResultsInfo: Codable {
 
     // MARK: - Helpers
 
+    public mutating func minimize() {
+        playersSortedByState = []
+    }
+
     internal func raceRewardPoints(for player: WKRPlayer) -> Int {
         return racePoints[player.profile] ?? 0
     }
@@ -131,33 +131,47 @@ public struct WKRResultsInfo: Codable {
         return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func raceRankingsPlayer(at index: Int) -> WKRPlayer {
-        return playersSortedByState[index]
+    public func player(for playerID: String) -> WKRPlayer? {
+        guard let updatedPlayerIndex = playersSortedByState.firstIndex(where: { $0.profile.playerID == playerID }) else { return nil }
+        return playersSortedByState[updatedPlayerIndex]
     }
 
-    public func sessionResults(at index: Int) -> WKRProfileSessionResults {
-        let player = playersSortedByPoints[index]
-        let points = sessionPoints[player.profile] ?? 0
+    public func raceRankings() -> [WKRPlayer] {
+        return playersSortedByState
+    }
 
-        var isTied = false
-        var ranking = 1
-        for otherPlayer in playersSortedByPoints.filter({ $0 != player }) {
-            let otherPlayerPoints = sessionPoints[otherPlayer.profile] ?? 0
-            if otherPlayerPoints > points {
-                ranking += 1
-            } else if otherPlayerPoints == points {
-                isTied = true
+    public func sessionResults() -> [WKRProfileSessionResults] {
+        var results = [WKRProfileSessionResults]()
+        for player in playersSortedByPoints {
+            let points = sessionPoints[player.profile] ?? 0
+
+            var isTied = false
+            var ranking = 1
+            for otherPlayer in playersSortedByPoints.filter({ $0 != player }) {
+                let otherPlayerPoints = sessionPoints[otherPlayer.profile] ?? 0
+                if otherPlayerPoints > points {
+                    ranking += 1
+                } else if otherPlayerPoints == points {
+                    isTied = true
+                }
             }
+
+            let item = WKRProfileSessionResults(profile: player.profile,
+                                            points: sessionPoints[player.profile] ?? 0,
+                                            ranking: ranking,
+                                            isTied: isTied)
+            results.append(item)
         }
-
-        return WKRProfileSessionResults(profile: player.profile,
-                                        points: sessionPoints[player.profile] ?? 0,
-                                        ranking: ranking,
-                                        isTied: isTied)
+        return results
     }
-
-    public func raceResultsPlayerProfileOrder() -> [WKRPlayerProfile] {
-        return playersSortedByState.map { $0.profile }
-    }
-
 }
+
+#if os(macOS)
+
+extension WKRResultsInfo {
+    public var _playersForLiveViewer: [WKRPlayer] {
+        return playersSortedByPoints
+    }
+}
+
+#endif

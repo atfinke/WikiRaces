@@ -17,12 +17,6 @@ final class MedalScene: SKScene {
     private let bronzeNode: SKNode
     private let dnfNode: SKNode
 
-    public var isActive = false {
-        didSet {
-            isPaused = !isActive
-        }
-    }
-
     // MARK: - Initalization -
 
     override init(size: CGSize) {
@@ -76,7 +70,7 @@ final class MedalScene: SKScene {
             node.removeFromParent()
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.isActive = !self.children.isEmpty
+            self.isPaused = self.children.isEmpty
         }
     }
 
@@ -100,7 +94,7 @@ final class MedalScene: SKScene {
             let padding: CGFloat = 40
             let maxX = size.width - padding
             node.position = CGPoint(x: CGFloat.random(in: padding..<maxX),
-                                     y: size.height + 50)
+                                    y: size.height + 50)
             node.zRotation = CGFloat.random(in: (-CGFloat.pi / 4)..<(CGFloat.pi / 4))
             addChild(node)
 
@@ -120,10 +114,10 @@ final class MedalScene: SKScene {
 
         for (index, place) in places.shuffled().enumerated() {
             scene?.run(.sequence([
-                .wait(forDuration: Double(index) * 0.075),
-                .run {
-                    createMedal(place: place)
-                }]))
+                                    .wait(forDuration: Double(index) * 0.075),
+                                    .run {
+                                        createMedal(place: place)
+                                    }]))
         }
     }
 }

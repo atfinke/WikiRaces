@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameKit
 
 final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
@@ -14,6 +15,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     private struct WKRAlertMessage: Equatable {
         let text: String
+        let player: WKRPlayerProfile?
         let duration: Double
         let isRaceSpecific: Bool
         let playHaptic: Bool
@@ -28,6 +30,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     private var topConstraint: NSLayoutConstraint!
 
     private var isPresenting = false
+    private let imageView = UIImageView()
 
     // MARK: - Initalization -
 
@@ -43,25 +46,22 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         contentView.addSubview(label)
+
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        imageView.layer.cornerRadius = WKRUIKitConstants.alertViewImageHeight / 2
+        imageView.clipsToBounds = true
+        contentView.addSubview(imageView)
 
         topConstraint = topAnchor.constraint(equalTo: alertWindow.bottomAnchor)
 
-        let inset: CGFloat = 10
         let constraints: [NSLayoutConstraint] = [
             topConstraint,
             leftAnchor.constraint(equalTo: alertWindow.leftAnchor),
             rightAnchor.constraint(equalTo: alertWindow.rightAnchor),
-
-            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset - alertWindow.safeAreaInsets.bottom / 2),
-
-            label.leftAnchor.constraint(equalTo: leftAnchor, constant: inset),
-            label.rightAnchor.constraint(equalTo: rightAnchor, constant: -inset),
-
-            label.heightAnchor.constraint(greaterThanOrEqualToConstant: WKRUIKitConstants.alertLabelHeight)
+            heightAnchor.constraint(equalToConstant: WKRUIKitConstants.alertViewHeight + alertWindow.safeAreaInsets.bottom / 2)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -80,14 +80,17 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     // MARK: - Enqueuing Messages -
 
     public func enqueue(text: String,
+                        for player: WKRPlayerProfile?,
                         duration: Double = WKRUIKitConstants.alertDefaultDuration,
                         isRaceSpecific: Bool,
                         playHaptic: Bool) {
 
-        let message = WKRAlertMessage(text: text,
-                                      duration: duration,
-                                      isRaceSpecific: isRaceSpecific,
-                                      playHaptic: playHaptic)
+        let message = WKRAlertMessage(
+            text: text,
+            player: player,
+            duration: duration,
+            isRaceSpecific: isRaceSpecific,
+            playHaptic: playHaptic)
 
         // Make sure message doesn't equal most recent in queue.
         // If queue empty, make sure message isn't the same as the one being displayed.
@@ -121,6 +124,34 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         let message = queue.removeFirst()
         label.text = message.text.uppercased()
+
+        let rect = label.attributedText?.boundingRect(
+            with: CGSize(width: frame.width, height: .infinity),
+            options: .usesLineFragmentOrigin,
+            context: nil) ?? bounds
+
+        label.frame = rect
+
+        let viewCenterY = frame.height / 2 - alertWindow.safeAreaInsets.bottom / 4
+        let imageViewPadding = WKRUIKitConstants.alertViewImagePadding
+        let imageViewWidth = WKRUIKitConstants.alertViewImageHeight
+
+        if let player = message.player {
+            imageView.isHidden = false
+            label.center = CGPoint(x: center.x + (imageViewWidth + imageViewPadding) / 2, y: viewCenterY)
+            imageView.image = player.rawImage
+
+            imageView.frame = CGRect(
+                x: label.frame.minX - imageViewWidth - imageViewPadding,
+                y: viewCenterY - imageViewWidth / 2,
+                width: imageViewWidth,
+                height: imageViewWidth)
+
+        } else {
+            imageView.isHidden = true
+            label.center = CGPoint(x: center.x, y: viewCenterY)
+        }
+
         setNeedsLayout()
         layoutIfNeeded()
 

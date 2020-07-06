@@ -51,7 +51,11 @@ final internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
         super.init()
 
         let config = WKWebViewConfiguration()
+        #if os(macOS)
+        let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        #else
         let linksScript = WKUserScript(source: WKRKitConstants.current.getLinksScript(), injectionTime: .atDocumentEnd)
+        #endif
 
         let messageDelegate = ScriptMessageDelegate(delegate: self)
 

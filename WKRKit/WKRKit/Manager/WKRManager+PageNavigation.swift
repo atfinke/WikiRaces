@@ -103,6 +103,7 @@ extension WKRGameManager {
                 return
         }
         enqueue(message: title,
+                for: nil,
                 duration: duration,
                 isRaceSpecific: true,
                 playHaptic: true)

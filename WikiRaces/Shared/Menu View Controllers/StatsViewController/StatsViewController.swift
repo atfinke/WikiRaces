@@ -46,14 +46,14 @@ class StatsViewController: UITableViewController {
                     detail: formatted(for: [.mpcPoints, .gkPoints], suffix: "Point")),
                 Item(
                     name: "Points Per Race",
-                    detail: String(format: "%.2f PPR", PlayerDatabaseStat.multiplayerAverage.value())),
+                    detail: String(format: "%.2f PPR", PlayerUserDefaultsStat.multiplayerAverage.value())),
                 Item(
                     name: "Total Time",
                     detail: formatted(for: [.soloTotalTime, .mpcTotalTime, .gkTotalTime], suffix: "S", checkPlural: false)),
                 Item(
                     name: "Pages Viewed",
                     detail: formatted(for: [.soloPages, .mpcPages, .gkPages], suffix: "Page"))
-        ]),
+            ]),
         Section(
             name: "Solo",
             items: [
@@ -63,9 +63,9 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Total Time",
                     detail: formatted(for: .soloTotalTime, suffix: "S", checkPlural: false))
-        ]),
+            ]),
         Section(
-            name: "Local Races",
+            name: "Private Races",
             items: [
                 Item(
                     name: "Races",
@@ -82,9 +82,9 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Players Raced",
                     detail: nil)
-        ]),
+            ]),
         Section(
-            name: "Global Races",
+            name: "Public Races",
             items: [
                 Item(
                     name: "Races",
@@ -101,7 +101,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Players Raced",
                     detail: nil)
-        ]),
+            ]),
         Section(
             name: "Other",
             items: [
@@ -114,7 +114,7 @@ class StatsViewController: UITableViewController {
                 Item(
                     name: "Needed Help",
                     detail: formatted(for: [.soloHelp, .mpcHelp, .gkHelp], suffix: "Time"))
-        ])
+            ])
     ]
 
     // MARK: - Initalization -
@@ -191,11 +191,11 @@ class StatsViewController: UITableViewController {
 
     }
 
-    static func formatted(for item: PlayerDatabaseStat, suffix: String?, checkPlural: Bool = true) -> String {
+    static func formatted(for item: PlayerUserDefaultsStat, suffix: String?, checkPlural: Bool = true) -> String {
         return formatted(for: item.value(), suffix: suffix, checkPlural: checkPlural)
     }
 
-    static func formatted(for items: [PlayerDatabaseStat], suffix: String?, checkPlural: Bool = true) -> String {
+    static func formatted(for items: [PlayerUserDefaultsStat], suffix: String?, checkPlural: Bool = true) -> String {
         var value = Double()
         items.forEach { value += $0.value() }
         return formatted(for: value, suffix: suffix, checkPlural: checkPlural)

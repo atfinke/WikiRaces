@@ -27,7 +27,7 @@ final internal class GameViewController: UIViewController {
 
     var transitionState = TransitionState.none {
         didSet {
-            PlayerAnonymousMetrics.log(event: .gameState("TransitionState: \(transitionState)"))
+            PlayerFirebaseAnalytics.log(event: .gameState("TransitionState: \(transitionState)"))
         }
     }
     var isErrorPresented = false
@@ -93,7 +93,7 @@ final internal class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+        if Defaults.isFastlaneSnapshotInstance {
             setupInterface()
             let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World_Monorail_System")!
             prepareForScreenshots(for: url)
@@ -106,10 +106,9 @@ final internal class GameViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
-            webView?.alpha = 1.0
-            return
-        }
+//        if Defaults.isFastlaneSnapshotInstance {
+//            return
+//        }
 
         if !isConfigured {
             isConfigured = true
@@ -120,13 +119,10 @@ final internal class GameViewController: UIViewController {
             gameManager.player(.startedGame)
             switch networkConfig {
             case .solo:
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch, attributes: nil)
-            case .gameKit(let match, _):
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
+                PlayerFirebaseAnalytics.log(event: .hostStartedMatch, attributes: nil)
+            case .gameKitPrivate(let match, _), .gameKitPublic(let match, _):
+                PlayerFirebaseAnalytics.log(event: .hostStartedMatch,
                                            attributes: ["ConnectedPeers": match.players.count - 1])
-            case .mpc(_, let session, _):
-                PlayerAnonymousMetrics.log(event: .hostStartedMatch,
-                                           attributes: ["ConnectedPeers": session.connectedPeers.count])
             default: break
             }
         }
@@ -161,17 +157,16 @@ final internal class GameViewController: UIViewController {
         switch networkConfig {
         case .solo:
             PlayerStatsManager.shared.connected(to: [], raceType: .solo)
-        case .gameKit(let match, _):
+        case .gameKitPrivate(let match, _):
             let playerNames = match.players.map { player -> String in
                 return player.alias
             }
-            PlayerStatsManager.shared.connected(to: playerNames, raceType: .gameKit)
-        case .mpc(_, let session, _):
-            // Due to low usage, not accounting for players joining mid session
-            let playerNames = session.connectedPeers.map { peerID -> String in
-                return peerID.displayName
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .private)
+        case .gameKitPublic(let match, _):
+            let playerNames = match.players.map { player -> String in
+                return player.alias
             }
-            PlayerStatsManager.shared.connected(to: playerNames, raceType: .mpc)
+            PlayerStatsManager.shared.connected(to: playerNames, raceType: .public)
         default:
             break
         }
@@ -188,7 +183,7 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func helpButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         if gameSettings.other.isHelpEnabled {
             showHelp()
@@ -204,7 +199,7 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func quitButtonPressed() {
-        PlayerAnonymousMetrics.log(event: .userAction(#function))
+        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
@@ -218,6 +213,7 @@ final internal class GameViewController: UIViewController {
         controller.url = gameManager.finalPageURL
         controller.linkTapped = { [weak self] in
             self?.gameManager.enqueue(message: "Links disabled in help",
+                                      for: nil,
                                       duration: 2.0,
                                       isRaceSpecific: true,
                                       playHaptic: true)
@@ -225,17 +221,17 @@ final internal class GameViewController: UIViewController {
         self.activeViewController = controller
 
         let navController = WKRUINavigationController(rootViewController: controller)
-        navController.modalPresentationStyle = .formSheet
+        navController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:help"))
-        PlayerAnonymousMetrics.log(event: .usedHelp,
+        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:help"))
+        PlayerFirebaseAnalytics.log(event: .usedHelp,
                                    attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
-            let stat: PlayerDatabaseStat
+            let stat: PlayerUserDefaultsStat
             switch raceType {
-            case .mpc: stat = .mpcHelp
-            case .gameKit: stat = .gkHelp
+            case .private: stat = .mpcHelp
+            case .public: stat = .gkHelp
             case .solo: stat = .soloHelp
             }
             stat.increment()
@@ -243,7 +239,7 @@ final internal class GameViewController: UIViewController {
     }
 
     func reloadPage() {
-        PlayerAnonymousMetrics.log(event: .userAction("flagButtonPressed:reload"))
+        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:reload"))
         self.webView?.reload()
     }
 

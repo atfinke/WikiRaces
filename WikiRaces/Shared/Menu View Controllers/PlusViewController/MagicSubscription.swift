@@ -40,7 +40,7 @@ struct MagicSubscription {
 
         MagicSubscription.priceFormatter.locale = product.priceLocale
         guard let price = MagicSubscription.priceFormatter.string(from: product.price),
-            let subscriptionPeriod = product.subscriptionPeriod else { return nil }
+              let subscriptionPeriod = product.subscriptionPeriod else { return nil }
 
         self.price = price
         switch subscriptionPeriod.unit {

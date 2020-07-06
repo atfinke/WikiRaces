@@ -1,5 +1,5 @@
 //
-//  StatsHelper.swift
+//  PlayerStatsManager.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 8/31/17.
@@ -17,16 +17,16 @@ final internal class PlayerStatsManager {
     // MARK: - Types
 
     enum RaceType: Int {
-        case mpc = 1, gameKit = 2, solo = 3
+        case `private` = 1, `public` = 2, solo = 3
 
         init?(_ config: WKRPeerNetworkConfig) {
             switch config {
             case .solo:
                 self = .solo
-            case .gameKit:
-                self = .gameKit
-            case .mpc:
-                self = .mpc
+            case .gameKitPublic:
+                self = .public
+            case .gameKitPrivate:
+                self = .private
             default :
                 return nil
             }
@@ -42,34 +42,38 @@ final internal class PlayerStatsManager {
     private let defaults = UserDefaults.standard
     private let keyValueStore = NSUbiquitousKeyValueStore.default
 
+    // MARK: - Initalization -
+
+    private init() {}
+
     // MARK: - Computed Properties
 
     var multiplayerPoints: Double {
-        return PlayerDatabaseStat.mpcPoints.value() + PlayerDatabaseStat.gkPoints.value()
+        return PlayerUserDefaultsStat.mpcPoints.value() + PlayerUserDefaultsStat.gkPoints.value()
     }
 
     var multiplayerRaces: Double {
-        return PlayerDatabaseStat.mpcRaces.value() + PlayerDatabaseStat.gkRaces.value()
+        return PlayerUserDefaultsStat.mpcRaces.value() + PlayerUserDefaultsStat.gkRaces.value()
     }
 
     var multiplayerPages: Double {
-        return PlayerDatabaseStat.mpcPages.value() + PlayerDatabaseStat.gkPages.value()
+        return PlayerUserDefaultsStat.mpcPages.value() + PlayerUserDefaultsStat.gkPages.value()
     }
 
     var multiplayerPixelsScrolled: Double {
-        return PlayerDatabaseStat.mpcPixelsScrolled.value() + PlayerDatabaseStat.gkPixelsScrolled.value()
+        return PlayerUserDefaultsStat.mpcPixelsScrolled.value() + PlayerUserDefaultsStat.gkPixelsScrolled.value()
     }
 
     var multiplayerTotalTime: Double {
-        return PlayerDatabaseStat.mpcTotalTime.value() + PlayerDatabaseStat.gkTotalTime.value()
+        return PlayerUserDefaultsStat.mpcTotalTime.value() + PlayerUserDefaultsStat.gkTotalTime.value()
     }
 
     var multiplayerFastestTime: Double {
-        let mpcTime = PlayerDatabaseStat.mpcFastestTime.value()
+        let mpcTime = PlayerUserDefaultsStat.mpcFastestTime.value()
         if mpcTime == 0 {
-            return PlayerDatabaseStat.gkFastestTime.value()
+            return PlayerUserDefaultsStat.gkFastestTime.value()
         } else {
-            let gkTime = PlayerDatabaseStat.gkFastestTime.value()
+            let gkTime = PlayerUserDefaultsStat.gkFastestTime.value()
             if gkTime == 0 {
                 return mpcTime
             } else if gkTime < mpcTime {
@@ -104,33 +108,33 @@ final internal class PlayerStatsManager {
     // MARK: - Set/Get Stats
 
     func viewedPage(raceType: RaceType) {
-        var stat: PlayerDatabaseStat
+        var stat: PlayerUserDefaultsStat
         switch raceType {
-        case .mpc:
-            stat = PlayerDatabaseStat.mpcPages
-        case .gameKit:
-            stat = PlayerDatabaseStat.gkPages
+        case .private:
+            stat = PlayerUserDefaultsStat.mpcPages
+        case .public:
+            stat = PlayerUserDefaultsStat.gkPages
         case .solo:
-            stat = PlayerDatabaseStat.soloPages
+            stat = PlayerUserDefaultsStat.soloPages
         }
         stat.increment()
     }
 
     func connected(to players: [String], raceType: RaceType) {
         var playersKey = ""
-        var uniqueStat = PlayerDatabaseStat.mpcUniquePlayers
-        var totalStat = PlayerDatabaseStat.mpcTotalPlayers
-        let matchStat: PlayerDatabaseStat
+        var uniqueStat = PlayerUserDefaultsStat.mpcUniquePlayers
+        var totalStat = PlayerUserDefaultsStat.mpcTotalPlayers
+        let matchStat: PlayerUserDefaultsStat
         switch raceType {
-        case .mpc:
+        case .private:
             playersKey = "PlayersArray"
-            uniqueStat = PlayerDatabaseStat.mpcUniquePlayers
-            totalStat = PlayerDatabaseStat.mpcTotalPlayers
+            uniqueStat = PlayerUserDefaultsStat.mpcUniquePlayers
+            totalStat = PlayerUserDefaultsStat.mpcTotalPlayers
             matchStat = .mpcMatch
-        case .gameKit:
+        case .public:
             playersKey = "GKPlayersArray"
-            uniqueStat = PlayerDatabaseStat.gkUniquePlayers
-            totalStat = PlayerDatabaseStat.gkTotalPlayers
+            uniqueStat = PlayerUserDefaultsStat.gkUniquePlayers
+            totalStat = PlayerUserDefaultsStat.gkTotalPlayers
             matchStat = .gkMatch
         case .solo:
             matchStat = .soloMatch
@@ -158,27 +162,29 @@ final internal class PlayerStatsManager {
         ubiquitousStoreSync()
     }
 
-    func completedRace(type: RaceType,
-                       points: Int,
-                       place: Int?,
-                       timeRaced: Int,
-                       pixelsScrolled: Int,
-                       pages: [WKRPage],
-                       isEligibleForPoints: Bool,
-                       isEligibleForSpeed: Bool) {
-        let pointsStat: PlayerDatabaseStat?
-        let racesStat: PlayerDatabaseStat
-        let totalTimeStat: PlayerDatabaseStat
-        let fastestTimeStat: PlayerDatabaseStat
-        let pixelsStat: PlayerDatabaseStat
+    func completedRace(
+        type: RaceType,
+        points: Int,
+        place: Int?,
+        timeRaced: Int,
+        pixelsScrolled: Int,
+        pages: [WKRPage],
+        isEligibleForPoints: Bool,
+        isEligibleForSpeed: Bool) {
 
-        let finishFirstStat: PlayerDatabaseStat
-        let finishSecondStat: PlayerDatabaseStat?
-        let finishThirdStat: PlayerDatabaseStat?
-        let finishDNFStat: PlayerDatabaseStat
+        let pointsStat: PlayerUserDefaultsStat?
+        let racesStat: PlayerUserDefaultsStat
+        let totalTimeStat: PlayerUserDefaultsStat
+        let fastestTimeStat: PlayerUserDefaultsStat
+        let pixelsStat: PlayerUserDefaultsStat
+
+        let finishFirstStat: PlayerUserDefaultsStat
+        let finishSecondStat: PlayerUserDefaultsStat?
+        let finishThirdStat: PlayerUserDefaultsStat?
+        let finishDNFStat: PlayerUserDefaultsStat
 
         switch type {
-        case .mpc:
+        case .private:
             pointsStat = .mpcPoints
             racesStat = .mpcRaces
             totalTimeStat = .mpcTotalTime
@@ -189,7 +195,7 @@ final internal class PlayerStatsManager {
             finishSecondStat = .mpcRaceFinishSecond
             finishThirdStat = .mpcRaceFinishThird
             finishDNFStat = .mpcRaceDNF
-        case .gameKit:
+        case .public:
             pointsStat = .gkPoints
             racesStat = .gkRaces
             totalTimeStat = .gkTotalTime
@@ -236,10 +242,10 @@ final internal class PlayerStatsManager {
                     fastestTimeStat.set(value: Double(timeRaced))
                 }
             }
-            SKStoreReviewController.shouldPromptForRating = true
+            Defaults.shouldPromptForRating = true
         } else {
             finishDNFStat.increment()
-            SKStoreReviewController.shouldPromptForRating = false
+            Defaults.shouldPromptForRating = false
         }
 
         ubiquitousStoreSync()
@@ -295,7 +301,7 @@ final internal class PlayerStatsManager {
         let reason = reasonForChange.intValue
         if reason == NSUbiquitousKeyValueStoreServerChange || reason == NSUbiquitousKeyValueStoreInitialSyncChange {
             for key in changedKeys {
-                guard let stat = PlayerDatabaseStat(rawValue: key) else { return }
+                guard let stat = PlayerUserDefaultsStat(rawValue: key) else { return }
                 self.sync(stat, key: key)
             }
         }
@@ -304,8 +310,8 @@ final internal class PlayerStatsManager {
         playerDatabaseSync()
     }
 
-    private func sync(_ stat: PlayerDatabaseStat, key: String) {
-        if PlayerDatabaseStat.numericHighStats.contains(stat) {
+    private func sync(_ stat: PlayerUserDefaultsStat, key: String) {
+        if PlayerUserDefaultsStat.numericHighStats.contains(stat) {
             let deviceValue = defaults.double(forKey: key)
             let cloudValue = keyValueStore.double(forKey: key)
             if deviceValue > cloudValue {
@@ -313,7 +319,7 @@ final internal class PlayerStatsManager {
             } else if cloudValue > deviceValue {
                 defaults.set(cloudValue, forKey: key)
             }
-        } else if PlayerDatabaseStat.numericLowStats.contains(stat) {
+        } else if PlayerUserDefaultsStat.numericLowStats.contains(stat) {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if cloudValue < deviceValue && cloudValue != 0.0 {
@@ -322,14 +328,14 @@ final internal class PlayerStatsManager {
                 keyValueStore.set(deviceValue, forKey: stat.key)
             }
         } else if stat == .mpcTotalPlayers {
-            syncPlayerNamesStat(raceType: .mpc)
+            syncPlayerNamesStat(raceType: .private)
         } else if stat == .gkTotalPlayers {
-            syncPlayerNamesStat(raceType: .gameKit)
+            syncPlayerNamesStat(raceType: .public)
         }
     }
 
     private func ubiquitousStoreSync() {
-        for stat in PlayerDatabaseStat.numericHighStats {
+        for stat in PlayerUserDefaultsStat.numericHighStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if deviceValue > cloudValue {
@@ -338,7 +344,7 @@ final internal class PlayerStatsManager {
                 defaults.set(cloudValue, forKey: stat.key)
             }
         }
-        for stat in PlayerDatabaseStat.numericLowStats {
+        for stat in PlayerUserDefaultsStat.numericLowStats {
             let deviceValue = defaults.double(forKey: stat.key)
             let cloudValue = keyValueStore.double(forKey: stat.key)
             if cloudValue < deviceValue && cloudValue != 0.0 {
@@ -348,15 +354,15 @@ final internal class PlayerStatsManager {
             }
         }
 
-        syncPlayerNamesStat(raceType: .mpc)
-        syncPlayerNamesStat(raceType: .gameKit)
+        syncPlayerNamesStat(raceType: .private)
+        syncPlayerNamesStat(raceType: .public)
     }
 
     private func syncPlayerNamesStat(raceType: RaceType) {
         var stat = ""
-        if raceType == .mpc {
+        if raceType == .private {
             stat = "PlayersArray"
-        } else if raceType == .gameKit {
+        } else if raceType == .public {
             stat = "GKPlayersArray"
         } else {
             return
@@ -370,20 +376,20 @@ final internal class PlayerStatsManager {
         }
     }
 
-    private func logStatToMetric(_ stat: PlayerDatabaseStat) {
-        let metrics = PlayerDatabaseMetrics.shared
+    private func logStatToMetric(_ stat: PlayerUserDefaultsStat) {
+        let metrics = PlayerCloudKitStatsManager.shared
         metrics.log(value: stat.value(), for: stat.rawValue)
     }
 
     private func logAllStatsToMetric() {
-        Set(PlayerDatabaseStat.allCases).forEach { logStatToMetric($0) }
+        Set(PlayerUserDefaultsStat.allCases).forEach { logStatToMetric($0) }
     }
 
     private func playerDatabaseSync() {
         logAllStatsToMetric()
         menuStatsUpdated?(multiplayerPoints,
                           multiplayerRaces,
-                          PlayerDatabaseStat.multiplayerAverage.value())
+                          PlayerUserDefaultsStat.multiplayerAverage.value())
     }
 
     private func leaderboardSync() {
@@ -393,7 +399,7 @@ final internal class PlayerStatsManager {
 
         let points = multiplayerPoints
         let races = multiplayerRaces
-        let average = PlayerDatabaseStat.multiplayerAverage.value()
+        let average = PlayerUserDefaultsStat.multiplayerAverage.value()
 
         let totalTime = multiplayerTotalTime
         let fastestTime = multiplayerFastestTime

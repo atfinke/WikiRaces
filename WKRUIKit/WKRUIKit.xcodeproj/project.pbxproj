@@ -36,6 +36,16 @@
 		14A3D4AC1F3634110038388F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14A3D4AA1F3634110038388F /* LaunchScreen.storyboard */; };
 		14A3D4B11F36342A0038388F /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */; };
 		14A3D4B21F36342A0038388F /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 149FF7F31F362B0D000A5D96 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		14E0CA5924AE58C50091868E /* WKRUIPlayerImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5824AE58C50091868E /* WKRUIPlayerImageManager.swift */; };
+		14E0CA5A24AE58C50091868E /* WKRUIPlayerImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5824AE58C50091868E /* WKRUIPlayerImageManager.swift */; };
+		14E0CA5C24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5B24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift */; };
+		14E0CA5D24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5B24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift */; };
+		14E0CA5F24AE59450091868E /* OSLog+WKRUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5E24AE59450091868E /* OSLog+WKRUIKit.swift */; };
+		14E0CA6024AE59450091868E /* OSLog+WKRUIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA5E24AE59450091868E /* OSLog+WKRUIKit.swift */; };
+		14E0CA6224AE59930091868E /* WKRUIPlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA6124AE59930091868E /* WKRUIPlayerImageView.swift */; };
+		14E0CA6324AE59930091868E /* WKRUIPlayerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA6124AE59930091868E /* WKRUIPlayerImageView.swift */; };
+		14E0CA6524AE59A30091868E /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA6424AE59A30091868E /* WKRPlayerProfile.swift */; };
+		14E0CA6624AE59A30091868E /* WKRPlayerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E0CA6424AE59A30091868E /* WKRPlayerProfile.swift */; };
 		14EB9F6E1F36838B00FF1A9E /* WKRUIKit+Scripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */; };
 		14FC66871F362FD4001868C4 /* WKRUIKit+Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */; };
 /* End PBXBuildFile section */
@@ -95,6 +105,11 @@
 		14A3D4A81F3634110038388F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		14A3D4AB1F3634110038388F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14A3D4AD1F3634110038388F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14E0CA5824AE58C50091868E /* WKRUIPlayerImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIPlayerImageManager.swift; sourceTree = "<group>"; };
+		14E0CA5B24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIPlayerPlaceholderImageRenderer.swift; sourceTree = "<group>"; };
+		14E0CA5E24AE59450091868E /* OSLog+WKRUIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+WKRUIKit.swift"; sourceTree = "<group>"; };
+		14E0CA6124AE59930091868E /* WKRUIPlayerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUIPlayerImageView.swift; sourceTree = "<group>"; };
+		14E0CA6424AE59A30091868E /* WKRPlayerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerProfile.swift; sourceTree = "<group>"; };
 		14EB9F6D1F36838B00FF1A9E /* WKRUIKit+Scripts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Scripts.swift"; sourceTree = "<group>"; };
 		14FC66861F362FD4001868C4 /* WKRUIKit+Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WKRUIKit+Fonts.swift"; sourceTree = "<group>"; };
 		14FC668B1F3631F5001868C4 /* WKRUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRUILabel.swift; sourceTree = "<group>"; };
@@ -165,6 +180,11 @@
 				14A3D4B61F3634960038388F /* Elements */,
 				14A3D4B71F3634A20038388F /* Extensions */,
 				14A3D4B81F3634DF0038388F /* Views */,
+				14E0CA5824AE58C50091868E /* WKRUIPlayerImageManager.swift */,
+				14E0CA5B24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift */,
+				14E0CA6124AE59930091868E /* WKRUIPlayerImageView.swift */,
+				14E0CA6424AE59A30091868E /* WKRPlayerProfile.swift */,
+				14E0CA5E24AE59450091868E /* OSLog+WKRUIKit.swift */,
 				149FF7F71F362B0D000A5D96 /* Info.plist */,
 			);
 			path = WKRUIKit;
@@ -397,20 +417,25 @@
 				1441A06922FFBEBA005D63B9 /* WKRUINavigationController.swift in Sources */,
 				1441A06522FFBE5E005D63B9 /* WKRUIStyle.swift in Sources */,
 				14EB9F6E1F36838B00FF1A9E /* WKRUIKit+Scripts.swift in Sources */,
+				14E0CA6524AE59A30091868E /* WKRPlayerProfile.swift in Sources */,
 				1413AB251F364FE400873ACA /* WKRUIButtonStyle.swift in Sources */,
 				1413AB201F364FBA00873ACA /* WKRUIThinLineView.swift in Sources */,
 				14FC66871F362FD4001868C4 /* WKRUIKit+Fonts.swift in Sources */,
 				1413AB211F364FBD00873ACA /* WKRUIBottomOverlayView.swift in Sources */,
 				1413AB2C1F36500400873ACA /* WKRUIWebView.swift in Sources */,
+				14E0CA6224AE59930091868E /* WKRUIPlayerImageView.swift in Sources */,
 				1413AB231F364FD800873ACA /* WKRUIKitConstants.swift in Sources */,
 				1413AB261F364FE400873ACA /* WKRUICenteredTableView.swift in Sources */,
+				14E0CA5924AE58C50091868E /* WKRUIPlayerImageManager.swift in Sources */,
 				1413AB241F364FE400873ACA /* WKRUIButton.swift in Sources */,
 				149FF8AC1F362CF6000A5D96 /* WKRUIKit+Colors.swift in Sources */,
 				1413AB221F364FC100873ACA /* WKRUIAlertView.swift in Sources */,
 				1413AB2A1F364FF100873ACA /* WKRUIProgressView.swift in Sources */,
 				140ADB7724628E320080F825 /* WKRUIBarButtonItem.swift in Sources */,
+				14E0CA5F24AE59450091868E /* OSLog+WKRUIKit.swift in Sources */,
 				144C221E241BEEBD00176EB5 /* WKRUIWindow.swift in Sources */,
 				144C221D241BEEBD00176EB5 /* WKRUIKit+Common.swift in Sources */,
+				14E0CA5C24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift in Sources */,
 				1413AB271F364FE400873ACA /* WKRUILabel.swift in Sources */,
 				1441A06722FFBE8D005D63B9 /* WKRUIKit+Blurs.swift in Sources */,
 			);
@@ -420,6 +445,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14E0CA5A24AE58C50091868E /* WKRUIPlayerImageManager.swift in Sources */,
+				14E0CA6024AE59450091868E /* OSLog+WKRUIKit.swift in Sources */,
+				14E0CA6324AE59930091868E /* WKRUIPlayerImageView.swift in Sources */,
+				14E0CA5D24AE58F70091868E /* WKRUIPlayerPlaceholderImageRenderer.swift in Sources */,
+				14E0CA6624AE59A30091868E /* WKRPlayerProfile.swift in Sources */,
 				14A3D4A41F3634110038388F /* ViewController.swift in Sources */,
 				14A3D4A21F3634110038388F /* AppDelegate.swift in Sources */,
 			);
@@ -506,7 +536,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -562,7 +592,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -587,9 +617,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.05.1;
+				MARKETING_VERSION = 2020.07;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -615,9 +645,9 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.05.1;
+				MARKETING_VERSION = 2020.07;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -633,8 +663,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -649,8 +680,9 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
