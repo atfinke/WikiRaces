@@ -21,7 +21,7 @@ public struct WKRPlayerProfile: Identifiable, Equatable, Hashable, Codable {
     public let playerID: String
     
     public var image: Image { Image(uiImage: rawImage) }
-    public var rawImage: UIImage { WKRUIPlayerImageManager.shared.image(for: id) }
+    public var rawImage: UIImage { WKRUIPlayerImageManager.shared.image(for: name) }
 
     // MARK: - Initalization -
     

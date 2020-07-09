@@ -70,6 +70,14 @@ public class WKRUIPlayerImageManager {
             }
         }
     }
+    
+    @discardableResult
+    private func generatePlaceholder(for player: String) -> UIImage {
+        let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player)
+        os_log("%{public}s: generated placeholder for %{public}s", log: .imageManager, type: .info, #function, player)
+        update(image: placeholder, for: player)
+        return placeholder
+    }
 
     private func update(image: UIImage, for playerID: String) {
         if playerID == GKLocalPlayer.local.alias {
@@ -79,13 +87,13 @@ public class WKRUIPlayerImageManager {
         }
     }
 
-    public func image(for playerID: String) -> UIImage {
-        if playerID == GKLocalPlayer.local.alias, let image = localPlayerImage {
+    public func image(for player: String) -> UIImage {
+        if player == GKLocalPlayer.local.displayName, let image = localPlayerImage {
             return image
-        } else if let image = connectedPlayerImages[playerID] {
+        } else if let image = connectedPlayerImages[player] {
             return image
         } else {
-            fatalError()
+            return generatePlaceholder(for: player)
         }
     }
 
