@@ -19,7 +19,7 @@ public struct WKRUIPlayerImageView: View {
     // MARK: - Body -
 
     public var body: some View {
-        Image(uiImage: WKRUIPlayerImageManager.shared.image(for: player.playerID))
+        Image(uiImage: WKRUIPlayerImageManager.shared.image(for: player.name))
             .renderingMode(.original)
             .resizable()
             .frame(width: size, height: size)

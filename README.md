@@ -54,3 +54,7 @@ Feel free to ping me with questions.
 - Framework responsible for the shared UI across the app.
 #### /WikiRaces
 - Contains the main project with the release and multi-window debug targets.
+
+## Other
+
+[Spectator Mode Alpha](https://atfinke.github.io/WikiRaces/Spectator)

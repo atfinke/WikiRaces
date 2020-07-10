@@ -49,11 +49,15 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     private var paymentQueueTransactions: [SKPaymentTransaction] = []
     private let paymentQueueTransactionsQueue = DispatchQueue(label: "com.andrewfinke.wikiraces.store.queue",
                                                               qos: .userInitiated)
+    var isDead = false
     var isPlus: Bool {
         set {
             UserDefaults.standard.set(newValue, forKey: "isPlus")
         }
         get {
+            if isDead {
+                return true
+            }
             #if targetEnvironment(simulator)
             return true
             #else
@@ -67,6 +71,19 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     private override init() {
         super.init()
         queue.add(self)
+        
+        guard let url = URL(string: "https://atfinke.github.io/WikiRaces/Killswitch") else {
+                return
+        }
+        let task = URLSession.shared.dataTask(with: url) { data, _, _ in
+            if let data = data,
+                let str = String(data: data, encoding: .utf8),
+                let val = Int(str),
+                val == 1 {
+                self.isDead = true
+            }
+        }
+        task.resume()
     }
 
     // MARK: - Helpers -
