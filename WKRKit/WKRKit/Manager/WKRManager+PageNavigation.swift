@@ -111,7 +111,7 @@ extension WKRGameManager {
 
     private func truncated(url: URL) -> String {
         var reportedURLString = url.absoluteString
-        if reportedURLString.starts(with: "https://en.m.wikipedia.org/wiki/") {
+        if reportedURLString.starts(with: WKRLanguageHackery.shared.baseURLString) {
             let index = reportedURLString.index(reportedURLString.startIndex, offsetBy: 31)
             reportedURLString = String(reportedURLString[index...])
         }

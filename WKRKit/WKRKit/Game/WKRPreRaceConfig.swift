@@ -7,6 +7,7 @@
 //
 
 import WKRUIKit
+import os.log
 
 /// Used to transmit voting data and starting page
 public struct WKRPreRaceConfig: Codable, Equatable {
@@ -86,6 +87,7 @@ public struct WKRPreRaceConfig: Codable, Equatable {
                 WKRPageFetcher.fetchRandom { page in
                     startingPage = page
                     startingPageOperation.state = .isFinished
+                    os_log("fetched random start: %{public}s", log: .articlesValidation, type: .info, page?.title ?? "-")
                 }
             case .custom(let page):
                 startingPage = page
@@ -114,30 +116,41 @@ public struct WKRPreRaceConfig: Codable, Equatable {
             endingPageOperations = randomPaths.map { path -> WKROperation in
                 let operation = WKROperation()
                 operation.addExecutionBlock { [unowned operation] in
-                    // don't use cache to make sure to get most recent page
-                    WKRPageFetcher.fetch(path: path, useCache: false) { page, isRedirect in
-                        // 1. Make sure not redirect
-                        // 2. Make sure page not nil
-                        // 3. Make sure page not already in voting list for this race
-                        // 4. Make sure page is not a link to a section "/USA#History"
-                        // 5. Sometimes removed pages redirect to the Wikipedia homepage.
-                        // 6. Make sure path in unseen
-                        // 7/8. Make sure link not equal to starting page
-                        if !isRedirect,
-                            let page = page,
-                            !potentialFinalPages.contains(page),
-                            !page.url.absoluteString.contains("#"),
-                             page.title != "Wikipedia, the free encyclopedia",
-                            finalArticles.contains(page.path),
-                            let startingPage = startingPage,
-                            startingPage.url.absoluteString.lowercased() != page.url.absoluteString.lowercased() {
-                            potentialFinalPages.append(page)
-                        } else {
-                            logEvents.append(WKRLogEvent(type: .votingArticleValidationFailure,
-                                                         attributes: ["PagePath": path]))
+
+                    WKRLanguageHackery.shared.adjustedPath(for: path) { adjustedPath in
+                        guard let path = adjustedPath else {
+                            operation.state = .isFinished
+                            os_log("fetched error: no adjusted path", log: .articlesValidation, type: .error)
+                            return
                         }
-                        operation.state = .isFinished
+
+                        // don't use cache to make sure to get most recent page
+                        WKRPageFetcher.fetch(path: path, useCache: false) { page, isRedirect in
+                            // 1. Make sure not redirect
+                            // 2. Make sure page not nil
+                            // 3. Make sure page not already in voting list for this race
+                            // 4. Make sure page is not a link to a section "/USA#History"
+                            // 5. Sometimes removed pages redirect to the Wikipedia homepage.
+                            // 6. Make sure path in unseen
+                            // 7/8. Make sure link not equal to starting page
+                            if !isRedirect,
+                                let page = page,
+                                !potentialFinalPages.contains(page),
+                                !page.url.absoluteString.contains("#"),
+                                 page.title != "Wikipedia, the free encyclopedia",
+                                let startingPage = startingPage,
+                                startingPage.url.absoluteString.lowercased() != page.url.absoluteString.lowercased() {
+                                potentialFinalPages.append(page)
+                                os_log("fetched final: %{public}s", log: .articlesValidation, type: .info, page.title ?? "-")
+                            } else {
+                                logEvents.append(WKRLogEvent(type: .votingArticleValidationFailure,
+                                                             attributes: ["PagePath": path]))
+                                os_log("fetched error final: %{public}s", log: .articlesValidation, type: .error, page?.title ?? "-")
+                            }
+                            operation.state = .isFinished
+                        }
                     }
+
                 }
                 operation.addDependency(startingPageOperation)
                 completedOperation.addDependency(operation)

@@ -14,7 +14,7 @@ extension OSLog {
     // MARK: - Types -
 
     private enum CustomCategory: String {
-        case constants, seenArticlesStore
+        case constants, seenArticlesStore, articlesValidation
     }
 
     private static let subsystem: String = {
@@ -24,5 +24,6 @@ extension OSLog {
 
     static let constants = OSLog(subsystem: subsystem, category: CustomCategory.constants.rawValue)
     static let seenArticlesStore = OSLog(subsystem: subsystem, category: CustomCategory.seenArticlesStore.rawValue)
+    static let articlesValidation = OSLog(subsystem: subsystem, category: CustomCategory.articlesValidation.rawValue)
 
 }

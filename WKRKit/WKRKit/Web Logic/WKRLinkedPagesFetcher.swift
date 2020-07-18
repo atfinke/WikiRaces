@@ -85,7 +85,7 @@ final internal class WKRLinkedPagesFetcher: NSObject, WKScriptMessageHandler {
 
     func start(for page: WKRPage) {
         let query = "&namespace=0&limit=500&hidetrans=1"
-        guard let url = URL(string: WKRKitConstants.current.whatLinksHereURLString + page.path + query) else { return }
+        guard let url = URL(string: WKRLanguageHackery.shared.whatLinksHereURLString + page.path + query) else { return }
         load(url: url)
     }
 

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140CE2FB24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FC24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FD24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FE24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
 		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1414280321FC18F600C48788 /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
@@ -650,6 +655,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRaceLanguageController.swift; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		1414280221FC18F600C48788 /* GKJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKJoinViewController.swift; sourceTree = "<group>"; };
 		1414280621FC394600C48788 /* GKConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKConnectViewController.swift; sourceTree = "<group>"; };
@@ -1333,6 +1339,7 @@
 				14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */,
 				14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */,
 				14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */,
+				140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */,
 			);
 			path = CustomRaceViewController;
 			sourceTree = "<group>";
@@ -1726,6 +1733,7 @@
 				14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				142ABE0624600A74008E7F77 /* PlusStore.swift in Sources */,
+				140CE2FB24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				142ABDFA24600559008E7F77 /* PlusViewController.swift in Sources */,
 				14DB8C9924AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				14EBF50B24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
@@ -1788,6 +1796,7 @@
 				142ABDFF24600576008E7F77 /* PlusView.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14B4DB662224F1B9007D4B54 /* GKJoinViewController.swift in Sources */,
+				140CE2FC24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				1475C14624A655B000882F1F /* GameViewController+KB.swift in Sources */,
 				1446C1E124A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
@@ -1904,6 +1913,7 @@
 				14DB8C9B24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				1475C13924A6555B00882F1F /* VisualEffectViewController.swift in Sources */,
 				1475C19E24A6560800882F1F /* ResultsViewController+KB.swift in Sources */,
+				140CE2FD24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				1475C14824A655B100882F1F /* GameViewController+Manager.swift in Sources */,
 				1475C18024A655F100882F1F /* StatsPlayersViewController.swift in Sources */,
 				1475C13D24A6556A00882F1F /* PlayerFirebaseAnalytics.swift in Sources */,
@@ -1966,6 +1976,7 @@
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				1475C1A124A6560D00882F1F /* HistoryViewController.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
+				140CE2FE24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				14B4DB672224F1BA007D4B54 /* GKJoinViewController.swift in Sources */,
 				1475C1A324A6560D00882F1F /* HistoryTableViewCell.swift in Sources */,
 				14EF51D7245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
@@ -2065,6 +2076,7 @@
 				1475C17E24A655F000882F1F /* StatsPlayersViewController.swift in Sources */,
 				148E5C6424A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				148E5C4624A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
+				140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				1475C13124A6553F00882F1F /* ResultsContentView.swift in Sources */,
 				148E5C5224A2943100DD43E4 /* Nearby.swift in Sources */,
 				14EBF50F24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
@@ -2341,7 +2353,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.07.2;
+				MARKETING_VERSION = 2020.08;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -2376,7 +2388,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.07.2;
+				MARKETING_VERSION = 2020.08;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";

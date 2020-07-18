@@ -106,6 +106,18 @@ public class WKRGameSettings: Codable {
         }
     }
 
+    public struct Language: Codable {
+        public let code: String
+
+        public var isStandard: Bool {
+            return code == "en"
+        }
+
+        public init(code: String) {
+            self.code = code
+        }
+    }
+
     // MARK: - Properties -
 
     public var isCustom: Bool {
@@ -114,7 +126,8 @@ public class WKRGameSettings: Codable {
             && timing.isStandard
             && other.isStandard
             && startPage.isStandard
-            && endPage.isStandard,
+            && endPage.isStandard
+            && language.isStandard,
             bannedPages.count == 1,
             case .portal = bannedPages[0] {
             return false
@@ -137,6 +150,7 @@ public class WKRGameSettings: Codable {
     public var points = Points(bonusPointReward: WKRKitConstants.current.bonusPointReward, bonusPointsInterval: WKRKitConstants.current.bonusPointsInterval)
     public var timing = Timing(votingTime: WKRRaceDurationConstants.votingState, resultsTime: WKRRaceDurationConstants.resultsState)
     public var other = Other(isHelpEnabled: true)
+    public var language = Language(code: "en")
 
     public func reset() {
         startPage = .random

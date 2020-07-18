@@ -31,7 +31,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
     public init(title: String?, url: URL) {
         self.title = WKRPage.formattedTitle(for: title)
         self.url = url
-        self.path = url.absoluteString.replacingOccurrences(of: "https://en.m.wikipedia.org/wiki", with: "")
+        self.path = url.absoluteString.replacingOccurrences(of: WKRLanguageHackery.shared.baseURLString, with: "")
     }
 
     // MARK: - Helpers
@@ -56,7 +56,7 @@ public struct WKRPage: Codable, Hashable, Equatable {
             return smartFormat(String(clippedTitle))
         } else {
             // The expected path
-            let title = title.replacingOccurrences(of: WKRKitConstants.current.pageTitleStringToReplace, with: "")
+            let title = title.replacingOccurrences(of: WKRLanguageHackery.shared.pageTitleStringToReplace, with: "")
             return smartFormat(title)
         }
     }

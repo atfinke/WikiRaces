@@ -73,7 +73,7 @@ final internal class WKRPageNavigation: NSObject, WKNavigationDelegate {
             }
         }
 
-        return urlString.contains(WKRKitConstants.current.baseURLString)
+        return urlString.contains(WKRLanguageHackery.shared.baseURLString)
     }
 
     // MARK: - WKNavigationDelegate
