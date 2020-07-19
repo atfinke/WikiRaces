@@ -61,6 +61,6 @@ extension GKMatchRequest {
     }
 
     private static func publicRacePlayerGroup() -> Int {
-        return 10
+        return 11
     }
 }

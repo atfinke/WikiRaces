@@ -102,7 +102,7 @@ class RaceCodeGenerator {
         guard raceCode.count < 10 else { return -1 }
 
         let formattedCode = raceCode.lowercased()
-        var playerGroup = formattedCode.count
+        var playerGroup = formattedCode.count + 1 // + X == force version compatibility due to App Store Connect being broken
         for (index, char) in formattedCode.enumerated() {
             let charValue: Int = (validCharactersArray.firstIndex(of: char) ?? 50) + 1
             let offset = Int(pow(Double(10), Double(index * 2) + 1))
