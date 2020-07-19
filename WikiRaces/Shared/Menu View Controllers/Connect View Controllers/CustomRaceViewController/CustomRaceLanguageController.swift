@@ -13,7 +13,7 @@ final class CustomRaceLanguageController: CustomRaceController {
 
     // MARK: - Types -
 
-    private class Cell: UITableViewCell {
+    private class Cell: UITableViewCell, UITextFieldDelegate {
 
         // MARK: - Properties -
 
@@ -25,6 +25,8 @@ final class CustomRaceLanguageController: CustomRaceController {
         override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
             textField.textAlignment = .right
+            textField.returnKeyType = .done
+            textField.delegate = self
             contentView.addSubview(textField)
         }
 
@@ -40,6 +42,13 @@ final class CustomRaceLanguageController: CustomRaceController {
             textField.center = CGPoint(
                 x: contentView.frame.width - contentView.layoutMargins.right - textField.frame.width / 2,
                 y: contentView.frame.height / 2)
+        }
+        
+        // MARK: - UITextFieldDelegate -
+        
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            textField.resignFirstResponder()
+            return true
         }
     }
 

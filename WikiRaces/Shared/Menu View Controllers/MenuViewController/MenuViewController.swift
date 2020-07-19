@@ -209,10 +209,15 @@ final internal class MenuViewController: UIViewController {
 
     func createRace() {
         if Defaults.isFastlaneSnapshotInstance {
-            let controller = GameViewController(network: .solo(name: "_"), settings: WKRGameSettings())
+            for player in ["A", "C", "G", "M", "X"] {
+                let _ = WKRUIPlayerImageManager.shared.image(for: player)
+            }
+            
+            let controller = GKHostViewController()
             let nav = WKRUINavigationController(rootViewController: controller)
             nav.modalPresentationStyle = .overCurrentContext
-            present(nav, animated: true, completion: nil)
+            nav.setNavigationBarHidden(true, animated: false)
+            present(nav, animated: false, completion: nil)
         } else {
             prepareForRace(completion: {
                 let controller = RaceChecksViewController(destination: .hostPrivate)

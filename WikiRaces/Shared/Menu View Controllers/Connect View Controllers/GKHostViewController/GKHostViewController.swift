@@ -52,8 +52,18 @@ final internal class GKHostViewController: GKConnectViewController {
     
     init() {
         super.init(isPlayerHost: true)
-        startMatchmaking()
-        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
+        if Defaults.isFastlaneSnapshotInstance {
+            model.raceCode = "APPLE"
+            model.state = .showingRacers
+            model.connectedPlayers = [
+                WKRPlayerProfile(name: "C", playerID: "C"),
+                WKRPlayerProfile(name: "G", playerID: "G"),
+                WKRPlayerProfile(name: "M", playerID: "M"),
+                WKRPlayerProfile(name: "X", playerID: "X")
+            ]
+        } else {
+            startMatchmaking()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -76,7 +86,7 @@ final internal class GKHostViewController: GKConnectViewController {
             self?.contentViewHosting.view.alpha = 1
         }
         
-        guard !Defaults.promptedAutoInvite else {
+        guard !Defaults.promptedAutoInvite && !Defaults.isFastlaneSnapshotInstance else {
             return
         }
         Defaults.promptedAutoInvite = true
@@ -97,6 +107,7 @@ final internal class GKHostViewController: GKConnectViewController {
             os_log("%{public}s: disabled auto invite", log: .gameKit, type: .info, #function)
         }
         controller.addAction(cancelAction)
+        
         present(controller, animated: true, completion: nil)
     }
     
@@ -108,6 +119,18 @@ final internal class GKHostViewController: GKConnectViewController {
     // MARK: - Actions -
     
     func startMatch() {
+        if Defaults.isFastlaneSnapshotInstance {
+            guard let code =  Locale.preferredLanguages.first?.split(separator: "-").first else { fatalError() }
+            model.settings.language = WKRGameSettings.Language(code: String(code))
+            let controller = GameViewController(network: .solo(name: "_"), settings: model.settings)
+            let nav = WKRUINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            nav.modalTransitionStyle = .crossDissolve
+            nav.isModalInPresentation = true
+            present(nav, animated: false)
+            return
+        }
+        
         os_log("%{public}s", log: .gameKit, type: .info, #function)
         PlayerFirebaseAnalytics.log(event: .userAction(#function))
         

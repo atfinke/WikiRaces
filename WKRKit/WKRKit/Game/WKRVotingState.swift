@@ -91,6 +91,19 @@ public struct WKRVotingState: Codable, Equatable {
         return (pagesWithMostVotes.randomElement, logEvent)
     }
 
+    mutating func fastlaneVotes(finalPage: WKRPage) {
+        var copy = pages
+        guard let index = copy.firstIndex(where: { $0 == finalPage }) else { fatalError() }
+        copy.remove(at: index)
+        copy.shuffle()
+        player(WKRPlayerProfile(name: "A", playerID: "A"), votedFor: finalPage)
+        player(WKRPlayerProfile(name: "G", playerID: "G"), votedFor: finalPage)
+        
+        player(WKRPlayerProfile(name: "C", playerID: "C"), votedFor: copy[0])
+        player(WKRPlayerProfile(name: "M", playerID: "M"), votedFor: copy[1])
+        player(WKRPlayerProfile(name: "X", playerID: "X"), votedFor: copy[2])
+    }
+    
     // MARK: - Public Accessors
 
     public var current: [(page: WKRPage, voters: [WKRPlayerProfile])] {

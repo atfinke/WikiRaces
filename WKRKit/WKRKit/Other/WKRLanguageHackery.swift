@@ -56,6 +56,10 @@ internal class WKRLanguageHackery {
 
     static let shared = WKRLanguageHackery()
     private var language = "en"
+    
+    var isEnglish: Bool {
+        return language == "en"
+    }
 
     // MARK: - Initalization -
 
@@ -86,6 +90,8 @@ internal class WKRLanguageHackery {
             return " — Wikipédia"
         } else if language == "de" {
             return " – Wikipedia"
+        } else if language == "ru" {
+            return " — Википедия"
         } else {
             return WKRKitConstants.current.pageTitleStringToReplace
         }

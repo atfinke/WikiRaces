@@ -55,13 +55,22 @@ struct HostContentView: View {
             .allowsHitTesting(model.state != .raceStarting)
 
             Spacer()
-            WKRUIPlayerImageView(
-                player: WKRPlayerProfile(player: GKLocalPlayer.local),
-                size: 100,
-                effectSize: 5)
-                .padding(.bottom, 20)
+            if Defaults.isFastlaneSnapshotInstance {
+                WKRUIPlayerImageView(
+                    player: WKRPlayerProfile(name: "A", playerID: "A"),
+                    size: 100,
+                    effectSize: 5)
+                    .padding(.bottom, 20)
+            } else {
+                WKRUIPlayerImageView(
+                    player: WKRPlayerProfile(player: GKLocalPlayer.local),
+                    size: 100,
+                    effectSize: 5)
+                    .padding(.bottom, 20)
+            }
+            
 
-            if !WKRUIPlayerImageManager.shared.isLocalPlayerImageFromGameCenter {
+            if !WKRUIPlayerImageManager.shared.isLocalPlayerImageFromGameCenter && !Defaults.isFastlaneSnapshotInstance {
                 HStack {
                     Spacer()
                     Text("Set a custom racer photo\nin the Game Center settings")

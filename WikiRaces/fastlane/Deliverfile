@@ -10,5 +10,5 @@ app_identifier "com.andrewfinke.wikiraces" # The bundle identifier of your app
 skip_binary_upload true
 skip_metadata true
 skip_app_version_update true
-overwrite_screenshots true
+overwrite_screenshots false
 run_precheck_before_submit false
