@@ -70,7 +70,7 @@ public class WKRUIPlayerImageManager {
             }
         }
     }
-    
+
     @discardableResult
     private func generatePlaceholder(for player: String) -> UIImage {
         let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player)

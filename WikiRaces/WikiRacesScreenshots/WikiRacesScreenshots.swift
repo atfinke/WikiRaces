@@ -9,29 +9,33 @@
 import XCTest
 
 class WikiRacesScreenshots: XCTestCase {
-
+    
+    let app = XCUIApplication()
+    
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-
-        let app = XCUIApplication()
+        
         setupSnapshot(app)
         app.launch()
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-
-        super.tearDown()
-    }
-
+    
     func testExample() {
+        let prefix = "2_DARK"
         sleep(2)
         XCUIDevice.shared.orientation = .landscapeLeft
-        snapshot("1_portrait")
-        XCUIApplication().buttons["GLOBAL RACE"].tap()
-        sleep(5)
-        snapshot("2_game")
+        snapshot(prefix + "_1_menu")
+        
+        app.buttons["CREATE"].tap()
+        sleep(1)
+        snapshot(prefix + "_2_host")
+        
+        app.buttons["play.fill"].tap()
+        sleep(6)
+        snapshot(prefix + "_3_voting")
+        
+        sleep(12)
+        snapshot(prefix + "_4_game")
     }
-
+    
 }

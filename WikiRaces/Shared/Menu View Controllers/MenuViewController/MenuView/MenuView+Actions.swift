@@ -31,7 +31,7 @@ extension MenuView {
 
         PlayerCloudKitLiveRaceManager.shared.isCloudEnabled { isEnabled in
             DispatchQueue.main.async {
-                if isEnabled {
+                if isEnabled || Defaults.isFastlaneSnapshotInstance {
                     self.animateMenuOut {
                         self.listenerUpdate?(.presentCreateRace)
                     }

@@ -62,7 +62,12 @@ extension GKHostViewController: GKMatchDelegate {
                     self.match?.delegate = self
                     self.addPlayers()
                 } else {
-                    fatalError()
+                    os_log("%{public}s- gamekit did the impossible, no error, no match, nothing to see here", log: .gameKit, type: .error, #function)
+                    DispatchQueue.main.async {
+                        self.isMatchmakingEnabled = false
+                        self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                        self.model.state = .soloRace
+                    }
                 }
             }
             

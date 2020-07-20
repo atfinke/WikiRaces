@@ -89,6 +89,8 @@ final public class WKRGameManager {
         self.votingUpdate = votingUpdate
         self.resultsUpdate = resultsUpdate
 
+        WKRLanguageHackery.shared.configure(for: settings)
+
         let setup = networkConfig.create()
         localPlayer = setup.player
         peerNetwork = setup.network

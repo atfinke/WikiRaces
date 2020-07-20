@@ -35,8 +35,8 @@ public struct WKRPageFetcher {
     /// Returns the title from the raw HTML
     private static func title(from string: String) -> String? {
         guard let titleAttributeStart = string.range(of: "<title>"),
-            let titleAttributeEnd = string.range(of: "</title>") else {
-                return nil
+              let titleAttributeEnd = string.range(of: "</title>") else {
+            return nil
         }
         let range = Range(uncheckedBounds: (titleAttributeStart.upperBound, titleAttributeEnd.lowerBound))
         return String(string[range])
@@ -46,7 +46,7 @@ public struct WKRPageFetcher {
 
     /// Fetches Wikipedia page with path ("/Apple_Inc.")
     public static func fetch(path: String, useCache: Bool, completionHandler: @escaping ((_ page: WKRPage?, _ isRedirect: Bool) -> Void)) {
-        guard let url = URL(string: WKRKitConstants.current.baseURLString + path) else {
+        guard let url = URL(string: WKRLanguageHackery.shared.baseURLString + path) else {
             completionHandler(nil, false)
             return
         }
@@ -55,7 +55,7 @@ public struct WKRPageFetcher {
 
     /// Fetches a random Wikipedia page
     static func fetchRandom(completionHandler: @escaping ((_ page: WKRPage?) -> Void)) {
-        guard let url = URL(string: WKRKitConstants.current.randomURLString) else {
+        guard let url = URL(string: WKRLanguageHackery.shared.randomURLString) else {
             completionHandler(nil)
             return
         }
@@ -73,7 +73,11 @@ public struct WKRPageFetcher {
             session = WKRPageFetcher.noCacheSession
         }
         let task = session.dataTask(with: url) { (data, response, _) in
-            if let data = data, let string = String(data: data, encoding: .utf8), let responseUrl = response?.url {
+            if let response = response as? HTTPURLResponse,
+               response.statusCode != 404,
+               let data = data,
+               let string = String(data: data, encoding: .utf8),
+               let responseUrl = response.url {
                 let page = WKRPage(title: title(from: string), url: responseUrl)
                 let isRedirect = string.contains("Redirected from")
                 completionHandler(page, isRedirect)
@@ -87,7 +91,7 @@ public struct WKRPageFetcher {
     /// Fetches a Wikipedia page source.
     static func fetchSource(url: URL,
                             useCache: Bool,
-                            progressHandler: @escaping (_ progress: Float) -> Void,
+                            progressHandler: ((_ progress: Float) -> Void)?,
                             completionHandler: @escaping (_ source: String?, _ error: Error?) -> Void) {
         let session: URLSession
         if useCache {
@@ -97,17 +101,24 @@ public struct WKRPageFetcher {
         }
 
         var observation: NSKeyValueObservation?
-        let task = session.dataTask(with: url) { (data, _, error) in
+        let task = session.dataTask(with: url) { (data, response, error) in
             observation?.invalidate()
-            if let data = data, let string = String(data: data, encoding: .utf8) {
+            if let response = response as? HTTPURLResponse,
+               response.statusCode != 404,
+               let data = data,
+               let string = String(data: data, encoding: .utf8) {
                 completionHandler(string, nil)
             } else {
                 completionHandler(nil, error)
             }
         }
-        observation = task.progress.observe(\.fractionCompleted) { progress, _ in
-            progressHandler(Float(progress.fractionCompleted))
+
+        if let progressHandler = progressHandler {
+            observation = task.progress.observe(\.fractionCompleted) { progress, _ in
+                progressHandler(Float(progress.fractionCompleted))
+            }
         }
+
         task.resume()
     }
 

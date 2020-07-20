@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140CE2FB24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FC24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FD24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FE24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
+		140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
 		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1414280321FC18F600C48788 /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
@@ -80,6 +85,25 @@
 		144EC2A724ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
 		144EC2A824ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
 		144EC2A924ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */; };
+		144F33AC24C345AB006E4437 /* FirebaseABTesting.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */; };
+		144F33AD24C345AB006E4437 /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE524A78DF900820638 /* FirebaseCore.xcframework */; };
+		144F33AE24C345AB006E4437 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
+		144F33AF24C345AB006E4437 /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */; };
+		144F33B024C345AB006E4437 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
+		144F33B124C345AB006E4437 /* FirebaseInstanceID.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */; };
+		144F33B224C345AB006E4437 /* FirebaseRemoteConfig.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */; };
+		144F33B324C345AB006E4437 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
+		144F33B424C345AB006E4437 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */; };
+		144F33B524C345AB006E4437 /* GoogleToolboxForMac.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */; };
+		144F33B624C345AB006E4437 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; };
+		144F33B724C345AB006E4437 /* GTMSessionFetcher.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */; };
+		144F33B824C345AB006E4437 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
+		144F33B924C345AB006E4437 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
+		144F33BA24C345AB006E4437 /* Protobuf.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FDE24A78DF900820638 /* Protobuf.xcframework */; };
+		144F33BB24C345AE006E4437 /* FirebasePerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FED24A78DFA00820638 /* FirebasePerformance.framework */; };
+		144F33BC24C345AE006E4437 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
+		144F33BD24C345AE006E4437 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
+		144F33BE24C345AE006E4437 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
 		14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
 		14584BC3220B6BE700D63428 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
@@ -650,6 +674,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRaceLanguageController.swift; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		1414280221FC18F600C48788 /* GKJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKJoinViewController.swift; sourceTree = "<group>"; };
 		1414280621FC394600C48788 /* GKConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKConnectViewController.swift; sourceTree = "<group>"; };
@@ -759,7 +784,6 @@
 		14EBF58624A4D8260040A7C0 /* HostContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostContentView.swift; sourceTree = "<group>"; };
 		14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostContentViewModel.swift; sourceTree = "<group>"; };
-		14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerImageView.swift; sourceTree = "<group>"; };
 		14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostSectionView.swift; sourceTree = "<group>"; };
 		14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceOtherController.swift; sourceTree = "<group>"; };
 		14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRacePageViewController.swift; sourceTree = "<group>"; };
@@ -858,6 +882,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144F33AF24C345AB006E4437 /* FirebaseCrashlytics.xcframework in Frameworks */,
+				144F33BC24C345AE006E4437 /* GoogleAppMeasurement.framework in Frameworks */,
+				144F33BD24C345AE006E4437 /* FirebaseAnalytics.framework in Frameworks */,
+				144F33B024C345AB006E4437 /* FirebaseInstallations.xcframework in Frameworks */,
+				144F33B524C345AB006E4437 /* GoogleToolboxForMac.xcframework in Frameworks */,
+				144F33B924C345AB006E4437 /* PromisesObjC.xcframework in Frameworks */,
+				144F33B324C345AB006E4437 /* GoogleDataTransport.xcframework in Frameworks */,
+				144F33B824C345AB006E4437 /* nanopb.xcframework in Frameworks */,
+				144F33B624C345AB006E4437 /* GoogleUtilities.xcframework in Frameworks */,
+				144F33B724C345AB006E4437 /* GTMSessionFetcher.xcframework in Frameworks */,
+				144F33B424C345AB006E4437 /* GoogleDataTransportCCTSupport.xcframework in Frameworks */,
+				144F33BA24C345AB006E4437 /* Protobuf.xcframework in Frameworks */,
+				144F33B224C345AB006E4437 /* FirebaseRemoteConfig.xcframework in Frameworks */,
+				144F33AC24C345AB006E4437 /* FirebaseABTesting.xcframework in Frameworks */,
+				144F33BB24C345AE006E4437 /* FirebasePerformance.framework in Frameworks */,
+				144F33AE24C345AB006E4437 /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
+				144F33B124C345AB006E4437 /* FirebaseInstanceID.xcframework in Frameworks */,
+				144F33AD24C345AB006E4437 /* FirebaseCore.xcframework in Frameworks */,
+				144F33BE24C345AE006E4437 /* FIRAnalyticsConnector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -924,24 +967,24 @@
 		143054C01F8958DC00C0BC27 /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */,
 				14F23FE224A78DF900820638 /* Firebase.h */,
-				14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */,
+				14F23FDC24A78DF900820638 /* module.modulemap */,
+				14F23FED24A78DFA00820638 /* FirebasePerformance.framework */,
+				14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */,
 				14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */,
+				14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */,
+				14F23FDD24A78DF900820638 /* FirebaseABTesting.xcframework */,
 				14F23FE524A78DF900820638 /* FirebaseCore.xcframework */,
 				14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */,
 				14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */,
 				14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */,
 				14F23FDF24A78DF900820638 /* FirebaseInstanceID.xcframework */,
-				14F23FED24A78DFA00820638 /* FirebasePerformance.framework */,
 				14F23FE024A78DF900820638 /* FirebaseRemoteConfig.xcframework */,
-				14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */,
 				14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */,
 				14F23FDB24A78DF900820638 /* GoogleDataTransportCCTSupport.xcframework */,
 				14F23FE624A78DF900820638 /* GoogleToolboxForMac.xcframework */,
 				14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */,
 				14F23FE124A78DF900820638 /* GTMSessionFetcher.xcframework */,
-				14F23FDC24A78DF900820638 /* module.modulemap */,
 				14F23FEF24A78DFA00820638 /* nanopb.xcframework */,
 				14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */,
 				14F23FDE24A78DF900820638 /* Protobuf.xcframework */,
@@ -1308,7 +1351,6 @@
 				14EBF59E24A4F43A0040A7C0 /* HostContentViewModel.swift */,
 				14EBF58624A4D8260040A7C0 /* HostContentView.swift */,
 				14EBF5AB24A4F4780040A7C0 /* HostSectionView.swift */,
-				14EBF5A524A4F4680040A7C0 /* PlayerImageView.swift */,
 				14EBF59824A4F3E20040A7C0 /* ActivityIndicatorView.swift */,
 			);
 			path = SwiftUI;
@@ -1333,6 +1375,7 @@
 				14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */,
 				14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */,
 				14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */,
+				140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */,
 			);
 			path = CustomRaceViewController;
 			sourceTree = "<group>";
@@ -1726,6 +1769,7 @@
 				14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				142ABE0624600A74008E7F77 /* PlusStore.swift in Sources */,
+				140CE2FB24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				142ABDFA24600559008E7F77 /* PlusViewController.swift in Sources */,
 				14DB8C9924AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				14EBF50B24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
@@ -1788,6 +1832,7 @@
 				142ABDFF24600576008E7F77 /* PlusView.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14B4DB662224F1B9007D4B54 /* GKJoinViewController.swift in Sources */,
+				140CE2FC24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				1475C14624A655B000882F1F /* GameViewController+KB.swift in Sources */,
 				1446C1E124A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
@@ -1904,6 +1949,7 @@
 				14DB8C9B24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				1475C13924A6555B00882F1F /* VisualEffectViewController.swift in Sources */,
 				1475C19E24A6560800882F1F /* ResultsViewController+KB.swift in Sources */,
+				140CE2FD24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				1475C14824A655B100882F1F /* GameViewController+Manager.swift in Sources */,
 				1475C18024A655F100882F1F /* StatsPlayersViewController.swift in Sources */,
 				1475C13D24A6556A00882F1F /* PlayerFirebaseAnalytics.swift in Sources */,
@@ -1966,6 +2012,7 @@
 				14B2DD4722212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				1475C1A124A6560D00882F1F /* HistoryViewController.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
+				140CE2FE24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				14B4DB672224F1BA007D4B54 /* GKJoinViewController.swift in Sources */,
 				1475C1A324A6560D00882F1F /* HistoryTableViewCell.swift in Sources */,
 				14EF51D7245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
@@ -2065,6 +2112,7 @@
 				1475C17E24A655F000882F1F /* StatsPlayersViewController.swift in Sources */,
 				148E5C6424A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				148E5C4624A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
+				140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				1475C13124A6553F00882F1F /* ResultsContentView.swift in Sources */,
 				148E5C5224A2943100DD43E4 /* Nearby.swift in Sources */,
 				14EBF50F24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
@@ -2341,7 +2389,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.07.2;
+				MARKETING_VERSION = 2020.08;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -2376,7 +2424,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.07.2;
+				MARKETING_VERSION = 2020.08;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2447,6 +2495,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRacesScreenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2469,6 +2518,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = WikiRacesScreenshots/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

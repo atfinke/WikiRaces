@@ -21,7 +21,7 @@ public struct WKRUIKitConstants {
 
     static let alertViewHeight: CGFloat = 50.0
     static let alertViewImageHeight: CGFloat = 22
-    static let alertViewImagePadding: CGFloat = 5
+    static let alertViewImagePadding: CGFloat = 6
     static let alertAnimateInDuration      = 0.2
     static let alertAnimateOutDuration     = 0.15
     public static let alertDefaultDuration = 3.0

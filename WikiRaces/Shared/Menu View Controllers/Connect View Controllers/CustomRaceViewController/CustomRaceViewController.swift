@@ -19,7 +19,7 @@ final class CustomRaceViewController: CustomRaceController {
         case endPage = "End Page"
         case bannedPages = "Banned Pages"
         case notifications = "Player Messages"
-        case points, timing, other
+        case points, timing, other, language
     }
 
     // MARK: - Properties -
@@ -217,6 +217,16 @@ final class CustomRaceViewController: CustomRaceController {
                     tableView.reloadData()
                 }
             }
+        case .language:
+            let controller = CustomRaceLanguageController(language: settings.language)
+            navigationController?.pushViewController(controller, animated: true)
+            controller.didUpdate = { [weak self] language in
+                guard let self = self else { return }
+                self.settings.language = language
+                DispatchQueue.main.async {
+                    tableView.reloadData()
+                }
+            }
         }
     }
 
@@ -266,6 +276,12 @@ final class CustomRaceViewController: CustomRaceController {
             }
         case .other:
             return ""
+        case .language:
+            if settings.language.isStandard {
+                return "English"
+            } else {
+                return settings.language.code.lowercased()
+            }
         }
     }
 

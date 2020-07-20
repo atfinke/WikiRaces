@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140CE30424C2967900ECA175 /* WKRLanguageHackery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE30324C2967900ECA175 /* WKRLanguageHackery.swift */; };
+		140CE30524C2967900ECA175 /* WKRLanguageHackery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE30324C2967900ECA175 /* WKRLanguageHackery.swift */; };
 		140FCFC31F36547E00FFA84E /* WKRResultsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */; };
 		140FCFC51F36549900FFA84E /* WKRPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFC41F36549900FFA84E /* WKRPlayer.swift */; };
 		140FCFCB1F3654D500FFA84E /* WKRPlayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */; };
@@ -17,6 +19,9 @@
 		141427FF21FBB84600C48788 /* WKRGameKitNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141427FE21FBB84600C48788 /* WKRGameKitNetwork.swift */; };
 		142CB29A202EAC6B00BC6A33 /* WKRSoloNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CB299202EAC6B00BC6A33 /* WKRSoloNetwork.swift */; };
 		142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142CB29D202EC42000BC6A33 /* WKRPeerNetworkConfig.swift */; };
+		144F33C024C34A24006E4437 /* WKRDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F33BF24C34A24006E4437 /* WKRDefaults.swift */; };
+		144F33C124C34A24006E4437 /* WKRDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F33BF24C34A24006E4437 /* WKRDefaults.swift */; };
+		144F33C224C34A24006E4437 /* WKRDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144F33BF24C34A24006E4437 /* WKRDefaults.swift */; };
 		1452B3721F36524400E81FD8 /* WKRPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3711F36524400E81FD8 /* WKRPage.swift */; };
 		1452B3741F36529300E81FD8 /* WKRKitConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3731F36529300E81FD8 /* WKRKitConstants.swift */; };
 		1452B3761F3652E900E81FD8 /* WKRRaceDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */; };
@@ -106,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		140CE30324C2967900ECA175 /* WKRLanguageHackery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRLanguageHackery.swift; sourceTree = "<group>"; };
 		140FCFC21F36547E00FFA84E /* WKRResultsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRResultsInfo.swift; sourceTree = "<group>"; };
 		140FCFC41F36549900FFA84E /* WKRPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayer.swift; sourceTree = "<group>"; };
 		140FCFCA1F3654D500FFA84E /* WKRPlayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPlayerState.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 		141427FE21FBB84600C48788 /* WKRGameKitNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRGameKitNetwork.swift; sourceTree = "<group>"; };
 		142CB299202EAC6B00BC6A33 /* WKRSoloNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRSoloNetwork.swift; sourceTree = "<group>"; };
 		142CB29D202EC42000BC6A33 /* WKRPeerNetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPeerNetworkConfig.swift; sourceTree = "<group>"; };
+		144F33BF24C34A24006E4437 /* WKRDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRDefaults.swift; sourceTree = "<group>"; };
 		1452B3711F36524400E81FD8 /* WKRPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRPage.swift; sourceTree = "<group>"; };
 		1452B3731F36529300E81FD8 /* WKRKitConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRKitConstants.swift; sourceTree = "<group>"; };
 		1452B3751F3652E900E81FD8 /* WKRRaceDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRRaceDurationConstants.swift; sourceTree = "<group>"; };
@@ -320,6 +327,8 @@
 				14EB9F651F36833A00FF1A9E /* WKROperation.swift */,
 				14B4DB86222674E2007D4B54 /* WKRLogEvent.swift */,
 				1499606D2226FCBF00259B68 /* WKRDurationFormatter.swift */,
+				140CE30324C2967900ECA175 /* WKRLanguageHackery.swift */,
+				144F33BF24C34A24006E4437 /* WKRDefaults.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -567,12 +576,14 @@
 				146E054724AE3E9E001E1917 /* WKRPlayer.swift in Sources */,
 				146E054B24AE3EB2001E1917 /* WKRLinkedPagesFetcher.swift in Sources */,
 				146E054124AE3E95001E1917 /* WKRSeenFinalArticlesStore.swift in Sources */,
+				140CE30524C2967900ECA175 /* WKRLanguageHackery.swift in Sources */,
 				146E053F24AE3E95001E1917 /* WKRHistoryEntry.swift in Sources */,
 				146E054224AE3E95001E1917 /* WKRPage.swift in Sources */,
 				146E053024AE3E80001E1917 /* WKRRaceDurationConstants.swift in Sources */,
 				146E053B24AE3E8F001E1917 /* WKRDurationFormatter.swift in Sources */,
 				146E053C24AE3E8F001E1917 /* WKRKit+Array.swift in Sources */,
 				146E053924AE3E85001E1917 /* WKRRaceSettings.swift in Sources */,
+				144F33C124C34A24006E4437 /* WKRDefaults.swift in Sources */,
 				146E054424AE3E9E001E1917 /* WKRPlayerRaceStats.swift in Sources */,
 				146E053324AE3E85001E1917 /* WKRReadyStates.swift in Sources */,
 				146E053A24AE3E8F001E1917 /* WKRLogEvent.swift in Sources */,
@@ -637,8 +648,10 @@
 				142CB29E202EC42000BC6A33 /* WKRPeerNetworkConfig.swift in Sources */,
 				149960702226FCBF00259B68 /* WKRDurationFormatter.swift in Sources */,
 				147EF6FE2202470700583D73 /* WKRSeenFinalArticlesStore.swift in Sources */,
+				144F33C024C34A24006E4437 /* WKRDefaults.swift in Sources */,
 				140FCFCD1F3654EB00FFA84E /* WKRHistoryEntry.swift in Sources */,
 				141427FF21FBB84600C48788 /* WKRGameKitNetwork.swift in Sources */,
+				140CE30424C2967900ECA175 /* WKRLanguageHackery.swift in Sources */,
 				14EB9F621F36832C00FF1A9E /* WKRMultiWindowNetwork.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,6 +660,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				144F33C224C34A24006E4437 /* WKRDefaults.swift in Sources */,
 				148164B11F5C94F200AC7178 /* WKRKitPageFetcherTests.swift in Sources */,
 				148164AF1F5C94E800AC7178 /* WKRKitRaceTests.swift in Sources */,
 				149FF8171F362B3D000A5D96 /* WKRKitTests.swift in Sources */,
@@ -851,7 +865,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.07;
+				MARKETING_VERSION = 2020.08;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -882,7 +896,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 2020.07;
+				MARKETING_VERSION = 2020.08;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

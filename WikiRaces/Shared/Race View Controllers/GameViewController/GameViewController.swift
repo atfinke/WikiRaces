@@ -92,23 +92,12 @@ final internal class GameViewController: UIViewController {
     // MARK: - View Life Cycle
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        if Defaults.isFastlaneSnapshotInstance {
-            setupInterface()
-            let url = URL(string: "https://en.m.wikipedia.org/wiki/Walt_Disney_World_Monorail_System")!
-            prepareForScreenshots(for: url)
-        } else {
-            setupGameManager()
-            setupInterface()
-        }
+        setupGameManager()
+        setupInterface()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-//        if Defaults.isFastlaneSnapshotInstance {
-//            return
-//        }
 
         if !isConfigured {
             isConfigured = true

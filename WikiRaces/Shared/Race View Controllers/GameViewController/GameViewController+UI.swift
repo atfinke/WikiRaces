@@ -39,10 +39,6 @@ extension GameViewController {
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = nil
 
-        if Defaults.isFastlaneSnapshotInstance {
-            navigationItem.leftBarButtonItem = helpBarButtonItem
-            navigationItem.rightBarButtonItem = quitBarButtonItem
-        }
         navigationView.addSubview(navigationBarBottomLine)
 
         setupElements()
@@ -64,7 +60,6 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-//        view.alpha = 0
         navigationController.setNavigationBarHidden(true, animated: false)
     }
 
@@ -117,9 +112,7 @@ extension GameViewController {
         ]
         NSLayoutConstraint.activate(constraints)
 
-        if !Defaults.isFastlaneSnapshotInstance {
-            gameManager.webView = webView
-        }
+        gameManager.webView = webView
         self.webView = webView
     }
 
