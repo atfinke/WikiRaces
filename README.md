@@ -2,7 +2,7 @@
 
 The source code for [WikiRaces 3](https://itunes.apple.com/us/app/wikiraces-3/id1030997904?mt=8) on the App Store.
 
-![screenshot](https://raw.githubusercontent.com/atfinke/WikiRaces/2020.09/Resources/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/atfinke/WikiRaces/master/Resources/screenshot.png)
 
 
 ## App Store Reviews
