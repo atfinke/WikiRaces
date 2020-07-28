@@ -4,7 +4,6 @@ The source code for [WikiRaces 3](https://itunes.apple.com/us/app/wikiraces-3/id
 
 ![screenshot](https://raw.githubusercontent.com/atfinke/WikiRaces/2020.09/Resources/screenshot.png)
 
-***
 
 ## App Store Reviews
 #### "Best Game Ever"
