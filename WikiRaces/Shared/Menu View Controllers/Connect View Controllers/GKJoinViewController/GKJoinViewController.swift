@@ -77,8 +77,8 @@ final class GKJoinViewController: GKConnectViewController {
         GKMatchmaker.shared().findMatch(for: GKMatchRequest.joinRequest(raceCode: raceCode)) { [weak self] match, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                if let error = error {
-                    os_log("%{public}s: result: error: %{public}s", log: .gameKit, type: .error, #function, error.localizedDescription)
+                if error != nil || match == nil {
+                    os_log("%{public}s: result: error: %{public}s", log: .gameKit, type: .error, #function, error?.localizedDescription ?? "-")
                     
                     let bannerTitle: String
                     let interfaceTitle: String
@@ -104,8 +104,6 @@ final class GKJoinViewController: GKConnectViewController {
                     if self.isPublicRace {
                         self.publicRaceDetermineHost(match: match)
                     }
-                } else {
-                    fatalError()
                 }
             }
         }
