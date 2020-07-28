@@ -16,6 +16,7 @@ import FirebasePerformance
 
 class RaceCodeGenerator {
 
+    private static let maxAttempts = 10
     private static let validCharacters = "abcdefghijklmnopqrstuvwxyz"
     private static let validCharactersSet = CharacterSet(charactersIn: validCharacters)
     private static let validCharactersArray = validCharacters.map { $0 }
@@ -51,6 +52,11 @@ class RaceCodeGenerator {
     private func generate() {
         guard !isCancelled else { return }
         attempts += 1
+        
+        guard attempts < RaceCodeGenerator.maxAttempts else {
+            cancel()
+            return
+        }
 
         guard let code = RaceCodeGenerator.codes.randomElement else { fatalError() }
         os_log("RaceCodeGenerator: %{public}s: %{public}s", log: .matchSupport, type: .info, #function, code)
@@ -89,12 +95,17 @@ class RaceCodeGenerator {
                 }
             } else {
                 os_log("RaceCodeGenerator: %{public}s: queryPlayerGroupActivity failed, count: %{public}ld, error: %{public}s", log: .matchSupport, type: .info, #function, count, error?.localizedDescription ?? "-")
-                self?.generate()
                 PlayerFirebaseAnalytics.log(event: .raceCodeGKFailed)
+                DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                    self?.generate()
+                }
             }
-            #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-            traceGK?.stop()
-            #endif
+           
+            if error == nil {
+                #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
+                traceGK?.stop()
+                #endif
+            }
         }
     }
 
