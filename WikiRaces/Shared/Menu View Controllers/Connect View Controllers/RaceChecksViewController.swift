@@ -9,6 +9,7 @@
 import GameKit
 import SwiftUI
 import WKRKit
+import WKRUIKit
 import os.log
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
@@ -126,16 +127,16 @@ final class RaceChecksViewController: VisualEffectViewController {
 
             // Give Game Center more time to get its act together
             if !isAuthenticated {
-                sleep(3)
+                sleep(2)
             }
             
-            DispatchQueue.main.async {
-                self.model.disclaimerButtonOpacity = 0
-            }
-
-            DispatchQueue.main.async { [weak self] in
-                self?.readyForNextMatchmakingStep()
-            }
+            // manually call bc the game center auth handler doesn't get called sometimes
+            WKRUIPlayerImageManager.shared.connected(to: GKLocalPlayer.local, completion: {
+                DispatchQueue.main.async { [weak self] in
+                    self?.model.disclaimerButtonOpacity = 0
+                    self?.readyForNextMatchmakingStep()
+                }
+            })
         }
     }
 
