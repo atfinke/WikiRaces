@@ -112,7 +112,6 @@ public class WKRUIPlayerImageManager {
     }
 
     public func container() -> Container {
-        assert(Thread.isMainThread)
         guard let image = localPlayerImage else { fatalError() }
         return Container(connectedPlayerImages: connectedPlayerImages, localPlayerImage: image)
     }

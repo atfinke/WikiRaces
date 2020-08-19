@@ -12,10 +12,6 @@ import WKRKit
 import WKRUIKit
 import os.log
 
-#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-import FirebasePerformance
-#endif
-
 final class RaceChecksViewController: VisualEffectViewController {
 
     // MARK: - Types -
@@ -58,19 +54,13 @@ final class RaceChecksViewController: VisualEffectViewController {
         super.viewDidLoad()
         configure(hostingView: contentViewHosting.view)
 
-        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let trace = Performance.startTrace(name: "Connection Test Trace")
-        #endif
-
         let startDate = Date()
         WKRConnectionTester.start { [weak self] success in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if success {
                     os_log("%{public}s: connection success: %{public}f", log: .matchSupport, type: .info, #function, -startDate.timeIntervalSinceNow)
-                    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                    trace?.stop()
-                    #endif
+
                     self.connectionSuccess()
                 } else {
                     os_log("%{public}s: connection error", log: .matchSupport, type: .error, #function)

@@ -10,10 +10,6 @@ import GameKit
 import WKRKit
 import os.log
 
-#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-import FirebasePerformance
-#endif
-
 class RaceCodeGenerator {
 
     private static let maxAttempts = 10
@@ -61,11 +57,6 @@ class RaceCodeGenerator {
         guard let code = RaceCodeGenerator.codes.randomElement else { fatalError() }
         os_log("RaceCodeGenerator: %{public}s: %{public}s", log: .matchSupport, type: .info, #function, code)
 
-        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let traceGK = Performance.startTrace(name: "Race Code Trace: queryPlayerGroupActivity")
-        let traceTotal = Performance.startTrace(name: "Race Code Trace: Total Success Time")
-        #endif
-
         let queryCheckStartDate = Date()
         GKMatchmaker.shared().queryPlayerGroupActivity(RaceCodeGenerator.playerGroup(for: code)) { [weak self] count, error in
             if count == 0 && error == nil {
@@ -77,9 +68,7 @@ class RaceCodeGenerator {
                     switch result {
                     case .valid:
                         self.callback?(code)
-                        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                        traceTotal?.stop()
-                        #endif
+
                         PlayerFirebaseAnalytics.log(event: .raceCodeGenerationFinished, attributes: [
                             "attempts": self.attempts,
                             "duration": -self.newStartDate.timeIntervalSinceNow
@@ -95,16 +84,12 @@ class RaceCodeGenerator {
                 }
             } else {
                 os_log("RaceCodeGenerator: %{public}s: queryPlayerGroupActivity failed, count: %{public}ld, error: %{public}s", log: .matchSupport, type: .info, #function, count, error?.localizedDescription ?? "-")
-                PlayerFirebaseAnalytics.log(event: .raceCodeGKFailed)
+                
+                let errorCode = (error as? GKError)?.errorCode ?? 0
+                PlayerFirebaseAnalytics.log(event: .raceCodeGKFailedRefactor, attributes: ["error": errorCode])
                 DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
                     self?.generate()
                 }
-            }
-           
-            if error == nil {
-                #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                traceGK?.stop()
-                #endif
             }
         }
     }

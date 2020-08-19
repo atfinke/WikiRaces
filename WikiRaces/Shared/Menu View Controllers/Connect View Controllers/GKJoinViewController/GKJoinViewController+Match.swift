@@ -12,10 +12,6 @@ import WKRUIKit
 
 import os.log
 
-#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-import FirebasePerformance
-#endif
-
 extension GKJoinViewController: GKMatchDelegate {
 
     func match(_ match: GKMatch, didReceive data: Data, fromRemotePlayer player: GKPlayer) {

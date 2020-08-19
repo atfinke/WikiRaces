@@ -61,7 +61,7 @@ internal struct PlayerFirebaseAnalytics {
         case forcedIntoStoreFromStats
 
         case raceCodeGKSuccess
-        case raceCodeGKFailed
+        case raceCodeGKFailedRefactor
         case raceCodeShared
 
         case raceCodeRecordReused

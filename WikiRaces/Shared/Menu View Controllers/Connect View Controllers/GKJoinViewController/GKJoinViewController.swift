@@ -14,10 +14,6 @@ import os.log
 import WKRKit
 import WKRUIKit
 
-#if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-import FirebasePerformance
-#endif
-
 final class GKJoinViewController: GKConnectViewController {
     
     // MARK: - Properties -
@@ -61,10 +57,6 @@ final class GKJoinViewController: GKConnectViewController {
     
     func joinMatch() {
         os_log("%{public}s: race code: %{public}s", log: .gameKit, type: .info, #function, raceCode ?? "-")
-        #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-        let type = raceCode == nil ? "Public" : "Private"
-        let findTrace = Performance.startTrace(name: "Global Race Find Trace - " + type)
-        #endif
         
         DispatchQueue.main.async {
             if self.raceCode == nil {
@@ -95,9 +87,6 @@ final class GKJoinViewController: GKConnectViewController {
                 } else if let match = match {
                     os_log("%{public}s: found match", log: .gameKit, type: .info, #function)
                     
-                    #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
-                    findTrace?.stop()
-                    #endif
                     self.match = match
                     match.delegate = self
                     
