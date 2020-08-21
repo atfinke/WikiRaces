@@ -46,10 +46,12 @@ public class WKRUIPlayerImageManager {
 
     public func connected(to player: GKPlayer, completion: (() -> Void)?) {
         DispatchQueue.main.async {
+            assert(Thread.isMainThread)
+            
             let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player.displayName)
             os_log("%{public}s: generated placeholder for %{public}s", log: .imageManager, type: .info, #function, player.alias)
 
-            self.update(image: placeholder, for: player.alias)
+            self.update(image: placeholder, for: player.alias, isPlaceholder: true)
 
             player.loadPhoto(for: .small) { photo, _ in
                 guard let photo = photo else {
@@ -63,8 +65,8 @@ public class WKRUIPlayerImageManager {
                     self.isLocalPlayerImageFromGameCenter = true
                 }
 
-                self.update(image: photo, for: player.alias)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                    self.update(image: photo, for: player.alias, isPlaceholder: false)
                     completion?()
                 }
             }
@@ -73,21 +75,28 @@ public class WKRUIPlayerImageManager {
 
     @discardableResult
     private func generatePlaceholder(for player: String) -> UIImage {
+        assert(Thread.isMainThread)
         let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player)
         os_log("%{public}s: generated placeholder for %{public}s", log: .imageManager, type: .info, #function, player)
-        update(image: placeholder, for: player)
+        update(image: placeholder, for: player, isPlaceholder: true)
         return placeholder
     }
 
-    private func update(image: UIImage, for playerID: String) {
+    private func update(image: UIImage, for playerID: String, isPlaceholder: Bool) {
+        assert(Thread.isMainThread)
         if playerID == GKLocalPlayer.local.alias {
-            localPlayerImage = image
+            if localPlayerImage == nil || !isPlaceholder {
+                localPlayerImage = image
+            }
         } else {
-            connectedPlayerImages[playerID] = image
+            if connectedPlayerImages[playerID] == nil || !isPlaceholder {
+                connectedPlayerImages[playerID] = image
+            }
         }
     }
 
     public func image(for player: String) -> UIImage {
+        assert(Thread.isMainThread)
         if player == GKLocalPlayer.local.displayName, let image = localPlayerImage {
             return image
         } else if let image = connectedPlayerImages[player] {
@@ -98,6 +107,7 @@ public class WKRUIPlayerImageManager {
     }
 
     public func clearConnectedPlayers() {
+        assert(Thread.isMainThread)
         connectedPlayerImages.removeAll()
     }
 

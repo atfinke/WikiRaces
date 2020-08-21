@@ -1,11 +1,9 @@
-# WikiRaces ![Build Status](https://github.com/atfinke/WikiRaces/workflows/CI/badge.svg)
+# WikiRaces
 
 The source code for [WikiRaces 3](https://itunes.apple.com/us/app/wikiraces-3/id1030997904?mt=8) on the App Store.
 
-Feature work is merged into master when the update containing the corresponding changes is released on the App Store.
+![screenshot](https://raw.githubusercontent.com/atfinke/WikiRaces/master/Resources/screenshot.png)
 
-Feel free to ping me with questions.
-***
 
 ## App Store Reviews
 #### "Best Game Ever"
@@ -31,29 +29,6 @@ Feel free to ping me with questions.
 #### "Fantastic and fun game"
 "Great work creating an addicting and fun game to play with friends"<br>
 \- Hubbytubby
-
-## Player Tweets
-
-[Hiatus](https://twitter.com/SHINICHlKUDOU/status/1071589372028436480)<br>
-[Jumping Jacks](https://twitter.com/SHINICHlKUDOU/status/1037168065547591680)<br>
-[Intense](https://twitter.com/SHINICHlKUDOU/status/1036492428868505600)<br>
-
-## Repo Overview
-
-#### /Resources
-- Various design resources.
-#### /WKRPython
-- Python scripts I use to compile the final articles list.
-#### /WKRArticlesPreviewer
-- macOS app for previewing the final articles list.
-#### /WKRCloudStats
-- macOS app that pulls app analytics from CloudKit.
-#### /WKRKit
-- Framework responsible for most of the core game logic.
-#### /WKRUIKit
-- Framework responsible for the shared UI across the app.
-#### /WikiRaces
-- Contains the main project with the release and multi-window debug targets.
 
 ## Other
 

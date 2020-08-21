@@ -84,7 +84,7 @@ struct HostContentView: View {
             VStack {
                 HostSectionView(
                     header: "RACE CODE",
-                    title: model.raceCode?.uppercased() ?? "-",
+                    title: (model.raceCode?.uppercased() ?? "-") + "  ", // ' ' prevents trimming??
                     imageName: "square.and.arrow.up",
                     disabled: model.raceCode == nil) {
                     self.presentModal(.activity)

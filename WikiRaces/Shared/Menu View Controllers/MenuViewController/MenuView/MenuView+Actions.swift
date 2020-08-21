@@ -36,7 +36,7 @@ extension MenuView {
                         self.listenerUpdate?(.presentCreateRace)
                     }
                 } else {
-                    let message = "You must be logged into iCloud to create a private race."
+                    let message = "You must have iCloud Drive enabled for WikiRaces to create a private race. You can still join any race."
                     let alertController = UIAlertController(title: "iCloud Issue", message: message, preferredStyle: .alert)
                     alertController.addCancelAction(title: "Ok")
 

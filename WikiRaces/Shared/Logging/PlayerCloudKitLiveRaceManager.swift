@@ -173,7 +173,7 @@ class PlayerCloudKitLiveRaceManager {
             if isEnabled {
                 self.fetchValidRecord(for: raceCode) { record, isRaceCodeValid in
                     if isRaceCodeValid {
-                        if record != nil {
+                        if record == nil {
                             PlayerFirebaseAnalytics.log(event: .raceCodeRecordCreated)
                         }
                         let raceRecord = record ?? CKRecord(recordType: "RaceActive")
