@@ -43,7 +43,6 @@ extension GameViewController {
 
         setupElements()
         setupProgressView()
-        setupNewWebView()
 
         let constraints: [NSLayoutConstraint] = [
             navigationBarBottomLine.topAnchor.constraint(equalTo: navigationView.bottomAnchor),
@@ -105,13 +104,14 @@ extension GameViewController {
         webView.progressView = progressView
 
         let constraints: [NSLayoutConstraint] = [
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-
+        webView.scrollView.layer.masksToBounds = false
+        
         gameManager.webView = webView
         self.webView = webView
     }
