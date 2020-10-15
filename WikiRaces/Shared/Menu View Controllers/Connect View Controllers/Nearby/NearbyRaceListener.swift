@@ -6,6 +6,7 @@
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
+import GameKit
 import MultipeerConnectivity
 import os.log
 
@@ -35,11 +36,21 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
     // MARK: - MCNearbyServiceAdvertiserDelegate -
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        if let data = context, let invite = try? JSONDecoder().decode(Nearby.Invite.self, from: data) {
-            os_log("Listener: %{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, invite.hostName, invite.raceCode)
-            handler?(invite.hostName, invite.raceCode)
+        defer {
+            invitationHandler(false, nil)
         }
-        invitationHandler(false, nil)
+        
+        guard let data = context, let invite = try? JSONDecoder().decode(Nearby.Invite.self, from: data) else {
+            return
+        }
+        
+        if GKHelper.shared.isAuthenticated && invite.hostName == GKLocalPlayer.local.alias {
+            os_log("Listener: same name, skipping", log: .nearby, type: .info, #function)
+            return
+        }
+        
+        os_log("Listener: %{public}s: host name: %{public}s, race code: %{public}s", log: .nearby, type: .info, #function, invite.hostName, invite.raceCode)
+        handler?(invite.hostName, invite.raceCode)
     }
     
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
