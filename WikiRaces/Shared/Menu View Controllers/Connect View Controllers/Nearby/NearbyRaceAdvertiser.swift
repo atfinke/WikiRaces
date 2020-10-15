@@ -55,5 +55,10 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
         browser.invitePeer(peerID, to: session, withContext: data, timeout: 600)
         invitedPeers.append(peerID)
     }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        os_log("Advertiser: %{public}s: %{public}s", log: .nearby, type: .info, #function, error.localizedDescription)
+    }
+    
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {}
 }

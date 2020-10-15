@@ -41,4 +41,9 @@ class NearbyRaceListener: NSObject, MCNearbyServiceAdvertiserDelegate {
         }
         invitationHandler(false, nil)
     }
+    
+    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+        os_log("Listener: %{public}s: %{public}s", log: .nearby, type: .info, #function, error.localizedDescription)
+    }
+    
 }
