@@ -38,6 +38,8 @@ class GKHelper {
             pushResultToHandler()
         }
     }
+    
+    public var isAuthenticated = false
 
     // MARK: - Initalization -
 
@@ -77,6 +79,7 @@ class GKHelper {
                         self.pendingResult = .controller(controller)
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
+                        self.isAuthenticated = true
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
                             WKRUIPlayerImageManager.shared.connected(to: GKLocalPlayer.local, completion: nil)
                         }

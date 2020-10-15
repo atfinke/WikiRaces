@@ -100,13 +100,13 @@ final class RaceChecksViewController: VisualEffectViewController {
 
     final func connectionSuccess() {
         let startDate = Date()
-        let isAuthenticated = GKLocalPlayer.local.isAuthenticated
+        let isAuthenticated = GKHelper.shared.isAuthenticated
         if !isAuthenticated {
             self.model.title = "WAITING FOR GAME CENTER"
         }
 
         DispatchQueue.global(qos: .userInitiated).async {
-            while !GKLocalPlayer.local.isAuthenticated {
+            while !GKHelper.shared.isAuthenticated {
                 if -startDate.timeIntervalSinceNow > 8 && self.model.disclaimerButtonOpacity == 0 {
                     DispatchQueue.main.async {
                         self.model.disclaimerButtonOpacity = 1
