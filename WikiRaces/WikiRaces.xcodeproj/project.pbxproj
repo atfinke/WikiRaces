@@ -2324,12 +2324,12 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Shared/Frameworks/Analytics";
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.09;
+				MARKETING_VERSION = 2020.10;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -2358,12 +2358,12 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Shared/Frameworks/Analytics";
 				INFOPLIST_FILE = WikiRaces/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.09;
+				MARKETING_VERSION = 2020.10;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
