@@ -110,7 +110,6 @@ extension GameViewController {
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
-        webView.scrollView.layer.masksToBounds = false
         
         gameManager.webView = webView
         self.webView = webView

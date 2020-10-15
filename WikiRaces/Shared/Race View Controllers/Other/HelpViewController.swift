@@ -37,7 +37,7 @@ final internal class HelpViewController: UIViewController, WKNavigationDelegate 
         webView.progressView = progressView
 
         let constraints: [NSLayoutConstraint] = [
-            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             webView.leftAnchor.constraint(equalTo: view.leftAnchor),
             webView.rightAnchor.constraint(equalTo: view.rightAnchor),

@@ -84,6 +84,8 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
         allowsLinkPreview = false
         allowsBackForwardNavigationGestures = false
+        
+        scrollView.layer.masksToBounds = false
 
         let features: [[UIFontDescriptor.FeatureKey: Int]] = [
             [
