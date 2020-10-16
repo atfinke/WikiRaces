@@ -18,9 +18,7 @@ public struct WKRConnectionTester {
     ///   - completionHandler: Handler with Bool indicating connectivity.
     public static func start(timeout: Double = WKRKitConstants.current.connectionTestTimeout,
                              completionHandler: @escaping (_ connected: Bool) -> Void) {
-        let startDate = Date()
         var timedOut = false
-
         let timer = Timer.scheduledTimer(withTimeInterval: timeout, repeats: false) { _ in
             timedOut = true
             completionHandler(false)
@@ -31,7 +29,7 @@ public struct WKRConnectionTester {
             if timedOut {
                 // Timer fired, completion handler already called
                 return
-            } else if page != nil, startDate.timeIntervalSinceNow > -3.0 {
+            } else if page != nil {
                 // Have valid page, loaded in time
                 completionHandler(true)
             } else {

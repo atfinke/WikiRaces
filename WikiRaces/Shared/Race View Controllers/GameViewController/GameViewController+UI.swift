@@ -13,11 +13,9 @@ extension GameViewController {
 
     // MARK: - Interface
 
-    #if !targetEnvironment(macCatalyst)
     override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
-    #endif
 
     func setupInterface() {
         guard let navigationController = navigationController,

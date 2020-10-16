@@ -46,8 +46,6 @@ public class WKRUIPlayerImageManager {
 
     public func connected(to player: GKPlayer, completion: (() -> Void)?) {
         DispatchQueue.main.async {
-            assert(Thread.isMainThread)
-            
             let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player.displayName)
             os_log("%{public}s: generated placeholder for %{public}s", log: .imageManager, type: .info, #function, player.alias)
 

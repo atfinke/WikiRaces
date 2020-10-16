@@ -6,6 +6,7 @@
 //  Copyright © 2019 Andrew Finke. All rights reserved.
 //
 
+import GameKit
 import UIKit
 import StoreKit
 import os.log
@@ -55,14 +56,18 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
             UserDefaults.standard.set(newValue, forKey: "isPlus")
         }
         get {
-            if isDead {
-                return true
-            }
-            #if targetEnvironment(simulator)
-            return true
-            #else
             return UserDefaults.standard.bool(forKey: "isPlus")
-            #endif
+//            if isDead {
+//                return true
+//            } else if GKLocalPlayer.local.isAuthenticated && GKLocalPlayer.local.alias == "J3D1 WARR10R" {
+//                return true
+//            }
+//
+//            #if targetEnvironment(simulator)
+//            return true
+//            #else
+//            return UserDefaults.standard.bool(forKey: "isPlus")
+//            #endif
         }
     }
 
@@ -72,8 +77,8 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         super.init()
         queue.add(self)
         
-        guard let url = URL(string: "https://atfinke.github.io/WikiRaces/Killswitch") else {
-                return
+        guard let url = URL(string: "https://www.andrewfinke.com/WikiRaces/Killswitch") else {
+            return
         }
         let task = URLSession.shared.dataTask(with: url) { data, _, _ in
             if let data = data,
@@ -247,7 +252,7 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         let receiptData = rawReceiptData.base64EncodedString()
         let jsonObject = ["receipt-data": receiptData]
 
-        var components = URLComponents(string: "https://magic-box-support.herokuapp.com/api/0.1/verifyReceipt/wkr")
+        var components = URLComponents(string: "https://www.andrewfinke.com/WikiRaces/Receipt")
         components?.queryItems = [
             URLQueryItem(name: "deviceIdentifierForVendor", value: UIDevice.current.identifierForVendor?.uuidString)
         ]
