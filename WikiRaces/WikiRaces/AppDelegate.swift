@@ -27,22 +27,21 @@ final internal class AppDelegate: WKRAppDelegate {
         FirebaseApp.configure()
         #endif
 
+        DispatchQueue.global(qos: .utility).async {
+            PlusStore.shared.sync()
+            self.logCloudStatus()
+            self.logBuild()
+            NotificationCenter.default.addObserver(self,
+                                                   selector: #selector(self.showBanHammer),
+                                                   name: PlayerCloudKitStatsManager.banHammerNotification,
+                                                   object: nil)
+        }
+        
         GKHelper.shared.start()
-        PlusStore.shared.sync()
         configureConstants()
-
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(showBanHammer),
-                                               name: PlayerCloudKitStatsManager.banHammerNotification,
-                                               object: nil)
 
         PlayerStatsManager.shared.start()
         PlayerCloudKitStatsManager.shared.connect()
-
-        logCloudStatus()
-        logBuild()
-
-        cleanTempDirectory()
 
         if Defaults.isFastlaneSnapshotInstance {
             UIView.setAnimationsEnabled(false)
