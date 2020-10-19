@@ -56,18 +56,17 @@ class PlusStore: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
             UserDefaults.standard.set(newValue, forKey: "isPlus")
         }
         get {
+            if isDead {
+                return true
+            } else if GKLocalPlayer.local.isAuthenticated && GKLocalPlayer.local.alias == "J3D1 WARR10R" {
+                return true
+            }
+
+            #if targetEnvironment(simulator)
+            return true
+            #else
             return UserDefaults.standard.bool(forKey: "isPlus")
-//            if isDead {
-//                return true
-//            } else if GKLocalPlayer.local.isAuthenticated && GKLocalPlayer.local.alias == "J3D1 WARR10R" {
-//                return true
-//            }
-//
-//            #if targetEnvironment(simulator)
-//            return true
-//            #else
-//            return UserDefaults.standard.bool(forKey: "isPlus")
-//            #endif
+            #endif
         }
     }
 
