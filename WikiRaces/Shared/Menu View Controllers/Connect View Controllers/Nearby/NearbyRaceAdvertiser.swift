@@ -47,13 +47,14 @@ class NearbyRaceAdvertiser: NSObject, MCNearbyServiceBrowserDelegate {
             return
         }
         os_log("Advertiser: %{public}s: peer: %{public}s", log: .nearby, type: .info, #function, peerID.displayName)
-        if peerID.displayName == Nearby.peerID.displayName {
-            os_log("Advertiser: same name, skipping", log: .nearby, type: .info, #function)
-            return
-        }
-        
+       
         browser.invitePeer(peerID, to: session, withContext: data, timeout: 600)
         invitedPeers.append(peerID)
     }
+    
+    func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
+        os_log("Advertiser: %{public}s: %{public}s", log: .nearby, type: .info, #function, error.localizedDescription)
+    }
+    
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {}
 }

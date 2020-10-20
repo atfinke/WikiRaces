@@ -40,6 +40,7 @@ class StatsPlayersViewController: UITableViewController {
         super.init(style: .plain)
         title = "Players Raced".uppercased()
         tableView.allowsSelection = false
+        tableView.cellLayoutMarginsFollowReadableWidth = true
     }
 
     required init?(coder: NSCoder) {

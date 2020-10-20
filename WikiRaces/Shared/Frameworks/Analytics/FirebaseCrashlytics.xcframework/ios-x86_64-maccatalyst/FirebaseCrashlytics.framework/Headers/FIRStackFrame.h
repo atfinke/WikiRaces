@@ -1,4 +1,4 @@
-// Copyright 2020 Google
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,16 @@ NS_SWIFT_NAME(StackFrame)
  * @param line - the line number
  */
 - (instancetype)initWithSymbol:(NSString *)symbol file:(NSString *)file line:(NSInteger)line;
+
+/**
+ * Creates a symbolicated Stack Frame from an address. The address will be
+ * symbolicated in the Crashlytics backend for the customer and reported in the
+ * Crahslytics dashboard with the appropriate file name and line number. If an
+ * invalid address is provided it will appear in the dashboard as missing.
+ *
+ * @param address - the address where the exception occurred
+ */
++ (instancetype)stackFrameWithAddress:(NSUInteger)address;
 
 /**
  * Creates a symbolicated Stack Frame with the given required fields. Symbolicated

@@ -122,6 +122,10 @@ class StatsViewController: UITableViewController {
     init() {
         super.init(style: .grouped)
         title = "Stats".uppercased()
+        
+        tableView.cellLayoutMarginsFollowReadableWidth = true
+        
+        navigationItem.backButtonTitle = ""
         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
             systemName: "xmark",
             target: self,
@@ -188,7 +192,6 @@ class StatsViewController: UITableViewController {
         } else {
             return str
         }
-
     }
 
     static func formatted(for item: PlayerUserDefaultsStat, suffix: String?, checkPlural: Bool = true) -> String {

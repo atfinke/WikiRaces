@@ -405,7 +405,7 @@ final internal class PlayerStatsManager {
         let fastestTime = multiplayerFastestTime
         let pagesViewed = multiplayerPages
         let pixelsScrolled = multiplayerPixelsScrolled
-
+        
         let pointsScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.points")
         pointsScore.value = Int64(points)
 
