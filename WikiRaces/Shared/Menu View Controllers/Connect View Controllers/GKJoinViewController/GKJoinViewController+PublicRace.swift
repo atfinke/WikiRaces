@@ -35,7 +35,7 @@ extension GKJoinViewController {
                 os_log("%{public}s: encoded seen articles", log: .gameKit, type: .info, #function)
                 try? match.send(data, to: [player], dataMode: .reliable)
             }
-            transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings)
+            transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings, dismiss: matchmaker)
         }
     }
 
@@ -58,6 +58,11 @@ extension GKJoinViewController {
         do {
             let data = try JSONEncoder().encode(message)
             try match.sendData(toAllPlayers: data, with: .reliable)
+            DispatchQueue.main.async {
+                self.matchmaker?.dismiss(animated: true, completion: nil)
+                self.model.title = "PREPARING"
+                self.model.activityOpacity = 1
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
                 self.transitionToGame(for: .gameKitPublic(match: match, isHost: true), settings: settings)
             }
@@ -73,12 +78,11 @@ extension GKJoinViewController {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.model.title = "Finding best host"
             var players = match.players
             players.append(GKLocalPlayer.local)
             if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
                 self.publicRaceHostAlias = hostPlayer.alias
-                os_log("%{public}s: determined host: %{public}s", log: .gameKit, type: .info, #function, hostPlayer.alias)
+                os_log("%{public}s: determined host: %{public}s, self = %{public}i", log: .gameKit, type: .info, #function, hostPlayer.alias, hostPlayer.alias == GKLocalPlayer.local.alias ? 1 : 0)
 
                 if hostPlayer.alias == GKLocalPlayer.local.alias {
                     self.isPlayerHost = true

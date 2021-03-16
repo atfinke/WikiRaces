@@ -62,9 +62,9 @@ final internal class MenuViewController: UIViewController {
                 controller.viewState = .leaderboards
                 controller.leaderboardTimeScope = .allTime
                 self.present(controller, animated: true, completion: nil)
-            case .presentJoinPublicRace:
+            case .presentStandardRace:
                 self.joinRace(raceCode: nil)
-            case .presentJoinPrivateRace:
+            case .presentJoinCustomRace:
                 let controller = UIAlertController(
                     title: "Join Private Race",
                     message: "Enter the race code",
@@ -83,7 +83,7 @@ final internal class MenuViewController: UIViewController {
                 }
                 controller.addAction(cancelAction)
                 self.present(controller, animated: true, completion: nil)
-            case .presentCreateRace:
+            case .presentCreateCustomRace:
                 self.createRace()
             case .presentAlert(let alert):
                 self.present(alert, animated: true, completion: nil)
@@ -197,7 +197,7 @@ final internal class MenuViewController: UIViewController {
             self.menuView.animateMenuOut {
                 let destination: RaceChecksViewController.Destination
                 if let code = raceCode {
-                    destination = .joinPrivate(raceCode: code)
+                    destination = .joinCustom(raceCode: code)
                 } else {
                     destination = .joinPublic
                 }
@@ -220,7 +220,7 @@ final internal class MenuViewController: UIViewController {
             present(nav, animated: false, completion: nil)
         } else {
             prepareForRace(completion: {
-                let controller = RaceChecksViewController(destination: .hostPrivate)
+                let controller = RaceChecksViewController(destination: .hostCustom)
                 self.navigationController?.pushViewController(controller, animated: false)
             })
         }

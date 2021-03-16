@@ -14,7 +14,7 @@ import os.log
 import WKRKit
 import WKRUIKit
 
-final class GKJoinViewController: GKConnectViewController {
+final class GKJoinViewController: GKConnectViewController, GKMatchmakerViewControllerDelegate {
     
     // MARK: - Properties -
     
@@ -30,6 +30,8 @@ final class GKJoinViewController: GKConnectViewController {
             self?.cancelMatch()
             }, disclaimerButton: nil))
     
+    var matchmaker: GKMatchmakerViewController?
+    
     // MARK: - Initalization -
     
     init(raceCode: String?) {
@@ -39,7 +41,10 @@ final class GKJoinViewController: GKConnectViewController {
         
         os_log("%{public}s", log: .gameKit, type: .info, #function)
         
-        joinMatch()
+        
+        if !isPublicRace {
+            joinMatch()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +56,73 @@ final class GKJoinViewController: GKConnectViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure(hostingView: contentViewHosting.view)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if isPublicRace, matchmaker == nil {
+            if let invite = GKHelper.shared._invite {
+                GKHelper.shared._invite = nil
+                matchmaker = GKMatchmakerViewController(invite: invite)
+            } else {
+                matchmaker = GKMatchmakerViewController(matchRequest: GKMatchRequest.joinRequest(raceCode: raceCode))
+            }
+            matchmaker?.matchmakingMode = .default
+            matchmaker?.matchmakerDelegate = self
+            if let matchmaker = matchmaker {
+                present(matchmaker, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: - GKMatchmakerViewControllerDelegate -
+    
+    func matchmakerViewControllerWasCancelled(_ viewController: GKMatchmakerViewController) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        self.view.alpha = 0.0
+        viewController.dismiss(animated: true, completion: {
+            self.navigationController?.popToRootViewController(animated: false)
+        })
+    }
+    
+    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFailWithError error: Error) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        viewController.dismiss(animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            let bannerTitle: String
+            let interfaceTitle: String
+            if self.isPublicRace {
+                bannerTitle = "Unable To Find Race"
+                interfaceTitle = "NO OPEN RACES"
+            } else {
+                bannerTitle = "Unable To Join Race"
+                interfaceTitle = "MATCHMAKING ISSUE"
+            }
+            self.showError(title: bannerTitle, message: "Please try again later.")
+            self.model.title = interfaceTitle
+            self.model.activityOpacity = 0
+        }
+    }
+    
+    func matchmakerViewController(_ viewController: GKMatchmakerViewController, didFind match: GKMatch) {
+        os_log("%{public}s: expectedPlayerCount: %{public}i", log: .gameKit, type: .info, #function, match.expectedPlayerCount)
+        
+        self.match = match
+        match.delegate = self
+        
+        DispatchQueue.main.async {
+            self.model.title = ""
+            self.model.activityOpacity = 0
+        }
+        
+        DispatchQueue.global().async {
+            while match.expectedPlayerCount != 0 {
+                sleep(1)
+            }
+            self.publicRaceDetermineHost(match: match)
+        }
     }
     
     // MARK: - Helpers -

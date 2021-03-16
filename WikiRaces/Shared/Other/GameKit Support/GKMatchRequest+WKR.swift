@@ -42,7 +42,8 @@ extension GKMatchRequest {
             request.playerGroup = RaceCodeGenerator.playerGroup(for: code)
             request.playerAttributes = 0x0000FFFF
         } else {
-            request.maxPlayers = 2
+            request.maxPlayers = min(GKMatchRequest.maxPlayersAllowedForMatch(of: .peerToPeer), WKRKitConstants.current.maxGlobalRacePlayers)
+            request.defaultNumberOfPlayers = 2
             request.playerGroup = publicRacePlayerGroup()
         }
 

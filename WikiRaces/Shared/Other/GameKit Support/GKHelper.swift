@@ -15,7 +15,7 @@ import FirebaseAnalytics
 import FirebaseCrashlytics
 #endif
 
-class GKHelper {
+class GKHelper: NSObject, GKLocalPlayerListener {
 
     enum AuthResult {
         case controller(UIViewController)
@@ -40,10 +40,11 @@ class GKHelper {
     }
     
     public var isAuthenticated = false
+    public var _invite: GKInvite?
 
     // MARK: - Initalization -
 
-    private init() {}
+    private override init() {}
 
     // MARK: - Handlers -
 
@@ -69,7 +70,7 @@ class GKHelper {
         guard !Defaults.isFastlaneSnapshotInstance else {
             return
         }
-
+return
         DispatchQueue.global().async {
             GKLocalPlayer.local.authenticateHandler = { controller, error in
                 DispatchQueue.main.async {
@@ -80,6 +81,10 @@ class GKHelper {
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
                         self.isAuthenticated = true
+                        
+                        GKLocalPlayer.local.unregisterAllListeners()
+                        GKLocalPlayer.local.register(self)
+                        
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
                             WKRUIPlayerImageManager.shared.connected(to: GKLocalPlayer.local, completion: nil)
                         }
@@ -101,6 +106,11 @@ class GKHelper {
     func acceptedInvite(code: String) {
         pendingInvite = code
         pushInviteToHandler()
+    }
+    
+    func player(_ player: GKPlayer, didAccept invite: GKInvite) {
+        _invite = invite
+        acceptedInvite(code: "_GKINVITE")
     }
 
 }

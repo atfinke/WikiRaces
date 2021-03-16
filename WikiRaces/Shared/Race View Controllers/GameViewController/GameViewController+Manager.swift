@@ -141,12 +141,12 @@ extension GameViewController {
             if resultsViewController?.state != .hostResults {
                 resultsViewController?.resultsInfo = resultsInfo
             }
-            if networkConfig.isHost {
+            if networkConfig.isHost, case .gameKitPrivate = networkConfig {
                 PlayerCloudKitLiveRaceManager.shared.updated(resultsInfo: resultsInfo)
             }
         case .hostResultsInfo(let resultsInfo):
             resultsViewController?.resultsInfo = resultsInfo
-            if networkConfig.isHost {
+            if networkConfig.isHost, case .gameKitPrivate = networkConfig {
                 PlayerCloudKitLiveRaceManager.shared.updated(resultsInfo: resultsInfo)
             }
         case .readyStates(let readyStates):

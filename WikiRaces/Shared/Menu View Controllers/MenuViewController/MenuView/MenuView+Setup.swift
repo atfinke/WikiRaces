@@ -22,21 +22,21 @@ extension MenuView {
 
         titleLabelConstraint = titleLabel.topAnchor.constraint(equalTo: topView.safeAreaLayoutGuide.topAnchor)
 
-        joinButtonWidthConstraint = joinButton.widthAnchor.constraint(equalToConstant: 0)
-        joinButtonHeightConstraint = joinButton.heightAnchor.constraint(equalToConstant: 0)
-        joinButtonLeftConstraint = joinButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 0)
-        createButtonWidthConstraint = createButton.widthAnchor.constraint(equalToConstant: 0)
+        standardRaceButtonWidthConstraint = standardRaceButton.widthAnchor.constraint(equalToConstant: 0)
+        standardRaceButtonHeightConstraint = standardRaceButton.heightAnchor.constraint(equalToConstant: 0)
+        standardRaceButtonLeftConstraint = standardRaceButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 0)
+        customRaceButtonWidthConstraint = customRaceButton.widthAnchor.constraint(equalToConstant: 0)
 
-        publicButtonWidthConstraint = publicButton.widthAnchor.constraint(equalToConstant: 0)
-        privateButtonLeftConstraint = publicButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 0)
-        privateButtonWidthConstraint = privateButton.widthAnchor.constraint(equalToConstant: 0)
+        joinButtonWidthConstraint = joinButton.widthAnchor.constraint(equalToConstant: 0)
+        createButtonLeftConstraint = joinButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 0)
+        createButtonWidthConstraint = createButton.widthAnchor.constraint(equalToConstant: 0)
         backButtonWidth = backButton.widthAnchor.constraint(equalToConstant: 30)
 
         statsButtonLeftConstraint = statsButton.leftAnchor.constraint(equalTo: topView.leftAnchor, constant: 0)
         statsButtonWidthConstraint = statsButton.widthAnchor.constraint(equalToConstant: 0)
 
         backButtonLeftConstraintForStats = backButton.leftAnchor.constraint(equalTo: statsButton.leftAnchor)
-        backButtonLeftConstraintForJoinOptions = backButton.leftAnchor.constraint(equalTo: publicButton.leftAnchor)
+        backButtonLeftConstraintForJoinOptions = backButton.leftAnchor.constraint(equalTo: joinButton.leftAnchor)
         backButtonLeftConstraintForJoinOptions.isActive = true
 
         let constraints = [
@@ -54,40 +54,40 @@ extension MenuView {
             subtitleLabel.widthAnchor.constraint(equalTo: topView.widthAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
 
-            joinButtonWidthConstraint!,
-            joinButtonHeightConstraint!,
-            joinButtonLeftConstraint!,
-            createButtonWidthConstraint!,
+            standardRaceButtonWidthConstraint!,
+            standardRaceButtonHeightConstraint!,
+            standardRaceButtonLeftConstraint!,
+            customRaceButtonWidthConstraint!,
 
-            publicButtonWidthConstraint!,
-            privateButtonLeftConstraint!,
-            privateButtonWidthConstraint!,
+            joinButtonWidthConstraint!,
+            createButtonLeftConstraint!,
+            createButtonWidthConstraint!,
             backButtonWidth!,
 
             statsButtonLeftConstraint!,
             statsButtonWidthConstraint!,
 
-            joinButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
+            standardRaceButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
                                             constant: 40.0),
-            publicButton.topAnchor.constraint(equalTo: joinButton.topAnchor),
-            statsButton.topAnchor.constraint(equalTo: joinButton.topAnchor),
+            joinButton.topAnchor.constraint(equalTo: standardRaceButton.topAnchor),
+            statsButton.topAnchor.constraint(equalTo: standardRaceButton.topAnchor),
 
-            createButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor),
-            publicButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor),
-            privateButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor),
-            statsButton.heightAnchor.constraint(equalTo: joinButton.heightAnchor),
+            customRaceButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
+            joinButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
+            createButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
+            statsButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
 
+            customRaceButton.leftAnchor.constraint(equalTo: standardRaceButton.leftAnchor),
             createButton.leftAnchor.constraint(equalTo: joinButton.leftAnchor),
-            privateButton.leftAnchor.constraint(equalTo: publicButton.leftAnchor),
-            createButton.topAnchor.constraint(equalTo: joinButton.bottomAnchor, constant: 20.0),
-            privateButton.topAnchor.constraint(equalTo: createButton.topAnchor),
+            customRaceButton.topAnchor.constraint(equalTo: standardRaceButton.bottomAnchor, constant: 20.0),
+            createButton.topAnchor.constraint(equalTo: customRaceButton.topAnchor),
 
-            plusButton.leftAnchor.constraint(equalTo: joinButton.leftAnchor),
-            plusButton.topAnchor.constraint(equalTo: createButton.bottomAnchor, constant: 20.0),
+            plusButton.leftAnchor.constraint(equalTo: standardRaceButton.leftAnchor),
+            plusButton.topAnchor.constraint(equalTo: customRaceButton.bottomAnchor, constant: 20.0),
             plusButton.widthAnchor.constraint(equalTo: backButton.widthAnchor),
             plusButton.heightAnchor.constraint(equalTo: backButton.widthAnchor),
 
-            backButton.topAnchor.constraint(equalTo: privateButton.bottomAnchor, constant: 20.0),
+            backButton.topAnchor.constraint(equalTo: createButton.bottomAnchor, constant: 20.0),
             backButton.heightAnchor.constraint(equalTo: backButton.widthAnchor, multiplier: 1)
         ]
         NSLayoutConstraint.activate(constraints)
@@ -95,25 +95,25 @@ extension MenuView {
 
     /// Sets up the buttons
     private func setupButtons() {
+        standardRaceButton.title = "standard"
+        standardRaceButton.translatesAutoresizingMaskIntoConstraints = false
+        standardRaceButton.addTarget(self, action: #selector(joinStandardRace), for: .touchUpInside)
+        topView.addSubview(standardRaceButton)
+
+        customRaceButton.title = "custom"
+        customRaceButton.translatesAutoresizingMaskIntoConstraints = false
+        customRaceButton.addTarget(self, action: #selector(showCustomOptions), for: .touchUpInside)
+        topView.addSubview(customRaceButton)
+
         joinButton.title = "join"
         joinButton.translatesAutoresizingMaskIntoConstraints = false
-        joinButton.addTarget(self, action: #selector(showJoinOptions), for: .touchUpInside)
+        joinButton.addTarget(self, action: #selector(joinCustomRace), for: .touchUpInside)
         topView.addSubview(joinButton)
 
         createButton.title = "create"
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        createButton.addTarget(self, action: #selector(createRace), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(createCustomRace), for: .touchUpInside)
         topView.addSubview(createButton)
-
-        publicButton.title = "public"
-        publicButton.translatesAutoresizingMaskIntoConstraints = false
-        publicButton.addTarget(self, action: #selector(joinPublicRace), for: .touchUpInside)
-        topView.addSubview(publicButton)
-
-        privateButton.title = "private"
-        privateButton.translatesAutoresizingMaskIntoConstraints = false
-        privateButton.addTarget(self, action: #selector(joinPrivateRace), for: .touchUpInside)
-        topView.addSubview(privateButton)
 
         statsButton.title = "stats"
         statsButton.translatesAutoresizingMaskIntoConstraints = false

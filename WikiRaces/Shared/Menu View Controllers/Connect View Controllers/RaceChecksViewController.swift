@@ -17,7 +17,7 @@ final class RaceChecksViewController: VisualEffectViewController {
     // MARK: - Types -
 
     enum Destination {
-        case joinPrivate(raceCode: String), joinPublic, hostPrivate
+        case joinCustom(raceCode: String), joinPublic, hostCustom
     }
 
     // MARK: - Properties -
@@ -134,13 +134,13 @@ final class RaceChecksViewController: VisualEffectViewController {
         let shouldFadeAlpha: Bool
         let controller: UIViewController
         switch self.destination {
-        case .joinPrivate(let raceCode):
+        case .joinCustom(let raceCode):
             shouldFadeAlpha = false
             controller = GKJoinViewController(raceCode: raceCode)
         case .joinPublic:
             shouldFadeAlpha = false
             controller = GKJoinViewController(raceCode: nil)
-        case .hostPrivate:
+        case .hostCustom:
             shouldFadeAlpha = true
             controller = GKHostViewController()
         }

@@ -103,7 +103,7 @@ class GKConnectViewController: VisualEffectViewController {
         })
     }
 
-    final func transitionToGame(for networkConfig: WKRPeerNetworkConfig, settings: WKRGameSettings) {
+    final func transitionToGame(for networkConfig: WKRPeerNetworkConfig, settings: WKRGameSettings, dismiss: UIViewController? = nil) {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
 
         guard !isShowingError else { return }
@@ -114,8 +114,17 @@ class GKConnectViewController: VisualEffectViewController {
         nav.modalPresentationStyle = .fullScreen
         nav.modalTransitionStyle = .crossDissolve
         nav.isModalInPresentation = true
-        present(nav, animated: true, completion: { [weak self] in
-            self?.view.alpha = 0
-        })
+        
+        func _present() {
+            present(nav, animated: true, completion: { [weak self] in
+                self?.view.alpha = 0
+            })
+        }
+        
+        if let dismiss = dismiss {
+            dismiss.dismiss(animated: true, completion: _present)
+        } else {
+            _present()
+        }
     }
 }

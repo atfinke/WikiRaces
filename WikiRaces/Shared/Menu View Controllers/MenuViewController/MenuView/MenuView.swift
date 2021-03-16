@@ -15,13 +15,13 @@ final class MenuView: UIView {
     // MARK: Types
 
     enum InterfaceState {
-        case joinOrCreate, noOptions, joinOptions, plusOptions, noInterface
+        case standardOrCustom, noOptions, customOptions, plusOptions, noInterface
     }
 
     enum ListenerUpdate {
         case presentDebug, presentLeaderboard
-        case presentJoinPublicRace, presentJoinPrivateRace
-        case presentCreateRace
+        case presentStandardRace, presentJoinCustomRace
+        case presentCreateCustomRace
         case presentAlert(UIAlertController)
         case presentStats, presentSubscription
     }
@@ -47,11 +47,11 @@ final class MenuView: UIView {
     /// The "Conquer..." label
     let subtitleLabel = UILabel()
 
+    let standardRaceButton = WKRUIButton()
+    let customRaceButton = WKRUIButton()
+
     let joinButton = WKRUIButton()
     let createButton = WKRUIButton()
-
-    let publicButton = WKRUIButton()
-    let privateButton = WKRUIButton()
 
     let backButton = UIButton()
     let plusButton = UIButton()
@@ -87,14 +87,14 @@ final class MenuView: UIView {
 
     /// Used for adjusting button widths and heights based on screen width
 
-    var joinButtonLeftConstraint: NSLayoutConstraint!
-    var joinButtonWidthConstraint: NSLayoutConstraint!
-    var joinButtonHeightConstraint: NSLayoutConstraint!
-    var createButtonWidthConstraint: NSLayoutConstraint!
+    var standardRaceButtonLeftConstraint: NSLayoutConstraint!
+    var standardRaceButtonWidthConstraint: NSLayoutConstraint!
+    var standardRaceButtonHeightConstraint: NSLayoutConstraint!
+    var customRaceButtonWidthConstraint: NSLayoutConstraint!
 
-    var publicButtonWidthConstraint: NSLayoutConstraint!
-    var privateButtonLeftConstraint: NSLayoutConstraint!
-    var privateButtonWidthConstraint: NSLayoutConstraint!
+    var joinButtonWidthConstraint: NSLayoutConstraint!
+    var createButtonLeftConstraint: NSLayoutConstraint!
+    var createButtonWidthConstraint: NSLayoutConstraint!
 
     var backButtonLeftConstraintForJoinOptions: NSLayoutConstraint!
     var backButtonLeftConstraintForStats: NSLayoutConstraint!
@@ -197,10 +197,10 @@ final class MenuView: UIView {
             rightMenuTile?.title = "RACES PLAYED"
         }
 
+        standardRaceButton.style = buttonStyle
+        customRaceButton.style = buttonStyle
         joinButton.style = buttonStyle
         createButton.style = buttonStyle
-        publicButton.style = buttonStyle
-        privateButton.style = buttonStyle
         statsButton.style = buttonStyle
 
         // Label Fonts
@@ -215,9 +215,9 @@ final class MenuView: UIView {
         }
 
         switch state {
-        case .joinOrCreate:
-            joinButtonLeftConstraint.constant = 30
-            privateButtonLeftConstraint.constant = -privateButton.frame.width * 2
+        case .standardOrCustom:
+            standardRaceButtonLeftConstraint.constant = 30
+            createButtonLeftConstraint.constant = -createButton.frame.width * 2
 
             statsButtonLeftConstraint.constant = -statsButton.frame.width
 
@@ -228,34 +228,34 @@ final class MenuView: UIView {
                 bottomViewAnchorConstraint.constant = 75
             }
         case .noOptions:
-            joinButtonLeftConstraint.constant = -createButton.frame.width
-            privateButtonLeftConstraint.constant = -privateButton.frame.width
+            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
+            createButtonLeftConstraint.constant = -createButton.frame.width
             statsButtonLeftConstraint.constant = -statsButton.frame.width
-        case .joinOptions:
-            joinButtonLeftConstraint.constant = -createButton.frame.width
-            privateButtonLeftConstraint.constant = 30
+        case .customOptions:
+            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
+            createButtonLeftConstraint.constant = 30
 
             backButtonLeftConstraintForStats.isActive = false
             backButtonLeftConstraintForJoinOptions.isActive = true
         case .noInterface:
             topViewLeftConstraint.constant = -topView.frame.width
             bottomViewAnchorConstraint.constant = bottomView.frame.height
-            joinButtonLeftConstraint.constant = 30
-            privateButtonLeftConstraint.constant = 30
+            standardRaceButtonLeftConstraint.constant = 30
+            createButtonLeftConstraint.constant = 30
         case .plusOptions:
-            joinButtonLeftConstraint.constant = -createButton.frame.width
+            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
             statsButtonLeftConstraint.constant = 30
 
             backButtonLeftConstraintForJoinOptions.isActive = false
             backButtonLeftConstraintForStats.isActive = true
         }
 
-        joinButtonHeightConstraint.constant = buttonHeight
-        joinButtonWidthConstraint.constant = buttonWidth + 10
-        createButtonWidthConstraint.constant = buttonWidth + 40
+        standardRaceButtonHeightConstraint.constant = buttonHeight
+        standardRaceButtonWidthConstraint.constant = buttonWidth + 10
+        customRaceButtonWidthConstraint.constant = buttonWidth + 40
 
-        publicButtonWidthConstraint.constant = buttonWidth + 34
-        privateButtonWidthConstraint.constant = buttonWidth + 44
+        joinButtonWidthConstraint.constant = buttonWidth + 34
+        createButtonWidthConstraint.constant = buttonWidth + 44
         statsButtonWidthConstraint.constant = buttonWidth + 20
 
         backButtonWidth.constant = buttonHeight - 10
@@ -276,7 +276,7 @@ final class MenuView: UIView {
         let action = UIAlertAction(title: "Find Public Race", style: .default, handler: { _ in
             PlayerFirebaseAnalytics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
             self.animateMenuOut {
-                self.listenerUpdate?(.presentJoinPublicRace)
+                self.listenerUpdate?(.presentStandardRace)
             }
         })
         alertController.addAction(action)
