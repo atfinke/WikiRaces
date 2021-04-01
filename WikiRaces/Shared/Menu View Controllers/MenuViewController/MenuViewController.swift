@@ -57,14 +57,17 @@ final internal class MenuViewController: UIViewController {
             case .presentDebug:
                 self.presentDebugController()
             case .presentLeaderboard:
-                let controller = GKGameCenterViewController()
-                controller.gameCenterDelegate = self
-                controller.viewState = .leaderboards
-                controller.leaderboardTimeScope = .allTime
-                self.present(controller, animated: true, completion: nil)
-            case .presentJoinPublicRace:
-                self.joinRace(raceCode: nil)
-            case .presentJoinPrivateRace:
+                if #available(iOS 14.0, *) {
+                    let controller = GKGameCenterViewController(state: .leaderboards)
+                    controller.gameCenterDelegate = self
+                    self.present(controller, animated: true, completion: nil)
+                } else {
+                    #warning("fix")
+                }
+                
+            case .presentStandardRace:
+                self.joinRace(invite: nil)
+            case .presentJoinCustomRace:
                 let controller = UIAlertController(
                     title: "Join Private Race",
                     message: "Enter the race code",
@@ -73,8 +76,8 @@ final internal class MenuViewController: UIViewController {
                     textField.placeholder = "Race Code"
                 }
                 let action = UIAlertAction(title: "Join", style: .default) { [weak controller, weak self] _ in
-                    guard let controller = controller, let code = controller.textFields?.first?.text else { return }
-                    self?.joinRace(raceCode: code)
+                    guard let controller = controller, let raceCode = controller.textFields?.first?.text else { return }
+                    self?.joinRace(invite: .raceCode(raceCode))
                 }
                 controller.addAction(action)
 
@@ -83,7 +86,7 @@ final internal class MenuViewController: UIViewController {
                 }
                 controller.addAction(cancelAction)
                 self.present(controller, animated: true, completion: nil)
-            case .presentCreateRace:
+            case .presentCreateCustomRace:
                 self.createRace()
             case .presentAlert(let alert):
                 self.present(alert, animated: true, completion: nil)
@@ -115,7 +118,16 @@ final internal class MenuViewController: UIViewController {
         menuView.animateMenuIn(completion: {
             if Defaults.shouldPromptForRating {
                 #if !DEBUG
-                SKStoreReviewController.requestReview()
+                
+                if #available(iOS 14.0, *) {
+                    if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+                    }
+                } else {
+                    #warning("fix")
+                }
+                
+                
                 #endif
             }
         })
@@ -146,7 +158,7 @@ final internal class MenuViewController: UIViewController {
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "Join", style: .default) { [weak self] _ in
                 DispatchQueue.main.async {
-                    self?.joinRace(raceCode: raceCode)
+                    self?.joinRace(invite: .raceCode(raceCode))
                 }
             }
             controller.addAction(action)
@@ -175,6 +187,8 @@ final internal class MenuViewController: UIViewController {
     // MARK: - Other -
 
     func prepareForRace(completion: @escaping () -> Void) {
+        GKMatchmaker.shared().cancel()
+        WKRSeenFinalArticlesStore.resetRemotePlayersSeenFinalArticles()
         UIApplication.shared.isIdleTimerDisabled = true
         nearbyRaceListener.stop()
         resignFirstResponder()
@@ -192,16 +206,28 @@ final internal class MenuViewController: UIViewController {
         }
     }
 
-    func joinRace(raceCode: String?) {
+    func joinRace(invite: GKHelper.Invite?) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        UIColor.systemBackground.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+ 
         prepareForRace(completion: {
             self.menuView.animateMenuOut {
-                let destination: RaceChecksViewController.Destination
-                if let code = raceCode {
-                    destination = .joinPrivate(raceCode: code)
+                let destination: PreRaceViewController.Destination
+                if let invite = invite {
+                    switch invite {
+                    case .raceCode(let raceCode):
+                        destination = .joinCustom(raceCode: raceCode)
+                    case .gkInvite(let invite):
+                        destination = .joinStandard(invite: invite)
+                    }
                 } else {
-                    destination = .joinPublic
+                    destination = .joinStandard(invite: nil)
                 }
-                let controller = RaceChecksViewController(destination: destination)
+                let controller = PreRaceConnectionTestViewController(destination: destination)
                 self.navigationController?.pushViewController(controller, animated: false)
             }
         })
@@ -220,7 +246,7 @@ final internal class MenuViewController: UIViewController {
             present(nav, animated: false, completion: nil)
         } else {
             prepareForRace(completion: {
-                let controller = RaceChecksViewController(destination: .hostPrivate)
+                let controller = PreRaceConnectionTestViewController(destination: .hostCustom)
                 self.navigationController?.pushViewController(controller, animated: false)
             })
         }

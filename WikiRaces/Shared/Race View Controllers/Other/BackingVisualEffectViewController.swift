@@ -14,12 +14,11 @@ internal class BackingVisualEffectViewController: UIViewController {
     // MARK: - Properties
 
     private let visualEffectView = UIVisualEffectView(effect: UIBlurEffect.wkrBlurEffect)
-    final var contentView: UIView {
-        return visualEffectView.contentView
-    }
 
     private var hostingView: UIView?
+    private var contentView = UIView()
     private let backingAlphaView = UIView()
+    
     var backingAlpha: CGFloat {
         set {
             backingAlphaView.alpha = newValue
@@ -39,10 +38,9 @@ internal class BackingVisualEffectViewController: UIViewController {
         nav.navigationBar.isTranslucent = true
         nav.view.backgroundColor = .clear
 
-        backingAlphaView.backgroundColor = UIColor.systemBackground
-
-        view.addSubview(backingAlphaView)
         view.addSubview(visualEffectView)
+        view.addSubview(backingAlphaView)
+        view.addSubview(contentView)
     }
 
     // MARK: - Interface
@@ -58,6 +56,10 @@ internal class BackingVisualEffectViewController: UIViewController {
         super.viewWillLayoutSubviews()
         backingAlphaView.frame = view.frame
         visualEffectView.frame = view.frame
+        contentView.frame = view.frame
         hostingView?.frame = view.frame
+        
+        backingAlphaView.backgroundColor = UIColor.wkrBackgroundColor(for: traitCollection)
+
     }
 }

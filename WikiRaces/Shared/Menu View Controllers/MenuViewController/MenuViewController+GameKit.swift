@@ -7,6 +7,7 @@
 //
 
 import GameKit
+import os.log
 
 extension MenuViewController: GKGameCenterControllerDelegate {
 
@@ -16,13 +17,14 @@ extension MenuViewController: GKGameCenterControllerDelegate {
         func auth(result: GKHelper.AuthResult) {
             switch result {
             case .error(let error):
-                let info = "attemptGlobalAuthentication: " + error.localizedDescription
-                PlayerFirebaseAnalytics.log(event: .error(info))
+                os_log("%{public}s: error: %{public}s", log: .gameKit, type: .info, #function, error.localizedDescription)
             case .controller(let controller):
+                os_log("%{public}s: controller", log: .gameKit, type: .info, #function)
                 if presentedViewController == nil, self.menuView.state != .noInterface {
                     present(controller, animated: true, completion: nil)
                 }
             case .isAuthenticated:
+                os_log("%{public}s: isAuthenticated", log: .gameKit, type: .info, #function)
                 let metrics = PlayerCloudKitStatsManager.shared
                 metrics.log(value: GKLocalPlayer.local.alias, for: "GCAliases")
             }
@@ -32,15 +34,16 @@ extension MenuViewController: GKGameCenterControllerDelegate {
     }
 
     func setupInviteHandler() {
-        GKHelper.shared.inviteHandler = { code in
-            self.joinRace(raceCode: code)
+        GKHelper.shared.inviteHandler = { invite in
+            DispatchQueue.main.async {
+                self.joinRace(invite: invite)
+            }
         }
     }
 
     // MARK: - GKGameCenterControllerDelegate -
 
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         dismiss(animated: true) {
             self.menuView.animateMenuIn()
         }

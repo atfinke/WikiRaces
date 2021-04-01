@@ -9,24 +9,30 @@
 import Foundation
 import GameKit
 import WKRUIKit
+import os.log
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebaseAnalytics
-import FirebaseCrashlytics
 #endif
 
-class GKHelper {
+class GKHelper: NSObject, GKLocalPlayerListener {
 
     enum AuthResult {
         case controller(UIViewController)
         case error(Error)
         case isAuthenticated
     }
+    
+    enum Invite {
+        case raceCode(String)
+        case gkInvite(GKInvite)
+    }
 
     static let shared = GKHelper()
+    static let gkInviteCode = "GKHelper.GKInvite"
 
-    private var pendingInvite: String?
-    var inviteHandler: ((String) -> Void)? {
+    private var pendingInvite: Invite?
+    var inviteHandler: ((Invite) -> Void)? {
         didSet {
             pushInviteToHandler()
         }
@@ -43,7 +49,7 @@ class GKHelper {
 
     // MARK: - Initalization -
 
-    private init() {}
+    private override init() {}
 
     // MARK: - Handlers -
 
@@ -80,13 +86,16 @@ class GKHelper {
                     } else if GKLocalPlayer.local.isAuthenticated {
                         self.pendingResult = .isAuthenticated
                         self.isAuthenticated = true
+                        
+                        GKLocalPlayer.local.unregisterAllListeners()
+                        GKLocalPlayer.local.register(self)
+                        
                         DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
                             WKRUIPlayerImageManager.shared.connected(to: GKLocalPlayer.local, completion: nil)
                         }
 
                         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                         let playerName = GKLocalPlayer.local.alias
-                        Crashlytics.crashlytics().setUserID(playerName)
                         Analytics.setUserProperty(playerName, forName: "playerName")
                         #endif
                     } else {
@@ -99,7 +108,14 @@ class GKHelper {
     }
 
     func acceptedInvite(code: String) {
-        pendingInvite = code
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, code)
+        pendingInvite = .raceCode(code)
+        pushInviteToHandler()
+    }
+    
+    func player(_ player: GKPlayer, didAccept invite: GKInvite) {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        pendingInvite = .gkInvite(invite)
         pushInviteToHandler()
     }
 

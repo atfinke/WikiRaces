@@ -36,7 +36,7 @@ public class WKRPlayerRaceStats: Codable, Equatable {
     func reset() {
         helpNeeded = 0
         update(history: nil, state: .connecting, pixels: 0)
-        statsDictionary["Help Needed"] = "0 Times"
+        statsDictionary["Help Needed"] = "0x"
     }
 
     func update(history: WKRHistory?, state: WKRPlayerState, pixels: Int) {
@@ -52,13 +52,13 @@ public class WKRPlayerRaceStats: Codable, Equatable {
 
     func neededHelp() {
         helpNeeded += 1
-        statsDictionary["Help Needed"] = "\(helpNeeded) Time" + (helpNeeded == 1 ? "" : "s")
+        statsDictionary["Help Needed"] = "\(helpNeeded)x"
     }
 
     // MARK: - Helpers -
 
     private func linksMissed(history: WKRHistory?, state: WKRPlayerState) -> String {
-        guard let history = history else { return "0 Links" }
+        guard let history = history else { return "0x" }
 
         var linkCount = history.entries.filter({ $0.linkHere }).count
         // on a page with the link
@@ -73,7 +73,7 @@ public class WKRPlayerRaceStats: Codable, Equatable {
             history.entries[history.entries.count - 2].linkHere {
             linkCount -= 1
         }
-        return "\(linkCount) Link" + (linkCount == 1 ? "" : "s")
+        return "\(linkCount)x"
     }
 
     private func avergeTimeSpent(history: WKRHistory?) -> String {

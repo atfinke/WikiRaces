@@ -9,6 +9,7 @@
 import CloudKit
 import GameKit
 import StoreKit
+import os.log
 
 import WKRKit
 
@@ -251,41 +252,6 @@ final internal class PlayerStatsManager {
         ubiquitousStoreSync()
         leaderboardSync()
         playerDatabaseSync()
-
-        DispatchQueue.global(qos: .utility).async {
-            let manager = FileManager.default
-            guard let docs = manager.urls(for: .documentDirectory, in: .userDomainMask).last else { fatalError() }
-            let pagesViewedDir = docs.appendingPathComponent("PagesViewed")
-            try? manager.createDirectory(at: pagesViewedDir, withIntermediateDirectories: false, attributes: nil)
-
-            let totalsFileURL = pagesViewedDir.appendingPathComponent("Totals.txt")
-            var seenPages: [WKRPage: Int]
-            if let data = try? Data(contentsOf: totalsFileURL),
-                let diskPages = try? JSONDecoder().decode([WKRPage: Int].self, from: data) {
-                seenPages = diskPages
-            } else {
-                seenPages = [:]
-            }
-
-            for page in pages {
-                if let existing = seenPages[page] {
-                    seenPages[page] = existing + 1
-                } else {
-                    seenPages[page] = 1
-                }
-            }
-
-            let encoder = JSONEncoder()
-            if let data = try? encoder.encode(seenPages) {
-                try? data.write(to: totalsFileURL)
-            }
-
-            let date = Date().timeIntervalSince1970.description.split(separator: ".")[0]
-            let url = pagesViewedDir.appendingPathComponent(date + ".txt")
-            if let data = try? encoder.encode(pages) {
-                try? data.write(to: url)
-            }
-        }
     }
 
     // MARK: - Syncing
@@ -406,40 +372,32 @@ final internal class PlayerStatsManager {
         let pagesViewed = multiplayerPages
         let pixelsScrolled = multiplayerPixelsScrolled
         
-        let pointsScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.points")
-        pointsScore.value = Int64(points)
-
-        let racesScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.races")
-        racesScore.value = Int64(races)
-
-        let totalTimeScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.totaltime")
-        totalTimeScore.value = Int64(totalTime / 60)
-
-        let pagesViewedScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.pages")
-        pagesViewedScore.value = Int64(pagesViewed)
-
-        let pixelsScrolledScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.pixelsscrolled")
-        pixelsScrolledScore.value = Int64(pixelsScrolled)
-
-        var scores = [
-            pointsScore,
-            racesScore,
-            totalTimeScore,
-            totalTimeScore,
-            pagesViewedScore,
-            pixelsScrolledScore
-        ]
-
+        func submit(score: Int, leaderboard: String) {
+            if #available(iOS 14.0, *) {
+                GKLeaderboard.submitScore(
+                    score,
+                    context: 0,
+                    player: GKLocalPlayer.local,
+                    leaderboardIDs: [leaderboard],
+                    completionHandler: { error in
+                        os_log("%{public}s: %{public}s (%{public}ld) with error: %{public}s", log: .gameKit, type: .info, #function, leaderboard, score, error?.localizedDescription ?? "-")
+                    })
+            } else {
+                #warning("fix")
+            }
+        }
+        
+        submit(score: Int(points), leaderboard: "com.andrewfinke.wikiraces.points")
+        submit(score: Int(races), leaderboard: "com.andrewfinke.wikiraces.races")
+        submit(score: Int(totalTime / 60), leaderboard: "com.andrewfinke.wikiraces.totaltime")
+        submit(score: Int(pagesViewed), leaderboard: "com.andrewfinke.wikiraces.pages")
+        submit(score: Int(pixelsScrolled), leaderboard: "com.andrewfinke.wikiraces.pixelsscrolled")
+        
         if races >= 5 {
-            let averageScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.ppr")
-            averageScore.value = Int64(average * 1_000)
-            scores.append(averageScore)
+            submit(score: Int(average * 1_000), leaderboard: "com.andrewfinke.wikiraces.ppr")
         }
         if fastestTime > 0 {
-            let fastestTimeScore = GKScore(leaderboardIdentifier: "com.andrewfinke.wikiraces.fastesttime")
-            fastestTimeScore.value = Int64(fastestTime)
-            scores.append(fastestTimeScore)
+            submit(score: Int(fastestTime), leaderboard: "com.andrewfinke.wikiraces.fastesttime")
         }
-        GKScore.report(scores, withCompletionHandler: nil)
     }
 }

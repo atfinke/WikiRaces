@@ -14,7 +14,7 @@ extension ResultsViewController {
 
     override var keyCommands: [UIKeyCommand]? {
         var commands = [UIKeyCommand]()
-        if model.buttonEnabled {
+        if model.isButtonEnabled {
             let command = UIKeyCommand(title: "Ready Up",
                                        action: #selector(keyboardAttemptReadyUp),
                                        input: " ",
@@ -33,7 +33,7 @@ extension ResultsViewController {
 
     @objc
     private func keyboardAttemptReadyUp() {
-        guard model.buttonEnabled else { return }
+        guard model.isButtonEnabled else { return }
         readyUpButtonPressed()
     }
 

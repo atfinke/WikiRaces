@@ -13,27 +13,49 @@ extension MenuView {
 
     // MARK: - Actions -
 
-    /// Join button pressed
+    /// Custom button pressed
     @objc
-    func showJoinOptions() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
+    func showCustomOptions() {
         UISelectionFeedbackGenerator().selectionChanged()
-        animateOptionsOutAndTransition(to: .joinOptions)
+        animateOptionsOutAndTransition(to: .customOptions)
     }
 
     @objc
-    func createRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-        PlayerFirebaseAnalytics.log(event: .revampPressedHost)
+    func joinStandardRace() {
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPublic)
+        PlayerUserDefaultsStat.gkPressedJoin.increment()
+        
+        UISelectionFeedbackGenerator().selectionChanged()
+        
+        animateMenuOut {
+            self.listenerUpdate?(.presentStandardRace)
+        }
+    }
+
+    @objc
+    func joinCustomRace() {
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
+        PlayerUserDefaultsStat.mpcPressedJoin.increment()
 
         UISelectionFeedbackGenerator().selectionChanged()
 
+        animateMenuOut {
+            self.listenerUpdate?(.presentJoinCustomRace)
+        }
+    }
+
+    @objc
+    func createCustomRace() {
+        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
+        PlayerUserDefaultsStat.mpcPressedHost.increment()
+
+        UISelectionFeedbackGenerator().selectionChanged()
+        
         PlayerCloudKitLiveRaceManager.shared.isCloudEnabled { isEnabled in
             DispatchQueue.main.async {
                 if isEnabled || Defaults.isFastlaneSnapshotInstance {
                     self.animateMenuOut {
-                        self.listenerUpdate?(.presentCreateRace)
+                        self.listenerUpdate?(.presentCreateCustomRace)
                     }
                 } else {
                     let message = "You must have iCloud Drive enabled for WikiRaces to create a private race. You can still join any race."
@@ -43,7 +65,7 @@ extension MenuView {
                     #if targetEnvironment(simulator)
                     let action = UIAlertAction(title: "SIM BYPASS", style: .default) { _ in
                         self.animateMenuOut {
-                            self.listenerUpdate?(.presentCreateRace)
+                            self.listenerUpdate?(.presentCreateCustomRace)
                         }
                     }
                     alertController.addAction(action)
@@ -58,52 +80,19 @@ extension MenuView {
     }
 
     @objc
-    func joinPublicRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPublic)
-        PlayerUserDefaultsStat.gkPressedJoin.increment()
-
-        UISelectionFeedbackGenerator().selectionChanged()
-
-        guard !promptGlobalRacesPopularity() else {
-            return
-        }
-
-        animateMenuOut {
-            self.listenerUpdate?(.presentJoinPublicRace)
-        }
-    }
-
-    @objc
-    func joinPrivateRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-        PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
-        PlayerUserDefaultsStat.mpcPressedJoin.increment()
-
-        UISelectionFeedbackGenerator().selectionChanged()
-
-        animateMenuOut {
-            self.listenerUpdate?(.presentJoinPrivateRace)
-        }
-    }
-
-    @objc
     func backButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
-        animateOptionsOutAndTransition(to: .joinOrCreate)
+        animateOptionsOutAndTransition(to: .standardOrCustom)
     }
 
     @objc
     func plusButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .plusOptions)
     }
 
     @objc
     func statsButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         if PlusStore.shared.isPlus {
             animateMenuOut {
@@ -119,7 +108,6 @@ extension MenuView {
     /// - Parameter sender: The pressed tile
     @objc
     func menuTilePressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         animateMenuOut {
             self.listenerUpdate?(.presentLeaderboard)
@@ -127,7 +115,6 @@ extension MenuView {
     }
 
     func triggeredEasterEgg() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         medalView.showMedals()
     }
 
@@ -139,7 +126,7 @@ extension MenuView {
 
         movingPuzzleView.start()
 
-        state = .joinOrCreate
+        state = .standardOrCustom
         setNeedsLayout()
 
         UIView.animate(

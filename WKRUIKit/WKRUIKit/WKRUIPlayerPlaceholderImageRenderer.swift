@@ -17,7 +17,6 @@ struct WKRUIPlayerPlaceholderImageRenderer {
         .systemOrange,
         .systemPink,
         .systemPurple,
-        .systemTeal,
         .systemIndigo
     ]
 

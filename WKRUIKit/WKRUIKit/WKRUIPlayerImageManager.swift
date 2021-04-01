@@ -33,6 +33,7 @@ public class WKRUIPlayerImageManager {
 
     public static var shared = WKRUIPlayerImageManager()
 
+    private var completionHandlers = [String: [(() -> Void)?]]()
     private var connectedPlayerImages = [String: UIImage]()
     private var localPlayerImage: UIImage?
 
@@ -43,9 +44,33 @@ public class WKRUIPlayerImageManager {
     private init() {}
 
     // MARK: - Helpers -
+    
+    public func connected(to players: [GKPlayer]) {
+        for player in players {
+            connected(to: player, completion: nil)
+        }
+    }
 
     public func connected(to player: GKPlayer, completion: (() -> Void)?) {
+        func completed() {
+            DispatchQueue.main.async {
+                guard let handlers = self.completionHandlers[player.alias] else {
+                    return
+                }
+                handlers.forEach { $0?() }
+                self.completionHandlers[player.alias] = nil
+            }
+        }
+        
         DispatchQueue.main.async {
+            if var handlers = self.completionHandlers[player.alias] {
+                handlers.append(completion)
+                self.completionHandlers[player.alias] = handlers
+                return
+            } else {
+                self.completionHandlers[player.alias] = [completion]
+            }
+            
             let placeholder = WKRUIPlayerPlaceholderImageRenderer.render(name: player.displayName)
             os_log("%{public}s: generated placeholder for %{public}s", log: .imageManager, type: .info, #function, player.alias)
 
@@ -54,7 +79,7 @@ public class WKRUIPlayerImageManager {
             player.loadPhoto(for: .small) { photo, _ in
                 guard let photo = photo else {
                     os_log("%{public}s: load photo failed for %{public}s", log: .imageManager, type: .error, #function, player.alias)
-                    completion?()
+                    completed()
                     return
                 }
                 os_log("%{public}s: load photo success for %{public}s", log: .imageManager, type: .info, #function, player.alias)
@@ -65,7 +90,7 @@ public class WKRUIPlayerImageManager {
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     self.update(image: photo, for: player.alias, isPlaceholder: false)
-                    completion?()
+                    completed()
                 }
             }
         }

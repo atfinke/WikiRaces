@@ -92,7 +92,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
         contentViewHosting.didMove(toParent: self)
 
         model.footerTopText = "TAP PLAYER TO VIEW HISTORY"
-        model.footerBottomText = "WAITING FOR PLAYERS TO FINISH"
+        model.footerBottomStartText = "WAITING FOR PLAYERS TO FINISH"
 
         let shareResultsBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action,
                                                         target: self,
@@ -115,7 +115,8 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
             return
         }
 
-        model.footerOpacity = 0
+        model.footerTextOpacity = 0
+        model.footerDividerOpacity = 0
 
         if isPlayerHost, let results = resultsInfo {
             DispatchQueue.global().async {
@@ -134,12 +135,8 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
 
     private func updatedTime(oldTime: Int) {
         if oldTime == 100 {
-            model.footerOpacity = 0
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.model.footerTopText = "TAP PLAYER TO VIEW HISTORY"
-                self.model.footerBottomText = "NEXT ROUND STARTS IN " + self.timeRemaining.description + " S"
-            }
-
+            model.footerTextOpacity = 0
+            
             guard let localPlayer = localPlayer else { return }
             let resultsPlayer = resultsInfo?.raceRankings().first(where: { $0 == localPlayer })
 
@@ -153,10 +150,12 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
                 self?.navigationItem.leftBarButtonItem?.isEnabled = true
             }
         } else {
-            model.footerBottomText = "NEXT ROUND STARTS IN " + timeRemaining.description + " S"
+            model.footerBottomStartText = "NEXT ROUND STARTS IN "
+            model.footerBottomNumberText = timeRemaining.description
+            model.footerBottomEndText = " S"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 guard self.state != .points else { return }
-                self.model.footerOpacity = 1
+                self.model.footerTextOpacity = 1
             }
         }
     }
@@ -206,17 +205,15 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
         if !showReady {
             navigationItem.leftBarButtonItem?.isEnabled = showReady
         }
-        model.buttonEnabled = showReady
+        model.isButtonEnabled = showReady
     }
 
     func readyUpButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
         UISelectionFeedbackGenerator().selectionChanged()
 
         navigationItem.leftBarButtonItem?.isEnabled = false
         listenerUpdate?(.readyButtonPressed)
-        model.buttonEnabled = false
+        model.isButtonEnabled = false
 
         PlayerFirebaseAnalytics.log(event: .pressedReadyButton, attributes: ["Time": timeRemaining as Any])
     }

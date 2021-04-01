@@ -45,19 +45,19 @@ final internal class HistoryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         pageLabel.textAlignment = .left
-        pageLabel.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        pageLabel.font = UIFont.tableViewCellTitle()
         pageLabel.numberOfLines = 0
         pageLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(pageLabel)
 
         linkHereLabel.text = "Link Here"
-        linkHereLabel.textColor = .lightGray
         linkHereLabel.textAlignment = .left
-        linkHereLabel.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        linkHereLabel.font = UIFont.tableViewCellDetail()
         linkHereLabel.numberOfLines = 1
         linkHereLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(linkHereLabel)
 
+        detailLabel.font = UIFont.tableViewCellDetail()
         detailLabel.textAlignment = .right
         detailLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -83,13 +83,30 @@ final internal class HistoryTableViewCell: UITableViewCell {
         let textColor = UIColor.wkrTextColor(for: traitCollection)
         tintColor = textColor
         pageLabel.textColor = textColor
-        detailLabel.textColor = textColor
+        detailLabel.textColor = .wkrSubtitleTextColor(for: traitCollection)
+        linkHereLabel.textColor = .wkrSubtitleTextColor(for: traitCollection)
         activityIndicatorView.color = .wkrActivityIndicatorColor(for: traitCollection)
     }
 
     // MARK: - Constraints -
 
     private func setupConstraints() {
+        let topMarginConstraint = NSLayoutConstraint(item: pageLabel,
+                                                       attribute: .top,
+                                                       relatedBy: .equal,
+                                                       toItem: self,
+                                                       attribute: .topMargin,
+                                                       multiplier: 1.0,
+                                                       constant: 0.0)
+        
+        let bottomMarginConstraint = NSLayoutConstraint(item: linkHereLabel,
+                                                       attribute: .bottom,
+                                                       relatedBy: .equal,
+                                                       toItem: self,
+                                                       attribute: .bottomMargin,
+                                                       multiplier: 1.0,
+                                                       constant: 0.0)
+        
         let leftMarginConstraint = NSLayoutConstraint(item: pageLabel,
                                                       attribute: .left,
                                                       relatedBy: .equal,
@@ -112,13 +129,13 @@ final internal class HistoryTableViewCell: UITableViewCell {
 
         let constraints = [
             leftMarginConstraint,
-            pageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            topMarginConstraint,
             pageLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 15),
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: detailLabel.leftAnchor, constant: -15),
             pageLabel.rightAnchor.constraint(lessThanOrEqualTo: activityIndicatorView.leftAnchor, constant: -15),
 
             linkLabelTopConstraint,
-            linkHereLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            bottomMarginConstraint,
             linkHereLabel.leftAnchor.constraint(equalTo: pageLabel.leftAnchor),
             linkHereLabel.rightAnchor.constraint(equalTo: pageLabel.rightAnchor),
 

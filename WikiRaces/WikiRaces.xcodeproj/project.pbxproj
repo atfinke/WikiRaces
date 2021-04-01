@@ -14,9 +14,6 @@
 		140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */; };
 		1410DB3B1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
 		1410DB3D1F4F510900F5CAD7 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */; };
-		1414280321FC18F600C48788 /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
-		1414280721FC394600C48788 /* GKConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* GKConnectViewController.swift */; };
-		1414280B21FC437000C48788 /* GKJoinViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */; };
 		141B3ED524A3C08000BD18C7 /* ListFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED024A3C08000BD18C7 /* ListFooterView.swift */; };
 		141B3ED624A3C08000BD18C7 /* ListFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED024A3C08000BD18C7 /* ListFooterView.swift */; };
 		141B3ED724A3C08000BD18C7 /* ListFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED024A3C08000BD18C7 /* ListFooterView.swift */; };
@@ -46,6 +43,11 @@
 		142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */; };
 		142ABE1024600ABE008E7F77 /* MagicSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */; };
 		142ABE16246013BC008E7F77 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 142ABE15246013BC008E7F77 /* StoreKit.framework */; };
+		142B4D1026475F430020249E /* WKRSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B4D0C26475F430020249E /* WKRSceneDelegate.swift */; };
+		142B4D1226475F430020249E /* WKRSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B4D0C26475F430020249E /* WKRSceneDelegate.swift */; };
+		142B4D1426475F430020249E /* WKRSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B4D0C26475F430020249E /* WKRSceneDelegate.swift */; };
+		142B4D2F264762550020249E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B4D2E264762550020249E /* SceneDelegate.swift */; };
+		142B4D35264762EA0020249E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142B4D34264762E90020249E /* SceneDelegate.swift */; };
 		142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F714E210C33FC00C66558 /* MenuViewController+KB.swift */; };
 		142F7157210C375F00C66558 /* GameViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F7156210C375F00C66558 /* GameViewController+KB.swift */; };
 		1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437C51E22285FE30003E53B /* HistoryTableViewStatsCell.swift */; };
@@ -56,9 +58,6 @@
 		143BB7151F60AEC900D00541 /* PlayerStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143A8BBB1F58746800580AA2 /* PlayerStatsManager.swift */; };
 		143BB7181F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
 		143BB7191F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
-		143CE07E24A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */; };
-		143CE07F24A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */; };
-		143CE08024A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */; };
 		1446C1D924A334C2000A0ED3 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446C1D824A334C2000A0ED3 /* Defaults.swift */; };
 		1446C1DA24A334C2000A0ED3 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446C1D824A334C2000A0ED3 /* Defaults.swift */; };
 		1446C1DB24A334C2000A0ED3 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1446C1D824A334C2000A0ED3 /* Defaults.swift */; };
@@ -72,11 +71,8 @@
 		14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
 		14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
 		14495D8A21FF9A0500CAA129 /* ResultRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14495D8721FF9A0500CAA129 /* ResultRenderer.swift */; };
-		144A1029202FC79B003DB51A /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1027202FC79B003DB51A /* VisualEffectViewController.swift */; };
 		144A102A202FC79B003DB51A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1028202FC79B003DB51A /* HelpViewController.swift */; };
-		144A102B202FC7A1003DB51A /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1027202FC79B003DB51A /* VisualEffectViewController.swift */; };
 		144A102C202FC7A1003DB51A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1028202FC79B003DB51A /* HelpViewController.swift */; };
-		144A102D202FC7A2003DB51A /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1027202FC79B003DB51A /* VisualEffectViewController.swift */; };
 		144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1028202FC79B003DB51A /* HelpViewController.swift */; };
 		144A5AEC1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
 		144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */; };
@@ -93,9 +89,6 @@
 		144F33B624C345AB006E4437 /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */; };
 		144F33B824C345AB006E4437 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
 		144F33B924C345AB006E4437 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
-		144F33BC24C345AE006E4437 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
-		144F33BD24C345AE006E4437 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
-		144F33BE24C345AE006E4437 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
 		14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
 		14584BC3220B6BE700D63428 /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
@@ -119,10 +112,6 @@
 		1475C13524A6554000882F1F /* ResultsContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED424A3C08000BD18C7 /* ResultsContentView.swift */; };
 		1475C13624A6554000882F1F /* ResultsItemContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED324A3C08000BD18C7 /* ResultsItemContentView.swift */; };
 		1475C13724A6554000882F1F /* ListFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141B3ED024A3C08000BD18C7 /* ListFooterView.swift */; };
-		1475C13824A6555A00882F1F /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1027202FC79B003DB51A /* VisualEffectViewController.swift */; };
-		1475C13924A6555B00882F1F /* VisualEffectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A1027202FC79B003DB51A /* VisualEffectViewController.swift */; };
-		1475C13A24A6556200882F1F /* GKConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* GKConnectViewController.swift */; };
-		1475C13B24A6556300882F1F /* GKConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* GKConnectViewController.swift */; };
 		1475C13C24A6556900882F1F /* PlayerFirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerFirebaseAnalytics.swift */; };
 		1475C13D24A6556A00882F1F /* PlayerFirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerFirebaseAnalytics.swift */; };
 		1475C13E24A6557100882F1F /* GKMatchRequest+WKR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F2EC9424A64A8F007A4C97 /* GKMatchRequest+WKR.swift */; };
@@ -173,12 +162,6 @@
 		1475C16E24A655DC00882F1F /* MenuViewController+GameKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */; };
 		1475C16F24A655DC00882F1F /* MenuViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F714E210C33FC00C66558 /* MenuViewController+KB.swift */; };
 		1475C17024A655DC00882F1F /* MenuViewController+KB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F714E210C33FC00C66558 /* MenuViewController+KB.swift */; };
-		1475C17124A655E800882F1F /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
-		1475C17224A655E800882F1F /* GKJoinViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */; };
-		1475C17324A655E800882F1F /* GKJoinViewController+PublicRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */; };
-		1475C17424A655E900882F1F /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
-		1475C17524A655E900882F1F /* GKJoinViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */; };
-		1475C17624A655E900882F1F /* GKJoinViewController+PublicRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */; };
 		1475C17724A655EC00882F1F /* CustomRaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DA762462900300EC9817 /* CustomRaceController.swift */; };
 		1475C17824A655EC00882F1F /* CustomRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */; };
 		1475C17924A655EC00882F1F /* CustomRaceNotificationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */; };
@@ -186,11 +169,11 @@
 		1475C17B24A655EC00882F1F /* CustomRaceOtherController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CA245FAE5500F3653F /* CustomRaceOtherController.swift */; };
 		1475C17C24A655EC00882F1F /* CustomRacePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CB245FAE5500F3653F /* CustomRacePageViewController.swift */; };
 		1475C17D24A655F000882F1F /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
-		1475C17E24A655F000882F1F /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		1475C17E24A655F000882F1F /* StatsCountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */; };
 		1475C17F24A655F100882F1F /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
-		1475C18024A655F100882F1F /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		1475C18024A655F100882F1F /* StatsCountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */; };
 		1475C18124A655F100882F1F /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
-		1475C18224A655F100882F1F /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		1475C18224A655F100882F1F /* StatsCountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */; };
 		1475C18324A655F500882F1F /* PlusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABDFD24600576008E7F77 /* PlusView.swift */; };
 		1475C18424A655F500882F1F /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE0524600A74008E7F77 /* PlusStore.swift */; };
 		1475C18524A655F500882F1F /* ActivityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142ABE012460057C008E7F77 /* ActivityButton.swift */; };
@@ -296,6 +279,50 @@
 		149FF8911F362BF1000A5D96 /* WikiRacesScreenshots.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */; };
 		14A7C9B31F65A9EB00980E4D /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 143BB7321F60DE9300D00541 /* Settings.bundle */; };
 		14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E1B1A01F798A520082F4FA /* CloudKit.framework */; };
+		14AD52D8263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */; };
+		14AD52D9263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */; };
+		14AD52DA263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */; };
+		14AD52DB263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */; };
+		14AD52E1263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */; };
+		14AD52E2263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */; };
+		14AD52E3263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */; };
+		14AD52E4263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */; };
+		14AD535C2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */; };
+		14AD535D2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */; };
+		14AD535E2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */; };
+		14AD535F2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */; };
+		14AD536A2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */; };
+		14AD536B2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */; };
+		14AD536C2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */; };
+		14AD536D2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */; };
+		14AD53752641D47A00F742F8 /* PreRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53742641D47A00F742F8 /* PreRaceContentView.swift */; };
+		14AD53762641D47A00F742F8 /* PreRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53742641D47A00F742F8 /* PreRaceContentView.swift */; };
+		14AD53772641D47A00F742F8 /* PreRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53742641D47A00F742F8 /* PreRaceContentView.swift */; };
+		14AD53782641D47A00F742F8 /* PreRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53742641D47A00F742F8 /* PreRaceContentView.swift */; };
+		14AD537E2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */; };
+		14AD537F2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */; };
+		14AD53802641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */; };
+		14AD53812641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */; };
+		14AD53872641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */; };
+		14AD53882641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */; };
+		14AD53892641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */; };
+		14AD538A2641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */; };
+		14AD538E2641DBF200F742F8 /* PreRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */; };
+		14AD538F2641DBF200F742F8 /* PreRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */; };
+		14AD53902641DBF200F742F8 /* PreRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */; };
+		14AD53912641DBF200F742F8 /* PreRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */; };
+		14AD53972641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */; };
+		14AD53982641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */; };
+		14AD53992641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */; };
+		14AD539A2641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */; };
+		14AD539E2641FF9800F742F8 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD539D2641FF9800F742F8 /* HostingViewController.swift */; };
+		14AD539F2641FF9800F742F8 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD539D2641FF9800F742F8 /* HostingViewController.swift */; };
+		14AD53A02641FF9800F742F8 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD539D2641FF9800F742F8 /* HostingViewController.swift */; };
+		14AD53A12641FF9800F742F8 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD539D2641FF9800F742F8 /* HostingViewController.swift */; };
+		14AD53AB2642148100F742F8 /* PreRaceMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */; };
+		14AD53AC2642148100F742F8 /* PreRaceMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */; };
+		14AD53AD2642148100F742F8 /* PreRaceMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */; };
+		14AD53AE2642148100F742F8 /* PreRaceMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */; };
 		14B05D2524AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift */; };
 		14B05D2624AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift */; };
 		14B05D2724AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B05D2424AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift */; };
@@ -313,13 +340,8 @@
 		14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
 		14B4DB622224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
 		14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B4DB602224809F007D4B54 /* MovingPuzzleView.swift */; };
-		14B4DB662224F1B9007D4B54 /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
-		14B4DB672224F1BA007D4B54 /* GKJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280221FC18F600C48788 /* GKJoinViewController.swift */; };
-		14B4DB682224F1BC007D4B54 /* GKJoinViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */; };
-		14B4DB692224F1BD007D4B54 /* GKJoinViewController+Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */; };
 		14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B8F80C222C456B006C7A06 /* GameKit.framework */; };
-		14BA538921FE3B1400A8CB01 /* GKConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* GKConnectViewController.swift */; };
 		14BA538D21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
 		14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BA538C21FE3D9100A8CB01 /* MenuViewController+Debug.swift */; };
 		14C25FE01F6F025A00CD7373 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */; };
@@ -362,8 +384,8 @@
 		14C6DA792462900300EC9817 /* CustomRaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C6DA762462900300EC9817 /* CustomRaceController.swift */; };
 		14D18CDC2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
 		14D18CDE2460CF00002E4F5D /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDB2460CF00002E4F5D /* StatsViewController.swift */; };
-		14D18CE02460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
-		14D18CE22460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */; };
+		14D18CE02460DF9C002E4F5D /* StatsCountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */; };
+		14D18CE22460DF9C002E4F5D /* StatsCountsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */; };
 		14D8AD471F81828D00914E5A /* PlayerFirebaseAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1B1991F7981C70082F4FA /* PlayerFirebaseAnalytics.swift */; };
 		14D8AD481F81835700914E5A /* DebugWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B55C981F3A49D20090E092 /* DebugWindow.swift */; };
 		14DB8C9924AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB8C9824AC2A8400D356DF /* OSLog+WikiRaces.swift */; };
@@ -371,11 +393,19 @@
 		14DB8C9B24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB8C9824AC2A8400D356DF /* OSLog+WikiRaces.swift */; };
 		14DB8C9C24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB8C9824AC2A8400D356DF /* OSLog+WikiRaces.swift */; };
 		14DB8C9D24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DB8C9824AC2A8400D356DF /* OSLog+WikiRaces.swift */; };
+		14DC2EB72646075400004236 /* HostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD539D2641FF9800F742F8 /* HostingViewController.swift */; };
+		14DC2EBD2646076300004236 /* PreRaceJoinStandardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */; };
+		14DC2EBE2646076300004236 /* PreRaceMessenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */; };
+		14DC2EBF2646076300004236 /* PreRaceHostSelectionViewController+Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */; };
+		14DC2EC02646076300004236 /* PreRaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */; };
+		14DC2EC12646076300004236 /* PreRaceHostSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */; };
+		14DC2EC22646076300004236 /* PreRaceContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53742641D47A00F742F8 /* PreRaceContentView.swift */; };
+		14DC2EC32646076300004236 /* PreRaceContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */; };
+		14DC2EC62646076600004236 /* PreRaceConnectionTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */; };
 		14DC66D31F9072180026C6ED /* WKRKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; };
 		14DC66D41F9072180026C6ED /* WKRKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D55A1F86A1B0005EB3B9 /* WKRKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		14DC66D71F9072200026C6ED /* WKRUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; };
 		14DC66D81F9072200026C6ED /* WKRUIKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 14E6D5521F86A1B0005EB3B9 /* WKRUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		14DD97252202293900AAB389 /* GKConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1414280621FC394600C48788 /* GKConnectViewController.swift */; };
 		14DD97282202294D00AAB389 /* PlayerCloudKitStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CF022012B2F000A0A15 /* PlayerCloudKitStatsManager.swift */; };
 		14DD97292202295100AAB389 /* PlayerCloudKitStatsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141E4CF022012B2F000A0A15 /* PlayerCloudKitStatsManager.swift */; };
 		14DF31A8211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */; };
@@ -441,21 +471,6 @@
 		14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
 		14EF51DF245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
 		14EF51E0245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */; };
-		14F0348124A8397A006A908E /* RaceChecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0348024A8397A006A908E /* RaceChecksViewController.swift */; };
-		14F0348224A8397A006A908E /* RaceChecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0348024A8397A006A908E /* RaceChecksViewController.swift */; };
-		14F0348324A8397A006A908E /* RaceChecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0348024A8397A006A908E /* RaceChecksViewController.swift */; };
-		14F0348424A8397A006A908E /* RaceChecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0348024A8397A006A908E /* RaceChecksViewController.swift */; };
-		14F0348524A8397A006A908E /* RaceChecksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F0348024A8397A006A908E /* RaceChecksViewController.swift */; };
-		14F034A724A847FF006A908E /* LoadingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034A624A847FF006A908E /* LoadingContentViewModel.swift */; };
-		14F034A824A847FF006A908E /* LoadingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034A624A847FF006A908E /* LoadingContentViewModel.swift */; };
-		14F034A924A847FF006A908E /* LoadingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034A624A847FF006A908E /* LoadingContentViewModel.swift */; };
-		14F034AA24A847FF006A908E /* LoadingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034A624A847FF006A908E /* LoadingContentViewModel.swift */; };
-		14F034AB24A847FF006A908E /* LoadingContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034A624A847FF006A908E /* LoadingContentViewModel.swift */; };
-		14F034AD24A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
-		14F034AE24A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
-		14F034AF24A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
-		14F034B024A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
-		14F034B124A8480D006A908E /* LoadingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F034AC24A8480D006A908E /* LoadingContentView.swift */; };
 		14F2400524A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; platformFilter = ios; };
 		14F2400624A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
 		14F2400724A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */; };
@@ -471,21 +486,12 @@
 		14F2401A24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; platformFilter = ios; };
 		14F2401B24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
 		14F2401C24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */; };
-		14F2401D24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; platformFilter = ios; };
-		14F2401E24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
-		14F2401F24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */; };
-		14F2402324A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; platformFilter = ios; };
-		14F2402424A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
-		14F2402524A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */; };
 		14F2402624A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; platformFilter = ios; };
 		14F2402724A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
 		14F2402824A78DFA00820638 /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FEF24A78DFA00820638 /* nanopb.xcframework */; };
 		14F2402924A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; platformFilter = ios; };
 		14F2402A24A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
 		14F2402B24A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */; };
-		14F2402C24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; platformFilter = ios; };
-		14F2402D24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
-		14F2402E24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */; };
 		14F2402F24A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; platformFilter = ios; };
 		14F2403024A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
 		14F2403124A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */; };
@@ -644,9 +650,6 @@
 /* Begin PBXFileReference section */
 		140CE2FA24C292F000ECA175 /* CustomRaceLanguageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRaceLanguageController.swift; sourceTree = "<group>"; };
 		1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
-		1414280221FC18F600C48788 /* GKJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKJoinViewController.swift; sourceTree = "<group>"; };
-		1414280621FC394600C48788 /* GKConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKConnectViewController.swift; sourceTree = "<group>"; };
-		1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKJoinViewController+Match.swift"; sourceTree = "<group>"; };
 		141B3ED024A3C08000BD18C7 /* ListFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFooterView.swift; sourceTree = "<group>"; };
 		141B3ED324A3C08000BD18C7 /* ResultsItemContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsItemContentView.swift; sourceTree = "<group>"; };
 		141B3ED424A3C08000BD18C7 /* ResultsContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsContentView.swift; sourceTree = "<group>"; };
@@ -658,6 +661,9 @@
 		142ABE0524600A74008E7F77 /* PlusStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusStore.swift; sourceTree = "<group>"; };
 		142ABE0D24600ABE008E7F77 /* MagicSubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicSubscription.swift; sourceTree = "<group>"; };
 		142ABE15246013BC008E7F77 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		142B4D0C26475F430020249E /* WKRSceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WKRSceneDelegate.swift; sourceTree = "<group>"; };
+		142B4D2E264762550020249E /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		142B4D34264762E90020249E /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		142F714E210C33FC00C66558 /* MenuViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7154210C35BC00C66558 /* VotingViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VotingViewController+KB.swift"; sourceTree = "<group>"; };
 		142F7156210C375F00C66558 /* GameViewController+KB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+KB.swift"; sourceTree = "<group>"; };
@@ -667,12 +673,10 @@
 		143A8BBB1F58746800580AA2 /* PlayerStatsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerStatsManager.swift; sourceTree = "<group>"; };
 		143BB7171F60BDC000D00541 /* MenuViewController+GameKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuViewController+GameKit.swift"; sourceTree = "<group>"; };
 		143BB7321F60DE9300D00541 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKJoinViewController+PublicRace.swift"; sourceTree = "<group>"; };
 		144280EC1F5883AB002D977F /* WikiRaces.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WikiRaces.entitlements; sourceTree = "<group>"; };
 		1446C1D824A334C2000A0ED3 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		1446C1DF24A337DD000A0ED3 /* GKHostViewController+Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKHostViewController+Match.swift"; sourceTree = "<group>"; };
 		14495D8721FF9A0500CAA129 /* ResultRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultRenderer.swift; sourceTree = "<group>"; };
-		144A1027202FC79B003DB51A /* VisualEffectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffectViewController.swift; sourceTree = "<group>"; };
 		144A1028202FC79B003DB51A /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAppDelegate.swift; sourceTree = "<group>"; };
 		144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackingVisualEffectViewController.swift; sourceTree = "<group>"; };
@@ -710,6 +714,17 @@
 		149FF8901F362BF1000A5D96 /* WikiRacesScreenshots.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WikiRacesScreenshots.swift; sourceTree = "<group>"; };
 		149FF8921F362BF1000A5D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "WikiRaces (Multi-Window).entitlements"; sourceTree = "<group>"; };
+		14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseAnalytics.xcframework; sourceTree = "<group>"; };
+		14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleAppMeasurement.xcframework; sourceTree = "<group>"; };
+		14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceConnectionTestViewController.swift; sourceTree = "<group>"; };
+		14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceContentViewModel.swift; sourceTree = "<group>"; };
+		14AD53742641D47A00F742F8 /* PreRaceContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceContentView.swift; sourceTree = "<group>"; };
+		14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceJoinStandardViewController.swift; sourceTree = "<group>"; };
+		14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceHostSelectionViewController.swift; sourceTree = "<group>"; };
+		14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceViewController.swift; sourceTree = "<group>"; };
+		14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreRaceHostSelectionViewController+Selection.swift"; sourceTree = "<group>"; };
+		14AD539D2641FF9800F742F8 /* HostingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingViewController.swift; sourceTree = "<group>"; };
+		14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreRaceMessenger.swift; sourceTree = "<group>"; };
 		14B05D2424AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCloudKitLiveRaceManager.swift; sourceTree = "<group>"; };
 		14B2DD3A22212298009B8AB3 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		14B2DD402221273E009B8AB3 /* MenuView+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MenuView+Actions.swift"; sourceTree = "<group>"; };
@@ -737,7 +752,7 @@
 		14C4AB641F368A210086B77F /* GameViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameViewController+UI.swift"; sourceTree = "<group>"; };
 		14C6DA762462900300EC9817 /* CustomRaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRaceController.swift; sourceTree = "<group>"; };
 		14D18CDB2460CF00002E4F5D /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
-		14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsPlayersViewController.swift; sourceTree = "<group>"; };
+		14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCountsViewController.swift; sourceTree = "<group>"; };
 		14DB8C9824AC2A8400D356DF /* OSLog+WikiRaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OSLog+WikiRaces.swift"; sourceTree = "<group>"; };
 		14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKRAnimationDurationConstants.swift; sourceTree = "<group>"; };
 		14E0F19E22303A8F00BFF1E9 /* PlayerUserDefaultsStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerUserDefaultsStat.swift; sourceTree = "<group>"; };
@@ -758,9 +773,6 @@
 		14EF51CC245FAE5500F3653F /* CustomRaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceViewController.swift; sourceTree = "<group>"; };
 		14EF51CD245FAE5600F3653F /* CustomRaceNotificationsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceNotificationsController.swift; sourceTree = "<group>"; };
 		14EF51CE245FAE5600F3653F /* CustomRaceNumericalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomRaceNumericalViewController.swift; sourceTree = "<group>"; };
-		14F0348024A8397A006A908E /* RaceChecksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceChecksViewController.swift; sourceTree = "<group>"; };
-		14F034A624A847FF006A908E /* LoadingContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentViewModel.swift; sourceTree = "<group>"; };
-		14F034AC24A8480D006A908E /* LoadingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingContentView.swift; sourceTree = "<group>"; };
 		14F23FDC24A78DF900820638 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		14F23FE224A78DF900820638 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransport.xcframework; sourceTree = "<group>"; };
@@ -768,11 +780,8 @@
 		14F23FE524A78DF900820638 /* FirebaseCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCore.xcframework; sourceTree = "<group>"; };
 		14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
 		14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseInstallations.xcframework; sourceTree = "<group>"; };
-		14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
 		14F23FEF24A78DFA00820638 /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
 		14F23FF024A78DFA00820638 /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PromisesObjC.xcframework; sourceTree = "<group>"; };
-		14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
 		14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCoreDiagnostics.xcframework; sourceTree = "<group>"; };
 		14F2EC9424A64A8F007A4C97 /* GKMatchRequest+WKR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GKMatchRequest+WKR.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -783,18 +792,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E6D55D1F86A1CA005EB3B9 /* WKRKit.framework in Frameworks */,
-				14F2402324A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */,
-				14F2401D24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */,
 				14F2402F24A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
 				14F2400824A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */,
 				14F2402624A78DFA00820638 /* nanopb.xcframework in Frameworks */,
+				14AD52D8263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */,
+				14AD52E1263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */,
 				14E1B1A11F798A520082F4FA /* CloudKit.framework in Frameworks */,
 				14F2401A24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */,
 				14E6D5611F86A1CF005EB3B9 /* WKRUIKit.framework in Frameworks */,
 				14F2400524A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */,
 				14F2400B24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */,
 				14F2401124A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */,
-				14F2402C24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */,
 				142ABE16246013BC008E7F77 /* StoreKit.framework in Frameworks */,
 				14B8F80D222C456B006C7A06 /* GameKit.framework in Frameworks */,
 				14F2402924A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */,
@@ -805,15 +813,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F2401E24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */,
+				14AD52E2263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */,
 				14F2402724A78DFA00820638 /* nanopb.xcframework in Frameworks */,
 				14F2400624A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */,
-				14F2402424A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */,
-				14F2402D24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */,
 				14F2400C24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */,
 				14DC66D31F9072180026C6ED /* WKRKit.framework in Frameworks */,
 				14A89F681F7ABB2400C85387 /* CloudKit.framework in Frameworks */,
 				14DC66D71F9072200026C6ED /* WKRUIKit.framework in Frameworks */,
+				14AD52D9263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */,
 				14F2401224A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */,
 				14F2401B24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */,
 				14F2403024A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
@@ -827,16 +834,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				144F33AF24C345AB006E4437 /* FirebaseCrashlytics.xcframework in Frameworks */,
-				144F33BC24C345AE006E4437 /* GoogleAppMeasurement.framework in Frameworks */,
-				144F33BD24C345AE006E4437 /* FirebaseAnalytics.framework in Frameworks */,
 				144F33B024C345AB006E4437 /* FirebaseInstallations.xcframework in Frameworks */,
 				144F33B924C345AB006E4437 /* PromisesObjC.xcframework in Frameworks */,
 				144F33B324C345AB006E4437 /* GoogleDataTransport.xcframework in Frameworks */,
+				14AD52DA263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */,
 				144F33B824C345AB006E4437 /* nanopb.xcframework in Frameworks */,
 				144F33B624C345AB006E4437 /* GoogleUtilities.xcframework in Frameworks */,
+				14AD52E3263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */,
 				144F33AE24C345AB006E4437 /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
 				144F33AD24C345AB006E4437 /* FirebaseCore.xcframework in Frameworks */,
-				144F33BE24C345AE006E4437 /* FIRAnalyticsConnector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -844,19 +850,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F2402524A78DFA00820638 /* GoogleAppMeasurement.framework in Frameworks */,
 				14F2400D24A78DFA00820638 /* FirebaseCore.xcframework in Frameworks */,
-				14F2402E24A78DFA00820638 /* FIRAnalyticsConnector.framework in Frameworks */,
 				14F2401324A78DFA00820638 /* GoogleUtilities.xcframework in Frameworks */,
+				14AD52E4263FCE7000F742F8 /* GoogleAppMeasurement.xcframework in Frameworks */,
 				14F2401C24A78DFA00820638 /* FirebaseInstallations.xcframework in Frameworks */,
 				14584BC7220B6BEE00D63428 /* WKRUIKit.framework in Frameworks */,
+				14AD52DB263FCDE000F742F8 /* FirebaseAnalytics.xcframework in Frameworks */,
 				14584BC2220B6BE700D63428 /* WKRKit.framework in Frameworks */,
 				14F2400A24A78DFA00820638 /* FirebaseCrashlytics.xcframework in Frameworks */,
 				14F2400724A78DFA00820638 /* GoogleDataTransport.xcframework in Frameworks */,
 				14F2402B24A78DFA00820638 /* PromisesObjC.xcframework in Frameworks */,
 				14F2402824A78DFA00820638 /* nanopb.xcframework in Frameworks */,
 				14F2403124A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
-				14F2401F24A78DFA00820638 /* FirebaseAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,9 +878,6 @@
 		1414280821FC3C9800C48788 /* GKJoinViewController */ = {
 			isa = PBXGroup;
 			children = (
-				1414280221FC18F600C48788 /* GKJoinViewController.swift */,
-				1414280A21FC437000C48788 /* GKJoinViewController+Match.swift */,
-				143CE07D24A355DC000F6833 /* GKJoinViewController+PublicRace.swift */,
 			);
 			path = GKJoinViewController;
 			sourceTree = "<group>";
@@ -897,13 +899,12 @@
 			children = (
 				14F23FE224A78DF900820638 /* Firebase.h */,
 				14F23FDC24A78DF900820638 /* module.modulemap */,
-				14F23FEE24A78DFA00820638 /* GoogleAppMeasurement.framework */,
-				14F23FEC24A78DFA00820638 /* FirebaseAnalytics.framework */,
-				14F23FF124A78DFA00820638 /* FIRAnalyticsConnector.framework */,
+				14AD52D7263FCDE000F742F8 /* FirebaseAnalytics.xcframework */,
 				14F23FE524A78DF900820638 /* FirebaseCore.xcframework */,
 				14F23FF224A78DFA00820638 /* FirebaseCoreDiagnostics.xcframework */,
 				14F23FE424A78DF900820638 /* FirebaseCrashlytics.xcframework */,
 				14F23FEB24A78DFA00820638 /* FirebaseInstallations.xcframework */,
+				14AD52E0263FCE7000F742F8 /* GoogleAppMeasurement.xcframework */,
 				14F23FE324A78DF900820638 /* GoogleDataTransport.xcframework */,
 				14F23FE724A78DF900820638 /* GoogleUtilities.xcframework */,
 				14F23FEF24A78DFA00820638 /* nanopb.xcframework */,
@@ -921,19 +922,17 @@
 			path = DebugInfoTableViewController;
 			sourceTree = "<group>";
 		};
-		143BB7331F60DF0200D00541 /* Connect View Controllers */ = {
+		143BB7331F60DF0200D00541 /* Pre Race View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				14F0348024A8397A006A908E /* RaceChecksViewController.swift */,
-				14F034A624A847FF006A908E /* LoadingContentViewModel.swift */,
-				14F034AC24A8480D006A908E /* LoadingContentView.swift */,
-				1414280621FC394600C48788 /* GKConnectViewController.swift */,
-				148E5C3224A2883300DD43E4 /* GKHostViewController */,
+				14AD53B92642171600F742F8 /* Join */,
+				14AD53642641D3CC00F742F8 /* Connect */,
+				148E5C3224A2883300DD43E4 /* Host */,
 				1414280821FC3C9800C48788 /* GKJoinViewController */,
 				14EF51C6245FAE3600F3653F /* CustomRaceViewController */,
 				1446C1DE24A337B2000A0ED3 /* Nearby */,
 			);
-			path = "Connect View Controllers";
+			path = "Pre Race View Controllers";
 			sourceTree = "<group>";
 		};
 		1446C1DE24A337B2000A0ED3 /* Nearby */ = {
@@ -949,7 +948,7 @@
 		144A1024202FC786003DB51A /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				144A1027202FC79B003DB51A /* VisualEffectViewController.swift */,
+				14AD539D2641FF9800F742F8 /* HostingViewController.swift */,
 				144EC2A424ADA93500F0C315 /* BackingVisualEffectViewController.swift */,
 				144A1028202FC79B003DB51A /* HelpViewController.swift */,
 				1473E29F210DAD7C00726377 /* HelpViewController+KB.swift */,
@@ -961,7 +960,7 @@
 			isa = PBXGroup;
 			children = (
 				14D18CDB2460CF00002E4F5D /* StatsViewController.swift */,
-				14D18CDF2460DF9C002E4F5D /* StatsPlayersViewController.swift */,
+				14D18CDF2460DF9C002E4F5D /* StatsCountsViewController.swift */,
 			);
 			path = StatsViewController;
 			sourceTree = "<group>";
@@ -976,14 +975,14 @@
 			path = "GameKit Support";
 			sourceTree = "<group>";
 		};
-		148E5C3224A2883300DD43E4 /* GKHostViewController */ = {
+		148E5C3224A2883300DD43E4 /* Host */ = {
 			isa = PBXGroup;
 			children = (
 				148E5C5324A2967600DD43E4 /* GKHostViewController.swift */,
 				1446C1DF24A337DD000A0ED3 /* GKHostViewController+Match.swift */,
 				14EBF5A424A4F4470040A7C0 /* SwiftUI */,
 			);
-			path = GKHostViewController;
+			path = Host;
 			sourceTree = "<group>";
 		};
 		149FDED51F4F4AAF003A71D0 /* Frameworks */ = {
@@ -1040,6 +1039,7 @@
 			children = (
 				14A89F671F7ABB2100C85387 /* WikiRaces (Multi-Window).entitlements */,
 				149FF87A1F362BE4000A5D96 /* AppDelegate.swift */,
+				142B4D34264762E90020249E /* SceneDelegate.swift */,
 				14B55C981F3A49D20090E092 /* DebugWindow.swift */,
 				149FF87C1F362BE4000A5D96 /* ViewController.swift */,
 				149FF8811F362BE4000A5D96 /* Assets.xcassets */,
@@ -1078,7 +1078,7 @@
 			isa = PBXGroup;
 			children = (
 				14B55C901F3A49670090E092 /* MenuViewController */,
-				143BB7331F60DF0200D00541 /* Connect View Controllers */,
+				143BB7331F60DF0200D00541 /* Pre Race View Controllers */,
 				1452EED22462940A00F357D3 /* StatsViewController */,
 				142ABDF624600550008E7F77 /* PlusViewController */,
 				143948C22144CCAE00992850 /* DebugInfoTableViewController */,
@@ -1093,6 +1093,28 @@
 				1410DB3A1F4F510900F5CAD7 /* SharedAssets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		14AD53642641D3CC00F742F8 /* Connect */ = {
+			isa = PBXGroup;
+			children = (
+				14AD535B2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift */,
+			);
+			path = Connect;
+			sourceTree = "<group>";
+		};
+		14AD53B92642171600F742F8 /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				14AD53AA2642148100F742F8 /* PreRaceMessenger.swift */,
+				14AD53742641D47A00F742F8 /* PreRaceContentView.swift */,
+				14AD53692641D45000F742F8 /* PreRaceContentViewModel.swift */,
+				14AD538D2641DBF200F742F8 /* PreRaceViewController.swift */,
+				14AD537D2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift */,
+				14AD53862641DB9700F742F8 /* PreRaceHostSelectionViewController.swift */,
+				14AD53962641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift */,
+			);
+			path = Join;
 			sourceTree = "<group>";
 		};
 		14B2DD4822212C25009B8AB3 /* MenuView */ = {
@@ -1172,6 +1194,7 @@
 				1446C1D824A334C2000A0ED3 /* Defaults.swift */,
 				14DF31A7211627D5005BA432 /* WKRAnimationDurationConstants.swift */,
 				144A5AEB1F4FF5C20058CB99 /* WKRAppDelegate.swift */,
+				142B4D0C26475F430020249E /* WKRSceneDelegate.swift */,
 				146E04F924AE3127001E1917 /* GameKit Support */,
 			);
 			path = Other;
@@ -1181,6 +1204,7 @@
 			isa = PBXGroup;
 			children = (
 				14C25FDF1F6F025A00CD7373 /* AppDelegate.swift */,
+				142B4D2E264762550020249E /* SceneDelegate.swift */,
 				14C25FE11F6F025A00CD7373 /* ViewController.swift */,
 				14C25FE31F6F025A00CD7373 /* Main-Catalog.storyboard */,
 				14C25FE61F6F025A00CD7373 /* Assets.xcassets */,
@@ -1414,7 +1438,7 @@
 					com.apple.gamecenter.Leaderboard,
 				);
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
 					149FF8481F362B83000A5D96 = {
@@ -1639,7 +1663,6 @@
 				143BB7181F60BDC000D00541 /* MenuViewController+GameKit.swift in Sources */,
 				143A8BBC1F58746800580AA2 /* PlayerStatsManager.swift in Sources */,
 				148E5C4E24A2943100DD43E4 /* Nearby.swift in Sources */,
-				143CE07E24A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */,
 				14C6DA772462900300EC9817 /* CustomRaceController.swift in Sources */,
 				142F714F210C33FC00C66558 /* MenuViewController+KB.swift in Sources */,
 				141B3ED824A3C08000BD18C7 /* ResultsItemContentView.swift in Sources */,
@@ -1656,26 +1679,26 @@
 				14B05D2524AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */,
 				14C4AB591F368A050086B77F /* HistoryViewController.swift in Sources */,
 				1446C1D924A334C2000A0ED3 /* Defaults.swift in Sources */,
+				14AD537E2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */,
 				14DF31A8211627D5005BA432 /* WKRAnimationDurationConstants.swift in Sources */,
 				14EBF4FD24A49BD10040A7C0 /* VotingContentView.swift in Sources */,
+				14AD536A2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */,
+				14AD53972641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */,
 				142F7157210C375F00C66558 /* GameViewController+KB.swift in Sources */,
-				1414280721FC394600C48788 /* GKConnectViewController.swift in Sources */,
-				14F0348124A8397A006A908E /* RaceChecksViewController.swift in Sources */,
+				14AD535C2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */,
 				148CCBCD24A3410700538F18 /* GKHelper.swift in Sources */,
+				14AD53752641D47A00F742F8 /* PreRaceContentView.swift in Sources */,
 				1478B1B122095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
 				14F2EC9524A64A8F007A4C97 /* GKMatchRequest+WKR.swift in Sources */,
 				145925DE210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				148E5C4824A293EB00DD43E4 /* NearbyRaceListener.swift in Sources */,
-				14F034A724A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				14B4DB612224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				142ABE022460057C008E7F77 /* ActivityButton.swift in Sources */,
 				144EC2A524ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				148E5C5424A2967600DD43E4 /* GKHostViewController.swift in Sources */,
-				14D18CE02460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
+				14D18CE02460DF9C002E4F5D /* StatsCountsViewController.swift in Sources */,
 				14495D8821FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
-				14F034AD24A8480D006A908E /* LoadingContentView.swift in Sources */,
 				141E4CE72200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
-				1414280B21FC437000C48788 /* GKJoinViewController+Match.swift in Sources */,
 				14D18CDC2460CF00002E4F5D /* StatsViewController.swift in Sources */,
 				14C4AB391F3689A90086B77F /* MenuTile.swift in Sources */,
 				14EBF50524A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
@@ -1684,18 +1707,21 @@
 				14C4AB5D1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				14B2DD4522212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
 				14EBF59F24A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
+				14AD539E2641FF9800F742F8 /* HostingViewController.swift in Sources */,
 				14C4AB651F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				141E4CF122012B2F000A0A15 /* PlayerCloudKitStatsManager.swift in Sources */,
 				14EF51DB245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
+				14AD538E2641DBF200F742F8 /* PreRaceViewController.swift in Sources */,
 				14EF51DE245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				142ABE0624600A74008E7F77 /* PlusStore.swift in Sources */,
+				14AD53AB2642148100F742F8 /* PreRaceMessenger.swift in Sources */,
 				140CE2FB24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				142ABDFA24600559008E7F77 /* PlusViewController.swift in Sources */,
 				14DB8C9924AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				14EBF50B24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
 				1473E2A0210DAD7C00726377 /* HelpViewController+KB.swift in Sources */,
-				1414280321FC18F600C48788 /* GKJoinViewController.swift in Sources */,
 				14B2DD412221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
+				14AD53872641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */,
 				148E5C6024A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				14EF51D5245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14C4AB2D1F3689900086B77F /* ResultsViewController.swift in Sources */,
@@ -1705,6 +1731,7 @@
 				14C4AB491F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14EBF59924A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				148E5C4224A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
+				142B4D1026475F430020249E /* WKRSceneDelegate.swift in Sources */,
 				149357D9210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14EF51D8245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				1485B6772230724A00D6800B /* MedalScene.swift in Sources */,
@@ -1712,7 +1739,6 @@
 				142ABE0E24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				1437C51F22285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
 				14EF51D2245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
-				144A1029202FC79B003DB51A /* VisualEffectViewController.swift in Sources */,
 				143948C12144CC8C00992850 /* DebugInfoTableViewCell.swift in Sources */,
 				141B3ED524A3C08000BD18C7 /* ListFooterView.swift in Sources */,
 				14C2AEFF24A3CE9000D2378C /* ResultsContentViewModel.swift in Sources */,
@@ -1725,10 +1751,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14F034A824A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				14C4AB571F3689FE0086B77F /* HistoryTableViewCell.swift in Sources */,
 				141B3EDC24A3C08000BD18C7 /* ResultsContentView.swift in Sources */,
 				14891AA6214F6BDB001BDEB8 /* DebugInfoTableViewCell.swift in Sources */,
+				14AD537F2641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */,
 				14EBF59A24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				14E0F1A022303A8F00BFF1E9 /* PlayerUserDefaultsStat.swift in Sources */,
 				14C4AB631F368A170086B77F /* GameViewController+Manager.swift in Sources */,
@@ -1745,13 +1771,13 @@
 				145925DF210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
 				149357DA210E801A00F6453A /* HistoryViewController+KB.swift in Sources */,
 				14EBF5A024A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
+				14AD539F2641FF9800F742F8 /* HostingViewController.swift in Sources */,
 				14DB8C9A24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
 				1485B6782230724A00D6800B /* MedalScene.swift in Sources */,
 				142ABE032460057C008E7F77 /* ActivityButton.swift in Sources */,
 				14EF51DF245FAE5600F3653F /* CustomRaceNumericalViewController.swift in Sources */,
 				142ABDFF24600576008E7F77 /* PlusView.swift in Sources */,
 				14B2DD4622212B96009B8AB3 /* MenuView+Setup.swift in Sources */,
-				14B4DB662224F1B9007D4B54 /* GKJoinViewController.swift in Sources */,
 				140CE2FC24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
 				14C4AB5B1F368A050086B77F /* HistoryViewController.swift in Sources */,
 				1475C14624A655B000882F1F /* GameViewController+KB.swift in Sources */,
@@ -1760,17 +1786,17 @@
 				149FF87D1F362BE4000A5D96 /* ViewController.swift in Sources */,
 				14EBF50624A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
 				142ABE0724600A74008E7F77 /* PlusStore.swift in Sources */,
-				14F0348224A8397A006A908E /* RaceChecksViewController.swift in Sources */,
 				14B2DD422221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
 				148E5C4F24A2943100DD43E4 /* Nearby.swift in Sources */,
+				14AD53982641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */,
 				14C2AF0024A3CE9000D2378C /* ResultsContentViewModel.swift in Sources */,
 				142ABDFB2460055B008E7F77 /* PlusViewController.swift in Sources */,
+				142B4D35264762EA0020249E /* SceneDelegate.swift in Sources */,
 				14B05D2624AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */,
-				14B4DB682224F1BC007D4B54 /* GKJoinViewController+Match.swift in Sources */,
 				14495D8921FF9A0500CAA129 /* ResultRenderer.swift in Sources */,
 				14EF51DC245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				1475C18124A655F100882F1F /* StatsViewController.swift in Sources */,
-				1475C18224A655F100882F1F /* StatsPlayersViewController.swift in Sources */,
+				1475C18224A655F100882F1F /* StatsCountsViewController.swift in Sources */,
 				14EBF50C24A49BF20040A7C0 /* VotingContentViewModel.swift in Sources */,
 				142ABE0F24600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				14C6DA782462900300EC9817 /* CustomRaceController.swift in Sources */,
@@ -1782,25 +1808,27 @@
 				14EBF58824A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				14EF51D3245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				1437C52022285FE30003E53B /* HistoryTableViewStatsCell.swift in Sources */,
-				14F034AE24A8480D006A908E /* LoadingContentView.swift in Sources */,
+				14AD538F2641DBF200F742F8 /* PreRaceViewController.swift in Sources */,
 				148CCBCE24A3410700538F18 /* GKHelper.swift in Sources */,
 				14BA538E21FE3D9100A8CB01 /* MenuViewController+Debug.swift in Sources */,
-				14DD97252202293900AAB389 /* GKConnectViewController.swift in Sources */,
 				1446C1DA24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14EF51D6245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14EBF4FE24A49BD10040A7C0 /* VotingContentView.swift in Sources */,
+				14AD53AC2642148100F742F8 /* PreRaceMessenger.swift in Sources */,
 				14C4AB3B1F3689A90086B77F /* MenuTile.swift in Sources */,
-				143CE07F24A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */,
 				149FF87B1F362BE4000A5D96 /* AppDelegate.swift in Sources */,
 				14C4AB5F1F368A0C0086B77F /* GameViewController.swift in Sources */,
 				1485B67E223072AB00D6800B /* MedalView.swift in Sources */,
+				14AD53882641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */,
 				14C4AB671F368A210086B77F /* GameViewController+UI.swift in Sources */,
 				14B55C991F3A49D20090E092 /* DebugWindow.swift in Sources */,
 				141B3ED624A3C08000BD18C7 /* ListFooterView.swift in Sources */,
+				14AD53762641D47A00F742F8 /* PreRaceContentView.swift in Sources */,
 				144A5AED1F4FF5C20058CB99 /* WKRAppDelegate.swift in Sources */,
-				144A102B202FC7A1003DB51A /* VisualEffectViewController.swift in Sources */,
+				14AD536B2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */,
 				14B4DB622224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				141B3ED924A3C08000BD18C7 /* ResultsItemContentView.swift in Sources */,
+				14AD535D2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */,
 				14C4AB2F1F3689900086B77F /* ResultsViewController.swift in Sources */,
 				14C4AB4B1F3689C60086B77F /* VotingViewController.swift in Sources */,
 				14C4AB3F1F3689AE0086B77F /* MenuViewController.swift in Sources */,
@@ -1819,7 +1847,6 @@
 				1446C1DB24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				1475C19224A6560000882F1F /* HelpViewController+KB.swift in Sources */,
 				14EBF5AE24A4F4780040A7C0 /* HostSectionView.swift in Sources */,
-				1475C17424A655E900882F1F /* GKJoinViewController.swift in Sources */,
 				1475C15D24A655D800882F1F /* MenuView.swift in Sources */,
 				148E5C5624A2967600DD43E4 /* GKHostViewController.swift in Sources */,
 				14EBF50724A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
@@ -1831,22 +1858,25 @@
 				1475C16F24A655DC00882F1F /* MenuViewController+KB.swift in Sources */,
 				1475C1AC24A6560E00882F1F /* HistoryTableViewStatsCell.swift in Sources */,
 				1475C1B524A6561A00882F1F /* PlayerCloudKitStatsManager.swift in Sources */,
-				14F034A924A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				1475C16024A655D800882F1F /* MedalView.swift in Sources */,
 				148E5C4424A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				1475C18B24A655F600882F1F /* MagicSubscription.swift in Sources */,
 				1475C17924A655EC00882F1F /* CustomRaceNotificationsController.swift in Sources */,
+				14AD53802641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */,
 				1475C1B024A6561400882F1F /* VotingViewController.swift in Sources */,
 				1475C19F24A6560800882F1F /* ResultRenderer.swift in Sources */,
+				14AD536C2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */,
+				14AD53992641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */,
 				1475C18824A655F600882F1F /* PlusView.swift in Sources */,
 				1475C1AA24A6560E00882F1F /* HistoryViewController+KB.swift in Sources */,
 				1475C14124A6557800882F1F /* GameViewController.swift in Sources */,
+				14AD535E2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */,
 				1475C15224A655CF00882F1F /* WKRAnimationDurationConstants.swift in Sources */,
+				14AD53772641D47A00F742F8 /* PreRaceContentView.swift in Sources */,
 				1446C1E224A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
 				148E5C4A24A293EB00DD43E4 /* NearbyRaceListener.swift in Sources */,
 				1475C15F24A655D800882F1F /* MenuView+Actions.swift in Sources */,
 				1475C16C24A655DC00882F1F /* MenuViewController.swift in Sources */,
-				1475C17524A655E900882F1F /* GKJoinViewController+Match.swift in Sources */,
 				1475C18A24A655F600882F1F /* ActivityButton.swift in Sources */,
 				14EBF5A124A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
 				144EC2A724ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
@@ -1860,22 +1890,24 @@
 				14EBF59B24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				147593D11F609911005DFC90 /* SnapshotHelper.swift in Sources */,
 				1475C18924A655F600882F1F /* PlusStore.swift in Sources */,
-				1475C17624A655E900882F1F /* GKJoinViewController+PublicRace.swift in Sources */,
 				1475C16D24A655DC00882F1F /* MenuViewController+Debug.swift in Sources */,
 				1475C17724A655EC00882F1F /* CustomRaceController.swift in Sources */,
 				1475C16124A655D800882F1F /* MedalScene.swift in Sources */,
+				14AD53A02641FF9800F742F8 /* HostingViewController.swift in Sources */,
 				1475C13524A6554000882F1F /* ResultsContentView.swift in Sources */,
 				1475C17B24A655EC00882F1F /* CustomRaceOtherController.swift in Sources */,
 				14DB8C9B24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
-				1475C13924A6555B00882F1F /* VisualEffectViewController.swift in Sources */,
+				14AD53902641DBF200F742F8 /* PreRaceViewController.swift in Sources */,
 				1475C19E24A6560800882F1F /* ResultsViewController+KB.swift in Sources */,
 				140CE2FD24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
+				14AD53AD2642148100F742F8 /* PreRaceMessenger.swift in Sources */,
 				1475C14824A655B100882F1F /* GameViewController+Manager.swift in Sources */,
-				1475C18024A655F100882F1F /* StatsPlayersViewController.swift in Sources */,
+				1475C18024A655F100882F1F /* StatsCountsViewController.swift in Sources */,
 				1475C13D24A6556A00882F1F /* PlayerFirebaseAnalytics.swift in Sources */,
 				1475C1AB24A6560E00882F1F /* HistoryTableViewCell.swift in Sources */,
 				1475C1B824A6571200882F1F /* GKHelper.swift in Sources */,
 				1475C17C24A655EC00882F1F /* CustomRacePageViewController.swift in Sources */,
+				14AD53892641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */,
 				1475C13424A6554000882F1F /* ResultsContentViewModel.swift in Sources */,
 				1475C18F24A655FC00882F1F /* DebugInfoTableViewController.swift in Sources */,
 				1475C13F24A6557200882F1F /* GKMatchRequest+WKR.swift in Sources */,
@@ -1883,17 +1915,15 @@
 				1475C19C24A6560800882F1F /* ResultsViewController+Actions.swift in Sources */,
 				1475C13624A6554000882F1F /* ResultsItemContentView.swift in Sources */,
 				1475C1A924A6560E00882F1F /* HistoryViewController.swift in Sources */,
+				142B4D1226475F430020249E /* WKRSceneDelegate.swift in Sources */,
 				1475C16E24A655DC00882F1F /* MenuViewController+GameKit.swift in Sources */,
 				1475C13724A6554000882F1F /* ListFooterView.swift in Sources */,
 				1475C14424A6559500882F1F /* PlusViewController.swift in Sources */,
 				1475C14724A655B100882F1F /* GameViewController+UI.swift in Sources */,
 				1475C14E24A655C100882F1F /* PlayerStatsManager.swift in Sources */,
-				1475C13B24A6556300882F1F /* GKConnectViewController.swift in Sources */,
-				14F0348324A8397A006A908E /* RaceChecksViewController.swift in Sources */,
 				14EBF4FF24A49BD10040A7C0 /* VotingContentView.swift in Sources */,
 				1475C17824A655EC00882F1F /* CustomRaceViewController.swift in Sources */,
 				1475C19024A655FC00882F1F /* DebugInfoTableViewCell.swift in Sources */,
-				14F034AF24A8480D006A908E /* LoadingContentView.swift in Sources */,
 				14B05D2724AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */,
 				148E5C6224A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				1475C1A024A6560800882F1F /* ResultRenderer+Creation.swift in Sources */,
@@ -1906,9 +1936,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C25FE21F6F025A00CD7373 /* ViewController.swift in Sources */,
-				14F034AA24A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
-				14D18CE22460DF9C002E4F5D /* StatsPlayersViewController.swift in Sources */,
+				14D18CE22460DF9C002E4F5D /* StatsCountsViewController.swift in Sources */,
 				145925E0210D555D00CCC8F0 /* ResultsViewController+KB.swift in Sources */,
+				14AD53812641D6B600F742F8 /* PreRaceJoinStandardViewController.swift in Sources */,
 				141B3EDD24A3C08000BD18C7 /* ResultsContentView.swift in Sources */,
 				14EBF59C24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				1475C16824A655DC00882F1F /* MenuViewController.swift in Sources */,
@@ -1925,6 +1955,7 @@
 				14C260071F6F02A500CD7373 /* PlayerStatsManager.swift in Sources */,
 				148E5C4524A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				148E5C6324A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
+				14AD53A12641FF9800F742F8 /* HostingViewController.swift in Sources */,
 				1485B6792230724A00D6800B /* MedalScene.swift in Sources */,
 				14C25FFB1F6F02A500CD7373 /* GameViewController.swift in Sources */,
 				14EBF5A224A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
@@ -1933,7 +1964,6 @@
 				1475C1A124A6560D00882F1F /* HistoryViewController.swift in Sources */,
 				14C25FFF1F6F02A500CD7373 /* ResultsViewController.swift in Sources */,
 				140CE2FE24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
-				14B4DB672224F1BA007D4B54 /* GKJoinViewController.swift in Sources */,
 				1475C1A324A6560D00882F1F /* HistoryTableViewCell.swift in Sources */,
 				14EF51D7245FAE5600F3653F /* CustomRacePageViewController.swift in Sources */,
 				14B2DD432221273E009B8AB3 /* MenuView+Actions.swift in Sources */,
@@ -1943,9 +1973,9 @@
 				14EF51DD245FAE5600F3653F /* CustomRaceNotificationsController.swift in Sources */,
 				1446C1E324A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
 				14DD97292202295100AAB389 /* PlayerCloudKitStatsManager.swift in Sources */,
-				14F0348424A8397A006A908E /* RaceChecksViewController.swift in Sources */,
+				14AD539A2641F7EB00F742F8 /* PreRaceHostSelectionViewController+Selection.swift in Sources */,
 				14EBF50824A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
-				14B4DB692224F1BD007D4B54 /* GKJoinViewController+Match.swift in Sources */,
+				142B4D2F264762550020249E /* SceneDelegate.swift in Sources */,
 				14EF51DA245FAE5600F3653F /* CustomRaceViewController.swift in Sources */,
 				14B05D2824AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */,
 				148E5C5124A2943100DD43E4 /* Nearby.swift in Sources */,
@@ -1963,32 +1993,34 @@
 				142ABE1024600ABE008E7F77 /* MagicSubscription.swift in Sources */,
 				14EBF58A24A4D8260040A7C0 /* HostContentView.swift in Sources */,
 				1478B1B322095360009F2F3F /* ResultRenderer+Creation.swift in Sources */,
-				14F034B024A8480D006A908E /* LoadingContentView.swift in Sources */,
+				14AD53912641DBF200F742F8 /* PreRaceViewController.swift in Sources */,
 				14EF51D4245FAE5600F3653F /* CustomRaceOtherController.swift in Sources */,
 				148CCBCF24A3410700538F18 /* GKHelper.swift in Sources */,
 				141E4CE92200DDD6000A0A15 /* ResultsViewController+Actions.swift in Sources */,
 				1446C1DC24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14EBF50024A49BD10040A7C0 /* VotingContentView.swift in Sources */,
+				14AD53AE2642148100F742F8 /* PreRaceMessenger.swift in Sources */,
 				1475C16924A655DC00882F1F /* MenuViewController+Debug.swift in Sources */,
 				1485B67F223072AB00D6800B /* MedalView.swift in Sources */,
 				1475C1A224A6560D00882F1F /* HistoryViewController+KB.swift in Sources */,
 				1475C16A24A655DC00882F1F /* MenuViewController+GameKit.swift in Sources */,
 				144A102E202FC7A2003DB51A /* HelpViewController.swift in Sources */,
-				143CE08024A355DC000F6833 /* GKJoinViewController+PublicRace.swift in Sources */,
+				14AD538A2641DB9700F742F8 /* PreRaceHostSelectionViewController.swift in Sources */,
 				14D8AD471F81828D00914E5A /* PlayerFirebaseAnalytics.swift in Sources */,
 				142ABE0824600A74008E7F77 /* PlusStore.swift in Sources */,
+				14AD53782641D47A00F742F8 /* PreRaceContentView.swift in Sources */,
 				14B4DB632224809F007D4B54 /* MovingPuzzleView.swift in Sources */,
 				14C260041F6F02A500CD7373 /* VotingViewController.swift in Sources */,
+				14AD536D2641D45000F742F8 /* PreRaceContentViewModel.swift in Sources */,
 				141B3ED724A3C08000BD18C7 /* ListFooterView.swift in Sources */,
 				142ABE0024600576008E7F77 /* PlusView.swift in Sources */,
+				14AD535F2641D3C700F742F8 /* PreRaceConnectionTestViewController.swift in Sources */,
 				142ABE042460057C008E7F77 /* ActivityButton.swift in Sources */,
 				141B3EDA24A3C08000BD18C7 /* ResultsItemContentView.swift in Sources */,
 				14D18CDE2460CF00002E4F5D /* StatsViewController.swift in Sources */,
 				1475C19324A6560000882F1F /* HelpViewController+KB.swift in Sources */,
 				148E5C4B24A293EB00DD43E4 /* NearbyRaceListener.swift in Sources */,
-				144A102D202FC7A2003DB51A /* VisualEffectViewController.swift in Sources */,
 				1475C1AF24A6561300882F1F /* VotingViewController+KB.swift in Sources */,
-				14BA538921FE3B1400A8CB01 /* GKConnectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2003,7 +2035,6 @@
 				1475C15824A655D700882F1F /* MenuView+Actions.swift in Sources */,
 				1446C1E424A337DD000A0ED3 /* GKHostViewController+Match.swift in Sources */,
 				1475C15524A655D700882F1F /* MenuTile.swift in Sources */,
-				14F034B124A8480D006A908E /* LoadingContentView.swift in Sources */,
 				1475C15B24A655D700882F1F /* MovingPuzzleView.swift in Sources */,
 				1475C18624A655F500882F1F /* MagicSubscription.swift in Sources */,
 				1475C18524A655F500882F1F /* ActivityButton.swift in Sources */,
@@ -2013,23 +2044,25 @@
 				1475C1B624A6561B00882F1F /* PlayerUserDefaultsStat.swift in Sources */,
 				1475C13C24A6556900882F1F /* PlayerFirebaseAnalytics.swift in Sources */,
 				1475C1A524A6560D00882F1F /* HistoryViewController.swift in Sources */,
+				14DC2EC32646076300004236 /* PreRaceContentViewModel.swift in Sources */,
 				1475C19924A6560700882F1F /* ResultRenderer.swift in Sources */,
 				1475C12D24A6551F00882F1F /* CustomRacePageViewController.swift in Sources */,
+				14DC2EC12646076300004236 /* PreRaceHostSelectionViewController.swift in Sources */,
 				1475C1AE24A6561200882F1F /* VotingViewController+KB.swift in Sources */,
+				14DC2EB72646075400004236 /* HostingViewController.swift in Sources */,
 				1475C14024A6557800882F1F /* GameViewController.swift in Sources */,
-				14F0348524A8397A006A908E /* RaceChecksViewController.swift in Sources */,
 				1446C1DD24A334C2000A0ED3 /* Defaults.swift in Sources */,
 				14E0F1AB22303FD100BFF1E9 /* WikiRacesTests.swift in Sources */,
+				14DC2EC02646076300004236 /* PreRaceViewController.swift in Sources */,
 				14EBF50124A49BD10040A7C0 /* VotingContentView.swift in Sources */,
 				14EBF59D24A4F3E20040A7C0 /* ActivityIndicatorView.swift in Sources */,
 				1475C1B924A6571300882F1F /* GKHelper.swift in Sources */,
 				1475C1A724A6560D00882F1F /* HistoryTableViewCell.swift in Sources */,
 				14DB8C9D24AC2A8400D356DF /* OSLog+WikiRaces.swift in Sources */,
-				1475C17224A655E800882F1F /* GKJoinViewController+Match.swift in Sources */,
 				1475C17D24A655F000882F1F /* StatsViewController.swift in Sources */,
 				1475C1A624A6560D00882F1F /* HistoryViewController+KB.swift in Sources */,
 				1475C16524A655DB00882F1F /* MenuViewController+GameKit.swift in Sources */,
-				1475C17E24A655F000882F1F /* StatsPlayersViewController.swift in Sources */,
+				1475C17E24A655F000882F1F /* StatsCountsViewController.swift in Sources */,
 				148E5C6424A2AE7D00DD43E4 /* RaceCodeGenerator.swift in Sources */,
 				148E5C4624A293DD00DD43E4 /* NearbyRaceAdvertiser.swift in Sources */,
 				140CE2FF24C292F000ECA175 /* CustomRaceLanguageController.swift in Sources */,
@@ -2039,20 +2072,21 @@
 				1475C14D24A655B200882F1F /* GameViewController+KB.swift in Sources */,
 				1475C15124A655C900882F1F /* HelpViewController.swift in Sources */,
 				1475C15924A655D700882F1F /* MedalView.swift in Sources */,
+				14DC2EC22646076300004236 /* PreRaceContentView.swift in Sources */,
 				1475C19A24A6560700882F1F /* ResultRenderer+Creation.swift in Sources */,
 				14EBF5A324A4F43A0040A7C0 /* HostContentViewModel.swift in Sources */,
-				14F034AB24A847FF006A908E /* LoadingContentViewModel.swift in Sources */,
 				1475C19824A6560700882F1F /* ResultsViewController+KB.swift in Sources */,
 				144EC2A924ADA93500F0C315 /* BackingVisualEffectViewController.swift in Sources */,
 				1475C13024A6553F00882F1F /* ResultsContentViewModel.swift in Sources */,
+				14DC2EBF2646076300004236 /* PreRaceHostSelectionViewController+Selection.swift in Sources */,
 				1475C19624A6560700882F1F /* ResultsViewController+Actions.swift in Sources */,
-				1475C17124A655E800882F1F /* GKJoinViewController.swift in Sources */,
 				1475C12C24A6551F00882F1F /* CustomRaceOtherController.swift in Sources */,
 				1475C14B24A655B200882F1F /* GameViewController+UI.swift in Sources */,
-				1475C13A24A6556200882F1F /* GKConnectViewController.swift in Sources */,
 				1475C14524A6559500882F1F /* PlusViewController.swift in Sources */,
+				14DC2EC62646076600004236 /* PreRaceConnectionTestViewController.swift in Sources */,
 				1475C18D24A655FB00882F1F /* DebugInfoTableViewController.swift in Sources */,
 				1475C15A24A655D700882F1F /* MedalScene.swift in Sources */,
+				14DC2EBE2646076300004236 /* PreRaceMessenger.swift in Sources */,
 				1475C12924A6551F00882F1F /* CustomRaceViewController.swift in Sources */,
 				1475C16624A655DB00882F1F /* MenuViewController+KB.swift in Sources */,
 				1475C1A824A6560D00882F1F /* HistoryTableViewStatsCell.swift in Sources */,
@@ -2061,20 +2095,20 @@
 				1475C18E24A655FB00882F1F /* DebugInfoTableViewCell.swift in Sources */,
 				1475C12B24A6551F00882F1F /* CustomRaceNumericalViewController.swift in Sources */,
 				14EBF50924A49BE20040A7C0 /* VotingItemContentView.swift in Sources */,
-				1475C17324A655E800882F1F /* GKJoinViewController+PublicRace.swift in Sources */,
 				1475C12A24A6551F00882F1F /* CustomRaceNotificationsController.swift in Sources */,
 				1475C18424A655F500882F1F /* PlusStore.swift in Sources */,
 				14EBF5B024A4F4780040A7C0 /* HostSectionView.swift in Sources */,
 				1475C15724A655D700882F1F /* MenuView+Setup.swift in Sources */,
 				1475C15424A655D000882F1F /* WKRAnimationDurationConstants.swift in Sources */,
+				14DC2EBD2646076300004236 /* PreRaceJoinStandardViewController.swift in Sources */,
 				14B05D2924AD542D0010FA07 /* PlayerCloudKitLiveRaceManager.swift in Sources */,
 				1475C13324A6553F00882F1F /* ListFooterView.swift in Sources */,
 				1475C16424A655DB00882F1F /* MenuViewController+Debug.swift in Sources */,
+				142B4D1426475F430020249E /* WKRSceneDelegate.swift in Sources */,
 				1475C13224A6553F00882F1F /* ResultsItemContentView.swift in Sources */,
 				1475C15624A655D700882F1F /* MenuView.swift in Sources */,
 				1475C13E24A6557100882F1F /* GKMatchRequest+WKR.swift in Sources */,
 				1475C14C24A655B200882F1F /* GameViewController+Manager.swift in Sources */,
-				1475C13824A6555A00882F1F /* VisualEffectViewController.swift in Sources */,
 				148E5C5824A2967600DD43E4 /* GKHostViewController.swift in Sources */,
 				1475C19424A6560100882F1F /* HelpViewController+KB.swift in Sources */,
 			);
@@ -2196,6 +2230,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2257,6 +2292,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2309,7 +2345,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.10;
+				MARKETING_VERSION = 2021.05;
 				OTHER_LDFLAGS = "-ObjC";
 				OTHER_SWIFT_FLAGS = "-Xfrontend -warn-long-function-bodies=300 -Xfrontend -warn-long-expression-type-checking=150";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
@@ -2343,7 +2379,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.10;
+				MARKETING_VERSION = 2021.05;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.wikiraces;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2366,7 +2402,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2391,7 +2427,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (Multi-Window)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2464,7 +2500,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2490,7 +2526,7 @@
 					"$(PROJECT_DIR)/Shared/Frameworks/Analytics",
 				);
 				INFOPLIST_FILE = "WikiRaces (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

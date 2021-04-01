@@ -11,7 +11,6 @@ import WKRKit
 
 #if !targetEnvironment(macCatalyst) && !MULTIWINDOWDEBUG
 import FirebaseAnalytics
-import FirebaseCrashlytics
 #endif
 
 internal struct PlayerFirebaseAnalytics {
@@ -73,6 +72,10 @@ internal struct PlayerFirebaseAnalytics {
         case raceCodeLinkOpened
         
         case matchmakingQuickFail
+        
+        case raceDestinationHostCustom, raceDestinationJoinCustom, raceDestinationJoinStandardPublic, raceDestinationJoinStandardInvite
+        
+        case hostSelectionNeededOneAttempt, hostSelectionNeededTwoAttempts, hostSelectionNeededToUseNames, hostSelectionFailed, hostSelectionSucceeded
 
         init(event: WKRLogEvent) {
             switch event.type {
@@ -90,30 +93,6 @@ internal struct PlayerFirebaseAnalytics {
             case .votingArticlesWeightedTiebreak:   self = .votingArticlesWeightedTiebreak
             }
         }
-    }
-
-    // MARK: - Logging Events
-
-    public static func log(event: CrashLogEvent) {
-        #if MULTIWINDOWDEBUG || targetEnvironment(macCatalyst)
-        switch event {
-        case .userAction(let action):
-            print("UserAction: ", action)
-        case .gameState(let description):
-            print("GameState: ", description)
-        case .error(let error):
-            print("Error: ", error)
-        }
-        #else
-        switch event {
-        case .userAction(let action):
-            Crashlytics.crashlytics().log("UserAction: \(action)")
-        case .gameState(let description):
-            Crashlytics.crashlytics().log("GameState: \(description)")
-        case .error(let error):
-            Crashlytics.crashlytics().log("LoggedError: \(error)")
-        }
-        #endif
     }
 
     // MARK: - Analytic Events
