@@ -16,6 +16,12 @@ import WKRUIKit
 
 final class GKJoinViewController: GKConnectViewController, GKMatchmakerViewControllerDelegate {
     
+    // MARK: - Types -
+    
+    struct PublicRaceHostVoteMessage: Codable {
+        let hostName: String
+    }
+    
     // MARK: - Properties -
     
     let raceCode: String?
@@ -31,6 +37,9 @@ final class GKJoinViewController: GKConnectViewController, GKMatchmakerViewContr
             }, disclaimerButton: nil))
     
     var matchmaker: GKMatchmakerViewController?
+    
+    var publicRaceHostVoteMessages = [PublicRaceHostVoteMessage]()
+    var isPublicRaceHostVoteMessageProcessingNeeded = true
     
     // MARK: - Initalization -
     

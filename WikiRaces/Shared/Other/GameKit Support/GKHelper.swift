@@ -70,7 +70,7 @@ class GKHelper: NSObject, GKLocalPlayerListener {
         guard !Defaults.isFastlaneSnapshotInstance else {
             return
         }
-return
+
         DispatchQueue.global().async {
             GKLocalPlayer.local.authenticateHandler = { controller, error in
                 DispatchQueue.main.async {

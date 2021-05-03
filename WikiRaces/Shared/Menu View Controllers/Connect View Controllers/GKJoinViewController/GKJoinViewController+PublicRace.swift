@@ -13,7 +13,7 @@ import os.log
 extension GKJoinViewController {
 
     // MARK: - Public Races -
-
+    
     func publicRaceProcess(data: Data, from player: GKPlayer) {
         guard let match = match else { fatalError() }
 
@@ -36,16 +36,20 @@ extension GKJoinViewController {
                 try? match.send(data, to: [player], dataMode: .reliable)
             }
             transitionToGame(for: .gameKitPublic(match: match, isHost: isPlayerHost), settings: object.gameSettings, dismiss: matchmaker)
+        } else if let object = try? JSONDecoder().decode(PublicRaceHostVoteMessage.self, from: data) {
+            os_log("%{public}s: host vote message", log: .gameKit, type: .info, #function)
+            process(hostVoteMessage: object)
         }
     }
 
-    func publicRaceSendStartMessage() {
+    private func publicRaceSendStartMessage() {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
 
         func fail() {
             showError(title: "Unable To Start Race", message: "Please try again later.")
             model.title = "Race Error"
         }
+        
         guard let match = match else {
             fail()
             let info = "findMatch: No valid match"
@@ -76,29 +80,91 @@ extension GKJoinViewController {
 
     func publicRaceDetermineHost(match: GKMatch) {
         os_log("%{public}s", log: .gameKit, type: .info, #function)
+        
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            var players = match.players
-            players.append(GKLocalPlayer.local)
-            if let hostPlayer = players.sorted(by: { $0.alias > $1.alias }).first {
-                self.publicRaceHostAlias = hostPlayer.alias
-                os_log("%{public}s: determined host: %{public}s, self = %{public}i", log: .gameKit, type: .info, #function, hostPlayer.alias, hostPlayer.alias == GKLocalPlayer.local.alias ? 1 : 0)
-
-                if hostPlayer.alias == GKLocalPlayer.local.alias {
-                    self.isPlayerHost = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                        self.publicRaceSendStartMessage()
-                    })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            var ____TIMEOUT = 10.0
+            var date = Date()
+            
+            DispatchQueue.global().async {
+                var isNetworkSelectedHostResultRelevant = true
+                os_log("%{public}s: choosing best hosting player", log: .gameKit, type: .info, #function)
+                match.chooseBestHostingPlayer { player in
+                    guard isNetworkSelectedHostResultRelevant, let name = player?.alias else {
+                        os_log("%{public}s: failed to choose best hosting player", log: .gameKit, type: .error, #function)
+                        return
+                    }
+                    
+                    os_log("%{public}s: found best host: %{public}s, t:%{public}i", log: .gameKit, type: .error, #function, name, -Int(date.timeIntervalSinceNow))
+                    do {
+                        let message = PublicRaceHostVoteMessage(hostName: name)
+                        let data = try JSONEncoder().encode(message)
+                        try match.sendData(toAllPlayers: data, with: .reliable)
+                        self.process(hostVoteMessage: message)
+                    } catch {
+                        os_log("%{public}s: failed to send host vote message", log: .gameKit, type: .error, #function)
+                        let info = "publicRaceDetermineHost: " + error.localizedDescription
+                        PlayerFirebaseAnalytics.log(event: .error(info))
+                    }
                 }
-            } else {
-                os_log("%{public}s: no host", log: .gameKit, type: .error, #function)
-
-                let info = "matchmaker...didFind: No host player"
-                PlayerFirebaseAnalytics.log(event: .error(info))
-                PlayerFirebaseAnalytics.log(event: .globalFailedToFindHost)
-                self.showError(title: "Unable To Find Best Host", message: "Please try again later.")
-                self.model.title = "Race Error"
+                Timer.scheduledTimer(withTimeInterval: ____TIMEOUT, repeats: false, block: { _ in
+                    isNetworkSelectedHostResultRelevant = false
+                    os_log("%{public}s: failed to select host before timeout", log: .gameKit, type: .error, #function)
+                })
             }
+            
+            DispatchQueue.global().asyncAfter(deadline: .now() + ____TIMEOUT + 5, execute: {
+                self.processHostVoteMessages()
+            })
+        }
+    }
+    
+    private func process(hostVoteMessage: PublicRaceHostVoteMessage) {
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, hostVoteMessage.hostName)
+        publicRaceHostVoteMessages.append(hostVoteMessage)
+        os_log("%{public}s: processed: %{public}i/%{public}i", log: .gameKit, type: .info, #function, publicRaceHostVoteMessages.count, match?.players.count ?? -1)
+        if let playerCount = match?.players.count, publicRaceHostVoteMessages.count == playerCount + 1 {
+            processHostVoteMessages()
+        }
+    }
+        
+    private func processHostVoteMessages() {
+        guard isPublicRaceHostVoteMessageProcessingNeeded else {
+            os_log("%{public}s: not needed", log: .gameKit, type: .error, #function)
+            return
+        }
+        os_log("%{public}s: started\n%{public}s\n", log: .gameKit, type: .info, #function, publicRaceHostVoteMessages.description)
+        isPublicRaceHostVoteMessageProcessingNeeded = false
+        
+        let host = publicRaceHostVoteMessages
+            .map { $0.hostName }
+            .reduce(into: [:]) { counts, number in
+                counts[number, default: 0] += 1
+            }
+            .sorted { (lhs, rhs) -> Bool in
+                if lhs.value > rhs.value {
+                    return true
+                } else if lhs.value == rhs.value {
+                    return lhs.key < rhs.key
+                } else {
+                    return false
+                }
+            }
+            .first
+        
+        guard let hostAlias = host?.key else {
+            os_log("%{public}s: failed to determine host", log: .gameKit, type: .error, #function)
+            return
+        }
+        os_log("%{public}s: determined host: %{public}s, self = %{public}i", log: .gameKit, type: .info, #function, hostAlias, hostAlias == GKLocalPlayer.local.alias ? 1 : 0)
+
+        self.publicRaceHostAlias = hostAlias
+        if hostAlias == GKLocalPlayer.local.alias {
+            self.isPlayerHost = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: {
+                self.publicRaceSendStartMessage()
+            })
         }
     }
 

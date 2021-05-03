@@ -198,7 +198,7 @@ final internal class GKHostViewController: GKConnectViewController {
         let controller: UIViewController
         switch modal {
         case .activity:
-            guard  let code = model.raceCode, let url = URL(string: "WikiRaces://Invite?Code=\(code)") else {
+            guard let code = model.raceCode, let url = URL(string: "WikiRaces://Invite?Code=\(code)") else {
                 fatalError()
             }
             controller = UIActivityViewController(activityItems: [url], applicationActivities: nil)

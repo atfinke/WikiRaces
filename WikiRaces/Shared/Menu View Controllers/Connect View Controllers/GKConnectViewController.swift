@@ -34,7 +34,7 @@ class GKConnectViewController: VisualEffectViewController {
     final var match: GKMatch?
     final var isPlayerHost: Bool
     final var isShowingError = false
-
+    
     // MARK: - Initalization -
 
     init(isPlayerHost: Bool) {
