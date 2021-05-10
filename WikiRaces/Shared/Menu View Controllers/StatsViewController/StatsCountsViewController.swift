@@ -1,5 +1,5 @@
 //
-//  StatsPlayersViewController.swift
+//  StatsCountsViewController.swift
 //  WikiRaces
 //
 //  Created by Andrew Finke on 5/4/20.
@@ -8,39 +8,24 @@
 
 import UIKit
 
-class StatsPlayersViewController: UITableViewController {
+class StatsCountsViewController: UITableViewController {
 
     // MARK: - Properties -
 
-    let players: [(String, Int)]
-
+    var counts: [(String, Int)] = [] {
+        didSet {
+            assert(Thread.isMainThread)
+            tableView.reloadData()
+        }
+    }
     // MARK: - Initalization -
 
-    init(mpc: Bool) {
-        let key: String
-        if mpc {
-            key = "PlayersArray"
-        } else {
-            key = "GKPlayersArray"
-        }
-        let players = UserDefaults.standard.stringArray(forKey: key) ?? []
-
-        var count = [String: Int]()
-        for player in players {
-            if let existing = count[player] {
-                count[player] = existing + 1
-            } else {
-                count[player] = 1
-            }
-        }
-        self.players = count.sorted { lhs, rhs -> Bool in
-            return lhs.value > rhs.value
-        }
-
-        super.init(style: .plain)
-        title = "Players Raced".uppercased()
+    init(title: String) {
+        super.init(style: .insetGrouped)
+        self.title = title.uppercased()
         tableView.allowsSelection = false
         tableView.cellLayoutMarginsFollowReadableWidth = true
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     required init?(coder: NSCoder) {
@@ -54,19 +39,26 @@ class StatsPlayersViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return max(1, players.count)
+        return max(1, counts.count)
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: nil)
-        if players.isEmpty {
-            cell.textLabel?.text = "No Players Raced"
+        if counts.isEmpty {
+            cell.textLabel?.text = "No Stats Yet"
             cell.textLabel?.textColor = .secondaryLabel
         } else {
-            let item = players[indexPath.row]
+            let item = counts[indexPath.row]
             cell.textLabel?.text = item.0
             cell.detailTextLabel?.text = item.1.description + "x"
         }
+        cell.textLabel?.numberOfLines = 0
+        cell.textLabel?.lineBreakMode = .byWordWrapping
+        cell.textLabel?.sizeToFit()
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
+        cell.detailTextLabel?.font = UIFont.tableViewCellDetail()
+        cell.detailTextLabel?.setContentCompressionResistancePriority(.required, for: .horizontal)
         return cell
     }
 

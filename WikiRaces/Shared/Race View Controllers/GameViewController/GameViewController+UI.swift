@@ -70,7 +70,7 @@ extension GameViewController {
         connectingLabel.alpha = 0.0
         connectingLabel.text = "PREPARING"
         connectingLabel.textAlignment = .center
-        connectingLabel.font = UIFont.systemFont(ofSize: 24, weight: .medium)
+        connectingLabel.font = UIFont.systemRoundedFont(ofSize: 20, weight: .medium)
         view.addSubview(connectingLabel)
 
         activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,14 +125,12 @@ extension GameViewController {
 
         if raceStarted {
             let forfeitAction = UIAlertAction(title: "Forfeit Race", style: .default) {  [weak self] _ in
-                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:forfeit"))
                 PlayerFirebaseAnalytics.log(event: .forfeited, attributes: ["Page": self?.finalPage?.title as Any])
                 self?.gameManager.player(.forfeited)
             }
             alertController.addAction(forfeitAction)
 
             let reloadAction = UIAlertAction(title: "Reload Page", style: .default) { _ in
-                PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:reload"))
                 PlayerFirebaseAnalytics.log(event: .usedReload)
                 self.webView?.reload()
             }
@@ -140,7 +138,6 @@ extension GameViewController {
         }
 
         let quitAction = UIAlertAction(title: "Leave Match", style: .destructive) {  [weak self] _ in
-            PlayerFirebaseAnalytics.log(event: .userAction("quitAlertController:quit"))
             PlayerFirebaseAnalytics.log(event: .quitRace, attributes: nil)
             self?.attemptQuit()
         }
@@ -162,11 +159,14 @@ extension GameViewController {
     }
 
     func performQuit() {
+        if activeViewController?.view.window != nil {
+            view.alpha = 0
+        }
+        
         transitionState = .quitting(.inProgress)
         resetActiveControllers()
         gameManager.player(.quit)
-        NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit,
-                                        object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name.localPlayerQuit, object: nil)
     }
 
 }

@@ -25,11 +25,7 @@ final internal class GameViewController: UIViewController {
 
     // MARK: - Game Properties
 
-    var transitionState = TransitionState.none {
-        didSet {
-            PlayerFirebaseAnalytics.log(event: .gameState("TransitionState: \(transitionState)"))
-        }
-    }
+    var transitionState = TransitionState.none
     var isErrorPresented = false
     var isConfigured = false
 
@@ -62,7 +58,7 @@ final internal class GameViewController: UIViewController {
     var quitBarButtonItem: UIBarButtonItem!
 
     let connectingLabel = UILabel()
-    let activityIndicatorView = UIActivityIndicatorView(style: .large)
+    let activityIndicatorView = UIActivityIndicatorView(style: .medium)
 
     // MARK: - View Controllers
 
@@ -172,8 +168,6 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func helpButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
         if gameSettings.other.isHelpEnabled {
             showHelp()
         } else {
@@ -188,8 +182,6 @@ final internal class GameViewController: UIViewController {
 
     @objc
     func quitButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
         let alertController = quitAlertController(raceStarted: true)
         present(alertController, animated: true, completion: nil)
         self.alertController = alertController
@@ -213,7 +205,6 @@ final internal class GameViewController: UIViewController {
         navController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .phone ? .fullScreen : .formSheet
         present(navController, animated: true, completion: nil)
 
-        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:help"))
         PlayerFirebaseAnalytics.log(event: .usedHelp,
                                    attributes: ["Page": self.finalPage?.title as Any])
         if let raceType = statRaceType {
@@ -228,8 +219,7 @@ final internal class GameViewController: UIViewController {
     }
 
     func reloadPage() {
-        PlayerFirebaseAnalytics.log(event: .userAction("flagButtonPressed:reload"))
-        self.webView?.reload()
+        webView?.reload()
     }
 
     // Used for screenshots / fastlane

@@ -27,6 +27,7 @@ final class CustomRaceLanguageController: CustomRaceController {
             textField.textAlignment = .right
             textField.returnKeyType = .done
             textField.delegate = self
+            textField.font = UIFont.tableViewCellTitle()
             contentView.addSubview(textField)
         }
 
@@ -66,7 +67,7 @@ final class CustomRaceLanguageController: CustomRaceController {
 
     init(language: WKRGameSettings.Language) {
         self.language = language
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
         title = "Language".uppercased()
         tableView.allowsSelection = false
         tableView.register(Cell.self, forCellReuseIdentifier: Cell.reuseIdentifier)

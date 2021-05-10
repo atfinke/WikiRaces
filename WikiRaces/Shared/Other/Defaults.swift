@@ -12,16 +12,6 @@ struct Defaults {
 
     private static let defaults = UserDefaults.standard
 
-    private static let promptedGlobalRacesPopularityKey = "PromptedGlobalRacesPopularity"
-    static var promptedGlobalRacesPopularity: Bool {
-        get {
-            return defaults.bool(forKey: promptedGlobalRacesPopularityKey)
-        }
-        set {
-            defaults.set(newValue, forKey: promptedGlobalRacesPopularityKey)
-        }
-    }
-
     private static let fastlaneKey = "FASTLANE_SNAPSHOT"
     static var isFastlaneSnapshotInstance: Bool {
         get {

@@ -30,8 +30,6 @@ extension GameViewController {
     private func gameUpdate(_ gameUpdate: WKRGameManager.GameUpdate) {
         switch gameUpdate {
         case .state(let state):
-            PlayerFirebaseAnalytics.log(event: .gameState("Transition: \(state)."))
-
             func startTransition(to state: WKRGameState) {
                 transitionState = .inProgress
                 transition(to: state, completion: { [weak self] in
@@ -119,8 +117,9 @@ extension GameViewController {
             UIView.animate(
                 withDuration: WKRAnimationDurationConstants.gameFadeIn,
                 delay: WKRAnimationDurationConstants.gameFadeInDelay,
+                options: .curveEaseOut,
                 animations: { [weak self] in
-                    self?.votingViewController?.backingAlpha = 0
+                    self?.votingViewController?.backingAlpha = 0.0
                 }, completion: nil)
 
             // Because web view is a pain, force relayout
@@ -170,16 +169,18 @@ extension GameViewController {
             self?.attemptQuit()
         }
         alertController.addAction(quitAction)
+        
+        if activeViewController?.view.window != nil {
+            view.alpha = 0
+            navigationController?.setNavigationBarHidden(true, animated: false)
+        }
+        
         self.dismissActiveController(completion: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
                 self.present(alertController, animated: true, completion: nil)
                 self.activeViewController = alertController
             })
         })
-
-        let info = "errorOccurred: " + error.message
-        PlayerFirebaseAnalytics.log(event: .error(info))
-
         PlayerFirebaseAnalytics.log(event: .fatalError,
                                    attributes: ["Error": error.title as Any])
     }
@@ -350,7 +351,7 @@ extension GameViewController {
             UIView.animate(
                 withDuration: WKRAnimationDurationConstants.gameFadeOut,
                 delay: WKRAnimationDurationConstants.gameFadeOutDelay,
-                options: .beginFromCurrentState,
+                options: .curveEaseOut,
                 animations: {
                     controller.backingAlpha = 1
             }, completion: { [weak self] _ in

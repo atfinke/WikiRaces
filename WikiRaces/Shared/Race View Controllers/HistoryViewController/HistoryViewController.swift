@@ -36,11 +36,6 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        var frame = CGRect.zero
-        frame.size.height = .leastNormalMagnitude
-        tableView.tableHeaderView = UIView(frame: frame)
-
         tableView.estimatedRowHeight = 150
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(HistoryTableViewCell.self,
@@ -171,7 +166,6 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
     // MARK: - Actions -
 
     @IBAction func doneButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 
@@ -194,16 +188,8 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
         return 2
     }
 
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return section == 0 ? "Tap an article to view on Wikipedia" : nil
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? entries.count : (stats?.raw.count ?? 0)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? super.tableView(tableView, heightForRowAt: indexPath) : 40
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -229,14 +215,12 @@ final internal class HistoryViewController: UITableViewController, SFSafariViewC
 
         if let duration = WKRDurationFormatter.string(for: entry.duration) {
             cell.detailLabel.text = duration
-            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
             cell.isShowingActivityIndicatorView = false
         } else if playerState == .racing {
             cell.detailLabel.text = ""
             cell.isShowingActivityIndicatorView = true
         } else {
             cell.detailLabel.text = playerState.text
-            cell.detailLabel.font = UIFont.systemFont(ofSize: 18, weight: .medium)
             cell.isShowingActivityIndicatorView = false
         }
 

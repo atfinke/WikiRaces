@@ -48,13 +48,18 @@ final internal class VotingViewController: BackingVisualEffectViewController {
 
     var voteTimeRemaing = 100 {
         didSet {
-            let timeString = "VOTING ENDS IN " + voteTimeRemaing.description + " S"
+            let timeStringStart = "VOTING ENDS IN "
+            let timeStringNum = voteTimeRemaing.description
+            let timeStringEnd = " S"
+            
             switch state {
             case .pre:
                 model.footerOpacity = 0
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.model.footerTopText = "TAP ARTICLE TO VOTE"
-                    self.model.footerBottomText = timeString
+                    self.model.footerBottomStartText = timeStringStart
+                    self.model.footerBottomNumberText = timeStringNum
+                    self.model.footerBottomEndText = timeStringEnd
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
                     self.model.footerOpacity = 1
@@ -65,11 +70,16 @@ final internal class VotingViewController: BackingVisualEffectViewController {
                 if voteTimeRemaing == 0 {
                     model.footerOpacity = 0
                 } else {
-                    model.footerBottomText = timeString
+                    model.footerBottomStartText = timeStringStart
+                    model.footerBottomNumberText = timeStringNum
+                    model.footerBottomEndText = timeStringEnd
                 }
             case .post:
                 model.footerTopText = "GET READY"
-                model.footerBottomText = "RACE STARTS IN " + voteTimeRemaing.description + " S"
+                model.footerBottomStartText = "RACE STARTS IN "
+                model.footerBottomNumberText = timeStringNum
+                model.footerBottomEndText = timeStringEnd
+                
                 if !isFinalTextVisible {
                     isFinalTextVisible = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -92,7 +102,7 @@ final internal class VotingViewController: BackingVisualEffectViewController {
         contentViewHosting.didMove(toParent: self)
 
         model.footerTopText = "PREPARING"
-        model.footerBottomText = "VOTING STARTS SOON"
+        model.footerBottomStartText = "VOTING STARTS SOON"
 
         navigationItem.rightBarButtonItem = WKRUIBarButtonItem(
             systemName: "xmark",
@@ -103,7 +113,6 @@ final internal class VotingViewController: BackingVisualEffectViewController {
     // MARK: - Actions -
 
     @objc func doneButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             PlayerFirebaseAnalytics.log(event: .backupQuit,
                                         attributes: ["RawGameState": WKRGameState.voting.rawValue])

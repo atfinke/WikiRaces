@@ -53,7 +53,7 @@ final class CustomRacePageViewController: CustomRaceController {
             ])
         }
 
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
 
         switch pageType {
         case .start:
@@ -140,6 +140,10 @@ final class CustomRacePageViewController: CustomRaceController {
         }
 
         cell.tintColor = .wkrTextColor(for: traitCollection)
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
+        cell.detailTextLabel?.font = UIFont.tableViewCellDetail()
+        
         return cell
     }
 
@@ -173,7 +177,9 @@ final class CustomRacePageViewController: CustomRaceController {
             }
             controller.addAction(confirmAction)
 
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
+                tableView.deselectRow(at: indexPath, animated: true)
+            })
             controller.addAction(cancelAction)
 
             present(controller, animated: true, completion: nil)

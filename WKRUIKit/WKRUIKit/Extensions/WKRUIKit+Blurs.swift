@@ -9,5 +9,5 @@
 import UIKit
 
 extension UIBlurEffect {
-    public static let wkrBlurEffect = UIBlurEffect(style: .systemThinMaterial)
+    public static let wkrBlurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
 }

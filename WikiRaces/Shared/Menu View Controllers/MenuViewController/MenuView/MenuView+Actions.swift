@@ -16,23 +16,16 @@ extension MenuView {
     /// Custom button pressed
     @objc
     func showCustomOptions() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .customOptions)
     }
 
     @objc
     func joinStandardRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         PlayerFirebaseAnalytics.log(event: .revampPressedJoinPublic)
         PlayerUserDefaultsStat.gkPressedJoin.increment()
         
         UISelectionFeedbackGenerator().selectionChanged()
-
-        guard !promptGlobalRacesPopularity() else {
-            return
-        }
         
         animateMenuOut {
             self.listenerUpdate?(.presentStandardRace)
@@ -41,7 +34,6 @@ extension MenuView {
 
     @objc
     func joinCustomRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
         PlayerUserDefaultsStat.mpcPressedJoin.increment()
 
@@ -54,7 +46,6 @@ extension MenuView {
 
     @objc
     func createCustomRace() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         PlayerFirebaseAnalytics.log(event: .revampPressedJoinPrivate)
         PlayerUserDefaultsStat.mpcPressedHost.increment()
 
@@ -90,21 +81,18 @@ extension MenuView {
 
     @objc
     func backButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .standardOrCustom)
     }
 
     @objc
     func plusButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         animateOptionsOutAndTransition(to: .plusOptions)
     }
 
     @objc
     func statsButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         UISelectionFeedbackGenerator().selectionChanged()
         if PlusStore.shared.isPlus {
             animateMenuOut {
@@ -120,7 +108,6 @@ extension MenuView {
     /// - Parameter sender: The pressed tile
     @objc
     func menuTilePressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
 
         animateMenuOut {
             self.listenerUpdate?(.presentLeaderboard)
@@ -128,7 +115,6 @@ extension MenuView {
     }
 
     func triggeredEasterEgg() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         medalView.showMedals()
     }
 

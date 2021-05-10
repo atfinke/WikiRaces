@@ -31,7 +31,7 @@ internal class ViewController: UIViewController {
         let controller = VotingViewController()
         let nav = UINavigationController(rootViewController: controller)
 
-        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
+        UIApplication.shared.windows.first?.rootViewController = nav
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             guard let appleURL = URL(string: "https://en.m.wikipedia.org/wiki/Apple_Inc."),
@@ -51,6 +51,11 @@ internal class ViewController: UIViewController {
                 state.player(WKRPlayerProfile(name: "", playerID: ""), votedFor: WKRPage(title: "Walt Disney", url: waltURL))
                 controller.votingState = state
                 controller.voteTimeRemaing = 5
+                Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        controller.voteTimeRemaing += 1
+                    }
+                }
             }
         }
     }
@@ -59,7 +64,7 @@ internal class ViewController: UIViewController {
         let controller = ResultsViewController()
         let nav = UINavigationController(rootViewController: controller)
 
-        (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = nav
+        UIApplication.shared.windows.first?.rootViewController = nav
 
         //        let names = ["Andrew", "Carol", "Tom", "Lisa", "Midnight", "Uncle D", "Pops", "Sam"]
         let names = ["Andrew", "Carol", "Tom", "Lisa"]

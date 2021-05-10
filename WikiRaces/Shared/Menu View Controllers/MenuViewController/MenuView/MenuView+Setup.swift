@@ -67,10 +67,9 @@ extension MenuView {
             statsButtonLeftConstraint!,
             statsButtonWidthConstraint!,
 
-            standardRaceButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor,
-                                            constant: 40.0),
-            joinButton.topAnchor.constraint(equalTo: standardRaceButton.topAnchor),
-            statsButton.topAnchor.constraint(equalTo: standardRaceButton.topAnchor),
+            customRaceButton.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 40.0),
+            joinButton.topAnchor.constraint(equalTo: customRaceButton.topAnchor),
+            statsButton.topAnchor.constraint(equalTo: customRaceButton.topAnchor),
 
             customRaceButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
             joinButton.heightAnchor.constraint(equalTo: standardRaceButton.heightAnchor),
@@ -79,11 +78,12 @@ extension MenuView {
 
             customRaceButton.leftAnchor.constraint(equalTo: standardRaceButton.leftAnchor),
             createButton.leftAnchor.constraint(equalTo: joinButton.leftAnchor),
-            customRaceButton.topAnchor.constraint(equalTo: standardRaceButton.bottomAnchor, constant: 20.0),
-            createButton.topAnchor.constraint(equalTo: customRaceButton.topAnchor),
+
+            standardRaceButton.topAnchor.constraint(equalTo: customRaceButton.bottomAnchor, constant: 20.0),
+            createButton.topAnchor.constraint(equalTo: standardRaceButton.topAnchor),
 
             plusButton.leftAnchor.constraint(equalTo: standardRaceButton.leftAnchor),
-            plusButton.topAnchor.constraint(equalTo: customRaceButton.bottomAnchor, constant: 20.0),
+            plusButton.topAnchor.constraint(equalTo: standardRaceButton.bottomAnchor, constant: 20.0),
             plusButton.widthAnchor.constraint(equalTo: backButton.widthAnchor),
             plusButton.heightAnchor.constraint(equalTo: backButton.widthAnchor),
 
@@ -120,10 +120,8 @@ extension MenuView {
         statsButton.addTarget(self, action: #selector(statsButtonPressed), for: .touchUpInside)
         topView.addSubview(statsButton)
 
-        if #available(iOS 13.4, *) {
-            backButton.isPointerInteractionEnabled = true
-            plusButton.isPointerInteractionEnabled = true
-        }
+        backButton.isPointerInteractionEnabled = true
+        plusButton.isPointerInteractionEnabled = true
 
         backButton.setImage(UIImage(named: "Back")!, for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false

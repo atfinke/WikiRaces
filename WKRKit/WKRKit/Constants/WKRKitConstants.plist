@@ -24,11 +24,11 @@
 	<key>QuickRace</key>
 	<false/>
 	<key>ConnectionTestTimeout</key>
-	<integer>4</integer>
+	<integer>5</integer>
 	<key>RandomURLString</key>
 	<string>https://en.m.wikipedia.org/wiki/Special:Random</string>
 	<key>Version</key>
-	<integer>32</integer>
+	<integer>40</integer>
 	<key>WhatLinksHereURLString</key>
 	<string>https://en.m.wikipedia.org/w/index.php?title=Special:WhatLinksHere</string>
 	<key>MaxFoundPagePlayers</key>
@@ -48,6 +48,16 @@
 	<key>RaceCodeRecordMinReuseTimeSinceLastUpdate</key>
 	<integer>600</integer>
 	<key>RaceResultsSpectatorUpdateInterval</key>
-	<integer>4</integer>
+	<integer>10</integer>
+	<key>MaxChooseHostTimeBasedOnConnection</key>
+	<integer>15</integer>
+	<key>MaxChooseHostTimeBasedOnName</key>
+	<integer>10</integer>
+	<key>TimeBetweenHostSelectionAndStartMessage</key>
+	<real>3.2</real>
+	<key>TimeBetweenHostStartMessageAndRaceStart</key>
+	<integer>2</integer>
+	<key>IsFirebaseEnabled</key>
+	<true/>
 </dict>
 </plist>

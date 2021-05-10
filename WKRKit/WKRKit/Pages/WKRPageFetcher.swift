@@ -18,6 +18,7 @@ public struct WKRPageFetcher {
         let config = URLSessionConfiguration.default
         config.timeoutIntervalForRequest = 7.5
         config.timeoutIntervalForResource = 7.5
+        config.multipathServiceType = .interactive
         return URLSession(configuration: config)
     }()
 
@@ -27,6 +28,7 @@ public struct WKRPageFetcher {
         config.timeoutIntervalForResource = 7.5
         config.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         config.urlCache = nil
+        config.multipathServiceType = .interactive
         return URLSession(configuration: config)
     }()
 

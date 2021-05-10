@@ -47,5 +47,15 @@
 	<integer>600</integer>
 	<key>RaceResultsSpectatorUpdateInterval</key>
 	<integer>4</integer>
+	<key>MaxChooseHostTimeBasedOnConnection</key>
+	<integer>15</integer>
+	<key>MaxChooseHostTimeBasedOnName</key>
+	<integer>10</integer>
+	<key>TimeBetweenHostSelectionAndStartMessage</key>
+	<real>3.2</real>
+	<key>TimeBetweenHostStartMessageAndRaceStart</key>
+	<integer>2</integer>
+	<key>IsFirebaseEnabled</key>
+	<true/>
 </dict>
 </plist>

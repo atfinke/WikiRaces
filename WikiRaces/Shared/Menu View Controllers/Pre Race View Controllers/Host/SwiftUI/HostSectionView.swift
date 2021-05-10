@@ -28,12 +28,11 @@ struct HostSectionView: View {
         HStack {
             VStack(alignment: .leading) {
                 Text(header)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.wkrSubtitleTextColor(for: colorScheme))
                     .multilineTextAlignment(.leading)
                 Text(title)
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.wkrTextColor(for: colorScheme))
+                    .font(.system(size: 20, weight: .semibold, design: .rounded))
                     .multilineTextAlignment(.leading)
                     .transition(.opacity)
                     .id(title)
@@ -44,12 +43,12 @@ struct HostSectionView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 24)
-                    .font(.system(size: 30, weight: .regular))
-                    .foregroundColor(.wkrTextColor(for: colorScheme))
+                    .font(.system(size: 30, weight: .regular, design: .rounded))
             })
             .opacity(disabled ? 0.2 : 1)
             .disabled(disabled)
             .animation(.spring())
         }
+        .foregroundColor(.wkrTextColor(for: colorScheme))
     }
 }

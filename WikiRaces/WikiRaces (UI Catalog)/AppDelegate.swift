@@ -11,17 +11,19 @@ import WKRUIKit
 
 @UIApplicationMain
 class AppDelegate: WKRAppDelegate {
+    
+//    var __window: WKRUIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureConstants()
         cleanTempDirectory()
 
-        window = WKRUIWindow(frame: UIScreen.main.bounds)
-        let controller = ViewController()
-        let nav = WKRUINavigationController(rootViewController: controller)
-        nav.setNavigationBarHidden(true, animated: false)
-        window?.rootViewController = nav
-        window?.makeKeyAndVisible()
+//        __window = WKRUIWindow(frame: UIScreen.main.bounds)
+//        let controller = ViewController()
+//        let nav = WKRUINavigationController(rootViewController: controller)
+//        nav.setNavigationBarHidden(true, animated: false)
+//        __window?.rootViewController = nav
+//        __window?.makeKeyAndVisible()
 
         return true
     }

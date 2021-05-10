@@ -25,10 +25,13 @@ class VotingContentViewModel: ObservableObject {
 
     @Published var items = [Item]()
     @Published var isFinalArticleSelected: Bool = false
-    @Published var isVotingEnabled: Bool = true
+    @Published var isVotingEnabled: Bool = false
 
     @Published var footerTopText: String = " "
-    @Published var footerBottomText: String = " "
+    @Published var footerBottomStartText: String = " "
+    @Published var footerBottomNumberText: String = ""
+    @Published var footerBottomEndText: String = ""
+
     @Published var footerOpacity: Double = 1.0
 
     // MARK: - Helpers -

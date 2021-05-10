@@ -1,3 +1,4 @@
+import time
 import re
 import random
 import urllib
@@ -10,6 +11,9 @@ from os.path import join, exists
 
 from time import sleep
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
 MAX_PAGE_TITLE_LENGTH = 25
@@ -272,7 +276,83 @@ def save_articles_to_path(articles, path):
     )), path)
 
 
+def fetch():
+    driver = webdriver.Safari()
+
+    urls = [
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2021-04&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2021-03&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2021-02&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2021-01&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=last-year&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2019&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2018&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2017&excludes=",
+        "https://pageviews.toolforge.org/topviews/?project=en.wikipedia.org&platform=all-access&date=2016&excludes="
+    ]
+
+    articles = []
+    for url in urls:
+        driver.get(url)
+        sleep(0.2)
+        element = WebDriverWait(driver, 40).until(
+            EC.presence_of_element_located((By.ID, "topview-entry-2"))
+        )
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        links = [a.get('href').replace('https://en.wikipedia.org/wiki', '') for a in soup.find_all("a", href=re.compile("https://en.wikipedia.org/wiki/"))]
+        print(len(links))
+        articles += links
+        save_articles_to_path(articles,"/Users/andrewfinke/Desktop/top.plist")
+        
+    
+
+    print(articles)
+    
+
+    driver.quit()
+
 if __name__ == "__main__":
-    articles = load_articles_at_path(
-        "/Users/andrewfinke/Desktop/WKRArticlesData.plist")
-    run_networking_test(articles)
+    # fetch()
+    # articles = remove_articles_from_articles(list(load_articles_at_path("/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/50.plist").keys()), list(load_articles_at_path("/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/All.plist").keys()))
+    # articles = remove_articles_from_articles(list(load_articles_at_path("/Users/andrewfinke/Desktop/WKRPython/PageLinksTests/50.plist").keys()), articles)
+
+    # save_articles_to_path(articles,"/Users/andrewfinke/Desktop/blu.plist")
+
+    articles = load_articles_at_path("/Users/andrewfinke/Desktop/WKRArticlesDataNew.plist") + load_articles_at_path("/Users/andrewfinke/Desktop/keep.plist")
+    # run_pages_that_link_to_articles_test(articles)
+    # new = list(load_articles_at_path("/Users/andrewfinke/Desktop/WKRPython/NetworkTests/RedirectingArticles.plist").values()) + load_articles_at_path("/Users/andrewfinke/Desktop/WKRPython/NetworkTests/NormalArticles.plist")
+    # f = remove_articles_from_articles(
+    #     articles, new
+    # )
+    save_articles_to_path(articles,"/Users/andrewfinke/Desktop/fin.plist")
+
+
+    # reduced = load_articles_at_path("/Users/andrewfinke/Desktop/reduced.plist")
+    # reduced = remove_articles_with_year(reduced)
+
+    # articles = []
+
+    # for r in reduced:
+    #     is_person_article, is_disambiguation_article = articles_properties(r)
+    #     if not is_person_article and not is_disambiguation_article:
+    #         articles.append(r)
+
+    # existing = load_articles_at_path("/Users/andrewfinke/Desktop/WKRArticlesDataNew.plist")
+    # reduced = remove_articles_from_articles(existing, articles)
+
+    # save_articles_to_path(reduced,"/Users/andrewfinke/Desktop/reduced.plist")
+    # print()
+
+    # pages = [
+    #     "/Wikipedia:Multiyear_ranking_of_most_viewed_pages",
+    #     "/Wikipedia:Top_25_Report",
+    #     "/User:HostBot/Top_1000_report",
+    #     "/List_of_Walt_Disney_World_Resort_attractions"
+    # ]
+    # art = []
+    # for aa in pages:
+    #     art += fetch_links_on_article(aa)
+
+    # save_articles_to_path(art,"/Users/andrewfinke/Desktop/new.plist")
+    # print(art)
+    # run_networking_test(articles)

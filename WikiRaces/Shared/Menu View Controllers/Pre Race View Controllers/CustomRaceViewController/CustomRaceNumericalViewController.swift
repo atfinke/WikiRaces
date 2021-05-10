@@ -83,7 +83,7 @@ final class CustomRaceNumericalViewController: CustomRaceController {
 
     init(settingsType: SettingsType, currentValue: Any) {
         self.type = settingsType
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
 
         switch type {
         case .points:
@@ -162,6 +162,10 @@ final class CustomRaceNumericalViewController: CustomRaceController {
                 cell.valueLabel.text = timing.resultsTime.description + " S"
             }
         }
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
+        cell.valueLabel.font = UIFont.tableViewCellDetail()
+        
         return cell
     }
 

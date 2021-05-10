@@ -29,17 +29,20 @@ class ResultsContentViewModel: ObservableObject {
 
     @Published var items = [Item]()
     @Published var footerTopText: String = ""
-    @Published var footerBottomText: String = ""
-    @Published var footerOpacity: Double = 1.0
+    @Published var footerBottomStartText: String = ""
+    @Published var footerBottomNumberText: String = ""
+    @Published var footerBottomEndText: String = ""
+    @Published var footerTextOpacity: Double = 1.0
+    @Published var footerDividerOpacity: Double = 1.0
 
     @Published var buttonFlashOpacity: Double = 1
-    @Published var buttonEnabled: Bool = false
+    @Published var isButtonEnabled: Bool = false
 
     // MARK: - Helpers -
 
     func startPulsingButton() {
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-            guard let self = self, self.buttonEnabled else { return }
+            guard let self = self, self.isButtonEnabled else { return }
             DispatchQueue.main.async {
                 self.buttonFlashOpacity = self.buttonFlashOpacity == 1 ? 0.5 : 1
             }

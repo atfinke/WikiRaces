@@ -14,8 +14,6 @@ import WKRUIKit
 
 internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
 
-    final var window: WKRUIWindow?
-
     final func configureConstants() {
         WKRKitConstants.updateConstants()
         WKRUIKitConstants.updateConstants()
@@ -53,6 +51,12 @@ internal class WKRAppDelegate: UIResponder, UIApplicationDelegate {
         GKHelper.shared.acceptedInvite(code: code)
         PlayerFirebaseAnalytics.log(event: .raceCodeLinkOpened)
         return true
+    }
+    
+    // MARK: - UISceneSession Lifecycle
+
+    func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+        return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
 }

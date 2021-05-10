@@ -38,7 +38,7 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
 
     public var text: String? {
         set {
-            linkCountLabel.text = newValue
+            linkCountLabel.text = (newValue ?? "") + "\n"
         }
         get {
             return linkCountLabel.text
@@ -93,24 +93,26 @@ final public class WKRUIWebView: WKWebView, WKScriptMessageHandler {
                 .typeIdentifier: kMonospacedNumbersSelector
             ]
         ]
-        let fontDescriptor = UIFont.systemFont(ofSize: 100, weight: .medium)
+        let fontDescriptor = UIFont.systemFont(ofSize: 100, weight: .regular)
             .fontDescriptor
             .addingAttributes(
             [UIFontDescriptor.AttributeName.featureSettings: features]
-        )
+            )
+            
+        let roundedFontDescriptor = fontDescriptor.withDesign(.rounded)
 
         loadingView.alpha = 0.0
         loadingView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(loadingView)
 
-        linkCountLabel.text = "0"
+        linkCountLabel.text = "0\n"
         linkCountLabel.textColor = UIColor.white
         linkCountLabel.textAlignment = .center
         linkCountLabel.numberOfLines = 0
 
         linkCountLabel.adjustsFontSizeToFitWidth = true
-        linkCountLabel.font = UIFont(descriptor: fontDescriptor, size: 100.0)
+        linkCountLabel.font = UIFont(descriptor: roundedFontDescriptor ?? fontDescriptor, size: 100.0)
         linkCountLabel.translatesAutoresizingMaskIntoConstraints = false
         loadingView.addSubview(linkCountLabel)
 

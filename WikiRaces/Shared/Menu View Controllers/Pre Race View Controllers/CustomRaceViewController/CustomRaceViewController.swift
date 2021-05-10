@@ -36,7 +36,7 @@ final class CustomRaceViewController: CustomRaceController {
         self.settings = settings
         self.allCustomPages = pages
         self.finalPagesCallback = finalPages
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
         title = "Customize Race".uppercased()
 
         navigationItem.leftBarButtonItem = nil
@@ -82,6 +82,7 @@ final class CustomRaceViewController: CustomRaceController {
         if indexPath.section == 1 {
             cell.textLabel?.text = "Reset to Default"
             cell.textLabel?.textColor = .systemRed
+            cell.textLabel?.font = UIFont.tableViewCellTitle()
             return cell
         } else if indexPath.section == 2 {
             if indexPath.row == 0 {
@@ -98,6 +99,10 @@ final class CustomRaceViewController: CustomRaceController {
         cell.textLabel?.text = setting.rawValue.capitalized
         cell.detailTextLabel?.text = value(for: setting)
         cell.accessoryType = .disclosureIndicator
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
+        cell.detailTextLabel?.font = UIFont.tableViewCellDetail()
+        
         return cell
     }
 

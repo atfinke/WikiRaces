@@ -8,6 +8,7 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 final class CustomRaceOtherController: CustomRaceController {
 
@@ -35,7 +36,8 @@ final class CustomRaceOtherController: CustomRaceController {
 
         override func layoutSubviews() {
             super.layoutSubviews()
-            toggle.onTintColor = .wkrTextColor(for: traitCollection)
+            toggle.onTintColor = UIColor.wkrTextColor(for: traitCollection)
+                .withAlphaComponent(WKRUIStyle.isDark(traitCollection) ? 0.75 : 1)
             toggle.center = CGPoint(
                 x: contentView.frame.width - contentView.layoutMargins.right - toggle.frame.width / 2,
                 y: contentView.frame.height / 2)
@@ -55,7 +57,7 @@ final class CustomRaceOtherController: CustomRaceController {
 
     init(other: WKRGameSettings.Other) {
         self.other = other
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
         title = "Other".uppercased()
         tableView.allowsSelection = false
         tableView.register(Cell.self, forCellReuseIdentifier: Cell.reuseIdentifier)
@@ -90,6 +92,8 @@ final class CustomRaceOtherController: CustomRaceController {
         default:
             fatalError()
         }
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
 
         return cell
     }

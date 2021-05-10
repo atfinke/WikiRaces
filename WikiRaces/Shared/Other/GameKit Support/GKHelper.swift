@@ -9,10 +9,10 @@
 import Foundation
 import GameKit
 import WKRUIKit
+import os.log
 
 #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
 import FirebaseAnalytics
-import FirebaseCrashlytics
 #endif
 
 class GKHelper: NSObject, GKLocalPlayerListener {
@@ -22,11 +22,17 @@ class GKHelper: NSObject, GKLocalPlayerListener {
         case error(Error)
         case isAuthenticated
     }
+    
+    enum Invite {
+        case raceCode(String)
+        case gkInvite(GKInvite)
+    }
 
     static let shared = GKHelper()
+    static let gkInviteCode = "GKHelper.GKInvite"
 
-    private var pendingInvite: String?
-    var inviteHandler: ((String) -> Void)? {
+    private var pendingInvite: Invite?
+    var inviteHandler: ((Invite) -> Void)? {
         didSet {
             pushInviteToHandler()
         }
@@ -40,7 +46,6 @@ class GKHelper: NSObject, GKLocalPlayerListener {
     }
     
     public var isAuthenticated = false
-    public var _invite: GKInvite?
 
     // MARK: - Initalization -
 
@@ -91,7 +96,6 @@ class GKHelper: NSObject, GKLocalPlayerListener {
 
                         #if !MULTIWINDOWDEBUG && !targetEnvironment(macCatalyst)
                         let playerName = GKLocalPlayer.local.alias
-                        Crashlytics.crashlytics().setUserID(playerName)
                         Analytics.setUserProperty(playerName, forName: "playerName")
                         #endif
                     } else {
@@ -104,13 +108,15 @@ class GKHelper: NSObject, GKLocalPlayerListener {
     }
 
     func acceptedInvite(code: String) {
-        pendingInvite = code
+        os_log("%{public}s: %{public}s", log: .gameKit, type: .info, #function, code)
+        pendingInvite = .raceCode(code)
         pushInviteToHandler()
     }
     
     func player(_ player: GKPlayer, didAccept invite: GKInvite) {
-        _invite = invite
-        acceptedInvite(code: "_GKINVITE")
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        pendingInvite = .gkInvite(invite)
+        pushInviteToHandler()
     }
 
 }

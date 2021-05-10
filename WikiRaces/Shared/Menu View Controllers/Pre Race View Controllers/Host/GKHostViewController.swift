@@ -14,11 +14,13 @@ import WKRKit
 import WKRUIKit
 import SwiftUI
 
-final internal class GKHostViewController: GKConnectViewController {
+final internal class GKHostViewController: HostingViewController {
     
     // MARK: - Properties -
     
     let raceCodeGenerator = RaceCodeGenerator()
+    var match: GKMatch?
+    var messenger: PreRaceMessenger?
     private let advertiser = NearbyRaceAdvertiser()
     private let sourceView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 100)))
     
@@ -51,7 +53,7 @@ final internal class GKHostViewController: GKConnectViewController {
     // MARK: - Initalization -
     
     init() {
-        super.init(isPlayerHost: true)
+        super.init(nibName: nil, bundle: nil)
         if Defaults.isFastlaneSnapshotInstance {
             model.raceCode = "APPLE"
             model.state = .showingRacers
@@ -75,7 +77,7 @@ final internal class GKHostViewController: GKConnectViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         sourceView.alpha = 0
-        contentView.addSubview(sourceView)
+        view.addSubview(sourceView)
         contentViewHosting.view.alpha = 0
         configure(hostingView: contentViewHosting.view)
     }
@@ -113,7 +115,7 @@ final internal class GKHostViewController: GKConnectViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        sourceView.center = CGPoint(x: contentView.center.x, y: contentView.center.y - 150)
+        sourceView.center = CGPoint(x: view.center.x, y: view.center.y - 150)
     }
     
     // MARK: - Actions -
@@ -132,41 +134,23 @@ final internal class GKHostViewController: GKConnectViewController {
         }
         
         os_log("%{public}s", log: .gameKit, type: .info, #function)
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         
-        model.state = .raceStarting
+        GKMatchmaker.shared().cancel()
         raceCodeGenerator.cancel()
         
         advertiser.stop()
         contentViewHosting.view.isUserInteractionEnabled = false
         
-        func sendStartMessage() {
-            guard let match = match else { fatalError("match is nil") }
-            GKMatchmaker.shared().finishMatchmaking(for: match)
-            os_log("%{public}s: sending start message", log: .gameKit, type: .info, #function)
-            
-            let message = GKConnectViewController.StartMessage(
-                hostName: GKLocalPlayer.local.alias,
-                gameSettings: model.settings)
-            do {
-                let data = try JSONEncoder().encode(message)
-                try match.sendData(toAllPlayers: data, with: .reliable)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-                    self.transitionToGame(
-                        for: .gameKitPrivate(match: match, isHost: true),
-                        settings: self.model.settings)
-                }
-            } catch {
-                self.cancelMatch()
-            }
-        }
-        
         func startSolo() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.transitionToGame(for:
-                    .solo(name: GKLocalPlayer.local.alias),
-                                      settings: self.model.settings)
-            }
+            let controller = GameViewController(network: .solo(name: GKLocalPlayer.local.alias), settings: self.model.settings)
+            let nav = WKRUINavigationController(rootViewController: controller)
+            nav.modalPresentationStyle = .fullScreen
+            nav.modalTransitionStyle = .crossDissolve
+            nav.isModalInPresentation = true
+            
+            self.present(nav, animated: true, completion: { [weak self] in
+                self?.view.alpha = 0
+            })
         }
         
         if match == nil || match?.players.count == 0 {
@@ -183,11 +167,32 @@ final internal class GKHostViewController: GKConnectViewController {
                 present(controller, animated: true, completion: nil)
                 Defaults.promptedSoloRacesStats = true
             }
-        } else {
-            sendStartMessage()
+        } else if let match = match {
+            let controller = PreRaceHostSelectionViewController(match: match, destination: .hostCustom)
+            controller.startCustomRaceHostDetermination(with: model.settings)
+            UIView.animate(withDuration: 0.5) {
+                self.contentViewHosting.view.alpha = 0
+            } completion: { [weak self] _ in
+                self?.navigationController?.pushViewController(controller, animated: false)
+            }
         }
+    }
+    
+    func cancelMatch() {
+        os_log("%{public}s", log: .gameKit, type: .info, #function)
+        messenger?.send(message: .init(info: .hostCancelled, data: nil))
+        GKMatchmaker.shared().cancel()
         
-        PlayerCloudKitLiveRaceManager.shared.savePlayerImages()
+        if let match = match {
+            match.delegate = nil
+            match.disconnect()
+        }
+
+        UIView.animate(withDuration: 0.25, animations: {
+            self.view.alpha = 0.0
+        }, completion: { _ in
+            self.navigationController?.popToRootViewController(animated: false)
+        })
     }
     
     // MARK: - Other -

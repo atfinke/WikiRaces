@@ -18,11 +18,11 @@ extension GKHostViewController: GKMatchDelegate {
         
         guard isMatchmakingEnabled else { return }
         
-        if attempt > 3 {
+        if attempt > 5 {
             os_log("%{public}s: too many attempts", log: .gameKit, type: .error, #function)
             DispatchQueue.main.async {
                 self.isMatchmakingEnabled = false
-                self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                GKNotificationBanner.show(withTitle: "Game Center Issue", message: "Please try again later.")
                 self.model.state = .soloRace
             }
             return
@@ -52,12 +52,13 @@ extension GKHostViewController: GKMatchDelegate {
                         os_log("%{public}s-%{public}s: error (long)", log: .gameKit, type: .error, #function, raceCode)
                         DispatchQueue.main.async {
                             self.isMatchmakingEnabled = false
-                            self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                            GKNotificationBanner.show(withTitle: "Game Center Issue", message: "Please try again later.")
                             self.model.state = .soloRace
                         }
                     }
                 } else if let match = match {
                     os_log("%{public}s-%{public}s: found match", log: .gameKit, type: .info, #function, raceCode)
+                    self.messenger = PreRaceMessenger(match: match)
                     self.match = match
                     self.match?.delegate = self
                     self.addPlayers()
@@ -65,7 +66,7 @@ extension GKHostViewController: GKMatchDelegate {
                     os_log("%{public}s- gamekit did the impossible, no error, no match, nothing to see here", log: .gameKit, type: .error, #function)
                     DispatchQueue.main.async {
                         self.isMatchmakingEnabled = false
-                        self.showError(title: "Failed to Create Race", message: "Please try again later.")
+                        GKNotificationBanner.show(withTitle: "Game Center Issue", message: "Please try again later.")
                         self.model.state = .soloRace
                     }
                 }
@@ -111,7 +112,6 @@ extension GKHostViewController: GKMatchDelegate {
                         self.model.connectedPlayers.append(player)
                     }
                 }
-                self?.sendMiniMessage(info: .connected)
             })
         } else if state == .disconnected {
             DispatchQueue.main.async {

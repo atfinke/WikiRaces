@@ -14,7 +14,6 @@ extension ResultsViewController {
     // MARK: - Actions
 
     @objc func doneButtonPressed() {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let alertController = quitAlertController else {
             PlayerFirebaseAnalytics.log(event: .backupQuit,
                               attributes: ["RawGameState": state.rawValue])
@@ -25,7 +24,6 @@ extension ResultsViewController {
     }
 
     @objc func shareResultsBarButtonItemPressed(_ sender: UIBarButtonItem) {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
         guard let image = resultImage else { return }
 
         let hackTitle = "Hack"
@@ -53,13 +51,11 @@ extension ResultsViewController {
     }
 
     func tapped(playerID: String) {
-        PlayerFirebaseAnalytics.log(event: .userAction(#function))
-
         guard let resultsInfo = resultsInfo, let player = resultsInfo.player(for: playerID), state != .points else {
             return
         }
 
-        let controller = HistoryViewController(style: .grouped)
+        let controller = HistoryViewController(style: .insetGrouped)
         historyViewController = controller
         controller.player = player
 

@@ -12,6 +12,8 @@ import WKRUIKit
 @UIApplicationMain
 internal class AppDelegate: WKRAppDelegate {
 
+    var window: WKRUIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         configureConstants()
 

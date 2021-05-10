@@ -8,6 +8,7 @@
 
 import UIKit
 import WKRKit
+import WKRUIKit
 
 final class CustomRaceNotificationsController: CustomRaceController {
 
@@ -35,7 +36,8 @@ final class CustomRaceNotificationsController: CustomRaceController {
 
         override func layoutSubviews() {
             super.layoutSubviews()
-            toggle.onTintColor = .wkrTextColor(for: traitCollection)
+            toggle.onTintColor = UIColor.wkrTextColor(for: traitCollection)
+                .withAlphaComponent(WKRUIStyle.isDark(traitCollection) ? 0.75 : 1)
 
             toggle.center = CGPoint(
                 x: contentView.frame.width - contentView.layoutMargins.right - toggle.frame.width / 2,
@@ -56,7 +58,7 @@ final class CustomRaceNotificationsController: CustomRaceController {
 
     init(notifications: WKRGameSettings.Notifications) {
         self.notifications = notifications
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
         title = "Player Messages".uppercased()
         tableView.allowsSelection = false
         tableView.register(Cell.self, forCellReuseIdentifier: Cell.reuseIdentifier)
@@ -103,6 +105,8 @@ final class CustomRaceNotificationsController: CustomRaceController {
         default:
             fatalError()
         }
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
 
         return cell
     }

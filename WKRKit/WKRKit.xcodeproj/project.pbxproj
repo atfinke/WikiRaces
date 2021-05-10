@@ -866,6 +866,7 @@
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2020.08;
 				OTHER_SWIFT_FLAGS = "";
@@ -897,6 +898,7 @@
 				INFOPLIST_FILE = WKRKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2020.08;
 				OTHER_SWIFT_FLAGS = "";

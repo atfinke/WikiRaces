@@ -28,9 +28,17 @@ extension UIFont {
     static public func systemRoundedFont(ofSize size: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
         let font = UIFont.systemFont(ofSize: size, weight: weight)
         guard let descriptor = font.fontDescriptor.withDesign(.rounded) else {
-            fatalError()
+            return UIFont.systemFont(ofSize: size, weight: weight)
         }
         return UIFont(descriptor: descriptor, size: size)
+    }
+    
+    static public func tableViewCellTitle() -> UIFont {
+        return .systemRoundedFont(ofSize: 17, weight: .regular)
+    }
+    
+    static public func tableViewCellDetail() -> UIFont {
+        return .systemRoundedFont(ofSize: 17, weight: .regular)
     }
 
 }

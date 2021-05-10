@@ -120,7 +120,7 @@ class StatsViewController: UITableViewController {
     // MARK: - Initalization -
 
     init() {
-        super.init(style: .grouped)
+        super.init(style: .insetGrouped)
         title = "Stats".uppercased()
         
         tableView.cellLayoutMarginsFollowReadableWidth = true
@@ -164,12 +164,43 @@ class StatsViewController: UITableViewController {
             cell.isUserInteractionEnabled = true
             cell.accessoryType = .disclosureIndicator
         }
+        
+        cell.textLabel?.font = UIFont.tableViewCellTitle()
+        cell.detailTextLabel?.font = UIFont.tableViewCellDetail()
+        
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = StatsPlayersViewController(mpc: indexPath.section == 2)
+        let controller = StatsCountsViewController(
+            title: indexPath.section == 0 ? "Top Pages Viewed" : "Players Raced")
         navigationController?.pushViewController(controller, animated: true)
+        
+        DispatchQueue.global().async {
+            let isMPC = indexPath.section == 2
+            let key: String
+            if isMPC {
+                key = "PlayersArray"
+            } else {
+                key = "GKPlayersArray"
+            }
+            let players = UserDefaults.standard.stringArray(forKey: key) ?? []
+            
+            var count = [String: Int]()
+            for player in players {
+                if let existing = count[player] {
+                    count[player] = existing + 1
+                } else {
+                    count[player] = 1
+                }
+            }
+            let counts = count.sorted { lhs, rhs -> Bool in
+                return lhs.value > rhs.value
+            }
+            DispatchQueue.main.async {
+                controller.counts = counts
+            }
+        }
     }
 
     // MARK: - Help -

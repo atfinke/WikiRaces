@@ -7,6 +7,7 @@
 //
 
 import CloudKit
+import CoreGraphics
 import os.log
 
 public struct WKRKitConstants {
@@ -37,11 +38,18 @@ public struct WKRKitConstants {
 
     public let maxGlobalRacePlayers: Int
     public let maxLocalRacePlayers: Int
-
+    public let maxChooseHostTimeBasedOnName: Int
+    public let maxChooseHostTimeBasedOnConnection: Int
+    
+    public let timeBetweenHostSelectionAndStartMessage: CGFloat
+    public let timeBetweenHostStartMessageAndRaceStart: CGFloat
+    
     public let manageGameCenterLink: URL
     public let raceCodeRecordMinReuseTimeSinceLastUpdate: Int
     public let raceResultsSpectatorUpdateInterval: Int
 
+    public let isFirebaseEnabled: Bool
+    
     // MARK: - Initalization
 
     init() {
@@ -100,7 +108,20 @@ public struct WKRKitConstants {
         guard let maxLocalRacePlayers = documentsConstants["MaxLocalRacePlayers"] as? Int else {
             fatalError("WKRKitConstants: No MaxLocalRacePlayers value")
         }
-
+        guard let maxChooseHostTimeBasedOnName = documentsConstants["MaxChooseHostTimeBasedOnName"] as? Int else {
+            fatalError("WKRKitConstants: No MaxChooseHostTimeBasedOnName value")
+        }
+        guard let maxChooseHostTimeBasedOnConnection = documentsConstants["MaxChooseHostTimeBasedOnConnection"] as? Int else {
+            fatalError("WKRKitConstants: No MaxChooseHostTimeBasedOnConnection value")
+        }
+        
+        guard let timeBetweenHostSelectionAndStartMessage = documentsConstants["TimeBetweenHostSelectionAndStartMessage"] as? CGFloat else {
+            fatalError("WKRKitConstants: No TimeBetweenHostSelectionAndStartMessage value")
+        }
+        guard let timeBetweenHostStartMessageAndRaceStart = documentsConstants["TimeBetweenHostStartMessageAndRaceStart"] as? CGFloat else {
+            fatalError("WKRKitConstants: No TimeBetweenHostStartMessageAndRaceStart value")
+        }
+        
         guard let manageGameCenterLinkString = documentsConstants["ManageGameCenterLink"] as? String,
               let manageGameCenterLink = URL(string: manageGameCenterLinkString) else {
             fatalError("WKRKitConstants: No ManageGameCenterLink value")
@@ -110,6 +131,9 @@ public struct WKRKitConstants {
         }
         guard let raceResultsSpectatorUpdateInterval = documentsConstants["RaceResultsSpectatorUpdateInterval"] as? Int else {
             fatalError("WKRKitConstants: No RaceResultsSpectatorUpdateInterval value")
+        }
+        guard let isFirebaseEnabled = documentsConstants["IsFirebaseEnabled"] as? Bool else {
+            fatalError("WKRKitConstants: No IsFirebaseEnabled value")
         }
 
         self.version = version
@@ -133,10 +157,16 @@ public struct WKRKitConstants {
         self.bannedURLFragments = bannedURLFragments
         self.maxGlobalRacePlayers = maxGlobalRacePlayers
         self.maxLocalRacePlayers = maxLocalRacePlayers
-
+        self.maxChooseHostTimeBasedOnName = maxChooseHostTimeBasedOnName
+        self.maxChooseHostTimeBasedOnConnection = maxChooseHostTimeBasedOnConnection
+        
+        self.timeBetweenHostSelectionAndStartMessage = timeBetweenHostSelectionAndStartMessage
+        self.timeBetweenHostStartMessageAndRaceStart = timeBetweenHostStartMessageAndRaceStart
+       
         self.manageGameCenterLink = manageGameCenterLink
         self.raceCodeRecordMinReuseTimeSinceLastUpdate = raceCodeRecordMinReuseTimeSinceLastUpdate
         self.raceResultsSpectatorUpdateInterval = raceResultsSpectatorUpdateInterval
+        self.isFirebaseEnabled = isFirebaseEnabled
     }
 
     // MARK: - Helpers

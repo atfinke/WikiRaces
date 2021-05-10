@@ -620,6 +620,7 @@
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2020.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
@@ -648,6 +649,7 @@
 				INFOPLIST_FILE = WKRUIKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 2020.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.WKRUIKit;
@@ -667,7 +669,7 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -684,7 +686,7 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "WKRUIKit (UI Catalog)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.WKRUIKit--UI-Catalog-";
 				PRODUCT_NAME = "$(TARGET_NAME)";

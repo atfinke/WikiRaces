@@ -8,6 +8,24 @@
 
 import SwiftUI
 
+private struct Table: View {
+    let items: [VotingContentViewModel.Item]
+    let isFinalArticleSelected: Bool
+    let tappedVotingItem: (VotingContentViewModel.Item) -> Void
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            ForEach(items) { item in
+                VotingItemContentView(item: item, isFinalArticleSelected: isFinalArticleSelected) {
+                    tappedVotingItem(item)
+                }
+            }
+        }
+        .padding(.all, 20)
+        .animation(.spring())
+        .frame(maxWidth: 500)
+    }
+}
+
 struct VotingContentView: View {
 
     // MARK: - Properties -
@@ -20,18 +38,15 @@ struct VotingContentView: View {
     var body: some View {
         VStack {
             Spacer()
-            VStack(alignment: .leading, spacing: 0) {
-                ForEach(self.model.items) { item in
-                    VotingItemContentView(item: item, isFinalArticleSelected: self.model.isFinalArticleSelected) {
-                        self.tappedVotingItem(item)
-                    }
-                }
-            }
-            .padding(.all, 20)
-            .animation(.spring())
-            .frame(maxWidth: 500)
+            Table(items: model.items, isFinalArticleSelected: model.isFinalArticleSelected, tappedVotingItem: tappedVotingItem)
             Spacer()
-            ListFooterView(topText: model.footerTopText, bottomText: model.footerBottomText, textOpacity: model.footerOpacity)
+            ListFooterView(
+                topText: model.footerTopText,
+                bottomStartText: model.footerBottomStartText,
+                bottomNumberText: model.footerBottomNumberText,
+                bottomEndText: model.footerBottomEndText,
+                textOpacity: model.footerOpacity,
+                dividerOpacity: 1)
         }
         .allowsHitTesting(model.isVotingEnabled)
     }

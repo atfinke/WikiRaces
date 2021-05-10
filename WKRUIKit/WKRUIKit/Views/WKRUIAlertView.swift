@@ -46,7 +46,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemRoundedFont(ofSize: 16, weight: .medium)
         contentView.addSubview(label)
 
         imageView.contentMode = .scaleAspectFit

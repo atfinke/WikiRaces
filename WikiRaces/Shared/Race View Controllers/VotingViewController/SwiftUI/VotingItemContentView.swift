@@ -23,13 +23,12 @@ struct VotingItemContentView: View {
 
     var body: some View {
         let isFinal = isFinalArticleSelected && item.isFinal
-        let opacity = isFinal || !isFinalArticleSelected ? 1 : 0.2
+        let opacity = isFinal || !isFinalArticleSelected ? 1 : 0.15
 
         return Button(action: action) {
             HStack {
                 Text(item.page.title ?? "-")
-                    .font(.system(size: 16, weight: .medium))
-                    .foregroundColor(.wkrTextColor(for: colorScheme))
+                    .font(.system(size: 16, weight: .medium, design: .rounded))
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.vertical, 10)
                 Spacer()
@@ -40,6 +39,7 @@ struct VotingItemContentView: View {
             }
         }
         .opacity(opacity)
+        .foregroundColor(.wkrTextColor(for: colorScheme))
         .animation(Animation.easeInOut(duration: 2), value: isFinalArticleSelected)
         .padding(.horizontal)
     }

@@ -16,8 +16,6 @@ class HostContentViewModel: ObservableObject {
         case generatingRaceCode
         case soloRace
         case showingRacers
-        case raceStarting
-        
     }
     
     @Published var state: State = .generatingRaceCode
@@ -41,8 +39,6 @@ class HostContentViewModel: ObservableObject {
             } else {
                 return "\(connectedPlayers.count) CONNECTED RACER" + (connectedPlayers.count == 1 ? "" : "S")
             }
-        case .raceStarting:
-            return "RACE STARTING"
         }
     }
     

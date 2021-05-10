@@ -13,7 +13,7 @@ class PlusView: UIView {
     // MARK: - Properties -
 
     private let closeImageView: UIImageView = {
-        let config = UIImage.SymbolConfiguration(weight: .light)
+        let config = UIImage.SymbolConfiguration(weight: .medium)
         let image = UIImage(systemName: "xmark", withConfiguration: config)
         let imageView = UIImageView(image: image)
         return imageView
@@ -29,7 +29,7 @@ class PlusView: UIView {
         let label = UILabel()
         label.text = "Unlock WikiRaces+"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
+        label.font = UIFont.systemRoundedFont(ofSize: 24, weight: .semibold)
         return label
     }()
 
@@ -38,7 +38,7 @@ class PlusView: UIView {
         label.text = "Thanks for playing WikiRaces!"
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.font = UIFont.systemRoundedFont(ofSize: 15, weight: .semibold)
         return label
     }()
 
@@ -47,7 +47,7 @@ class PlusView: UIView {
         label.text = "Please consider supporting development costs to unlock exclusive features."
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemRoundedFont(ofSize: 16, weight: .medium)
         return label
     }()
 

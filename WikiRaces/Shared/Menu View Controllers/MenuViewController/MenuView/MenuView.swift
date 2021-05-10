@@ -228,11 +228,11 @@ final class MenuView: UIView {
                 bottomViewAnchorConstraint.constant = 75
             }
         case .noOptions:
-            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
+            standardRaceButtonLeftConstraint.constant = -standardRaceButton.frame.width
             createButtonLeftConstraint.constant = -createButton.frame.width
             statsButtonLeftConstraint.constant = -statsButton.frame.width
         case .customOptions:
-            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
+            standardRaceButtonLeftConstraint.constant = -standardRaceButton.frame.width
             createButtonLeftConstraint.constant = 30
 
             backButtonLeftConstraintForStats.isActive = false
@@ -243,7 +243,7 @@ final class MenuView: UIView {
             standardRaceButtonLeftConstraint.constant = 30
             createButtonLeftConstraint.constant = 30
         case .plusOptions:
-            standardRaceButtonLeftConstraint.constant = -customRaceButton.frame.width
+            standardRaceButtonLeftConstraint.constant = -standardRaceButton.frame.width
             statsButtonLeftConstraint.constant = 30
 
             backButtonLeftConstraintForJoinOptions.isActive = false
@@ -251,38 +251,17 @@ final class MenuView: UIView {
         }
 
         standardRaceButtonHeightConstraint.constant = buttonHeight
-        standardRaceButtonWidthConstraint.constant = buttonWidth + 10
-        customRaceButtonWidthConstraint.constant = buttonWidth + 40
+        standardRaceButtonWidthConstraint.constant = buttonWidth + 78
+        customRaceButtonWidthConstraint.constant = buttonWidth + 52
 
-        joinButtonWidthConstraint.constant = buttonWidth + 34
-        createButtonWidthConstraint.constant = buttonWidth + 44
-        statsButtonWidthConstraint.constant = buttonWidth + 20
+        joinButtonWidthConstraint.constant = buttonWidth + 15
+        createButtonWidthConstraint.constant = buttonWidth + 45
+        statsButtonWidthConstraint.constant = buttonWidth + 30
 
         backButtonWidth.constant = buttonHeight - 10
 
         backButton.layer.cornerRadius = backButtonWidth.constant / 2
         plusButton.layer.cornerRadius = backButton.layer.cornerRadius
-    }
-
-    func promptGlobalRacesPopularity() -> Bool {
-        guard !Defaults.promptedGlobalRacesPopularity else {
-            return false
-        }
-        Defaults.promptedGlobalRacesPopularity = true
-
-        let message = "Most racers use private races to play with friends. Create a private race and invite a friend for the best chance at joining a race. You can also start a solo race at any time."
-        let alertController = UIAlertController(title: "Public Races", message: message, preferredStyle: .alert)
-
-        let action = UIAlertAction(title: "Find Public Race", style: .default, handler: { _ in
-            PlayerFirebaseAnalytics.log(event: .userAction("promptGlobalRacesPopularity:ok"))
-            self.animateMenuOut {
-                self.listenerUpdate?(.presentStandardRace)
-            }
-        })
-        alertController.addAction(action)
-
-        listenerUpdate?(.presentAlert(alertController))
-        return true
     }
 
 }
