@@ -50,6 +50,7 @@ final internal class GameViewController: UIViewController {
 
     // MARK: - User Interface
 
+    var alertView: WKRUIAlertView?
     var webView: WKRUIWebView?
     let progressView = WKRUIProgressView()
     let navigationBarBottomLine = UIView()
@@ -155,13 +156,16 @@ final internal class GameViewController: UIViewController {
         default:
             break
         }
+        
+        guard let window = view.window else {
+            fatalError()
+        }
+        alertView = WKRUIAlertView(window: window)
+        gameManager.alertView = alertView
     }
 
     deinit {
-        let alertView = gameManager.alertView
-        DispatchQueue.main.async {
-            alertView.removeFromSuperview()
-        }
+        alertView?.removeFromSuperview()
     }
 
     // MARK: - User Actions

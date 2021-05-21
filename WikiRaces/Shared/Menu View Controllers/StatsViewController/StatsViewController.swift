@@ -65,7 +65,7 @@ class StatsViewController: UITableViewController {
                     detail: formatted(for: .soloTotalTime, suffix: "S", checkPlural: false))
             ]),
         Section(
-            name: "Private Races",
+            name: "Private + Custom Races",
             items: [
                 Item(
                     name: "Races",
@@ -84,7 +84,7 @@ class StatsViewController: UITableViewController {
                     detail: nil)
             ]),
         Section(
-            name: "Public Races",
+            name: "Public + Standard Races",
             items: [
                 Item(
                     name: "Races",

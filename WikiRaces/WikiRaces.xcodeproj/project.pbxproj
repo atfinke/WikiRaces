@@ -875,13 +875,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1414280821FC3C9800C48788 /* GKJoinViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = GKJoinViewController;
-			sourceTree = "<group>";
-		};
 		142ABDF624600550008E7F77 /* PlusViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -928,7 +921,6 @@
 				14AD53B92642171600F742F8 /* Join */,
 				14AD53642641D3CC00F742F8 /* Connect */,
 				148E5C3224A2883300DD43E4 /* Host */,
-				1414280821FC3C9800C48788 /* GKJoinViewController */,
 				14EF51C6245FAE3600F3653F /* CustomRaceViewController */,
 				1446C1DE24A337B2000A0ED3 /* Nearby */,
 			);
