@@ -22,5 +22,15 @@ class WKRSceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = nav
         window?.makeKeyAndVisible()
     }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        guard let url = URLContexts.first?.url,
+              let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems,
+              let code = items.first(where: { $0.name == "Code" })?.value else {
+            return
+        }
+        GKHelper.shared.acceptedInvite(code: code)
+        PlayerFirebaseAnalytics.log(event: .raceCodeLinkOpened)
+    }
 }
 

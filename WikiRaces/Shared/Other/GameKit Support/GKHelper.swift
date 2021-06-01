@@ -29,7 +29,6 @@ class GKHelper: NSObject, GKLocalPlayerListener {
     }
 
     static let shared = GKHelper()
-    static let gkInviteCode = "GKHelper.GKInvite"
 
     private var pendingInvite: Invite?
     var inviteHandler: ((Invite) -> Void)? {

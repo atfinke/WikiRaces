@@ -75,7 +75,7 @@ final public class WKRGameManager {
             createPageNavigation()
         }
     }
-    public let alertView = WKRUIAlertView()
+    public weak var alertView: WKRUIAlertView?
 
     // MARK: - Initialization
 
@@ -131,11 +131,11 @@ final public class WKRGameManager {
     // MARK: - User Interface
 
     public func enqueue(message: String, for player: WKRPlayerProfile?, duration: Double, isRaceSpecific: Bool, playHaptic: Bool) {
-        alertView.enqueue(text: message,
-                          for: player,
-                          duration: duration,
-                          isRaceSpecific: isRaceSpecific,
-                          playHaptic: playHaptic)
+        alertView?.enqueue(text: message,
+                           for: player,
+                           duration: duration,
+                           isRaceSpecific: isRaceSpecific,
+                           playHaptic: playHaptic)
     }
 
     // MARK: - Actions
@@ -170,7 +170,7 @@ final public class WKRGameManager {
         case .quit:
             peerNetwork.send(object: WKRCodable(enum: WKRPlayerMessage.quit))
             peerNetwork.disconnect()
-            alertView.forceDismiss()
+            alertView?.forceDismiss()
         default: fatalError("\(action)")
         }
     }

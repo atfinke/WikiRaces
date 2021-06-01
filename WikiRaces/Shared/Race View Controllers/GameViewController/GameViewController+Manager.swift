@@ -117,7 +117,7 @@ extension GameViewController {
             UIView.animate(
                 withDuration: WKRAnimationDurationConstants.gameFadeIn,
                 delay: WKRAnimationDurationConstants.gameFadeInDelay,
-                options: .curveEaseOut,
+                options: .curveLinear,
                 animations: { [weak self] in
                     self?.votingViewController?.backingAlpha = 0.0
                 }, completion: nil)

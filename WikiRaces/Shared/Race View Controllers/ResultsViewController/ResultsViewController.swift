@@ -117,6 +117,7 @@ final internal class ResultsViewController: BackingVisualEffectViewController {
 
         model.footerTextOpacity = 0
         model.footerDividerOpacity = 0
+        contentViewHosting.view.isUserInteractionEnabled = false
 
         if isPlayerHost, let results = resultsInfo {
             DispatchQueue.global().async {

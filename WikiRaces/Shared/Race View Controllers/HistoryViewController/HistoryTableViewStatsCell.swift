@@ -27,6 +27,7 @@ final internal class HistoryTableViewStatsCell: UITableViewCell {
         super.init(style: .value1, reuseIdentifier: reuseIdentifier)
         textLabel?.font = UIFont.tableViewCellTitle()
         detailTextLabel?.font = UIFont.tableViewCellDetail()
+        isUserInteractionEnabled = false
     }
 
     required init?(coder aDecoder: NSCoder) {

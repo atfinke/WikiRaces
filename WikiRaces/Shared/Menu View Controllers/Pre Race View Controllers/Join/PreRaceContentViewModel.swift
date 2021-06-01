@@ -40,9 +40,9 @@ class PreRaceContentViewModel: ObservableObject {
     
     func startedFindingHostBasedOnConnection(attempt: Int) {
         startTimer(maxTime: CGFloat(WKRKitConstants.current.maxChooseHostTimeBasedOnConnection),
-                   percentChunk: attempt == 1 ? 0.65 : 0.05,
-                   startProgress: attempt == 1 ? 0 : 0.7,
-                   invalidateTimerProgress: attempt == 1 ? 0.7 : 0.75)
+                   percentChunk: attempt == 1 ? 0.65 : 0.1,
+                   startProgress: attempt == 1 ? 0 : 0.65,
+                   invalidateTimerProgress: attempt == 1 ? 0.65 : 0.75)
     }
     
     func preparingToStartRace(estimatedTime: CGFloat) {

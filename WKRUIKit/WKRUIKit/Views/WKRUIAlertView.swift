@@ -26,7 +26,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     private var queue = [WKRAlertMessage]()
 
     private let label = UILabel()
-    private let alertWindow: UIWindow
+    private weak var alertWindow: UIWindow?
     private var topConstraint: NSLayoutConstraint!
 
     private var isPresenting = false
@@ -34,15 +34,12 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
     // MARK: - Initalization -
 
-    public override init() {
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else {
-            fatalError("Couldn't get key window")
-        }
+    public init(window: UIWindow) {
         alertWindow = window
 
         super.init()
 
-        alertWindow.addSubview(self)
+        window.addSubview(self)
 
         label.textAlignment = .center
         label.numberOfLines = 0
@@ -55,13 +52,13 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
         imageView.clipsToBounds = true
         contentView.addSubview(imageView)
 
-        topConstraint = topAnchor.constraint(equalTo: alertWindow.bottomAnchor)
+        topConstraint = topAnchor.constraint(equalTo: window.bottomAnchor)
 
         let constraints: [NSLayoutConstraint] = [
             topConstraint,
-            leftAnchor.constraint(equalTo: alertWindow.leftAnchor),
-            rightAnchor.constraint(equalTo: alertWindow.rightAnchor),
-            heightAnchor.constraint(equalToConstant: WKRUIKitConstants.alertViewHeight + alertWindow.safeAreaInsets.bottom / 2)
+            leftAnchor.constraint(equalTo: window.leftAnchor),
+            rightAnchor.constraint(equalTo: window.rightAnchor),
+            heightAnchor.constraint(equalToConstant: WKRUIKitConstants.alertViewHeight + window.safeAreaInsets.bottom / 2)
         ]
         NSLayoutConstraint.activate(constraints)
     }
@@ -119,7 +116,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     // MARK: - State -
 
     private func present() {
-        guard !queue.isEmpty, !isPresenting else { return }
+        guard !queue.isEmpty, !isPresenting, let window = alertWindow else { return }
         isPresenting = true
 
         let message = queue.removeFirst()
@@ -132,7 +129,7 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
 
         label.frame = rect
 
-        let viewCenterY = frame.height / 2 - alertWindow.safeAreaInsets.bottom / 4
+        let viewCenterY = frame.height / 2 - window.safeAreaInsets.bottom / 4
         let imageViewPadding = WKRUIKitConstants.alertViewImagePadding
         let imageViewWidth = WKRUIKitConstants.alertViewImageHeight
 
@@ -156,15 +153,15 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
         layoutIfNeeded()
 
         topConstraint.constant = -frame.height
-        alertWindow.setNeedsLayout()
-        alertWindow.bringSubviewToFront(self)
+        window.setNeedsLayout()
+        window.bringSubviewToFront(self)
 
         if message.playHaptic {
             UINotificationFeedbackGenerator().notificationOccurred(.warning)
         }
 
         UIView.animate(withDuration: WKRUIKitConstants.alertAnimateInDuration) {
-            self.alertWindow.layoutIfNeeded()
+            window.layoutIfNeeded()
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + message.duration) {
@@ -173,11 +170,15 @@ final public class WKRUIAlertView: WKRUIBottomOverlayView {
     }
 
     private func dismiss() {
+        guard let window = alertWindow else {
+            removeFromSuperview()
+            return
+        }
         topConstraint.constant = 0
-        alertWindow.setNeedsLayout()
+        window.setNeedsLayout()
 
         UIView.animate(withDuration: WKRUIKitConstants.alertAnimateOutDuration, animations: {
-            self.alertWindow.layoutIfNeeded()
+            window.layoutIfNeeded()
         }, completion: { _ in
             self.label.text = nil
             self.isPresenting = false

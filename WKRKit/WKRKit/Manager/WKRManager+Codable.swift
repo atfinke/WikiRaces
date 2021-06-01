@@ -140,7 +140,7 @@ extension WKRGameManager {
     // MARK: - Game Updates
 
     private func receivedFinalResults(_ resultsInfo: WKRResultsInfo) {
-        alertView.clearRaceSpecificMessages()
+        alertView?.clearRaceSpecificMessages()
         game.finishedRace()
 
         if gameState != .hostResults {
